@@ -1,5 +1,5 @@
 //
-//  test.h
+//  testVC.h
 //  Corsi
 //
 //  Created by Jon Howell on 04/09/2014.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface test : UIViewController
+@interface testVC : UIViewController
 
 @end
