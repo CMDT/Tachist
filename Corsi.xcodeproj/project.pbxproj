@@ -45,6 +45,11 @@
 		E1DAD7A319B87F8E00600608 /* email2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1DAD79B19B87F8E00600608 /* email2@2x.png */; };
 		E1DAD7A419B87F8E00600608 /* results64.png in Resources */ = {isa = PBXBuildFile; fileRef = E1DAD79C19B87F8E00600608 /* results64.png */; };
 		E1DAD7A519B87F8E00600608 /* settings64.png in Resources */ = {isa = PBXBuildFile; fileRef = E1DAD79D19B87F8E00600608 /* settings64.png */; };
+		E1DAD7A819B8A31700600608 /* mySingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = E1DAD7A719B8A31700600608 /* mySingleton.m */; };
+		E1DAD7AB19B8A92400600608 /* settingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1DAD7AA19B8A92400600608 /* settingsVC.m */; };
+		E1DAD7AE19B8A95000600608 /* testVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1DAD7AD19B8A95000600608 /* testVC.m */; };
+		E1DAD7B119B8A98800600608 /* resultsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1DAD7B019B8A98800600608 /* resultsVC.m */; };
+		E1DAD7B419B8A9A500600608 /* informationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1DAD7B319B8A9A500600608 /* informationVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,6 +109,16 @@
 		E1DAD79B19B87F8E00600608 /* email2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "email2@2x.png"; sourceTree = "<group>"; };
 		E1DAD79C19B87F8E00600608 /* results64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = results64.png; sourceTree = "<group>"; };
 		E1DAD79D19B87F8E00600608 /* settings64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings64.png; sourceTree = "<group>"; };
+		E1DAD7A619B8A31700600608 /* mySingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mySingleton.h; sourceTree = "<group>"; };
+		E1DAD7A719B8A31700600608 /* mySingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mySingleton.m; sourceTree = "<group>"; };
+		E1DAD7A919B8A92400600608 /* settingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = settingsVC.h; sourceTree = "<group>"; };
+		E1DAD7AA19B8A92400600608 /* settingsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = settingsVC.m; sourceTree = "<group>"; };
+		E1DAD7AC19B8A95000600608 /* testVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testVC.h; sourceTree = "<group>"; };
+		E1DAD7AD19B8A95000600608 /* testVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testVC.m; sourceTree = "<group>"; };
+		E1DAD7AF19B8A98800600608 /* resultsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = resultsVC.h; sourceTree = "<group>"; };
+		E1DAD7B019B8A98800600608 /* resultsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = resultsVC.m; sourceTree = "<group>"; };
+		E1DAD7B219B8A9A500600608 /* informationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = informationVC.h; sourceTree = "<group>"; };
+		E1DAD7B319B8A9A500600608 /* informationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = informationVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,12 +185,22 @@
 				E1DAD77719B85ECC00600608 /* TestFlight.h */,
 				E1DAD77819B85ECC00600608 /* TestFlight+AsyncLogging.h */,
 				E1DAD77919B85ECC00600608 /* TestFlight+ManualSessions.h */,
-				E10D017719B6024F00D9E5F8 /* AppDelegate.h */,
-				E10D017819B6024F00D9E5F8 /* AppDelegate.m */,
 				E10D017A19B6024F00D9E5F8 /* Main_iPhone.storyboard */,
 				E10D017D19B6024F00D9E5F8 /* Main_iPad.storyboard */,
+				E10D017719B6024F00D9E5F8 /* AppDelegate.h */,
+				E10D017819B6024F00D9E5F8 /* AppDelegate.m */,
+				E1DAD7A619B8A31700600608 /* mySingleton.h */,
+				E1DAD7A719B8A31700600608 /* mySingleton.m */,
 				E10D018019B6024F00D9E5F8 /* ViewController.h */,
 				E10D018119B6024F00D9E5F8 /* ViewController.m */,
+				E1DAD7A919B8A92400600608 /* settingsVC.h */,
+				E1DAD7AA19B8A92400600608 /* settingsVC.m */,
+				E1DAD7AC19B8A95000600608 /* testVC.h */,
+				E1DAD7AD19B8A95000600608 /* testVC.m */,
+				E1DAD7AF19B8A98800600608 /* resultsVC.h */,
+				E1DAD7B019B8A98800600608 /* resultsVC.m */,
+				E1DAD7B219B8A9A500600608 /* informationVC.h */,
+				E1DAD7B319B8A9A500600608 /* informationVC.m */,
 				E10D018319B6024F00D9E5F8 /* Images.xcassets */,
 				E10D016F19B6024F00D9E5F8 /* Supporting Files */,
 			);
@@ -355,8 +380,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				E10D018219B6024F00D9E5F8 /* ViewController.m in Sources */,
+				E1DAD7B419B8A9A500600608 /* informationVC.m in Sources */,
+				E1DAD7A819B8A31700600608 /* mySingleton.m in Sources */,
+				E1DAD7B119B8A98800600608 /* resultsVC.m in Sources */,
+				E1DAD7AB19B8A92400600608 /* settingsVC.m in Sources */,
 				E10D017919B6024F00D9E5F8 /* AppDelegate.m in Sources */,
 				E10D017519B6024F00D9E5F8 /* main.m in Sources */,
+				E1DAD7AE19B8A95000600608 /* testVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
