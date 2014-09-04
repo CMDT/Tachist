@@ -24,7 +24,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="0.95234378850000001" blue="0.8036439179" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Settings" id="JfG-Kt-5KA"/>
                 </viewController>
@@ -52,7 +52,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.89420127579999997" green="1" blue="0.66009751149999996" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Results" id="RRh-7Z-4U7"/>
                 </viewController>
@@ -60,11 +60,11 @@
             </objects>
             <point key="canvasLocation" x="1500" y="103"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab Bar Controller - CorsiTabController-->
         <scene sceneID="sw2-hC-uGP">
             <objects>
-                <tabBarController definesPresentationContext="YES" id="IKI-2A-uin" sceneMemberID="viewController">
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                <tabBarController title="CorsiTabController" definesPresentationContext="YES" id="IKI-2A-uin" sceneMemberID="viewController">
+                    <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="06U-FS-t22">
                         <rect key="frame" x="129" y="330" width="163" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -101,7 +101,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.89411771299999998" green="0.9450981021" blue="0.97254908080000002" alpha="1" colorSpace="deviceRGB"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Test" id="uI8-6A-gw6"/>
                 </viewController>
@@ -129,7 +129,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="0.89417350449999999" blue="0.6320989253" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Information" id="H2M-mc-v72"/>
                 </viewController>
