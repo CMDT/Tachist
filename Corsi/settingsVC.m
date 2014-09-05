@@ -166,8 +166,12 @@
     block8View.frame=CGRectMake(block8pt.x, block8pt.y, blockSize, blockSize) ;
     block9View.frame=CGRectMake(block9pt.x, block9pt.y, blockSize, blockSize) ;
 
-    CGAffineTransform scaleTrans =
-    CGAffineTransformMakeScale(1, 1);
+    float scale=1;
+    CGAffineTransform scaleTrans = CGAffineTransformMakeScale(scale, scale);
+
+
+    singleton.blockSize=[blockSizeLBL.text intValue];
+
 
     CGAffineTransform rotateTrans =
     CGAffineTransformMakeRotation(0 * M_PI / 180);
@@ -188,8 +192,8 @@
                                                    rotateTrans
                                                    );
     block6View.transform = CGAffineTransformConcat(scaleTrans,
-                                                                                                        rotateTrans
-                                                                                                        );
+                                                   rotateTrans
+                                                   );
     block7View.transform = CGAffineTransformConcat(scaleTrans,
                                                    rotateTrans
                                                    );
@@ -203,9 +207,7 @@
 }
 -(void)updateBlockColours{
     mySingleton *singleton = [mySingleton sharedSingleton];
-    
 
-    
     currentBlockColour     = singleton.currentBlockColour;
     currentBackgroundColour= singleton.currentBackgroundColour;
     currentShowColour      = singleton.currentShowColour;
@@ -361,6 +363,7 @@
 }
 
 -(void)setRotAngle{
+    mySingleton *singleton = [mySingleton sharedSingleton];
     CGAffineTransform rotateTrans1 = CGAffineTransformMakeRotation(rot1 * M_PI / 180);
     CGAffineTransform rotateTrans2 = CGAffineTransformMakeRotation(rot2 * M_PI / 180);
     CGAffineTransform rotateTrans3 = CGAffineTransformMakeRotation(rot3 * M_PI / 180);
@@ -371,7 +374,7 @@
     CGAffineTransform rotateTrans8 = CGAffineTransformMakeRotation(rot8 * M_PI / 180);
     CGAffineTransform rotateTrans9 = CGAffineTransformMakeRotation(rot9 * M_PI / 180);
     
-    CGAffineTransform scaleTrans =  CGAffineTransformMakeScale(1.0, 1.0);
+    CGAffineTransform scaleTrans =  CGAffineTransformMakeScale(singleton.blockSize/30, singleton.blockSize/30);
     
     block1View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans1);
     block2View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans2);
@@ -448,6 +451,7 @@
         finish=start;
         startPlusBTN.alpha=0.3;
     }
+    singleton.start=start;
     [self updateSizesOfBlocks];
     [self updateBlockNumbers];
 }
@@ -466,7 +470,7 @@
         start=finish;
         finishPlusBTN.alpha=0.3;
     }
-    
+    singleton.finish=finish;
     [self updateSizesOfBlocks];
     [self updateBlockNumbers];
 }
@@ -481,8 +485,10 @@
     }else{
         sizeMinusBTN.alpha=1;
     }
+    singleton.blockSize=blockSize;
     [self updateSizesOfBlocks];
     [self updateBlockNumbers];
+
     
 }
 - (IBAction)blockStartMinusBTN:(id)sender{
@@ -500,6 +506,7 @@
         finish=start;
         startMinusBTN.alpha=0.3;
     }
+    singleton.start=start;
     [self updateSizesOfBlocks];
     [self updateBlockNumbers];
 }
@@ -518,6 +525,7 @@
         finish=start;
         finishMinusBTN.alpha=0.3;
     }
+    singleton.finish=finish;
     [self updateSizesOfBlocks];
     [self updateBlockNumbers];
 }
@@ -532,8 +540,10 @@
     }else{
         sizePlusBTN.alpha=1;
     }
+    singleton.blockSize=blockSize;
     [self updateSizesOfBlocks];
     [self updateBlockNumbers];
+    
 }
 
 - (IBAction)forwardTestSWT:(id)sender{
