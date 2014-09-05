@@ -23,6 +23,17 @@
     int showTime;
     int clickNumber;
     
+    BOOL forwardTestDirection;
+    BOOL blockRotation;
+    BOOL onScreenInfo;
+    
+    NSString *oldSubjectName;
+    NSString *subjectName;
+    NSString *resultStrings;
+    NSString *testDate;
+    NSString *testTime;
+    NSString *email;
+    
     long double timerTime;
     
     UIView *bl1;
@@ -48,6 +59,18 @@
 @property (nonatomic) int   startTime;
 @property (nonatomic) int   showTime;
 @property (nonatomic) int   clickNumber;
+
+@property (nonatomic) BOOL forwardTestDirection;
+@property (nonatomic) BOOL blockRotation;
+@property (nonatomic) BOOL onScreenInfo;
+
+@property (nonatomic,retain) NSString *oldSubjectName;
+@property (nonatomic,retain) NSString *subjectName;
+@property (nonatomic,retain) NSString *resultStrings;
+@property (nonatomic,retain) NSString *testDate;
+@property (nonatomic,retain) NSString *testTime;
+@property (nonatomic,retain) NSString *email;
+
 @property (nonatomic) long double timerTime;
 
 @property (nonatomic, retain) UIView *bl1;

@@ -238,6 +238,9 @@
     blockStartDelaySLD.value=startTime;
     blockWaitTimeSLD.value=waitTime;
     blockShowTimeSLD.value=showTime;
+    singleton.showTime=showTime;
+    singleton.waitTime=waitTime;
+    singleton.startTime=startTime;
 }
 
 -(void)updateBlockNumbers{
@@ -553,6 +556,7 @@
     }else{
         forwardTestDirection=NO;
     }
+    singleton.forwardTestDirection=forwardTestDirection;
 }
 - (IBAction)onScreenInfoSWT:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
@@ -562,20 +566,24 @@
     }else{
         screenInfoDisplayed=NO;
     }
+    singleton.onScreenInfo=screenInfoDisplayed;
 }
 - (IBAction)blockRotateSWT:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
-    
+    BOOL rotate;
     if (blockRotateSWT.isOn)
     {
         //arbitary rotate from current position to new position, don't care about absolute angle
             //[self updateSizesOfBlocks];
             [self newRotationAngle:(id)sender];
             [self setRotAngle];
+        rotate=YES;
     }else{
             [self setRot90];
             [self updateSizesOfBlocks];
+        rotate=NO;
     }
+    singleton.blockRotation=rotate;
 }
 //sliders for timings
 - (IBAction)blockStartDelaySLD:(UISlider *)sender{

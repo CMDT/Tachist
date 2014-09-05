@@ -15,9 +15,37 @@ static mySingleton * sharedSingleton = nil;
 }
 
 // eg::: @synthesize offset;
-@synthesize currentShowColour,currentBlockColour,currentBackgroundColour;
-@synthesize blockSize,bl1,bl2,bl3,bl4,bl5,bl6,bl7,bl8,bl9,clickNumber,showTime;
-@synthesize start,startTime,finish,timerTime,waitTime;
+@synthesize
+            currentShowColour,
+            currentBlockColour,
+            currentBackgroundColour,
+            blockSize,
+            bl1,
+            bl2,
+            bl3,
+            bl4,
+            bl5,
+            bl6,
+            bl7,
+            bl8,
+            bl9,
+            clickNumber,
+            showTime,
+            start,
+            startTime,
+            finish,
+            timerTime,
+            waitTime,
+            oldSubjectName,
+            subjectName,
+            testDate,
+            testTime,
+            resultStrings,
+            email,
+            forwardTestDirection,
+            blockRotation,
+            onScreenInfo
+            ;
 
 #pragma mark -
 #pragma mark Singleton Methods
@@ -52,6 +80,7 @@ static mySingleton * sharedSingleton = nil;
         showTime   = 200;
         timerTime  = 0.0;
         clickNumber= 0;
+        oldSubjectName =@"Subject 1";
         
     }
     return self;
