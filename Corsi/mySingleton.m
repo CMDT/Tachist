@@ -51,7 +51,7 @@ static mySingleton * sharedSingleton = nil;
         startTime  = 1000;
         showTime   = 200;
         timerTime  = 0.0;
-        clickNumber=0;
+        clickNumber= 0;
         
     }
     return self;

@@ -132,7 +132,6 @@
                                 </state>
                                 <connections>
                                     <action selector="BlockBackgroundColourWhiBTN:" destination="NmM-sh-eu8" eventType="touchUpInside" id="WJF-ep-8oq"/>
-                                    <action selector="BlockColourWhiBTN:" destination="NmM-sh-eu8" eventType="touchUpInside" id="axp-Fn-UYG"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aHt-qy-mCO">
@@ -221,7 +220,6 @@
                                 </state>
                                 <connections>
                                     <action selector="BlockBackgroundColourBluBTN:" destination="NmM-sh-eu8" eventType="touchUpInside" id="Z82-gT-nkD"/>
-                                    <action selector="BlockColourBluBTN:" destination="NmM-sh-eu8" eventType="touchUpInside" id="iow-FE-Qoi"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BSs-02-f3t">
@@ -244,7 +242,6 @@
                                 </state>
                                 <connections>
                                     <action selector="BlockBackgroundColourBlaBTN:" destination="NmM-sh-eu8" eventType="touchUpInside" id="90V-7Q-G2J"/>
-                                    <action selector="BlockColourBlaBTN:" destination="NmM-sh-eu8" eventType="touchUpInside" id="eyy-yC-CuZ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uca-fb-zyT">
@@ -266,7 +263,6 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="BlockColourRedBTN:" destination="NmM-sh-eu8" eventType="touchUpInside" id="huL-Pm-LvD"/>
                                     <action selector="BlockHighlightColourRedBTN:" destination="NmM-sh-eu8" eventType="touchUpInside" id="zo2-rA-XHd"/>
                                 </connections>
                             </button>
@@ -278,7 +274,6 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="BlockColourYelBTN:" destination="NmM-sh-eu8" eventType="touchUpInside" id="yxk-jW-PJB"/>
                                     <action selector="BlockHighlightColourYelBTN:" destination="NmM-sh-eu8" eventType="touchUpInside" id="34c-L7-MZ7"/>
                                 </connections>
                             </button>
@@ -290,7 +285,6 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="BlockColourCyaBTN:" destination="NmM-sh-eu8" eventType="touchUpInside" id="56t-0k-W1p"/>
                                     <action selector="BlockHighlightColourCyaBTN:" destination="NmM-sh-eu8" eventType="touchUpInside" id="1as-Z9-S2T"/>
                                 </connections>
                             </button>
@@ -390,7 +384,7 @@
                                     <action selector="forwardTestSWT:" destination="NmM-sh-eu8" eventType="valueChanged" id="HHd-r5-LvX"/>
                                 </connections>
                             </switch>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="GM3-i7-do6">
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GM3-i7-do6">
                                 <rect key="frame" x="77" y="248" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
@@ -457,19 +451,19 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hgt-gD-GLg">
-                                <rect key="frame" x="261" y="295" width="51" height="21"/>
+                                <rect key="frame" x="263" y="290" width="51" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="500" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zr1-6f-RnH">
-                                <rect key="frame" x="261" y="350" width="51" height="21"/>
+                                <rect key="frame" x="262" y="350" width="51" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="100" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="geb-a0-pxj">
-                                <rect key="frame" x="261" y="400" width="52" height="21"/>
+                                <rect key="frame" x="260" y="400" width="52" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>

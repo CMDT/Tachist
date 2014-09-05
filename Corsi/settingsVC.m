@@ -115,8 +115,6 @@
         startTime = 2000;
         showTime  = 500;
         
-        [self setArraysDefault];
-        
         [self setRot90];
     }
     
@@ -125,8 +123,6 @@
     [self updateSizesOfBlocks];
     [self updateBlockNumbers];
     [self updateTiming];
-    
-    
 }
 
 -(void)hideAllBlocks{
@@ -141,33 +137,11 @@
     self.block9View.hidden=YES;
 }
 
--(void)setArraysDefault{
-    NSArray *forward = [[NSArray alloc] initWithObjects:@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9", nil];
-    NSArray *reverse = [[NSArray alloc] initWithObjects:@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9", nil];
-    NSArray *guess1  = [[NSArray alloc] initWithObjects:@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-", nil];
-    
-    NSArray *score1  = [[NSArray alloc] initWithObjects:@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-", nil];
-    NSArray *times1  = [[NSArray alloc] initWithObjects:@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-", nil];
-    NSArray *score2  = [[NSArray alloc] initWithObjects:@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-", nil];
-    NSArray *times2  = [[NSArray alloc] initWithObjects:@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-", nil];
-    NSArray *score3  = [[NSArray alloc] initWithObjects:@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-", nil];
-    NSArray *times3  = [[NSArray alloc] initWithObjects:@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-", nil];
-    NSArray *score4  = [[NSArray alloc] initWithObjects:@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-", nil];
-    NSArray *times4  = [[NSArray alloc] initWithObjects:@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-", nil];
-    NSArray *score5  = [[NSArray alloc] initWithObjects:@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-", nil];
-    NSArray *times5  = [[NSArray alloc] initWithObjects:@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-", nil];
-    NSArray *score6  = [[NSArray alloc] initWithObjects:@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-", nil];
-    NSArray *times6  = [[NSArray alloc] initWithObjects:@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-", nil];
-    NSArray *score7  = [[NSArray alloc] initWithObjects:@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-", nil];
-    NSArray *times7  = [[NSArray alloc] initWithObjects:@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-", nil];
-    NSArray *score8  = [[NSArray alloc] initWithObjects:@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-", nil];
-    NSArray *times8  = [[NSArray alloc] initWithObjects:@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-", nil];
-    NSArray *score9  = [[NSArray alloc] initWithObjects:@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-", nil];
-    NSArray *times9  = [[NSArray alloc] initWithObjects:@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-", nil];
-}
-
 -(void)updateSizesOfBlocks{
-    blockSizeLBL.text=[[NSString alloc]initWithFormat:@"%i",blockSize];
+    mySingleton *singleton = [mySingleton sharedSingleton];
+
+    blockSizeLBL.text=[[NSString alloc]initWithFormat:@"%i", blockSize];
+    singleton.blockSize = blockSize;
     
     //get pos of centres
     CGPoint block1pt = block1View.frame.origin;
@@ -179,8 +153,9 @@
     CGPoint block7pt = block7View.frame.origin;
     CGPoint block8pt = block8View.frame.origin;
     CGPoint block9pt = block9View.frame.origin;
-    
+
     //move the block
+
     block1View.frame=CGRectMake(block1pt.x, block1pt.y, blockSize, blockSize) ;
     block2View.frame=CGRectMake(block2pt.x, block2pt.y, blockSize, blockSize) ;
     block3View.frame=CGRectMake(block3pt.x, block3pt.y, blockSize, blockSize) ;
@@ -190,22 +165,58 @@
     block7View.frame=CGRectMake(block7pt.x, block7pt.y, blockSize, blockSize) ;
     block8View.frame=CGRectMake(block8pt.x, block8pt.y, blockSize, blockSize) ;
     block9View.frame=CGRectMake(block9pt.x, block9pt.y, blockSize, blockSize) ;
+
+    CGAffineTransform scaleTrans =
+    CGAffineTransformMakeScale(1, 1);
+
+    CGAffineTransform rotateTrans =
+    CGAffineTransformMakeRotation(0 * M_PI / 180);
+
+    block1View.transform = CGAffineTransformConcat(scaleTrans,
+                                                   rotateTrans
+                                                   );
+    block2View.transform = CGAffineTransformConcat(scaleTrans,
+                                                   rotateTrans
+                                                   );
+    block3View.transform = CGAffineTransformConcat(scaleTrans,
+                                                   rotateTrans
+                                                   );
+    block4View.transform = CGAffineTransformConcat(scaleTrans,
+                                                   rotateTrans
+                                                   );
+    block5View.transform = CGAffineTransformConcat(scaleTrans,
+                                                   rotateTrans
+                                                   );
+    block6View.transform = CGAffineTransformConcat(scaleTrans,
+                                                                                                        rotateTrans
+                                                                                                        );
+    block7View.transform = CGAffineTransformConcat(scaleTrans,
+                                                   rotateTrans
+                                                   );
+    block8View.transform = CGAffineTransformConcat(scaleTrans,
+                                                   rotateTrans
+                                                   );
+    block9View.transform = CGAffineTransformConcat(scaleTrans,
+                                                   rotateTrans
+                                                   );
+
 }
 -(void)updateBlockColours{
     mySingleton *singleton = [mySingleton sharedSingleton];
     
-      self.settingsViewerVIEW.backgroundColor=singleton.currentBackgroundColour;
+
     
-    currentBlockColour=singleton.currentBlockColour;
-    currentBackgroundColour=singleton.currentBackgroundColour;
-    currentShowColour=singleton.currentShowColour;
+    currentBlockColour     = singleton.currentBlockColour;
+    currentBackgroundColour= singleton.currentBackgroundColour;
+    currentShowColour      = singleton.currentShowColour;
     
+    self.settingsViewerVIEW.backgroundColor=singleton.currentBackgroundColour;
     
     self.block1View.backgroundColor=currentBlockColour;
     self.block2View.backgroundColor=currentBlockColour;
     self.block3View.backgroundColor=currentBlockColour;
     self.block4View.backgroundColor=currentBlockColour;
-    self.block5View.backgroundColor=currentBlockColour;
+    self.block5View.backgroundColor=currentShowColour;
     self.block6View.backgroundColor=currentBlockColour;
     self.block7View.backgroundColor=currentBlockColour;
     self.block8View.backgroundColor=currentBlockColour;
@@ -334,6 +345,7 @@
             break;
     }
 }
+
 -(void)setRot90{
     //set the blocks to original rotation
 
@@ -346,10 +358,9 @@
     block7View.transform = CGAffineTransformIdentity;
     block8View.transform = CGAffineTransformIdentity;
     block9View.transform = CGAffineTransformIdentity;
-    [self updateSizesOfBlocks];
 }
+
 -(void)setRotAngle{
-    
     CGAffineTransform rotateTrans1 = CGAffineTransformMakeRotation(rot1 * M_PI / 180);
     CGAffineTransform rotateTrans2 = CGAffineTransformMakeRotation(rot2 * M_PI / 180);
     CGAffineTransform rotateTrans3 = CGAffineTransformMakeRotation(rot3 * M_PI / 180);
@@ -361,7 +372,6 @@
     CGAffineTransform rotateTrans9 = CGAffineTransformMakeRotation(rot9 * M_PI / 180);
     
     CGAffineTransform scaleTrans =  CGAffineTransformMakeScale(1.0, 1.0);
-  
     
     block1View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans1);
     block2View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans2);
@@ -372,7 +382,6 @@
     block7View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans7);
     block8View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans8);
     block9View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans9);
-    
 }
 
 - (IBAction)newRotationAngle:(id)sender {
@@ -399,36 +408,29 @@
     waitTime=500;
     startTime=2000;
     showTime=500;
+    blockStartDelaySLD.value = startTime;
+    blockWaitTimeSLD.value   = waitTime;
+    blockShowTimeSLD.value   = showTime;
+    blockStartDelayLBL.text=[NSString stringWithFormat:@"%i", startTime];
+    blockWaitTimeLBL.text=[NSString stringWithFormat:@"%i", waitTime];
+    blockShowTimeLBL.text=[NSString stringWithFormat:@"%i", showTime];
+    block5View.backgroundColor=[UIColor orangeColor];
+
+    [self BlockBackgroundColourBlaBTN:self];
+    [self BlockHighlightColourOraBTN:self];
+    [self BlockColourBluBTN:self];
     
     blockSizeLBL.text=[[NSString alloc]initWithFormat:@"%i",blockSize];
     singleton.currentBackgroundColour=[UIColor blackColor];
     singleton.currentBlockColour=[UIColor blueColor];
-    currentShowColour=[UIColor orangeColor];
+    singleton.currentShowColour=[UIColor orangeColor];
     //get pos of centres
-    
-    block1View.frame=CGRectMake(34,   37, blockSize, blockSize) ;
-    block2View.frame=CGRectMake(75,   89, blockSize, blockSize) ;
-    block3View.frame=CGRectMake(140,  70, blockSize, blockSize) ;
-    block4View.frame=CGRectMake(27,  173, blockSize, blockSize) ;
-    block5View.frame=CGRectMake(130, 150, blockSize, blockSize) ;
-    block6View.frame=CGRectMake(61,  236, blockSize, blockSize) ;
-    block7View.frame=CGRectMake(148, 218, blockSize, blockSize) ;
-    block8View.frame=CGRectMake(20,  280, blockSize, blockSize) ;
-    block9View.frame=CGRectMake(122, 275, blockSize, blockSize) ;
-    
+
     [self setRot90];
-    if (blockRotateSWT.isOn)
-    {
-        //arbitary rotate from current position to new position, don't care about absolute angle
-        
-        [self newRotationAngle:(id)sender];
-        [self setRotAngle];
-        
-    }
     [self updateSizesOfBlocks];
     [self updateBlockNumbers];
-    
 }
+
 #pragma mark Settings Actions Buttons
 - (IBAction)blockStartPlusBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
@@ -560,9 +562,7 @@
             //[self updateSizesOfBlocks];
             [self newRotationAngle:(id)sender];
             [self setRotAngle];
-        
     }else{
-        
             [self setRot90];
             [self updateSizesOfBlocks];
     }
@@ -577,6 +577,7 @@
 - (IBAction)blockShowTimeSLD:(UISlider *)sender{
     blockShowTimeLBL.text=[NSString stringWithFormat:@"%d", (int)blockShowTimeSLD.value];
 }
+
 #pragma mark Block Colours Setting Actions
 - (IBAction)BlockColourBlaBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
@@ -584,7 +585,7 @@
     self.block2View.backgroundColor=[UIColor blackColor];
     self.block3View.backgroundColor=[UIColor blackColor];
     self.block4View.backgroundColor=[UIColor blackColor];
-    self.block5View.backgroundColor=[UIColor blackColor];
+    self.block5View.backgroundColor=currentShowColour;
     self.block6View.backgroundColor=[UIColor blackColor];
     self.block7View.backgroundColor=[UIColor blackColor];
     self.block8View.backgroundColor=[UIColor blackColor];
@@ -598,7 +599,7 @@
     self.block2View.backgroundColor=[UIColor blueColor];
     self.block3View.backgroundColor=[UIColor blueColor];
     self.block4View.backgroundColor=[UIColor blueColor];
-    self.block5View.backgroundColor=[UIColor blueColor];
+    self.block5View.backgroundColor=currentShowColour;
     self.block6View.backgroundColor=[UIColor blueColor];
     self.block7View.backgroundColor=[UIColor blueColor];
     self.block8View.backgroundColor=[UIColor blueColor];
@@ -612,7 +613,7 @@
     self.block2View.backgroundColor=[UIColor redColor];
     self.block3View.backgroundColor=[UIColor redColor];
     self.block4View.backgroundColor=[UIColor redColor];
-    self.block5View.backgroundColor=[UIColor redColor];
+        self.block5View.backgroundColor=currentShowColour;
     self.block6View.backgroundColor=[UIColor redColor];
     self.block7View.backgroundColor=[UIColor redColor];
     self.block8View.backgroundColor=[UIColor redColor];
@@ -625,7 +626,7 @@
     self.block2View.backgroundColor=[UIColor orangeColor];
     self.block3View.backgroundColor=[UIColor orangeColor];
     self.block4View.backgroundColor=[UIColor orangeColor];
-    self.block5View.backgroundColor=[UIColor orangeColor];
+        self.block5View.backgroundColor=currentShowColour;
     self.block6View.backgroundColor=[UIColor orangeColor];
     self.block7View.backgroundColor=[UIColor orangeColor];
     self.block8View.backgroundColor=[UIColor orangeColor];
@@ -639,7 +640,7 @@
     self.block2View.backgroundColor=[UIColor greenColor];
     self.block3View.backgroundColor=[UIColor greenColor];
     self.block4View.backgroundColor=[UIColor greenColor];
-    self.block5View.backgroundColor=[UIColor greenColor];
+        self.block5View.backgroundColor=currentShowColour;
     self.block6View.backgroundColor=[UIColor greenColor];
     self.block7View.backgroundColor=[UIColor greenColor];
     self.block8View.backgroundColor=[UIColor greenColor];
@@ -652,7 +653,7 @@
     self.block2View.backgroundColor=[UIColor yellowColor];
     self.block3View.backgroundColor=[UIColor yellowColor];
     self.block4View.backgroundColor=[UIColor yellowColor];
-    self.block5View.backgroundColor=[UIColor yellowColor];
+        self.block5View.backgroundColor=currentShowColour;
     self.block6View.backgroundColor=[UIColor yellowColor];
     self.block7View.backgroundColor=[UIColor yellowColor];
     self.block8View.backgroundColor=[UIColor yellowColor];
@@ -665,7 +666,7 @@
     self.block2View.backgroundColor=[UIColor magentaColor];
     self.block3View.backgroundColor=[UIColor magentaColor];
     self.block4View.backgroundColor=[UIColor magentaColor];
-    self.block5View.backgroundColor=[UIColor magentaColor];
+        self.block5View.backgroundColor=currentShowColour;
     self.block6View.backgroundColor=[UIColor magentaColor];
     self.block7View.backgroundColor=[UIColor magentaColor];
     self.block8View.backgroundColor=[UIColor magentaColor];
@@ -678,7 +679,7 @@
     self.block2View.backgroundColor=[UIColor grayColor];
     self.block3View.backgroundColor=[UIColor grayColor];
     self.block4View.backgroundColor=[UIColor grayColor];
-    self.block5View.backgroundColor=[UIColor grayColor];
+        self.block5View.backgroundColor=currentShowColour;
     self.block6View.backgroundColor=[UIColor grayColor];
     self.block7View.backgroundColor=[UIColor grayColor];
     self.block8View.backgroundColor=[UIColor grayColor];
@@ -691,7 +692,7 @@
     self.block2View.backgroundColor=[UIColor whiteColor];
     self.block3View.backgroundColor=[UIColor whiteColor];
     self.block4View.backgroundColor=[UIColor whiteColor];
-    self.block5View.backgroundColor=[UIColor whiteColor];
+        self.block5View.backgroundColor=currentShowColour;
     self.block6View.backgroundColor=[UIColor whiteColor];
     self.block7View.backgroundColor=[UIColor whiteColor];
     self.block8View.backgroundColor=[UIColor whiteColor];
@@ -704,7 +705,7 @@
     self.block2View.backgroundColor=[UIColor cyanColor];
     self.block3View.backgroundColor=[UIColor cyanColor];
     self.block4View.backgroundColor=[UIColor cyanColor];
-    self.block5View.backgroundColor=[UIColor cyanColor];
+        self.block5View.backgroundColor=currentShowColour;
     self.block6View.backgroundColor=[UIColor cyanColor];
     self.block7View.backgroundColor=[UIColor cyanColor];
     self.block8View.backgroundColor=[UIColor cyanColor];
@@ -714,106 +715,58 @@
 #pragma mark Show Highlight Colours Setting Actions
 - (IBAction)BlockHighlightColourBlaBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
-    self.block1View.backgroundColor=[UIColor blackColor];
-    self.block2View.backgroundColor=[UIColor blackColor];
-    self.block3View.backgroundColor=[UIColor blackColor];
-    self.block4View.backgroundColor=[UIColor blackColor];
+
     self.block5View.backgroundColor=[UIColor blackColor];
-    self.block6View.backgroundColor=[UIColor blackColor];
-    self.block7View.backgroundColor=[UIColor blackColor];
-    self.block8View.backgroundColor=[UIColor blackColor];
-    self.block9View.backgroundColor=[UIColor blackColor];
+
     singleton.currentShowColour=[UIColor blackColor];
 }
 - (IBAction)BlockHighlightColourBluBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
-    self.block1View.backgroundColor=[UIColor blueColor];
-    self.block2View.backgroundColor=[UIColor blueColor];
-    self.block3View.backgroundColor=[UIColor blueColor];
-    self.block4View.backgroundColor=[UIColor blueColor];
+
     self.block5View.backgroundColor=[UIColor blueColor];
-    self.block6View.backgroundColor=[UIColor blueColor];
-    self.block7View.backgroundColor=[UIColor blueColor];
-    self.block8View.backgroundColor=[UIColor blueColor];
-    self.block9View.backgroundColor=[UIColor blueColor];
+
     singleton.currentShowColour=[UIColor blueColor];
 }
 - (IBAction)BlockHighlightColourRedBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
-    self.block1View.backgroundColor=[UIColor redColor];
-    self.block2View.backgroundColor=[UIColor redColor];
-    self.block3View.backgroundColor=[UIColor redColor];
-    self.block4View.backgroundColor=[UIColor redColor];
+
     self.block5View.backgroundColor=[UIColor redColor];
-    self.block6View.backgroundColor=[UIColor redColor];
-    self.block7View.backgroundColor=[UIColor redColor];
-    self.block8View.backgroundColor=[UIColor redColor];
-    self.block9View.backgroundColor=[UIColor redColor];
+
     singleton.currentShowColour=[UIColor redColor];
 }
 - (IBAction)BlockHighlightColourOraBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
-    self.block1View.backgroundColor=[UIColor orangeColor];
-    self.block2View.backgroundColor=[UIColor orangeColor];
-    self.block3View.backgroundColor=[UIColor orangeColor];
-    self.block4View.backgroundColor=[UIColor orangeColor];
+
     self.block5View.backgroundColor=[UIColor orangeColor];
-    self.block6View.backgroundColor=[UIColor orangeColor];
-    self.block7View.backgroundColor=[UIColor orangeColor];
-    self.block8View.backgroundColor=[UIColor orangeColor];
-    self.block9View.backgroundColor=[UIColor orangeColor];
+
     singleton.currentShowColour=[UIColor orangeColor];
 }
 - (IBAction)BlockHighlightColourGreBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
-    self.block1View.backgroundColor=[UIColor greenColor];
-    self.block2View.backgroundColor=[UIColor greenColor];
-    self.block3View.backgroundColor=[UIColor greenColor];
-    self.block4View.backgroundColor=[UIColor greenColor];
+
     self.block5View.backgroundColor=[UIColor greenColor];
-    self.block6View.backgroundColor=[UIColor greenColor];
-    self.block7View.backgroundColor=[UIColor greenColor];
-    self.block8View.backgroundColor=[UIColor greenColor];
-    self.block9View.backgroundColor=[UIColor greenColor];
+
     singleton.currentShowColour=[UIColor greenColor];
 }
 - (IBAction)BlockHighlightColourCyaBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
-    self.block1View.backgroundColor=[UIColor cyanColor];
-    self.block2View.backgroundColor=[UIColor cyanColor];
-    self.block3View.backgroundColor=[UIColor cyanColor];
-    self.block4View.backgroundColor=[UIColor cyanColor];
+
     self.block5View.backgroundColor=[UIColor cyanColor];
-    self.block6View.backgroundColor=[UIColor cyanColor];
-    self.block7View.backgroundColor=[UIColor cyanColor];
-    self.block8View.backgroundColor=[UIColor cyanColor];
-    self.block9View.backgroundColor=[UIColor cyanColor];
+
     singleton.currentShowColour=[UIColor cyanColor];
 }
 - (IBAction)BlockHighlightColourYelBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
-    self.block1View.backgroundColor=[UIColor yellowColor];
-    self.block2View.backgroundColor=[UIColor yellowColor];
-    self.block3View.backgroundColor=[UIColor yellowColor];
-    self.block4View.backgroundColor=[UIColor yellowColor];
+
     self.block5View.backgroundColor=[UIColor yellowColor];
-    self.block6View.backgroundColor=[UIColor yellowColor];
-    self.block7View.backgroundColor=[UIColor yellowColor];
-    self.block8View.backgroundColor=[UIColor yellowColor];
-    self.block9View.backgroundColor=[UIColor yellowColor];
+
     singleton.currentShowColour=[UIColor yellowColor];
 }
 - (IBAction)BlockHighlightColourWhiBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
-    self.block1View.backgroundColor=[UIColor whiteColor];
-    self.block2View.backgroundColor=[UIColor whiteColor];
-    self.block3View.backgroundColor=[UIColor whiteColor];
-    self.block4View.backgroundColor=[UIColor whiteColor];
+
     self.block5View.backgroundColor=[UIColor whiteColor];
-    self.block6View.backgroundColor=[UIColor whiteColor];
-    self.block7View.backgroundColor=[UIColor whiteColor];
-    self.block8View.backgroundColor=[UIColor whiteColor];
-    self.block9View.backgroundColor=[UIColor whiteColor];
+
     singleton.currentShowColour=[UIColor whiteColor];
 }
 #pragma mark Background Colours Setting Actions
@@ -900,20 +853,7 @@
     return posrand;
 }
 
-/*-(void)setBlocksTestPositionCentre{
-    int factor=2;
-    
-    bl1.frame=CGRectMake(135+[self randomPt]-(blockSize/2), 218+[self randomPt]-(blockSize/2), blockSize*factor, blockSize*factor) ;
-    bl2.frame=CGRectMake(384+[self randomPt]-(blockSize/2), 218+[self randomPt]-(blockSize/2), blockSize*factor, blockSize*factor) ;
-    bl3.frame=CGRectMake(647+[self randomPt]-(blockSize/2), 218+[self randomPt]-(blockSize/2), blockSize*factor, blockSize*factor) ;
-    bl4.frame=CGRectMake(135+[self randomPt]-(blockSize/2), 492+[self randomPt]-(blockSize/2), blockSize*factor, blockSize*factor) ;
-    bl5.frame=CGRectMake(384+[self randomPt]-(blockSize/2), 492+[self randomPt]-(blockSize/2), blockSize*factor, blockSize*factor) ;
-    bl6.frame=CGRectMake(647+[self randomPt]-(blockSize/2), 492+[self randomPt]-(blockSize/2), blockSize*factor, blockSize*factor) ;
-    bl7.frame=CGRectMake(135+[self randomPt]-(blockSize/2), 763+[self randomPt]-(blockSize/2), blockSize*factor, blockSize*factor) ;
-    bl8.frame=CGRectMake(384+[self randomPt]-(blockSize/2), 763+[self randomPt]-(blockSize/2), blockSize*factor, blockSize*factor) ;
-    bl9.frame=CGRectMake(647+[self randomPt]-(blockSize/2), 763+[self randomPt]-(blockSize/2), blockSize*factor, blockSize*factor) ;
-}
- */
+
 
 
 @end
