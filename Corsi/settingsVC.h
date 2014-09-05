@@ -122,5 +122,7 @@
 -(float)randomDegrees359;
 //-(CGPoint)randomXY:(CGFloat)X Y:(CGFloat)Y;
 -(void)updateBlockNumbers;
+-(void)saveSettings;
+-(void)loadSettings;
 
 @end

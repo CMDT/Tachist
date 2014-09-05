@@ -258,12 +258,12 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jrJ-bx-ecL">
                                 <rect key="frame" x="20" y="317" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" backgroundImage="red72.png">
+                                <state key="normal" backgroundImage="orange72.png">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="BlockHighlightColourRedBTN:" destination="NmM-sh-eu8" eventType="touchUpInside" id="zo2-rA-XHd"/>
+                                    <action selector="BlockHighlightColourOraBTN:" destination="NmM-sh-eu8" eventType="touchUpInside" id="iJ6-7d-uS2"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dMQ-YL-Hbf">
@@ -289,14 +289,25 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="380-F3-cMM">
-                                <rect key="frame" x="223" y="434" width="83" height="72"/>
+                                <rect key="frame" x="218" y="436" width="83" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Defaults">
+                                <state key="normal" title="Load">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="setDefaults:" destination="NmM-sh-eu8" eventType="touchUpInside" id="JPn-vv-gP0"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="NFr-fd-bM3">
+                                <rect key="frame" x="218" y="472" width="83" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Save">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="setDefaults:" destination="NmM-sh-eu8" eventType="touchUpInside" id="Gdt-C0-LcG"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BWP-Zo-8vw">
@@ -637,7 +648,7 @@ When all the sequence has been shown, try and remember the sequence and press th
                                 <rect key="frame" x="20" y="49" width="280" height="398"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <mutableString key="text">The Corsi Block Test is can be used as a measure of short term memory.
+                                <string key="text">The Corsi Block Test is can be used as a measure of short term memory.
 
 The original test used 9 blocks which were placed on a table, and the observer touched the blocks in an order the subject was asked to repeat.  The ability to repeat all the blocks in the sequence originally shown gives a score.
 
@@ -657,7 +668,7 @@ The developer of this App is Jonathan Howell, SAS Technical SAervices, Mancheste
 
 This version, (c) 2014.
 
-</mutableString>
+</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>

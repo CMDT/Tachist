@@ -249,6 +249,11 @@
     blockFinishNumLBL.text=[[NSString alloc]initWithFormat:@"%i",finish];
     blockSizeLBL.text=[[NSString alloc]initWithFormat:@"%i",blockSize];
     
+    //save data
+    singleton.blockSize=blockSize;
+    singleton.start=start;
+    singleton.finish=finish;
+    
     //set the number of blocks on the biggest valid number
     int blockCount = blockFinishNumLBL.text.intValue;
     switch (blockCount) {
@@ -403,6 +408,7 @@
 }
 
 - (IBAction)setDefaults:(id)sender {
+    //also used in Load Settings from k data store
     mySingleton *singleton = [mySingleton sharedSingleton];
     [forwardTestSWT setOn:YES animated:YES];
     [onScreenInfoSWT setOn:YES animated:YES];
@@ -412,8 +418,8 @@
     blockSize=30;
     
     waitTime=500;
-    startTime=2000;
-    showTime=500;
+    startTime=1000;
+    showTime=200;
     blockStartDelaySLD.value = startTime;
     blockWaitTimeSLD.value   = waitTime;
     blockShowTimeSLD.value   = showTime;
@@ -479,7 +485,7 @@
 }
 - (IBAction)blockSizePlusBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
-    blockSize++;
+    blockSize=blockSize+5;
     sizeMinusBTN.alpha=1;
     sizePlusBTN.alpha=1;
     if (blockSize>55) {
@@ -534,7 +540,7 @@
 }
 - (IBAction)blockSizeMinusBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
-    blockSize--;
+    blockSize=blockSize-5;
     sizeMinusBTN.alpha=1;
     sizePlusBTN.alpha=1;
     if (blockSize<10) {
@@ -871,6 +877,44 @@
     return posrand;
 }
 
+-(void)saveSettings{
+    
+}
+-(void)loadSettings{
+    //edit this to take data from k data store in Apple Settings pane
+    mySingleton *singleton = [mySingleton sharedSingleton];
+    [forwardTestSWT setOn:YES animated:YES];
+    [onScreenInfoSWT setOn:YES animated:YES];
+    [blockRotateSWT setOn:NO animated:YES];
+    start=3;
+    finish=9;
+    blockSize=30;
+    
+    waitTime=500;
+    startTime=1000;
+    showTime=200;
+    blockStartDelaySLD.value = startTime;
+    blockWaitTimeSLD.value   = waitTime;
+    blockShowTimeSLD.value   = showTime;
+    blockStartDelayLBL.text=[NSString stringWithFormat:@"%i", startTime];
+    blockWaitTimeLBL.text=[NSString stringWithFormat:@"%i", waitTime];
+    blockShowTimeLBL.text=[NSString stringWithFormat:@"%i", showTime];
+    block5View.backgroundColor=[UIColor orangeColor];
+    
+    [self BlockBackgroundColourBlaBTN:self];
+    [self BlockHighlightColourOraBTN:self];
+    [self BlockColourBluBTN:self];
+    
+    blockSizeLBL.text=[[NSString alloc]initWithFormat:@"%i",blockSize];
+    singleton.currentBackgroundColour=[UIColor blackColor];
+    singleton.currentBlockColour=[UIColor blueColor];
+    singleton.currentShowColour=[UIColor orangeColor];
+    //get pos of centres
+    
+    [self setRot90];
+    [self updateSizesOfBlocks];
+    [self updateBlockNumbers];
+}
 
 
 
