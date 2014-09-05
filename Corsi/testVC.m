@@ -7,6 +7,7 @@
 //
 
 #import "testVC.h"
+#import "mySingleton.h"
 
 @interface testVC ()
 
@@ -27,6 +28,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
 }
 
 - (void)didReceiveMemoryWarning

@@ -18,7 +18,11 @@
     // start of your application:didFinishLaunchingWithOptions // ...
     [TestFlight takeOff:@"366e7ec5-6ae8-4163-ad1c-eb12570fb8da"];
     // The rest of your application:didFinishLaunchingWithOptions method// ...
-
+    //start the main App with a message
+    NSString *temp2 = [NSString stringWithFormat:@"Corsi Block Test"];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:temp2 message:@"Take a moment to read the notes on these pages before you run the Application ..." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [alert show];
+    
     return YES;
 }
 							
