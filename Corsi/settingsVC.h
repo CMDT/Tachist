@@ -9,6 +9,28 @@
 
 #import <UIKit/UIKit.h>
 
+#define kEmail      @"emailAddress"
+#define kTester     @"testerName"
+#define kSubject    @"subjectName"
+
+#define kStart      @"startBlocks"
+#define kFinish     @"finishBlocks"
+#define kSize       @"blockSize"
+
+#define kForward    @"forwardTestEnabled"
+#define kInfo       @"infoEnabled"
+#define kRot        @"rotationEnabled"
+
+#define kBlockCol   @"blockColour"
+#define kShowCol    @"highlightColour"
+#define kBackCol    @"backgroundColour"
+
+#define kDelay      @"blockDelay"
+#define kTime       @"blockTime"
+#define kShow       @"blockShow"
+
+#define kVersion    @"version"
+
 @interface settingsVC : UIViewController{
     UIView *settingsViewerVIEW;
 }

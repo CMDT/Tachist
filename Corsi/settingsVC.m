@@ -93,12 +93,30 @@
 //@synthesize bl1,bl2,bl3,bl4,bl5,bl6,bl7,bl8,bl9,CBTView,infoFinishLBL,infoRoundLBL,infoSelectLBL,infoStartLBL,myMessageLBL;
 @synthesize currentBackgroundColour,currentBlockColour,currentShowColour;
 
+
+
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    // NSString *prefValue = (engineSwitch.on) ? @"Engaged" : @"Disabled";
+    //[defaults setObject:prefValue forKey:kWarpDriveKey];
+    //[defaults setFloat:warpFactorSlider.value forKey:kWarpFactorKey];
+    [super viewWillDisappear:animated];
+}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    
+    NSURL *defaultPrefsFile = [[NSBundle mainBundle]
+                               URLForResource:@"Root" withExtension:@"plist"];
+    NSDictionary *defaultPrefs =
+    [NSDictionary dictionaryWithContentsOfURL:defaultPrefsFile];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultPrefs];
+
     mySingleton *singleton = [mySingleton sharedSingleton];
     
     currentBlockColour=singleton.currentBlockColour;
@@ -117,12 +135,56 @@
         
         [self setRot90];
     }
-    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
+    //read the NSUserDefaults settings bundle
+
+//#define kEmail      @"emailAddress"
+//#define kTester     @"testerName"
+//#define kSubject    @"subjectName"
+//
+//#define kStart      @"startBlocks"
+//#define kFinish     @"finishBlocks"
+//#define kSize       @"blockSize"
+//
+//#define kForward    @"forwardTestEnabled"
+//#define kInfo       @"infoEnabled"
+//#define kRot        @"rotationEnabled"
+//
+//#define kBlockCol   @"blockColour"
+//#define kShowCol    @"highlightColour"
+//#define kBackCol    @"backgroundColour"
+//
+//#define kDelay      @"blockDelay"
+//#define kTime       @"blockTime"
+//#define kShow       @"blockShow"
+//
+//#define kVersion    @"version"
+    NSLog(@"tester      :%@",[defaults objectForKey:kTester]);
+    NSLog(@"subject     :%@",[defaults objectForKey:kSubject]);
+    NSLog(@"email       :%@",[defaults objectForKey:kEmail]);
+    NSLog(@"start       :%ld",(long)[defaults integerForKey:kStart]);
+    NSLog(@"finish      :%ld",(long)[defaults integerForKey:kFinish]);
+    NSLog(@"size        :%ld",(long)[defaults integerForKey:kSize]);
+    NSLog(@"forward     :%ld",(long)[defaults integerForKey:kForward]);
+    NSLog(@"info        :%ld",(long)[defaults integerForKey:kInfo]);
+    NSLog(@"rotation    :%ld",(long)[defaults integerForKey:kRot]);
+    NSLog(@"block col   :%@",[defaults objectForKey:kBlockCol]);
+    NSLog(@"show col    :%@",[defaults objectForKey:kShowCol]);
+    NSLog(@"back col    :%@",[defaults objectForKey:kBackCol]);
+    NSLog(@"delay       :%ld",(long)[defaults integerForKey:kDelay]);
+    NSLog(@"time        :%ld",(long)[defaults integerForKey:kTime]);
+    NSLog(@"show        :%ld",(long)[defaults integerForKey:kShow]);
+    NSLog(@"version     :%@",[defaults objectForKey:kVersion]);
+
     blockSizeLBL.text=[[NSString alloc]initWithFormat:@"%i",blockSize];
     [self updateBlockColours];
     [self updateSizesOfBlocks];
     [self updateBlockNumbers];
     [self updateTiming];
+
+
 }
 
 -(void)hideAllBlocks{

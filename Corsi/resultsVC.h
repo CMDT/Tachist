@@ -9,9 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <MessageUI/MFMailComposeViewController.h>
 
-#define kEmail  @"emailAddress"
-#define kTester @"testerName"
-
 @interface resultsVC : UIViewController <MFMailComposeViewControllerDelegate>
 {
     
