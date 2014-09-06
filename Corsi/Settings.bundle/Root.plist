@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>Title</key>
-	<string>CORSI BLOCK TEST - SETTINGS</string>
+	<string>Corsi Block Test Settings</string>
 	<key>PreferenceSpecifiers</key>
 	<array>
 		<dict>
@@ -220,7 +220,7 @@
 			<key>Key</key>
 			<string>blockColour</string>
 			<key>DefaultValue</key>
-			<integer>8</integer>
+			<string></string>
 			<key>Values</key>
 			<array>
 				<integer>0</integer>
@@ -250,7 +250,7 @@
 		</dict>
 		<dict>
 			<key>DefaultValue</key>
-			<integer>0</integer>
+			<string></string>
 			<key>Titles</key>
 			<array>
 				<string>Orange</string>
@@ -272,7 +272,7 @@
 		</dict>
 		<dict>
 			<key>DefaultValue</key>
-			<integer>2</integer>
+			<string></string>
 			<key>Titles</key>
 			<array>
 				<string>White</string>

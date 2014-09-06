@@ -98,7 +98,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    // NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     // NSString *prefValue = (engineSwitch.on) ? @"Engaged" : @"Disabled";
     //[defaults setObject:prefValue forKey:kWarpDriveKey];
     //[defaults setFloat:warpFactorSlider.value forKey:kWarpFactorKey];
@@ -164,18 +164,18 @@
     NSLog(@"tester      :%@",[defaults objectForKey:kTester]);
     NSLog(@"subject     :%@",[defaults objectForKey:kSubject]);
     NSLog(@"email       :%@",[defaults objectForKey:kEmail]);
-    NSLog(@"start       :%ld",(long)[defaults integerForKey:kStart]);
-    NSLog(@"finish      :%ld",(long)[defaults integerForKey:kFinish]);
-    NSLog(@"size        :%ld",(long)[defaults integerForKey:kSize]);
-    NSLog(@"forward     :%ld",(long)[defaults integerForKey:kForward]);
-    NSLog(@"info        :%ld",(long)[defaults integerForKey:kInfo]);
-    NSLog(@"rotation    :%ld",(long)[defaults integerForKey:kRot]);
+    NSLog(@"start       :%@",[defaults objectForKey:kStart]);
+    NSLog(@"finish      :%@",[defaults objectForKey:kFinish]);
+    NSLog(@"size        :%@",[defaults objectForKey:kSize]);
+    NSLog(@"forward     :%@",[defaults objectForKey:kForward]);
+    NSLog(@"info        :%@",[defaults objectForKey:kInfo]);
+    NSLog(@"rotation    :%@",[defaults objectForKey:kRot]);
     NSLog(@"block col   :%@",[defaults objectForKey:kBlockCol]);
     NSLog(@"show col    :%@",[defaults objectForKey:kShowCol]);
     NSLog(@"back col    :%@",[defaults objectForKey:kBackCol]);
-    NSLog(@"delay       :%ld",(long)[defaults integerForKey:kDelay]);
-    NSLog(@"time        :%ld",(long)[defaults integerForKey:kTime]);
-    NSLog(@"show        :%ld",(long)[defaults integerForKey:kShow]);
+    NSLog(@"delay       :%@",[defaults objectForKey:kDelay]);
+    NSLog(@"time        :%@",[defaults objectForKey:kTime]);
+    NSLog(@"show        :%@",[defaults objectForKey:kShow]);
     NSLog(@"version     :%@",[defaults objectForKey:kVersion]);
 
     blockSizeLBL.text=[[NSString alloc]initWithFormat:@"%i",blockSize];
