@@ -188,13 +188,8 @@
 		E10D016E19B6024F00D9E5F8 /* Corsi */ = {
 			isa = PBXGroup;
 			children = (
-				E1DAD77719B85ECC00600608 /* TestFlight.h */,
-				E1DAD77819B85ECC00600608 /* TestFlight+AsyncLogging.h */,
-				E1DAD77919B85ECC00600608 /* TestFlight+ManualSessions.h */,
 				E10D017A19B6024F00D9E5F8 /* Main_iPhone.storyboard */,
 				E10D017D19B6024F00D9E5F8 /* Main_iPad.storyboard */,
-				E10D017719B6024F00D9E5F8 /* AppDelegate.h */,
-				E10D017819B6024F00D9E5F8 /* AppDelegate.m */,
 				E1DAD7A619B8A31700600608 /* mySingleton.h */,
 				E1DAD7A719B8A31700600608 /* mySingleton.m */,
 				E10D018019B6024F00D9E5F8 /* ViewController.h */,
@@ -207,6 +202,11 @@
 				E1DAD7B019B8A98800600608 /* resultsVC.m */,
 				E1DAD7B219B8A9A500600608 /* informationVC.h */,
 				E1DAD7B319B8A9A500600608 /* informationVC.m */,
+				E10D017719B6024F00D9E5F8 /* AppDelegate.h */,
+				E10D017819B6024F00D9E5F8 /* AppDelegate.m */,
+				E1DAD77719B85ECC00600608 /* TestFlight.h */,
+				E1DAD77819B85ECC00600608 /* TestFlight+AsyncLogging.h */,
+				E1DAD77919B85ECC00600608 /* TestFlight+ManualSessions.h */,
 				E10D018319B6024F00D9E5F8 /* Images.xcassets */,
 				E10D016F19B6024F00D9E5F8 /* Supporting Files */,
 			);
