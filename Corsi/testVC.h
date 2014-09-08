@@ -8,6 +8,49 @@
 
 #import <UIKit/UIKit.h>
 
-@interface testVC : UIViewController
+@interface testVC : UIViewController{
+
+}
+@property (retain, nonatomic) IBOutlet UILabel *headingLBL;
+@property (retain, nonatomic) IBOutlet UILabel *statusMessageLBL;
+@property (retain, nonatomic) IBOutlet UIView *MessageView;
+@property (retain, nonatomic) IBOutlet UITextView *MessageTextView;
+
+//labels for the stages, hide if not needed
+@property (retain, nonatomic) IBOutlet UILabel *blkLBL;
+@property (retain, nonatomic) IBOutlet UILabel *blkNoLBL;
+@property (retain, nonatomic) IBOutlet UILabel *blkOfLBL;
+@property (retain, nonatomic) IBOutlet UILabel *blkTotalLBL;
+
+//labels for the stages if needed, hide if not
+@property (retain, nonatomic) IBOutlet UILabel *setLBL;
+@property (retain, nonatomic) IBOutlet UILabel *setNoLBL;
+@property (retain, nonatomic) IBOutlet UILabel *setOfLBL;
+@property (retain, nonatomic) IBOutlet UILabel *setTotalLBL;
+
+//buttons over images
+@property (strong, nonatomic) IBOutlet UIButton *box1BTN;
+@property (strong, nonatomic) IBOutlet UIButton *box2BTN;
+@property (strong, nonatomic) IBOutlet UIButton *box3BTN;
+@property (strong, nonatomic) IBOutlet UIButton *box4BTN;
+@property (strong, nonatomic) IBOutlet UIButton *box5BTN;
+@property (strong, nonatomic) IBOutlet UIButton *box6BTN;
+@property (strong, nonatomic) IBOutlet UIButton *box7BTN;
+@property (strong, nonatomic) IBOutlet UIButton *box8BTN;
+@property (strong, nonatomic) IBOutlet UIButton *box9BTN;
+
+//buttons for control
+@property (strong, nonatomic) IBOutlet UIButton *startBTN;
+
+//images for the boxes
+@property (strong, nonatomic) IBOutlet UIView  *box1image;
+@property (strong, nonatomic) IBOutlet UIView  *box2image;
+@property (strong, nonatomic) IBOutlet UIView  *box3image;
+@property (strong, nonatomic) IBOutlet UIView  *box4image;
+@property (strong, nonatomic) IBOutlet UIView  *box5image;
+@property (strong, nonatomic) IBOutlet UIView  *box6image;
+@property (strong, nonatomic) IBOutlet UIView  *box7image;
+@property (strong, nonatomic) IBOutlet UIView  *box8image;
+@property (strong, nonatomic) IBOutlet UIView  *box9image;
 
 @end

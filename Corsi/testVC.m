@@ -10,7 +10,40 @@
 #import "mySingleton.h"
 
 @interface testVC ()
+{
+    int box[9];
+    UIImage *card[5];
+    int startcounter;
+    int finishcounter;
+    BOOL isFinished;
+    BOOL resultsSaved;
+    BOOL infoShow;
+    BOOL reverseTest;
+    int blockSize;
+    BOOL rotateBlocks;
+    int xAdj[9];
+    int yAdj[9];
+    int angle[9];
+    int totla;
+    int percent;
+    NSString *order[9];
+    NSString *guess[9];
+    int score;
+    int pressNo;
+    NSString *orderStr[9];
+    NSString *guessStr[9];
+    NSString *correct[9];
+    Float32 testTime[7][9];
+    Float32 testTimer[7][9];
+    int testNo;
+    int timingCalc;
+    int reply1;
+    long tm;
+    BOOL analysisFlag;
+    Float32 timeGuess[7][9];
 
+
+}
 @end
 
 @implementation testVC
@@ -38,6 +71,90 @@
 }
 //
 //
+-(void)awakeFromNib {
+    statusMessageLab.text=@"The App is Awake...";
+    //hide unhide labels, screens and buttons
+    //***
+    //Action buttons
+    noBut.hidden              = YES;
+    yesBut.hidden             = YES;
+    startBut.hidden           = NO;
+    newTestBut.hidden         = YES;
+    hideResultsBut.hidden     = YES;
+    saveDataToEmailBut.hidden = YES;
+    infoBut.hidden            = NO;
+
+    //text views
+    cardHolder.hidden         = YES;
+    resultsView.hidden        = YES;
+    resultsViewBorder.hidden  = YES;
+    settingsBG.hidden         = YES;
+    infoView.hidden           = YES;
+    settingsBG.hidden         = NO;
+
+    //settings messages and text inputs
+    cardsLab.hidden           = NO;
+    stimLab.hidden            = NO;
+    respLab.hidden            = NO;
+    ms1Lab.hidden             = NO;
+    ms2Lab.hidden             = NO;
+    noCards.hidden            = NO;
+    stimOnTime.hidden         = NO;
+    postResponseDelay.hidden  = NO;
+
+    //headings and labels
+    logoImage.hidden          = NO;
+    title1Lab.hidden          = NO;
+    title2Lab.hidden          = NO;
+    XbutLab.hidden            = YES;
+    ObutLab.hidden            = YES;
+
+    subjectCodeLab.hidden     = NO;
+    subjectCodeTxt.hidden     = NO;
+    statusMessageLab.hidden   = NO;
+    results.hidden            = YES;
+    settingsLab.hidden        = NO;
+    JumpingManLogo.hidden     = NO;
+    clickMessageLab.hidden    = NO;
+
+    if (someResultsExist==1){
+        results.hidden=NO;
+        saveDataToEmailBut.hidden = NO;
+    } else {
+        results.hidden=YES;
+        saveDataToEmailBut.hidden = YES;
+    }
+    //end of hide section
+    NSString *temp2 = [NSString stringWithFormat:@"Tachistoscope Test V.%i.%i.%i",v1,v2,v3];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:temp2 message:@"Type the SUBJECT Code, STIMULUS On Time, POST Stimulus Delay and the NUMBER of cards before starting the test."
+                                                   delegate:self cancelButtonTitle:@"Continue to the App Settings" otherButtonTitles: nil];
+    [alert show];
+    NSMutableArray *cardNo = [[NSMutableArray alloc] init];
+
+    //initialise
+
+
+    card[0] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-start.png"]];
+    card[1] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-finished.png"]];
+    card[2] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-stage-start.png"]];
+    card[3] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-stage-end.png"]];
+    card[4] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-calculating.png"]];
+    
+    //number the cards
+    for(int s=0;s<31;++s){
+        [cardNo addObject:[NSNumber numberWithInt:s]];
+    }
+    //shuffle the cards except the first one and the last two
+    //for(int s=1;s<29;++s){
+    //int r = arc4random() % 28;
+    //[cardNo exchangeObjectAtIndex:s withObjectAtIndex:r+1];
+    //}
+
+    for(int s=0;s<31;++s){
+        // NSLog(@"No: = %d Card No. %@", s, cardNo[s]);
+    }
+}
+
 //
 -(Float32) delayDelay
 {//start delay, once only

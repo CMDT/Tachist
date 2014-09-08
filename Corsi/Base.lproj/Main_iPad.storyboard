@@ -262,9 +262,6 @@
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <action selector="BlockHighlightColourRedBTN:" destination="C4B-Eu-QsW" eventType="touchUpInside" id="EhF-ko-PbC"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t3k-mq-lQs">
                                 <rect key="frame" x="58" y="317" width="30" height="30"/>
