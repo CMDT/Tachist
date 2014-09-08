@@ -11,10 +11,11 @@
 
 @interface testVC ()
 {
-    int box[9];
-    UIImage *card[5];
+    NSNumber *box[9];
+    UIImageView *card[5];
     int startcounter;
     int finishcounter;
+    int stageCounter;
     BOOL isFinished;
     BOOL resultsSaved;
     BOOL infoShow;
@@ -41,12 +42,43 @@
     long tm;
     BOOL analysisFlag;
     Float32 timeGuess[7][9];
-
-
 }
 @end
 
 @implementation testVC
+@synthesize
+    blkLBL,
+    blkNoLBL,
+    blkTotalLBL,
+    box1BTN,
+    box1image,
+    box2BTN,
+    box2image,
+    box3BTN,
+    box3image,
+    box4BTN,
+    box4image,
+    box5BTN,
+    box5image,
+    box6BTN,
+    box6image,
+    box7BTN,
+    box7image,
+    box8BTN,
+    box8image,
+    box9BTN,
+    box9image,
+    setLBL,
+    setNoLBL,
+    setOfLBL,
+    setTotalLBL,
+    startBTN,
+    statusMessageLBL,
+    headingLBL,
+    MessageTextView,
+    MessageView
+    ;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -72,64 +104,26 @@
 //
 //
 -(void)awakeFromNib {
-    statusMessageLab.text=@"The App is Awake...";
+    statusMessageLBL.text=@"The App is Awake...";
     //hide unhide labels, screens and buttons
     //***
     //Action buttons
-    noBut.hidden              = YES;
-    yesBut.hidden             = YES;
-    startBut.hidden           = NO;
-    newTestBut.hidden         = YES;
-    hideResultsBut.hidden     = YES;
-    saveDataToEmailBut.hidden = YES;
-    infoBut.hidden            = NO;
+
+    startBTN.hidden           = NO;
+
 
     //text views
-    cardHolder.hidden         = YES;
-    resultsView.hidden        = YES;
-    resultsViewBorder.hidden  = YES;
-    settingsBG.hidden         = YES;
-    infoView.hidden           = YES;
-    settingsBG.hidden         = NO;
+
 
     //settings messages and text inputs
-    cardsLab.hidden           = NO;
-    stimLab.hidden            = NO;
-    respLab.hidden            = NO;
-    ms1Lab.hidden             = NO;
-    ms2Lab.hidden             = NO;
-    noCards.hidden            = NO;
-    stimOnTime.hidden         = NO;
-    postResponseDelay.hidden  = NO;
+
 
     //headings and labels
-    logoImage.hidden          = NO;
-    title1Lab.hidden          = NO;
-    title2Lab.hidden          = NO;
-    XbutLab.hidden            = YES;
-    ObutLab.hidden            = YES;
 
-    subjectCodeLab.hidden     = NO;
-    subjectCodeTxt.hidden     = NO;
-    statusMessageLab.hidden   = NO;
-    results.hidden            = YES;
-    settingsLab.hidden        = NO;
-    JumpingManLogo.hidden     = NO;
-    clickMessageLab.hidden    = NO;
 
-    if (someResultsExist==1){
-        results.hidden=NO;
-        saveDataToEmailBut.hidden = NO;
-    } else {
-        results.hidden=YES;
-        saveDataToEmailBut.hidden = YES;
-    }
     //end of hide section
-    NSString *temp2 = [NSString stringWithFormat:@"Tachistoscope Test V.%i.%i.%i",v1,v2,v3];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:temp2 message:@"Type the SUBJECT Code, STIMULUS On Time, POST Stimulus Delay and the NUMBER of cards before starting the test."
-                                                   delegate:self cancelButtonTitle:@"Continue to the App Settings" otherButtonTitles: nil];
-    [alert show];
-    NSMutableArray *cardNo = [[NSMutableArray alloc] init];
+
+    NSMutableArray *boxNo = [[NSMutableArray alloc] init];
 
     //initialise
 
@@ -141,8 +135,8 @@
     card[4] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-calculating.png"]];
     
     //number the cards
-    for(int s=0;s<31;++s){
-        [cardNo addObject:[NSNumber numberWithInt:s]];
+    for(int s=0;s<10;++s){
+        //[box addObject:[NSNumber numberWithInt:s]]; ??????????check original code
     }
     //shuffle the cards except the first one and the last two
     //for(int s=1;s<29;++s){
@@ -192,314 +186,120 @@
 //========**  blanks
 //========*******************************************************=========
 //========*******************************************************=========
--(void)onCardDisplay1 {
-    statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
+-(void)boxInit {
+    statusMessageLBL.text = @"Observe";
     //hide the buttons
-    //noBut.hidden = NO;
-    //yesBut.hidden = NO;
+
     //startBut.hidden = YES;
-    //cardCounter++;
-    int t=[self pickACard];
-    if (wasButtonPressed==NO) {
-        // NSLog(@"(Button Not Pressed)");
-    }
-    wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
+    //zero counters
+
+    [MessageView setImage: card[0].image];
     
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay1) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:(([self delayDelay])) target:self selector:@selector(box1) userInfo:nil repeats:NO];
 }
 
--(void)onCardDisplay2 {
-    statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-    if (wasButtonPressed==NO) {
-        // NSLog(@"(Button Not Pressed)");
-    }
-    
-    wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-    
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay2) userInfo:nil repeats:NO];
-}
+-(void)box1 {
+    statusMessageLBL.text = @"Observe";
 
--(void)onCardDisplay3 {
-    statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-    if (wasButtonPressed==NO) {
-        // NSLog(@"(Button Not Pressed)");
-    }
-    
-    wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-    
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay3) userInfo:nil repeats:NO];
-}
+    int t=[self pickABox];
+    //show the t block
 
--(void)onCardDisplay4 {
-    statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-    if (wasButtonPressed==NO) {
-        // NSLog(@"(Button Not Pressed)");
-    }
-    
-    wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-    
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay4) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:(([self delayShow])) target:self selector:@selector(but1) userInfo:nil repeats:NO];
 }
+-(void)box2 {
+    statusMessageLBL.text = @"Observe";
 
--(void)onCardDisplay5 {
-    statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-    if (wasButtonPressed==NO) {
-        // NSLog(@"(Button Not Pressed)");
-    }
-    
-    wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-    
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay5) userInfo:nil repeats:NO];
-}
+    int t=[self pickABox];
 
--(void)onCardDisplay6 {
-    statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-    if (wasButtonPressed==NO) {
-        // NSLog(@"(Button Not Pressed)");
-    }
-    
-    wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-    
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay6) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:(([self delayShow])) target:self selector:@selector(but2) userInfo:nil repeats:NO];
 }
+-(void)box3 {
+    statusMessageLBL.text = @"Observe";
 
--(void)onCardDisplay7 {
-    statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-    if (wasButtonPressed==NO) {
-        // NSLog(@"(Button Not Pressed)");
-    }
-    wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-    
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay7) userInfo:nil repeats:NO];
+    int t=[self pickABox];
+
+    [NSTimer scheduledTimerWithTimeInterval:(([self delayShow])) target:self selector:@selector(but3) userInfo:nil repeats:NO];
 }
--(void)onCardDisplay8 {
-    statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-    if (wasButtonPressed==NO) {
-        // NSLog(@"(Button Not Pressed)");
-    }
-    wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-    
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay8) userInfo:nil repeats:NO];
+-(void)box4 {
+    statusMessageLBL.text = @"Observe";
+
+    int t=[self pickABox];
+
+    [NSTimer scheduledTimerWithTimeInterval:(([self delayShow])) target:self selector:@selector(but4) userInfo:nil repeats:NO];
 }
--(void)onCardDisplay9 {
-    statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-    if (wasButtonPressed==NO) {
-        // NSLog(@"(Button Not Pressed)");
-    }
-    wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-    
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay9) userInfo:nil repeats:NO];
+-(void)box5 {
+    statusMessageLBL.text = @"Observe";
+
+    int t=[self pickABox];
+
+    [NSTimer scheduledTimerWithTimeInterval:(([self delayShow])) target:self selector:@selector(but5) userInfo:nil repeats:NO];
+}
+-(void)box6 {
+    statusMessageLBL.text = @"Observe";
+
+    int t=[self pickABox];
+
+    [NSTimer scheduledTimerWithTimeInterval:(([self delayShow])) target:self selector:@selector(but6) userInfo:nil repeats:NO];
+}
+-(void)box7 {
+    statusMessageLBL.text = @"Observe";
+
+    int t=[self pickABox];
+
+    [NSTimer scheduledTimerWithTimeInterval:(([self delayShow])) target:self selector:@selector(but7) userInfo:nil repeats:NO];
+}
+-(void)box8 {
+    statusMessageLBL.text = @"Observe";
+
+    int t=[self pickABox];
+
+    [NSTimer scheduledTimerWithTimeInterval:(([self delayShow])) target:self selector:@selector(but8) userInfo:nil repeats:NO];
+}
+-(void)box9 {
+    statusMessageLBL.text = @"Observe";
+
+    int t=[self pickABox];
+
+    [NSTimer scheduledTimerWithTimeInterval:(([self delayShow])) target:self selector:@selector(but9) userInfo:nil repeats:NO];
 }
 
 //========**  blanks
 //========*******************************************************=========
-//========*******************************************************=========
 
--(void)blankCardDisplay0 {
-    //blank screen
-    //detectorOn = 0;
-    
-    //// NSLog(@"card display blank");
-    [cardHolder setImage: card[0].image];
+-(void)stageEnd {
+
+    [MessageView setImage: card[0].image];
     //[NSTimer scheduledTimerWithTimeInterval:(([self delayx1])) target:self selector:@selector(onCardDisplay1) userInfo:nil repeats:NO];
-    [NSTimer scheduledTimerWithTimeInterval: [self delayx1] target:self selector:@selector(onCardDisplay1) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval: [self delayWait] target:self selector:@selector(onCardDisplay1) userInfo:nil repeats:NO];
 }
 
--(void)blankCardDisplay1 {
-    //blank screen
-    //detectorOn = 0;
-    if (noOfCards<2) {
-        lastCard=YES;
+-(void)nextStage {
+    if (finishcounter<2) {
+        isFinished=YES;
         // NSLog(@"card display ending now...");
-        [cardHolder setImage: card[0].image];
-        [NSTimer scheduledTimerWithTimeInterval:[self delayx1] target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
+        [MessageView setImage: card[3].image];
+        [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(testEnd) userInfo:nil repeats:NO];
     }else{
         //// NSLog(@"card display blank");
-        [cardHolder setImage: card[0].image];
-        [NSTimer scheduledTimerWithTimeInterval:[self delayx1] target:self selector:@selector(onCardDisplay2) userInfo:nil repeats:NO];
+        [MessageView setImage: card[2].image];
+        [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(box2) userInfo:nil repeats:NO];
     }
 }
 
--(void)blankCardDisplay2 {
-    //blank screen
-    //detectorOn = 0;
-    if (noOfCards<3) {
-        lastCard=YES;
+-(void)but1 {
+    if (finishcounter<3) {
+        isFinished=YES;
         // NSLog(@"card display ending now...");
-        [cardHolder setImage: card[0].image];
-        [NSTimer scheduledTimerWithTimeInterval:[self delayx1] target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
+        [MessageView setImage: card[0].image];
+        [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }else{
         //// NSLog(@"card display blank");
-        [cardHolder setImage: card[0].image];
+        [MessageView setImage: card[0].image];
         
-        [NSTimer scheduledTimerWithTimeInterval:(([self delayx1])) target:self selector:@selector(onCardDisplay3) userInfo:nil repeats:NO];
-    }
-}
--(void)blankCardDisplay3 {
-    //blank screen
-    //detectorOn = 0;
-    if (noOfCards<4) {
-        lastCard=YES;
-        // NSLog(@"card display ending now...");
-        [cardHolder setImage: card[0].image];
-        [NSTimer scheduledTimerWithTimeInterval:[self delayx1] target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
-    }else{
-        //// NSLog(@"card display blank");
-        [cardHolder setImage: card[0].image];
-        
-        [NSTimer scheduledTimerWithTimeInterval:(([self delayx1])) target:self selector:@selector(onCardDisplay4) userInfo:nil repeats:NO];
-    }
-}
--(void)blankCardDisplay4 {
-    //blank screen
-    //detectorOn = 0;
-    if (noOfCards<5) {
-        lastCard=YES;
-        // NSLog(@"card display ending now...");
-        [cardHolder setImage: card[0].image];
-        [NSTimer scheduledTimerWithTimeInterval:[self delayx1] target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
-    }else{
-        //// NSLog(@"card display blank");
-        [cardHolder setImage: card[0].image];
-        
-        [NSTimer scheduledTimerWithTimeInterval:(([self delayx1])) target:self selector:@selector(onCardDisplay5) userInfo:nil repeats:NO];
-    }
-}
--(void)blankCardDisplay5 {
-    //blank screen
-    //detectorOn = 0;
-    if (noOfCards<6) {
-        lastCard=YES;
-        // NSLog(@"card display ending now...");
-        [cardHolder setImage: card[0].image];
-        [NSTimer scheduledTimerWithTimeInterval:[self delayx1] target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
-    }else{
-        //// NSLog(@"card display blank");
-        [cardHolder setImage: card[0].image];
-        
-        [NSTimer scheduledTimerWithTimeInterval:(([self delayx1])) target:self selector:@selector(onCardDisplay6) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayWait])) target:self selector:@selector(box3) userInfo:nil repeats:NO];
     }
 }
 
--(void)blankCardDisplay6 {
-    //blank screen
-    //detectorOn = 0;
-    if (noOfCards<7) {
-        lastCard=YES;
-        // NSLog(@"card display ending now...");
-        [cardHolder setImage: card[0].image];
-        [NSTimer scheduledTimerWithTimeInterval:[self delayx1] target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
-    }else{
-        //// NSLog(@"card display blank");
-        [cardHolder setImage: card[0].image];
-        
-        [NSTimer scheduledTimerWithTimeInterval:(([self delayx1])) target:self selector:@selector(onCardDisplay7) userInfo:nil repeats:NO];
-    }
-}
-
--(void)blankCardDisplay7 {
-    //blank screen
-    //detectorOn = 0;
-    if (noOfCards<8) {
-        lastCard=YES;
-        // NSLog(@"card display ending now...");
-        [cardHolder setImage: card[0].image];
-        [NSTimer scheduledTimerWithTimeInterval:[self delayx1] target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
-    }else{
-        //// NSLog(@"card display blank");
-        [cardHolder setImage: card[0].image];
-        
-        [NSTimer scheduledTimerWithTimeInterval:(([self delayx1])) target:self selector:@selector(onCardDisplay8) userInfo:nil repeats:NO];
-    }
-}
--(void)blankCardDisplay8 {
-    //blank screen
-    //detectorOn = 0;
-    if (noOfCards<9) {
-        lastCard=YES;
-        // NSLog(@"card display ending now...");
-        [cardHolder setImage: card[0].image];
-        [NSTimer scheduledTimerWithTimeInterval:[self delayx1] target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
-    }else{
-        //// NSLog(@"card display blank");
-        [cardHolder setImage: card[0].image];
-        
-        [NSTimer scheduledTimerWithTimeInterval:(([self delayx1])) target:self selector:@selector(onCardDisplay9) userInfo:nil repeats:NO];
-    }
-}
--(void)blankCardDisplay9 {
-    //blank screen
-    //detectorOn = 0;
-    if (noOfCards<10) {
-        lastCard=YES;
-        // NSLog(@"card display ending now...");
-        [cardHolder setImage: card[0].image];
-        [NSTimer scheduledTimerWithTimeInterval:[self delayx1] target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
-    }else{
-        //// NSLog(@"card display blank");
-        [cardHolder setImage: card[0].image];
-        
-        [NSTimer scheduledTimerWithTimeInterval:(([self delayx1])) target:self selector:@selector(onCardDisplay10) userInfo:nil repeats:NO];
-    }
-}
--(void)blankCardDisplay10 {
-    //blank screen
-    //detectorOn = 0;
-    if (noOfCards<11) {
-        lastCard=YES;
-        // NSLog(@"card display ending now...");
-        [cardHolder setImage: card[0].image];
-        [NSTimer scheduledTimerWithTimeInterval:[self delayx1] target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
-    }else{
-        //// NSLog(@"card display blank");
-        [cardHolder setImage: card[0].image];
-        
-        [NSTimer scheduledTimerWithTimeInterval:(([self delayx1])) target:self selector:@selector(onCardDisplay11) userInfo:nil repeats:NO];
-    }
-}
 
 
 @end

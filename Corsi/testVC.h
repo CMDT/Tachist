@@ -13,7 +13,7 @@
 }
 @property (retain, nonatomic) IBOutlet UILabel *headingLBL;
 @property (retain, nonatomic) IBOutlet UILabel *statusMessageLBL;
-@property (retain, nonatomic) IBOutlet UIView *MessageView;
+@property (retain, nonatomic) IBOutlet UIImageView *MessageView;
 @property (retain, nonatomic) IBOutlet UITextView *MessageTextView;
 
 //labels for the stages, hide if not needed
@@ -52,5 +52,39 @@
 @property (strong, nonatomic) IBOutlet UIView  *box7image;
 @property (strong, nonatomic) IBOutlet UIView  *box8image;
 @property (strong, nonatomic) IBOutlet UIView  *box9image;
+
+-(IBAction)startTest:(id)sender;
+
+-(void)randomise_boxes;
+-(void)display_blocks;
+-(void)hide_blocks;
+-(void)showInfo;
+-(void)awakeFromNib;
+-(Float32) delayDelay;
+-(Float32) delayWait;
+-(Float32) delayShow;
+-(int)pickABox;
+
+-(void)box1;
+-(void)box2;
+-(void)box3;
+-(void)box4;
+-(void)box5;
+-(void)box6;
+-(void)box7;
+-(void)box8;
+-(void)box9;
+
+-(void)but1;
+-(void)but2;
+-(void)but3;
+-(void)but4;
+-(void)but5;
+-(void)but6;
+-(void)but7;
+-(void)but8;
+-(void)but9;
+
+
 
 @end
