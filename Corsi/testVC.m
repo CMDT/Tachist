@@ -109,8 +109,22 @@
     //***
     //Action buttons
 
-    startBTN.hidden           = NO;
-
+    startBTN.hidden  = NO;
+    
+    box1image.hidden = true;
+    box2image.hidden = true;
+    box3image.hidden = true;
+    box4image.hidden = true;
+    box5image.hidden = true;
+    box6image.hidden = true;
+    box7image.hidden = true;
+    box8image.hidden = true;
+    box9image.hidden = true;
+    
+    blkLBL.hidden=true;
+    blkNoLBL.hidden=true;
+    blkTotalLBL.hidden=true;
+    setLBL
 
     //text views
 
