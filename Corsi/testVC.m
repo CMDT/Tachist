@@ -50,6 +50,7 @@
     blkLBL,
     blkNoLBL,
     blkTotalLBL,
+    blkOfLBL,
     box1BTN,
     box1image,
     box2BTN,
@@ -93,24 +94,13 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-//
-//
--(void)awakeFromNib {
-    statusMessageLBL.text=@"The App is Awake...";
-    //hide unhide labels, screens and buttons
-    //***
-    //Action buttons
+-(IBAction)startTest:(id)sender {
+    startBTN.hidden  = true;
+    headingLBL.hidden= true;
 
-    startBTN.hidden  = NO;
-    
     box1image.hidden = true;
     box2image.hidden = true;
     box3image.hidden = true;
@@ -120,11 +110,64 @@
     box7image.hidden = true;
     box8image.hidden = true;
     box9image.hidden = true;
-    
+
     blkLBL.hidden=true;
     blkNoLBL.hidden=true;
+    blkOfLBL.hidden=true;
     blkTotalLBL.hidden=true;
-    setLBL
+    setLBL.hidden=true;
+    statusMessageLBL.hidden=true;
+    setTotalLBL.hidden=true;
+    setOfLBL.hidden=true;
+    setNoLBL.hidden=true;
+    MessageTextView.hidden=true;
+
+    //start the timer
+	self.startDate = [NSDate date];
+    [NSTimer scheduledTimerWithTimeInterval:(([self delayDelay])) target:self selector:@selector(startTest:) userInfo:nil repeats:NO];
+    MessageView.hidden=false;
+    [MessageView setImage: card[0].image];
+
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+//
+
+
+-(void)viewDidAppear:(BOOL)animated{
+    //hide unhide labels, screens and buttons
+    //***
+    //Action buttons
+
+    startBTN.hidden  = NO;
+    headingLBL.hidden= NO;
+    box1image.hidden = true;
+    box2image.hidden = true;
+    box3image.hidden = true;
+    box4image.hidden = true;
+    box5image.hidden = true;
+    box6image.hidden = true;
+    box7image.hidden = true;
+    box8image.hidden = true;
+    box9image.hidden = true;
+
+    blkLBL.hidden=true;
+    blkNoLBL.hidden=true;
+    blkOfLBL.hidden=true;
+    blkTotalLBL.hidden=true;
+    setLBL.hidden=true;
+    statusMessageLBL.hidden=true;
+    setTotalLBL.hidden=true;
+    setOfLBL.hidden=true;
+    setNoLBL.hidden=true;
+    MessageView.hidden=true;
+    MessageTextView.hidden=NO;
+
+
 
     //text views
 
@@ -147,7 +190,7 @@
     card[2] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-stage-start.png"]];
     card[3] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-stage-end.png"]];
     card[4] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-calculating.png"]];
-    
+
     //number the cards
     for(int s=0;s<10;++s){
         //[box addObject:[NSNumber numberWithInt:s]]; ??????????check original code
@@ -161,7 +204,12 @@
     for(int s=0;s<31;++s){
         // NSLog(@"No: = %d Card No. %@", s, cardNo[s]);
     }
+
 }
+//
+-(void)awakeFromNib {
+    statusMessageLBL.text=@"The App is Awake...";
+ }
 
 //
 -(Float32) delayDelay
@@ -313,7 +361,35 @@
         [NSTimer scheduledTimerWithTimeInterval:(([self delayWait])) target:self selector:@selector(box3) userInfo:nil repeats:NO];
     }
 }
+-(void)but2 {
+}
+-(void)but3 {
+}
+-(void)but4 {
+}
+-(void)but5 {
+}
+-(void)but6 {
+}
+-(void)but7 {
+}
+-(void)but8 {
+}
+-(void)but9 {
+}
 
+-(void)endTests {
+    if (finishcounter<2) {
+        isFinished=YES;
+        // NSLog(@"card display ending now...");
+        [MessageView setImage: card[3].image];
+        [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(testEnd) userInfo:nil repeats:NO];
+    }else{
+        //// NSLog(@"card display blank");
+        [MessageView setImage: card[2].image];
+        [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(box2) userInfo:nil repeats:NO];
+    }
+}
 
 
 @end

@@ -85,6 +85,11 @@
 -(void)but8;
 -(void)but9;
 
+-(void)nextStage;
+-(void)stageEnd;
+-(void)endTests;
+
+
 
 
 @end
