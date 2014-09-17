@@ -123,7 +123,7 @@
     MessageTextView.hidden=true;
 
     //start the timer
-	self.startDate = [NSDate date];
+	//self.startDate = [NSDate date];
     [NSTimer scheduledTimerWithTimeInterval:(([self delayDelay])) target:self selector:@selector(startTest:) userInfo:nil repeats:NO];
     MessageView.hidden=false;
     [MessageView setImage: card[0].image];

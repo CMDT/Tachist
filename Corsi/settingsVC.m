@@ -511,7 +511,7 @@
     start++;
     startMinusBTN.alpha=1;
     startPlusBTN.alpha=1;
-    if (start>9) {
+    if (start>=9) {
         start=9;
         startPlusBTN.alpha=0.3;
     }else{
@@ -522,6 +522,9 @@
         finish=start;
         startPlusBTN.alpha=0.3;
     }
+    if (finish>=9) {
+        finishPlusBTN.alpha=0.3;
+    }
     singleton.start=start;
     [self updateSizesOfBlocks];
     [self updateBlockNumbers];
@@ -531,7 +534,7 @@
     finish++;
     finishMinusBTN.alpha=1;
     finishPlusBTN.alpha=1;
-    if (finish>9) {
+    if (finish>=9) {
         finishPlusBTN.alpha=0.3;
         finish=9;
     }else{
@@ -541,10 +544,14 @@
         start=finish;
         finishPlusBTN.alpha=0.3;
     }
+    if (start>=9) {
+        startPlusBTN.alpha=0.3;
+    }
     singleton.finish=finish;
     [self updateSizesOfBlocks];
     [self updateBlockNumbers];
 }
+
 - (IBAction)blockSizePlusBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
     blockSize=blockSize+5;
@@ -567,7 +574,7 @@
     start--;
     startMinusBTN.alpha=1;
     startPlusBTN.alpha=1;
-    if (start<3) {
+    if (start<=3) {
         startMinusBTN.alpha=0.3;
         start=3;
     }else{
@@ -576,6 +583,9 @@
     if (finish<=start) {
         finish=start;
         startMinusBTN.alpha=0.3;
+    }
+    if (finish<=3) {
+        finishMinusBTN.alpha=0.3;
     }
     singleton.start=start;
     [self updateSizesOfBlocks];
@@ -586,7 +596,7 @@
     finish--;
     finishMinusBTN.alpha=1;
     finishPlusBTN.alpha=1;
-    if (finish<3) {
+    if (finish<=3) {
         finishMinusBTN.alpha=0.3;
         finish=3;
     }else{
@@ -595,6 +605,9 @@
     if (start>=finish) {
         finish=start;
         finishMinusBTN.alpha=0.3;
+    }
+    if (start<=3) {
+        startMinusBTN.alpha=0.3;
     }
     singleton.finish=finish;
     [self updateSizesOfBlocks];
