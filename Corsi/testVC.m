@@ -96,7 +96,35 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self make9order];
+}
 
+-(NSString*) make9order{
+    NSLog(@"Starting now...");
+    NSString *nums[11];
+    NSString *orderz;
+    //make numbers 1=9
+    for (int n=1;n<10;n++){
+        nums[n]=[NSString stringWithFormat:@"%i",n ];
+    }
+    //shuffle the array of numbers
+    NSString *temp;
+    for (int x=0;x<12531;x++){
+        for(int n=1;n<9;n++){
+            int boxz = (arc4random() % 8)+1;
+            if(boxz==0||boxz>9){boxz=1;}
+            if(boxz>=5){
+                temp = nums[n];
+                nums[n]=nums[n+1];
+                nums[n+1]=temp;
+            }
+        }
+    }
+    //format the string and return it
+    orderz=[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@",nums[1],nums[3],nums[2],nums[5],nums[4],nums[7],nums[6],nums[9],nums[8]];
+
+    NSLog(@"Order=%@",orderz);
+    return orderz;
 }
 
 -(IBAction)startTest:(id)sender {

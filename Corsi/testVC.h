@@ -66,6 +66,8 @@
 -(Float32) delayWait;
 -(Float32) delayShow;
 
+-(NSString*) make9order;
+
 -(int)pickABox;
 
 -(void)box1;

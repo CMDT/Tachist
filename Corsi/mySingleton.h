@@ -33,7 +33,15 @@
     NSString *testDate;
     NSString *testTime;
     NSString *email;
-    
+    Float32 *testTimez[7][9];
+    Float32 *testTimerz[7][9];
+    Float32 *timeGuess[7][9];
+    int blockx[9];
+    int blocky[9];
+    int adjustx[9];
+    int adjusty[9];
+    int blockRot[9];
+
     long double timerTime;
     
     UIView *bl1;
