@@ -16,7 +16,9 @@
     int startcounter;
     int finishcounter;
     int stageCounter;
+    
     BOOL isFinished;
+    BOOL stageEnded;
     BOOL resultsSaved;
     BOOL infoShow;
     BOOL reverseTest;
