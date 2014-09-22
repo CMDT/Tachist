@@ -101,30 +101,15 @@
     startBTN.hidden  = true;
     headingLBL.hidden= true;
 
-    box1image.hidden = true;
-    box2image.hidden = true;
-    box3image.hidden = true;
-    box4image.hidden = true;
-    box5image.hidden = true;
-    box6image.hidden = true;
-    box7image.hidden = true;
-    box8image.hidden = true;
-    box9image.hidden = true;
+    [self hide_blocks];
 
-    blkLBL.hidden=true;
-    blkNoLBL.hidden=true;
-    blkOfLBL.hidden=true;
-    blkTotalLBL.hidden=true;
-    setLBL.hidden=true;
-    statusMessageLBL.hidden=true;
-    setTotalLBL.hidden=true;
-    setOfLBL.hidden=true;
-    setNoLBL.hidden=true;
+    [self hideInfo];
+    
     MessageTextView.hidden=true;
 
     //start the timer
 	//self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayDelay])) target:self selector:@selector(startTest:) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:(([self delayDelay])) target:self selector:@selector(boxInit) userInfo:nil repeats:NO];
     MessageView.hidden=false;
     [MessageView setImage: card[0].image];
 
@@ -145,29 +130,12 @@
 
     startBTN.hidden  = NO;
     headingLBL.hidden= NO;
-    box1image.hidden = true;
-    box2image.hidden = true;
-    box3image.hidden = true;
-    box4image.hidden = true;
-    box5image.hidden = true;
-    box6image.hidden = true;
-    box7image.hidden = true;
-    box8image.hidden = true;
-    box9image.hidden = true;
+    
+    [self hide_blocks];
 
-    blkLBL.hidden=true;
-    blkNoLBL.hidden=true;
-    blkOfLBL.hidden=true;
-    blkTotalLBL.hidden=true;
-    setLBL.hidden=true;
-    statusMessageLBL.hidden=true;
-    setTotalLBL.hidden=true;
-    setOfLBL.hidden=true;
-    setNoLBL.hidden=true;
-    MessageView.hidden=true;
+    [self hideInfo];
+    
     MessageTextView.hidden=NO;
-
-
 
     //text views
 
@@ -200,10 +168,16 @@
     //int r = arc4random() % 28;
     //[cardNo exchangeObjectAtIndex:s withObjectAtIndex:r+1];
     //}
-
+    
+    
+    //show the blocks
+    [self display_blocks];
+    
     for(int s=0;s<31;++s){
         // NSLog(@"No: = %d Card No. %@", s, cardNo[s]);
     }
+    
+
 
 }
 //
@@ -243,6 +217,83 @@
     int boxPicked;
     boxPicked = (arc4random() % 9)+1;
     return boxPicked;
+}
+
+-(void)randomise_boxes{
+    //move all the boxes a bit up/down/left/right from origin to give appearance of random throw
+}
+
+-(void)display_blocks{
+    //show the blocks
+    box1image.hidden = false;
+    box2image.hidden = false;
+    box3image.hidden = false;
+    box4image.hidden = false;
+    box5image.hidden = false;
+    box6image.hidden = false;
+    box7image.hidden = false;
+    box8image.hidden = false;
+    box9image.hidden = false;
+    //show the buttons on the top
+    box1BTN.hidden   = false;
+    box2BTN.hidden   = false;
+    box3BTN.hidden   = false;
+    box4BTN.hidden   = false;
+    box5BTN.hidden   = false;
+    box6BTN.hidden   = false;
+    box7BTN.hidden   = false;
+    box8BTN.hidden   = false;
+    box9BTN.hidden   = false;
+}
+
+-(void)hide_blocks{
+    //hide the blocks
+    box1image.hidden = true;
+    box2image.hidden = true;
+    box3image.hidden = true;
+    box4image.hidden = true;
+    box5image.hidden = true;
+    box6image.hidden = true;
+    box7image.hidden = true;
+    box8image.hidden = true;
+    box9image.hidden = true;
+    //hide the buttons on the top
+    box1BTN.hidden   = true;
+    box2BTN.hidden   = true;
+    box3BTN.hidden   = true;
+    box4BTN.hidden   = true;
+    box5BTN.hidden   = true;
+    box6BTN.hidden   = true;
+    box7BTN.hidden   = true;
+    box8BTN.hidden   = true;
+    box9BTN.hidden   = true;
+}
+
+-(void)showInfo{
+    //show the messages and status
+    blkLBL.hidden      = false;
+    blkNoLBL.hidden    = false;
+    blkOfLBL.hidden    = false;
+    blkTotalLBL.hidden = false;
+    setLBL.hidden      = false;
+    setTotalLBL.hidden = false;
+    setOfLBL.hidden    = false;
+    setNoLBL.hidden    = false;
+    statusMessageLBL.hidden
+                       = false;
+}
+-(void)hideInfo{
+    //hide the messages and status
+    blkLBL.hidden      = true;
+    blkNoLBL.hidden    = true;
+    blkOfLBL.hidden    = true;
+    blkTotalLBL.hidden = true;
+    setLBL.hidden      = true;
+    setTotalLBL.hidden = true;
+    setOfLBL.hidden    = true;
+    setNoLBL.hidden    = true;
+    statusMessageLBL.hidden
+                       = true;
 }
 
 //========**  blanks
@@ -353,7 +404,7 @@
         isFinished=YES;
         // NSLog(@"card display ending now...");
         [MessageView setImage: card[0].image];
-        [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(endTests) userInfo:nil repeats:NO];
     }else{
         //// NSLog(@"card display blank");
         [MessageView setImage: card[0].image];

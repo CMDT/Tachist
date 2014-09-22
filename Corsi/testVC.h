@@ -59,10 +59,13 @@
 -(void)display_blocks;
 -(void)hide_blocks;
 -(void)showInfo;
+-(void)hideInfo;
 -(void)awakeFromNib;
+
 -(Float32) delayDelay;
 -(Float32) delayWait;
 -(Float32) delayShow;
+
 -(int)pickABox;
 
 -(void)box1;
