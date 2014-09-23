@@ -9,6 +9,27 @@
 #import "settingsVC.h"
 #import "mySingleton.h"
 
+#define kEmail      @"emailAddress"
+#define kTester     @"testerName"
+#define kSubject    @"subjectName"
+
+#define kStart      @"startBlocks"
+#define kFinish     @"finishBlocks"
+#define kSize       @"blockSize"
+
+#define kForward    @"forwardTestEnabled"
+#define kInfo       @"infoEnabled"
+#define kRot        @"rotationEnabled"
+
+#define kBlockCol   @"blockColour"
+#define kShowCol    @"highlightColour"
+#define kBackCol    @"backgroundColour"
+
+#define kDelay      @"blockDelay"
+#define kTime       @"blockTime"
+#define kShow       @"blockShow"
+
+#define kVersion    @"version"
 @interface settingsVC ()
 
 @end
@@ -93,16 +114,31 @@
 //@synthesize bl1,bl2,bl3,bl4,bl5,bl6,bl7,bl8,bl9,CBTView,infoFinishLBL,infoRoundLBL,infoSelectLBL,infoStartLBL,myMessageLBL;
 @synthesize currentBackgroundColour,currentBlockColour,currentShowColour;
 
-
+-(void)viewWillAppear:(BOOL)animated{
+    mySingleton *singleton = [mySingleton sharedSingleton];
+    NSURL *defaultPrefsFile = [[NSBundle mainBundle]
+                               URLForResource:@"Root" withExtension:@"plist"];
+    NSDictionary *defaultPrefs =
+    [NSDictionary dictionaryWithContentsOfURL:defaultPrefsFile];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultPrefs];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+       NSString *test2=[defaults objectForKey:kFinish];
+}
 
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    mySingleton *singleton = [mySingleton sharedSingleton];
+    
     // NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     // NSString *prefValue = (engineSwitch.on) ? @"Engaged" : @"Disabled";
     //[defaults setObject:prefValue forKey:kWarpDriveKey];
     //[defaults setFloat:warpFactorSlider.value forKey:kWarpFactorKey];
     [super viewWillDisappear:animated];
+    
 }
 
 
@@ -110,57 +146,40 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    
-    NSURL *defaultPrefsFile = [[NSBundle mainBundle]
-                               URLForResource:@"Root" withExtension:@"plist"];
-    NSDictionary *defaultPrefs =
-    [NSDictionary dictionaryWithContentsOfURL:defaultPrefsFile];
-    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultPrefs];
-
     mySingleton *singleton = [mySingleton sharedSingleton];
     
-    currentBlockColour=singleton.currentBlockColour;
-    currentShowColour=singleton.currentShowColour;
-    currentBackgroundColour=singleton.currentBackgroundColour;
+    NSURL *defaultPrefsFile = [[NSBundle mainBundle]URLForResource:@"Root" withExtension:@"plist"];
+    NSDictionary *defaultPrefs = [NSDictionary dictionaryWithContentsOfURL:defaultPrefsFile];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultPrefs];
     
-    //only set values if not set already
-    if(!startTime)
-    {
-        start     = 3;
-        finish    = 9;
-        blockSize = 30;
-        waitTime  = 500;
-        startTime = 2000;
-        showTime  = 500;
-        
-        [self setRot90];
-    }
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    //read the user defaults in the iPhone/iPad bundle
+    
+    currentBlockColour      = [defaults objectForKey:kBlockCol];
+    currentShowColour       = [defaults objectForKey:kShowCol];
+    currentBackgroundColour = [defaults objectForKey:kBackCol];
+   //[defaults objectForKey:kTester];
+   //[defaults objectForKey:kSubject];
+   //[defaults objectForKey:kEmail];
+   //[defaults objectForKey:kStart];
+   //[defaults objectForKey:kFinish];
+  // [defaults objectForKey:kSize];
+   //[defaults objectForKey:kForward];
+  // [defaults objectForKey:kInfo];
+  // [defaults objectForKey:kRot];
+
+  // [defaults objectForKey:kDelay];
+  // [defaults objectForKey:kTime];
+  // [defaults objectForKey:kShow];
+  // [defaults objectForKey:kVersion];
+
+
 
     //read the NSUserDefaults settings bundle
 
-//#define kEmail      @"emailAddress"
-//#define kTester     @"testerName"
-//#define kSubject    @"subjectName"
-//
-//#define kStart      @"startBlocks"
-//#define kFinish     @"finishBlocks"
-//#define kSize       @"blockSize"
-//
-//#define kForward    @"forwardTestEnabled"
-//#define kInfo       @"infoEnabled"
-//#define kRot        @"rotationEnabled"
-//
-//#define kBlockCol   @"blockColour"
-//#define kShowCol    @"highlightColour"
-//#define kBackCol    @"backgroundColour"
-//
-//#define kDelay      @"blockDelay"
-//#define kTime       @"blockTime"
-//#define kShow       @"blockShow"
-//
-//#define kVersion    @"version"
+//for testing what is written, can be rem'd out later
     NSLog(@"tester      :%@",[defaults objectForKey:kTester]);
     NSLog(@"subject     :%@",[defaults objectForKey:kSubject]);
     NSLog(@"email       :%@",[defaults objectForKey:kEmail]);
@@ -478,13 +497,14 @@
     start=3;
     finish=9;
     blockSize=30;
-    
     waitTime=500;
     startTime=1000;
     showTime=200;
+    
     blockStartDelaySLD.value = startTime;
     blockWaitTimeSLD.value   = waitTime;
     blockShowTimeSLD.value   = showTime;
+    
     blockStartDelayLBL.text=[NSString stringWithFormat:@"%i", startTime];
     blockWaitTimeLBL.text=[NSString stringWithFormat:@"%i", waitTime];
     blockShowTimeLBL.text=[NSString stringWithFormat:@"%i", showTime];
@@ -957,17 +977,26 @@
 }
 -(void)loadSettings{
     //edit this to take data from k data store in Apple Settings pane
+    
     mySingleton *singleton = [mySingleton sharedSingleton];
+    
+    NSURL *defaultPrefsFile     = [[NSBundle mainBundle]
+                                URLForResource:@"Root" withExtension:@"plist"];
+    
+    NSDictionary *defaultPrefs  = [NSDictionary dictionaryWithContentsOfURL:defaultPrefsFile];
+                                [[NSUserDefaults standardUserDefaults] registerDefaults:defaultPrefs];
+    
+    NSUserDefaults *defaults    = [NSUserDefaults standardUserDefaults];
+                                [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    //read the user defaults in the iPhone/iPad bundle
+    
+    currentBlockColour          = [defaults objectForKey:kBlockCol];
+    
     [forwardTestSWT setOn:YES animated:YES];
     [onScreenInfoSWT setOn:YES animated:YES];
     [blockRotateSWT setOn:NO animated:YES];
-    start=3;
-    finish=9;
-    blockSize=30;
-    
-    waitTime=500;
-    startTime=1000;
-    showTime=200;
+
     blockStartDelaySLD.value = startTime;
     blockWaitTimeSLD.value   = waitTime;
     blockShowTimeSLD.value   = showTime;

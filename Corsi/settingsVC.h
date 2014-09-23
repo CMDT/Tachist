@@ -8,7 +8,7 @@
 
 
 #import <UIKit/UIKit.h>
-
+/*
 #define kEmail      @"emailAddress"
 #define kTester     @"testerName"
 #define kSubject    @"subjectName"
@@ -30,7 +30,7 @@
 #define kShow       @"blockShow"
 
 #define kVersion    @"version"
-
+*/
 @interface settingsVC : UIViewController{
     UIView *settingsViewerVIEW;
 }

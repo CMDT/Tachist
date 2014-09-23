@@ -38,6 +38,7 @@ static mySingleton * sharedSingleton = nil;
             waitTime,
             oldSubjectName,
             subjectName,
+            testerName,
             testDate,
             testTime,
             resultStrings,

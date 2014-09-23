@@ -29,6 +29,7 @@
     
     NSString *oldSubjectName;
     NSString *subjectName;
+    NSString *testerName;
     NSString *resultStrings;
     NSString *testDate;
     NSString *testTime;
@@ -74,6 +75,7 @@
 
 @property (nonatomic,retain) NSString *oldSubjectName;
 @property (nonatomic,retain) NSString *subjectName;
+@property (nonatomic,retain) NSString *testerName;
 @property (nonatomic,retain) NSString *resultStrings;
 @property (nonatomic,retain) NSString *testDate;
 @property (nonatomic,retain) NSString *testTime;

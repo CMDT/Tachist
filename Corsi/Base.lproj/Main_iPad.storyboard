@@ -700,6 +700,15 @@ When all the sequence has been shown, try and remember the sequence and press th
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="13i-9c-VN0">
+                                <rect key="frame" x="130" y="473" width="30" height="30"/>
+                                <state key="normal" title="ggg">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="ggg:" destination="64y-Nm-lKj" eventType="touchUpInside" id="P6I-QJ-siT"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.89411771299999998" green="0.9450981021" blue="0.97254908080000002" alpha="1" colorSpace="deviceRGB"/>
                     </view>

@@ -96,9 +96,119 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self make9order];
+    
+    order[1]=[self make9order];
+    NSLog(@"Order returned=%@",order[1]);
+    
+    int no1=[self whichBlock:1 :1];
+    NSLog(@"No.1=%i",no1);
+    int no2=[self whichBlock:2 :1];
+    NSLog(@"No.2=%i",no2);
+    int no3=[self whichBlock:3 :1];
+    NSLog(@"No.3=%i",no3);
+    int no4=[self whichBlock:4 :1];
+    NSLog(@"No.4=%i",no4);
+    int no5=[self whichBlock:5 :1];
+    NSLog(@"No.5=%i",no5);
+    int no6=[self whichBlock:6 :1];
+    NSLog(@"No.6=%i",no6);
+    int no7=[self whichBlock:7 :1];
+    NSLog(@"No.7=%i",no7);
+    int no8=[self whichBlock:8 :1];
+    NSLog(@"No.8=%i",no8);
+    int no9=[self whichBlock:9 :1];
+    NSLog(@"No.9=%i",no9);
+    
+    // don't bother, too difficult to do yet //[self rotAllBlocks];
+    [self sizeAllBlocks];
 }
 
+-(void)sizeAllBlocks{
+    mySingleton *singleton = [mySingleton sharedSingleton];
+    int bsize=singleton.blockSize;
+    box1image.frame =  CGRectMake(box1image.frame.origin.x,
+                                  box1image.frame.origin.y,
+                                  bsize,
+                                  bsize);
+    box2image.frame =  CGRectMake(box2image.frame.origin.x,
+                                  box2image.frame.origin.y,
+                                  bsize,
+                                  bsize);
+    box3image.frame =  CGRectMake(box3image.frame.origin.x,
+                                  box3image.frame.origin.y,
+                                  bsize,
+                                  bsize);
+    box4image.frame =  CGRectMake(box4image.frame.origin.x,
+                                  box4image.frame.origin.y,
+                                  bsize,
+                                  bsize);
+    box5image.frame =  CGRectMake(box5image.frame.origin.x,
+                                  box5image.frame.origin.y,
+                                  bsize,
+                                  bsize);
+    box6image.frame =  CGRectMake(box6image.frame.origin.x,
+                                  box6image.frame.origin.y,
+                                  bsize,
+                                  bsize);
+    box7image.frame =  CGRectMake(box7image.frame.origin.x,
+                                  box7image.frame.origin.y,
+                                  bsize,
+                                  bsize);
+    box8image.frame =  CGRectMake(box8image.frame.origin.x,
+                                  box8image.frame.origin.y,
+                                  bsize,
+                                  bsize);
+    box9image.frame =  CGRectMake(box9image.frame.origin.x,
+                                  box9image.frame.origin.y,
+                                  bsize,
+                                  bsize);
+}
+
+-(void)rotAllBlocks{
+    //get a rand number of degrees for all blocks and assign rotate
+
+    mySingleton *singleton = [mySingleton sharedSingleton];
+    //rotate angles
+    
+    CGAffineTransform rotateTrans1 = CGAffineTransformMakeRotation([self randomDegrees359] * M_PI / 180);
+    CGAffineTransform rotateTrans2 = CGAffineTransformMakeRotation([self randomDegrees359] * M_PI / 180);
+    CGAffineTransform rotateTrans3 = CGAffineTransformMakeRotation([self randomDegrees359] * M_PI / 180);
+    CGAffineTransform rotateTrans4 = CGAffineTransformMakeRotation([self randomDegrees359] * M_PI / 180);
+    CGAffineTransform rotateTrans5 = CGAffineTransformMakeRotation([self randomDegrees359] * M_PI / 180);
+    CGAffineTransform rotateTrans6 = CGAffineTransformMakeRotation([self randomDegrees359] * M_PI / 180);
+    CGAffineTransform rotateTrans7 = CGAffineTransformMakeRotation([self randomDegrees359] * M_PI / 180);
+    CGAffineTransform rotateTrans8 = CGAffineTransformMakeRotation([self randomDegrees359] * M_PI / 180);
+    CGAffineTransform rotateTrans9 = CGAffineTransformMakeRotation([self randomDegrees359] * M_PI / 180);
+    
+    //scale
+    //CGAffineTransform scaleTrans =  CGAffineTransformMakeScale(singleton.blockSize/30, singleton.blockSize/30);
+    CGAffineTransform scaleTrans =  CGAffineTransformMakeScale(0.1, 0.1);
+    //draw
+    box1image.transform = CGAffineTransformConcat(scaleTrans, rotateTrans1);
+    //box2image.transform = CGAffineTransformConcat(scaleTrans, rotateTrans2);
+    //box3image.transform = CGAffineTransformConcat(scaleTrans, rotateTrans3);
+    //box4image.transform = CGAffineTransformConcat(scaleTrans, rotateTrans4);
+    //box5image.transform = CGAffineTransformConcat(scaleTrans, rotateTrans5);
+    //box6image.transform = CGAffineTransformConcat(scaleTrans, rotateTrans6);
+    //box7image.transform = CGAffineTransformConcat(scaleTrans, rotateTrans7);
+    //box8image.transform = CGAffineTransformConcat(scaleTrans, rotateTrans8);
+    //box9image.transform = CGAffineTransformConcat(scaleTrans, rotateTrans9);
+}
+-(void)posAllBlocks{
+    
+}
+-(IBAction)ggg:(id)sender{
+    box1image.frame =  CGRectMake(box1image.frame.origin.x,
+                                  box1image.frame.origin.y,
+                                  box1image.frame.size.width+20,
+                                  box1image.frame.size.height+20);}
+-(float)randomDegrees359
+{
+    float degrees = 0;
+    degrees = arc4random_uniform(360); //returns a value from 0 to 359, not 360;
+    //NSLog(@"Degs=%f",degrees);
+    return degrees;
+}
 -(NSString*) make9order{
     NSLog(@"Starting now...");
     NSString *nums[11];
@@ -122,9 +232,17 @@
     }
     //format the string and return it
     orderz=[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@",nums[1],nums[3],nums[2],nums[5],nums[4],nums[7],nums[6],nums[9],nums[8]];
-
+//just for testing, rem out later
     NSLog(@"Order=%@",orderz);
     return orderz;
+}
+
+-(int) whichBlock: (int) number :(int) stage{
+    //read the order from the array and pick the n'th char
+    //int stringNo = [order[stage] characterAtIndex:number]; //returns character number
+    NSString *stringNo = [order[stage] substringWithRange:NSMakeRange(number-1, 1)];
+    int block = [stringNo intValue];
+    return block;
 }
 
 -(IBAction)startTest:(id)sender {
@@ -198,7 +316,7 @@
     //int r = arc4random() % 28;
     //[cardNo exchangeObjectAtIndex:s withObjectAtIndex:r+1];
     //}
-    
+    [self rotAllBlocks];
     
     //show the blocks
     [self display_blocks];
