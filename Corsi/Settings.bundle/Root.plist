@@ -220,7 +220,7 @@
 			<key>Key</key>
 			<string>blockColour</string>
 			<key>DefaultValue</key>
-			<string></string>
+			<string>orange</string>
 			<key>Values</key>
 			<array>
 				<integer>0</integer>

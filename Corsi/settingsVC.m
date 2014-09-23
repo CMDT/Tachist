@@ -34,6 +34,38 @@
 
 @end
 
+//Saving
+//NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+
+// saving an NSString
+//[prefs setObject:@"TextToSave" forKey:@"keyToLookupString"];
+
+// saving an NSInteger
+//[prefs setInteger:42 forKey:@"integerKey"];
+
+// saving a Double
+//[prefs setDouble:3.1415 forKey:@"doubleKey"];
+
+// saving a Float
+//[prefs setFloat:1.2345678 forKey:@"floatKey"];
+
+// This is suggested to synch prefs, but is not needed (I didn't put it in my tut)
+//[prefs synchronize];
+
+//Retrieving
+//NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+
+// getting an NSString
+//NSString *myString = [prefs stringForKey:@"keyToLookupString"];
+
+// getting an NSInteger
+//NSInteger myInt = [prefs integerForKey:@"integerKey"];
+
+// getting an Float
+//float myFloat = [prefs floatForKey:@"floatKey"];
+
+
+
 @implementation settingsVC
 {
     int start;
@@ -490,21 +522,84 @@
 
 - (IBAction)setDefaults:(id)sender {
     //also used in Load Settings from k data store
+    //edit this to take data from k data store in Apple Settings pane
+
     mySingleton *singleton = [mySingleton sharedSingleton];
+
+    NSURL *defaultPrefsFile     = [[NSBundle mainBundle]
+                                   URLForResource:@"Root" withExtension:@"plist"];
+
+    NSDictionary *defaultPrefs  = [NSDictionary dictionaryWithContentsOfURL:defaultPrefsFile];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultPrefs];
+
+    NSUserDefaults *defaults    = [NSUserDefaults standardUserDefaults];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
+    //read the user defaults in the iPhone/iPad bundle
+
+    currentBlockColour          = [defaults objectForKey:kBlockCol];
+    if(currentBlockColour  == nil ){
+        currentBlockColour =  [UIColor blueColor];
+    }
+    currentBackgroundColour          = [defaults objectForKey:kBackCol];
+    if(currentBackgroundColour  == nil ){
+        currentBackgroundColour =  [UIColor blackColor];
+    }
+    currentShowColour          = [defaults objectForKey:kShowCol];
+    if(currentShowColour  == nil ){
+        currentShowColour =  [UIColor blueColor];
+    }
+    NSString *temp        = [defaults objectForKey:kStart];
+    if( temp == nil ){
+        start =  3;
+    }else{
+        start=[temp intValue];
+    }
+    temp        = [defaults objectForKey:kFinish];
+    if( temp == nil ){
+        finish =  9;
+    }else{
+        finish=[temp intValue];
+    }
+    temp        = [defaults objectForKey:kSize];
+    if( temp == nil ){
+        blockSize =  30;
+    }else{
+        blockSize=[temp intValue];
+    }
+    temp        = [defaults objectForKey:kDelay];
+    if( temp == nil ){
+        waitTime=  500;
+    }else{
+        waitTime=[temp intValue];
+    }
+    temp        = [defaults objectForKey:kShow];
+    if( temp == nil ){
+        showTime =  200;
+    }else{
+        showTime=[temp intValue];
+    }
+    temp        = [defaults objectForKey:kTime];
+    if( temp == nil ){
+        startTime =  1000;
+        [defaults setObject:@"1000" forKey:kTime];
+    }else{
+        startTime=[temp intValue];
+        [defaults setObject:temp forKey:kTime];
+    }
+
+    //timerTime  = 0.0;
+    clickNumber= 0;
+    //oldSubjectName =@"Subject 1";
+
     [forwardTestSWT setOn:YES animated:YES];
     [onScreenInfoSWT setOn:YES animated:YES];
     [blockRotateSWT setOn:NO animated:YES];
-    start=3;
-    finish=9;
-    blockSize=30;
-    waitTime=500;
-    startTime=1000;
-    showTime=200;
-    
+
     blockStartDelaySLD.value = startTime;
     blockWaitTimeSLD.value   = waitTime;
     blockShowTimeSLD.value   = showTime;
-    
+
     blockStartDelayLBL.text=[NSString stringWithFormat:@"%i", startTime];
     blockWaitTimeLBL.text=[NSString stringWithFormat:@"%i", waitTime];
     blockShowTimeLBL.text=[NSString stringWithFormat:@"%i", showTime];
@@ -513,7 +608,7 @@
     [self BlockBackgroundColourBlaBTN:self];
     [self BlockHighlightColourOraBTN:self];
     [self BlockColourBluBTN:self];
-    
+
     blockSizeLBL.text=[[NSString alloc]initWithFormat:@"%i",blockSize];
     singleton.currentBackgroundColour=[UIColor blackColor];
     singleton.currentBlockColour=[UIColor blueColor];
@@ -523,6 +618,7 @@
     [self setRot90];
     [self updateSizesOfBlocks];
     [self updateBlockNumbers];
+
 }
 
 #pragma mark Settings Actions Buttons
@@ -973,53 +1069,17 @@
 }
 
 -(void)saveSettings{
-    
-}
--(void)loadSettings{
-    //edit this to take data from k data store in Apple Settings pane
-    
     mySingleton *singleton = [mySingleton sharedSingleton];
-    
+
     NSURL *defaultPrefsFile     = [[NSBundle mainBundle]
-                                URLForResource:@"Root" withExtension:@"plist"];
-    
+                                   URLForResource:@"Root" withExtension:@"plist"];
+
     NSDictionary *defaultPrefs  = [NSDictionary dictionaryWithContentsOfURL:defaultPrefsFile];
-                                [[NSUserDefaults standardUserDefaults] registerDefaults:defaultPrefs];
-    
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultPrefs];
+
     NSUserDefaults *defaults    = [NSUserDefaults standardUserDefaults];
-                                [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    //read the user defaults in the iPhone/iPad bundle
-    
-    currentBlockColour          = [defaults objectForKey:kBlockCol];
-    
-    [forwardTestSWT setOn:YES animated:YES];
-    [onScreenInfoSWT setOn:YES animated:YES];
-    [blockRotateSWT setOn:NO animated:YES];
-
-    blockStartDelaySLD.value = startTime;
-    blockWaitTimeSLD.value   = waitTime;
-    blockShowTimeSLD.value   = showTime;
-    blockStartDelayLBL.text=[NSString stringWithFormat:@"%i", startTime];
-    blockWaitTimeLBL.text=[NSString stringWithFormat:@"%i", waitTime];
-    blockShowTimeLBL.text=[NSString stringWithFormat:@"%i", showTime];
-    block5View.backgroundColor=[UIColor orangeColor];
-    
-    [self BlockBackgroundColourBlaBTN:self];
-    [self BlockHighlightColourOraBTN:self];
-    [self BlockColourBluBTN:self];
-    
-    blockSizeLBL.text=[[NSString alloc]initWithFormat:@"%i",blockSize];
-    singleton.currentBackgroundColour=[UIColor blackColor];
-    singleton.currentBlockColour=[UIColor blueColor];
-    singleton.currentShowColour=[UIColor orangeColor];
-    //get pos of centres
-    
-    [self setRot90];
-    [self updateSizesOfBlocks];
-    [self updateBlockNumbers];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    //one for each setting
+    //[defaults setObject:@"TextToSave" forKey:@"keyToLookupString"];
 }
-
-
-
 @end
