@@ -6,15 +6,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Corsi/settingsVC.m"
-            timestampString = "433208092.575515"
+            timestampString = "433547935.879959"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "589"
-            endingLineNumber = "589"
+            startingLineNumber = "581"
+            endingLineNumber = "581"
             landmarkName = "-setDefaults:"
             landmarkType = "5">
          </BreakpointContent>

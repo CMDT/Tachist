@@ -223,29 +223,37 @@
 			<string>Orange</string>
 			<key>Values</key>
 			<array>
-                <string>White</string>
-                <string>Gray</string>
-                <string>Yellow</string>
-                <string>Orange</string>
-                <string>Cyan</string>
-                <string>Magenta</string>
-                <string>Red</string>
-                <string>Green</string>
-                <string>Blue</string>
-                <string>Black</string>
+				<string>White</string>
+				<string>Red</string>
+				<string>Orange</string>
+				<string>Yellow</string>
+				<string>Green</string>
+				<string>Blue</string>
+				<string>Purple</string>
+				<string>Magenta</string>
+				<string>Cyan</string>
+				<string>Brown</string>
+				<string>Black</string>
+				<string>Light Grey</string>
+				<string>GreyGrey</string>
+				<string>Light Grey</string>
 			</array>
 			<key>Titles</key>
 			<array>
 				<string>White</string>
-				<string>Gray</string>
-				<string>Yellow</string>
-				<string>Orange</string>
-				<string>Cyan</string>
-				<string>Magenta</string>
 				<string>Red</string>
+				<string>Orange</string>
+				<string>Yellow</string>
 				<string>Green</string>
 				<string>Blue</string>
+				<string>Purple</string>
+				<string>Magenta</string>
+				<string>Cyan</string>
+				<string>Brown</string>
 				<string>Black</string>
+				<string>Light Grey</string>
+				<string>GreyGrey</string>
+				<string>Light Grey</string>
 			</array>
 		</dict>
 		<dict>
@@ -253,9 +261,20 @@
 			<string></string>
 			<key>Titles</key>
 			<array>
-				<string>Orange</string>
-				<string>Cyan</string>
+				<string>White</string>
 				<string>Red</string>
+				<string>Orange</string>
+				<string>Yellow</string>
+				<string>Green</string>
+				<string>Blue</string>
+				<string>Purple</string>
+				<string>Magenta</string>
+				<string>Cyan</string>
+				<string>Brown</string>
+				<string>Black</string>
+				<string>Light Grey</string>
+				<string>GreyGrey</string>
+				<string>Light Grey</string>
 			</array>
 			<key>Key</key>
 			<string>highlightColour</string>
@@ -265,9 +284,20 @@
 			<string>Highlight Block Colour</string>
 			<key>Values</key>
 			<array>
-                <string>Orange</string>
-                <string>Cyan</string>
-                <string>Red</string>
+				<string>White</string>
+				<string>Red</string>
+				<string>Orange</string>
+				<string>Yellow</string>
+				<string>Green</string>
+				<string>Blue</string>
+				<string>Purple</string>
+				<string>Magenta</string>
+				<string>Cyan</string>
+				<string>Brown</string>
+				<string>Black</string>
+				<string>Light Grey</string>
+				<string>GreyGrey</string>
+				<string>Light Grey</string>
 			</array>
 		</dict>
 		<dict>
@@ -276,8 +306,19 @@
 			<key>Titles</key>
 			<array>
 				<string>White</string>
+				<string>Red</string>
+				<string>Orange</string>
+				<string>Yellow</string>
+				<string>Green</string>
 				<string>Blue</string>
+				<string>Purple</string>
+				<string>Magenta</string>
+				<string>Cyan</string>
+				<string>Brown</string>
 				<string>Black</string>
+				<string>Light Grey</string>
+				<string>GreyGrey</string>
+				<string>Light Grey</string>
 			</array>
 			<key>Key</key>
 			<string>backgroundColour</string>
@@ -287,9 +328,20 @@
 			<string>Background Colour</string>
 			<key>Values</key>
 			<array>
-                <string>White</string>
-                <string>Blue</string>
-                <string>Black</string>
+				<string>White</string>
+				<string>Red</string>
+				<string>Orange</string>
+				<string>Yellow</string>
+				<string>Green</string>
+				<string>Blue</string>
+				<string>Purple</string>
+				<string>Magenta</string>
+				<string>Cyan</string>
+				<string>Brown</string>
+				<string>Black</string>
+				<string>Light Grey</string>
+				<string>GreyGrey</string>
+				<string>Light Grey</string>
 			</array>
 		</dict>
 		<dict>
@@ -344,7 +396,7 @@
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
-			<string>Version 1.0.5 (c) MMU 2014 J.A.Howell</string>
+			<string>Version 1.0.6 (c) MMU 2014 J.A.Howell</string>
 			<key>Key</key>
 			<string>version</string>
 		</dict>

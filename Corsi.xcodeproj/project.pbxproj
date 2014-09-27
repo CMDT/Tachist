@@ -12,6 +12,10 @@
 		91530B5619BE55B300D2026B /* corsi-finished.png in Resources */ = {isa = PBXBuildFile; fileRef = 91530B5119BE55B300D2026B /* corsi-finished.png */; };
 		91530B5719BE55B300D2026B /* corsi-stage-end.png in Resources */ = {isa = PBXBuildFile; fileRef = 91530B5219BE55B300D2026B /* corsi-stage-end.png */; };
 		91530B5819BE55B300D2026B /* corsi-stage-start.png in Resources */ = {isa = PBXBuildFile; fileRef = 91530B5319BE55B300D2026B /* corsi-stage-start.png */; };
+		91CCCCF819D77AE000C742B6 /* purple72.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CCCCF419D77AE000C742B6 /* purple72.png */; };
+		91CCCCF919D77AE000C742B6 /* lightgrey.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CCCCF519D77AE000C742B6 /* lightgrey.png */; };
+		91CCCCFA19D77AE000C742B6 /* darkgrey72.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CCCCF619D77AE000C742B6 /* darkgrey72.png */; };
+		91CCCCFB19D77AE000C742B6 /* brown72.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CCCCF719D77AE000C742B6 /* brown72.png */; };
 		E10D016919B6024F00D9E5F8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E10D016819B6024F00D9E5F8 /* Foundation.framework */; };
 		E10D016B19B6024F00D9E5F8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E10D016A19B6024F00D9E5F8 /* CoreGraphics.framework */; };
 		E10D016D19B6024F00D9E5F8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E10D016C19B6024F00D9E5F8 /* UIKit.framework */; };
@@ -75,6 +79,10 @@
 		91530B5119BE55B300D2026B /* corsi-finished.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "corsi-finished.png"; sourceTree = "<group>"; };
 		91530B5219BE55B300D2026B /* corsi-stage-end.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "corsi-stage-end.png"; sourceTree = "<group>"; };
 		91530B5319BE55B300D2026B /* corsi-stage-start.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "corsi-stage-start.png"; sourceTree = "<group>"; };
+		91CCCCF419D77AE000C742B6 /* purple72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = purple72.png; sourceTree = "<group>"; };
+		91CCCCF519D77AE000C742B6 /* lightgrey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lightgrey.png; sourceTree = "<group>"; };
+		91CCCCF619D77AE000C742B6 /* darkgrey72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = darkgrey72.png; sourceTree = "<group>"; };
+		91CCCCF719D77AE000C742B6 /* brown72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brown72.png; sourceTree = "<group>"; };
 		E10D016519B6024F00D9E5F8 /* Corsi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Corsi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E10D016819B6024F00D9E5F8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E10D016A19B6024F00D9E5F8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -226,6 +234,10 @@
 		E10D016F19B6024F00D9E5F8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				91CCCCF419D77AE000C742B6 /* purple72.png */,
+				91CCCCF519D77AE000C742B6 /* lightgrey.png */,
+				91CCCCF619D77AE000C742B6 /* darkgrey72.png */,
+				91CCCCF719D77AE000C742B6 /* brown72.png */,
 				91530B4F19BE55B300D2026B /* corsi_start.png */,
 				91530B5019BE55B300D2026B /* corsi-calculating.png */,
 				91530B5119BE55B300D2026B /* corsi-finished.png */,
@@ -358,6 +370,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91CCCCF819D77AE000C742B6 /* purple72.png in Resources */,
 				91530B5519BE55B300D2026B /* corsi-calculating.png in Resources */,
 				91530B5619BE55B300D2026B /* corsi-finished.png in Resources */,
 				E1B29EC519B7532E005B9C84 /* corsi.png in Resources */,
@@ -376,6 +389,7 @@
 				E10D018419B6024F00D9E5F8 /* Images.xcassets in Resources */,
 				E1DAD79F19B87F8E00600608 /* analy64.png in Resources */,
 				E1DAD7A019B87F8E00600608 /* email.png in Resources */,
+				91CCCCFA19D77AE000C742B6 /* darkgrey72.png in Resources */,
 				E1B29EC919B7532E005B9C84 /* magenta72.png in Resources */,
 				E1B29EC319B7532E005B9C84 /* check.png in Resources */,
 				E1B29EC819B7532E005B9C84 /* grey72.png in Resources */,
@@ -386,8 +400,10 @@
 				E10D017319B6024F00D9E5F8 /* InfoPlist.strings in Resources */,
 				E1B29EC619B7532E005B9C84 /* cyan72.png in Resources */,
 				E1B29EC419B7532E005B9C84 /* checkbox.png in Resources */,
+				91CCCCF919D77AE000C742B6 /* lightgrey.png in Resources */,
 				91530B5419BE55B300D2026B /* corsi_start.png in Resources */,
 				E1B29ECB19B7532E005B9C84 /* red72.png in Resources */,
+				91CCCCFB19D77AE000C742B6 /* brown72.png in Resources */,
 				E1B29EC119B7532E005B9C84 /* black72.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

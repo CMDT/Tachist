@@ -145,17 +145,10 @@
 @synthesize currentBackgroundColour,currentBlockColour,currentShowColour;
 
 -(void)viewWillAppear:(BOOL)animated{
+    //set up the screen from the singleton
+    //only save if SAVE button pressed
     mySingleton *singleton = [mySingleton sharedSingleton];
-    NSURL *defaultPrefsFile = [[NSBundle mainBundle]
-                               URLForResource:@"Root" withExtension:@"plist"];
-    NSDictionary *defaultPrefs =
-    [NSDictionary dictionaryWithContentsOfURL:defaultPrefsFile];
-    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultPrefs];
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
-       NSString *test2=[defaults objectForKey:kFinish];
+
 }
 
 
@@ -163,10 +156,7 @@
 {
     mySingleton *singleton = [mySingleton sharedSingleton];
     
-    // NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    // NSString *prefValue = (engineSwitch.on) ? @"Engaged" : @"Disabled";
-    //[defaults setObject:prefValue forKey:kWarpDriveKey];
-    //[defaults setFloat:warpFactorSlider.value forKey:kWarpFactorKey];
+    //save any settings to the singleton, only save to plist if save button pressed
     [super viewWillDisappear:animated];
     
 }
@@ -176,6 +166,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    //not much here as this routine is only run once when the app has been unloaded from memory and loads fresh.
+    //the App relies on buttons starting actions.
 }
 
 -(void)hideAllBlocks{
