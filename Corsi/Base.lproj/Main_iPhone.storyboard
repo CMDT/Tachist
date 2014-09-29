@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="IKI-2A-uin">
     <dependencies>
-        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -432,151 +431,6 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Block Colour (Start)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2bH-z6-dtP">
-                                <rect key="frame" x="85" y="49" width="150" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KqQ-ty-bsl" userLabel="Button lt gr">
-                                <rect key="frame" x="72" y="78" width="30" height="30"/>
-                                <state key="normal" backgroundImage="lightgrey.png">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="BlockColourLtGBTN:" destination="2Wh-Zj-8FI" eventType="touchUpInside" id="zBy-yU-Rbk"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jk8-Gj-Hax" userLabel="Button gr">
-                                <rect key="frame" x="110" y="78" width="30" height="30"/>
-                                <state key="normal" backgroundImage="grey72.png">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="BlockColourGraBTN:" destination="2Wh-Zj-8FI" eventType="touchUpInside" id="iSV-G1-aRX"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R3N-bn-KBo" userLabel="Button wh">
-                                <rect key="frame" x="34" y="78" width="30" height="30"/>
-                                <state key="normal" backgroundImage="white72.png">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="BlockColourWhiBTN:" destination="2Wh-Zj-8FI" eventType="touchUpInside" id="MYE-jf-CLh"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hWb-lh-54y" userLabel="Button mg">
-                                <rect key="frame" x="186" y="125" width="30" height="30"/>
-                                <state key="normal" backgroundImage="magenta72.png">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="BlockColourMagBTN:" destination="2Wh-Zj-8FI" eventType="touchUpInside" id="Rv3-Mb-TbF"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R0h-lH-DD7" userLabel="Button dk gr">
-                                <rect key="frame" x="148" y="78" width="30" height="30"/>
-                                <state key="normal" backgroundImage="darkgrey72.png">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="BlockColourDkGBTN:" destination="2Wh-Zj-8FI" eventType="touchUpInside" id="TjI-QH-Uvq"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Ik-JQ-qwU" userLabel="Button bk">
-                                <rect key="frame" x="186" y="78" width="30" height="30"/>
-                                <state key="normal" backgroundImage="black72.png">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="BlockColourBlaBTN:" destination="2Wh-Zj-8FI" eventType="touchUpInside" id="icm-eq-yMI"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6MB-eB-Ha8" userLabel="Button br">
-                                <rect key="frame" x="110" y="125" width="30" height="30"/>
-                                <state key="normal" backgroundImage="brown72.png">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="BlockColourBroBTN:" destination="2Wh-Zj-8FI" eventType="touchUpInside" id="fwi-RE-xsJ"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aba-Q5-L0h" userLabel="Button or">
-                                <rect key="frame" x="72" y="125" width="30" height="30"/>
-                                <state key="normal" backgroundImage="orange72.png">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="BlockColourOraBTN:" destination="2Wh-Zj-8FI" eventType="touchUpInside" id="mJR-m3-QfD"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GuY-gj-co6" userLabel="Button ye">
-                                <rect key="frame" x="34" y="125" width="30" height="30"/>
-                                <state key="normal" backgroundImage="yellow72.png">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="BlockColourYelBTN:" destination="2Wh-Zj-8FI" eventType="touchUpInside" id="tG7-6u-LAj"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q17-Ii-sOu" userLabel="Button cy">
-                                <rect key="frame" x="148" y="125" width="30" height="30"/>
-                                <state key="normal" backgroundImage="cyan72.png">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="BlockColourCyaBTN:" destination="2Wh-Zj-8FI" eventType="touchUpInside" id="ObL-1R-yjf"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Cv-4y-b8R" userLabel="Button pu">
-                                <rect key="frame" x="262" y="125" width="30" height="30"/>
-                                <state key="normal" backgroundImage="purple72.png">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="BlockColourPurBTN:" destination="2Wh-Zj-8FI" eventType="touchUpInside" id="ieX-W0-5cf"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iFI-rr-Ya6" userLabel="Button bl">
-                                <rect key="frame" x="224" y="78" width="30" height="30"/>
-                                <state key="normal" backgroundImage="blue72.png">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="BlockColourBluBTN:" destination="2Wh-Zj-8FI" eventType="touchUpInside" id="3gs-uv-PaG"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oj7-gN-5Dg" userLabel="Button re">
-                                <rect key="frame" x="262" y="78" width="30" height="30"/>
-                                <state key="normal" backgroundImage="red72.png">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="BlockColourRedBTN:" destination="2Wh-Zj-8FI" eventType="touchUpInside" id="03I-QH-FRp"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ik7-OM-2kY" userLabel="Button gn">
-                                <rect key="frame" x="224" y="125" width="30" height="30"/>
-                                <state key="normal" backgroundImage="green72.png">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="BlockColourGreBTN:" destination="2Wh-Zj-8FI" eventType="touchUpInside" id="H8T-fz-7sG"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Psn-nV-lKo" userLabel="Button lt gr">
                                 <rect key="frame" x="72" y="192" width="30" height="30"/>
                                 <state key="normal" backgroundImage="lightgrey.png">
@@ -718,7 +572,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lb5-D0-CGQ" userLabel="Button lt gr">
-                                <rect key="frame" x="72" y="306" width="30" height="30"/>
+                                <rect key="frame" x="69" y="78" width="30" height="30"/>
                                 <state key="normal" backgroundImage="lightgrey.png">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -728,7 +582,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8fg-GR-tSO" userLabel="Button gr">
-                                <rect key="frame" x="110" y="306" width="30" height="30"/>
+                                <rect key="frame" x="107" y="78" width="30" height="30"/>
                                 <state key="normal" backgroundImage="grey72.png">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -738,7 +592,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F5r-cT-Qvu" userLabel="Button wh">
-                                <rect key="frame" x="34" y="306" width="30" height="30"/>
+                                <rect key="frame" x="31" y="78" width="30" height="30"/>
                                 <state key="normal" backgroundImage="white72.png">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -748,7 +602,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pqN-h0-7s2" userLabel="Button mg">
-                                <rect key="frame" x="186" y="353" width="30" height="30"/>
+                                <rect key="frame" x="183" y="125" width="30" height="30"/>
                                 <state key="normal" backgroundImage="magenta72.png">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -758,7 +612,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2uu-g0-TEf" userLabel="Button dk gr">
-                                <rect key="frame" x="148" y="306" width="30" height="30"/>
+                                <rect key="frame" x="145" y="78" width="30" height="30"/>
                                 <state key="normal" backgroundImage="darkgrey72.png">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -768,7 +622,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t7a-91-dne" userLabel="Button bk">
-                                <rect key="frame" x="186" y="306" width="30" height="30"/>
+                                <rect key="frame" x="183" y="78" width="30" height="30"/>
                                 <state key="normal" backgroundImage="black72.png">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -778,7 +632,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S5d-ZU-ewd" userLabel="Button br">
-                                <rect key="frame" x="110" y="353" width="30" height="30"/>
+                                <rect key="frame" x="107" y="125" width="30" height="30"/>
                                 <state key="normal" backgroundImage="brown72.png">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -788,7 +642,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l8Y-Mr-4nc" userLabel="Button or">
-                                <rect key="frame" x="72" y="353" width="30" height="30"/>
+                                <rect key="frame" x="69" y="125" width="30" height="30"/>
                                 <state key="normal" backgroundImage="orange72.png">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -798,7 +652,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FFA-cE-cIM" userLabel="Button ye">
-                                <rect key="frame" x="34" y="353" width="30" height="30"/>
+                                <rect key="frame" x="31" y="125" width="30" height="30"/>
                                 <state key="normal" backgroundImage="yellow72.png">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -808,7 +662,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gjC-1n-ZIx" userLabel="Button cy">
-                                <rect key="frame" x="148" y="353" width="30" height="30"/>
+                                <rect key="frame" x="145" y="125" width="30" height="30"/>
                                 <state key="normal" image="check72grey.png" backgroundImage="cyan72.png">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -818,7 +672,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7wP-xc-Jqa" userLabel="Button pu">
-                                <rect key="frame" x="262" y="353" width="30" height="30"/>
+                                <rect key="frame" x="259" y="125" width="30" height="30"/>
                                 <state key="normal" backgroundImage="purple72.png">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -828,7 +682,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oQG-GM-Xbr" userLabel="Button bl">
-                                <rect key="frame" x="224" y="306" width="30" height="30"/>
+                                <rect key="frame" x="221" y="78" width="30" height="30"/>
                                 <state key="normal" backgroundImage="blue72.png">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -838,7 +692,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hTh-Oh-Iti" userLabel="Button re">
-                                <rect key="frame" x="262" y="306" width="30" height="30"/>
+                                <rect key="frame" x="259" y="78" width="30" height="30"/>
                                 <state key="normal" backgroundImage="red72.png">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -848,7 +702,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kg9-Zl-gUc" userLabel="Button gn">
-                                <rect key="frame" x="224" y="353" width="30" height="30"/>
+                                <rect key="frame" x="221" y="125" width="30" height="30"/>
                                 <state key="normal" backgroundImage="green72.png">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -863,10 +717,155 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Canvas Colour (Background)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z6U-Bx-sHY">
-                                <rect key="frame" x="56" y="277" width="221" height="21"/>
+                                <rect key="frame" x="53" y="49" width="221" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Block Colour (Start)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2bH-z6-dtP">
+                                <rect key="frame" x="82" y="277" width="150" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KqQ-ty-bsl" userLabel="Button lt gr">
+                                <rect key="frame" x="69" y="306" width="30" height="30"/>
+                                <state key="normal" backgroundImage="lightgrey.png">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="BlockColourLtGBTN:" destination="2Wh-Zj-8FI" eventType="touchUpInside" id="zBy-yU-Rbk"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jk8-Gj-Hax" userLabel="Button gr">
+                                <rect key="frame" x="107" y="306" width="30" height="30"/>
+                                <state key="normal" backgroundImage="grey72.png">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="BlockColourGraBTN:" destination="2Wh-Zj-8FI" eventType="touchUpInside" id="iSV-G1-aRX"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R3N-bn-KBo" userLabel="Button wh">
+                                <rect key="frame" x="31" y="306" width="30" height="30"/>
+                                <state key="normal" backgroundImage="white72.png">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="BlockColourWhiBTN:" destination="2Wh-Zj-8FI" eventType="touchUpInside" id="MYE-jf-CLh"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hWb-lh-54y" userLabel="Button mg">
+                                <rect key="frame" x="183" y="353" width="30" height="30"/>
+                                <state key="normal" backgroundImage="magenta72.png">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="BlockColourMagBTN:" destination="2Wh-Zj-8FI" eventType="touchUpInside" id="Rv3-Mb-TbF"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R0h-lH-DD7" userLabel="Button dk gr">
+                                <rect key="frame" x="145" y="306" width="30" height="30"/>
+                                <state key="normal" backgroundImage="darkgrey72.png">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="BlockColourDkGBTN:" destination="2Wh-Zj-8FI" eventType="touchUpInside" id="TjI-QH-Uvq"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Ik-JQ-qwU" userLabel="Button bk">
+                                <rect key="frame" x="183" y="306" width="30" height="30"/>
+                                <state key="normal" backgroundImage="black72.png">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="BlockColourBlaBTN:" destination="2Wh-Zj-8FI" eventType="touchUpInside" id="icm-eq-yMI"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6MB-eB-Ha8" userLabel="Button br">
+                                <rect key="frame" x="107" y="353" width="30" height="30"/>
+                                <state key="normal" backgroundImage="brown72.png">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="BlockColourBroBTN:" destination="2Wh-Zj-8FI" eventType="touchUpInside" id="fwi-RE-xsJ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aba-Q5-L0h" userLabel="Button or">
+                                <rect key="frame" x="69" y="353" width="30" height="30"/>
+                                <state key="normal" backgroundImage="orange72.png">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="BlockColourOraBTN:" destination="2Wh-Zj-8FI" eventType="touchUpInside" id="mJR-m3-QfD"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GuY-gj-co6" userLabel="Button ye">
+                                <rect key="frame" x="31" y="353" width="30" height="30"/>
+                                <state key="normal" backgroundImage="yellow72.png">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="BlockColourYelBTN:" destination="2Wh-Zj-8FI" eventType="touchUpInside" id="tG7-6u-LAj"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q17-Ii-sOu" userLabel="Button cy">
+                                <rect key="frame" x="145" y="353" width="30" height="30"/>
+                                <state key="normal" backgroundImage="cyan72.png">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="BlockColourCyaBTN:" destination="2Wh-Zj-8FI" eventType="touchUpInside" id="ObL-1R-yjf"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Cv-4y-b8R" userLabel="Button pu">
+                                <rect key="frame" x="259" y="353" width="30" height="30"/>
+                                <state key="normal" backgroundImage="purple72.png">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="BlockColourPurBTN:" destination="2Wh-Zj-8FI" eventType="touchUpInside" id="ieX-W0-5cf"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iFI-rr-Ya6" userLabel="Button bl">
+                                <rect key="frame" x="221" y="306" width="30" height="30"/>
+                                <state key="normal" backgroundImage="blue72.png">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="BlockColourBluBTN:" destination="2Wh-Zj-8FI" eventType="touchUpInside" id="3gs-uv-PaG"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oj7-gN-5Dg" userLabel="Button re">
+                                <rect key="frame" x="259" y="306" width="30" height="30"/>
+                                <state key="normal" backgroundImage="red72.png">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="BlockColourRedBTN:" destination="2Wh-Zj-8FI" eventType="touchUpInside" id="03I-QH-FRp"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ik7-OM-2kY" userLabel="Button gn">
+                                <rect key="frame" x="221" y="353" width="30" height="30"/>
+                                <state key="normal" backgroundImage="green72.png">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="BlockColourGreBTN:" destination="2Wh-Zj-8FI" eventType="touchUpInside" id="H8T-fz-7sG"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>

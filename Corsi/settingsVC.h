@@ -39,7 +39,6 @@
 @property (strong, nonatomic) IBOutlet UIColor *currentBackgroundColour;
 @property (strong, nonatomic) IBOutlet UIColor *currentShowColour;
 
-
 @property (strong, nonatomic) IBOutlet UILabel *canvasLBL;
 @property (strong, nonatomic) IBOutlet UILabel *blockLBL;
 @property (strong, nonatomic) IBOutlet UILabel *showLBL;
