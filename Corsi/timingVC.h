@@ -17,9 +17,10 @@
 @property (retain, nonatomic) IBOutlet UISlider *blockWaitTimeSLD;
 @property (retain, nonatomic) IBOutlet UISlider *blockStartDelaySLD;
 
+@property (weak, nonatomic) IBOutlet UILabel *blockStartDelayLBL;
+@property (weak, nonatomic) IBOutlet UILabel *blockWaitTimeLBL;
+@property (weak, nonatomic) IBOutlet UILabel *blockShowTimeLBL;
+
 
 @end
 
-//@property (weak, nonatomic) IBOutlet UILabel *blockStartDelayLBL;
-//@property (weak, nonatomic) IBOutlet UILabel *blockWaitTimeLBL;
-//@property (weak, nonatomic) IBOutlet UILabel *blockShowTimeLBL;

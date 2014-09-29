@@ -158,6 +158,14 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL;
     blockStartNumLBL.text=[NSString stringWithFormat:@"%d",singleton.start];
     blockFinishNumLBL.text=[NSString stringWithFormat:@"%d",singleton.finish];
     blockSizeLBL.text=[NSString stringWithFormat:@"%d",singleton.blockSize];
+
+    startTime = singleton.startTime;
+    waitTime = singleton.waitTime;
+    showTime = singleton.showTime;
+
+    blockStartLBL.text=[[NSString alloc]initWithFormat:@"%i",startTime];
+    blockShowLBL.text=[[NSString alloc]initWithFormat:@"%i",showTime];
+    blockWaitLBL.text=[[NSString alloc]initWithFormat:@"%i",waitTime];
 }
 
 

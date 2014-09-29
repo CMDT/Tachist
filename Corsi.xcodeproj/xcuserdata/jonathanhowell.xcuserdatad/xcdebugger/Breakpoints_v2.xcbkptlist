@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Corsi/settingsVC.m"
-            timestampString = "433643086.196699"
+            timestampString = "433724935.175066"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "418"
-            endingLineNumber = "418"
+            startingLineNumber = "426"
+            endingLineNumber = "426"
             landmarkName = "-setDefaults:"
             landmarkType = "5">
          </BreakpointContent>
