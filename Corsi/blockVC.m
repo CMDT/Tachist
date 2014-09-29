@@ -10,7 +10,11 @@
 #import "mySingleton.h"
 
 @interface blockVC ()
-
+{
+    int start;
+    int finish;
+    int blockSize;
+}
 @end
 
 @implementation blockVC
@@ -19,9 +23,36 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
+@synthesize blockFinishNumLBL,blockRotateSWT,blockSizeLBL,
+blockStartNumLBL,sizeMinusBTN,sizePlusBTN,startMinusBTN,
+startPlusBTN,onScreenInfoSWT,finishMinusBTN,finishPlusBTN,
+forwardTestSWT;
+
+-(void)viewDidAppear:(BOOL)animated{
+    mySingleton *singleton = [mySingleton sharedSingleton];
+    
+    //switches set
+    if(singleton.blockRotation){
+        blockRotateSWT.on=YES;
+    }else{
+        blockRotateSWT.on=NO;
+    }
+    if(singleton.forwardTestDirection){
+        forwardTestSWT.on=YES;
+    }else{
+        forwardTestSWT.on=NO;
+    }
+    if(singleton.onScreenInfo){
+        onScreenInfoSWT.on=YES;
+    }else{
+        onScreenInfoSWT.on=NO;
+    }
+    
+    //blocks set
+}
 
 #pragma mark Settings Actions Buttons
-/*- (IBAction)blockStartPlusBTN:(id)sender{
+- (IBAction)blockStartPlusBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
     start++;
     startMinusBTN.alpha=1;
@@ -30,7 +61,6 @@
         start=9;
         startPlusBTN.alpha=0.3;
     }else{
-
         startMinusBTN.alpha=1;
     }
     if (finish<=start) {
@@ -38,11 +68,13 @@
         startPlusBTN.alpha=0.3;
     }
     if (finish>=9) {
+        finish=9;
         finishPlusBTN.alpha=0.3;
     }
-    singleton.start=start;
-    [self updateSizesOfBlocks];
-    [self updateBlockNumbers];
+    blockStartNumLBL.text  = [NSString stringWithFormat:@"%d",start];
+    blockFinishNumLBL.text = [NSString stringWithFormat:@"%d",finish];
+    singleton.start  = start;
+    singleton.finish = finish;
 }
 - (IBAction)blockFinishPlusBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
@@ -60,11 +92,13 @@
         finishPlusBTN.alpha=0.3;
     }
     if (start>=9) {
+        start=9;
         startPlusBTN.alpha=0.3;
     }
-    singleton.finish=finish;
-    [self updateSizesOfBlocks];
-    [self updateBlockNumbers];
+    blockStartNumLBL.text  = [NSString stringWithFormat:@"%d",start];
+    blockFinishNumLBL.text = [NSString stringWithFormat:@"%d",finish];
+    singleton.start  = start;
+    singleton.finish = finish;
 }
 
 - (IBAction)blockSizePlusBTN:(id)sender{
@@ -78,11 +112,8 @@
     }else{
         sizeMinusBTN.alpha=1;
     }
-    singleton.blockSize=blockSize;
-    [self updateSizesOfBlocks];
-    [self updateBlockNumbers];
-
-
+    blockSizeLBL.text  = [NSString stringWithFormat:@"%d", blockSize];
+    singleton.blockSize    = blockSize;
 }
 - (IBAction)blockStartMinusBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
@@ -100,11 +131,13 @@
         startMinusBTN.alpha=0.3;
     }
     if (finish<=3) {
+        finish=3;
         finishMinusBTN.alpha=0.3;
     }
-    singleton.start=start;
-    [self updateSizesOfBlocks];
-    [self updateBlockNumbers];
+    blockStartNumLBL.text  = [NSString stringWithFormat:@"%d",start];
+    blockFinishNumLBL.text = [NSString stringWithFormat:@"%d",finish];
+    singleton.start  = start;
+    singleton.finish = finish;
 }
 - (IBAction)blockFinishMinusBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
@@ -122,11 +155,13 @@
         finishMinusBTN.alpha=0.3;
     }
     if (start<=3) {
+        start=3;
         startMinusBTN.alpha=0.3;
     }
-    singleton.finish=finish;
-    [self updateSizesOfBlocks];
-    [self updateBlockNumbers];
+    blockStartNumLBL.text  = [NSString stringWithFormat:@"%d",start];
+    blockFinishNumLBL.text = [NSString stringWithFormat:@"%d",finish];
+    singleton.start  = start;
+    singleton.finish = finish;
 }
 - (IBAction)blockSizeMinusBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
@@ -139,14 +174,13 @@
     }else{
         sizePlusBTN.alpha=1;
     }
-    singleton.blockSize=blockSize;
-    [self updateSizesOfBlocks];
-    [self updateBlockNumbers];
-
+    blockSizeLBL.text  = [NSString stringWithFormat:@"%d", blockSize];
+    singleton.blockSize    = blockSize;
 }
 
 - (IBAction)forwardTestSWT:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
+    BOOL forwardTestDirection;
     if(forwardTestSWT.isOn){
         forwardTestDirection=YES;
     }else{
@@ -154,195 +188,33 @@
     }
     singleton.forwardTestDirection=forwardTestDirection;
 }
+
 - (IBAction)onScreenInfoSWT:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
+    
+    BOOL screenInfoDisplayed;
+    
     if(onScreenInfoSWT.isOn){
-        screenInfoDisplayed=YES;
-
-    }else{
-        screenInfoDisplayed=NO;
+        screenInfoDisplayed = YES;
+    } else {
+        screenInfoDisplayed = NO;
     }
-    singleton.onScreenInfo=screenInfoDisplayed;
+    singleton.onScreenInfo = screenInfoDisplayed;
 }
+
 - (IBAction)blockRotateSWT:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
     BOOL rotate;
     if (blockRotateSWT.isOn)
         {
-        //arbitary rotate from current position to new position, don't care about absolute angle
-        //[self updateSizesOfBlocks];
-        [self newRotationAngle:(id)sender];
-        [self setRotAngle];
-        rotate=YES;
-        }else{
-            [self setRot90];
-            [self updateSizesOfBlocks];
-            rotate=NO;
+        rotate = YES;
+        } else {
+
+        rotate = NO;
         }
     singleton.blockRotation=rotate;
 }
 
 
--(float)randomDegrees359
-{
-    float degrees = 0;
-    degrees = arc4random_uniform(360); //returns a value from 0 to 359, not 360;
-                                       //NSLog(@"Degs=%f",degrees);
-    return degrees;
-}
 
--(float)random9
-{
-    float num = 1;
-    for (int r=1; r<+arc4random_uniform(321); r++)
-        {
-        while (num>0)
-            {
-            num = arc4random_uniform(10); //1-9
-            }
-        }
-    return num;
-}
-
--(int)randomPt
-{
-    float split1=0;
-    if (arc4random_uniform(11)>5.5)
-        {
-        split1=-1;
-        }
-    else
-        {
-        split1=1;
-        }
-    int posrand=0;
-    posrand=(int)arc4random_uniform(60)*split1;
-    return posrand;
-}
-
-
--(void)updateBlockNumbers{
-    mySingleton *singleton = [mySingleton sharedSingleton];
-    blockStartNumLBL.text=singleton.start;
-    blockFinishNumLBL.text=singleton.finish;
-    blockSizeLBL.text=singleton.blockSize;
-
-    //save data
-    singleton.blockSize=blockSize;
-    singleton.start=start;
-    singleton.finish=finish;
-
-    //set the number of blocks on the biggest valid number
-    int blockCount = blockFinishNumLBL.text.intValue;
-    switch (blockCount) {
-        case 3:
-            block1View.hidden=YES;
-            block2View.hidden=YES;
-            block3View.hidden=NO;
-            block4View.hidden=NO;
-            block5View.hidden=NO;
-            block6View.hidden=YES;
-            block7View.hidden=YES;
-            block8View.hidden=YES;
-            block9View.hidden=YES;
-
-            break;
-        case 4:
-            block1View.hidden=YES;
-            block2View.hidden=YES;
-            block3View.hidden=NO;
-            block4View.hidden=NO;
-            block5View.hidden=NO;
-            block6View.hidden=YES;
-            block7View.hidden=NO;
-            block8View.hidden=YES;
-            block9View.hidden=YES;
-
-            break;
-        case 5:
-            block1View.hidden=NO;
-            block2View.hidden=YES;
-            block3View.hidden=NO;
-            block4View.hidden=NO;
-            block5View.hidden=NO;
-            block6View.hidden=YES;
-            block7View.hidden=NO;
-            block8View.hidden=YES;
-            block9View.hidden=YES;
-
-            break;
-        case 6:
-            block1View.hidden=NO;
-            block2View.hidden=YES;
-            block3View.hidden=NO;
-            block4View.hidden=NO;
-            block5View.hidden=NO;
-            block6View.hidden=YES;
-            block7View.hidden=NO;
-            block8View.hidden=NO;
-            block9View.hidden=YES;
-
-            break;
-        case 7:
-            block1View.hidden=NO;
-            block2View.hidden=YES;
-            block3View.hidden=NO;
-            block4View.hidden=NO;
-            block5View.hidden=NO;
-            block6View.hidden=NO;
-            block7View.hidden=NO;
-            block8View.hidden=NO;
-            block9View.hidden=YES;
-
-            break;
-        case 8:
-            block1View.hidden=NO;
-            block2View.hidden=NO;
-            block3View.hidden=NO;
-            block4View.hidden=NO;
-            block5View.hidden=NO;
-            block6View.hidden=NO;
-            block7View.hidden=NO;
-            block8View.hidden=NO;
-            block9View.hidden=YES;
-
-            break;
-        case 9:
-            block1View.hidden=NO;
-            block2View.hidden=NO;
-            block3View.hidden=NO;
-            block4View.hidden=NO;
-            block5View.hidden=NO;
-            block6View.hidden=NO;
-            block7View.hidden=NO;
-            block8View.hidden=NO;
-            block9View.hidden=NO;
-
-            break;
-        default:
-            block1View.hidden=NO;
-            block2View.hidden=NO;
-            block3View.hidden=NO;
-            block4View.hidden=NO;
-            block5View.hidden=NO;
-            block6View.hidden=NO;
-            block7View.hidden=NO;
-            block8View.hidden=NO;
-            block9View.hidden=NO;
-            
-            break;
-    }
-}
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
--(void)viewDidAppear:(BOOL)animated{
-    mySingleton *singleton = [mySingleton sharedSingleton];
-}
--(void)viewWillDisappear:(BOOL)animated{
-    mySingleton *singleton = [mySingleton sharedSingleton];
-}
-*/
 @end

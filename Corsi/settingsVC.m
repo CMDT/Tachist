@@ -105,8 +105,10 @@
 
 @synthesize block1View,block2View,block3View,block4View,block5View;
 @synthesize block6View,block7View,block8View,block9View,settingsViewerVIEW;
-
+@synthesize  blockSizeLBL,blockFinishNumLBL,blockStartNumLBL,blockShowLBL,
+blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL;
 //@synthesize bl1,bl2,bl3,bl4,bl5,bl6,bl7,bl8,bl9,CBTView,infoFinishLBL,infoRoundLBL,infoSelectLBL,infoStartLBL,myMessageLBL;
+
 @synthesize currentBackgroundColour,currentBlockColour,currentShowColour;
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -132,15 +134,30 @@
     
     [canvasLBL setBackgroundColor: singleton.currentBackgroundColour];
     [settingsViewerVIEW setBackgroundColor:singleton.currentBackgroundColour];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    mySingleton *singleton = [mySingleton sharedSingleton];
     
-    //save any settings to the singleton, only save to plist if save button pressed
-    [super viewWillDisappear:animated];
+    //forward or revers test flag
+    if(singleton.forwardTestDirection==YES){
+        forwardLBL.text=@"Forward";
+    } else {
+        forwardLBL.text=@"Reverse";
+    }
+    //on screen info during tests flag
+    if(singleton.onScreenInfo==YES){
+        infoLBL.text=@"Info.";
+    } else {
+        infoLBL.text=@"No Info";
+    }
+    //rotation flag
+    if(singleton.blockRotation==YES){
+        rotateLBL.text=@"Rotate";
+    } else {
+        rotateLBL.text=@"Square";
+    }
     
+    //start, finish and sizes on screen from singleton
+    blockStartNumLBL.text=[NSString stringWithFormat:@"%d",singleton.start];
+    blockFinishNumLBL.text=[NSString stringWithFormat:@"%d",singleton.finish];
+    blockSizeLBL.text=[NSString stringWithFormat:@"%d",singleton.blockSize];
 }
 
 
@@ -148,8 +165,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    //not much here as this routine is only run once when the app has been unloaded from memory and loads fresh.
-    //the App relies on buttons starting actions.
+    // Not much here as this routine is only run once when the app has been unloaded from memory and loads fresh.
+    // the App relies on buttons starting actions.
 }
 
 

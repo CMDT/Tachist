@@ -43,6 +43,18 @@
 @property (strong, nonatomic) IBOutlet UILabel *blockLBL;
 @property (strong, nonatomic) IBOutlet UILabel *showLBL;
 
+@property (strong, nonatomic) IBOutlet UILabel *blockSizeLBL;
+@property (strong, nonatomic) IBOutlet UILabel *blockStartNumLBL;
+@property (strong, nonatomic) IBOutlet UILabel *blockFinishNumLBL;
+
+@property (strong, nonatomic) IBOutlet UILabel *blockStartLBL;
+@property (strong, nonatomic) IBOutlet UILabel *blockShowLBL;
+@property (strong, nonatomic) IBOutlet UILabel *blockWaitLBL;
+
+@property (strong, nonatomic) IBOutlet UILabel *forwardLBL;
+@property (strong, nonatomic) IBOutlet UILabel *infoLBL;
+@property (strong, nonatomic) IBOutlet UILabel *rotateLBL;
+
 - (IBAction)newRotationAngle:(id)sender;
 
 - (IBAction)setDefaults:(id)sender;
