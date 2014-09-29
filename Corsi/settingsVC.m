@@ -118,9 +118,20 @@
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     [showLBL setBackgroundColor:singleton.currentShowColour];
+    [block5View setBackgroundColor:singleton.currentShowColour];
+    
     [blockLBL setBackgroundColor:singleton.currentBlockColour];
+    [block1View setBackgroundColor:singleton.currentBlockColour];
+    [block2View setBackgroundColor:singleton.currentBlockColour];
+    [block3View setBackgroundColor:singleton.currentBlockColour];
+    [block4View setBackgroundColor:singleton.currentBlockColour];
+    [block6View setBackgroundColor:singleton.currentBlockColour];
+    [block7View setBackgroundColor:singleton.currentBlockColour];
+    [block8View setBackgroundColor:singleton.currentBlockColour];
+    [block9View setBackgroundColor:singleton.currentBlockColour];
+    
     [canvasLBL setBackgroundColor: singleton.currentBackgroundColour];
-
+    [settingsViewerVIEW setBackgroundColor:singleton.currentBackgroundColour];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
