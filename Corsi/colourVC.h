@@ -10,7 +10,8 @@
 
 @interface colourVC : UIViewController
 @property (retain, nonatomic) IBOutlet UIView *mainColourView;
-
+@property (retain, nonatomic) IBOutlet UILabel *statusMessage;
+@property (retain, nonatomic) IBOutlet UIButton *backButton;
 
 - (IBAction)BlockColourBlaBTN:(id)sender;
 - (IBAction)BlockColourBluBTN:(id)sender;
@@ -101,4 +102,5 @@
 @property (retain, nonatomic) IBOutlet UIButton *c11;
 @property (retain, nonatomic) IBOutlet UIButton *c12;
 @property (retain, nonatomic) IBOutlet UIButton *c13;
+
 @end

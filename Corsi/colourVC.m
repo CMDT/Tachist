@@ -18,7 +18,7 @@
 @implementation colourVC
 
 @synthesize
-mainColourView,
+mainColourView, backButton, statusMessage,
 b0,b1,b10,b11,b12,b13,b2,b3,b4,b5,b6,b7,b8,b9,
 s0,s1,s10,s11,s12,s13,s2,s3,s4,s5,s6,s7,s8,s9,
 c0,c1,c10,c11,c12,c13,c2,c3,c4,c5,c6,c7,c8,c9;
@@ -794,8 +794,9 @@ c0,c1,c10,c11,c12,c13,c2,c3,c4,c5,c6,c7,c8,c9;
             }
             break;
         default:
+            // do nothing
             break;
-    }//etc for rest of 12, then for canvas and block
+    }
 }
 
 -(void)canvasSelected:(id)sender{
@@ -1439,7 +1440,7 @@ c0,c1,c10,c11,c12,c13,c2,c3,c4,c5,c6,c7,c8,c9;
             }
             break;
         case 4:
-            if([b3 isSelected]==YES)
+            if([b4 isSelected]==YES)
                 {
                 [b0 setSelected:NO];
                 [b1 setSelected:NO];
@@ -1943,74 +1944,88 @@ c0,c1,c10,c11,c12,c13,c2,c3,c4,c5,c6,c7,c8,c9;
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     singleton.currentBlockColour=[UIColor blackColor];
+    [self checkColourCombinations];
 }
 
 - (IBAction)BlockColourBluBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     singleton.currentBlockColour=[UIColor blueColor];
+    [self checkColourCombinations];
 }
 
 - (IBAction)BlockColourRedBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     singleton.currentBlockColour=[UIColor redColor];
+    [self checkColourCombinations];
 }
 - (IBAction)BlockColourOraBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     singleton.currentBlockColour=[UIColor orangeColor];
+    [self checkColourCombinations];
 
 }
 - (IBAction)BlockColourGreBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     singleton.currentBlockColour=[UIColor greenColor];
+    [self checkColourCombinations];
 }
 - (IBAction)BlockColourYelBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     singleton.currentBlockColour=[UIColor yellowColor];
+    [self checkColourCombinations];
 }
 - (IBAction)BlockColourMagBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     singleton.currentBlockColour=[UIColor magentaColor];
+    [self checkColourCombinations];
 }
 - (IBAction)BlockColourGraBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     singleton.currentBlockColour=[UIColor grayColor];
+    [self checkColourCombinations];
 }
 - (IBAction)BlockColourWhiBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     singleton.currentBlockColour=[UIColor whiteColor];
+    [self checkColourCombinations];
 }
 - (IBAction)BlockColourCyaBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     singleton.currentBlockColour=[UIColor cyanColor];
+    [self checkColourCombinations];
 }
 - (IBAction)BlockColourPurBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     singleton.currentBlockColour=[UIColor purpleColor];
+    [self checkColourCombinations];
 }
 - (IBAction)BlockColourBroBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     singleton.currentBlockColour=[UIColor brownColor];
+    [self checkColourCombinations];
 }
 - (IBAction)BlockColourDkGBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     singleton.currentBlockColour=[UIColor darkGrayColor];
+    [self checkColourCombinations];
 }
 - (IBAction)BlockColourLtGBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     singleton.currentBlockColour=[UIColor lightGrayColor];
+    [self checkColourCombinations];
 }
 
 #pragma mark Show Highlight Colours Setting Actions
@@ -2018,67 +2033,86 @@ c0,c1,c10,c11,c12,c13,c2,c3,c4,c5,c6,c7,c8,c9;
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     singleton.currentShowColour=[UIColor blackColor];
+    [self checkColourCombinations];
 }
 - (IBAction)BlockHighlightColourGraBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     singleton.currentShowColour=[UIColor grayColor];
+    [self checkColourCombinations];
 }
 - (IBAction)BlockHighlightColourBluBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     singleton.currentShowColour=[UIColor blueColor];
+    [self checkColourCombinations];
 }
 - (IBAction)BlockHighlightColourRedBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     singleton.currentShowColour=[UIColor redColor];
+    [self checkColourCombinations];
 }
 - (IBAction)BlockHighlightColourOraBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     singleton.currentShowColour=[UIColor orangeColor];
+    [self checkColourCombinations];
+}
+- (IBAction)BlockHighlightColourMagBTN:(id)sender{
+    mySingleton *singleton = [mySingleton sharedSingleton];
+    
+    singleton.currentShowColour=[UIColor magentaColor];
+    [self checkColourCombinations];
 }
 - (IBAction)BlockHighlightColourGreBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     singleton.currentShowColour=[UIColor greenColor];
+    [self checkColourCombinations];
 }
 - (IBAction)BlockHighlightColourCyaBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     singleton.currentShowColour=[UIColor cyanColor];
+    [self checkColourCombinations];
 }
 - (IBAction)BlockHighlightColourYelBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     singleton.currentShowColour=[UIColor yellowColor];
+    [self checkColourCombinations];
 }
 - (IBAction)BlockHighlightColourWhiBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     singleton.currentShowColour=[UIColor whiteColor];
+    [self checkColourCombinations];
 }
 
 - (IBAction)BlockHighlightColourPurBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     singleton.currentShowColour=[UIColor purpleColor];
+    [self checkColourCombinations];
 }
 - (IBAction)BlockHighlightColourBroBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     singleton.currentShowColour=[UIColor brownColor];
+    [self checkColourCombinations];
 }
 - (IBAction)BlockHighlightColourDkGBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     singleton.currentShowColour=[UIColor darkGrayColor];
+    [self checkColourCombinations];
 }
 - (IBAction)BlockHighlightColourLtGBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     singleton.currentShowColour=[UIColor lightGrayColor];
+    [self checkColourCombinations];
 }
 #pragma mark Background Colours Setting Actions
 
@@ -2086,65 +2120,114 @@ c0,c1,c10,c11,c12,c13,c2,c3,c4,c5,c6,c7,c8,c9;
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     singleton.currentBackgroundColour=[UIColor blackColor];
+    [self checkColourCombinations];
 }
 - (IBAction)BlockBackgroundColourGraBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     singleton.currentBackgroundColour=[UIColor grayColor];
+    [self checkColourCombinations];
 }
 - (IBAction)BlockBackgroundColourBluBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     singleton.currentBackgroundColour=[UIColor blueColor];
+    [self checkColourCombinations];
 }
 - (IBAction)BlockBackgroundColourRedBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     singleton.currentBackgroundColour=[UIColor redColor];
+    [self checkColourCombinations];
 }
 - (IBAction)BlockBackgroundColourOraBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     singleton.currentBackgroundColour=[UIColor orangeColor];
+    [self checkColourCombinations];
 }
 - (IBAction)BlockBackgroundColourGreBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     singleton.currentBackgroundColour=[UIColor greenColor];
+    [self checkColourCombinations];
 }
 - (IBAction)BlockBackgroundColourCyaBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     singleton.currentBackgroundColour=[UIColor cyanColor];
+    [self checkColourCombinations];
 }
 - (IBAction)BlockBackgroundColourYelBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     singleton.currentBackgroundColour=[UIColor yellowColor];
+    [self checkColourCombinations];
 }
 - (IBAction)BlockBackgroundColourWhiBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     singleton.currentBackgroundColour=[UIColor whiteColor];
+    [self checkColourCombinations];
 }
 - (IBAction)BlockBackgroundColourPurBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     singleton.currentBackgroundColour=[UIColor purpleColor];
+    [self checkColourCombinations];
+}
+- (IBAction)BlockBackgroundColourMagBTN:(id)sender{
+    mySingleton *singleton = [mySingleton sharedSingleton];
+    
+    singleton.currentBackgroundColour=[UIColor magentaColor];
+    [self checkColourCombinations];
 }
 - (IBAction)BlockBackgroundColourBroBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     singleton.currentBackgroundColour=[UIColor brownColor];
+    [self checkColourCombinations];
 }
 - (IBAction)BlockBackgroundColourDkGBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     singleton.currentBackgroundColour=[UIColor darkGrayColor];
+    [self checkColourCombinations];
 }
 - (IBAction)BlockBackgroundColourLtGBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     singleton.currentBackgroundColour=[UIColor lightGrayColor];
+    [self checkColourCombinations];
+}
+
+-(void)checkColourCombinations{
+    mySingleton *singleton = [mySingleton sharedSingleton];
+    BOOL isColourOK = YES;
+    //check colour combinations, and if OK, allow back button
+    
+    if(singleton.currentBackgroundColour == singleton.currentShowColour){
+        //cant have background and show the same
+        statusMessage.text=@"Canvas and Show Colours must be different";
+        isColourOK = NO;
+    }
+    if(singleton.currentBlockColour == singleton.currentShowColour){
+        //cant have block and show the same
+        statusMessage.text=@"Block and Show Colours must be different";
+        isColourOK = NO;
+    }
+    if(singleton.currentBlockColour == singleton.currentBackgroundColour){
+        //cant have block and backgrond the same
+        statusMessage.text=@"Canvas and Block Colours must be different";
+        isColourOK = NO;
+    }
+    
+    if(isColourOK){
+        backButton.hidden=NO;
+        statusMessage.hidden=YES;
+    } else {
+        backButton.hidden=YES;
+        statusMessage.hidden=NO;
+    }
 }
 @end
