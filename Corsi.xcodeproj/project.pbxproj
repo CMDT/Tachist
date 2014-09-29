@@ -16,6 +16,10 @@
 		91CCCCF919D77AE000C742B6 /* lightgrey.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CCCCF519D77AE000C742B6 /* lightgrey.png */; };
 		91CCCCFA19D77AE000C742B6 /* darkgrey72.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CCCCF619D77AE000C742B6 /* darkgrey72.png */; };
 		91CCCCFB19D77AE000C742B6 /* brown72.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CCCCF719D77AE000C742B6 /* brown72.png */; };
+		91E2633519D88D04005B2643 /* colourVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 91E2633419D88D04005B2643 /* colourVC.m */; };
+		91E2633819D88D47005B2643 /* timingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 91E2633719D88D47005B2643 /* timingVC.m */; };
+		91E2633B19D88D68005B2643 /* blockVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 91E2633A19D88D68005B2643 /* blockVC.m */; };
+		91E2633D19D8914B005B2643 /* check72grey.png in Resources */ = {isa = PBXBuildFile; fileRef = 91E2633C19D8914B005B2643 /* check72grey.png */; };
 		E10D016919B6024F00D9E5F8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E10D016819B6024F00D9E5F8 /* Foundation.framework */; };
 		E10D016B19B6024F00D9E5F8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E10D016A19B6024F00D9E5F8 /* CoreGraphics.framework */; };
 		E10D016D19B6024F00D9E5F8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E10D016C19B6024F00D9E5F8 /* UIKit.framework */; };
@@ -83,6 +87,13 @@
 		91CCCCF519D77AE000C742B6 /* lightgrey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lightgrey.png; sourceTree = "<group>"; };
 		91CCCCF619D77AE000C742B6 /* darkgrey72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = darkgrey72.png; sourceTree = "<group>"; };
 		91CCCCF719D77AE000C742B6 /* brown72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brown72.png; sourceTree = "<group>"; };
+		91E2633319D88D04005B2643 /* colourVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = colourVC.h; sourceTree = "<group>"; };
+		91E2633419D88D04005B2643 /* colourVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = colourVC.m; sourceTree = "<group>"; };
+		91E2633619D88D47005B2643 /* timingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = timingVC.h; sourceTree = "<group>"; };
+		91E2633719D88D47005B2643 /* timingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = timingVC.m; sourceTree = "<group>"; };
+		91E2633919D88D68005B2643 /* blockVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blockVC.h; sourceTree = "<group>"; };
+		91E2633A19D88D68005B2643 /* blockVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = blockVC.m; sourceTree = "<group>"; };
+		91E2633C19D8914B005B2643 /* check72grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check72grey.png; sourceTree = "<group>"; };
 		E10D016519B6024F00D9E5F8 /* Corsi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Corsi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E10D016819B6024F00D9E5F8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E10D016A19B6024F00D9E5F8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -214,6 +225,12 @@
 				E10D018119B6024F00D9E5F8 /* ViewController.m */,
 				E1DAD7A919B8A92400600608 /* settingsVC.h */,
 				E1DAD7AA19B8A92400600608 /* settingsVC.m */,
+				91E2633319D88D04005B2643 /* colourVC.h */,
+				91E2633419D88D04005B2643 /* colourVC.m */,
+				91E2633619D88D47005B2643 /* timingVC.h */,
+				91E2633719D88D47005B2643 /* timingVC.m */,
+				91E2633919D88D68005B2643 /* blockVC.h */,
+				91E2633A19D88D68005B2643 /* blockVC.m */,
 				E1DAD7AC19B8A95000600608 /* testVC.h */,
 				E1DAD7AD19B8A95000600608 /* testVC.m */,
 				E1DAD7AF19B8A98800600608 /* resultsVC.h */,
@@ -234,6 +251,7 @@
 		E10D016F19B6024F00D9E5F8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				91E2633C19D8914B005B2643 /* check72grey.png */,
 				91CCCCF419D77AE000C742B6 /* purple72.png */,
 				91CCCCF519D77AE000C742B6 /* lightgrey.png */,
 				91CCCCF619D77AE000C742B6 /* darkgrey72.png */,
@@ -370,6 +388,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91E2633D19D8914B005B2643 /* check72grey.png in Resources */,
 				91CCCCF819D77AE000C742B6 /* purple72.png in Resources */,
 				91530B5519BE55B300D2026B /* corsi-calculating.png in Resources */,
 				91530B5619BE55B300D2026B /* corsi-finished.png in Resources */,
@@ -423,13 +442,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91E2633B19D88D68005B2643 /* blockVC.m in Sources */,
 				E10D018219B6024F00D9E5F8 /* ViewController.m in Sources */,
 				E1DAD7B419B8A9A500600608 /* informationVC.m in Sources */,
 				E1DAD7A819B8A31700600608 /* mySingleton.m in Sources */,
 				E1DAD7B119B8A98800600608 /* resultsVC.m in Sources */,
+				91E2633519D88D04005B2643 /* colourVC.m in Sources */,
 				E1DAD7AB19B8A92400600608 /* settingsVC.m in Sources */,
 				E10D017919B6024F00D9E5F8 /* AppDelegate.m in Sources */,
 				E10D017519B6024F00D9E5F8 /* main.m in Sources */,
+				91E2633819D88D47005B2643 /* timingVC.m in Sources */,
 				E1DAD7AE19B8A95000600608 /* testVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
