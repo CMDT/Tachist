@@ -19,7 +19,8 @@
 
 @implementation timingVC
 
-@synthesize blockShowTimeLBL,blockShowTimeSLD,blockStartDelayLBL,blockStartDelaySLD,blockWaitTimeLBL,blockWaitTimeSLD;
+@synthesize blockShowTimeLBL,blockShowTimeSLD,blockStartDelayLBL,
+blockShowTimeTXT,blockStartDelayTXT,blockWaitTimeTXT, blockStartDelaySLD,blockWaitTimeLBL,blockWaitTimeSLD;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -35,6 +36,8 @@
 - (IBAction)blockStartDelaySLD:(UISlider *)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
 blockStartDelayLBL.text=[NSString stringWithFormat:@"%d", (int)blockStartDelaySLD.value];
+    
+    blockStartDelayTXT.text=[NSString stringWithFormat:@"%f", (float)blockStartDelaySLD.value];
 
     singleton.startTime = blockStartDelaySLD.value;
 }
@@ -42,13 +45,13 @@ blockStartDelayLBL.text=[NSString stringWithFormat:@"%d", (int)blockStartDelaySL
     mySingleton *singleton = [mySingleton sharedSingleton];
 blockWaitTimeLBL.text=[NSString stringWithFormat:@"%d", (int)blockWaitTimeSLD.value];
 
-        singleton.startTime = blockWaitTimeSLD.value;
+        singleton.waitTime = blockWaitTimeSLD.value;
 }
 - (IBAction)blockShowTimeSLD:(UISlider *)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
 blockShowTimeLBL.text=[NSString stringWithFormat:@"%d", (int)blockShowTimeSLD.value];
     
-        singleton.startTime = blockShowTimeSLD.value;
+        singleton.showTime = blockShowTimeSLD.value;
 }
 
 -(void)viewDidAppear:(BOOL)animated{

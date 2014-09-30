@@ -168,7 +168,6 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL;
     blockWaitLBL.text=[[NSString alloc]initWithFormat:@"%i",waitTime];
 }
 
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -179,7 +178,7 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL;
 
 
 -(void)updateSizesOfBlocks{
-    mySingleton *singleton = [mySingleton sharedSingleton];
+    //mySingleton *singleton = [mySingleton sharedSingleton];
 
     //blockSizeLBL.text=[[NSString alloc]initWithFormat:@"%i", blockSize];
 
@@ -270,10 +269,6 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
-
-
 -(void)setRot90{
     //set the blocks to original rotation
 
@@ -451,8 +446,8 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL;
     NSLog(@"show        :%@",[defaults objectForKey:kShow]);
     NSLog(@"version     :%@",[defaults objectForKey:kVersion]);
     [self setRot90];
-    [self updateSizesOfBlocks];
-    [self updateBlockNumbers];
+    //[self updateSizesOfBlocks];
+    //[self updateBlockNumbers];
 }
 
 -(UIColor*)colourPicker:(NSString*)colourName{
@@ -574,7 +569,7 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL;
 }
 
 -(void)saveSettings{
-    mySingleton *singleton = [mySingleton sharedSingleton];
+    //mySingleton *singleton = [mySingleton sharedSingleton];
 
     NSURL *defaultPrefsFile     = [[NSBundle mainBundle]
                                    URLForResource:@"Root" withExtension:@"plist"];
@@ -583,7 +578,7 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL;
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaultPrefs];
 
     NSUserDefaults *defaults    = [NSUserDefaults standardUserDefaults];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+   // [[NSUserDefaults standardUserDefaults] synchronize];
     //one for each setting
     //[defaults setObject:@"TextToSave" forKey:@"keyToLookupString"];
 }
