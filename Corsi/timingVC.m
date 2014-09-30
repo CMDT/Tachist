@@ -37,19 +37,21 @@ blockShowTimeTXT,blockStartDelayTXT,blockWaitTimeTXT, blockStartDelaySLD,blockWa
     mySingleton *singleton = [mySingleton sharedSingleton];
 blockStartDelayLBL.text=[NSString stringWithFormat:@"%d", (int)blockStartDelaySLD.value];
     
-    blockStartDelayTXT.text=[NSString stringWithFormat:@"%f", (float)blockStartDelaySLD.value];
-
+    blockStartDelayTXT.text=[NSString stringWithFormat:@"%0.0f", (float)blockStartDelaySLD.value];
+    
     singleton.startTime = blockStartDelaySLD.value;
 }
 - (IBAction)blockWaitTimeSLD:(UISlider *)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
 blockWaitTimeLBL.text=[NSString stringWithFormat:@"%d", (int)blockWaitTimeSLD.value];
-
+blockWaitTimeTXT.text=[NSString stringWithFormat:@"%0.0f", (float)blockWaitTimeSLD.value];
+    
         singleton.waitTime = blockWaitTimeSLD.value;
 }
 - (IBAction)blockShowTimeSLD:(UISlider *)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
 blockShowTimeLBL.text=[NSString stringWithFormat:@"%d", (int)blockShowTimeSLD.value];
+    blockShowTimeTXT.text=[NSString stringWithFormat:@"%0.0f", (float)blockShowTimeSLD.value];
     
         singleton.showTime = blockShowTimeSLD.value;
 }
@@ -68,6 +70,10 @@ blockShowTimeLBL.text=[NSString stringWithFormat:@"%d", (int)blockShowTimeSLD.va
     blockStartDelaySLD.value=startTime;
     blockWaitTimeSLD.value=waitTime;
     blockShowTimeSLD.value=showTime;
+    
+    blockStartDelayTXT.text=[NSString stringWithFormat:@"%0.0f", (float)blockStartDelaySLD.value];
+    blockWaitTimeTXT.text=[NSString stringWithFormat:@"%0.0f", (float)blockWaitTimeSLD.value];
+    blockShowTimeTXT.text=[NSString stringWithFormat:@"%0.0f", (float)blockShowTimeSLD.value];
 }
 
 
