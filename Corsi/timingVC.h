@@ -8,23 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
-@interface timingVC : UIViewController
+@interface timingVC : UIViewController <UITextFieldDelegate>
+
+@property (strong, nonatomic) IBOutlet UISlider *blockShowTimeSLD;
+@property (strong, nonatomic) IBOutlet UISlider *blockWaitTimeSLD;
+@property (strong, nonatomic) IBOutlet UISlider *blockStartDelaySLD;
+
+@property (strong, nonatomic) IBOutlet UITextField *blockStartDelayTXT;
+@property (strong, nonatomic) IBOutlet UITextField *blockWaitTimeTXT;
+@property (strong, nonatomic) IBOutlet UITextField *blockShowTimeTXT;
 
 - (IBAction)blockStartDelaySLD:(UISlider *)sender;
 - (IBAction)blockWaitTimeSLD  :(UISlider *)sender;
 - (IBAction)blockShowTimeSLD  :(UISlider *)sender;
-
-@property (retain, nonatomic) IBOutlet UISlider *blockShowTimeSLD;
-@property (retain, nonatomic) IBOutlet UISlider *blockWaitTimeSLD;
-@property (retain, nonatomic) IBOutlet UISlider *blockStartDelaySLD;
-
-@property (weak, nonatomic) IBOutlet UILabel *blockStartDelayLBL;
-@property (weak, nonatomic) IBOutlet UILabel *blockWaitTimeLBL;
-@property (weak, nonatomic) IBOutlet UILabel *blockShowTimeLBL;
-
-@property (weak, nonatomic) IBOutlet UITextField *blockStartDelayTXT;
-@property (weak, nonatomic) IBOutlet UITextField *blockWaitTimeTXT;
-@property (weak, nonatomic) IBOutlet UITextField *blockShowTimeTXT;
 
 @end
 
