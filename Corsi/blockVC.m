@@ -56,8 +56,40 @@ forwardTestSWT;
     blockFinishNumLBL.text=[NSString stringWithFormat:@"%d",finish];
     blockStartNumLBL.text=[NSString stringWithFormat:@"%d",start];
     blockSizeLBL.text=[NSString stringWithFormat:@"%d",blockSize];
+    [self buttonIncCheck];
 }
-
+-(void)buttonIncCheck{
+    if(start==3){
+        startMinusBTN.alpha=0.3;
+    }
+    if(finish==9){
+        finishPlusBTN.alpha=0.3;
+    }
+    if(finish==3){
+        finishMinusBTN.alpha=0.3;
+    }
+    if(start==9){
+        startPlusBTN.alpha=0.3;
+    }
+    if(start==finish){
+        startPlusBTN.alpha=0.3;
+        finishMinusBTN.alpha=0.3;
+    }
+    if(blockSize==55){
+        sizePlusBTN.alpha=.3;
+    }
+    if(blockSize==10){
+        sizeMinusBTN.alpha=.3;
+    }
+    if(start<finish){
+        startPlusBTN.alpha=1;
+        finishMinusBTN.alpha=1;
+    }
+    if(finish>start){
+        startPlusBTN.alpha=1;
+        finishMinusBTN.alpha=1;
+    }
+}
 #pragma mark Settings Actions Buttons
 - (IBAction)blockStartPlusBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
@@ -67,20 +99,14 @@ forwardTestSWT;
     start++;
     startMinusBTN.alpha=1;
     startPlusBTN.alpha=1;
+
     if (start>=9) {
         start=9;
-        startPlusBTN.alpha=0.3;
-    }else{
-        startMinusBTN.alpha=1;
     }
-    if (finish<=start) {
-        finish=start;
-        startPlusBTN.alpha=0.3;
+    if (start>finish) {
+        start=finish;
     }
-    if (finish>=9) {
-        finish=9;
-        finishPlusBTN.alpha=0.3;
-    }
+    [self buttonIncCheck];
     blockStartNumLBL.text  = [NSString stringWithFormat:@"%d",start];
     blockFinishNumLBL.text = [NSString stringWithFormat:@"%d",finish];
     singleton.start  = start;
@@ -95,19 +121,9 @@ forwardTestSWT;
     finishMinusBTN.alpha=1;
     finishPlusBTN.alpha=1;
     if (finish>=9) {
-        finishPlusBTN.alpha=0.3;
         finish=9;
-    }else{
-        finishMinusBTN.alpha=1;
     }
-    if (start>=finish) {
-        start=finish;
-        finishPlusBTN.alpha=0.3;
-    }
-    if (start>=9) {
-        start=9;
-        startPlusBTN.alpha=0.3;
-    }
+    [self buttonIncCheck];
     blockStartNumLBL.text  = [NSString stringWithFormat:@"%d",start];
     blockFinishNumLBL.text = [NSString stringWithFormat:@"%d",finish];
     singleton.start  = start;
@@ -121,11 +137,9 @@ forwardTestSWT;
     sizeMinusBTN.alpha=1;
     sizePlusBTN.alpha=1;
     if (blockSize>55) {
-        sizePlusBTN.alpha=0.3;
         blockSize=55;
-    }else{
-        sizeMinusBTN.alpha=1;
     }
+    [self buttonIncCheck];
     blockSizeLBL.text  = [NSString stringWithFormat:@"%d", blockSize];
     singleton.blockSize    = blockSize;
 }
@@ -137,20 +151,11 @@ forwardTestSWT;
     start--;
     startMinusBTN.alpha=1;
     startPlusBTN.alpha=1;
+
     if (start<=3) {
-        startMinusBTN.alpha=0.3;
         start=3;
-    }else{
-        startPlusBTN.alpha=1;
     }
-    if (finish<=start) {
-        finish=start;
-        startMinusBTN.alpha=0.3;
-    }
-    if (finish<=3) {
-        finish=3;
-        finishMinusBTN.alpha=0.3;
-    }
+    [self buttonIncCheck];
     blockStartNumLBL.text  = [NSString stringWithFormat:@"%d",start];
     blockFinishNumLBL.text = [NSString stringWithFormat:@"%d",finish];
     singleton.start  = start;
@@ -164,20 +169,15 @@ forwardTestSWT;
     finish--;
     finishMinusBTN.alpha=1;
     finishPlusBTN.alpha=1;
+
     if (finish<=3) {
-        finishMinusBTN.alpha=0.3;
-        finish=3;
-    }else{
-        finishPlusBTN.alpha=1;
+          finish=3;
     }
-    if (start>=finish) {
+    if (finish<start) {
         finish=start;
-        finishMinusBTN.alpha=0.3;
-    }
-    if (start<=3) {
-        start=3;
-        startMinusBTN.alpha=0.3;
-    }
+     }
+
+    [self buttonIncCheck];
     blockStartNumLBL.text  = [NSString stringWithFormat:@"%d",start];
     blockFinishNumLBL.text = [NSString stringWithFormat:@"%d",finish];
     singleton.start  = start;
@@ -190,12 +190,12 @@ forwardTestSWT;
     blockSize=blockSize-5;
     sizeMinusBTN.alpha=1;
     sizePlusBTN.alpha=1;
+
     if (blockSize<10) {
-        sizeMinusBTN.alpha=0.3;
         blockSize=10;
-    }else{
-        sizePlusBTN.alpha=1;
     }
+
+    [self buttonIncCheck];
     blockSizeLBL.text  = [NSString stringWithFormat:@"%d", blockSize];
     singleton.blockSize    = blockSize;
 }
@@ -236,7 +236,5 @@ forwardTestSWT;
         }
     singleton.blockRotation=rotate;
 }
-
-
 
 @end

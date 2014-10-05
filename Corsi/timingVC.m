@@ -165,9 +165,9 @@ blockWaitTimeTXT.text=[NSString stringWithFormat:@"%0.0f", (float)temp];
     blockWaitTimeSLD.value = [blockWaitTimeTXT.text intValue];
     blockShowTimeSLD.value = [blockShowTimeTXT.text intValue];
 
-    singleton.startTime = blockStartDelaySLD.value;
-    singleton.showTime = blockWaitTimeSLD.value;
-    singleton.waitTime = blockShowTimeSLD.value;
+    singleton.startTime = [blockStartDelayTXT.text intValue];
+    singleton.waitTime =  [blockWaitTimeTXT.text intValue];
+    singleton.showTime = [blockShowTimeTXT.text intValue];
 }
 
 -(void) keyBoardAppeared :(int)oft
@@ -187,7 +187,6 @@ blockWaitTimeTXT.text=[NSString stringWithFormat:@"%0.0f", (float)temp];
 
 -(void) keyBoardDisappeared :(int)oft
 {
-    mySingleton *singleton = [mySingleton sharedSingleton];
     //move the screen back to original position
     CGRect frame = self.view.frame;
     //oft= the y of the text field?  make some code to find it
@@ -199,9 +198,9 @@ blockWaitTimeTXT.text=[NSString stringWithFormat:@"%0.0f", (float)temp];
                      }
                      completion:^(BOOL finished){
                      }];
-    blockStartDelayTXT.text = [NSString stringWithFormat:@"%d", singleton.startTime];
-    blockWaitTimeTXT.text = [NSString stringWithFormat:@"%d", singleton.waitTime];
-    blockShowTimeTXT.text = [NSString stringWithFormat:@"%d", singleton.showTime];
+    blockStartDelaySLD.value = [blockStartDelayTXT.text intValue];
+    blockWaitTimeSLD.value = [blockWaitTimeTXT.text intValue];
+    blockShowTimeSLD.value = [blockShowTimeTXT.text intValue];
 }
 
 @end

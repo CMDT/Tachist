@@ -21,6 +21,8 @@
 - (IBAction)onScreenInfoSWT:(id)sender;
 - (IBAction)blockRotateSWT:(id)sender;
 
+-(void)buttonIncCheck;
+
 @property (retain, nonatomic) IBOutlet UILabel *blockStartNumLBL;
 @property (retain, nonatomic) IBOutlet UILabel *blockFinishNumLBL;
 @property (retain, nonatomic) IBOutlet UILabel *blockSizeLBL;
