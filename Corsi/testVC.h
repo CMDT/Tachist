@@ -52,6 +52,7 @@
 @property (strong, nonatomic) IBOutlet UIView  *box7image;
 @property (strong, nonatomic) IBOutlet UIView  *box8image;
 @property (strong, nonatomic) IBOutlet UIView  *box9image;
+@property (strong, nonatomic) IBOutlet UIView *testViewerView;
 
 -(IBAction)startTest:(id)sender;
 

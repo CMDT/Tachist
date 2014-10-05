@@ -35,10 +35,6 @@
     UIView *settingsViewerVIEW;
 }
 
-@property (strong, nonatomic) IBOutlet UIColor *currentBlockColour;
-@property (strong, nonatomic) IBOutlet UIColor *currentBackgroundColour;
-@property (strong, nonatomic) IBOutlet UIColor *currentShowColour;
-
 @property (strong, nonatomic) IBOutlet UILabel *canvasLBL;
 @property (strong, nonatomic) IBOutlet UILabel *blockLBL;
 @property (strong, nonatomic) IBOutlet UILabel *showLBL;
@@ -55,10 +51,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *infoLBL;
 @property (strong, nonatomic) IBOutlet UILabel *rotateLBL;
 
-- (IBAction)newRotationAngle:(id)sender;
-
-- (IBAction)setDefaults:(id)sender;
-
 @property (retain, nonatomic) IBOutlet UIView *block1View;
 @property (retain, nonatomic) IBOutlet UIView *block2View;
 @property (retain, nonatomic) IBOutlet UIView *block3View;
@@ -69,28 +61,11 @@
 @property (retain, nonatomic) IBOutlet UIView *block8View;
 @property (retain, nonatomic) IBOutlet UIView *block9View;
 
-//@property (strong, nonatomic) IBOutlet UIView *CBTView;
-
 @property (retain, nonatomic) IBOutlet UIView *settingsViewerVIEW;
 
-//@property (strong, nonatomic) IBOutlet UIView *bl1;
-//@property (strong, nonatomic) IBOutlet UIView *bl2;
-//@property (strong, nonatomic) IBOutlet UIView *bl3;
-//@property (strong, nonatomic) IBOutlet UIView *bl4;
-//@property (strong, nonatomic) IBOutlet UIView *bl5;
-//@property (strong, nonatomic) IBOutlet UIView *bl6;
-//@property (strong, nonatomic) IBOutlet UIView *bl7;
-//@property (strong, nonatomic) IBOutlet UIView *bl8;
-//@property (strong, nonatomic) IBOutlet UIView *bl9;
-//@property (strong, nonatomic) IBOutlet UIButton *startTestBTNo;
-//- (IBAction)startTestBTNa:(id)sender;
-//@property (strong, nonatomic) IBOutlet UILabel *infoStartLBL;
-//@property (strong, nonatomic) IBOutlet UILabel *infoFinishLBL;
-//@property (strong, nonatomic) IBOutlet UILabel *infoRoundLBL;
-//@property (strong, nonatomic) IBOutlet UILabel *infoSelectLBL;
-//@property (strong, nonatomic) IBOutlet UILabel *myMessageLBL;
 
--(float)randomDegrees359;
+
+- (IBAction)setDefaults:(id)sender;
 -(void)saveSettings;
-
+-(void)loadSettings;
 @end

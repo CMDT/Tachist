@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="IKI-2A-uin">
     <dependencies>
-        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -1456,6 +1455,7 @@ When all the sequence has been shown, try and remember the sequence and press th
                         <outlet property="setTotalLBL" destination="vWa-1z-H4Y" id="vTL-4b-CqP"/>
                         <outlet property="startBTN" destination="6tj-yi-W4u" id="IJ8-tE-MeO"/>
                         <outlet property="statusMessageLBL" destination="hQf-Ml-LhR" id="ahX-sz-yNL"/>
+                        <outlet property="testViewerView" destination="lfF-OU-0B0" id="vJG-G9-Sde"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Et-jW-1Na" userLabel="First Responder" sceneMemberID="firstResponder"/>

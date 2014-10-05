@@ -34,36 +34,6 @@
 
 @end
 
-//Saving
-//NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-
-// saving an NSString
-//[prefs setObject:@"TextToSave" forKey:@"keyToLookupString"];
-
-// saving an NSInteger
-//[prefs setInteger:42 forKey:@"integerKey"];
-
-// saving a Double
-//[prefs setDouble:3.1415 forKey:@"doubleKey"];
-
-// saving a Float
-//[prefs setFloat:1.2345678 forKey:@"floatKey"];
-
-// This is suggested to synch prefs, but is not needed (I didn't put it in my tut)
-//[prefs synchronize];
-
-//Retrieving
-//NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-
-// getting an NSString
-//NSString *myString = [prefs stringForKey:@"keyToLookupString"];
-
-// getting an NSInteger
-//NSInteger myInt = [prefs integerForKey:@"integerKey"];
-
-// getting an Float
-//float myFloat = [prefs floatForKey:@"floatKey"];
-
 @implementation settingsVC
 {
     int start;
@@ -109,7 +79,7 @@
 blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL;
 //@synthesize bl1,bl2,bl3,bl4,bl5,bl6,bl7,bl8,bl9,CBTView,infoFinishLBL,infoRoundLBL,infoSelectLBL,infoStartLBL,myMessageLBL;
 
-@synthesize currentBackgroundColour,currentBlockColour,currentShowColour;
+//@synthesize currentBackgroundColour,currentBlockColour,currentShowColour;
 
 -(void)viewWillAppear:(BOOL)animated{
     //set up the screen from the singleton
@@ -177,148 +147,12 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL;
 }
 
 
--(void)updateSizesOfBlocks{
-    //mySingleton *singleton = [mySingleton sharedSingleton];
-
-    //blockSizeLBL.text=[[NSString alloc]initWithFormat:@"%i", blockSize];
-
-    
-    //get pos of centres
-    CGPoint block1pt = block1View.frame.origin;
-    CGPoint block2pt = block2View.frame.origin;
-    CGPoint block3pt = block3View.frame.origin;
-    CGPoint block4pt = block4View.frame.origin;
-    CGPoint block5pt = block5View.frame.origin;
-    CGPoint block6pt = block6View.frame.origin;
-    CGPoint block7pt = block7View.frame.origin;
-    CGPoint block8pt = block8View.frame.origin;
-    CGPoint block9pt = block9View.frame.origin;
-
-    //move the block
-
-    block1View.frame=CGRectMake(block1pt.x, block1pt.y, blockSize, blockSize) ;
-    block2View.frame=CGRectMake(block2pt.x, block2pt.y, blockSize, blockSize) ;
-    block3View.frame=CGRectMake(block3pt.x, block3pt.y, blockSize, blockSize) ;
-    block4View.frame=CGRectMake(block4pt.x, block4pt.y, blockSize, blockSize) ;
-    block5View.frame=CGRectMake(block5pt.x, block5pt.y, blockSize, blockSize) ;
-    block6View.frame=CGRectMake(block6pt.x, block6pt.y, blockSize, blockSize) ;
-    block7View.frame=CGRectMake(block7pt.x, block7pt.y, blockSize, blockSize) ;
-    block8View.frame=CGRectMake(block8pt.x, block8pt.y, blockSize, blockSize) ;
-    block9View.frame=CGRectMake(block9pt.x, block9pt.y, blockSize, blockSize) ;
-
-    float scale=1;
-    CGAffineTransform scaleTrans = CGAffineTransformMakeScale(scale, scale);
-
-
-    //singleton.blockSize=[blockSizeLBL.text intValue];
-
-
-    CGAffineTransform rotateTrans =
-    CGAffineTransformMakeRotation(0 * M_PI / 180);
-
-    block1View.transform = CGAffineTransformConcat(scaleTrans,
-                                                   rotateTrans
-                                                   );
-    block2View.transform = CGAffineTransformConcat(scaleTrans,
-                                                   rotateTrans
-                                                   );
-    block3View.transform = CGAffineTransformConcat(scaleTrans,
-                                                   rotateTrans
-                                                   );
-    block4View.transform = CGAffineTransformConcat(scaleTrans,
-                                                   rotateTrans
-                                                   );
-    block5View.transform = CGAffineTransformConcat(scaleTrans,
-                                                   rotateTrans
-                                                   );
-    block6View.transform = CGAffineTransformConcat(scaleTrans,
-                                                   rotateTrans
-                                                   );
-    block7View.transform = CGAffineTransformConcat(scaleTrans,
-                                                   rotateTrans
-                                                   );
-    block8View.transform = CGAffineTransformConcat(scaleTrans,
-                                                   rotateTrans
-                                                   );
-    block9View.transform = CGAffineTransformConcat(scaleTrans,
-                                                   rotateTrans
-                                                   );
-
-}
--(void)updateBlockColours{
-    mySingleton *singleton = [mySingleton sharedSingleton];
-
-    currentBlockColour     = singleton.currentBlockColour;
-    currentBackgroundColour= singleton.currentBackgroundColour;
-    currentShowColour      = singleton.currentShowColour;
-    
-    self.settingsViewerVIEW.backgroundColor=singleton.currentBackgroundColour;
-    
-    self.block1View.backgroundColor=currentBlockColour;
-    self.block2View.backgroundColor=currentBlockColour;
-    self.block3View.backgroundColor=currentBlockColour;
-    self.block4View.backgroundColor=currentBlockColour;
-    self.block5View.backgroundColor=currentShowColour;
-    self.block6View.backgroundColor=currentBlockColour;
-    self.block7View.backgroundColor=currentBlockColour;
-    self.block8View.backgroundColor=currentBlockColour;
-    self.block9View.backgroundColor=currentBlockColour;
-}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(void)setRot90{
-    //set the blocks to original rotation
 
-    block1View.transform = CGAffineTransformIdentity;
-    block2View.transform = CGAffineTransformIdentity;
-    block3View.transform = CGAffineTransformIdentity;
-    block4View.transform = CGAffineTransformIdentity;
-    block5View.transform = CGAffineTransformIdentity;
-    block6View.transform = CGAffineTransformIdentity;
-    block7View.transform = CGAffineTransformIdentity;
-    block8View.transform = CGAffineTransformIdentity;
-    block9View.transform = CGAffineTransformIdentity;
-}
-
--(void)setRotAngle{
-    mySingleton *singleton = [mySingleton sharedSingleton];
-    CGAffineTransform rotateTrans1 = CGAffineTransformMakeRotation(rot1 * M_PI / 180);
-    CGAffineTransform rotateTrans2 = CGAffineTransformMakeRotation(rot2 * M_PI / 180);
-    CGAffineTransform rotateTrans3 = CGAffineTransformMakeRotation(rot3 * M_PI / 180);
-    CGAffineTransform rotateTrans4 = CGAffineTransformMakeRotation(rot4 * M_PI / 180);
-    CGAffineTransform rotateTrans5 = CGAffineTransformMakeRotation(rot5 * M_PI / 180);
-    CGAffineTransform rotateTrans6 = CGAffineTransformMakeRotation(rot6 * M_PI / 180);
-    CGAffineTransform rotateTrans7 = CGAffineTransformMakeRotation(rot7 * M_PI / 180);
-    CGAffineTransform rotateTrans8 = CGAffineTransformMakeRotation(rot8 * M_PI / 180);
-    CGAffineTransform rotateTrans9 = CGAffineTransformMakeRotation(rot9 * M_PI / 180);
-    
-    CGAffineTransform scaleTrans =  CGAffineTransformMakeScale(singleton.blockSize/30, singleton.blockSize/30);
-    
-    block1View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans1);
-    block2View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans2);
-    block3View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans3);
-    block4View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans4);
-    block5View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans5);
-    block6View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans6);
-    block7View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans7);
-    block8View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans8);
-    block9View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans9);
-}
-
-- (IBAction)newRotationAngle:(id)sender {
-    rot1=[self randomDegrees359];
-    rot2=[self randomDegrees359];
-    rot3=[self randomDegrees359];
-    rot4=[self randomDegrees359];
-    rot5=[self randomDegrees359];
-    rot6=[self randomDegrees359];
-    rot7=[self randomDegrees359];
-    rot8=[self randomDegrees359];
-    rot9=[self randomDegrees359];
-}
 
 - (IBAction)setDefaults:(id)sender {
     //also used in Load Settings from k data store
@@ -401,33 +235,10 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL;
         [defaults setObject:temp forKey:kTime];
     }
 
-    //timerTime  = 0.0;
-    //clickNumber= 0;
-    //oldSubjectName =@"Subject 1";
-
-    //[forwardTestSWT setOn:YES animated:YES];
-    //[onScreenInfoSWT setOn:YES animated:YES];
-    // [blockRotateSWT setOn:NO animated:YES];
-
-    // blockStartDelaySLD.value = startTime;
-    // blockWaitTimeSLD.value   = waitTime;
-    //blockShowTimeSLD.value   = showTime;
-
-    //blockStartDelayLBL.text=[NSString stringWithFormat:@"%i", startTime];
-    //blockWaitTimeLBL.text=[NSString stringWithFormat:@"%i", waitTime];
-    //blockShowTimeLBL.text=[NSString stringWithFormat:@"%i", showTime];
-    block5View.backgroundColor=[UIColor orangeColor];
-
-    //[self BlockBackgroundColourBlaBTN:self];
-    //[self BlockHighlightColourOraBTN:self];
-    //[self BlockColourBluBTN:self];
-
-    //blockSizeLBL.text=[[NSString alloc]initWithFormat:@"%i",blockSize];
     singleton.currentBackgroundColour=[UIColor blackColor];
     singleton.currentBlockColour=[UIColor blueColor];
     singleton.currentShowColour=[UIColor orangeColor];
-    //get pos of centres
-    
+
     //for testing what is written, can be rem'd out later
     NSLog(@"tester      :%@",[defaults objectForKey:kTester]);
     NSLog(@"subject     :%@",[defaults objectForKey:kSubject]);
@@ -445,9 +256,6 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL;
     NSLog(@"time        :%@",[defaults objectForKey:kTime]);
     NSLog(@"show        :%@",[defaults objectForKey:kShow]);
     NSLog(@"version     :%@",[defaults objectForKey:kVersion]);
-    [self setRot90];
-    //[self updateSizesOfBlocks];
-    //[self updateBlockNumbers];
 }
 
 -(UIColor*)colourPicker:(NSString*)colourName{
@@ -527,48 +335,25 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL;
     return colourUIName;
 }
 
--(void)getAKeyPress{
-    sleep(2);
-}
-
--(float)randomDegrees359
-{
-    float degrees = 0;
-    degrees = arc4random_uniform(360); //returns a value from 0 to 359, not 360;
-    //NSLog(@"Degs=%f",degrees);
-    return degrees;
-}
-
--(float)random9
-{
-    float num = 1;
-    for (int r=1; r<+arc4random_uniform(321); r++)
-    {
-        while (num>0)
-        {
-            num = arc4random_uniform(10); //1-9
-        }
-    }
-    return num;
-}
-
--(int)randomPt
-{
-    float split1=0;
-    if (arc4random_uniform(11)>5.5)
-    {
-        split1=-1;
-    }
-    else
-    {
-        split1=1;
-    }
-    int posrand=0;
-    posrand=(int)arc4random_uniform(60)*split1;
-    return posrand;
-}
-
 -(void)saveSettings{
+    //Saving
+    //NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+
+    // saving an NSString
+    //[prefs setObject:@"TextToSave" forKey:@"keyToLookupString"];
+
+    // saving an NSInteger
+    //[prefs setInteger:42 forKey:@"integerKey"];
+
+    // saving a Double
+    //[prefs setDouble:3.1415 forKey:@"doubleKey"];
+
+    // saving a Float
+    //[prefs setFloat:1.2345678 forKey:@"floatKey"];
+
+    // This is suggested to synch prefs, but is not needed (I didn't put it in my tut)
+    //[prefs synchronize];
+
     //mySingleton *singleton = [mySingleton sharedSingleton];
 
     NSURL *defaultPrefsFile     = [[NSBundle mainBundle]
@@ -579,6 +364,33 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL;
 
     NSUserDefaults *defaults    = [NSUserDefaults standardUserDefaults];
    // [[NSUserDefaults standardUserDefaults] synchronize];
+    //one for each setting
+    //[defaults setObject:@"TextToSave" forKey:@"keyToLookupString"];
+}
+
+-(void)loadSettings{
+    //Retrieving
+    //NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+
+    // getting an NSString
+    //NSString *myString = [prefs stringForKey:@"keyToLookupString"];
+
+    // getting an NSInteger
+    //NSInteger myInt = [prefs integerForKey:@"integerKey"];
+
+    // getting an Float
+    //float myFloat = [prefs floatForKey:@"floatKey"];
+
+    //mySingleton *singleton = [mySingleton sharedSingleton];
+
+    NSURL *defaultPrefsFile     = [[NSBundle mainBundle]
+                                   URLForResource:@"Root" withExtension:@"plist"];
+
+    NSDictionary *defaultPrefs  = [NSDictionary dictionaryWithContentsOfURL:defaultPrefsFile];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultPrefs];
+
+    NSUserDefaults *defaults    = [NSUserDefaults standardUserDefaults];
+    // [[NSUserDefaults standardUserDefaults] synchronize];
     //one for each setting
     //[defaults setObject:@"TextToSave" forKey:@"keyToLookupString"];
 }
