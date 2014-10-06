@@ -235,8 +235,8 @@
 				<string>Brown</string>
 				<string>Black</string>
 				<string>Light Grey</string>
-				<string>GreyGrey</string>
-				<string>Light Grey</string>
+				<string>Grey</string>
+				<string>Dark Grey</string>
 			</array>
 			<key>Titles</key>
 			<array>
@@ -252,8 +252,8 @@
 				<string>Brown</string>
 				<string>Black</string>
 				<string>Light Grey</string>
-				<string>GreyGrey</string>
-				<string>Light Grey</string>
+				<string>Grey</string>
+				<string>Dark Grey</string>
 			</array>
 		</dict>
 		<dict>
@@ -273,8 +273,8 @@
 				<string>Brown</string>
 				<string>Black</string>
 				<string>Light Grey</string>
-				<string>GreyGrey</string>
-				<string>Light Grey</string>
+				<string>Grey</string>
+				<string>Dark Grey</string>
 			</array>
 			<key>Key</key>
 			<string>highlightColour</string>
@@ -296,8 +296,8 @@
 				<string>Brown</string>
 				<string>Black</string>
 				<string>Light Grey</string>
-				<string>GreyGrey</string>
-				<string>Light Grey</string>
+				<string>Grey</string>
+				<string>Dark Grey</string>
 			</array>
 		</dict>
 		<dict>
@@ -317,8 +317,8 @@
 				<string>Brown</string>
 				<string>Black</string>
 				<string>Light Grey</string>
-				<string>GreyGrey</string>
-				<string>Light Grey</string>
+				<string>Grey</string>
+				<string>Dark Grey</string>
 			</array>
 			<key>Key</key>
 			<string>backgroundColour</string>
@@ -340,8 +340,8 @@
 				<string>Brown</string>
 				<string>Black</string>
 				<string>Light Grey</string>
-				<string>GreyGrey</string>
-				<string>Light Grey</string>
+				<string>Grey</string>
+				<string>Dark Grey</string>
 			</array>
 		</dict>
 		<dict>
@@ -396,7 +396,7 @@
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
-			<string>Version 1.0.6 (c) MMU 2014 J.A.Howell</string>
+			<string>Version 1.0.7 (c) MMU 2014 J.A.Howell</string>
 			<key>Key</key>
 			<string>version</string>
 		</dict>

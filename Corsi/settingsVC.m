@@ -51,6 +51,14 @@
     int rot7;
     int rot8;
     int rot9;
+    
+    BOOL forward;
+    BOOL info;
+    bool rotation;
+    
+    NSString *blockCol;
+    NSString *showCol;
+    NSString *backCol;
 
     CGPoint blk1pos;
     CGPoint blk2pos;
@@ -79,13 +87,11 @@
 blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL;
 //@synthesize bl1,bl2,bl3,bl4,bl5,bl6,bl7,bl8,bl9,CBTView,infoFinishLBL,infoRoundLBL,infoSelectLBL,infoStartLBL,myMessageLBL;
 
-//@synthesize currentBackgroundColour,currentBlockColour,currentShowColour;
-
 -(void)viewWillAppear:(BOOL)animated{
     //set up the screen from the singleton
     //only save if SAVE button pressed
-
 }
+
 -(void)viewDidAppear:(BOOL)animated{
     mySingleton *singleton = [mySingleton sharedSingleton];
 
@@ -143,7 +149,15 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL;
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     // Not much here as this routine is only run once when the app has been unloaded from memory and loads fresh.
+    
     // the App relies on buttons starting actions.
+    //set the plist values up if they are nil
+    
+    //[self setDefaults];
+    
+    //read the values and pass to working copies as first run.
+    //Only change these later if app closed down fully
+    //[self loadSettings:self];
 }
 
 
@@ -154,11 +168,9 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL;
 }
 
 
-- (IBAction)setDefaults:(id)sender {
+- (void)setDefaults{
     //also used in Load Settings from k data store
     //edit this to take data from k data store in Apple Settings pane
-
-    mySingleton *singleton = [mySingleton sharedSingleton];
 
     NSURL *defaultPrefsFile     = [[NSBundle mainBundle]
                                    URLForResource:@"Root" withExtension:@"plist"];
@@ -169,77 +181,100 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL;
     NSUserDefaults *defaults    = [NSUserDefaults standardUserDefaults];
     [[NSUserDefaults standardUserDefaults] synchronize];
 
-    //read the user defaults in the iPhone/iPad bundle
-
+    //read the user defaults from the iPhone/iPad bundle
+    // if any are set to nil (no value on first run), put a temporary one in
+    
+//block colour
     currentBlockColour          = [defaults objectForKey:kBlockCol];
     if(currentBlockColour  == nil ){
         currentBlockColour =  [UIColor blueColor];
+        blockCol =@"Blue";
+        [defaults setObject:@"Blue" forKey:kBlockCol];
     }
-    
+//bacground colour
     currentBackgroundColour          = [defaults objectForKey:kBackCol];
     if(currentBackgroundColour  == nil ){
         currentBackgroundColour =  [UIColor blackColor];
+        backCol =@"Black";
+        [defaults setObject:@"Black" forKey:kBackCol];
     }
-    
+//show colour
     currentShowColour          = [defaults objectForKey:kShowCol];
     if(currentShowColour  == nil ){
-        currentShowColour =  [UIColor blueColor];
+        currentShowColour =  [UIColor orangeColor];
+        showCol =@"Orange";
+        [defaults setObject:@"Orange" forKey:kShowCol];
     }
     
     NSString *temp        = [defaults objectForKey:kStart];
     if( temp == nil ){
         start =  3;
         [defaults setObject:@"3" forKey:kStart];
-    }else{
-        start=[temp intValue];
-        [defaults setObject:temp forKey:kStart];
+    //}else{
+        //start=[temp intValue];
+        //[defaults setObject:temp forKey:kStart];
     }
     temp        = [defaults objectForKey:kFinish];
     if( temp == nil ){
         finish =  9;
         [defaults setObject:@"9" forKey:kFinish];
-    }else{
-        finish=[temp intValue];
-        [defaults setObject:temp forKey:kFinish];
+    //}else{
+        //finish=[temp intValue];
+        //[defaults setObject:temp forKey:kFinish];
     }
     temp        = [defaults objectForKey:kSize];
     if( temp == nil ){
         blockSize =  30;
         [defaults setObject:@"30" forKey:kSize];
-    }else{
-        blockSize=[temp intValue];
-        [defaults setObject:temp forKey:kSize];
+    //}else{
+        //blockSize=[temp intValue];
+        //[defaults setObject:temp forKey:kSize];
     }
     temp        = [defaults objectForKey:kDelay];
     if( temp == nil ){
         waitTime=  500;
         [defaults setObject:@"500" forKey:kDelay];
-    }else{
-        waitTime=[temp intValue];
-        [defaults setObject:temp forKey:kDelay];
+    //}else{
+        //waitTime=[temp intValue];
+        //[defaults setObject:temp forKey:kDelay];
     }
     temp        = [defaults objectForKey:kShow];
     if( temp == nil ){
         showTime =  200;
         [defaults setObject:@"200" forKey:kShow];
-    }else{
-        showTime=[temp intValue];
-        [defaults setObject:temp forKey:kShow];
+    //}else{
+        //showTime=[temp intValue];
+        //[defaults setObject:temp forKey:kShow];
     }
     temp        = [defaults objectForKey:kTime];
     if( temp == nil ){
         startTime =  1000;
         [defaults setObject:@"1000" forKey:kTime];
-    }else{
-        startTime=[temp intValue];
-        [defaults setObject:temp forKey:kTime];
+    //}else{
+        //startTime=[temp intValue];
+        //[defaults setObject:temp forKey:kTime];
+    }
+    //set rotate
+    temp        = [defaults objectForKey:kRot];
+    if( temp == nil ){
+        rotation =  NO;
+        [defaults setBool:NO forKey:kRot];
+    }
+    //set status messages
+    temp        = [defaults objectForKey:kInfo];
+    if( temp == nil ){
+        info =  YES;
+        [defaults setBool:YES forKey:kInfo];
+    }
+    //set forward/reverse
+    temp        = [defaults objectForKey:kForward];
+    if( temp == nil ){
+        forward =  YES;
+        [defaults setBool:YES forKey:kForward];
     }
 
-    singleton.currentBackgroundColour=[UIColor blackColor];
-    singleton.currentBlockColour=[UIColor blueColor];
-    singleton.currentShowColour=[UIColor orangeColor];
-
     //for testing what is written, can be rem'd out later
+    NSLog(@"What is in the plist on first load:-->");
     NSLog(@"tester      :%@",[defaults objectForKey:kTester]);
     NSLog(@"subject     :%@",[defaults objectForKey:kSubject]);
     NSLog(@"email       :%@",[defaults objectForKey:kEmail]);
@@ -335,7 +370,95 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL;
     return colourUIName;
 }
 
--(void)saveSettings{
+-(NSString*)colourUIToString:(UIColor*)myUIColour{
+    NSString * myColour;
+    
+    //make an array of colour names
+    NSArray *items = @[
+                       [UIColor blackColor],
+                       [UIColor blueColor],
+                       [UIColor greenColor],
+                       [UIColor redColor],
+                       [UIColor cyanColor],
+                       [UIColor whiteColor],
+                       [UIColor yellowColor],
+                       [UIColor magentaColor],
+                       [UIColor grayColor],
+                       [UIColor orangeColor],
+                       [UIColor brownColor],
+                       [UIColor purpleColor],
+                       [UIColor darkGrayColor],
+                       [UIColor lightGrayColor]
+                       ];
+    //find the index value of each
+    long item = [items indexOfObject: myUIColour];
+    
+    //select the item number
+    switch (item) {
+        case 0:
+            // Item 1
+            myColour = @"Black";
+            break;
+        case 1:
+            // Item 2
+            myColour = @"Blue";
+            break;
+        case 2:
+            // Item 3
+            myColour = @"Green";
+            break;
+        case 3:
+            // Item 4
+            myColour = @"Red";
+            break;
+        case 4:
+            // Item 5
+            myColour = @"Cyan";
+            break;
+        case 5:
+            // Item 6
+            myColour = @"White";
+            break;
+        case 6:
+            // Item 7
+            myColour = @"Yellow";
+            break;
+        case 7:
+            // Item 8
+            myColour = @"Magenta";
+            break;
+        case 8:
+            // Item 9
+            myColour = @"Grey";
+            break;
+        case 9:
+            // Item 10
+            myColour = @"Orange";
+            break;
+        case 10:
+            // Item 11
+            myColour = @"Brown";
+            break;
+        case 11:
+            // Item 12
+            myColour = @"Purple";
+            break;
+        case 12:
+            // Item 13
+            myColour = @"Dark Grey";
+            break;
+        case 13:
+            // Item 14
+            myColour = @"Light Grey";
+            break;
+        default:
+            myColour = @"Orange";
+            break;
+    }
+    return myColour;
+}
+
+-(IBAction)saveSettings:(id)sender{
     //Saving
     //NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
 
@@ -354,7 +477,7 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL;
     // This is suggested to synch prefs, but is not needed (I didn't put it in my tut)
     //[prefs synchronize];
 
-    //mySingleton *singleton = [mySingleton sharedSingleton];
+    mySingleton *singleton = [mySingleton sharedSingleton];
 
     NSURL *defaultPrefsFile     = [[NSBundle mainBundle]
                                    URLForResource:@"Root" withExtension:@"plist"];
@@ -363,35 +486,189 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL;
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaultPrefs];
 
     NSUserDefaults *defaults    = [NSUserDefaults standardUserDefaults];
-   // [[NSUserDefaults standardUserDefaults] synchronize];
-    //one for each setting
-    //[defaults setObject:@"TextToSave" forKey:@"keyToLookupString"];
+
+    //read the user defaults from the iPhone/iPad bundle
+    // if any are set to nil (no value on first run), put a temporary one in
+    NSLog(@"Saving settings to singleton...");
+    //block colour
+    
+    //some testing code to check routine works
+    //UIColor *tt;
+    //NSString *qq;
+        //tt=[UIColor darkGrayColor];
+    //NSLog(@"sent    :-%@",tt);
+    //qq=[self colourUIToString:tt];
+    //NSLog(@"returned:-%@",qq);
+    
+        [defaults setObject:[self colourUIToString:singleton.currentBlockColour] forKey:kBlockCol];
+
+    //background colour
+
+        [defaults setObject:[self colourUIToString:singleton.currentBackgroundColour] forKey:kBackCol];
+
+    //show colour
+
+        [defaults setObject:[self colourUIToString:singleton.currentShowColour] forKey:kShowCol];
+
+        [defaults setObject:[NSString stringWithFormat:@"%d", singleton.start] forKey:kStart];
+
+        [defaults setObject:[NSString stringWithFormat:@"%d", singleton.finish] forKey:kFinish];
+
+        [defaults setObject:[NSString stringWithFormat:@"%d", singleton.blockSize] forKey:kSize];
+
+        [defaults setObject:[NSString stringWithFormat:@"%d", singleton.startTime] forKey:kDelay];
+
+        [defaults setObject:[NSString stringWithFormat:@"%d", singleton.showTime] forKey:kShow];
+
+        [defaults setObject:[NSString stringWithFormat:@"%d", singleton.waitTime] forKey:kTime];
+
+        [defaults setBool:NO forKey:kRot];
+
+        [defaults setBool:YES forKey:kInfo];
+
+        [defaults setBool:YES forKey:kForward];
 }
 
--(void)loadSettings{
+-(IBAction)loadSettings:(id)sender{
     //Retrieving
     //NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-
     // getting an NSString
     //NSString *myString = [prefs stringForKey:@"keyToLookupString"];
-
     // getting an NSInteger
     //NSInteger myInt = [prefs integerForKey:@"integerKey"];
-
     // getting an Float
     //float myFloat = [prefs floatForKey:@"floatKey"];
-
     //mySingleton *singleton = [mySingleton sharedSingleton];
 
+    mySingleton *singleton = [mySingleton sharedSingleton];
+    
     NSURL *defaultPrefsFile     = [[NSBundle mainBundle]
                                    URLForResource:@"Root" withExtension:@"plist"];
-
+    
     NSDictionary *defaultPrefs  = [NSDictionary dictionaryWithContentsOfURL:defaultPrefsFile];
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaultPrefs];
-
+    
     NSUserDefaults *defaults    = [NSUserDefaults standardUserDefaults];
-    // [[NSUserDefaults standardUserDefaults] synchronize];
-    //one for each setting
-    //[defaults setObject:@"TextToSave" forKey:@"keyToLookupString"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    //read the user defaults from the iPhone/iPad bundle
+    // if any are set to nil (no value on first run), put a temporary one in
+    
+    //block colour
+    blockCol          = [defaults objectForKey:kBlockCol];
+    if(currentBlockColour  == nil ){
+        currentBlockColour =  [UIColor blueColor];
+        blockCol =@"Blue";
+        [defaults setObject:@"Blue" forKey:kBlockCol];
+    }else{
+        currentBlockColour = [self colourPicker:blockCol];
+    }
+    //background colour
+    backCol         = [defaults objectForKey:kBackCol];
+    if(currentBackgroundColour  == nil ){
+        currentBackgroundColour =  [UIColor blackColor];
+        backCol =@"Black";
+        [defaults setObject:@"Black" forKey:kBackCol];
+    }else{
+        currentBackgroundColour = [self colourPicker:backCol];
+    }
+    //show colour
+    showCol          = [defaults objectForKey:kShowCol];
+    if(currentShowColour  == nil ){
+        currentShowColour =  [UIColor orangeColor];
+        showCol =@"Orange";
+        [defaults setObject:@"Orange" forKey:kShowCol];
+    }else{
+        currentShowColour = [self colourPicker:showCol];
+    }
+    
+    NSString *temp        = [defaults objectForKey:kStart];
+    if( temp == nil ){
+        start =  3;
+        [defaults setObject:@"3" forKey:kStart];
+        //}else{
+        //start=[temp intValue];
+        //[defaults setObject:temp forKey:kStart];
+    }
+    temp        = [defaults objectForKey:kFinish];
+    if( temp == nil ){
+        finish =  9;
+        [defaults setObject:@"9" forKey:kFinish];
+        //}else{
+        //finish=[temp intValue];
+        //[defaults setObject:temp forKey:kFinish];
+    }
+    temp        = [defaults objectForKey:kSize];
+    if( temp == nil ){
+        blockSize =  30;
+        [defaults setObject:@"30" forKey:kSize];
+        //}else{
+        //blockSize=[temp intValue];
+        //[defaults setObject:temp forKey:kSize];
+    }
+    temp        = [defaults objectForKey:kDelay];
+    if( temp == nil ){
+        waitTime=  500;
+        [defaults setObject:@"500" forKey:kDelay];
+        //}else{
+        //waitTime=[temp intValue];
+        //[defaults setObject:temp forKey:kDelay];
+    }
+    temp        = [defaults objectForKey:kShow];
+    if( temp == nil ){
+        showTime =  200;
+        [defaults setObject:@"200" forKey:kShow];
+        //}else{
+        //showTime=[temp intValue];
+        //[defaults setObject:temp forKey:kShow];
+    }
+    temp        = [defaults objectForKey:kTime];
+    if( temp == nil ){
+        startTime =  1000;
+        [defaults setObject:@"1000" forKey:kTime];
+        //}else{
+        //startTime=[temp intValue];
+        //[defaults setObject:temp forKey:kTime];
+    }
+    
+    //set rotate
+    temp        = [defaults objectForKey:kRot];
+    if( temp == nil ){
+        rotation =  NO;
+        [defaults setBool:NO forKey:kRot];
+    }
+    //set status messages
+    temp        = [defaults objectForKey:kInfo];
+    if( temp == nil ){
+        info =  YES;
+        [defaults setBool:YES forKey:kInfo];
+    }
+    //set forward/reverse
+    temp        = [defaults objectForKey:kForward];
+    if( temp == nil ){
+        forward =  YES;
+        [defaults setBool:YES forKey:kForward];
+    }
+    
+    //for testing what is written, can be rem'd out later
+    NSLog(@"Loading from PLIST... sending to singleton");
+    singleton.testerName              = [defaults  objectForKey:kTester];
+    singleton.subjectName             = [defaults  objectForKey:kSubject];
+    singleton.email                   = [defaults  objectForKey:kEmail];
+    singleton.start                   = [[defaults objectForKey:kStart] doubleValue];
+    singleton.finish                  = [[defaults objectForKey:kFinish] doubleValue];
+    singleton.blockSize               = [[defaults objectForKey:kSize] doubleValue];
+    singleton.forwardTestDirection    = [defaults  objectForKey:kForward];
+    singleton.onScreenInfo            = [defaults  objectForKey:kInfo];
+    singleton.blockRotation           = [defaults  objectForKey:kRot];
+    singleton.currentBlockColour      = currentBlockColour;
+    singleton.currentShowColour       = currentShowColour;
+    singleton.currentBackgroundColour = currentBackgroundColour;
+    singleton.startTime               = [[defaults objectForKey:kDelay] doubleValue];
+    singleton.waitTime                = [[defaults objectForKey:kTime] doubleValue];
+    singleton.showTime                = [[defaults objectForKey:kShow] doubleValue];
+    
+    //singleton.version             = [defaults objectForKey:kVersion];
 }
+
 @end

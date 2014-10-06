@@ -70,26 +70,29 @@
                                 <rect key="frame" x="16" y="388" width="83" height="34"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="125" id="OOQ-ZB-7xr"/>
-                                    <constraint firstAttribute="height" constant="34" id="oh5-nE-DVh"/>
+                                    <constraint firstAttribute="width" constant="83" id="DGW-9c-8Iy"/>
+                                    <constraint firstAttribute="height" constant="34" id="bj1-m8-pU8"/>
                                 </constraints>
                                 <state key="normal" title="Load">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="setDefaults:" destination="NmM-sh-eu8" eventType="touchUpInside" id="JPn-vv-gP0"/>
+                                    <action selector="loadSettings:" destination="NmM-sh-eu8" eventType="touchUpInside" id="fMA-xc-UfR"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="NFr-fd-bM3">
                                 <rect key="frame" x="221" y="388" width="83" height="34"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="123" id="1Zt-jF-xq9"/>
-                                    <constraint firstAttribute="height" constant="34" id="ihi-Gg-uuz"/>
+                                    <constraint firstAttribute="height" constant="34" id="WS5-oT-sUZ"/>
+                                    <constraint firstAttribute="width" constant="83" id="bG6-Hc-Fla"/>
                                 </constraints>
                                 <state key="normal" title="Save">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="saveSettings:" destination="NmM-sh-eu8" eventType="touchUpInside" id="htD-4U-Ssi"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="r4i-MY-S5n">
                                 <rect key="frame" x="181" y="49" width="123" height="34"/>
@@ -280,10 +283,10 @@
                         </subviews>
                         <color key="backgroundColor" red="0.84290279212849473" green="0.9223086456184334" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="NFr-fd-bM3" firstAttribute="trailing" secondItem="8im-2Q-xAb" secondAttribute="trailingMargin" id="Jgq-Y4-jHs"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="NFr-fd-bM3" secondAttribute="bottom" constant="9" id="a5a-Uo-IbD"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="380-F3-cMM" secondAttribute="bottom" constant="9" id="jHe-z2-EQ7"/>
-                            <constraint firstItem="380-F3-cMM" firstAttribute="leading" secondItem="8im-2Q-xAb" secondAttribute="leadingMargin" id="w1x-od-B4E"/>
+                            <constraint firstItem="F16-UG-V0r" firstAttribute="top" secondItem="380-F3-cMM" secondAttribute="bottom" constant="16" id="VgE-5U-KOr"/>
+                            <constraint firstItem="380-F3-cMM" firstAttribute="leading" secondItem="8im-2Q-xAb" secondAttribute="leadingMargin" constant="8" id="aeO-M3-7tz"/>
+                            <constraint firstItem="F16-UG-V0r" firstAttribute="top" secondItem="NFr-fd-bM3" secondAttribute="bottom" constant="16" id="e5C-KA-DgJ"/>
+                            <constraint firstItem="NFr-fd-bM3" firstAttribute="trailing" secondItem="8im-2Q-xAb" secondAttribute="trailingMargin" constant="-8" id="mva-H0-X0e"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" tag="2" title="Settings" image="settings64.png" id="JfG-Kt-5KA">
@@ -349,7 +352,7 @@
                                     <action selector="blockShowTimeSLD:" destination="aRU-3a-nW6" eventType="valueChanged" id="Qsf-j6-QG7"/>
                                 </connections>
                             </slider>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Start Delay" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mk0-Pb-sg3">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Start Delay mSec" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mk0-Pb-sg3">
                                 <rect key="frame" x="15" y="129" width="147" height="21"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -373,14 +376,14 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Block Timing" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2O1-bp-9Dw">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Block Timing m Sec" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2O1-bp-9Dw">
                                 <rect key="frame" x="79" y="196" width="160" height="21"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Block Show" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eea-ch-hje">
-                                <rect key="frame" x="204" y="263" width="100" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Block Show m Sec " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eea-ch-hje">
+                                <rect key="frame" x="154" y="263" width="151" height="21"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
@@ -448,7 +451,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AS9-gv-3ec" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1630" y="31"/>
+            <point key="canvasLocation" x="1615" y="36"/>
         </scene>
         <!--Colour Settings-->
         <scene sceneID="f9J-gR-aMz">
@@ -984,7 +987,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wFS-p1-DTW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="919" y="36"/>
+            <point key="canvasLocation" x="919" y="31"/>
         </scene>
         <!--Block Settings-->
         <scene sceneID="fXO-cP-nio">
@@ -1203,7 +1206,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WqZ-kI-dxD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="868" y="685"/>
+            <point key="canvasLocation" x="866" y="701"/>
         </scene>
         <!--CorsiTabController-->
         <scene sceneID="sw2-hC-uGP">
@@ -1460,7 +1463,7 @@ When all the sequence has been shown, try and remember the sequence and press th
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Et-jW-1Na" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="505" y="685"/>
+            <point key="canvasLocation" x="504" y="701"/>
         </scene>
         <!--Information-->
         <scene sceneID="UUY-XU-Df1">
@@ -1549,6 +1552,6 @@ This version, MMU (c) 2014.
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="lkT-6I-6x4"/>
+        <segue reference="1gJ-g6-Scq"/>
     </inferredMetricsTieBreakers>
 </document>

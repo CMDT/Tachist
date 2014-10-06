@@ -63,9 +63,10 @@
 
 @property (retain, nonatomic) IBOutlet UIView *settingsViewerVIEW;
 
+-(void)setDefaults;
+-(UIColor*)colourPicker:(NSString*)colourName;
+-(NSString*)colourUIToString:(UIColor*)myUIColour;
+-(IBAction)saveSettings:(id)sender;
+-(IBAction)loadSettings:(id)sender;
 
-
-- (IBAction)setDefaults:(id)sender;
--(void)saveSettings;
--(void)loadSettings;
 @end
