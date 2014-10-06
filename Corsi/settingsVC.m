@@ -97,8 +97,8 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL;
 
     [showLBL setBackgroundColor:singleton.currentShowColour];
     [block5View setBackgroundColor:singleton.currentShowColour];
-    
     [blockLBL setBackgroundColor:singleton.currentBlockColour];
+
     [block1View setBackgroundColor:singleton.currentBlockColour];
     [block2View setBackgroundColor:singleton.currentBlockColour];
     [block3View setBackgroundColor:singleton.currentBlockColour];
@@ -148,18 +148,7 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    // Not much here as this routine is only run once when the app has been unloaded from memory and loads fresh.
-    
-    // the App relies on buttons starting actions.
-    //set the plist values up if they are nil
-    
-    //[self setDefaults];
-    
-    //read the values and pass to working copies as first run.
-    //Only change these later if app closed down fully
-    //[self loadSettings:self];
 }
-
 
 - (void)didReceiveMemoryWarning
 {
@@ -459,47 +448,22 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL;
 }
 
 -(IBAction)saveSettings:(id)sender{
-    //Saving
-    //NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-
-    // saving an NSString
-    //[prefs setObject:@"TextToSave" forKey:@"keyToLookupString"];
-
-    // saving an NSInteger
-    //[prefs setInteger:42 forKey:@"integerKey"];
-
-    // saving a Double
-    //[prefs setDouble:3.1415 forKey:@"doubleKey"];
-
-    // saving a Float
-    //[prefs setFloat:1.2345678 forKey:@"floatKey"];
-
-    // This is suggested to synch prefs, but is not needed (I didn't put it in my tut)
-    //[prefs synchronize];
 
     mySingleton *singleton = [mySingleton sharedSingleton];
 
-    NSURL *defaultPrefsFile     = [[NSBundle mainBundle]
-                                   URLForResource:@"Root" withExtension:@"plist"];
-
-    NSDictionary *defaultPrefs  = [NSDictionary dictionaryWithContentsOfURL:defaultPrefsFile];
-    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultPrefs];
-
+    NSURL *defaultPrefsFile = [[NSBundle mainBundle]
+                               URLForResource:@"Root" withExtension:@"plist"];
+    NSDictionary *defaults1 =
+    [NSDictionary dictionaryWithContentsOfURL:defaultPrefsFile];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaults1];
+    //
     NSUserDefaults *defaults    = [NSUserDefaults standardUserDefaults];
 
     //read the user defaults from the iPhone/iPad bundle
     // if any are set to nil (no value on first run), put a temporary one in
     NSLog(@"Saving settings to singleton...");
     //block colour
-    
-    //some testing code to check routine works
-    //UIColor *tt;
-    //NSString *qq;
-        //tt=[UIColor darkGrayColor];
-    //NSLog(@"sent    :-%@",tt);
-    //qq=[self colourUIToString:tt];
-    //NSLog(@"returned:-%@",qq);
-    
+
         [defaults setObject:[self colourUIToString:singleton.currentBlockColour] forKey:kBlockCol];
 
     //background colour
@@ -527,18 +491,11 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL;
         [defaults setBool:YES forKey:kInfo];
 
         [defaults setBool:YES forKey:kForward];
+
+    [defaults synchronize];
 }
 
 -(IBAction)loadSettings:(id)sender{
-    //Retrieving
-    //NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    // getting an NSString
-    //NSString *myString = [prefs stringForKey:@"keyToLookupString"];
-    // getting an NSInteger
-    //NSInteger myInt = [prefs integerForKey:@"integerKey"];
-    // getting an Float
-    //float myFloat = [prefs floatForKey:@"floatKey"];
-    //mySingleton *singleton = [mySingleton sharedSingleton];
 
     mySingleton *singleton = [mySingleton sharedSingleton];
     
@@ -549,12 +506,14 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL;
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaultPrefs];
     
     NSUserDefaults *defaults    = [NSUserDefaults standardUserDefaults];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+
+    [defaults synchronize];
     
     //read the user defaults from the iPhone/iPad bundle
     // if any are set to nil (no value on first run), put a temporary one in
     
     //block colour
+    //blockCol          = [defaults objectForKey:kBlockCol];
     blockCol          = [defaults objectForKey:kBlockCol];
     if(currentBlockColour  == nil ){
         currentBlockColour =  [UIColor blueColor];
@@ -564,6 +523,7 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL;
         currentBlockColour = [self colourPicker:blockCol];
     }
     //background colour
+    //backCol         = [defaults objectForKey:kBackCol];
     backCol         = [defaults objectForKey:kBackCol];
     if(currentBackgroundColour  == nil ){
         currentBackgroundColour =  [UIColor blackColor];
@@ -669,6 +629,8 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL;
     singleton.showTime                = [[defaults objectForKey:kShow] doubleValue];
     
     //singleton.version             = [defaults objectForKey:kVersion];
+
+    [defaults synchronize];
 }
 
 @end
