@@ -126,9 +126,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    order[1]=[self make9order];
-    NSLog(@"Order returned=%@",order[1]);
+    //make 9 sets of number strings
+    for (int x=1; x<10; x++) {
+        order[x]=[self make9order];
+        NSLog(@"Order returned for Set: %d is:%@",x, order[x]);
+    }
     
+    
+    NSLog(@"Order returned=First Set");
     int no1=[self whichBlock:1 :1];
     NSLog(@"No.1=%i",no1);
     int no2=[self whichBlock:2 :1];
@@ -146,6 +151,26 @@
     int no8=[self whichBlock:8 :1];
     NSLog(@"No.8=%i",no8);
     int no9=[self whichBlock:9 :1];
+    NSLog(@"No.9=%i",no9);
+
+    NSLog(@"Order returned=Second Set");
+    no1=[self whichBlock:1 :2];
+    NSLog(@"No.1=%i",no1);
+    no2=[self whichBlock:2 :2];
+    NSLog(@"No.2=%i",no2);
+    no3=[self whichBlock:3 :2];
+    NSLog(@"No.3=%i",no3);
+    no4=[self whichBlock:4 :2];
+    NSLog(@"No.4=%i",no4);
+    no5=[self whichBlock:5 :2];
+    NSLog(@"No.5=%i",no5);
+    no6=[self whichBlock:6 :2];
+    NSLog(@"No.6=%i",no6);
+    no7=[self whichBlock:7 :2];
+    NSLog(@"No.7=%i",no7);
+    no8=[self whichBlock:8 :2];
+    NSLog(@"No.8=%i",no8);
+    no9=[self whichBlock:9 :2];
     NSLog(@"No.9=%i",no9);
     
     // don't bother, too difficult to do yet //[self rotAllBlocks];
@@ -239,7 +264,7 @@
     return degrees;
 }
 -(NSString*) make9order{
-    NSLog(@"Starting now...");
+    //makes a string of numbers, each one only once
     NSString *nums[11];
     NSString *orderz;
     //make numbers 1=9
@@ -259,10 +284,8 @@
             }
         }
     }
-    //format the string and return it
+    //format the string from the parts and return it
     orderz=[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@",nums[1],nums[3],nums[2],nums[5],nums[4],nums[7],nums[6],nums[9],nums[8]];
-//just for testing, rem out later
-    NSLog(@"Order=%@",orderz);
     return orderz;
 }
 
