@@ -18,9 +18,9 @@
     int start;
     int finish;
     int blockSize;
-    int waitTime;
-    int startTime;
-    int showTime;
+    float waitTime;
+    float startTime;
+    float showTime;
     int clickNumber;
     
     BOOL forwardTestDirection;
@@ -64,9 +64,9 @@
 @property (nonatomic) int   start;
 @property (nonatomic) int   finish;
 @property (nonatomic) int   blockSize;
-@property (nonatomic) int   waitTime;
-@property (nonatomic) int   startTime;
-@property (nonatomic) int   showTime;
+@property (nonatomic) float   waitTime;
+@property (nonatomic) float   startTime;
+@property (nonatomic) float   showTime;
 @property (nonatomic) int   clickNumber;
 
 @property (nonatomic) BOOL forwardTestDirection;
