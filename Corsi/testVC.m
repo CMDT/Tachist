@@ -46,9 +46,9 @@
     Float32 timeGuess[7][9];
     int start;
     int finish;
-    Float32 waitTime;
-    Float32 startTime;
-    Float32 showTime;
+    float waitTime;
+    float startTime;
+    float showTime;
     int rot1;
     int rot2;
     int rot3;
@@ -251,7 +251,7 @@
 -(void)posAllBlocks{
     
 }
--(IBAction)ggg:(id)sender{
+-(IBAction)startTest:sender{
     /*box1image.frame =  CGRectMake(box1image.frame.origin.x,
                                   box1image.frame.origin.y,
                                   box1image.frame.size.width+20,
@@ -262,21 +262,21 @@
     //temp to test code
     finishcounter=10;
     
-    startBTN.hidden  = true;
-    headingLBL.hidden= true;
+    startBTN.hidden  = YES;
+    headingLBL.hidden= YES;
     
     [self hide_blocks];
     
     [self hideInfo];
     
-    MessageTextView.hidden=true;
+    MessageTextView.hidden=YES;
     
     //start the timer
     //self.startDate = [NSDate date];
     [NSTimer scheduledTimerWithTimeInterval:[self delayDelay] target:self selector:@selector(boxInit) userInfo:nil repeats:NO];
-    MessageView.hidden=false;
-    [MessageView setImage: card[0].image];
     
+    [MessageView setImage: card[0].image];
+    MessageView.hidden=NO;
 }
 
 -(float)randomDegrees359
@@ -320,31 +320,12 @@
     return block;
 }
 
--(IBAction)startTest:(id)sender {
-    startBTN.hidden  = true;
-    headingLBL.hidden= true;
-
-    [self hide_blocks];
-
-    [self hideInfo];
-    
-    MessageTextView.hidden=true;
-
-    //start the timer
-	//self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:[self delayDelay] target:self selector:@selector(boxInit) userInfo:nil repeats:NO];
-    MessageView.hidden=false;
-    [MessageView setImage: card[0].image];
-
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 //
-
 
 -(void)viewDidAppear:(BOOL)animated{
     //hide unhide labels, screens and buttons
@@ -375,8 +356,7 @@
 
     //initialise
 
-
-    card[0] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-start.png"]];
+    card[0] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_start.png"]];
     card[1] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-finished.png"]];
     card[2] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-stage-start.png"]];
     card[3] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-stage-end.png"]];
@@ -394,7 +374,7 @@
     [self rotAllBlocks];
     
     //show the blocks
-    [self display_blocks];
+    //[self display_blocks];
     
     for(int s=0;s<31;++s){
         //NSLog(@"No: = %d Card No. %@", s, cardNo[s]);
@@ -524,24 +504,25 @@
     NSLog(@"box init");
     statusMessageLBL.text = @"Observe";
     //hide the buttons
-
-    //startBut.hidden = YES;
+    [self hide_blocks];
+    MessageView.hidden=NO;
+    startBTN.hidden = YES;
     //zero counters
-    MessageView.hidden=FALSE;
-    [MessageView setImage: card[0].image];
+    
+    [MessageView setImage: card[1].image];
     
     [NSTimer scheduledTimerWithTimeInterval:[self delayDelay] target:self selector:@selector(box1) userInfo:nil repeats:NO];
 }
 
 -(void)box1 {
     NSLog(@"box 1");
-    
+    MessageView.hidden=YES;
     [self display_blocks];
     statusMessageLBL.text = @"Observe";
 
     int t=[self pickABox];
     //show the t block
-
+    box1image.backgroundColor=currentShowColour;
     [NSTimer scheduledTimerWithTimeInterval:[self delayShow] target:self selector:@selector(but1) userInfo:nil repeats:NO];
 }
 -(void)box2 {
@@ -635,14 +616,15 @@
 
 -(void)but1 {
         NSLog(@"but 1");
+    box1image.backgroundColor=currentBlockColour;
     if (finishcounter<3) {
         isFinished=YES;
         // NSLog(@"card display ending now...");
-        [MessageView setImage: card[0].image];
+        [MessageView setImage: card[4].image];
         [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(endTests) userInfo:nil repeats:NO];
     }else{
         //// NSLog(@"card display blank");
-        [MessageView setImage: card[0].image];
+        [MessageView setImage: card[2].image];
         
         [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(box2) userInfo:nil repeats:NO];
     }
@@ -652,11 +634,11 @@
     if (finishcounter<4) {
         isFinished=YES;
         // NSLog(@"card display ending now...");
-        [MessageView setImage: card[0].image];
+        [MessageView setImage: card[4].image];
         [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(endTests) userInfo:nil repeats:NO];
     }else{
         //// NSLog(@"card display blank");
-        [MessageView setImage: card[0].image];
+        [MessageView setImage: card[2].image];
         
         [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(box3) userInfo:nil repeats:NO];
     }
@@ -666,11 +648,11 @@
     if (finishcounter<5) {
         isFinished=YES;
         // NSLog(@"card display ending now...");
-        [MessageView setImage: card[0].image];
+        [MessageView setImage: card[4].image];
         [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(endTests) userInfo:nil repeats:NO];
     }else{
         //// NSLog(@"card display blank");
-        [MessageView setImage: card[0].image];
+        [MessageView setImage: card[2].image];
         
         [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(box4) userInfo:nil repeats:NO];
     }
@@ -681,11 +663,11 @@
     if (finishcounter<6) {
         isFinished=YES;
         // NSLog(@"card display ending now...");
-        [MessageView setImage: card[0].image];
+        [MessageView setImage: card[4].image];
         [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(endTests) userInfo:nil repeats:NO];
     }else{
         //// NSLog(@"card display blank");
-        [MessageView setImage: card[0].image];
+        [MessageView setImage: card[2].image];
         
         [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(box5) userInfo:nil repeats:NO];
     }
@@ -695,11 +677,11 @@
     if (finishcounter<7) {
         isFinished=YES;
         // NSLog(@"card display ending now...");
-        [MessageView setImage: card[0].image];
+        [MessageView setImage: card[4].image];
         [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(endTests) userInfo:nil repeats:NO];
     }else{
         //// NSLog(@"card display blank");
-        [MessageView setImage: card[0].image];
+        [MessageView setImage: card[2].image];
         
         [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(box6) userInfo:nil repeats:NO];
     }
@@ -709,11 +691,11 @@
     if (finishcounter<8) {
         isFinished=YES;
         // NSLog(@"card display ending now...");
-        [MessageView setImage: card[0].image];
+        [MessageView setImage: card[4].image];
         [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(endTests) userInfo:nil repeats:NO];
     }else{
         //// NSLog(@"card display blank");
-        [MessageView setImage: card[0].image];
+        [MessageView setImage: card[2].image];
         
         [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(box7) userInfo:nil repeats:NO];
     }
@@ -723,11 +705,11 @@
     if (finishcounter<9) {
         isFinished=YES;
         // NSLog(@"card display ending now...");
-        [MessageView setImage: card[0].image];
+        [MessageView setImage: card[4].image];
         [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(endTests) userInfo:nil repeats:NO];
     }else{
         //// NSLog(@"card display blank");
-        [MessageView setImage: card[0].image];
+        [MessageView setImage: card[2].image];
         
         [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(box8) userInfo:nil repeats:NO];
     }
@@ -737,11 +719,11 @@
     if (finishcounter<10) {
         isFinished=YES;
         // NSLog(@"card display ending now...");
-        [MessageView setImage: card[0].image];
+        [MessageView setImage: card[4].image];
         [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(endTests) userInfo:nil repeats:NO];
     }else{
         //// NSLog(@"card display blank");
-        [MessageView setImage: card[0].image];
+        [MessageView setImage: card[2].image];
         
         [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(box9) userInfo:nil repeats:NO];
     }
@@ -751,11 +733,11 @@
     if (finishcounter<11) {
         isFinished=YES;
         // NSLog(@"card display ending now...");
-        [MessageView setImage: card[0].image];
+        [MessageView setImage: card[4].image];
         [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(endTests) userInfo:nil repeats:NO];
     }else{
         //// NSLog(@"card display blank");
-        [MessageView setImage: card[0].image];
+        [MessageView setImage: card[2].image];
         
         [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(endTests) userInfo:nil repeats:NO];
     }

@@ -63,9 +63,9 @@
 -(void)hideInfo;
 -(void)awakeFromNib;
 
--(Float32) delayDelay;
--(Float32) delayWait;
--(Float32) delayShow;
+-(float) delayDelay;
+-(float) delayWait;
+-(float) delayShow;
 
 -(NSString*) make9order;
 
