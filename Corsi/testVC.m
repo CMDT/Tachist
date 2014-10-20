@@ -272,6 +272,13 @@
     currentBlockColour=singleton.currentBlockColour;
     currentShowColour=singleton.currentShowColour;
     
+    start=singleton.start;
+    finish=singleton.finish;
+    
+    startTime=[self delayDelay];
+    showTime=[self delayShow];
+    waitTime=[self delayWait];
+    
     [self hide_blocks];
     
     [self hideInfo];
@@ -280,7 +287,7 @@
     
     //start the timer
     //self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:[self delayDelay] target:self selector:@selector(boxInit) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:([self delayDelay]*2) target:self selector:@selector(boxInit) userInfo:nil repeats:NO];
     
     [MessageView setImage: card[0].image];
     MessageView.hidden=NO;
@@ -498,20 +505,42 @@
     
     [MessageView setImage: card[1].image];
     
-    [NSTimer scheduledTimerWithTimeInterval:[self delayDelay] target:self selector:@selector(stageChecks) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:startTime target:self selector:@selector(stageChecks) userInfo:nil repeats:NO];
 }
 -(void)stageChecks {
         [self display_blocks];
     //check for stage ends and starts
-    if (xcounter>9) {
+    if (xcounter>finish) {
         isFinished=YES;
         [self hide_blocks];
+        MessageView.hidden=NO;
         
         // NSLog(@"card display ending now...");
         [MessageView setImage: card[4].image];
-        [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(endTests) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:startTime target:self selector:@selector(endTests) userInfo:nil repeats:NO];
     }else{
+        if(ncounter==1){
+            [self hide_blocks];
+            MessageView.hidden=NO;
+        [MessageView setImage: card[2].image];
+                    [NSTimer scheduledTimerWithTimeInterval:startTime target:self selector:@selector(box1) userInfo:nil repeats:NO];
+        }
+        if(ncounter>xcounter){
+            [self hide_blocks];
+            ncounter=1;
+            xcounter=xcounter+1;
+ 
+            MessageView.hidden=NO;
+        [MessageView setImage: card[3].image];
+                    [NSTimer scheduledTimerWithTimeInterval:startTime target:self selector:@selector(stageChecks) userInfo:nil repeats:NO];
+        }
         [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(box1) userInfo:nil repeats:NO];
+    }
+    ncounter=ncounter+1;
+    
+    if(ncounter>9){
+        ncounter=1;
+        xcounter=xcounter+1;
     }
 }
 
@@ -519,6 +548,7 @@
     MessageTextView.hidden=YES;
     MessageView.hidden=YES;
     startBTN.hidden=YES;
+    [self display_blocks];
     statusMessageLBL.text = @"Observe Box 1";
 
     int t=[self whichBlock:ncounter :xcounter];
@@ -557,7 +587,7 @@
             break;
     }
     
-    [NSTimer scheduledTimerWithTimeInterval:[self delayShow] target:self selector:@selector(but1) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:showTime target:self selector:@selector(but1) userInfo:nil repeats:NO];
 }
 
 -(void)but1 {
@@ -565,14 +595,7 @@
     
     [self allButtonsBackgroundReset];// background colour reset to std
     
-        [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(stageChecks) userInfo:nil repeats:NO];
-    
-    ncounter=ncounter+1;
-    
-    if (ncounter==xcounter){
-        ncounter=1;
-        xcounter=xcounter+1;
-    }
+        [NSTimer scheduledTimerWithTimeInterval:waitTime target:self selector:@selector(stageChecks) userInfo:nil repeats:NO];
 }
 
 -(void)allButtonsBackgroundReset {
@@ -809,7 +832,7 @@
     //// NSLog(@"card display blank");
     [self hide_blocks];
     [MessageView setImage: card[4].image];
-    [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(calculating) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(self) userInfo:nil repeats:NO];
 }
 -(float)random9
 {
