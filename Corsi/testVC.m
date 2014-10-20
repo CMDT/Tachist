@@ -16,6 +16,8 @@
     int startcounter;
     int finishcounter;
     int stageCounter;
+    int xcounter;
+    int ncounter;
     
     BOOL isFinished;
     BOOL stageEnded;
@@ -29,21 +31,21 @@
     int angle[9];
     int totla;
     int percent;
-    NSString *order[9];
-    NSString *guess[9];
+    NSString *order[10];
+    NSString *guess[10];
     int score;
     int pressNo;
-    NSString *orderStr[9];
-    NSString *guessStr[9];
-    NSString *correct[9];
-    Float32 testTime[7][9];
-    Float32 testTimer[7][9];
+    NSString *orderStr[10];
+    NSString *guessStr[10];
+    NSString *correct[10];
+    Float32 testTime[7][10];
+    Float32 testTimer[7][10];
     int testNo;
     int timingCalc;
     int reply1;
     long tm;
     BOOL analysisFlag;
-    Float32 timeGuess[7][9];
+    Float32 timeGuess[7][10];
     int start;
     int finish;
     float waitTime;
@@ -131,8 +133,7 @@
         order[x]=[self make9order];
         NSLog(@"Order returned for Set: %d is:%@",x, order[x]);
     }
-    
-    
+    //testing yto see what was made, can be turned off
     NSLog(@"Order returned=First Set");
     int no1=[self whichBlock:1 :1];
     NSLog(@"No.1=%i",no1);
@@ -174,7 +175,7 @@
     NSLog(@"No.9=%i",no9);
     
     // don't bother, too difficult to do yet //[self rotAllBlocks];
-    [self sizeAllBlocks];
+    //  [self sizeAllBlocks];
 }
 
 -(void)sizeAllBlocks{
@@ -239,19 +240,22 @@
     CGAffineTransform scaleTrans =  CGAffineTransformMakeScale(0.1, 0.1);
     //draw
     box1image.transform = CGAffineTransformConcat(scaleTrans, rotateTrans1);
-    //box2image.transform = CGAffineTransformConcat(scaleTrans, rotateTrans2);
-    //box3image.transform = CGAffineTransformConcat(scaleTrans, rotateTrans3);
-    //box4image.transform = CGAffineTransformConcat(scaleTrans, rotateTrans4);
-    //box5image.transform = CGAffineTransformConcat(scaleTrans, rotateTrans5);
-    //box6image.transform = CGAffineTransformConcat(scaleTrans, rotateTrans6);
-    //box7image.transform = CGAffineTransformConcat(scaleTrans, rotateTrans7);
-    //box8image.transform = CGAffineTransformConcat(scaleTrans, rotateTrans8);
-    //box9image.transform = CGAffineTransformConcat(scaleTrans, rotateTrans9);
+    box2image.transform = CGAffineTransformConcat(scaleTrans, rotateTrans2);
+    box3image.transform = CGAffineTransformConcat(scaleTrans, rotateTrans3);
+    box4image.transform = CGAffineTransformConcat(scaleTrans, rotateTrans4);
+    box5image.transform = CGAffineTransformConcat(scaleTrans, rotateTrans5);
+    box6image.transform = CGAffineTransformConcat(scaleTrans, rotateTrans6);
+    box7image.transform = CGAffineTransformConcat(scaleTrans, rotateTrans7);
+    box8image.transform = CGAffineTransformConcat(scaleTrans, rotateTrans8);
+    box9image.transform = CGAffineTransformConcat(scaleTrans, rotateTrans9);
 }
+
 -(void)posAllBlocks{
-    
+ // position the blocks somwhere slightly away at random from the origin
 }
+
 -(IBAction)startTest:sender{
+        mySingleton *singleton = [mySingleton sharedSingleton];
     /*box1image.frame =  CGRectMake(box1image.frame.origin.x,
                                   box1image.frame.origin.y,
                                   box1image.frame.size.width+20,
@@ -264,6 +268,9 @@
     
     startBTN.hidden  = YES;
     headingLBL.hidden= YES;
+    
+    currentBlockColour=singleton.currentBlockColour;
+    currentShowColour=singleton.currentShowColour;
     
     [self hide_blocks];
     
@@ -286,6 +293,7 @@
     //NSLog(@"Degs=%f",degrees);
     return degrees;
 }
+
 -(NSString*) make9order{
     //makes a string of numbers, each one only once
     NSString *nums[11];
@@ -299,7 +307,11 @@
     for (int x=0;x<12531;x++){
         for(int n=1;n<9;n++){
             int boxz = (arc4random() % 8)+1;
-            if(boxz==0||boxz>9){boxz=1;}
+            
+            if(boxz==0||boxz>9){
+                boxz=1;
+            }
+            
             if(boxz>=5){
                 temp = nums[n];
                 nums[n]=nums[n+1];
@@ -340,17 +352,8 @@
     [self hideInfo];
     
     MessageTextView.hidden=NO;
-
-    //text views
-
-
-    //settings messages and text inputs
-
-
-    //headings and labels
-
-
-    //end of hide section
+    MessageView.hidden=YES;
+    startBTN.hidden=NO;
 
     NSMutableArray *boxNo = [[NSMutableArray alloc] init];
 
@@ -362,23 +365,6 @@
     card[3] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-stage-end.png"]];
     card[4] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-calculating.png"]];
 
-    //number the cards
-    for(int s=0;s<10;++s){
-        //[box addObject:[NSNumber numberWithInt:s]]; ??????????check original code
-    }
-    //shuffle the cards except the first one and the last two
-    //for(int s=1;s<29;++s){
-    //int r = arc4random() % 28;
-    //[cardNo exchangeObjectAtIndex:s withObjectAtIndex:r+1];
-    //}
-    [self rotAllBlocks];
-    
-    //show the blocks
-    //[self display_blocks];
-    
-    for(int s=0;s<31;++s){
-        //NSLog(@"No: = %d Card No. %@", s, cardNo[s]);
-    }
 }
 
 //
@@ -412,12 +398,6 @@
     delayShow1 = singleton.showTime/1000;
     NSLog(@"show delay = %f",delayShow1);
     return delayShow1;
-}
-
--(int)pickABox{
-    int boxPicked;
-    boxPicked = (arc4random() % 9)+1;
-    return boxPicked;
 }
 
 -(void)randomise_boxes{
@@ -502,34 +482,120 @@
 //========*******************************************************=========
 -(void)boxInit {
     NSLog(@"box init");
-    statusMessageLBL.text = @"Observe";
+    statusMessageLBL.text = @"Observe Blocks, Start of Test";
     //hide the buttons
     [self hide_blocks];
-    MessageView.hidden=NO;
-    startBTN.hidden = YES;
+    [self allButtonsBackgroundReset];// background colour reset to std
+    
+    MessageTextView.hidden=YES;
+    MessageView.hidden=YES;
+    startBTN.hidden=YES;
+    
     //zero counters
+    
+    xcounter=start;
+    ncounter=1;
     
     [MessageView setImage: card[1].image];
     
-    [NSTimer scheduledTimerWithTimeInterval:[self delayDelay] target:self selector:@selector(box1) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:[self delayDelay] target:self selector:@selector(stageChecks) userInfo:nil repeats:NO];
+}
+-(void)stageChecks {
+        [self display_blocks];
+    //check for stage ends and starts
+    if (xcounter>9) {
+        isFinished=YES;
+        [self hide_blocks];
+        
+        // NSLog(@"card display ending now...");
+        [MessageView setImage: card[4].image];
+        [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(endTests) userInfo:nil repeats:NO];
+    }else{
+        [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(box1) userInfo:nil repeats:NO];
+    }
 }
 
 -(void)box1 {
-    NSLog(@"box 1");
+    MessageTextView.hidden=YES;
     MessageView.hidden=YES;
-    [self display_blocks];
-    statusMessageLBL.text = @"Observe";
+    startBTN.hidden=YES;
+    statusMessageLBL.text = @"Observe Box 1";
 
-    int t=[self pickABox];
+    int t=[self whichBlock:ncounter :xcounter];
+    NSLog(@"box : %i num : %i set : %i",t,ncounter,xcounter);
     //show the t block
-    box1image.backgroundColor=currentShowColour;
+    switch (t) {
+        case 1:
+            box1image.backgroundColor=currentShowColour;
+            break;
+        case 2:
+            box2image.backgroundColor=currentShowColour;
+            break;
+        case 3:
+            box3image.backgroundColor=currentShowColour;
+            break;
+        case 4:
+            box4image.backgroundColor=currentShowColour;
+            break;
+        case 5:
+            box5image.backgroundColor=currentShowColour;
+            break;
+        case 6:
+            box6image.backgroundColor=currentShowColour;
+            break;
+        case 7:
+            box7image.backgroundColor=currentShowColour;
+            break;
+        case 8:
+            box8image.backgroundColor=currentShowColour;
+            break;
+        case 9:
+            box9image.backgroundColor=currentShowColour;
+            break;
+        default:
+            [self allButtonsBackgroundReset];// background colour reset to std
+            break;
+    }
+    
     [NSTimer scheduledTimerWithTimeInterval:[self delayShow] target:self selector:@selector(but1) userInfo:nil repeats:NO];
 }
+
+-(void)but1 {
+    NSLog(@"but %i",ncounter);
+    
+    [self allButtonsBackgroundReset];// background colour reset to std
+    
+        [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(stageChecks) userInfo:nil repeats:NO];
+    
+    ncounter=ncounter+1;
+    
+    if (ncounter==xcounter){
+        ncounter=1;
+        xcounter=xcounter+1;
+    }
+}
+
+-(void)allButtonsBackgroundReset {
+    box1image.backgroundColor=currentBlockColour;
+    box2image.backgroundColor=currentBlockColour;
+    box3image.backgroundColor=currentBlockColour;
+    box4image.backgroundColor=currentBlockColour;
+    box5image.backgroundColor=currentBlockColour;
+    box6image.backgroundColor=currentBlockColour;
+    box7image.backgroundColor=currentBlockColour;
+    box8image.backgroundColor=currentBlockColour;
+    box9image.backgroundColor=currentBlockColour;
+}
+
+
+
+
+
 -(void)box2 {
         NSLog(@"box 2");
     statusMessageLBL.text = @"Observe";
 
-    int t=[self pickABox];
+    int t=[self whichBlock:xcounter :ncounter];
 
     [NSTimer scheduledTimerWithTimeInterval:[self delayShow] target:self selector:@selector(but2) userInfo:nil repeats:NO];
 }
@@ -537,7 +603,7 @@
         NSLog(@"box 3");
     statusMessageLBL.text = @"Observe";
 
-    int t=[self pickABox];
+    int t=[self whichBlock:xcounter :ncounter];
 
     [NSTimer scheduledTimerWithTimeInterval:[self delayShow] target:self selector:@selector(but3) userInfo:nil repeats:NO];
 }
@@ -545,7 +611,7 @@
         NSLog(@"box 4");
     statusMessageLBL.text = @"Observe";
 
-    int t=[self pickABox];
+    int t=[self whichBlock:xcounter :ncounter];
 
     [NSTimer scheduledTimerWithTimeInterval:[self delayShow] target:self selector:@selector(but4) userInfo:nil repeats:NO];
 }
@@ -553,7 +619,7 @@
         NSLog(@"box 5");
     statusMessageLBL.text = @"Observe";
 
-    int t=[self pickABox];
+    int t=[self whichBlock:xcounter :ncounter];
 
     [NSTimer scheduledTimerWithTimeInterval:[self delayShow] target:self selector:@selector(but5) userInfo:nil repeats:NO];
 }
@@ -561,7 +627,7 @@
         NSLog(@"box 6");
     statusMessageLBL.text = @"Observe";
 
-    int t=[self pickABox];
+    int t=[self whichBlock:xcounter :ncounter];
 
     [NSTimer scheduledTimerWithTimeInterval:[self delayShow] target:self selector:@selector(but6) userInfo:nil repeats:NO];
 }
@@ -569,7 +635,7 @@
         NSLog(@"box 7");
     statusMessageLBL.text = @"Observe";
 
-    int t=[self pickABox];
+    int t=[self whichBlock:xcounter :ncounter];
 
     [NSTimer scheduledTimerWithTimeInterval:[self delayShow] target:self selector:@selector(but7) userInfo:nil repeats:NO];
 }
@@ -577,7 +643,7 @@
         NSLog(@"box 8");
     statusMessageLBL.text = @"Observe";
 
-    int t=[self pickABox];
+    int t=[self whichBlock:xcounter :ncounter];
 
     [NSTimer scheduledTimerWithTimeInterval:[self delayShow] target:self selector:@selector(but8) userInfo:nil repeats:NO];
 }
@@ -585,7 +651,7 @@
         NSLog(@"box 9");
     statusMessageLBL.text = @"Observe";
 
-    int t=[self pickABox];
+    int t=[self whichBlock:xcounter :ncounter];
 
     [NSTimer scheduledTimerWithTimeInterval:[self delayShow] target:self selector:@selector(but9) userInfo:nil repeats:NO];
 }
@@ -597,7 +663,7 @@
     NSLog(@"stage end");
     [MessageView setImage: card[0].image];
     //[NSTimer scheduledTimerWithTimeInterval:(([self delayx1])) target:self selector:@selector(onCardDisplay1) userInfo:nil repeats:NO];
-    [NSTimer scheduledTimerWithTimeInterval: [self delayWait] target:self selector:@selector(self) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval: [self delayWait] target:self selector:@selector(box1) userInfo:nil repeats:NO];
 }
 
 -(void)nextStage {
@@ -610,25 +676,12 @@
     }else{
         //// NSLog(@"card display blank");
         [MessageView setImage: card[2].image];
-        [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(box2) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(box1) userInfo:nil repeats:NO];
     }
 }
 
--(void)but1 {
-        NSLog(@"but 1");
-    box1image.backgroundColor=currentBlockColour;
-    if (finishcounter<3) {
-        isFinished=YES;
-        // NSLog(@"card display ending now...");
-        [MessageView setImage: card[4].image];
-        [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(endTests) userInfo:nil repeats:NO];
-    }else{
-        //// NSLog(@"card display blank");
-        [MessageView setImage: card[2].image];
-        
-        [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(box2) userInfo:nil repeats:NO];
-    }
-}
+
+
 -(void)but2 {
             NSLog(@"but 2");
     if (finishcounter<4) {
@@ -745,9 +798,19 @@
 
 -(void)endTests {
             NSLog(@"end tests");
-        [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(self) userInfo:nil repeats:NO];
+    //// NSLog(@"card display blank");
+    [self hide_blocks];
+    [MessageView setImage: card[1].image];
+        [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(calculating) userInfo:nil repeats:NO];
 }
 
+-(void)calculating {
+    NSLog(@"Calculating Test Results");
+    //// NSLog(@"card display blank");
+    [self hide_blocks];
+    [MessageView setImage: card[4].image];
+    [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(calculating) userInfo:nil repeats:NO];
+}
 -(float)random9
 {
     float num = 1;

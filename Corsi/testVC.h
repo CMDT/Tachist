@@ -69,8 +69,8 @@
 
 -(NSString*) make9order;
 
--(int)pickABox;
-
+-(int) whichBlock: (int) number :(int) stage;
+-(void)allButtonsBackgroundReset;
 -(void)box1;
 -(void)box2;
 -(void)box3;
