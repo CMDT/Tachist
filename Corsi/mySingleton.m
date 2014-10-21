@@ -36,6 +36,7 @@ static mySingleton * sharedSingleton = nil;
             finish,
             timerTime,
             waitTime,
+            messageTime,
             oldSubjectName,
             subjectName,
             testerName,
@@ -76,9 +77,10 @@ static mySingleton * sharedSingleton = nil;
         start       = 3;
         finish      = 9;
         blockSize   = 30;
-        waitTime    = 500;
+        waitTime    = 1000;
         startTime   = 1000;
         showTime    = 200;
+        messageTime = 2000; //for on screen instructions and messages in time interval delay
         timerTime   = 0.0;
         clickNumber = 0;
         blockRotation = NO;

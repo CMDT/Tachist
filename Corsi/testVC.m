@@ -51,6 +51,7 @@
     float waitTime;
     float startTime;
     float showTime;
+    float messageTime;
     int rot1;
     int rot2;
     int rot3;
@@ -266,18 +267,20 @@
     //temp to test code
     finishcounter=10;
     
-    startBTN.hidden  = YES;
-    headingLBL.hidden= YES;
+    startBTN.hidden   = YES;
+    headingLBL.hidden = YES;
     
-    currentBlockColour=singleton.currentBlockColour;
-    currentShowColour=singleton.currentShowColour;
+    currentBlockColour = singleton.currentBlockColour;
+    currentShowColour  = singleton.currentShowColour;
     
-    start=singleton.start;
-    finish=singleton.finish;
+    start       = singleton.start;
+    finish      = singleton.finish;
     
-    startTime=[self delayDelay];
-    showTime=[self delayShow];
-    waitTime=[self delayWait];
+    startTime   =[self delayDelay];
+    showTime    =[self delayShow];
+    waitTime    =[self delayWait];
+    messageTime =[self delayMessage];
+    
     
     [self hide_blocks];
     
@@ -287,9 +290,8 @@
     
     //start the timer
     //self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:([self delayDelay]*2) target:self selector:@selector(boxInit) userInfo:nil repeats:NO];
-    
-    [MessageView setImage: card[0].image];
+    [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(boxInit) userInfo:nil repeats:NO];
+
     MessageView.hidden=NO;
 }
 
@@ -385,7 +387,7 @@
     mySingleton *singleton = [mySingleton sharedSingleton];
     float delayDelay1;
     delayDelay1  = singleton.startTime/1000;
-    NSLog(@"start delay = %f",delayDelay1);
+    //NSLog(@"start delay = %f",delayDelay1);
     return delayDelay1;
 }
 
@@ -394,7 +396,7 @@
     mySingleton *singleton = [mySingleton sharedSingleton];
     float delayWait1;
     delayWait1 = singleton.waitTime/1000;
-    NSLog(@"wait delay = %f",delayWait1);
+    //NSLog(@"wait delay = %f",delayWait1);
     return delayWait1;
 }
 
@@ -403,8 +405,17 @@
     mySingleton *singleton = [mySingleton sharedSingleton];
     float delayShow1;
     delayShow1 = singleton.showTime/1000;
-    NSLog(@"show delay = %f",delayShow1);
+    //NSLog(@"show delay = %f",delayShow1);
     return delayShow1;
+}
+
+-(float) delayMessage
+{//show delay, after each box display
+    mySingleton *singleton = [mySingleton sharedSingleton];
+    float delayMessage1;
+    delayMessage1 = singleton.messageTime/1000;
+    //NSLog(@"show delay = %f",delayShow1);
+    return delayMessage1;
 }
 
 -(void)randomise_boxes{
@@ -484,9 +495,6 @@
                        = true;
 }
 
-//========**  blanks
-//========*******************************************************=========
-//========*******************************************************=========
 -(void)boxInit {
     NSLog(@"box init");
     statusMessageLBL.text = @"Observe Blocks, Start of Test";
@@ -500,15 +508,15 @@
     
     //zero counters
     
-    xcounter=start;
-    ncounter=1;
+    xcounter = start; //default is 3 but could be 3-9 range depending on settings
+    ncounter = 1;
     
-    [MessageView setImage: card[1].image];
-    
-    [NSTimer scheduledTimerWithTimeInterval:startTime target:self selector:@selector(stageChecks) userInfo:nil repeats:NO];
+    [MessageView setImage: card[0].image];
+    [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(startTestMSG) userInfo:nil repeats:NO];
 }
+
 -(void)stageChecks {
-        [self display_blocks];
+    [self display_blocks];
     //check for stage ends and starts
     if (xcounter>finish) {
         isFinished=YES;
@@ -517,24 +525,16 @@
         
         // NSLog(@"card display ending now...");
         [MessageView setImage: card[4].image];
-        [NSTimer scheduledTimerWithTimeInterval:startTime target:self selector:@selector(endTests) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(endTestMSG) userInfo:nil repeats:NO];
     }else{
-        if(ncounter==1){
+        if(ncounter==1&&xcounter>1){
             [self hide_blocks];
             MessageView.hidden=NO;
-        [MessageView setImage: card[2].image];
-                    [NSTimer scheduledTimerWithTimeInterval:startTime target:self selector:@selector(box1) userInfo:nil repeats:NO];
+            [MessageView setImage: card[2].image];
+            [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(stageEndMSG) userInfo:nil repeats:NO];
+        }else{
+            [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(box1) userInfo:nil repeats:NO];
         }
-        if(ncounter>xcounter){
-            [self hide_blocks];
-            ncounter=1;
-            xcounter=xcounter+1;
- 
-            MessageView.hidden=NO;
-        [MessageView setImage: card[3].image];
-                    [NSTimer scheduledTimerWithTimeInterval:startTime target:self selector:@selector(stageChecks) userInfo:nil repeats:NO];
-        }
-        [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(box1) userInfo:nil repeats:NO];
     }
     ncounter=ncounter+1;
     
@@ -545,11 +545,15 @@
 }
 
 -(void)box1 {
+    //hide all messages except blocks
     MessageTextView.hidden=YES;
     MessageView.hidden=YES;
     startBTN.hidden=YES;
+    
+    //display blocks
     [self display_blocks];
-    statusMessageLBL.text = @"Observe Box 1";
+    
+    statusMessageLBL.text = @"Observe Boxes";
 
     int t=[self whichBlock:ncounter :xcounter];
     NSLog(@"box : %i num : %i set : %i",t,ncounter,xcounter);
@@ -610,230 +614,58 @@
     box9image.backgroundColor=currentBlockColour;
 }
 
-
-
-
-
--(void)box2 {
-        NSLog(@"box 2");
-    statusMessageLBL.text = @"Observe";
-
-    int t=[self whichBlock:xcounter :ncounter];
-
-    [NSTimer scheduledTimerWithTimeInterval:[self delayShow] target:self selector:@selector(but2) userInfo:nil repeats:NO];
-}
--(void)box3 {
-        NSLog(@"box 3");
-    statusMessageLBL.text = @"Observe";
-
-    int t=[self whichBlock:xcounter :ncounter];
-
-    [NSTimer scheduledTimerWithTimeInterval:[self delayShow] target:self selector:@selector(but3) userInfo:nil repeats:NO];
-}
--(void)box4 {
-        NSLog(@"box 4");
-    statusMessageLBL.text = @"Observe";
-
-    int t=[self whichBlock:xcounter :ncounter];
-
-    [NSTimer scheduledTimerWithTimeInterval:[self delayShow] target:self selector:@selector(but4) userInfo:nil repeats:NO];
-}
--(void)box5 {
-        NSLog(@"box 5");
-    statusMessageLBL.text = @"Observe";
-
-    int t=[self whichBlock:xcounter :ncounter];
-
-    [NSTimer scheduledTimerWithTimeInterval:[self delayShow] target:self selector:@selector(but5) userInfo:nil repeats:NO];
-}
--(void)box6 {
-        NSLog(@"box 6");
-    statusMessageLBL.text = @"Observe";
-
-    int t=[self whichBlock:xcounter :ncounter];
-
-    [NSTimer scheduledTimerWithTimeInterval:[self delayShow] target:self selector:@selector(but6) userInfo:nil repeats:NO];
-}
--(void)box7 {
-        NSLog(@"box 7");
-    statusMessageLBL.text = @"Observe";
-
-    int t=[self whichBlock:xcounter :ncounter];
-
-    [NSTimer scheduledTimerWithTimeInterval:[self delayShow] target:self selector:@selector(but7) userInfo:nil repeats:NO];
-}
--(void)box8 {
-        NSLog(@"box 8");
-    statusMessageLBL.text = @"Observe";
-
-    int t=[self whichBlock:xcounter :ncounter];
-
-    [NSTimer scheduledTimerWithTimeInterval:[self delayShow] target:self selector:@selector(but8) userInfo:nil repeats:NO];
-}
--(void)box9 {
-        NSLog(@"box 9");
-    statusMessageLBL.text = @"Observe";
-
-    int t=[self whichBlock:xcounter :ncounter];
-
-    [NSTimer scheduledTimerWithTimeInterval:[self delayShow] target:self selector:@selector(but9) userInfo:nil repeats:NO];
-}
-
 //========**  blanks
 //========*******************************************************=========
 
--(void)stageEnd {
-    NSLog(@"stage end");
+-(void)stageEndMSG {
+    //ends a stage with a message, either move to next stage or end of test
+    NSLog(@"Stage Ending");
+    [self hide_blocks];
+    [MessageView setImage: card[3].image];
+    MessageView.hidden=NO;
+    [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(nextStageMSG) userInfo:nil repeats:NO];
+    //now need to add get button presses for ncounter buttons inputs before move on
+}
+
+-(void)nextStageMSG {
+    //before this, have to hold to collect button presses
+    [self hide_blocks];
+    [MessageView setImage: card[2].image];
+    MessageView.hidden=NO;
+    //starts a stage with a message
+    NSLog(@"Stage Starting");
+    [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(box1) userInfo:nil repeats:NO];
+}
+
+-(void)startTestMSG {
+    //Start of Test Message
+    NSLog(@"Start of Test");
+    [self hide_blocks];
     [MessageView setImage: card[0].image];
-    //[NSTimer scheduledTimerWithTimeInterval:(([self delayx1])) target:self selector:@selector(onCardDisplay1) userInfo:nil repeats:NO];
-    [NSTimer scheduledTimerWithTimeInterval: [self delayWait] target:self selector:@selector(box1) userInfo:nil repeats:NO];
+    MessageView.hidden=NO;
+    [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(box1) userInfo:nil repeats:NO];
 }
 
--(void)nextStage {
-        NSLog(@"next stage");
-    if (finishcounter<2) {
-        isFinished=YES;
-        // NSLog(@"card display ending now...");
-        [MessageView setImage: card[3].image];
-        [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(endTests) userInfo:nil repeats:NO];
-    }else{
-        //// NSLog(@"card display blank");
-        [MessageView setImage: card[2].image];
-        [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(box1) userInfo:nil repeats:NO];
-    }
-}
-
-
-
--(void)but2 {
-            NSLog(@"but 2");
-    if (finishcounter<4) {
-        isFinished=YES;
-        // NSLog(@"card display ending now...");
-        [MessageView setImage: card[4].image];
-        [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(endTests) userInfo:nil repeats:NO];
-    }else{
-        //// NSLog(@"card display blank");
-        [MessageView setImage: card[2].image];
-        
-        [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(box3) userInfo:nil repeats:NO];
-    }
-}
--(void)but3 {
-            NSLog(@"but 3");
-    if (finishcounter<5) {
-        isFinished=YES;
-        // NSLog(@"card display ending now...");
-        [MessageView setImage: card[4].image];
-        [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(endTests) userInfo:nil repeats:NO];
-    }else{
-        //// NSLog(@"card display blank");
-        [MessageView setImage: card[2].image];
-        
-        [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(box4) userInfo:nil repeats:NO];
-    }
-    
-}
--(void)but4 {
-            NSLog(@"but 4");
-    if (finishcounter<6) {
-        isFinished=YES;
-        // NSLog(@"card display ending now...");
-        [MessageView setImage: card[4].image];
-        [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(endTests) userInfo:nil repeats:NO];
-    }else{
-        //// NSLog(@"card display blank");
-        [MessageView setImage: card[2].image];
-        
-        [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(box5) userInfo:nil repeats:NO];
-    }
-}
--(void)but5 {
-            NSLog(@"but 5");
-    if (finishcounter<7) {
-        isFinished=YES;
-        // NSLog(@"card display ending now...");
-        [MessageView setImage: card[4].image];
-        [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(endTests) userInfo:nil repeats:NO];
-    }else{
-        //// NSLog(@"card display blank");
-        [MessageView setImage: card[2].image];
-        
-        [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(box6) userInfo:nil repeats:NO];
-    }
-}
--(void)but6 {
-            NSLog(@"but 6");
-    if (finishcounter<8) {
-        isFinished=YES;
-        // NSLog(@"card display ending now...");
-        [MessageView setImage: card[4].image];
-        [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(endTests) userInfo:nil repeats:NO];
-    }else{
-        //// NSLog(@"card display blank");
-        [MessageView setImage: card[2].image];
-        
-        [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(box7) userInfo:nil repeats:NO];
-    }
-}
--(void)but7 {
-            NSLog(@"but 7");
-    if (finishcounter<9) {
-        isFinished=YES;
-        // NSLog(@"card display ending now...");
-        [MessageView setImage: card[4].image];
-        [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(endTests) userInfo:nil repeats:NO];
-    }else{
-        //// NSLog(@"card display blank");
-        [MessageView setImage: card[2].image];
-        
-        [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(box8) userInfo:nil repeats:NO];
-    }
-}
--(void)but8 {
-            NSLog(@"but 8");
-    if (finishcounter<10) {
-        isFinished=YES;
-        // NSLog(@"card display ending now...");
-        [MessageView setImage: card[4].image];
-        [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(endTests) userInfo:nil repeats:NO];
-    }else{
-        //// NSLog(@"card display blank");
-        [MessageView setImage: card[2].image];
-        
-        [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(box9) userInfo:nil repeats:NO];
-    }
-}
--(void)but9 {
-            NSLog(@"but 9");
-    if (finishcounter<11) {
-        isFinished=YES;
-        // NSLog(@"card display ending now...");
-        [MessageView setImage: card[4].image];
-        [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(endTests) userInfo:nil repeats:NO];
-    }else{
-        //// NSLog(@"card display blank");
-        [MessageView setImage: card[2].image];
-        
-        [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(endTests) userInfo:nil repeats:NO];
-    }
-}
-
--(void)endTests {
-            NSLog(@"end tests");
-    //// NSLog(@"card display blank");
+-(void)endTestMSG {
+    //End of Test Message
+    NSLog(@"end tests");
     [self hide_blocks];
     [MessageView setImage: card[1].image];
-        [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(calculating) userInfo:nil repeats:NO];
+    MessageView.hidden=NO;
+    
+    [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(calculatingMSG) userInfo:nil repeats:NO];
 }
 
--(void)calculating {
+-(void)calculatingMSG {
+    //Calculate stats and outputs
     NSLog(@"Calculating Test Results");
-    //// NSLog(@"card display blank");
+    //holds here at present, need to make new func to do the work
     [self hide_blocks];
     [MessageView setImage: card[4].image];
-    [NSTimer scheduledTimerWithTimeInterval:[self delayWait] target:self selector:@selector(self) userInfo:nil repeats:NO];
+    MessageView.hidden=NO;
+    [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(self) userInfo:nil repeats:NO];
 }
+
 -(float)random9
 {
     float num = 1;

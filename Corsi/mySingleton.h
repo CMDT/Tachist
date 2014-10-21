@@ -21,6 +21,7 @@
     float waitTime;
     float startTime;
     float showTime;
+    float messageTime;
     int clickNumber;
     
     BOOL forwardTestDirection;
@@ -67,6 +68,7 @@
 @property (nonatomic) float   waitTime;
 @property (nonatomic) float   startTime;
 @property (nonatomic) float   showTime;
+@property (nonatomic) float   messageTime;
 @property (nonatomic) int   clickNumber;
 
 @property (nonatomic) BOOL forwardTestDirection;
