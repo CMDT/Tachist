@@ -96,5 +96,7 @@
 -(void)endTestMSG;
 -(void)startTestMSG;
 -(void)calculatingMSG;
+-(void)blankMSG;
+-(void)blankMSG2;
 
 @end

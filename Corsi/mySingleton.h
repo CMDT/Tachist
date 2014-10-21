@@ -62,18 +62,18 @@
 @property (nonatomic, retain) UIColor *currentShowColour;
 @property (nonatomic, retain) UIColor *currentBlockColour;
 
-@property (nonatomic) int   start;
-@property (nonatomic) int   finish;
-@property (nonatomic) int   blockSize;
-@property (nonatomic) float   waitTime;
-@property (nonatomic) float   startTime;
-@property (nonatomic) float   showTime;
-@property (nonatomic) float   messageTime;
-@property (nonatomic) int   clickNumber;
+@property (nonatomic) int       start;
+@property (nonatomic) int       finish;
+@property (nonatomic) int       blockSize;
+@property (nonatomic) float     waitTime;
+@property (nonatomic) float     startTime;
+@property (nonatomic) float     showTime;
+@property (nonatomic) float     messageTime;
+@property (nonatomic) int       clickNumber;
 
-@property (nonatomic) BOOL forwardTestDirection;
-@property (nonatomic) BOOL blockRotation;
-@property (nonatomic) BOOL onScreenInfo;
+@property (nonatomic) BOOL      forwardTestDirection;
+@property (nonatomic) BOOL      blockRotation;
+@property (nonatomic) BOOL      onScreenInfo;
 
 @property (nonatomic,retain) NSString *oldSubjectName;
 @property (nonatomic,retain) NSString *subjectName;

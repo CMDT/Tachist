@@ -366,14 +366,12 @@
 
     NSMutableArray *boxNo = [[NSMutableArray alloc] init];
 
-    //initialise
-
+    //initialise images for messages on messageview
     card[0] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_start.png"]];
     card[1] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-finished.png"]];
     card[2] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-stage-start.png"]];
     card[3] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-stage-end.png"]];
     card[4] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-calculating.png"]];
-
 }
 
 //
@@ -500,51 +498,64 @@
     statusMessageLBL.text = @"Observe Blocks, Start of Test";
     //hide the buttons
     [self hide_blocks];
+    [self hideInfo];
     [self allButtonsBackgroundReset];// background colour reset to std
     
     MessageTextView.hidden=YES;
     MessageView.hidden=YES;
     startBTN.hidden=YES;
     
-    //zero counters
+    [self showInfo];
     
+    //zero counters
     xcounter = start; //default is 3 but could be 3-9 range depending on settings
     ncounter = 1;
+    
+    blkTotalLBL.text = [NSString stringWithFormat:@"%d", xcounter+1];
+    blkNoLBL.text    = [NSString stringWithFormat:@"%d", ncounter];
+    setNoLBL.text    = [NSString stringWithFormat:@"%d", xcounter-3];
+    setTotalLBL.text = [NSString stringWithFormat:@"%d", finish-3];
     
     [MessageView setImage: card[0].image];
     [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(startTestMSG) userInfo:nil repeats:NO];
 }
 
 -(void)stageChecks {
+    //keep blocks displayed for now
     [self display_blocks];
-    //check for stage ends and starts
-    if (xcounter>finish) {
+    
+    //check for stage and test end
+    if (xcounter==finish) {
+        //end test 1
         isFinished=YES;
         [self hide_blocks];
-        MessageView.hidden=NO;
-        
-        // NSLog(@"card display ending now...");
-        [MessageView setImage: card[4].image];
         [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(endTestMSG) userInfo:nil repeats:NO];
     }else{
-        if(ncounter==1&&xcounter>1){
+        if(ncounter==xcounter){
+            //stage end 3
             [self hide_blocks];
-            MessageView.hidden=NO;
-            [MessageView setImage: card[2].image];
             [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(stageEndMSG) userInfo:nil repeats:NO];
         }else{
+            //not ended, carry on
             [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(box1) userInfo:nil repeats:NO];
         }
     }
-    ncounter=ncounter+1;
+    //update all counters
+    ncounter = ncounter+1;   //block number 3-9 range
     
-    if(ncounter>9){
+    if(ncounter>xcounter+1){ //starts at 3 for 3 blocks, end stage, then new set, 3 for 4 blocks etc.
         ncounter=1;
-        xcounter=xcounter+1;
+        xcounter=xcounter+1; //stage counter 3-9 range
     }
 }
 
 -(void)box1 {
+    //display status
+    blkTotalLBL.text = [NSString stringWithFormat:@"%d", xcounter+1];
+    blkNoLBL.text    = [NSString stringWithFormat:@"%d", ncounter];
+    setNoLBL.text    = [NSString stringWithFormat:@"%d", xcounter-3];
+    setTotalLBL.text = [NSString stringWithFormat:@"%d", finish-3];
+        [self showInfo];
     //hide all messages except blocks
     MessageTextView.hidden=YES;
     MessageView.hidden=YES;
@@ -556,7 +567,7 @@
     statusMessageLBL.text = @"Observe Boxes";
 
     int t=[self whichBlock:ncounter :xcounter];
-    NSLog(@"box : %i num : %i set : %i",t,ncounter,xcounter);
+    NSLog(@"block showing : %i seq : %i set : %i", t, ncounter, xcounter);
     //show the t block
     switch (t) {
         case 1:
@@ -595,11 +606,9 @@
 }
 
 -(void)but1 {
-    NSLog(@"but %i",ncounter);
-    
+    //clears the block, waits and then sends to check to see if any end, stage or flag is passed
     [self allButtonsBackgroundReset];// background colour reset to std
-    
-        [NSTimer scheduledTimerWithTimeInterval:waitTime target:self selector:@selector(stageChecks) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:waitTime target:self selector:@selector(stageChecks) userInfo:nil repeats:NO];
 }
 
 -(void)allButtonsBackgroundReset {
@@ -629,26 +638,28 @@
 
 -(void)nextStageMSG {
     //before this, have to hold to collect button presses
+    NSLog(@"Stage Starting");
     [self hide_blocks];
     [MessageView setImage: card[2].image];
     MessageView.hidden=NO;
     //starts a stage with a message
-    NSLog(@"Stage Starting");
-    [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(box1) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(blankMSG) userInfo:nil repeats:NO];
 }
 
 -(void)startTestMSG {
     //Start of Test Message
-    NSLog(@"Start of Test");
+    NSLog(@"Start Test");
+        [self hideInfo];
     [self hide_blocks];
     [MessageView setImage: card[0].image];
     MessageView.hidden=NO;
-    [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(box1) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(blankMSG2) userInfo:nil repeats:NO];
 }
 
 -(void)endTestMSG {
     //End of Test Message
-    NSLog(@"end tests");
+    NSLog(@"End Test");
+        [self hideInfo];
     [self hide_blocks];
     [MessageView setImage: card[1].image];
     MessageView.hidden=NO;
@@ -661,9 +672,28 @@
     NSLog(@"Calculating Test Results");
     //holds here at present, need to make new func to do the work
     [self hide_blocks];
+    [self hideInfo];
     [MessageView setImage: card[4].image];
     MessageView.hidden=NO;
     [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(self) userInfo:nil repeats:NO];
+}
+
+-(void)blankMSG {
+    //blank blocks, before new sequence is shown
+    NSLog(@"(blank)");
+    //holds here at present, need to make new func to do the work
+    [self display_blocks];
+    MessageView.hidden=YES;
+    [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(stageChecks) userInfo:nil repeats:NO];
+}
+
+-(void)blankMSG2 {
+    //blank set of blocks, but only after init start
+    NSLog(@"(blank2)");
+    //holds here at present, need to make new func to do the work
+    [self display_blocks];
+    MessageView.hidden=YES;
+    [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(box1) userInfo:nil repeats:NO];
 }
 
 -(float)random9
@@ -699,7 +729,6 @@
     //mySingleton *singleton = [mySingleton sharedSingleton];
 
     //blockSizeLBL.text=[[NSString alloc]initWithFormat:@"%i", blockSize];
-
 
     //get pos of centres
     CGPoint block1pt = box1image.frame.origin;
