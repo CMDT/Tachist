@@ -29,8 +29,8 @@
     int xAdj[9];
     int yAdj[9];
     int angle[9];
-    int totla;
-    int percent;
+    int total;
+    float percent;
     NSString *order[10];
     NSString *guess[10];
     int score;
@@ -549,7 +549,34 @@
     }
 }
 
+-(void)buttonsEnable{
+    box1BTN.enabled=YES;
+    box2BTN.enabled=YES;
+    box3BTN.enabled=YES;
+    box4BTN.enabled=YES;
+    box5BTN.enabled=YES;
+    box6BTN.enabled=YES;
+    box7BTN.enabled=YES;
+    box8BTN.enabled=YES;
+    box9BTN.enabled=YES;
+}
+
+-(void)buttonsDisable{
+    box1BTN.enabled=NO;
+    box2BTN.enabled=NO;
+    box3BTN.enabled=NO;
+    box4BTN.enabled=NO;
+    box5BTN.enabled=NO;
+    box6BTN.enabled=NO;
+    box7BTN.enabled=NO;
+    box8BTN.enabled=NO;
+    box9BTN.enabled=NO;
+}
+
 -(void)box1 {
+    //block button inputs for now, re-enable after stage end.
+    [self buttonsDisable];
+    
     //display status
     blkTotalLBL.text = [NSString stringWithFormat:@"%d", xcounter+1];
     blkNoLBL.text    = [NSString stringWithFormat:@"%d", ncounter];
@@ -606,6 +633,7 @@
 }
 
 -(void)but1 {
+    [self buttonsDisable];
     //clears the block, waits and then sends to check to see if any end, stage or flag is passed
     [self allButtonsBackgroundReset];// background colour reset to std
     [NSTimer scheduledTimerWithTimeInterval:waitTime target:self selector:@selector(stageChecks) userInfo:nil repeats:NO];
@@ -625,14 +653,71 @@
 
 //========**  blanks
 //========*******************************************************=========
+-(IBAction)blk1BUT:(id)sender{
+    //button 1 pressed
+    guess[pressNo]=@"1";
+    pressNo=pressNo+1;
+}
 
+-(IBAction)blk2BUT:(id)sender{
+    
+}
+
+-(IBAction)blk3BUT:(id)sender{
+    
+}
+
+-(IBAction)blk4BUT:(id)sender{
+    
+}
+
+-(IBAction)blk5BUT:(id)sender{
+    
+}
+
+-(IBAction)blk6BUT:(id)sender{
+    
+}
+
+-(IBAction)blk7BUT:(id)sender{
+    
+}
+
+-(IBAction)blk8BUT:(id)sender{
+    
+}
+
+-(IBAction)blk9BUT:(id)sender{
+    
+}
+
+-(void)getGuesses {
+    //turns on the buttons, collects the xcounter guesses, forms a string, saves it and carries on with next stage
+    NSLog(@"Press The Blocks in Order");
+    [self display_blocks];
+    [self buttonsEnable];
+    pressNo=1;
+    MessageView.hidden=YES;
+    if(pressNo==xcounter){
+        [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(blankMSG3) userInfo:nil repeats:NO];
+    }
+    //now need to add get button presses for ncounter buttons inputs before move on
+}
+-(void)guessMSG {
+    //set a message to say now guess the sequence    NSLog(@"Stage Ending");
+    [self hide_blocks];
+    [MessageView setImage: card[5].image];
+    MessageView.hidden=NO;
+    [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(getGuesses) userInfo:nil repeats:NO];
+    //now need to add get button presses for ncounter buttons inputs before move on
+}
 -(void)stageEndMSG {
     //ends a stage with a message, either move to next stage or end of test
     NSLog(@"Stage Ending");
     [self hide_blocks];
     [MessageView setImage: card[3].image];
     MessageView.hidden=NO;
-    [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(nextStageMSG) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(guessMSG) userInfo:nil repeats:NO];
     //now need to add get button presses for ncounter buttons inputs before move on
 }
 
@@ -694,6 +779,15 @@
     [self display_blocks];
     MessageView.hidden=YES;
     [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(box1) userInfo:nil repeats:NO];
+}
+
+-(void)blankMSG3 {
+    //blank set of blocks, but only after init start
+    NSLog(@"(blank2)");
+    //holds here at present, need to make new func to do the work
+    [self display_blocks];
+    MessageView.hidden=YES;
+    [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(nextStageMSG) userInfo:nil repeats:NO];
 }
 
 -(float)random9

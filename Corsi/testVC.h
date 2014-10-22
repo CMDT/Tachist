@@ -11,6 +11,7 @@
 @interface testVC : UIViewController{
 
 }
+
 @property (retain, nonatomic) IBOutlet UILabel     * headingLBL;
 @property (retain, nonatomic) IBOutlet UILabel     * statusMessageLBL;
 @property (retain, nonatomic) IBOutlet UIImageView * MessageView;
@@ -56,6 +57,16 @@
 
 -(IBAction)startTest:(id)sender;
 
+-(IBAction)blk1BUT:(id)sender;
+-(IBAction)blk2BUT:(id)sender;
+-(IBAction)blk3BUT:(id)sender;
+-(IBAction)blk4BUT:(id)sender;
+-(IBAction)blk5BUT:(id)sender;
+-(IBAction)blk6BUT:(id)sender;
+-(IBAction)blk7BUT:(id)sender;
+-(IBAction)blk8BUT:(id)sender;
+-(IBAction)blk9BUT:(id)sender;
+
 -(void)randomise_boxes;
 -(void)display_blocks;
 -(void)hide_blocks;
@@ -71,25 +82,10 @@
 
 -(int) whichBlock: (int) number :(int) stage;
 -(void)allButtonsBackgroundReset;
+
 -(void)box1;
--(void)box2;
--(void)box3;
--(void)box4;
--(void)box5;
--(void)box6;
--(void)box7;
--(void)box8;
--(void)box9;
 
 -(void)but1;
--(void)but2;
--(void)but3;
--(void)but4;
--(void)but5;
--(void)but6;
--(void)but7;
--(void)but8;
--(void)but9;
 
 -(void)nextStageMSG;
 -(void)stageEndMSG;
@@ -98,5 +94,9 @@
 -(void)calculatingMSG;
 -(void)blankMSG;
 -(void)blankMSG2;
+-(void)blankMSG3;
+-(void)buttonsEnable;
+-(void)buttonsDisable;
+
 
 @end
