@@ -56,6 +56,9 @@
 @property (strong, nonatomic) IBOutlet UIView  * box9image;
 @property (strong, nonatomic) IBOutlet UIView  * testViewerView;
 
+@property (nonatomic) float scaleFactor;
+
+
 -(IBAction)startTest:(id)sender;
 
 -(IBAction)blk1BUT:(id)sender;

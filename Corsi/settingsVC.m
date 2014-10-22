@@ -38,7 +38,7 @@
 {
     int start;
     int finish;
-    int blockSize;
+    float blockSize;
     int waitTime;
     int startTime;
     int showTime;
@@ -133,7 +133,7 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL;
     //start, finish and sizes on screen from singleton
     blockStartNumLBL.text=[NSString stringWithFormat:@"%d",singleton.start];
     blockFinishNumLBL.text=[NSString stringWithFormat:@"%d",singleton.finish];
-    blockSizeLBL.text=[NSString stringWithFormat:@"%d",singleton.blockSize];
+    blockSizeLBL.text=[NSString stringWithFormat:@"%2.0f",singleton.blockSize];
 
     startTime = singleton.startTime;
     waitTime = singleton.waitTime;

@@ -17,7 +17,7 @@
     
     int start;
     int finish;
-    int blockSize;
+    float blockSize;
     float waitTime;
     float startTime;
     float showTime;
@@ -64,7 +64,7 @@
 
 @property (nonatomic) int       start;
 @property (nonatomic) int       finish;
-@property (nonatomic) int       blockSize;
+@property (nonatomic) float     blockSize;
 @property (nonatomic) float     waitTime;
 @property (nonatomic) float     startTime;
 @property (nonatomic) float     showTime;
