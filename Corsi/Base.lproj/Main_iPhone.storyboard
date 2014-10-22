@@ -1275,11 +1275,8 @@ When all the sequence has been shown, try and remember the sequence and press th
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IMM-B6-Wcr" userLabel="block backgroundImage View">
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Pd-MY-wKc" userLabel="Image View message">
-                                <rect key="frame" x="16" y="68" width="241" height="300"/>
+                                <rect key="frame" x="16" y="68" width="288" height="300"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QDJ-tc-Dj2" userLabel="Image View b1">
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -1437,6 +1434,10 @@ When all the sequence has been shown, try and remember the sequence and press th
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IMM-B6-Wcr" userLabel="block backgroundImage View">
+                                <rect key="frame" x="10" y="68" width="300" height="300"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.89411771299999998" green="0.9450981021" blue="0.97254908080000002" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
