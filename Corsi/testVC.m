@@ -12,7 +12,7 @@
 @interface testVC ()
 {
     NSNumber *box[9];
-    UIImageView *card[5];
+    UIImageView *card[11];
     int startcounter;
     int finishcounter;
     int stageCounter;
@@ -112,7 +112,8 @@
     statusMessageLBL,
     headingLBL,
     MessageTextView,
-    MessageView
+    MessageView,
+    blockBackgroundView
     ;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -349,7 +350,9 @@
 //
 
 -(void)viewDidAppear:(BOOL)animated{
+    mySingleton *singleton = [mySingleton sharedSingleton];
     //hide unhide labels, screens and buttons
+    
     //***
     //Action buttons
 
@@ -361,10 +364,9 @@
     [self hideInfo];
     
     MessageTextView.hidden=NO;
+    blockBackgroundView.backgroundColor = singleton.currentBackgroundColour;
     MessageView.hidden=YES;
     startBTN.hidden=NO;
-
-    NSMutableArray *boxNo = [[NSMutableArray alloc] init];
 
     //initialise images for messages on messageview
     card[0] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_start.png"]];
@@ -372,6 +374,7 @@
     card[2] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-stage-start.png"]];
     card[3] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-stage-end.png"]];
     card[4] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-calculating.png"]];
+    card[5] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-touch-blocks.png"]];
 }
 
 //
@@ -510,10 +513,11 @@
     //zero counters
     xcounter = start; //default is 3 but could be 3-9 range depending on settings
     ncounter = 1;
+    pressNo  = 1; //set initial no of presses
     
-    blkTotalLBL.text = [NSString stringWithFormat:@"%d", xcounter+1];
+    blkTotalLBL.text = [NSString stringWithFormat:@"%d", xcounter];
     blkNoLBL.text    = [NSString stringWithFormat:@"%d", ncounter];
-    setNoLBL.text    = [NSString stringWithFormat:@"%d", xcounter-3];
+    setNoLBL.text    = [NSString stringWithFormat:@"%d", xcounter-2];
     setTotalLBL.text = [NSString stringWithFormat:@"%d", finish-3];
     
     [MessageView setImage: card[0].image];
@@ -578,9 +582,9 @@
     [self buttonsDisable];
     
     //display status
-    blkTotalLBL.text = [NSString stringWithFormat:@"%d", xcounter+1];
+    blkTotalLBL.text = [NSString stringWithFormat:@"%d", xcounter];
     blkNoLBL.text    = [NSString stringWithFormat:@"%d", ncounter];
-    setNoLBL.text    = [NSString stringWithFormat:@"%d", xcounter-3];
+    setNoLBL.text    = [NSString stringWithFormat:@"%d", xcounter-2];
     setTotalLBL.text = [NSString stringWithFormat:@"%d", finish-3];
         [self showInfo];
     //hide all messages except blocks
@@ -651,44 +655,85 @@
     box9image.backgroundColor=currentBlockColour;
 }
 
-//========**  blanks
-//========*******************************************************=========
 -(IBAction)blk1BUT:(id)sender{
     //button 1 pressed
     guess[pressNo]=@"1";
     pressNo=pressNo+1;
+    if(pressNo >= xcounter+1){
+        [self blankMSG3];
+    }
 }
 
 -(IBAction)blk2BUT:(id)sender{
-    
+    //button 2 pressed
+    guess[pressNo]=@"2";
+    pressNo=pressNo+1;
+    if(pressNo >= xcounter+1){
+        [self blankMSG3];
+    }
 }
 
 -(IBAction)blk3BUT:(id)sender{
-    
+    //button 3 pressed
+    guess[pressNo]=@"3";
+    pressNo=pressNo+1;
+    if(pressNo >= xcounter+1){
+        [self blankMSG3];
+    }
 }
 
 -(IBAction)blk4BUT:(id)sender{
-    
+    //button 4 pressed
+    guess[pressNo]=@"4";
+    pressNo=pressNo+1;
+    if(pressNo >= xcounter+1){
+        [self blankMSG3];
+    }
 }
 
 -(IBAction)blk5BUT:(id)sender{
-    
+    //button 5 pressed
+    guess[pressNo]=@"5";
+    pressNo=pressNo+1;
+    if(pressNo >= xcounter+1){
+        [self blankMSG3];
+    }
 }
 
 -(IBAction)blk6BUT:(id)sender{
-    
+    //button 6 pressed
+    guess[pressNo]=@"6";
+    pressNo=pressNo+1;
+    if(pressNo >= xcounter+1){
+        [self blankMSG3];
+    }
 }
 
 -(IBAction)blk7BUT:(id)sender{
-    
+    //button 7 pressed
+    guess[pressNo]=@"7";
+    pressNo=pressNo+1;
+    if(pressNo >= xcounter+1){
+        [self blankMSG3];
+    }
 }
 
 -(IBAction)blk8BUT:(id)sender{
-    
+    //button 8 pressed
+    guess[pressNo]=@"8";
+    pressNo=pressNo+1;
+    if(pressNo >= xcounter+1){
+        [self blankMSG3];
+    }
 }
 
 -(IBAction)blk9BUT:(id)sender{
-    
+    //button 9 pressed
+    guess[pressNo]=@"9";
+    pressNo=pressNo+1;
+    if(pressNo >= xcounter+1){
+        [self blankMSG3];
+    }
 }
 
 -(void)getGuesses {
@@ -696,15 +741,20 @@
     NSLog(@"Press The Blocks in Order");
     [self display_blocks];
     [self buttonsEnable];
-    pressNo=1;
+    
     MessageView.hidden=YES;
-    if(pressNo==xcounter){
-        [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(blankMSG3) userInfo:nil repeats:NO];
+    if(pressNo >= xcounter+1){
+        pressNo=1;
+        [self buttonsDisable];
+        [NSTimer scheduledTimerWithTimeInterval: (messageTime/2) target:self selector:@selector(blankMSG3) userInfo:nil repeats:NO];
+    }else{
+        [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(self) userInfo:nil repeats:NO];
     }
     //now need to add get button presses for ncounter buttons inputs before move on
 }
 -(void)guessMSG {
-    //set a message to say now guess the sequence    NSLog(@"Stage Ending");
+    NSLog(@"Guess Now");
+    //set a message to say touch blocks in the sequence    NSLog(@"touch the blocks in sequence");
     [self hide_blocks];
     [MessageView setImage: card[5].image];
     MessageView.hidden=NO;
@@ -782,11 +832,13 @@
 }
 
 -(void)blankMSG3 {
+    guessStr[xcounter]= [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@",guess[1],guess[2],guess[3],guess[4],guess[5],guess[6],guess[7],guess[8],guess[9]];
     //blank set of blocks, but only after init start
-    NSLog(@"(blank2)");
+    NSLog(@"(blank3 after buttons input %@)",guessStr[xcounter]);
     //holds here at present, need to make new func to do the work
     [self display_blocks];
     MessageView.hidden=YES;
+    pressNo = 1; //reset counter for next time
     [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(nextStageMSG) userInfo:nil repeats:NO];
 }
 

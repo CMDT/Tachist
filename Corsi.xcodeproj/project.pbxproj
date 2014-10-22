@@ -65,6 +65,7 @@
 		E1DAD7AE19B8A95000600608 /* testVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1DAD7AD19B8A95000600608 /* testVC.m */; };
 		E1DAD7B119B8A98800600608 /* resultsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1DAD7B019B8A98800600608 /* resultsVC.m */; };
 		E1DAD7B419B8A9A500600608 /* informationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1DAD7B319B8A9A500600608 /* informationVC.m */; };
+		E1FAECF019F7F0870098A243 /* corsi-touch-blocks.png in Resources */ = {isa = PBXBuildFile; fileRef = E1FAECEF19F7F0870098A243 /* corsi-touch-blocks.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -152,6 +153,7 @@
 		E1DAD7B019B8A98800600608 /* resultsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = resultsVC.m; sourceTree = "<group>"; };
 		E1DAD7B219B8A9A500600608 /* informationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = informationVC.h; sourceTree = "<group>"; };
 		E1DAD7B319B8A9A500600608 /* informationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = informationVC.m; sourceTree = "<group>"; };
+		E1FAECEF19F7F0870098A243 /* corsi-touch-blocks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "corsi-touch-blocks.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -261,6 +263,7 @@
 				91530B5119BE55B300D2026B /* corsi-finished.png */,
 				91530B5219BE55B300D2026B /* corsi-stage-end.png */,
 				91530B5319BE55B300D2026B /* corsi-stage-start.png */,
+				E1FAECEF19F7F0870098A243 /* corsi-touch-blocks.png */,
 				E1DAD79619B87F8E00600608 /* about64.png */,
 				E1DAD79719B87F8E00600608 /* analy64.png */,
 				E1DAD79819B87F8E00600608 /* email.png */,
@@ -407,6 +410,7 @@
 				E1DAD7A519B87F8E00600608 /* settings64.png in Resources */,
 				E10D018419B6024F00D9E5F8 /* Images.xcassets in Resources */,
 				E1DAD79F19B87F8E00600608 /* analy64.png in Resources */,
+				E1FAECF019F7F0870098A243 /* corsi-touch-blocks.png in Resources */,
 				E1DAD7A019B87F8E00600608 /* email.png in Resources */,
 				91CCCCFA19D77AE000C742B6 /* darkgrey72.png in Resources */,
 				E1B29EC919B7532E005B9C84 /* magenta72.png in Resources */,
