@@ -838,28 +838,28 @@ mySingleton *singleton = [mySingleton sharedSingleton];
     
     switch ((int)singleton.blockSize) {
         case 10:
-            range1=22;
+            range1=45;
             break;
         case 15:
-            range1=21;
+            range1=40;
             break;
         case 20:
-            range1=19;
+            range1=35;
             break;
         case 25:
-            range1=17;
+            range1=30;
             break;
         case 30:
-            range1=15;
+            range1=25;
             break;
         case 35:
-            range1=13;
+            range1=20;
             break;
         case 40:
-            range1=11;
+            range1=15;
             break;
         case 45:
-            range1=9;
+            range1=10;
             break;
         case 50:
             range1=7;
@@ -868,7 +868,7 @@ mySingleton *singleton = [mySingleton sharedSingleton];
             range1=5;
             break;
         default:
-            range1=3;
+            range1=5;
             break;
     }
     float split1=0;
