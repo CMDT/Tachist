@@ -95,7 +95,8 @@
     MessageTextView,
     MessageView,
     blockBackgroundView,
-    scaleFactor
+    scaleFactor,
+    testViewerView
     ;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -111,6 +112,19 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+
+mySingleton *singleton = [mySingleton sharedSingleton];
+    testViewerView.backgroundColor=singleton.currentBackgroundColour;
+    [self putBlocksInPlace];
+    box1image.transform = CGAffineTransformTranslate(box1image.transform,[self randomPt], [self randomPt]);
+    box2image.transform = CGAffineTransformTranslate(box2image.transform,[self randomPt], [self randomPt]);
+    box3image.transform = CGAffineTransformTranslate(box3image.transform,[self randomPt], [self randomPt]);
+    box4image.transform = CGAffineTransformTranslate(box4image.transform,[self randomPt], [self randomPt]);
+    box5image.transform = CGAffineTransformTranslate(box5image.transform,[self randomPt], [self randomPt]);
+    box6image.transform = CGAffineTransformTranslate(box6image.transform,[self randomPt], [self randomPt]);
+    box7image.transform = CGAffineTransformTranslate(box7image.transform,[self randomPt], [self randomPt]);
+    box8image.transform = CGAffineTransformTranslate(box8image.transform,[self randomPt], [self randomPt]);
+    box9image.transform = CGAffineTransformTranslate(box9image.transform,[self randomPt], [self randomPt]);
 
     //make 9 sets of number strings
     for (int x=1; x<10; x++) {
@@ -184,9 +198,7 @@
     waitTime    =[self delayWait];
     messageTime =[self delayMessage];
 
-    [self putBlocksInPlace];
-    
-    [self hide_blocks];
+    //[self hide_blocks];
     
     [self hideInfo];
     
@@ -211,6 +223,7 @@
     {
     mySingleton *singleton = [mySingleton sharedSingleton];
     // Do any additional setup after loading the view.
+
     blockSize1 = singleton.blockSize;
     blockSize1 = blockSize1/55.00;
     if( blockSize1 <= 0){
@@ -222,7 +235,7 @@
 
     scaleFactor = blockSize1;//arbitary change, replace with singleton size
     if(singleton.blockRotation){
-        angle[1] = self.randomDegrees359;//(_angle == 180 ? 360 : 180);
+        angle[1] = self.randomDegrees359;
         angle[2] = self.randomDegrees359;
         angle[3] = self.randomDegrees359;
         angle[4] = self.randomDegrees359;
@@ -237,21 +250,12 @@
         }
     }
     //UITouch *touch = [touches anyObject];
-    //some new point slightly different from the original one
-    CGPoint location1 = CGPointMake(box1image.center.x+[self randomPt], box1image.center.y+[self randomPt]);
-    CGPoint location2 = CGPointMake(box2image.center.x+[self randomPt], box2image.center.y+[self randomPt]);
-    CGPoint location3 = CGPointMake(box3image.center.x+[self randomPt], box3image.center.y+[self randomPt]);
-    CGPoint location4 = CGPointMake(box4image.center.x+[self randomPt], box4image.center.y+[self randomPt]);
-    CGPoint location5 = CGPointMake(box5image.center.x+[self randomPt], box5image.center.y+[self randomPt]);
-    CGPoint location6 = CGPointMake(box6image.center.x+[self randomPt], box6image.center.y+[self randomPt]);
-    CGPoint location7 = CGPointMake(box7image.center.x+[self randomPt], box7image.center.y+[self randomPt]);
-    CGPoint location8 = CGPointMake(box8image.center.x+[self randomPt], box8image.center.y+[self randomPt]);
-    CGPoint location9 = CGPointMake(box9image.center.x+[self randomPt], box9image.center.y+[self randomPt]);
 
     [UIView animateWithDuration:1.0
-                          delay:0.1
+                          delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
+
                          CGAffineTransform scaleTrans = CGAffineTransformMakeScale(scaleFactor, scaleFactor);
 
                          CGAffineTransform rotateTrans1 = CGAffineTransformMakeRotation(angle[1] * M_PI / 180);
@@ -273,30 +277,7 @@
                          box7image.transform = CGAffineTransformConcat(scaleTrans, rotateTrans7);
                          box8image.transform = CGAffineTransformConcat(scaleTrans, rotateTrans8);
                          box9image.transform = CGAffineTransformConcat(scaleTrans, rotateTrans9);
-
-                         angle[1] = self.randomDegrees359;//(_angle == 180 ? 360 : 180);
-                         angle[2] = self.randomDegrees359;
-                         angle[3] = self.randomDegrees359;
-                         angle[4] = self.randomDegrees359;
-                         angle[5] = self.randomDegrees359;
-                         angle[6] = self.randomDegrees359;
-                         angle[7] = self.randomDegrees359;
-                         angle[8] = self.randomDegrees359;
-                         angle[9] = self.randomDegrees359;
-
-                         scaleFactor = 1;
-                         
-                         box1image.center = location1;
-                         box2image.center = location2;
-                         box3image.center = location3;
-                         box4image.center = location4;
-                         box5image.center = location5;
-                         box6image.center = location6;
-                         box7image.center = location7;
-                         box8image.center = location8;
-                         box9image.center = location9;
-                         
-                     } completion:nil];
+                     }   completion:nil];
     }
 }
 
@@ -353,7 +334,7 @@
     headingLBL.hidden= NO;
     
     //[self hide_blocks];
-    [self hide_blocks];
+    //[self hide_blocks];
 
     [self hideInfo];
     
@@ -494,11 +475,12 @@
     NSLog(@"box init");
     statusMessageLBL.text = @"Observe Blocks, Start of Test";
     //hide the buttons
+
     [self hide_blocks];
 
     [self hideInfo];
     [self allButtonsBackgroundReset];// background colour reset to std
-    [self putBlocksInPlace];
+
     MessageTextView.hidden=YES;
     MessageView.hidden=YES;
     startBTN.hidden=YES;
@@ -851,6 +833,44 @@
 
 -(int)randomPt
 {
+    mySingleton *singleton = [mySingleton sharedSingleton];
+    int range1;
+    
+    switch ((int)singleton.blockSize) {
+        case 10:
+            range1=22;
+            break;
+        case 15:
+            range1=21;
+            break;
+        case 20:
+            range1=19;
+            break;
+        case 25:
+            range1=17;
+            break;
+        case 30:
+            range1=15;
+            break;
+        case 35:
+            range1=13;
+            break;
+        case 40:
+            range1=11;
+            break;
+        case 45:
+            range1=9;
+            break;
+        case 50:
+            range1=7;
+            break;
+        case 55:
+            range1=5;
+            break;
+        default:
+            range1=3;
+            break;
+    }
     float split1=0;
     if (arc4random_uniform(11)>5.5)
         {
@@ -861,7 +881,8 @@
         split1=1;
         }
     int posrand=0;
-    posrand=(int)arc4random_uniform(30)*split1;
+    posrand=(float)arc4random_uniform(range1)*split1;
+    NSLog(@"Random Pt:%i",posrand);
     return posrand;
 }
 

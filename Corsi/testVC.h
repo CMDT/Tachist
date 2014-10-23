@@ -58,7 +58,6 @@
 
 @property (nonatomic) float scaleFactor;
 
-
 -(IBAction)startTest:(id)sender;
 
 -(IBAction)blk1BUT:(id)sender;
@@ -101,6 +100,7 @@
 -(void)blankMSG3;
 -(void)buttonsEnable;
 -(void)buttonsDisable;
+-(int)randomPt;
 
 
 @end

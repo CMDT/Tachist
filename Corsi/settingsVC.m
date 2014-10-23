@@ -478,13 +478,13 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL;
 
         [defaults setObject:[NSString stringWithFormat:@"%d", singleton.finish] forKey:kFinish];
 
-        [defaults setObject:[NSString stringWithFormat:@"%d", singleton.blockSize] forKey:kSize];
+        [defaults setObject:[NSString stringWithFormat:@"%f", singleton.blockSize] forKey:kSize];
 
-        [defaults setObject:[NSString stringWithFormat:@"%d", singleton.startTime] forKey:kDelay];
+        [defaults setObject:[NSString stringWithFormat:@"%f", singleton.startTime] forKey:kDelay];
 
-        [defaults setObject:[NSString stringWithFormat:@"%d", singleton.showTime] forKey:kShow];
+        [defaults setObject:[NSString stringWithFormat:@"%f", singleton.showTime] forKey:kShow];
 
-        [defaults setObject:[NSString stringWithFormat:@"%d", singleton.waitTime] forKey:kTime];
+        [defaults setObject:[NSString stringWithFormat:@"%f", singleton.waitTime] forKey:kTime];
 
         [defaults setBool:NO forKey:kRot];
 
