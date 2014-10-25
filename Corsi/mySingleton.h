@@ -14,6 +14,7 @@
     UIColor *currentBackgroundColour;
     UIColor *currentBlockColour;
     UIColor *currentShowColour;
+    UIColor *currentStatusColour;
     
     int start;
     int finish;
@@ -61,6 +62,7 @@
 @property (nonatomic, retain) UIColor *currentBackgroundColour;
 @property (nonatomic, retain) UIColor *currentShowColour;
 @property (nonatomic, retain) UIColor *currentBlockColour;
+@property (nonatomic, retain) UIColor *currentStatusColour;
 
 @property (nonatomic) int       start;
 @property (nonatomic) int       finish;

@@ -19,6 +19,7 @@ static mySingleton * sharedSingleton = nil;
             currentShowColour,
             currentBlockColour,
             currentBackgroundColour,
+            currentStatusColour,
             blockSize,
             bl1,
             bl2,
@@ -74,6 +75,7 @@ static mySingleton * sharedSingleton = nil;
         currentBackgroundColour = [UIColor blackColor];
         currentBlockColour = [UIColor blueColor];
         currentShowColour  = [UIColor orangeColor];
+        currentStatusColour= [UIColor yellowColor];
         start       = 3;
         finish      = 9;
         blockSize   = 30;

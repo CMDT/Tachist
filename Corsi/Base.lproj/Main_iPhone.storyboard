@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="IKI-2A-uin">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="IKI-2A-uin">
     <dependencies>
-        <deployment defaultVersion="1808" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -77,9 +77,6 @@
                                 <state key="normal" title="Load">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
-                                <connections>
-                                    <action selector="loadSettings:" destination="NmM-sh-eu8" eventType="touchUpInside" id="fMA-xc-UfR"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="NFr-fd-bM3">
                                 <rect key="frame" x="221" y="388" width="83" height="34"/>
@@ -91,9 +88,6 @@
                                 <state key="normal" title="Save">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
-                                <connections>
-                                    <action selector="saveSettings:" destination="NmM-sh-eu8" eventType="touchUpInside" id="htD-4U-Ssi"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="r4i-MY-S5n">
                                 <rect key="frame" x="181" y="49" width="123" height="34"/>
@@ -326,7 +320,7 @@
         <!--Timing Settings-->
         <scene sceneID="dDb-Sb-L7X">
             <objects>
-                <viewController storyboardIdentifier="timing" title="Timing Settings" modalTransitionStyle="flipHorizontal" useStoryboardIdentifierAsRestorationIdentifier="YES" id="aRU-3a-nW6" customClass="timingVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="timing" title="Timing Settings" definesPresentationContext="YES" providesPresentationContextTransitionStyle="YES" modalTransitionStyle="flipHorizontal" useStoryboardIdentifierAsRestorationIdentifier="YES" id="aRU-3a-nW6" customClass="timingVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cO2-7o-bpE"/>
                         <viewControllerLayoutGuide type="bottom" id="2tC-fB-xqX"/>
@@ -457,7 +451,7 @@
         <!--Colour Settings-->
         <scene sceneID="f9J-gR-aMz">
             <objects>
-                <viewController storyboardIdentifier="colours" title="Colour Settings" modalTransitionStyle="flipHorizontal" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2Wh-Zj-8FI" customClass="colourVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="colours" title="Colour Settings" definesPresentationContext="YES" providesPresentationContextTransitionStyle="YES" modalTransitionStyle="flipHorizontal" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2Wh-Zj-8FI" customClass="colourVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Xva-nw-H37"/>
                         <viewControllerLayoutGuide type="bottom" id="xqc-1R-ELF"/>
@@ -993,7 +987,7 @@
         <!--Block Settings-->
         <scene sceneID="fXO-cP-nio">
             <objects>
-                <viewController storyboardIdentifier="block" title="Block Settings" modalTransitionStyle="flipHorizontal" useStoryboardIdentifierAsRestorationIdentifier="YES" id="AeB-vP-vxl" customClass="blockVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="block" title="Block Settings" definesPresentationContext="YES" providesPresentationContextTransitionStyle="YES" modalTransitionStyle="flipHorizontal" useStoryboardIdentifierAsRestorationIdentifier="YES" id="AeB-vP-vxl" customClass="blockVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iY6-vB-lmh"/>
                         <viewControllerLayoutGuide type="bottom" id="6hV-ZV-igI"/>
@@ -1182,7 +1176,7 @@
         <!--Results-->
         <scene sceneID="XF9-yp-dwS">
             <objects>
-                <viewController storyboardIdentifier="results" title="Results" modalTransitionStyle="flipHorizontal" useStoryboardIdentifierAsRestorationIdentifier="YES" id="APr-Tr-350" customClass="resultsVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="results" title="Results" definesPresentationContext="YES" providesPresentationContextTransitionStyle="YES" modalTransitionStyle="flipHorizontal" useStoryboardIdentifierAsRestorationIdentifier="YES" id="APr-Tr-350" customClass="resultsVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="M7L-cd-3fu"/>
                         <viewControllerLayoutGuide type="bottom" id="IQO-b7-bMl"/>
@@ -1212,8 +1206,8 @@
         <!--CorsiTabController-->
         <scene sceneID="sw2-hC-uGP">
             <objects>
-                <tabBarController title="CorsiTabController" definesPresentationContext="YES" modalTransitionStyle="flipHorizontal" id="IKI-2A-uin" sceneMemberID="viewController">
-                    <nil key="simulatedBottomBarMetrics"/>
+                <tabBarController title="CorsiTabController" definesPresentationContext="YES" providesPresentationContextTransitionStyle="YES" modalTransitionStyle="flipHorizontal" id="IKI-2A-uin" sceneMemberID="viewController">
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="06U-FS-t22">
                         <rect key="frame" x="129" y="330" width="163" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -1222,8 +1216,8 @@
                     <connections>
                         <segue destination="NmM-sh-eu8" kind="relationship" relationship="viewControllers" id="yLc-RD-KfT"/>
                         <segue destination="fkz-qV-ETW" kind="relationship" relationship="viewControllers" id="27Y-Y6-uk1"/>
-                        <segue destination="So4-z0-L3J" kind="relationship" relationship="viewControllers" id="tlU-ao-Qqx"/>
                         <segue destination="APr-Tr-350" kind="relationship" relationship="viewControllers" id="m86-dW-K32"/>
+                        <segue destination="So4-z0-L3J" kind="relationship" relationship="viewControllers" id="tlU-ao-Qqx"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Mf-qD-7gS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1275,44 +1269,31 @@ When all the sequence has been shown, try and remember the sequence and press th
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IMM-B6-Wcr" userLabel="block backgroundImage View">
-                                <rect key="frame" x="16" y="449" width="50" height="50"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QDJ-tc-Dj2" userLabel="Image View b1">
-                                <rect key="frame" x="38" y="81" width="64" height="64"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EO2-KO-iFc" userLabel="Image View b2">
-                                <rect key="frame" x="128" y="81" width="64" height="64"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fw7-oq-ggb" userLabel="Image View b3">
-                                <rect key="frame" x="218" y="81" width="64" height="64"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LoJ-BI-1rr" userLabel="Image View b4">
-                                <rect key="frame" x="38" y="186" width="64" height="64"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4bc-w1-rXa" userLabel="Image View b5">
-                                <rect key="frame" x="128" y="186" width="64" height="64"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rdp-MB-Rcb" userLabel="Image View b6">
-                                <rect key="frame" x="218" y="186" width="64" height="64"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LC7-qr-unq" userLabel="Image View b7">
-                                <rect key="frame" x="38" y="292" width="64" height="64"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vJF-bL-n6w" userLabel="Image View b8">
-                                <rect key="frame" x="128" y="292" width="64" height="64"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Koe-hz-RVo" userLabel="Image View b9">
-                                <rect key="frame" x="218" y="292" width="64" height="64"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="69w-EY-VDe" userLabel="Button - b1">
@@ -1444,9 +1425,13 @@ When all the sequence has been shown, try and remember the sequence and press th
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Pd-MY-wKc" userLabel="Image View message">
-                                <rect key="frame" x="16" y="68" width="288" height="300"/>
-                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Pd-MY-wKc" userLabel="Image View message"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Status Message" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yg3-Wd-rcW">
+                                <rect key="frame" x="16" y="435" width="288" height="64"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="1" green="1" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.89411771299999998" green="0.9450981021" blue="0.97254908080000002" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
@@ -1464,7 +1449,6 @@ When all the sequence has been shown, try and remember the sequence and press th
                         <outlet property="blkNoLBL" destination="cij-n4-yqw" id="kVn-fF-sY4"/>
                         <outlet property="blkOfLBL" destination="5ZR-0G-KbU" id="Cu5-u8-fB7"/>
                         <outlet property="blkTotalLBL" destination="K32-bM-gZL" id="lGk-nw-kgP"/>
-                        <outlet property="blockBackgroundView" destination="IMM-B6-Wcr" id="x6X-VD-p6j"/>
                         <outlet property="box1BTN" destination="69w-EY-VDe" id="C68-Qv-eVL"/>
                         <outlet property="box1image" destination="QDJ-tc-Dj2" id="Lbc-kL-JE7"/>
                         <outlet property="box2BTN" destination="RYU-YX-51H" id="Mg2-0I-gro"/>
