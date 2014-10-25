@@ -16,7 +16,6 @@
 @property (retain, nonatomic) IBOutlet UILabel     * statusMessageLBL;
 @property (retain, nonatomic) IBOutlet UIImageView * MessageView;
 @property (retain, nonatomic) IBOutlet UITextView  * MessageTextView;
-@property (retain, nonatomic) IBOutlet UIImageView * blockBackgroundView;
 
 //labels for the stages, hide if not needed
 @property (retain, nonatomic) IBOutlet UILabel * blkLBL;
