@@ -1260,6 +1260,10 @@ When all the sequence has been shown, try and remember the sequence and press th
                                 <rect key="frame" x="128" y="292" width="64" height="64"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Koe-hz-RVo" userLabel="Image View b9">
+                                <rect key="frame" x="218" y="292" width="64" height="64"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="69w-EY-VDe" userLabel="Button - b1">
                                 <rect key="frame" x="38" y="81" width="64" height="64"/>
                                 <state key="normal">
@@ -1389,10 +1393,8 @@ When all the sequence has been shown, try and remember the sequence and press th
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Pd-MY-wKc" userLabel="Image View message"/>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Koe-hz-RVo" userLabel="Image View b9">
-                                <rect key="frame" x="218" y="292" width="64" height="64"/>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Pd-MY-wKc" userLabel="Image View message">
+                                <rect key="frame" x="16" y="68" width="288" height="300"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.89411771299999998" green="0.9450981021" blue="0.97254908080000002" alpha="1" colorSpace="deviceRGB"/>

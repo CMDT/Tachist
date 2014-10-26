@@ -534,7 +534,7 @@ mySingleton *singleton = [mySingleton sharedSingleton];
     if (xcounter==finish) {
         //end test 1
         isFinished=YES;
-        [self hide_blocks];
+        //[self hide_blocks];
         [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(finalStageEndMSG) userInfo:nil repeats:NO];
     }else{
         if(ncounter==xcounter){
@@ -801,7 +801,7 @@ mySingleton *singleton = [mySingleton sharedSingleton];
     //[self display_blocks];
     [self buttonsEnable];
     
-    MessageView.hidden=YES;
+    //MessageView.hidden=YES;
     if(pressNo >= xcounter+1){
         pressNo=1;
         [self buttonsDisable];
@@ -869,7 +869,7 @@ mySingleton *singleton = [mySingleton sharedSingleton];
 -(void)finalStageEndMSG {
     [self buttonsDisable];
     //ends a stage with a message, either move to next stage or end of test
-    NSLog(@"Stage Ending");
+    NSLog(@"Final Stage Ending");
     statusMessageLBL.text = @"The Final Stage has Ended, prepare to recall the  sequence of blocks.";
     //[self hide_blocks];
     //[MessageView setImage: card[3].image];
@@ -897,8 +897,8 @@ mySingleton *singleton = [mySingleton sharedSingleton];
     statusMessageLBL.text = @"Observe the sequence, recall in the same order by touching the blocks when asked.";
     //[self hideInfo];
     //[self hide_blocks];
-    //[MessageView setImage: card[0].image];
-    //MessageView.hidden=NO;
+    [MessageView setImage: card[0].image];
+    MessageView.hidden=NO;
     [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(blankMSG2) userInfo:nil repeats:NO];
 }
 
@@ -907,9 +907,9 @@ mySingleton *singleton = [mySingleton sharedSingleton];
     [self buttonsDisable];
     NSLog(@"End Test");
     statusMessageLBL.text = @"The test has now finished, you have completed all the stages.  In a few moments the results will be ready.";
-        [self hideInfo];
-    [self hide_blocks];
-    [MessageView setImage: card[1].image];
+    [self hideInfo];
+    //[self hide_blocks];
+    //[MessageView setImage: card[1].image];
     MessageView.hidden=NO;
     
     [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(calculatingMSG) userInfo:nil repeats:NO];
