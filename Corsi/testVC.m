@@ -113,8 +113,16 @@
     // Do any additional setup after loading the view.
     statusMessageLBL.text = @"CORSI Block Test";
 mySingleton *singleton = [mySingleton sharedSingleton];
+
     testViewerView.backgroundColor=singleton.currentBackgroundColour;
+    currentBackgroundColour = singleton.currentBackgroundColour;
+    currentBlockColour      = singleton.currentBlockColour;
+    currentShowColour       = singleton.currentShowColour;
+    currentStatusColour     = singleton.currentStatusColour;
+
+    [self allButtonsBackgroundReset];
     [self putBlocksInPlace];
+
     box1image.transform = CGAffineTransformTranslate(box1image.transform,[self randomPt], [self randomPt]);
     box2image.transform = CGAffineTransformTranslate(box2image.transform,[self randomPt], [self randomPt]);
     box3image.transform = CGAffineTransformTranslate(box3image.transform,[self randomPt], [self randomPt]);
@@ -225,6 +233,10 @@ mySingleton *singleton = [mySingleton sharedSingleton];
     mySingleton *singleton = [mySingleton sharedSingleton];
     // Do any additional setup after loading the view.
 
+    //colour the blocks
+    box1image.backgroundColor=currentBackgroundColour;
+
+
     blockSize1 = singleton.blockSize;
     blockSize1 = blockSize1/55.00;
     if( blockSize1 <= 0){
@@ -329,6 +341,8 @@ mySingleton *singleton = [mySingleton sharedSingleton];
 
 -(void)viewDidAppear:(BOOL)animated{
     mySingleton *singleton = [mySingleton sharedSingleton];
+
+    [self allButtonsBackgroundReset];
     //hide unhide labels, screens and buttons
 
     startBTN.hidden  = NO;
@@ -341,9 +355,11 @@ mySingleton *singleton = [mySingleton sharedSingleton];
     
     MessageTextView.hidden=NO;
 
+    testViewerView.backgroundColor=singleton.currentBackgroundColour;
     currentBackgroundColour = singleton.currentBackgroundColour;
-    currentBlockColour = singleton.currentBlockColour;
-    currentShowColour = singleton.currentShowColour;
+    currentBlockColour      = singleton.currentBlockColour;
+    currentShowColour       = singleton.currentShowColour;
+    currentStatusColour     = singleton.currentStatusColour;
     
     statusMessageLBL.backgroundColor = singleton.currentBackgroundColour;
     statusMessageLBL.textColor = singleton.currentStatusColour;
@@ -501,7 +517,7 @@ mySingleton *singleton = [mySingleton sharedSingleton];
     pressNo  = 1; //set initial no of presses
     
     blkTotalLBL.text = [NSString stringWithFormat:@"%d", xcounter];
-    blkNoLBL.text    = [NSString stringWithFormat:@"%d", ncounter];
+    blkNoLBL.text    = [NSString stringWithFormat:@"%d", 0];
     setNoLBL.text    = [NSString stringWithFormat:@"%d", xcounter-2];
     setTotalLBL.text = [NSString stringWithFormat:@"%d", finish-3];
 
@@ -641,17 +657,6 @@ mySingleton *singleton = [mySingleton sharedSingleton];
     box9image.backgroundColor=currentBlockColour;
 }
 
--(IBAction)blk1BUT:(id)sender{
-    //button 1 pressed
-    guess[pressNo]=@"1";
-    pressNo=pressNo+1;
-    [self statusUpdate:pressNo];
-    if(pressNo >= xcounter+1){
-        [self statusUpdate2:pressNo];
-        [self blankMSG3];
-    }
-}
-
 -(void)statusUpdate:(int)press{
     switch (press) {
         case 1:
@@ -689,47 +694,21 @@ mySingleton *singleton = [mySingleton sharedSingleton];
     guessStr[xcounter]= [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@",guess[1],guess[2],guess[3],guess[4],guess[5],guess[6],guess[7],guess[8],guess[9]];
 }
 
-
--(void)statusUpdate2:(int)press{
-    switch (press) {
-        case 1:
-            statusMessageLBL.text = [NSString stringWithFormat:@"%@ - Completed Guesses, next observe sequence starting",guess[1]];
-            break;
-        case 2:
-            statusMessageLBL.text = [NSString stringWithFormat:@"%@%@ - Completed Guesses, next observe sequence starting",guess[1],guess[2]];
-            break;
-        case 3:
-            statusMessageLBL.text = [NSString stringWithFormat:@"%@%@%@ - Completed Guesses, next observe sequence starting",guess[1],guess[2],guess[3]];
-            break;
-        case 4:
-            statusMessageLBL.text = [NSString stringWithFormat:@"%@%@%@%@ - Completed Guesses, next observe sequence starting",guess[1],guess[2],guess[3],guess[4]];
-            break;
-        case 5:
-            statusMessageLBL.text = [NSString stringWithFormat:@"%@%@%@%@%@ - Completed Guesses, next observe sequence starting",guess[1],guess[2],guess[3],guess[4],guess[5]];
-            break;
-        case 6:
-            statusMessageLBL.text = [NSString stringWithFormat:@"%@%@%@%@%@%@ - Completed Guesses, next observe sequence starting",guess[1],guess[2],guess[3],guess[4],guess[5],guess[6]];
-            break;
-        case 7:
-            statusMessageLBL.text = [NSString stringWithFormat:@"%@%@%@%@%@%@%@ - Completed Guesses, next observe sequence starting",guess[1],guess[2],guess[3],guess[4],guess[5],guess[6],guess[7]];
-            break;
-        case 8:
-            statusMessageLBL.text = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@ - Completed Guesses, next observe sequence starting",guess[1],guess[2],guess[3],guess[4],guess[5],guess[6],guess[7],guess[8]];
-            break;
-        case 9:
-            statusMessageLBL.text = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@ - Completed Guesses, next observe sequence starting",guess[1],guess[2],guess[3],guess[4],guess[5],guess[6],guess[7],guess[8],guess[9]];
-            break;
-
-        default:
-            statusMessageLBL.text = @"Recall Completed";
-            break;
+-(IBAction)blk1BUT:(id)sender{
+    //button 1 pressed
+    guess[pressNo]=@"1";
+    blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo];
+    [self statusUpdate:pressNo];
+    pressNo=pressNo+1;
+    if(pressNo >= xcounter+1){
+        [self blankMSG3];
     }
-    guessStr[xcounter]= [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@",guess[1],guess[2],guess[3],guess[4],guess[5],guess[6],guess[7],guess[8],guess[9]];
 }
 
 -(IBAction)blk2BUT:(id)sender{
     //button 2 pressed
     guess[pressNo]=@"2";
+    blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo];
     [self statusUpdate:pressNo];
     pressNo=pressNo+1;
     if(pressNo >= xcounter+1){
@@ -740,6 +719,7 @@ mySingleton *singleton = [mySingleton sharedSingleton];
 -(IBAction)blk3BUT:(id)sender{
     //button 3 pressed
     guess[pressNo]=@"3";
+    blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo];
     pressNo=pressNo+1;
     [self statusUpdate:pressNo];
     if(pressNo >= xcounter+1){
@@ -750,6 +730,7 @@ mySingleton *singleton = [mySingleton sharedSingleton];
 -(IBAction)blk4BUT:(id)sender{
     //button 4 pressed
     guess[pressNo]=@"4";
+    blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo];
     [self statusUpdate:pressNo];
     pressNo=pressNo+1;
     if(pressNo >= xcounter+1){
@@ -760,6 +741,7 @@ mySingleton *singleton = [mySingleton sharedSingleton];
 -(IBAction)blk5BUT:(id)sender{
     //button 5 pressed
     guess[pressNo]=@"5";
+    blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo];
     [self statusUpdate:pressNo];
     pressNo=pressNo+1;
     if(pressNo >= xcounter+1){
@@ -770,6 +752,7 @@ mySingleton *singleton = [mySingleton sharedSingleton];
 -(IBAction)blk6BUT:(id)sender{
     //button 6 pressed
     guess[pressNo]=@"6";
+    blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo];
     [self statusUpdate:pressNo];
     pressNo=pressNo+1;
     if(pressNo >= xcounter+1){
@@ -780,6 +763,7 @@ mySingleton *singleton = [mySingleton sharedSingleton];
 -(IBAction)blk7BUT:(id)sender{
     //button 7 pressed
     guess[pressNo]=@"7";
+    blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo];
     [self statusUpdate:pressNo];
     pressNo=pressNo+1;
     if(pressNo >= xcounter+1){
@@ -790,6 +774,7 @@ mySingleton *singleton = [mySingleton sharedSingleton];
 -(IBAction)blk8BUT:(id)sender{
     //button 8 pressed
     guess[pressNo]=@"8";
+    blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo];
     [self statusUpdate:pressNo];
     pressNo=pressNo+1;
     if(pressNo >= xcounter+1){
@@ -800,6 +785,7 @@ mySingleton *singleton = [mySingleton sharedSingleton];
 -(IBAction)blk9BUT:(id)sender{
     //button 9 pressed
     guess[pressNo]=@"9";
+    blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo];
     [self statusUpdate:pressNo];
     pressNo=pressNo+1;
     if(pressNo >= xcounter+1){
@@ -808,6 +794,7 @@ mySingleton *singleton = [mySingleton sharedSingleton];
 }
 
 -(void)getGuesses {
+        blkNoLBL.text = [NSString stringWithFormat:@"%i",0];
     //turns on the buttons, collects the xcounter guesses, forms a string, saves it and carries on with next stage
     statusMessageLBL.text = @"Recall The Sequence, touch the blocks.";
     NSLog(@"Press The Blocks in Order");
@@ -826,13 +813,14 @@ mySingleton *singleton = [mySingleton sharedSingleton];
 }
 
 -(void)getFinalGuesses {
+        blkNoLBL.text = [NSString stringWithFormat:@"%i",0];
     //turns on the buttons, collects the xcounter guesses, forms a string, saves it and carries on with next stage
     statusMessageLBL.text = @"Recall The Sequence, touch the blocks.";
     NSLog(@"Press The Blocks in Order");
     //[self display_blocks];
     [self buttonsEnable];
 
-    MessageView.hidden=YES;
+    //MessageView.hidden=YES;
     if(pressNo >= xcounter+1){
         pressNo=1;
         [self buttonsDisable];
@@ -844,22 +832,24 @@ mySingleton *singleton = [mySingleton sharedSingleton];
 }
 
 -(void)guessMSG {
+        blkNoLBL.text = [NSString stringWithFormat:@"%i",0];
     NSLog(@"Guess Now");
     statusMessageLBL.text = @"Recall The Sequence, touch the blocks.";
     //set a message to say touch blocks in the sequence    NSLog(@"touch the blocks in sequence");
     //[self hide_blocks];
     //[MessageView setImage: card[5].image];
-    MessageView.hidden=NO;
+    //MessageView.hidden=NO;
     [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(getGuesses) userInfo:nil repeats:NO];
     //now need to add get button presses for ncounter buttons inputs before move on
 }
 
 -(void)finalGuessMSG {
+        blkNoLBL.text = [NSString stringWithFormat:@"%i",0];
     statusMessageLBL.text = @"Recall The Sequence, touch the blocks.";
     //set a message to say touch blocks in the sequence    NSLog(@"touch the blocks in sequence");
     //[self hide_blocks];
     //[MessageView setImage: card[5].image];
-    MessageView.hidden=NO;
+    //MessageView.hidden=NO;
     [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(getFinalGuesses) userInfo:nil repeats:NO];
     //now need to add get button presses for ncounter buttons inputs before move on
 }
@@ -871,7 +861,7 @@ mySingleton *singleton = [mySingleton sharedSingleton];
     statusMessageLBL.text = @"The Stage has Ended, prepare to recall the  sequence of blocks.";
     //[self hide_blocks];
     //[MessageView setImage: card[3].image];
-    MessageView.hidden=NO;
+    //MessageView.hidden=NO;
     [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(guessMSG) userInfo:nil repeats:NO];
     //now need to add get button presses for ncounter buttons inputs before move on
 }
@@ -883,7 +873,7 @@ mySingleton *singleton = [mySingleton sharedSingleton];
     statusMessageLBL.text = @"The Final Stage has Ended, prepare to recall the  sequence of blocks.";
     //[self hide_blocks];
     //[MessageView setImage: card[3].image];
-    MessageView.hidden=NO;
+    //MessageView.hidden=NO;
     [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(finalGuessMSG) userInfo:nil repeats:NO];
     //now need to add get button presses for ncounter buttons inputs before move on
 }
@@ -895,7 +885,7 @@ mySingleton *singleton = [mySingleton sharedSingleton];
     statusMessageLBL.text = @"Observe The Blocks";
     //[self hide_blocks];
     //[MessageView setImage: card[2].image];
-    MessageView.hidden=NO;
+    //MessageView.hidden=NO;
     //starts a stage with a message
     [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(blankMSG) userInfo:nil repeats:NO];
 }
@@ -906,9 +896,9 @@ mySingleton *singleton = [mySingleton sharedSingleton];
     NSLog(@"Start Test");
     statusMessageLBL.text = @"Observe the sequence, recall in the same order by touching the blocks when asked.";
     //[self hideInfo];
-    [self hide_blocks];
-    [MessageView setImage: card[0].image];
-    MessageView.hidden=NO;
+    //[self hide_blocks];
+    //[MessageView setImage: card[0].image];
+    //MessageView.hidden=NO;
     [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(blankMSG2) userInfo:nil repeats:NO];
 }
 
