@@ -81,6 +81,7 @@
 -(float) delayShow;
 
 -(NSString*) make9order;
+-(NSString*) rev9Order:(NSString*)forOrder;
 
 -(int) whichBlock: (int) number :(int) stage;
 -(void)allButtonsBackgroundReset;

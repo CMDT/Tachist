@@ -33,9 +33,11 @@
     float percent;
     NSString *order[10];
     NSString *guess[10];
+    NSString *reverse[10];
     int score;
     int pressNo;
     NSString *orderStr[10];
+    NSString *reverseStr[10];
     NSString *guessStr[10];
     NSString *correct[10];
     Float32 testTime[7][10];
@@ -112,7 +114,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     statusMessageLBL.text = @"CORSI Block Test";
-mySingleton *singleton = [mySingleton sharedSingleton];
+    mySingleton *singleton = [mySingleton sharedSingleton];
+
+    //check for direction of test and title the test appropiately
+    if (singleton.forwardTestDirection) {
+        headingLBL.text=@"CORSI FORWARD BLOCK TEST";
+    }else{
+        headingLBL.text=@"CORSI REVERSE BLOCK TEST";
+    }
 
     testViewerView.backgroundColor=singleton.currentBackgroundColour;
     currentBackgroundColour = singleton.currentBackgroundColour;
@@ -136,7 +145,8 @@ mySingleton *singleton = [mySingleton sharedSingleton];
     //make 9 sets of number strings
     for (int x=1; x<10; x++) {
         order[x]=[self make9order];
-        NSLog(@"Order returned for Set: %d is:%@",x, order[x]);
+        reverse[x]=[self rev9Order:order[x]];
+        NSLog(@"Order returned for Set: %d is:%@, reverse:%@",x, order[x], reverse[x]);
     }
     //testing yto see what was made, can be turned off
     NSLog(@"Order returned=First Set");
@@ -181,6 +191,15 @@ mySingleton *singleton = [mySingleton sharedSingleton];
     
     // don't bother, too difficult to do yet //[self rotAllBlocks];
     //  [self sizeAllBlocks];
+}
+
+-(NSString*) rev9Order:(NSString*)forOrder{
+    NSString *revOrder;
+    revOrder=@"";//blank
+    for (int t=8; t>-1; t--) {
+        revOrder= [revOrder stringByAppendingString:[forOrder substringWithRange:NSMakeRange(t, 1)]];
+    }
+    return revOrder;
 }
 
 -(IBAction)startTest:sender{
