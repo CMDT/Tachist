@@ -72,8 +72,8 @@ static mySingleton * sharedSingleton = nil;
     if(self = [super init]) {
         
         //eg:::       offset=30;
-        currentBackgroundColour = [UIColor blackColor];
-        currentBlockColour = [UIColor blueColor];
+        currentBackgroundColour = [UIColor blueColor];
+        currentBlockColour = [UIColor cyanColor];
         currentShowColour  = [UIColor orangeColor];
         currentStatusColour= [UIColor yellowColor];
         start       = 3;

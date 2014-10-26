@@ -123,11 +123,7 @@
         headingLBL.text=@"CORSI REVERSE BLOCK TEST";
     }
 
-    testViewerView.backgroundColor=singleton.currentBackgroundColour;
-    currentBackgroundColour = singleton.currentBackgroundColour;
-    currentBlockColour      = singleton.currentBlockColour;
-    currentShowColour       = singleton.currentShowColour;
-    currentStatusColour     = singleton.currentStatusColour;
+    [self setColours];
 
     [self allButtonsBackgroundReset];
     [self putBlocksInPlace];
@@ -213,11 +209,8 @@
     startBTN.hidden   = YES;
     headingLBL.hidden = YES;
 
-    currentBackgroundColour = singleton.currentBackgroundColour;
-    currentBlockColour      = singleton.currentBlockColour;
-    currentShowColour       = singleton.currentShowColour;
-    currentStatusColour     = singleton.currentStatusColour;
-    
+    [self setColours];
+
     start       = singleton.start;
     finish      = singleton.finish;
     
@@ -380,8 +373,7 @@
     currentShowColour       = singleton.currentShowColour;
     currentStatusColour     = singleton.currentStatusColour;
     
-    statusMessageLBL.backgroundColor = singleton.currentBackgroundColour;
-    statusMessageLBL.textColor = singleton.currentStatusColour;
+    [self setColours];
 
     MessageView.hidden=YES;
     startBTN.hidden=NO;
@@ -547,16 +539,16 @@
 }
 
 -(void)stageChecks {
-    //keep blocks displayed for now
-    //[self display_blocks];
+    if (isFinished) { //definitely ended, to catch second round of checks
+        [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(endTestMSG) userInfo:nil repeats:NO];
+    }
     //check for stage and test end
-    if (xcounter==finish) {
-        //end test 1
+    if ((xcounter == finish) && (ncounter >= xcounter)) {
+        //test is ended
         isFinished=YES;
-        //[self hide_blocks];
         [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(finalStageEndMSG) userInfo:nil repeats:NO];
     }else{
-        if(ncounter==xcounter){
+        if(ncounter>=xcounter){
             //stage end 3
             //[self hide_blocks];
             [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(stageEndMSG) userInfo:nil repeats:NO];
@@ -817,10 +809,7 @@
     //turns on the buttons, collects the xcounter guesses, forms a string, saves it and carries on with next stage
     statusMessageLBL.text = @"Recall The Sequence, touch the blocks.";
     NSLog(@"Press The Blocks in Order");
-    //[self display_blocks];
     [self buttonsEnable];
-    
-    //MessageView.hidden=YES;
     if(pressNo >= xcounter+1){
         pressNo=1;
         [self buttonsDisable];
@@ -828,7 +817,6 @@
     }else{
         [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(self) userInfo:nil repeats:NO];
     }
-    //now need to add get button presses for ncounter buttons inputs before move on
 }
 
 -(void)getFinalGuesses {
@@ -836,10 +824,7 @@
     //turns on the buttons, collects the xcounter guesses, forms a string, saves it and carries on with next stage
     statusMessageLBL.text = @"Recall The Sequence, touch the blocks.";
     NSLog(@"Press The Blocks in Order");
-    //[self display_blocks];
     [self buttonsEnable];
-
-    //MessageView.hidden=YES;
     if(pressNo >= xcounter+1){
         pressNo=1;
         [self buttonsDisable];
@@ -847,65 +832,39 @@
     }else{
         [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(self) userInfo:nil repeats:NO];
     }
-    //now need to add get button presses for ncounter buttons inputs before move on
 }
 
 -(void)guessMSG {
         blkNoLBL.text = [NSString stringWithFormat:@"%i",0];
     NSLog(@"Guess Now");
     statusMessageLBL.text = @"Recall The Sequence, touch the blocks.";
-    //set a message to say touch blocks in the sequence    NSLog(@"touch the blocks in sequence");
-    //[self hide_blocks];
-    //[MessageView setImage: card[5].image];
-    //MessageView.hidden=NO;
     [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(getGuesses) userInfo:nil repeats:NO];
-    //now need to add get button presses for ncounter buttons inputs before move on
 }
 
 -(void)finalGuessMSG {
         blkNoLBL.text = [NSString stringWithFormat:@"%i",0];
     statusMessageLBL.text = @"Recall The Sequence, touch the blocks.";
-    //set a message to say touch blocks in the sequence    NSLog(@"touch the blocks in sequence");
-    //[self hide_blocks];
-    //[MessageView setImage: card[5].image];
-    //MessageView.hidden=NO;
     [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(getFinalGuesses) userInfo:nil repeats:NO];
-    //now need to add get button presses for ncounter buttons inputs before move on
 }
 
 -(void)stageEndMSG {
     [self buttonsDisable];
-    //ends a stage with a message, either move to next stage or end of test
     NSLog(@"Stage Ending");
     statusMessageLBL.text = @"The Stage has Ended, prepare to recall the  sequence of blocks.";
-    //[self hide_blocks];
-    //[MessageView setImage: card[3].image];
-    //MessageView.hidden=NO;
     [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(guessMSG) userInfo:nil repeats:NO];
-    //now need to add get button presses for ncounter buttons inputs before move on
 }
 
 -(void)finalStageEndMSG {
     [self buttonsDisable];
-    //ends a stage with a message, either move to next stage or end of test
     NSLog(@"Final Stage Ending");
     statusMessageLBL.text = @"The Final Stage has Ended, prepare to recall the  sequence of blocks.";
-    //[self hide_blocks];
-    //[MessageView setImage: card[3].image];
-    //MessageView.hidden=NO;
     [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(finalGuessMSG) userInfo:nil repeats:NO];
-    //now need to add get button presses for ncounter buttons inputs before move on
 }
 
 -(void)nextStageMSG {
     [self buttonsDisable];
-    //before this, have to hold to collect button presses
     NSLog(@"Stage Starting");
     statusMessageLBL.text = @"Observe The Blocks";
-    //[self hide_blocks];
-    //[MessageView setImage: card[2].image];
-    //MessageView.hidden=NO;
-    //starts a stage with a message
     [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(blankMSG) userInfo:nil repeats:NO];
 }
 
@@ -914,8 +873,6 @@
     [self buttonsDisable];
     NSLog(@"Start Test");
     statusMessageLBL.text = @"Observe the sequence, recall in the same order by touching the blocks when asked.";
-    //[self hideInfo];
-    //[self hide_blocks];
     [MessageView setImage: card[0].image];
     MessageView.hidden=NO;
     [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(blankMSG2) userInfo:nil repeats:NO];
@@ -927,8 +884,8 @@
     NSLog(@"End Test");
     statusMessageLBL.text = @"The test has now finished, you have completed all the stages.  In a few moments the results will be ready.";
     [self hideInfo];
-    //[self hide_blocks];
-    //[MessageView setImage: card[1].image];
+    [self hide_blocks];
+    [MessageView setImage: card[1].image];
     MessageView.hidden=NO;
     
     [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(calculatingMSG) userInfo:nil repeats:NO];
@@ -938,43 +895,34 @@
     //Calculate stats and outputs
     [self buttonsDisable];
     NSLog(@"Calculating Test Results");
-    //holds here at present, need to make new func to do the work
     statusMessageLBL.text = @"The test results are being calculated, please wait a moment";
     [self hide_blocks];
     [self hideInfo];
     [MessageView setImage: card[4].image];
     MessageView.hidden=NO;
-    [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(self) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(calculations) userInfo:nil repeats:NO];
 }
 
 -(void)blankMSG {
-        [self buttonsDisable];
-    //blank blocks, before new sequence is shown
+    [self buttonsDisable];
     NSLog(@"(blank)");
-    //holds here at present, need to make new func to do the work
-    //[self display_blocks];
     MessageView.hidden=YES;
     [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(stageChecks) userInfo:nil repeats:NO];
 }
 
 -(void)blankMSG2 {
-        [self buttonsDisable];
-    //blank set of blocks, but only after init start
+    [self buttonsDisable];
     NSLog(@"(blank2)");
-    //statusMessageLBL.text = @"Observe The Blocks";
-    //holds here at present, need to make new func to do the work
     [self display_blocks];
     MessageView.hidden=YES;
     [NSTimer scheduledTimerWithTimeInterval:messageTime*2 target:self selector:@selector(box1) userInfo:nil repeats:NO];
 }
 
 -(void)blankMSG3 {
-        [self buttonsDisable];
+    [self buttonsDisable];
     guessStr[xcounter]= [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@",guess[1],guess[2],guess[3],guess[4],guess[5],guess[6],guess[7],guess[8],guess[9]];
     [self statusUpdate:xcounter];
-    //blank set of blocks, but only after init start
     NSLog(@"(blank3 after buttons input %@)",guessStr[xcounter]);
-    //holds here at present, need to make new func to do the work
     [self display_blocks];
     MessageView.hidden=YES;
     pressNo = 1; //reset counter for next time
@@ -1067,5 +1015,35 @@
     self.box7image.backgroundColor=currentBlockColour;
     self.box8image.backgroundColor=currentBlockColour;
     self.box9image.backgroundColor=currentBlockColour;
+}
+
+-(void)calculations{
+    NSLog(@"Calculations have started.");
+    NSLog(@"String 1 was:%@, your guess:%@",order[1],guessStr[1]);
+    NSLog(@"String 2 was:%@, your guess:%@",order[2],guessStr[2]);
+    NSLog(@"String 3 was:%@, your guess:%@",order[3],guessStr[3]);
+    NSLog(@"String 4 was:%@, your guess:%@",order[4],guessStr[4]);
+    NSLog(@"String 5 was:%@, your guess:%@",order[5],guessStr[5]);
+    NSLog(@"String 6 was:%@, your guess:%@",order[6],guessStr[6]);
+    NSLog(@"String 7 was:%@, your guess:%@",order[7],guessStr[7]);
+    NSLog(@"String 8 was:%@, your guess:%@",order[8],guessStr[8]);
+    NSLog(@"String 9 was:%@, your guess:%@",order[9],guessStr[9]);
+}
+
+-(void)setColours{
+    mySingleton *singleton = [mySingleton sharedSingleton];
+    testViewerView.backgroundColor=singleton.currentBackgroundColour;
+    currentBackgroundColour = singleton.currentBackgroundColour;
+    currentBlockColour      = singleton.currentBlockColour;
+    currentShowColour       = singleton.currentShowColour;
+    currentStatusColour     = singleton.currentStatusColour;
+    blkNoLBL.textColor      = singleton.currentStatusColour;
+    blkLBL.textColor        = singleton.currentStatusColour;
+    blkOfLBL.textColor      = singleton.currentStatusColour;
+    blkTotalLBL.textColor   = singleton.currentStatusColour;
+    setLBL.textColor        = singleton.currentStatusColour;
+    setNoLBL.textColor      = singleton.currentStatusColour;
+    setOfLBL.textColor      = singleton.currentStatusColour;
+    setTotalLBL.textColor   = singleton.currentStatusColour;
 }
 @end
