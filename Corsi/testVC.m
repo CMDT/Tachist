@@ -122,7 +122,61 @@
     }else{
         headingLBL.text=@"CORSI REVERSE BLOCK TEST";
     }
-
+    float sizer;
+    
+    float viewHeight=testViewerView.frame.size.height;
+    float viewWidth=testViewerView.frame.size.width;
+    
+    sizer=singleton.blockSize*viewWidth/100;
+    
+    float row2=viewHeight*35/100;
+    float col2=(viewWidth/2)-38;
+    float col1=38;
+    float col3=viewWidth-38-(sizer);
+    float row1=viewHeight*15/100;
+    float row3=viewHeight*50/100;
+    
+    
+    
+    box1image =[[UIImageView alloc] initWithFrame:CGRectMake(col1,row1,sizer,sizer)];
+    box4image =[[UIImageView alloc] initWithFrame:CGRectMake(col1,row2,sizer,sizer)];
+    box7image =[[UIImageView alloc] initWithFrame:CGRectMake(col1,row3,sizer,sizer)];
+    box2image =[[UIImageView alloc] initWithFrame:CGRectMake(col2,row1,sizer,sizer)];
+    box5image =[[UIImageView alloc] initWithFrame:CGRectMake(col2,row2,sizer,sizer)];
+    box8image =[[UIImageView alloc] initWithFrame:CGRectMake(col2,row3,sizer,sizer)];
+    box3image =[[UIImageView alloc] initWithFrame:CGRectMake(col3,row1,sizer,sizer)];
+    box6image =[[UIImageView alloc] initWithFrame:CGRectMake(col3,row2,sizer,sizer)];
+    box9image =[[UIImageView alloc] initWithFrame:CGRectMake(col3,row3,sizer,sizer)];
+    
+    [self.view addSubview:box1image];
+    [self.view addSubview:box2image];
+    [self.view addSubview:box3image];
+    [self.view addSubview:box4image];
+    [self.view addSubview:box5image];
+    [self.view addSubview:box6image];
+    [self.view addSubview:box7image];
+    [self.view addSubview:box8image];
+    [self.view addSubview:box9image];
+    
+    
+    /*
+    float sizer;
+    
+    sizer=64; //singleton.blockSize;
+    
+    box1image.frame= CGRectMake(100, 100, sizer, sizer);
+    
+    box1image.frame = CGRectMake(box1image.frame.size.height,box1image.frame.size.width, sizer, sizer);
+    box2image.frame = CGRectMake(box2image.frame.size.height,box2image.frame.size.width, sizer, sizer);
+    box3image.frame = CGRectMake(box3image.frame.size.height,box3image.frame.size.width, sizer, sizer);
+    box4image.frame = CGRectMake(box4image.frame.size.height,box4image.frame.size.width, sizer, sizer);
+    box5image.frame = CGRectMake(box5image.frame.size.height,box5image.frame.size.width, sizer, sizer);
+    box6image.frame = CGRectMake(box6image.frame.size.height,box6image.frame.size.width, sizer, sizer);
+    box7image.frame = CGRectMake(box7image.frame.size.height,box7image.frame.size.width, sizer, sizer);
+    box8image.frame = CGRectMake(box8image.frame.size.height,box8image.frame.size.width, sizer, sizer);
+    box9image.frame = CGRectMake(box9image.frame.size.height,box9image.frame.size.width, sizer, sizer);
+    */
+    
     [self setColours];
 
     [self allButtonsBackgroundReset];
@@ -138,19 +192,8 @@
     box9image.transform = CGAffineTransformMakeScale(0,0);
 
 
-    //float sizer;
-    //sizer=singleton.blockSize;
 
-    /*box1image.frame = CGRectMake(box1image.frame.size.height,box1image.frame.size.width, sizer, sizer);
-    box2image.frame = CGRectMake(box1image.frame.size.height,box1image.frame.size.width, sizer, sizer);
-    box3image.frame = CGRectMake(box1image.frame.size.height,box1image.frame.size.width, sizer, sizer);
-    box4image.frame = CGRectMake(box1image.frame.size.height,box1image.frame.size.width, sizer, sizer);
-    box5image.frame = CGRectMake(box1image.frame.size.height,box1image.frame.size.width, sizer, sizer);
-    box6image.frame = CGRectMake(box1image.frame.size.height,box1image.frame.size.width, sizer, sizer);
-    box7image.frame = CGRectMake(box1image.frame.size.height,box1image.frame.size.width, sizer, sizer);
-    box8image.frame = CGRectMake(box1image.frame.size.height,box1image.frame.size.width, sizer, sizer);
-    box9image.frame = CGRectMake(box1image.frame.size.height,box1image.frame.size.width, sizer, sizer);
-     */
+    
 
     [self putBlocksInPlace];
 
@@ -286,18 +329,12 @@
     scaleFactor = blockSize1;
 
     if(singleton.blockRotation){
-        angle[1] = self.randomDegrees359;
-        angle[2] = self.randomDegrees359;
-        angle[3] = self.randomDegrees359;
-        angle[4] = self.randomDegrees359;
-        angle[5] = self.randomDegrees359;
-        angle[6] = self.randomDegrees359;
-        angle[7] = self.randomDegrees359;
-        angle[8] = self.randomDegrees359;
-        angle[9] = self.randomDegrees359;
-    }else{
-        for (int t=0; t<10; t++) {
-            angle[t] = 0;
+        for (int t = 0; t < 10; t++) {
+            angle[t] = self.randomDegrees359;
+        }
+    } else {
+        for (int t = 0; t < 10; t++) {
+                angle[t] = 0;
         }
     }
 

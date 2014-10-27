@@ -52,14 +52,10 @@
 		E1B8888719B9E8BB006597C5 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E1B8888619B9E8BB006597C5 /* Settings.bundle */; };
 		E1DAD78019B8606B00600608 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E1DAD77519B85E7300600608 /* libz.dylib */; };
 		E1DAD78119B8608600600608 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E1DAD77319B85E4A00600608 /* libTestFlight.a */; };
-		E1DAD79E19B87F8E00600608 /* about64.png in Resources */ = {isa = PBXBuildFile; fileRef = E1DAD79619B87F8E00600608 /* about64.png */; };
-		E1DAD79F19B87F8E00600608 /* analy64.png in Resources */ = {isa = PBXBuildFile; fileRef = E1DAD79719B87F8E00600608 /* analy64.png */; };
 		E1DAD7A019B87F8E00600608 /* email.png in Resources */ = {isa = PBXBuildFile; fileRef = E1DAD79819B87F8E00600608 /* email.png */; };
 		E1DAD7A119B87F8E00600608 /* email1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1DAD79919B87F8E00600608 /* email1@2x.png */; };
 		E1DAD7A219B87F8E00600608 /* email2.png in Resources */ = {isa = PBXBuildFile; fileRef = E1DAD79A19B87F8E00600608 /* email2.png */; };
 		E1DAD7A319B87F8E00600608 /* email2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1DAD79B19B87F8E00600608 /* email2@2x.png */; };
-		E1DAD7A419B87F8E00600608 /* results64.png in Resources */ = {isa = PBXBuildFile; fileRef = E1DAD79C19B87F8E00600608 /* results64.png */; };
-		E1DAD7A519B87F8E00600608 /* settings64.png in Resources */ = {isa = PBXBuildFile; fileRef = E1DAD79D19B87F8E00600608 /* settings64.png */; };
 		E1DAD7A819B8A31700600608 /* mySingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = E1DAD7A719B8A31700600608 /* mySingleton.m */; };
 		E1DAD7AB19B8A92400600608 /* settingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1DAD7AA19B8A92400600608 /* settingsVC.m */; };
 		E1DAD7AE19B8A95000600608 /* testVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1DAD7AD19B8A95000600608 /* testVC.m */; };
@@ -135,14 +131,10 @@
 		E1DAD77719B85ECC00600608 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestFlight.h; path = "TestFlightSDK3-3/TestFlight.h"; sourceTree = "<group>"; };
 		E1DAD77819B85ECC00600608 /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "TestFlight+AsyncLogging.h"; path = "TestFlightSDK3-3/TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
 		E1DAD77919B85ECC00600608 /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "TestFlight+ManualSessions.h"; path = "TestFlightSDK3-3/TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
-		E1DAD79619B87F8E00600608 /* about64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about64.png; sourceTree = "<group>"; };
-		E1DAD79719B87F8E00600608 /* analy64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = analy64.png; sourceTree = "<group>"; };
 		E1DAD79819B87F8E00600608 /* email.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = email.png; sourceTree = "<group>"; };
 		E1DAD79919B87F8E00600608 /* email1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "email1@2x.png"; sourceTree = "<group>"; };
 		E1DAD79A19B87F8E00600608 /* email2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = email2.png; sourceTree = "<group>"; };
 		E1DAD79B19B87F8E00600608 /* email2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "email2@2x.png"; sourceTree = "<group>"; };
-		E1DAD79C19B87F8E00600608 /* results64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = results64.png; sourceTree = "<group>"; };
-		E1DAD79D19B87F8E00600608 /* settings64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings64.png; sourceTree = "<group>"; };
 		E1DAD7A619B8A31700600608 /* mySingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mySingleton.h; sourceTree = "<group>"; };
 		E1DAD7A719B8A31700600608 /* mySingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mySingleton.m; sourceTree = "<group>"; };
 		E1DAD7A919B8A92400600608 /* settingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = settingsVC.h; sourceTree = "<group>"; };
@@ -264,14 +256,10 @@
 				91530B5219BE55B300D2026B /* corsi-stage-end.png */,
 				91530B5319BE55B300D2026B /* corsi-stage-start.png */,
 				E1FAECEF19F7F0870098A243 /* corsi-touch-blocks.png */,
-				E1DAD79619B87F8E00600608 /* about64.png */,
-				E1DAD79719B87F8E00600608 /* analy64.png */,
 				E1DAD79819B87F8E00600608 /* email.png */,
 				E1DAD79919B87F8E00600608 /* email1@2x.png */,
 				E1DAD79A19B87F8E00600608 /* email2.png */,
 				E1DAD79B19B87F8E00600608 /* email2@2x.png */,
-				E1DAD79C19B87F8E00600608 /* results64.png */,
-				E1DAD79D19B87F8E00600608 /* settings64.png */,
 				E1B29EB419B7532E005B9C84 /* black72.png */,
 				E1B29EB519B7532E005B9C84 /* blue72.png */,
 				E1B29EB619B7532E005B9C84 /* check.png */,
@@ -400,16 +388,12 @@
 				E1B8888719B9E8BB006597C5 /* Settings.bundle in Resources */,
 				E1B29ECD19B7532E005B9C84 /* yellow72.png in Resources */,
 				E1DAD7A119B87F8E00600608 /* email1@2x.png in Resources */,
-				E1DAD7A419B87F8E00600608 /* results64.png in Resources */,
 				E1B29EC719B7532E005B9C84 /* green72.png in Resources */,
 				91530B5719BE55B300D2026B /* corsi-stage-end.png in Resources */,
 				E1B29ECA19B7532E005B9C84 /* orange72.png in Resources */,
 				91530B5819BE55B300D2026B /* corsi-stage-start.png in Resources */,
 				E10D017F19B6024F00D9E5F8 /* Main_iPad.storyboard in Resources */,
-				E1DAD79E19B87F8E00600608 /* about64.png in Resources */,
-				E1DAD7A519B87F8E00600608 /* settings64.png in Resources */,
 				E10D018419B6024F00D9E5F8 /* Images.xcassets in Resources */,
-				E1DAD79F19B87F8E00600608 /* analy64.png in Resources */,
 				E1FAECF019F7F0870098A243 /* corsi-touch-blocks.png in Resources */,
 				E1DAD7A019B87F8E00600608 /* email.png in Resources */,
 				91CCCCFA19D77AE000C742B6 /* darkgrey72.png in Resources */,
@@ -595,6 +579,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Corsi/Corsi-Prefix.pch";
 				INFOPLIST_FILE = "Corsi/Corsi-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Corsi/TestFlightSDK3-3",
@@ -614,6 +599,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Corsi/Corsi-Prefix.pch";
 				INFOPLIST_FILE = "Corsi/Corsi-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Corsi/TestFlightSDK3-3",

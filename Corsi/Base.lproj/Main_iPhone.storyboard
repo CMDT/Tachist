@@ -269,7 +269,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.84290279212849473" green="0.9223086456184334" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="2" title="Settings" image="settings64.png" id="JfG-Kt-5KA">
+                    <tabBarItem key="tabBarItem" tag="2" title="Settings" image="Settings" id="JfG-Kt-5KA">
                         <inset key="imageInsets" minX="15" minY="15" maxX="15" maxY="15"/>
                     </tabBarItem>
                     <connections>
@@ -300,7 +300,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d6x-0F-1TZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="542" y="41"/>
+            <point key="canvasLocation" x="508" y="41"/>
         </scene>
         <!--Timing Settings-->
         <scene sceneID="dDb-Sb-L7X">
@@ -952,7 +952,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wFS-p1-DTW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="919" y="31"/>
+            <point key="canvasLocation" x="870" y="41"/>
         </scene>
         <!--Block Settings-->
         <scene sceneID="fXO-cP-nio">
@@ -1158,13 +1158,13 @@
                         </subviews>
                         <color key="backgroundColor" red="0.89420127579999997" green="1" blue="0.66009751149999996" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="4" title="Results" image="results64.png" id="RRh-7Z-4U7">
+                    <tabBarItem key="tabBarItem" tag="4" title="Results" image="Results" id="RRh-7Z-4U7">
                         <inset key="imageInsets" minX="15" minY="15" maxX="15" maxY="15"/>
                     </tabBarItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WqZ-kI-dxD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="866" y="701"/>
+            <point key="canvasLocation" x="870" y="701"/>
         </scene>
         <!--CorsiTabController-->
         <scene sceneID="sw2-hC-uGP">
@@ -1180,12 +1180,12 @@
                         <segue destination="NmM-sh-eu8" kind="relationship" relationship="viewControllers" id="yLc-RD-KfT"/>
                         <segue destination="fkz-qV-ETW" kind="relationship" relationship="viewControllers" id="27Y-Y6-uk1"/>
                         <segue destination="APr-Tr-350" kind="relationship" relationship="viewControllers" id="m86-dW-K32"/>
-                        <segue destination="So4-z0-L3J" kind="relationship" relationship="viewControllers" id="tlU-ao-Qqx"/>
+                        <segue destination="So4-z0-L3J" kind="relationship" relationship="viewControllers" id="6O8-Ht-9Ae"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Mf-qD-7gS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="143" y="41"/>
+            <point key="canvasLocation" x="118" y="4"/>
         </scene>
         <!--Test-->
         <scene sceneID="Hse-ve-D12">
@@ -1228,40 +1228,28 @@ When all the sequence has been shown, try and remember the sequence and press th
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QDJ-tc-Dj2" userLabel="Image View b1">
-                                <rect key="frame" x="38" y="81" width="64" height="64"/>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EO2-KO-iFc" userLabel="Image View b2">
-                                <rect key="frame" x="128" y="81" width="64" height="64"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fw7-oq-ggb" userLabel="Image View b3">
-                                <rect key="frame" x="218" y="81" width="64" height="64"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LoJ-BI-1rr" userLabel="Image View b4">
-                                <rect key="frame" x="38" y="186" width="64" height="64"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4bc-w1-rXa" userLabel="Image View b5">
-                                <rect key="frame" x="128" y="186" width="64" height="64"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rdp-MB-Rcb" userLabel="Image View b6">
-                                <rect key="frame" x="218" y="186" width="64" height="64"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LC7-qr-unq" userLabel="Image View b7">
-                                <rect key="frame" x="38" y="292" width="64" height="64"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vJF-bL-n6w" userLabel="Image View b8">
-                                <rect key="frame" x="128" y="292" width="64" height="64"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Koe-hz-RVo" userLabel="Image View b9">
-                                <rect key="frame" x="218" y="292" width="64" height="64"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="69w-EY-VDe" userLabel="Button - b1">
@@ -1393,13 +1381,14 @@ When all the sequence has been shown, try and remember the sequence and press th
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Pd-MY-wKc" userLabel="Image View message">
-                                <rect key="frame" x="16" y="68" width="288" height="300"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Pd-MY-wKc" userLabel="Image View message"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QDJ-tc-Dj2" userLabel="Image View b1">
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.89411771299999998" green="0.9450981021" blue="0.97254908080000002" alpha="1" colorSpace="deviceRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="3" title="Test" image="analy64.png" id="uI8-6A-gw6">
+                    <tabBarItem key="tabBarItem" tag="3" title="Test" image="Test" id="uI8-6A-gw6">
                         <inset key="imageInsets" minX="15" minY="15" maxX="15" maxY="15"/>
                     </tabBarItem>
                     <connections>
@@ -1439,7 +1428,7 @@ When all the sequence has been shown, try and remember the sequence and press th
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Et-jW-1Na" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="497" y="678"/>
+            <point key="canvasLocation" x="508" y="701"/>
         </scene>
         <!--Information-->
         <scene sceneID="UUY-XU-Df1">
@@ -1492,7 +1481,7 @@ This version, MMU (c) 2014.
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.89417350449999999" blue="0.6320989253" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="1" title="Information" image="about64.png" id="H2M-mc-v72">
+                    <tabBarItem key="tabBarItem" tag="1" title="Information" image="Information" id="H2M-mc-v72">
                         <inset key="imageInsets" minX="15" minY="15" maxX="15" maxY="15"/>
                     </tabBarItem>
                 </viewController>
@@ -1502,8 +1491,10 @@ This version, MMU (c) 2014.
         </scene>
     </scenes>
     <resources>
-        <image name="about64.png" width="64" height="64"/>
-        <image name="analy64.png" width="64" height="64"/>
+        <image name="Information" width="32" height="32"/>
+        <image name="Results" width="32" height="32"/>
+        <image name="Settings" width="32" height="32"/>
+        <image name="Test" width="32" height="32"/>
         <image name="black72.png" width="72" height="72"/>
         <image name="blue72.png" width="72" height="72"/>
         <image name="brown72.png" width="72" height="72"/>
@@ -1517,8 +1508,6 @@ This version, MMU (c) 2014.
         <image name="orange72.png" width="72" height="72"/>
         <image name="purple72.png" width="72" height="72"/>
         <image name="red72.png" width="72" height="72"/>
-        <image name="results64.png" width="64" height="64"/>
-        <image name="settings64.png" width="64" height="64"/>
         <image name="white72.png" width="72" height="72"/>
         <image name="yellow72.png" width="72" height="72"/>
     </resources>

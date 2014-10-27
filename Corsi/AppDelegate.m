@@ -22,7 +22,7 @@
     NSString *temp2 = [NSString stringWithFormat:@"Corsi Block Test"];
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:temp2 message:@"Take a moment to read the notes on these pages before you run the Application ..." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     [alert show];
-    
+
     return YES;
 }
 							
