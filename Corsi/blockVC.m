@@ -13,7 +13,7 @@
 {
     int start;
     int finish;
-    int blockSize;
+    float blockSize;
 }
 @end
 
@@ -55,7 +55,7 @@ forwardTestSWT;
 
     blockFinishNumLBL.text=[NSString stringWithFormat:@"%d",finish];
     blockStartNumLBL.text=[NSString stringWithFormat:@"%d",start];
-    blockSizeLBL.text=[NSString stringWithFormat:@"%d",blockSize];
+    blockSizeLBL.text=[NSString stringWithFormat:@"%2.0f",blockSize];
     [self buttonIncCheck];
 }
 -(void)buttonIncCheck{
@@ -140,7 +140,7 @@ forwardTestSWT;
         blockSize=55;
     }
     [self buttonIncCheck];
-    blockSizeLBL.text  = [NSString stringWithFormat:@"%d", blockSize];
+    blockSizeLBL.text  = [NSString stringWithFormat:@"%2.0f", blockSize];
     singleton.blockSize    = blockSize;
 }
 - (IBAction)blockStartMinusBTN:(id)sender{
@@ -196,7 +196,7 @@ forwardTestSWT;
     }
 
     [self buttonIncCheck];
-    blockSizeLBL.text  = [NSString stringWithFormat:@"%d", blockSize];
+    blockSizeLBL.text  = [NSString stringWithFormat:@"%2.0f", blockSize];
     singleton.blockSize    = blockSize;
 }
 

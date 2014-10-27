@@ -213,10 +213,10 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL;
     }
     temp        = [defaults objectForKey:kSize];
     if( temp == nil ){
-        blockSize =  30;
-        [defaults setObject:@"30" forKey:kSize];
+        blockSize =  30.00;
+        [defaults setObject:@"30.00" forKey:kSize];
     //}else{
-        //blockSize=[temp intValue];
+        //blockSize=[temp floatValue];
         //[defaults setObject:temp forKey:kSize];
     }
     temp        = [defaults objectForKey:kDelay];
@@ -560,8 +560,8 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL;
     }
     temp        = [defaults objectForKey:kSize];
     if( temp == nil ){
-        blockSize =  30;
-        [defaults setObject:@"30" forKey:kSize];
+        blockSize =  30.00;
+        [defaults setObject:@"30.00" forKey:kSize];
         //}else{
         //blockSize=[temp intValue];
         //[defaults setObject:temp forKey:kSize];

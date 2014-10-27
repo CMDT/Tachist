@@ -126,6 +126,32 @@
     [self setColours];
 
     [self allButtonsBackgroundReset];
+
+    box1image.transform = CGAffineTransformMakeScale(0,0);
+    box2image.transform = CGAffineTransformMakeScale(0,0);
+    box3image.transform = CGAffineTransformMakeScale(0,0);
+    box4image.transform = CGAffineTransformMakeScale(0,0);
+    box5image.transform = CGAffineTransformMakeScale(0,0);
+    box6image.transform = CGAffineTransformMakeScale(0,0);
+    box7image.transform = CGAffineTransformMakeScale(0,0);
+    box8image.transform = CGAffineTransformMakeScale(0,0);
+    box9image.transform = CGAffineTransformMakeScale(0,0);
+
+
+    //float sizer;
+    //sizer=singleton.blockSize;
+
+    /*box1image.frame = CGRectMake(box1image.frame.size.height,box1image.frame.size.width, sizer, sizer);
+    box2image.frame = CGRectMake(box1image.frame.size.height,box1image.frame.size.width, sizer, sizer);
+    box3image.frame = CGRectMake(box1image.frame.size.height,box1image.frame.size.width, sizer, sizer);
+    box4image.frame = CGRectMake(box1image.frame.size.height,box1image.frame.size.width, sizer, sizer);
+    box5image.frame = CGRectMake(box1image.frame.size.height,box1image.frame.size.width, sizer, sizer);
+    box6image.frame = CGRectMake(box1image.frame.size.height,box1image.frame.size.width, sizer, sizer);
+    box7image.frame = CGRectMake(box1image.frame.size.height,box1image.frame.size.width, sizer, sizer);
+    box8image.frame = CGRectMake(box1image.frame.size.height,box1image.frame.size.width, sizer, sizer);
+    box9image.frame = CGRectMake(box1image.frame.size.height,box1image.frame.size.width, sizer, sizer);
+     */
+
     [self putBlocksInPlace];
 
     box1image.transform = CGAffineTransformTranslate(box1image.transform,[self randomPt], [self randomPt]);
@@ -137,6 +163,8 @@
     box7image.transform = CGAffineTransformTranslate(box7image.transform,[self randomPt], [self randomPt]);
     box8image.transform = CGAffineTransformTranslate(box8image.transform,[self randomPt], [self randomPt]);
     box9image.transform = CGAffineTransformTranslate(box9image.transform,[self randomPt], [self randomPt]);
+
+    infoShow=singleton.onScreenInfo;
 
     //make 9 sets of number strings
     for (int x=1; x<10; x++) {
@@ -202,10 +230,8 @@
         mySingleton *singleton = [mySingleton sharedSingleton];
 
     NSLog(@"Test has started");
-        statusMessageLBL.text = @"The Test Has Started";
-    //temp to test code
-    finishcounter=10;
-    
+    statusMessageLBL.text = @"The Test Has Started";
+
     startBTN.hidden   = YES;
     headingLBL.hidden = YES;
 
@@ -246,11 +272,10 @@
     // Do any additional setup after loading the view.
 
     //colour the blocks
-    box1image.backgroundColor=currentBackgroundColour;
-
+    [self updateBlockColours];
 
     blockSize1 = singleton.blockSize;
-    blockSize1 = blockSize1/55.00;
+    blockSize1 = blockSize1 / 55.00; //size picked against max size allowed here
     if( blockSize1 <= 0){
         blockSize1 = 0.1;
     }
@@ -258,7 +283,8 @@
         blockSize1 = 1;
     }
 
-    scaleFactor = blockSize1;//arbitary change, replace with singleton size
+    scaleFactor = blockSize1;
+
     if(singleton.blockRotation){
         angle[1] = self.randomDegrees359;
         angle[2] = self.randomDegrees359;
@@ -270,18 +296,19 @@
         angle[8] = self.randomDegrees359;
         angle[9] = self.randomDegrees359;
     }else{
-        for (int t; t<10; t++) {
+        for (int t=0; t<10; t++) {
             angle[t] = 0;
         }
     }
-    //UITouch *touch = [touches anyObject];
+
+    //UITouch *touch = [touches anyObject];//some old example code if you used a touch rather than an image reference
 
     [UIView animateWithDuration:1.0
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
 
-                         CGAffineTransform scaleTrans = CGAffineTransformMakeScale(scaleFactor, scaleFactor);
+                         CGAffineTransform scaleTrans = CGAffineTransformMakeScale(scaleFactor, scaleFactor);
 
                          CGAffineTransform rotateTrans1 = CGAffineTransformMakeRotation(angle[1] * M_PI / 180);
                          CGAffineTransform rotateTrans2 = CGAffineTransformMakeRotation(angle[2] * M_PI / 180);
@@ -302,7 +329,7 @@
                          box7image.transform = CGAffineTransformConcat(scaleTrans, rotateTrans7);
                          box8image.transform = CGAffineTransformConcat(scaleTrans, rotateTrans8);
                          box9image.transform = CGAffineTransformConcat(scaleTrans, rotateTrans9);
-                     }   completion:nil];
+                     }completion:nil];
     }
 }
 
@@ -508,7 +535,12 @@
 
 -(void)boxInit {
     NSLog(@"box init");
-    statusMessageLBL.text = @"Observe Blocks, Start of Test";
+
+    if (infoShow) {
+        statusMessageLBL.text = @"Observe Blocks, Start of Test";
+    }else{
+        statusMessageLBL.text = @"";
+    }
     //hide the buttons
     [self display_blocks];
     //[self hide_blocks];
@@ -607,8 +639,12 @@
     
     //display blocks
     [self display_blocks];
-    
-    statusMessageLBL.text = @"Observe The Blocks";
+
+    if (infoShow) {
+        statusMessageLBL.text = @"Observe Block Sequence";
+    }else{
+        statusMessageLBL.text = @"Observe";
+    }
 
     int t=[self whichBlock:ncounter :xcounter];
     NSLog(@"block showing : %i seq : %i set : %i", t, ncounter, xcounter);
@@ -669,6 +705,8 @@
 }
 
 -(void)statusUpdate:(int)press{
+    if (infoShow) {
+
     switch (press) {
         case 1:
             statusMessageLBL.text = [NSString stringWithFormat:@"%@",guess[1]];
@@ -702,7 +740,10 @@
             statusMessageLBL.text = @"Touch the blocks in sequence";
             break;
     }
-    guessStr[xcounter]= [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@",guess[1],guess[2],guess[3],guess[4],guess[5],guess[6],guess[7],guess[8],guess[9]];
+    }else{
+        statusMessageLBL.text = @"Recall";
+    }
+        //guessStr[xcounter]= [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@",guess[1],guess[2],guess[3],guess[4],guess[5],guess[6],guess[7],guess[8],guess[9]];
 }
 
 -(IBAction)blk1BUT:(id)sender{
@@ -807,7 +848,13 @@
 -(void)getGuesses {
         blkNoLBL.text = [NSString stringWithFormat:@"%i",0];
     //turns on the buttons, collects the xcounter guesses, forms a string, saves it and carries on with next stage
-    statusMessageLBL.text = @"Recall The Sequence, touch the blocks.";
+
+    if (infoShow) {
+        statusMessageLBL.text = @"Recall The Sequence, touch the blocks.";
+    }else{
+        statusMessageLBL.text = @"Recall";
+    }
+
     NSLog(@"Press The Blocks in Order");
     [self buttonsEnable];
     if(pressNo >= xcounter+1){
@@ -822,7 +869,11 @@
 -(void)getFinalGuesses {
         blkNoLBL.text = [NSString stringWithFormat:@"%i",0];
     //turns on the buttons, collects the xcounter guesses, forms a string, saves it and carries on with next stage
-    statusMessageLBL.text = @"Recall The Sequence, touch the blocks.";
+    if (infoShow) {
+        statusMessageLBL.text = @"Recall The Sequence, touch the blocks.";
+    }else{
+        statusMessageLBL.text = @"Recall";
+    }
     NSLog(@"Press The Blocks in Order");
     [self buttonsEnable];
     if(pressNo >= xcounter+1){
@@ -837,34 +888,54 @@
 -(void)guessMSG {
         blkNoLBL.text = [NSString stringWithFormat:@"%i",0];
     NSLog(@"Guess Now");
-    statusMessageLBL.text = @"Recall The Sequence, touch the blocks.";
+    if (infoShow) {
+        statusMessageLBL.text = @"Recall The Sequence, touch the blocks.";
+    }else{
+        statusMessageLBL.text = @"Recall";
+    }
     [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(getGuesses) userInfo:nil repeats:NO];
 }
 
 -(void)finalGuessMSG {
         blkNoLBL.text = [NSString stringWithFormat:@"%i",0];
-    statusMessageLBL.text = @"Recall The Sequence, touch the blocks.";
+    if (infoShow) {
+        statusMessageLBL.text = @"Recall The Sequence, touch the blocks.";
+    }else{
+        statusMessageLBL.text = @"Recall";
+    }
     [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(getFinalGuesses) userInfo:nil repeats:NO];
 }
 
 -(void)stageEndMSG {
     [self buttonsDisable];
     NSLog(@"Stage Ending");
-    statusMessageLBL.text = @"The Stage has Ended, prepare to recall the  sequence of blocks.";
+    if (infoShow) {
+        statusMessageLBL.text = @"The Stage has Ended, prepare to recall the  sequence of blocks.";
+    }else{
+        statusMessageLBL.text = @"";
+    }
     [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(guessMSG) userInfo:nil repeats:NO];
 }
 
 -(void)finalStageEndMSG {
     [self buttonsDisable];
     NSLog(@"Final Stage Ending");
-    statusMessageLBL.text = @"The Final Stage has Ended, prepare to recall the  sequence of blocks.";
+    if (infoShow) {
+        statusMessageLBL.text = @"The Final Stage has Ended, prepare to recall the  sequence of blocks.";
+    }else{
+        statusMessageLBL.text = @"";
+    }
     [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(finalGuessMSG) userInfo:nil repeats:NO];
 }
 
 -(void)nextStageMSG {
     [self buttonsDisable];
     NSLog(@"Stage Starting");
-    statusMessageLBL.text = @"Observe The Blocks";
+    if (infoShow) {
+        statusMessageLBL.text = @"Observe the Blocks";
+    }else{
+        statusMessageLBL.text = @"Observe";
+    }
     [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(blankMSG) userInfo:nil repeats:NO];
 }
 
@@ -872,7 +943,21 @@
     //Start of Test Message
     [self buttonsDisable];
     NSLog(@"Start Test");
-    statusMessageLBL.text = @"Observe the sequence, recall in the same order by touching the blocks when asked.";
+
+    if (reverseTest) {
+        if (infoShow) {
+            statusMessageLBL.text = @"Observe the sequence, recall in the reverse order by touching the blocks when asked.";
+        }else{
+            statusMessageLBL.text = @"Reverse Test";
+        }
+    }else{
+        if (infoShow) {
+            statusMessageLBL.text = @"Observe the sequence, recall in the same order by touching the blocks when asked.";
+        }else{
+            statusMessageLBL.text = @"Forward Test";
+        }
+    }
+
     [MessageView setImage: card[0].image];
     MessageView.hidden=NO;
     [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(blankMSG2) userInfo:nil repeats:NO];
@@ -882,7 +967,11 @@
     //End of Test Message
     [self buttonsDisable];
     NSLog(@"End Test");
-    statusMessageLBL.text = @"The test has now finished, you have completed all the stages.  In a few moments the results will be ready.";
+    if (infoShow) {
+        statusMessageLBL.text = @"The test has now finished, you have completed all the stages.  In a few moments the results will be ready.";
+    }else{
+        statusMessageLBL.text = @"Finished";
+    }
     [self hideInfo];
     [self hide_blocks];
     [MessageView setImage: card[1].image];
@@ -895,7 +984,11 @@
     //Calculate stats and outputs
     [self buttonsDisable];
     NSLog(@"Calculating Test Results");
-    statusMessageLBL.text = @"The test results are being calculated, please wait a moment";
+    if (infoShow) {
+      statusMessageLBL.text = @"The test results are being calculated, please wait a moment";
+    }else{
+        statusMessageLBL.text = @"";
+    }
     [self hide_blocks];
     [self hideInfo];
     [MessageView setImage: card[4].image];
@@ -1036,14 +1129,29 @@
     currentBackgroundColour = singleton.currentBackgroundColour;
     currentBlockColour      = singleton.currentBlockColour;
     currentShowColour       = singleton.currentShowColour;
+
     currentStatusColour     = singleton.currentStatusColour;
-    blkNoLBL.textColor      = singleton.currentStatusColour;
-    blkLBL.textColor        = singleton.currentStatusColour;
-    blkOfLBL.textColor      = singleton.currentStatusColour;
-    blkTotalLBL.textColor   = singleton.currentStatusColour;
-    setLBL.textColor        = singleton.currentStatusColour;
-    setNoLBL.textColor      = singleton.currentStatusColour;
-    setOfLBL.textColor      = singleton.currentStatusColour;
-    setTotalLBL.textColor   = singleton.currentStatusColour;
+    statusMessageLBL.textColor=currentStatusColour;
+    statusMessageLBL.alpha=0.50;
+
+    if (singleton.onScreenInfo) {
+        blkNoLBL.textColor      = singleton.currentStatusColour;
+        blkLBL.textColor        = singleton.currentStatusColour;
+        blkOfLBL.textColor      = singleton.currentStatusColour;
+        blkTotalLBL.textColor   = singleton.currentStatusColour;
+        setLBL.textColor        = singleton.currentStatusColour;
+        setNoLBL.textColor      = singleton.currentStatusColour;
+        setOfLBL.textColor      = singleton.currentStatusColour;
+        setTotalLBL.textColor   = singleton.currentStatusColour;
+    } else {
+        blkNoLBL.textColor      = singleton.currentBackgroundColour;
+        blkLBL.textColor        = singleton.currentBackgroundColour;
+        blkOfLBL.textColor      = singleton.currentBackgroundColour;
+        blkTotalLBL.textColor   = singleton.currentBackgroundColour;
+        setLBL.textColor        = singleton.currentBackgroundColour;
+        setNoLBL.textColor      = singleton.currentBackgroundColour;
+        setOfLBL.textColor      = singleton.currentBackgroundColour;
+        setTotalLBL.textColor   = singleton.currentBackgroundColour;
+    }
 }
 @end
