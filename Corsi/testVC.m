@@ -26,6 +26,8 @@
     BOOL reverseTest;
     float blockSize1;
     BOOL rotateBlocks;
+    BOOL animals;
+    
     int xAdj[10];
     int yAdj[10];
     int angle[10];
@@ -65,6 +67,8 @@
 
 @implementation testVC
 @synthesize
+    box1iv,
+
     blkLBL,
     blkNoLBL,
     blkTotalLBL,
@@ -109,6 +113,165 @@
     return self;
 }
 
+
+-(void)initialiseBlocks{
+    statusMessageLBL.text = @"CORSI Block Test";
+    mySingleton *singleton = [mySingleton sharedSingleton];
+    
+    //check for direction of test and title the test appropiately
+    if (singleton.forwardTestDirection) {
+        headingLBL.text=@"CORSI FORWARD BLOCK TEST";
+    }else{
+        headingLBL.text=@"CORSI REVERSE BLOCK TEST";
+    }
+    float sizer;
+    
+    float viewHeight=testViewerView.frame.size.height;
+    float viewWidth=testViewerView.frame.size.width;
+    
+    animals=singleton.animals;
+    
+    sizer=singleton.blockSize*viewWidth/100;
+    /*
+     float row2=viewHeight*35/100;
+     float col2=(viewWidth/2)-38;
+     float col1=38;
+     float col3=viewWidth-38-(sizer);
+     float row1=viewHeight*15/100;
+     float row3=viewHeight*50/100;
+     
+     box1image =[[UIImageView alloc] initWithFrame:CGRectMake(col1,row1,sizer,sizer)];
+     box4image =[[UIImageView alloc] initWithFrame:CGRectMake(col1,row2,sizer,sizer)];
+     box7image =[[UIImageView alloc] initWithFrame:CGRectMake(col1,row3,sizer,sizer)];
+     box2image =[[UIImageView alloc] initWithFrame:CGRectMake(col2,row1,sizer,sizer)];
+     box5image =[[UIImageView alloc] initWithFrame:CGRectMake(col2,row2,sizer,sizer)];
+     box8image =[[UIImageView alloc] initWithFrame:CGRectMake(col2,row3,sizer,sizer)];
+     box3image =[[UIImageView alloc] initWithFrame:CGRectMake(col3,row1,sizer,sizer)];
+     box6image =[[UIImageView alloc] initWithFrame:CGRectMake(col3,row2,sizer,sizer)];
+     box9image =[[UIImageView alloc] initWithFrame:CGRectMake(col3,row3,sizer,sizer)];
+     
+     [self.view addSubview:box1image];
+     [self.view addSubview:box2image];
+     [self.view addSubview:box3image];
+     [self.view addSubview:box4image];
+     [self.view addSubview:box5image];
+     [self.view addSubview:box6image];
+     [self.view addSubview:box7image];
+     [self.view addSubview:box8image];
+     [self.view addSubview:box9image];
+     */
+    
+    if (animals) {
+        //draw an animal picture in the view
+        
+        box1image.image = [self getAnimal];//[UIImage imageNamed:@"Fox"];
+        box2image.image = [self getAnimal];
+        box3image.image = [self getAnimal];
+        box4image.image = [self getAnimal];
+        box5image.image = [self getAnimal];
+        box6image.image = [self getAnimal];
+        box7image.image = [self getAnimal];
+        box8image.image = [self getAnimal];
+        box9image.image = [self getAnimal];
+    }
+    /*
+     
+     float sizer;
+     
+     sizer=64; //singleton.blockSize;
+     
+     box1image.frame= CGRectMake(100, 100, sizer, sizer);
+     
+     box1image.frame = CGRectMake(box1image.frame.size.height,box1image.frame.size.width, sizer, sizer);
+     box2image.frame = CGRectMake(box2image.frame.size.height,box2image.frame.size.width, sizer, sizer);
+     box3image.frame = CGRectMake(box3image.frame.size.height,box3image.frame.size.width, sizer, sizer);
+     box4image.frame = CGRectMake(box4image.frame.size.height,box4image.frame.size.width, sizer, sizer);
+     box5image.frame = CGRectMake(box5image.frame.size.height,box5image.frame.size.width, sizer, sizer);
+     box6image.frame = CGRectMake(box6image.frame.size.height,box6image.frame.size.width, sizer, sizer);
+     box7image.frame = CGRectMake(box7image.frame.size.height,box7image.frame.size.width, sizer, sizer);
+     box8image.frame = CGRectMake(box8image.frame.size.height,box8image.frame.size.width, sizer, sizer);
+     box9image.frame = CGRectMake(box9image.frame.size.height,box9image.frame.size.width, sizer, sizer);
+     */
+    
+    [self setColours];
+    
+    [self allButtonsBackgroundReset];
+    
+    box1image.transform = CGAffineTransformMakeScale(0,0);
+    box2image.transform = CGAffineTransformMakeScale(0,0);
+    box3image.transform = CGAffineTransformMakeScale(0,0);
+    box4image.transform = CGAffineTransformMakeScale(0,0);
+    box5image.transform = CGAffineTransformMakeScale(0,0);
+    box6image.transform = CGAffineTransformMakeScale(0,0);
+    box7image.transform = CGAffineTransformMakeScale(0,0);
+    box8image.transform = CGAffineTransformMakeScale(0,0);
+    box9image.transform = CGAffineTransformMakeScale(0,0);
+    
+    [self putBlocksInPlace];
+    
+    box1image.transform = CGAffineTransformTranslate(box1image.transform,[self randomPt], [self randomPt]);
+    box2image.transform = CGAffineTransformTranslate(box2image.transform,[self randomPt], [self randomPt]);
+    box3image.transform = CGAffineTransformTranslate(box3image.transform,[self randomPt], [self randomPt]);
+    box4image.transform = CGAffineTransformTranslate(box4image.transform,[self randomPt], [self randomPt]);
+    box5image.transform = CGAffineTransformTranslate(box5image.transform,[self randomPt], [self randomPt]);
+    box6image.transform = CGAffineTransformTranslate(box6image.transform,[self randomPt], [self randomPt]);
+    box7image.transform = CGAffineTransformTranslate(box7image.transform,[self randomPt], [self randomPt]);
+    box8image.transform = CGAffineTransformTranslate(box8image.transform,[self randomPt], [self randomPt]);
+    box9image.transform = CGAffineTransformTranslate(box9image.transform,[self randomPt], [self randomPt]);
+    
+    infoShow=singleton.onScreenInfo;
+    
+    //make 9 sets of number strings
+    for (int x=1; x<10; x++) {
+        order[x]=[self make9order];
+        reverse[x]=[self rev9Order:order[x]];
+        NSLog(@"Order returned for Set: %d is:%@, reverse:%@",x, order[x], reverse[x]);
+    }
+    //testing yto see what was made, can be turned off
+    NSLog(@"Order returned=First Set");
+    int no1=[self whichBlock:1 :1];
+    NSLog(@"No.1=%i",no1);
+    int no2=[self whichBlock:2 :1];
+    NSLog(@"No.2=%i",no2);
+    int no3=[self whichBlock:3 :1];
+    NSLog(@"No.3=%i",no3);
+    int no4=[self whichBlock:4 :1];
+    NSLog(@"No.4=%i",no4);
+    int no5=[self whichBlock:5 :1];
+    NSLog(@"No.5=%i",no5);
+    int no6=[self whichBlock:6 :1];
+    NSLog(@"No.6=%i",no6);
+    int no7=[self whichBlock:7 :1];
+    NSLog(@"No.7=%i",no7);
+    int no8=[self whichBlock:8 :1];
+    NSLog(@"No.8=%i",no8);
+    int no9=[self whichBlock:9 :1];
+    NSLog(@"No.9=%i",no9);
+    
+    NSLog(@"Order returned=Second Set");
+    no1=[self whichBlock:1 :2];
+    NSLog(@"No.1=%i",no1);
+    no2=[self whichBlock:2 :2];
+    NSLog(@"No.2=%i",no2);
+    no3=[self whichBlock:3 :2];
+    NSLog(@"No.3=%i",no3);
+    no4=[self whichBlock:4 :2];
+    NSLog(@"No.4=%i",no4);
+    no5=[self whichBlock:5 :2];
+    NSLog(@"No.5=%i",no5);
+    no6=[self whichBlock:6 :2];
+    NSLog(@"No.6=%i",no6);
+    no7=[self whichBlock:7 :2];
+    NSLog(@"No.7=%i",no7);
+    no8=[self whichBlock:8 :2];
+    NSLog(@"No.8=%i",no8);
+    no9=[self whichBlock:9 :2];
+    NSLog(@"No.9=%i",no9);
+    
+    // don't bother, too difficult to do yet //[self rotAllBlocks];
+    //  [self sizeAllBlocks];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -127,16 +290,16 @@
     float viewHeight=testViewerView.frame.size.height;
     float viewWidth=testViewerView.frame.size.width;
     
-    sizer=singleton.blockSize*viewWidth/100;
+    animals=singleton.animals;
     
+    sizer=singleton.blockSize*viewWidth/100;
+   /*
     float row2=viewHeight*35/100;
     float col2=(viewWidth/2)-38;
     float col1=38;
     float col3=viewWidth-38-(sizer);
     float row1=viewHeight*15/100;
     float row3=viewHeight*50/100;
-    
-    
     
     box1image =[[UIImageView alloc] initWithFrame:CGRectMake(col1,row1,sizer,sizer)];
     box4image =[[UIImageView alloc] initWithFrame:CGRectMake(col1,row2,sizer,sizer)];
@@ -157,9 +320,23 @@
     [self.view addSubview:box7image];
     [self.view addSubview:box8image];
     [self.view addSubview:box9image];
-    
-    
+    */
+
+    if (animals) {
+    //draw an animal picture in the view
+        
+        box1image.image = [self getAnimal];//[UIImage imageNamed:@"Fox"];
+        box2image.image = [self getAnimal];
+        box3image.image = [self getAnimal];
+        box4image.image = [self getAnimal];
+        box5image.image = [self getAnimal];
+        box6image.image = [self getAnimal];
+        box7image.image = [self getAnimal];
+        box8image.image = [self getAnimal];
+        box9image.image = [self getAnimal];
+    }
     /*
+     
     float sizer;
     
     sizer=64; //singleton.blockSize;
@@ -190,10 +367,6 @@
     box7image.transform = CGAffineTransformMakeScale(0,0);
     box8image.transform = CGAffineTransformMakeScale(0,0);
     box9image.transform = CGAffineTransformMakeScale(0,0);
-
-
-
-    
 
     [self putBlocksInPlace];
 
@@ -260,6 +433,85 @@
     //  [self sizeAllBlocks];
 }
 
+-(UIImage*)getAnimal{
+    //pick an animal at random and return its image
+    UIImage *animal;
+    int animalNo = 0;
+    animalNo = arc4random_uniform(22);
+    switch (animalNo) {
+        case 1:
+            animal = [UIImage imageNamed:@"Elephant"];
+            break;
+        case 2:
+            animal = [UIImage imageNamed:@"Cat"];
+            break;
+        case 3:
+            animal = [UIImage imageNamed:@"Frog"];
+            break;
+        case 4:
+            animal = [UIImage imageNamed:@"Fox"];
+            break;
+        case 5:
+            animal = [UIImage imageNamed:@"Goat"];
+            break;
+        case 6:
+            animal = [UIImage imageNamed:@"Crab"];
+            break;
+        case 7:
+            animal = [UIImage imageNamed:@"Bear"];
+            break;
+        case 8:
+            animal = [UIImage imageNamed:@"Bird"];
+            break;
+        case 9:
+            animal = [UIImage imageNamed:@"Duck"];
+            break;
+        case 10:
+            animal = [UIImage imageNamed:@"Croc"];
+            break;
+        case 11:
+            animal = [UIImage imageNamed:@"Cow"];
+            break;
+        case 12:
+            animal = [UIImage imageNamed:@"Butterfly"];
+            break;
+        case 13:
+            animal = [UIImage imageNamed:@"Lion"];
+            break;
+        case 14:
+            animal = [UIImage imageNamed:@"Lama"];
+            break;
+        case 15:
+            animal = [UIImage imageNamed:@"Penguin"];
+            break;
+        case 16:
+            animal = [UIImage imageNamed:@"Fish"];
+            break;
+        case 17:
+            animal = [UIImage imageNamed:@"Seal"];
+            break;
+        case 18:
+            animal = [UIImage imageNamed:@"Tortoise"];
+            break;
+        case 19:
+            animal = [UIImage imageNamed:@"Rabbit"];
+            break;
+        case 20:
+            animal = [UIImage imageNamed:@"Pig"];
+            break;
+        case 21:
+            animal = [UIImage imageNamed:@"Squirel"];
+            break;
+        case 22:
+            animal = [UIImage imageNamed:@"Donkey"];
+            break;
+        default:
+            animal = [UIImage imageNamed:@"Cat"];
+            break;
+    }
+    return animal;
+}
+
 -(NSString*) rev9Order:(NSString*)forOrder{
     NSString *revOrder;
     revOrder=@"";//blank
@@ -304,7 +556,8 @@
 -(float)randomDegrees359
 {
     float degrees = 0;
-    degrees = arc4random_uniform(360); //returns a value from 0 to 359, not 360;
+    degrees = arc4random_uniform(359); //was 359 //returns a value from 0 to 359, not 360;
+
     //NSLog(@"Degs=%f",degrees);
     return degrees;
 }
@@ -318,9 +571,9 @@
     [self updateBlockColours];
 
     blockSize1 = singleton.blockSize;
-    blockSize1 = blockSize1 / 55.00; //size picked against max size allowed here
-    if( blockSize1 <= 0){
-        blockSize1 = 0.1;
+        blockSize1 = blockSize1 / 120; // 55.00; //size picked against max size allowed here
+    if( blockSize1 <= 0.2){
+        blockSize1 = 0.2;
     }
     if( blockSize1 >= 1){
         blockSize1 = 1;
@@ -416,6 +669,8 @@
 //
 
 -(void)viewDidAppear:(BOOL)animated{
+    
+    [self initialiseBlocks];
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     [self allButtonsBackgroundReset];
@@ -1169,7 +1424,7 @@
 
     currentStatusColour     = singleton.currentStatusColour;
     statusMessageLBL.textColor=currentStatusColour;
-    statusMessageLBL.alpha=0.50;
+    statusMessageLBL.alpha=0.70;
 
     if (singleton.onScreenInfo) {
         blkNoLBL.textColor      = singleton.currentStatusColour;

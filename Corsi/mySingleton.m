@@ -47,7 +47,8 @@ static mySingleton * sharedSingleton = nil;
             email,
             forwardTestDirection,
             blockRotation,
-            onScreenInfo
+            onScreenInfo,
+            animals
             ;
 
 #pragma mark -
@@ -87,9 +88,9 @@ static mySingleton * sharedSingleton = nil;
         clickNumber = 0;
         blockRotation = NO;
         onScreenInfo  = YES;
+        animals       = NO;
         forwardTestDirection = YES;
         oldSubjectName = @"Subject 1";
-        
     }
     return self;
 }

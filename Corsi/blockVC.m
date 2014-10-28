@@ -26,7 +26,7 @@
 @synthesize blockFinishNumLBL,blockRotateSWT,blockSizeLBL,
 blockStartNumLBL,sizeMinusBTN,sizePlusBTN,startMinusBTN,
 startPlusBTN,onScreenInfoSWT,finishMinusBTN,finishPlusBTN,
-forwardTestSWT;
+forwardTestSWT,animalsSWT;
 
 -(void)viewDidAppear:(BOOL)animated{
     mySingleton *singleton = [mySingleton sharedSingleton];
@@ -46,6 +46,11 @@ forwardTestSWT;
         onScreenInfoSWT.on=YES;
     }else{
         onScreenInfoSWT.on=NO;
+    }
+    if(singleton.animals){
+        animalsSWT.on=YES;
+    }else{
+        animalsSWT.on=NO;
     }
     
     //blocks set
@@ -231,10 +236,20 @@ forwardTestSWT;
         {
         rotate = YES;
         } else {
-
         rotate = NO;
         }
     singleton.blockRotation=rotate;
 }
 
+- (IBAction)animalsSWT:(id)sender{
+    mySingleton *singleton = [mySingleton sharedSingleton];
+    BOOL animals;
+    if (animalsSWT.isOn)
+    {
+        animals = YES;
+    } else {
+        animals = NO;
+    }
+    singleton.animals=animals;
+}
 @end

@@ -28,6 +28,7 @@
     BOOL forwardTestDirection;
     BOOL blockRotation;
     BOOL onScreenInfo;
+    BOOL animals;
     
     NSString *oldSubjectName;
     NSString *subjectName;
@@ -76,6 +77,7 @@
 @property (nonatomic) BOOL      forwardTestDirection;
 @property (nonatomic) BOOL      blockRotation;
 @property (nonatomic) BOOL      onScreenInfo;
+@property (nonatomic) BOOL      animals;
 
 @property (nonatomic,retain) NSString *oldSubjectName;
 @property (nonatomic,retain) NSString *subjectName;

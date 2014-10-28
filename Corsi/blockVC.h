@@ -20,8 +20,9 @@
 - (IBAction)forwardTestSWT:(id)sender;
 - (IBAction)onScreenInfoSWT:(id)sender;
 - (IBAction)blockRotateSWT:(id)sender;
+- (IBAction)animalsSWT:(id)sender;
 
--(void)buttonIncCheck;
+- (void)buttonIncCheck;
 
 @property (retain, nonatomic) IBOutlet UILabel *blockStartNumLBL;
 @property (retain, nonatomic) IBOutlet UILabel *blockFinishNumLBL;
@@ -37,4 +38,5 @@
 @property (weak, nonatomic) IBOutlet UISwitch *forwardTestSWT;
 @property (weak, nonatomic) IBOutlet UISwitch *onScreenInfoSWT;
 @property (weak, nonatomic) IBOutlet UISwitch *blockRotateSWT;
+@property (weak, nonatomic) IBOutlet UISwitch *animalsSWT;
 @end

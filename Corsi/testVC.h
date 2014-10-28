@@ -44,15 +44,17 @@
 @property (strong, nonatomic) IBOutlet UIButton * startBTN;
 
 //images for the boxes
-@property (strong, nonatomic) IBOutlet UIView  * box1image;
-@property (strong, nonatomic) IBOutlet UIView  * box2image;
-@property (strong, nonatomic) IBOutlet UIView  * box3image;
-@property (strong, nonatomic) IBOutlet UIView  * box4image;
-@property (strong, nonatomic) IBOutlet UIView  * box5image;
-@property (strong, nonatomic) IBOutlet UIView  * box6image;
-@property (strong, nonatomic) IBOutlet UIView  * box7image;
-@property (strong, nonatomic) IBOutlet UIView  * box8image;
-@property (strong, nonatomic) IBOutlet UIView  * box9image;
+@property (strong, nonatomic) IBOutlet UIImageView   * box1iv;
+@property (strong, nonatomic) IBOutlet UIImageView   * box1image;
+@property (strong, nonatomic) IBOutlet UIImageView   * box2image;
+@property (strong, nonatomic) IBOutlet UIImageView   * box3image;
+@property (strong, nonatomic) IBOutlet UIImageView   * box4image;
+@property (strong, nonatomic) IBOutlet UIImageView   * box5image;
+@property (strong, nonatomic) IBOutlet UIImageView   * box6image;
+@property (strong, nonatomic) IBOutlet UIImageView   * box7image;
+@property (strong, nonatomic) IBOutlet UIImageView   * box8image;
+@property (strong, nonatomic) IBOutlet UIImageView   * box9image;
+
 @property (strong, nonatomic) IBOutlet UIView  * testViewerView;
 
 @property (nonatomic) float scaleFactor;
@@ -101,6 +103,7 @@
 -(void)buttonsEnable;
 -(void)buttonsDisable;
 -(int)randomPt;
-
+-(UIImage*)getAnimal;
+-(void)setColours;
 
 @end
