@@ -81,6 +81,8 @@
 -(float) delayDelay;
 -(float) delayWait;
 -(float) delayShow;
+-(float) random9;
+-(int) random22;
 
 -(NSString*) make9order;
 -(NSString*) rev9Order:(NSString*)forOrder;
@@ -103,7 +105,7 @@
 -(void)buttonsEnable;
 -(void)buttonsDisable;
 -(int)randomPt;
--(UIImage*)getAnimal;
+-(UIImage*)getAnimal:(int)animalNo;
 -(void)setColours;
 
 @end

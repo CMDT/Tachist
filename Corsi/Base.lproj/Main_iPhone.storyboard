@@ -1053,23 +1053,28 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cCq-n8-ayX">
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cCq-n8-ayX" userLabel="ForwardSwitch">
                                 <rect key="frame" x="236" y="76" width="51" height="31"/>
                                 <connections>
                                     <action selector="forwardTestSWT:" destination="AeB-vP-vxl" eventType="valueChanged" id="8de-eK-pCS"/>
                                 </connections>
                             </switch>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GM3-i7-do6">
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GM3-i7-do6" userLabel="InfoSwitch">
                                 <rect key="frame" x="234" y="140" width="51" height="31"/>
                                 <connections>
                                     <action selector="onScreenInfoSWT:" destination="AeB-vP-vxl" eventType="valueChanged" id="Owc-4Z-iIt"/>
                                 </connections>
                             </switch>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="xdV-1Q-cjf">
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="xdV-1Q-cjf" userLabel="RotateSwitch">
                                 <rect key="frame" x="235" y="263" width="51" height="31"/>
                                 <connections>
-                                    <action selector="animalsSWT:" destination="AeB-vP-vxl" eventType="valueChanged" id="EAi-sP-qaZ"/>
                                     <action selector="blockRotateSWT:" destination="AeB-vP-vxl" eventType="valueChanged" id="gRD-HH-542"/>
+                                </connections>
+                            </switch>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HWX-rH-kjL" userLabel="AnimalsSwitch">
+                                <rect key="frame" x="234" y="202" width="51" height="31"/>
+                                <connections>
+                                    <action selector="animalsSWT:" destination="AeB-vP-vxl" eventType="valueChanged" id="BnO-vb-NUF"/>
                                 </connections>
                             </switch>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Information" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hsD-s1-3N4">
@@ -1077,9 +1082,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HWX-rH-kjL">
-                                <rect key="frame" x="234" y="202" width="51" height="31"/>
-                            </switch>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Animals" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SNg-j7-KhH">
                                 <rect key="frame" x="215" y="175" width="88" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1127,7 +1129,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="LhO-v0-eIv"/>
                     <connections>
-                        <outlet property="animalsSWT" destination="xdV-1Q-cjf" id="4Ez-FE-19k"/>
+                        <outlet property="animalsSWT" destination="HWX-rH-kjL" id="cmc-M8-TXW"/>
                         <outlet property="blockFinishNumLBL" destination="mZm-DS-8ej" id="Frp-b2-IWN"/>
                         <outlet property="blockRotateSWT" destination="xdV-1Q-cjf" id="w05-6Z-FNh"/>
                         <outlet property="blockSizeLBL" destination="wYP-2c-jTq" id="bHc-2c-PJc"/>
@@ -1431,7 +1433,6 @@ When all the sequence has been shown, try and remember the sequence and press th
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Pd-MY-wKc" userLabel="Image View message"/>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LC7-qr-unq" userLabel="Image View b7">
                                 <rect key="frame" x="56" y="292" width="64" height="64"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -1439,6 +1440,9 @@ When all the sequence has been shown, try and remember the sequence and press th
                                     <constraint firstAttribute="height" constant="64" id="eO7-Li-iKs"/>
                                     <constraint firstAttribute="width" constant="64" id="guE-H2-eCS"/>
                                 </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Pd-MY-wKc" userLabel="Image View message">
+                                <rect key="frame" x="16" y="68" width="288" height="300"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.89411771299999998" green="0.9450981021" blue="0.97254908080000002" alpha="1" colorSpace="deviceRGB"/>

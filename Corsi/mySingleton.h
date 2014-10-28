@@ -15,16 +15,29 @@
     UIColor *currentBlockColour;
     UIColor *currentShowColour;
     UIColor *currentStatusColour;
-    
-    int start;
-    int finish;
+
+    long double timerTime;
+
+    int   clickNumber;
+    int   start;
+    int   finish;
+
+    int blockx[9];
+    int blocky[9];
+    int adjustx[9];
+    int adjusty[9];
+    int blockRot[9];
+
     float blockSize;
     float waitTime;
     float startTime;
     float showTime;
     float messageTime;
-    int clickNumber;
-    
+
+    Float32 *testTimez[7][9];
+    Float32 *testTimerz[7][9];
+    Float32 *timeGuess[7][9];
+
     BOOL forwardTestDirection;
     BOOL blockRotation;
     BOOL onScreenInfo;
@@ -37,16 +50,6 @@
     NSString *testDate;
     NSString *testTime;
     NSString *email;
-    Float32 *testTimez[7][9];
-    Float32 *testTimerz[7][9];
-    Float32 *timeGuess[7][9];
-    int blockx[9];
-    int blocky[9];
-    int adjustx[9];
-    int adjusty[9];
-    int blockRot[9];
-
-    long double timerTime;
     
     UIView *bl1;
     UIView *bl2;
@@ -98,7 +101,6 @@
 @property (nonatomic, retain) UIView *bl7;
 @property (nonatomic, retain) UIView *bl8;
 @property (nonatomic, retain) UIView *bl9;
-
 
 //set up singleton shared
 

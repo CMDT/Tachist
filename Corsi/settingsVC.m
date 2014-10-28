@@ -20,6 +20,7 @@
 #define kForward    @"forwardTestEnabled"
 #define kInfo       @"infoEnabled"
 #define kRot        @"rotationEnabled"
+#define kAnimals    @"animalsEnabled"
 
 #define kBlockCol   @"blockColour"
 #define kShowCol    @"highlightColour"
@@ -30,6 +31,7 @@
 #define kShow       @"blockShow"
 
 #define kVersion    @"version"
+
 @interface settingsVC ()
 
 @end
@@ -54,7 +56,8 @@
     
     BOOL forward;
     BOOL info;
-    bool rotation;
+    BOOL rotation;
+    BOOL animals;
     
     NSString *blockCol;
     NSString *showCol;
@@ -84,12 +87,10 @@
 @synthesize block1View,block2View,block3View,block4View,block5View;
 @synthesize block6View,block7View,block8View,block9View,settingsViewerVIEW;
 @synthesize  blockSizeLBL,blockFinishNumLBL,blockStartNumLBL,blockShowLBL,
-blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL;
-//@synthesize bl1,bl2,bl3,bl4,bl5,bl6,bl7,bl8,bl9,CBTView,infoFinishLBL,infoRoundLBL,infoSelectLBL,infoStartLBL,myMessageLBL;
+blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL;
 
 -(void)viewWillAppear:(BOOL)animated{
-    //set up the screen from the singleton
-    //only save if SAVE button pressed
+    //when the view loads, before display does the code here
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -125,11 +126,16 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL;
     }
     //rotation flag
     if(singleton.blockRotation==YES){
-        rotateLBL.text=@"Rotate";
+        rotateLBL.text=@"Rotated";
     } else {
-        rotateLBL.text=@"Square";
+        rotateLBL.text=@"Level";
     }
-    
+    //animals flag
+    if(singleton.animals==YES){
+        animalsLBL.text=@"Animals";
+    } else {
+        animalsLBL.text=@"Square";
+    }
     //start, finish and sizes on screen from singleton
     blockStartNumLBL.text=[NSString stringWithFormat:@"%d",singleton.start];
     blockFinishNumLBL.text=[NSString stringWithFormat:@"%d",singleton.finish];
@@ -155,7 +161,6 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 - (void)setDefaults{
     //also used in Load Settings from k data store
@@ -249,6 +254,12 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL;
         rotation =  NO;
         [defaults setBool:NO forKey:kRot];
     }
+    //set animals
+    temp        = [defaults objectForKey:kAnimals];
+    if( temp == nil ){
+        animals =  NO;
+        [defaults setBool:NO forKey:kAnimals];
+    }
     //set status messages
     temp        = [defaults objectForKey:kInfo];
     if( temp == nil ){
@@ -273,6 +284,7 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL;
     NSLog(@"forward     :%@",[defaults objectForKey:kForward]);
     NSLog(@"info        :%@",[defaults objectForKey:kInfo]);
     NSLog(@"rotation    :%@",[defaults objectForKey:kRot]);
+    NSLog(@"animals     :%@",[defaults objectForKey:kAnimals]);
     NSLog(@"block col   :%@",[defaults objectForKey:kBlockCol]);
     NSLog(@"show col    :%@",[defaults objectForKey:kShowCol]);
     NSLog(@"back col    :%@",[defaults objectForKey:kBackCol]);
@@ -488,6 +500,8 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL;
 
         [defaults setBool:NO forKey:kRot];
 
+        [defaults setBool:NO forKey:kAnimals];
+
         [defaults setBool:YES forKey:kInfo];
 
         [defaults setBool:YES forKey:kForward];
@@ -597,6 +611,12 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL;
         rotation =  NO;
         [defaults setBool:NO forKey:kRot];
     }
+    //set animals
+    temp        = [defaults objectForKey:kAnimals];
+    if( temp == nil ){
+        animals =  NO;
+        [defaults setBool:NO forKey:kAnimals];
+    }
     //set status messages
     temp        = [defaults objectForKey:kInfo];
     if( temp == nil ){
@@ -621,6 +641,7 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL;
     singleton.forwardTestDirection    = [defaults  boolForKey:kForward];
     singleton.onScreenInfo            = [defaults  boolForKey:kInfo];
     singleton.blockRotation           = [defaults  boolForKey:kRot];
+    singleton.animals                 = [defaults  boolForKey:kAnimals];
     singleton.currentBlockColour      = currentBlockColour;
     singleton.currentShowColour       = currentShowColour;
     singleton.currentBackgroundColour = currentBackgroundColour;

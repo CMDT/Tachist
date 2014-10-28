@@ -206,6 +206,16 @@
 			<key>Title</key>
 			<string>Block Rotation Enabled</string>
 		</dict>
+        <dict>
+            <key>DefaultValue</key>
+            <false/>
+            <key>Key</key>
+            <string>animalsEnabled</string>
+            <key>Type</key>
+            <string>PSToggleSwitchSpecifier</string>
+            <key>Title</key>
+            <string>Animal Shapes Enabled</string>
+        </dict>
 		<dict>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>

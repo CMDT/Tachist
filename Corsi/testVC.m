@@ -163,16 +163,49 @@
     
     if (animals) {
         //draw an animal picture in the view
-        
-        box1image.image = [self getAnimal];//[UIImage imageNamed:@"Fox"];
-        box2image.image = [self getAnimal];
-        box3image.image = [self getAnimal];
-        box4image.image = [self getAnimal];
-        box5image.image = [self getAnimal];
-        box6image.image = [self getAnimal];
-        box7image.image = [self getAnimal];
-        box8image.image = [self getAnimal];
-        box9image.image = [self getAnimal];
+        int startAnimal;
+        startAnimal=[self random22];
+        box1image.image = [self getAnimal:startAnimal];//[UIImage imageNamed:@"Fox"];
+        int a=startAnimal+1;
+        if (a>21) {
+            a=1;
+        }
+        box2image.image = [self getAnimal:a];
+        a=a+1;
+        if (a>21) {
+            a=1;
+        }
+        box3image.image = [self getAnimal:a];
+        a=a+1;
+        if (a>21) {
+            a=1;
+        }
+        box4image.image = [self getAnimal:a];
+        a=a+1;
+        if (a>21) {
+            a=1;
+        }
+        box5image.image = [self getAnimal:a];
+        a=a+1;
+        if (a>21) {
+            a=1;
+        }
+        box6image.image = [self getAnimal:a];
+        a=a+1;
+        if (a>21) {
+            a=1;
+        }
+        box7image.image = [self getAnimal:a];
+        a=a+1;
+        if (a>21) {
+            a=1;
+        }
+        box8image.image = [self getAnimal:a];
+        a=a+1;
+        if (a>21) {
+            a=1;
+        }
+        box9image.image = [self getAnimal:a];
     }
     /*
      
@@ -324,16 +357,49 @@
 
     if (animals) {
     //draw an animal picture in the view
-        
-        box1image.image = [self getAnimal];//[UIImage imageNamed:@"Fox"];
-        box2image.image = [self getAnimal];
-        box3image.image = [self getAnimal];
-        box4image.image = [self getAnimal];
-        box5image.image = [self getAnimal];
-        box6image.image = [self getAnimal];
-        box7image.image = [self getAnimal];
-        box8image.image = [self getAnimal];
-        box9image.image = [self getAnimal];
+        int startAnimal;
+        startAnimal=[self random22];
+        box1image.image = [self getAnimal:startAnimal];//[UIImage imageNamed:@"Fox"];
+        int a=startAnimal+1;
+        if (a>22) {
+            a=1;
+        }
+        box2image.image = [self getAnimal:a];
+        a=a+1;
+        if (a>22) {
+            a=1;
+        }
+        box3image.image = [self getAnimal:a];
+        a=a+1;
+        if (a>22) {
+            a=1;
+        }
+        box4image.image = [self getAnimal:a];
+        a=a+1;
+        if (a>22) {
+            a=1;
+        }
+        box5image.image = [self getAnimal:a];
+        a=a+1;
+        if (a>22) {
+            a=1;
+        }
+        box6image.image = [self getAnimal:a];
+        a=a+1;
+        if (a>22) {
+            a=1;
+        }
+        box7image.image = [self getAnimal:a];
+        a=a+1;
+        if (a>22) {
+            a=1;
+        }
+        box8image.image = [self getAnimal:a];
+        a=a+1;
+        if (a>22) {
+            a=1;
+        }
+        box9image.image = [self getAnimal:a];
     }
     /*
      
@@ -433,17 +499,15 @@
     //  [self sizeAllBlocks];
 }
 
--(UIImage*)getAnimal{
-    //pick an animal at random and return its image
+-(UIImage*)getAnimal:(int)animalNo{
+    //pick an animal and return its image
     UIImage *animal;
-    int animalNo = 0;
-    animalNo = arc4random_uniform(22);
     switch (animalNo) {
         case 1:
             animal = [UIImage imageNamed:@"Elephant"];
             break;
         case 2:
-            animal = [UIImage imageNamed:@"Cat"];
+            animal = [UIImage imageNamed:@"Donkey"];
             break;
         case 3:
             animal = [UIImage imageNamed:@"Frog"];
@@ -501,9 +565,6 @@
             break;
         case 21:
             animal = [UIImage imageNamed:@"Squirel"];
-            break;
-        case 22:
-            animal = [UIImage imageNamed:@"Donkey"];
             break;
         default:
             animal = [UIImage imageNamed:@"Cat"];
@@ -571,7 +632,7 @@
     [self updateBlockColours];
 
     blockSize1 = singleton.blockSize;
-        blockSize1 = blockSize1 / 120; // 55.00; //size picked against max size allowed here
+        blockSize1 = blockSize1 / 55; // 55.00; //size picked against max size allowed here
     if( blockSize1 <= 0.2){
         blockSize1 = 0.2;
     }
@@ -1322,6 +1383,19 @@
         while (num>0)
             {
             num = arc4random_uniform(10); //1-9
+            }
+        }
+    return num;
+}
+
+-(int)random22
+{
+    float num = 1;
+    for (int r=1; r<+arc4random_uniform(435); r++)
+        {
+        while (num>0)
+            {
+            num = arc4random_uniform(22); //1-21
             }
         }
     return num;

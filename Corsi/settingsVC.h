@@ -20,6 +20,7 @@
 #define kForward    @"forwardTestEnabled"
 #define kInfo       @"infoEnabled"
 #define kRot        @"rotationEnabled"
+#define kAnimals    @"animalsEnabled"
 
 #define kBlockCol   @"blockColour"
 #define kShowCol    @"highlightColour"
@@ -50,6 +51,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *forwardLBL;
 @property (strong, nonatomic) IBOutlet UILabel *infoLBL;
 @property (strong, nonatomic) IBOutlet UILabel *rotateLBL;
+@property (strong, nonatomic) IBOutlet UILabel *animalsLBL;
 
 @property (retain, nonatomic) IBOutlet UIView *block1View;
 @property (retain, nonatomic) IBOutlet UIView *block2View;
