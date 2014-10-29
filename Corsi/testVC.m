@@ -200,39 +200,7 @@
 {
     [super viewDidLoad];
     mySingleton *singleton = [mySingleton sharedSingleton];
-    /*
-    // Do any additional setup after loading the view.
-    statusMessageLBL.text = @"CORSI Block Test";
-    
 
-    //check for direction of test and title the test appropiately
-    if (singleton.forwardTestDirection) {
-        headingLBL.text=@"CORSI FORWARD BLOCK TEST";
-    }else{
-        headingLBL.text=@"CORSI REVERSE BLOCK TEST";
-    }
-    
-    animals=singleton.animals;
-    
-    [self putAnimals];//place the correct random animal in the view
-    
-    [self setColours];
-
-    [self allButtonsBackgroundReset];
-
-    [self putBlocksInPlace];
-    
-
-    box1image.transform = CGAffineTransformTranslate(box1image.transform,[self randomPt], [self randomPt]);
-    box2image.transform = CGAffineTransformTranslate(box2image.transform,[self randomPt], [self randomPt]);
-    box3image.transform = CGAffineTransformTranslate(box3image.transform,[self randomPt], [self randomPt]);
-    box4image.transform = CGAffineTransformTranslate(box4image.transform,[self randomPt], [self randomPt]);
-    box5image.transform = CGAffineTransformTranslate(box5image.transform,[self randomPt], [self randomPt]);
-    box6image.transform = CGAffineTransformTranslate(box6image.transform,[self randomPt], [self randomPt]);
-    box7image.transform = CGAffineTransformTranslate(box7image.transform,[self randomPt], [self randomPt]);
-    box8image.transform = CGAffineTransformTranslate(box8image.transform,[self randomPt], [self randomPt]);
-    box9image.transform = CGAffineTransformTranslate(box9image.transform,[self randomPt], [self randomPt]);
-*/
     infoShow=singleton.onScreenInfo;
 
     //make 9 sets of number strings
@@ -648,10 +616,9 @@
     }else{
         statusMessageLBL.text = @"";
     }
-    //hide the buttons
+    
     [self display_blocks];
-    //[self hide_blocks];
-
+    
     [self hideInfo];
     [self allButtonsBackgroundReset];// background colour reset to std
 
