@@ -77,7 +77,7 @@
 -(void)hideInfo;
 -(void)awakeFromNib;
 -(void)putAnimals;
--(void)getAnimals;
+//-(void)getAnimals;
 -(float) delayDelay;
 -(float) delayWait;
 -(float) delayShow;
@@ -93,7 +93,7 @@
 -(void)box1;
 
 -(void)but1;
--(void)setBlockOrigins;
+//-(void)setBlockOrigins;
 -(void)nextStageMSG;
 -(void)stageEndMSG;
 -(void)endTestMSG;

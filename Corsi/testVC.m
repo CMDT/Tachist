@@ -113,7 +113,6 @@
     return self;
 }
 
-
 -(void)initialiseBlocks{
     statusMessageLBL.text = @"CORSI Block Test";
     mySingleton *singleton = [mySingleton sharedSingleton];
@@ -124,127 +123,31 @@
     }else{
         headingLBL.text=@"CORSI REVERSE BLOCK TEST";
     }
-    float sizer;
-    
-    float viewHeight=testViewerView.frame.size.height;
-    float viewWidth=testViewerView.frame.size.width;
-    
+
     animals=singleton.animals;
     
-    sizer=singleton.blockSize*viewWidth/100;
-    /*
-     float row2=viewHeight*35/100;
-     float col2=(viewWidth/2)-38;
-     float col1=38;
-     float col3=viewWidth-38-(sizer);
-     float row1=viewHeight*15/100;
-     float row3=viewHeight*50/100;
-     
-     box1image =[[UIImageView alloc] initWithFrame:CGRectMake(col1,row1,sizer,sizer)];
-     box4image =[[UIImageView alloc] initWithFrame:CGRectMake(col1,row2,sizer,sizer)];
-     box7image =[[UIImageView alloc] initWithFrame:CGRectMake(col1,row3,sizer,sizer)];
-     box2image =[[UIImageView alloc] initWithFrame:CGRectMake(col2,row1,sizer,sizer)];
-     box5image =[[UIImageView alloc] initWithFrame:CGRectMake(col2,row2,sizer,sizer)];
-     box8image =[[UIImageView alloc] initWithFrame:CGRectMake(col2,row3,sizer,sizer)];
-     box3image =[[UIImageView alloc] initWithFrame:CGRectMake(col3,row1,sizer,sizer)];
-     box6image =[[UIImageView alloc] initWithFrame:CGRectMake(col3,row2,sizer,sizer)];
-     box9image =[[UIImageView alloc] initWithFrame:CGRectMake(col3,row3,sizer,sizer)];
-     
-     [self.view addSubview:box1image];
-     [self.view addSubview:box2image];
-     [self.view addSubview:box3image];
-     [self.view addSubview:box4image];
-     [self.view addSubview:box5image];
-     [self.view addSubview:box6image];
-     [self.view addSubview:box7image];
-     [self.view addSubview:box8image];
-     [self.view addSubview:box9image];
-     */
-    
     [self putAnimals];//place the correct random animal in the view
-        /*
-     
-         
-     float sizer;
-     
-     sizer=64; //singleton.blockSize;
-     
-     box1image.frame= CGRectMake(100, 100, sizer, sizer);
-     
-     box1image.frame = CGRectMake(box1image.frame.size.height,box1image.frame.size.width, sizer, sizer);
-     box2image.frame = CGRectMake(box2image.frame.size.height,box2image.frame.size.width, sizer, sizer);
-     box3image.frame = CGRectMake(box3image.frame.size.height,box3image.frame.size.width, sizer, sizer);
-     box4image.frame = CGRectMake(box4image.frame.size.height,box4image.frame.size.width, sizer, sizer);
-     box5image.frame = CGRectMake(box5image.frame.size.height,box5image.frame.size.width, sizer, sizer);
-     box6image.frame = CGRectMake(box6image.frame.size.height,box6image.frame.size.width, sizer, sizer);
-     box7image.frame = CGRectMake(box7image.frame.size.height,box7image.frame.size.width, sizer, sizer);
-     box8image.frame = CGRectMake(box8image.frame.size.height,box8image.frame.size.width, sizer, sizer);
-     box9image.frame = CGRectMake(box9image.frame.size.height,box9image.frame.size.width, sizer, sizer);
-     */
     
     [self setColours];
     
     [self allButtonsBackgroundReset];
     
-    box1image.transform = CGAffineTransformMakeScale(0,0);
-    box2image.transform = CGAffineTransformMakeScale(0,0);
-    box3image.transform = CGAffineTransformMakeScale(0,0);
-    box4image.transform = CGAffineTransformMakeScale(0,0);
-    box5image.transform = CGAffineTransformMakeScale(0,0);
-    box6image.transform = CGAffineTransformMakeScale(0,0);
-    box7image.transform = CGAffineTransformMakeScale(0,0);
-    box8image.transform = CGAffineTransformMakeScale(0,0);
-    box9image.transform = CGAffineTransformMakeScale(0,0);
-    
     [self putBlocksInPlace];
     
-        float sizeb = singleton.blockSize;
-    switch ((int)sizeb) {
-        case 10:
-            sizeb=100;
-            break;
-        case 15:
-            sizeb=80;
-            break;
-        case 20:
-            sizeb=60;
-            break;
-        case 25:
-            sizeb=50;
-            break;
-        case 30:
-            sizeb=45;
-            break;
-        case 35:
-            sizeb=40;
-            break;
-        case 40:
-            sizeb=35;
-            break;
-        case 45:
-            sizeb=30;
-            break;
-        case 50:
-            sizeb=25;
-            break;
-        case 55:
-            sizeb=20;
-            break;
-            
-        default:
-            sizeb=0;
-            break;
+      int sizeb=0;
+    if (!singleton.blockRotation) {
+        box1image.transform = CGAffineTransformTranslate(box1image.transform,[self randomPt]-sizeb, [self randomPt]);
+        box2image.transform = CGAffineTransformTranslate(box2image.transform,[self randomPt]-sizeb, [self randomPt]);
+        box3image.transform = CGAffineTransformTranslate(box3image.transform,[self randomPt]-sizeb, [self randomPt]);
+        box4image.transform = CGAffineTransformTranslate(box4image.transform,[self randomPt]-sizeb, [self randomPt]);
+        box5image.transform = CGAffineTransformTranslate(box5image.transform,[self randomPt]-sizeb, [self randomPt]);
+        box6image.transform = CGAffineTransformTranslate(box6image.transform,[self randomPt]-sizeb, [self randomPt]);
+        box7image.transform = CGAffineTransformTranslate(box7image.transform,[self randomPt]-sizeb, [self randomPt]);
+        box8image.transform = CGAffineTransformTranslate(box8image.transform,[self randomPt]-sizeb, [self randomPt]);
+        box9image.transform = CGAffineTransformTranslate(box9image.transform,[self randomPt]-sizeb, [self randomPt]);
     }
     
-    box1image.transform = CGAffineTransformTranslate(box1image.transform,[self randomPt]-sizeb, [self randomPt]);
-    box2image.transform = CGAffineTransformTranslate(box2image.transform,[self randomPt]-sizeb, [self randomPt]);
-    box3image.transform = CGAffineTransformTranslate(box3image.transform,[self randomPt]-sizeb, [self randomPt]);
-    box4image.transform = CGAffineTransformTranslate(box4image.transform,[self randomPt]-sizeb, [self randomPt]);
-    box5image.transform = CGAffineTransformTranslate(box5image.transform,[self randomPt]-sizeb, [self randomPt]);
-    box6image.transform = CGAffineTransformTranslate(box6image.transform,[self randomPt]-sizeb, [self randomPt]);
-    box7image.transform = CGAffineTransformTranslate(box7image.transform,[self randomPt]-sizeb, [self randomPt]);
-    box8image.transform = CGAffineTransformTranslate(box8image.transform,[self randomPt]-sizeb, [self randomPt]);
-    box9image.transform = CGAffineTransformTranslate(box9image.transform,[self randomPt]-sizeb, [self randomPt]);
+    //[self putBlocksInPlace];
     
     infoShow=singleton.onScreenInfo;
     
@@ -254,47 +157,7 @@
         reverse[x]=[self rev9Order:order[x]];
         NSLog(@"Order returned for Set: %d is:%@, reverse:%@",x, order[x], reverse[x]);
     }
-    //testing yto see what was made, can be turned off
-    NSLog(@"Order returned=First Set");
-    int no1=[self whichBlock:1 :1];
-    NSLog(@"No.1=%i",no1);
-    int no2=[self whichBlock:2 :1];
-    NSLog(@"No.2=%i",no2);
-    int no3=[self whichBlock:3 :1];
-    NSLog(@"No.3=%i",no3);
-    int no4=[self whichBlock:4 :1];
-    NSLog(@"No.4=%i",no4);
-    int no5=[self whichBlock:5 :1];
-    NSLog(@"No.5=%i",no5);
-    int no6=[self whichBlock:6 :1];
-    NSLog(@"No.6=%i",no6);
-    int no7=[self whichBlock:7 :1];
-    NSLog(@"No.7=%i",no7);
-    int no8=[self whichBlock:8 :1];
-    NSLog(@"No.8=%i",no8);
-    int no9=[self whichBlock:9 :1];
-    NSLog(@"No.9=%i",no9);
-    
-    NSLog(@"Order returned=Second Set");
-    no1=[self whichBlock:1 :2];
-    NSLog(@"No.1=%i",no1);
-    no2=[self whichBlock:2 :2];
-    NSLog(@"No.2=%i",no2);
-    no3=[self whichBlock:3 :2];
-    NSLog(@"No.3=%i",no3);
-    no4=[self whichBlock:4 :2];
-    NSLog(@"No.4=%i",no4);
-    no5=[self whichBlock:5 :2];
-    NSLog(@"No.5=%i",no5);
-    no6=[self whichBlock:6 :2];
-    NSLog(@"No.6=%i",no6);
-    no7=[self whichBlock:7 :2];
-    NSLog(@"No.7=%i",no7);
-    no8=[self whichBlock:8 :2];
-    NSLog(@"No.8=%i",no8);
-    no9=[self whichBlock:9 :2];
-    NSLog(@"No.9=%i",no9);
-    
+
     // don't bother, too difficult to do yet //[self rotAllBlocks];
     //  [self sizeAllBlocks];
 }
@@ -336,9 +199,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    mySingleton *singleton = [mySingleton sharedSingleton];
+    /*
     // Do any additional setup after loading the view.
     statusMessageLBL.text = @"CORSI Block Test";
-    mySingleton *singleton = [mySingleton sharedSingleton];
+    
 
     //check for direction of test and title the test appropiately
     if (singleton.forwardTestDirection) {
@@ -355,17 +220,8 @@
 
     [self allButtonsBackgroundReset];
 
-    box1image.transform = CGAffineTransformMakeScale(0,0);
-    box2image.transform = CGAffineTransformMakeScale(0,0);
-    box3image.transform = CGAffineTransformMakeScale(0,0);
-    box4image.transform = CGAffineTransformMakeScale(0,0);
-    box5image.transform = CGAffineTransformMakeScale(0,0);
-    box6image.transform = CGAffineTransformMakeScale(0,0);
-    box7image.transform = CGAffineTransformMakeScale(0,0);
-    box8image.transform = CGAffineTransformMakeScale(0,0);
-    box9image.transform = CGAffineTransformMakeScale(0,0);
-
     [self putBlocksInPlace];
+    
 
     box1image.transform = CGAffineTransformTranslate(box1image.transform,[self randomPt], [self randomPt]);
     box2image.transform = CGAffineTransformTranslate(box2image.transform,[self randomPt], [self randomPt]);
@@ -376,7 +232,7 @@
     box7image.transform = CGAffineTransformTranslate(box7image.transform,[self randomPt], [self randomPt]);
     box8image.transform = CGAffineTransformTranslate(box8image.transform,[self randomPt], [self randomPt]);
     box9image.transform = CGAffineTransformTranslate(box9image.transform,[self randomPt], [self randomPt]);
-
+*/
     infoShow=singleton.onScreenInfo;
 
     //make 9 sets of number strings
@@ -471,7 +327,7 @@
 }
 
 -(IBAction)startTest:sender{
-        mySingleton *singleton = [mySingleton sharedSingleton];
+    mySingleton *singleton = [mySingleton sharedSingleton];
 
     NSLog(@"Test has started");
     statusMessageLBL.text = @"The Test Has Started";
@@ -541,15 +397,8 @@
     }
         
     //UITouch *touch = [touches anyObject];//some old example code if you used a touch rather than an image reference
+    //make sure rotation is about the centre axis. 0,0 is bot left, .5,.5 is ctr, 1,1 is top rt, 1,.5 is mid right.
         
-
-        
-    [UIView animateWithDuration:1.0
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveEaseInOut
-                     animations:^{
-        if(singleton.blockRotation){
-        /*
         box1image.layer.anchorPoint = CGPointMake(.5,.5);
         box2image.layer.anchorPoint = CGPointMake(.5,.5);
         box3image.layer.anchorPoint = CGPointMake(.5,.5);
@@ -558,9 +407,13 @@
         box6image.layer.anchorPoint = CGPointMake(.5,.5);
         box7image.layer.anchorPoint = CGPointMake(.5,.5);
         box8image.layer.anchorPoint = CGPointMake(.5,.5);
-        box9image.layer.anchorPoint = CGPointMake(.5,.5);*/
-        }
-
+        box9image.layer.anchorPoint = CGPointMake(.5,.5);
+      
+    [UIView animateWithDuration:1.0
+                        delay:0.0
+                         options:UIViewAnimationOptionCurveEaseInOut
+ 
+                     animations:^{
                          
                          CGAffineTransform scaleTrans = CGAffineTransformMakeScale(scaleFactor, scaleFactor);
 
@@ -573,7 +426,8 @@
                          CGAffineTransform rotateTrans7 = CGAffineTransformMakeRotation(angle[7] * M_PI / 180);
                          CGAffineTransform rotateTrans8 = CGAffineTransformMakeRotation(angle[8] * M_PI / 180);
                          CGAffineTransform rotateTrans9 = CGAffineTransformMakeRotation(angle[9] * M_PI / 180);
-
+                         
+                      
                          box1image.transform = CGAffineTransformConcat(scaleTrans, rotateTrans1);
                          box2image.transform = CGAffineTransformConcat(scaleTrans, rotateTrans2);
                          box3image.transform = CGAffineTransformConcat(scaleTrans, rotateTrans3);
@@ -1356,7 +1210,7 @@
     
     NSLog(@"Random Pt:%i",posrand);
     //*********************************************
-    return 0;//************************************ posrand;
+    return posrand;
 }
 
 -(void)updateBlockColours{
