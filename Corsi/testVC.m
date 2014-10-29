@@ -134,7 +134,7 @@
     
     [self putBlocksInPlace];
     
-      int sizeb=0;
+    int sizeb=0;
     if (!singleton.blockRotation) {
         box1image.transform = CGAffineTransformTranslate(box1image.transform,[self randomPt]-sizeb, [self randomPt]);
         box2image.transform = CGAffineTransformTranslate(box2image.transform,[self randomPt]-sizeb, [self randomPt]);
@@ -165,15 +165,15 @@
 -(void)putAnimals{
     if (animals) {
         //draw an animal picture in the view
-        long ani[22];
+        int ani[22];
         NSLog(@"start");
         for (int b=0; b<22; b++) {
             ani[b]=b;
-            NSLog(@"animal:%ld", ani[b]);
+            NSLog(@"animal:%d", ani[b]);
         }
         int temp=0;
         int tt=0;
-        for (int b=0; b<1001; b++) {
+        for (int b=0; b<2541; b++) {
             tt=[self random22];
             temp=ani[tt-1];
             ani[tt-1]=ani[tt];
@@ -181,7 +181,7 @@
         }
         NSLog(@"mix");
         for (int b=0; b<22; b++) {
-            NSLog(@"animal:%ld", ani[b]);
+            NSLog(@"animal:%d", ani[b]);
         }
         NSLog(@"end");
         box1image.image = [self getAnimal:ani[1]];
@@ -666,7 +666,7 @@
     //update all counters
     ncounter = ncounter+1;   //block number 3-9 range
     
-    if(ncounter>xcounter+1){ //starts at 3 for 3 blocks, end stage, then new set, 3 for 4 blocks etc.
+    if(ncounter>=xcounter+1){ //starts at 3 for 3 blocks, end stage, then new set, 3 for 4 blocks etc.
         ncounter=1;
         xcounter=xcounter+1; //stage counter 3-9 range
     }
@@ -705,7 +705,7 @@
     blkNoLBL.text    = [NSString stringWithFormat:@"%d", ncounter];
     setNoLBL.text    = [NSString stringWithFormat:@"%d", xcounter-2];
     setTotalLBL.text = [NSString stringWithFormat:@"%d", finish-3];
-        [self showInfo];
+    [self showInfo];
     //hide all messages except blocks
     MessageTextView.hidden=YES;
     MessageView.hidden=YES;
@@ -1009,6 +1009,8 @@
     }else{
         statusMessageLBL.text = @"Observe";
     }
+    ncounter=1;
+    pressNo=1;
     [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(blankMSG) userInfo:nil repeats:NO];
 }
 
@@ -1092,6 +1094,7 @@
     [self display_blocks];
     MessageView.hidden=YES;
     pressNo = 1; //reset counter for next time
+    ncounter=1;
     [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(nextStageMSG) userInfo:nil repeats:NO];
 }
 
