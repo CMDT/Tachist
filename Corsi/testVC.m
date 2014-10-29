@@ -625,18 +625,18 @@
     MessageTextView.hidden=YES;
     MessageView.hidden=YES;
     startBTN.hidden=YES;
-    
+    isFinished=NO;
     [self showInfo];
     
     //zero counters
     xcounter = start; //default is 3 but could be 3-9 range depending on settings
     ncounter = 1;
-    pressNo  = 1; //set initial no of presses
+    pressNo  = 0; //set initial no of presses
     
     blkTotalLBL.text = [NSString stringWithFormat:@"%d", xcounter];
     blkNoLBL.text    = [NSString stringWithFormat:@"%d", 0];
     setNoLBL.text    = [NSString stringWithFormat:@"%d", xcounter-2];
-    setTotalLBL.text = [NSString stringWithFormat:@"%d", finish-3];
+    setTotalLBL.text = [NSString stringWithFormat:@"%d", finish-2];
 
     [self buttonsDisable];
     
@@ -667,7 +667,7 @@
     ncounter = ncounter+1;   //block number 3-9 range
     
     if(ncounter>=xcounter+1){ //starts at 3 for 3 blocks, end stage, then new set, 3 for 4 blocks etc.
-        ncounter=1;
+        ncounter=0;
         xcounter=xcounter+1; //stage counter 3-9 range
     }
 }
@@ -704,7 +704,7 @@
     blkTotalLBL.text = [NSString stringWithFormat:@"%d", xcounter];
     blkNoLBL.text    = [NSString stringWithFormat:@"%d", ncounter];
     setNoLBL.text    = [NSString stringWithFormat:@"%d", xcounter-2];
-    setTotalLBL.text = [NSString stringWithFormat:@"%d", finish-3];
+    setTotalLBL.text = [NSString stringWithFormat:@"%d", finish-2];
     [self showInfo];
     //hide all messages except blocks
     MessageTextView.hidden=YES;
@@ -821,99 +821,116 @@
 
 -(IBAction)blk1BUT:(id)sender{
     //button 1 pressed
-    guess[pressNo]=@"1";
-    blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo];
-    [self statusUpdate:pressNo];
+    guess[pressNo+1]=@"1";
+    blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo+1];
+    [self statusUpdate:pressNo+1];
     pressNo=pressNo+1;
-    if(pressNo >= xcounter+1){
+    if(pressNo >= xcounter-1){
+        [self stageChecks];
+    }else{
         [self blankMSG3];
     }
 }
 
 -(IBAction)blk2BUT:(id)sender{
     //button 2 pressed
-    guess[pressNo]=@"2";
-    blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo];
-    [self statusUpdate:pressNo];
+    guess[pressNo+1]=@"2";
+    blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo+1];
+    [self statusUpdate:pressNo+1];
     pressNo=pressNo+1;
-    if(pressNo >= xcounter+1){
+    if(pressNo >= xcounter-1){
+        [self stageChecks];
+    }else{
         [self blankMSG3];
     }
 }
 
 -(IBAction)blk3BUT:(id)sender{
     //button 3 pressed
-    guess[pressNo]=@"3";
-    blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo];
+    guess[pressNo+1]=@"3";
+    blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo+1];
+    [self statusUpdate:pressNo+1];
     pressNo=pressNo+1;
-    [self statusUpdate:pressNo];
-    if(pressNo >= xcounter+1){
+    if(pressNo >= xcounter-1){
+        [self stageChecks];
+    }else{
         [self blankMSG3];
     }
 }
 
 -(IBAction)blk4BUT:(id)sender{
     //button 4 pressed
-    guess[pressNo]=@"4";
-    blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo];
-    [self statusUpdate:pressNo];
+    guess[pressNo+1]=@"4";
+    blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo+1];
+    [self statusUpdate:pressNo+1];
     pressNo=pressNo+1;
-    if(pressNo >= xcounter+1){
+    if(pressNo >= xcounter-1){
+        [self stageChecks];
+    }else{
         [self blankMSG3];
     }
 }
 
 -(IBAction)blk5BUT:(id)sender{
     //button 5 pressed
-    guess[pressNo]=@"5";
-    blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo];
-    [self statusUpdate:pressNo];
+    guess[pressNo+1]=@"5";
+    blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo+1];
+    [self statusUpdate:pressNo+1];
     pressNo=pressNo+1;
-    if(pressNo >= xcounter+1){
+    if(pressNo >= xcounter-1){
+        [self stageChecks];
+    }else{
         [self blankMSG3];
     }
 }
 
 -(IBAction)blk6BUT:(id)sender{
     //button 6 pressed
-    guess[pressNo]=@"6";
-    blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo];
-    [self statusUpdate:pressNo];
+    guess[pressNo+1]=@"6";
+    blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo+1];
+    [self statusUpdate:pressNo+1];
     pressNo=pressNo+1;
-    if(pressNo >= xcounter+1){
+    if(pressNo >= xcounter-1){
+        [self stageChecks];
+    }else{
         [self blankMSG3];
     }
 }
 
 -(IBAction)blk7BUT:(id)sender{
     //button 7 pressed
-    guess[pressNo]=@"7";
-    blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo];
-    [self statusUpdate:pressNo];
+    guess[pressNo+1]=@"7";
+    blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo+1];
+    [self statusUpdate:pressNo+1];
     pressNo=pressNo+1;
-    if(pressNo >= xcounter+1){
+    if(pressNo >= xcounter-1){
+        [self stageChecks];
+    }else{
         [self blankMSG3];
     }
 }
 
 -(IBAction)blk8BUT:(id)sender{
     //button 8 pressed
-    guess[pressNo]=@"8";
-    blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo];
-    [self statusUpdate:pressNo];
-    pressNo=pressNo+1;
-    if(pressNo >= xcounter+1){
+    guess[pressNo+1]=@"8";
+    blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo+1];
+    [self statusUpdate:pressNo+1];
+    if(pressNo >= xcounter-1){
+        [self stageChecks];
+    }else{
         [self blankMSG3];
     }
 }
 
 -(IBAction)blk9BUT:(id)sender{
     //button 9 pressed
-    guess[pressNo]=@"9";
-    blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo];
-    [self statusUpdate:pressNo];
+    guess[pressNo+1]=@"9";
+    blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo+1];
+    [self statusUpdate:pressNo+1];
     pressNo=pressNo+1;
-    if(pressNo >= xcounter+1){
+    if(pressNo >= xcounter-1){
+        [self stageChecks];
+    }else{
         [self blankMSG3];
     }
 }
@@ -921,7 +938,7 @@
 -(void)getGuesses {
         blkNoLBL.text = [NSString stringWithFormat:@"%i",0];
     //turns on the buttons, collects the xcounter guesses, forms a string, saves it and carries on with next stage
-
+    [self buttonsEnable];
     if (infoShow) {
         statusMessageLBL.text = @"Recall The Sequence, touch the blocks.";
     }else{
@@ -929,9 +946,9 @@
     }
 
     NSLog(@"Press The Blocks in Order");
-    [self buttonsEnable];
-    if(pressNo >= xcounter+1){
-        pressNo=1;
+    
+    if(pressNo >= xcounter){
+        pressNo=0;
         [self buttonsDisable];
         [NSTimer scheduledTimerWithTimeInterval: (messageTime/2) target:self selector:@selector(blankMSG3) userInfo:nil repeats:NO];
     }else{
@@ -949,8 +966,7 @@
     }
     NSLog(@"Press The Blocks in Order");
     [self buttonsEnable];
-    if(pressNo >= xcounter+1){
-        pressNo=1;
+    if((pressNo >= xcounter)&&(isFinished==YES)){
         [self buttonsDisable];
         [NSTimer scheduledTimerWithTimeInterval: (messageTime/2) target:self selector:@selector(endTestMSG) userInfo:nil repeats:NO];
     }else{
@@ -993,6 +1009,7 @@
 -(void)finalStageEndMSG {
     [self buttonsDisable];
     NSLog(@"Final Stage Ending");
+    isFinished=YES;
     if (infoShow) {
         statusMessageLBL.text = @"The Final Stage has Ended, prepare to recall the  sequence of blocks.";
     }else{
@@ -1009,8 +1026,7 @@
     }else{
         statusMessageLBL.text = @"Observe";
     }
-    ncounter=1;
-    pressNo=1;
+    pressNo=0;
     [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(blankMSG) userInfo:nil repeats:NO];
 }
 
@@ -1032,7 +1048,6 @@
             statusMessageLBL.text = @"Forward Test";
         }
     }
-
     [MessageView setImage: card[0].image];
     MessageView.hidden=NO;
     [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(blankMSG2) userInfo:nil repeats:NO];
@@ -1042,6 +1057,7 @@
     //End of Test Message
     [self buttonsDisable];
     NSLog(@"End Test");
+    isFinished=YES;
     if (infoShow) {
         statusMessageLBL.text = @"The test has now finished, you have completed all the stages.  In a few moments the results will be ready.";
     }else{
@@ -1058,6 +1074,7 @@
 -(void)calculatingMSG {
     //Calculate stats and outputs
     [self buttonsDisable];
+    isFinished=YES;
     NSLog(@"Calculating Test Results");
     if (infoShow) {
       statusMessageLBL.text = @"The test results are being calculated, please wait a moment";
@@ -1089,12 +1106,11 @@
 -(void)blankMSG3 {
     [self buttonsDisable];
     guessStr[xcounter]= [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@",guess[1],guess[2],guess[3],guess[4],guess[5],guess[6],guess[7],guess[8],guess[9]];
-    [self statusUpdate:xcounter];
+    [self statusUpdate:xcounter-1];
     NSLog(@"(blank3 after buttons input %@)",guessStr[xcounter]);
     [self display_blocks];
     MessageView.hidden=YES;
-    pressNo = 1; //reset counter for next time
-    ncounter=1;
+        pressNo = 0; //reset counter for next time
     [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(nextStageMSG) userInfo:nil repeats:NO];
 }
 
