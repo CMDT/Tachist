@@ -161,54 +161,10 @@
      [self.view addSubview:box9image];
      */
     
-    if (animals) {
-        //draw an animal picture in the view
-        int startAnimal;
-        startAnimal=[self random22];
-        box1image.image = [self getAnimal:startAnimal];//[UIImage imageNamed:@"Fox"];
-        int a=startAnimal+1;
-        if (a>21) {
-            a=1;
-        }
-        box2image.image = [self getAnimal:a];
-        a=a+1;
-        if (a>21) {
-            a=1;
-        }
-        box3image.image = [self getAnimal:a];
-        a=a+1;
-        if (a>21) {
-            a=1;
-        }
-        box4image.image = [self getAnimal:a];
-        a=a+1;
-        if (a>21) {
-            a=1;
-        }
-        box5image.image = [self getAnimal:a];
-        a=a+1;
-        if (a>21) {
-            a=1;
-        }
-        box6image.image = [self getAnimal:a];
-        a=a+1;
-        if (a>21) {
-            a=1;
-        }
-        box7image.image = [self getAnimal:a];
-        a=a+1;
-        if (a>21) {
-            a=1;
-        }
-        box8image.image = [self getAnimal:a];
-        a=a+1;
-        if (a>21) {
-            a=1;
-        }
-        box9image.image = [self getAnimal:a];
-    }
-    /*
+    [self putAnimals];//place the correct random animal in the view
+        /*
      
+         
      float sizer;
      
      sizer=64; //singleton.blockSize;
@@ -242,15 +198,53 @@
     
     [self putBlocksInPlace];
     
-    box1image.transform = CGAffineTransformTranslate(box1image.transform,[self randomPt], [self randomPt]);
-    box2image.transform = CGAffineTransformTranslate(box2image.transform,[self randomPt], [self randomPt]);
-    box3image.transform = CGAffineTransformTranslate(box3image.transform,[self randomPt], [self randomPt]);
-    box4image.transform = CGAffineTransformTranslate(box4image.transform,[self randomPt], [self randomPt]);
-    box5image.transform = CGAffineTransformTranslate(box5image.transform,[self randomPt], [self randomPt]);
-    box6image.transform = CGAffineTransformTranslate(box6image.transform,[self randomPt], [self randomPt]);
-    box7image.transform = CGAffineTransformTranslate(box7image.transform,[self randomPt], [self randomPt]);
-    box8image.transform = CGAffineTransformTranslate(box8image.transform,[self randomPt], [self randomPt]);
-    box9image.transform = CGAffineTransformTranslate(box9image.transform,[self randomPt], [self randomPt]);
+        float sizeb = singleton.blockSize;
+    switch ((int)sizeb) {
+        case 10:
+            sizeb=100;
+            break;
+        case 15:
+            sizeb=80;
+            break;
+        case 20:
+            sizeb=60;
+            break;
+        case 25:
+            sizeb=50;
+            break;
+        case 30:
+            sizeb=45;
+            break;
+        case 35:
+            sizeb=40;
+            break;
+        case 40:
+            sizeb=35;
+            break;
+        case 45:
+            sizeb=30;
+            break;
+        case 50:
+            sizeb=25;
+            break;
+        case 55:
+            sizeb=20;
+            break;
+            
+        default:
+            sizeb=0;
+            break;
+    }
+    
+    box1image.transform = CGAffineTransformTranslate(box1image.transform,[self randomPt]-sizeb, [self randomPt]);
+    box2image.transform = CGAffineTransformTranslate(box2image.transform,[self randomPt]-sizeb, [self randomPt]);
+    box3image.transform = CGAffineTransformTranslate(box3image.transform,[self randomPt]-sizeb, [self randomPt]);
+    box4image.transform = CGAffineTransformTranslate(box4image.transform,[self randomPt]-sizeb, [self randomPt]);
+    box5image.transform = CGAffineTransformTranslate(box5image.transform,[self randomPt]-sizeb, [self randomPt]);
+    box6image.transform = CGAffineTransformTranslate(box6image.transform,[self randomPt]-sizeb, [self randomPt]);
+    box7image.transform = CGAffineTransformTranslate(box7image.transform,[self randomPt]-sizeb, [self randomPt]);
+    box8image.transform = CGAffineTransformTranslate(box8image.transform,[self randomPt]-sizeb, [self randomPt]);
+    box9image.transform = CGAffineTransformTranslate(box9image.transform,[self randomPt]-sizeb, [self randomPt]);
     
     infoShow=singleton.onScreenInfo;
     
@@ -305,6 +299,40 @@
     //  [self sizeAllBlocks];
 }
 
+-(void)putAnimals{
+    if (animals) {
+        //draw an animal picture in the view
+        long ani[22];
+        NSLog(@"start");
+        for (int b=0; b<22; b++) {
+            ani[b]=b;
+            NSLog(@"animal:%ld", ani[b]);
+        }
+        int temp=0;
+        int tt=0;
+        for (int b=0; b<1001; b++) {
+            tt=[self random22];
+            temp=ani[tt-1];
+            ani[tt-1]=ani[tt];
+            ani[tt]=temp;
+        }
+        NSLog(@"mix");
+        for (int b=0; b<22; b++) {
+            NSLog(@"animal:%ld", ani[b]);
+        }
+        NSLog(@"end");
+        box1image.image = [self getAnimal:ani[1]];
+        box2image.image = [self getAnimal:ani[3]];
+        box3image.image = [self getAnimal:ani[5]];
+        box4image.image = [self getAnimal:ani[7]];
+        box5image.image = [self getAnimal:ani[8]];
+        box6image.image = [self getAnimal:ani[0]];
+        box7image.image = [self getAnimal:ani[2]];
+        box8image.image = [self getAnimal:ani[4]];
+        box9image.image = [self getAnimal:ani[6]];
+    }
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -318,107 +346,10 @@
     }else{
         headingLBL.text=@"CORSI REVERSE BLOCK TEST";
     }
-    float sizer;
-    
-    float viewHeight=testViewerView.frame.size.height;
-    float viewWidth=testViewerView.frame.size.width;
     
     animals=singleton.animals;
     
-    sizer=singleton.blockSize*viewWidth/100;
-   /*
-    float row2=viewHeight*35/100;
-    float col2=(viewWidth/2)-38;
-    float col1=38;
-    float col3=viewWidth-38-(sizer);
-    float row1=viewHeight*15/100;
-    float row3=viewHeight*50/100;
-    
-    box1image =[[UIImageView alloc] initWithFrame:CGRectMake(col1,row1,sizer,sizer)];
-    box4image =[[UIImageView alloc] initWithFrame:CGRectMake(col1,row2,sizer,sizer)];
-    box7image =[[UIImageView alloc] initWithFrame:CGRectMake(col1,row3,sizer,sizer)];
-    box2image =[[UIImageView alloc] initWithFrame:CGRectMake(col2,row1,sizer,sizer)];
-    box5image =[[UIImageView alloc] initWithFrame:CGRectMake(col2,row2,sizer,sizer)];
-    box8image =[[UIImageView alloc] initWithFrame:CGRectMake(col2,row3,sizer,sizer)];
-    box3image =[[UIImageView alloc] initWithFrame:CGRectMake(col3,row1,sizer,sizer)];
-    box6image =[[UIImageView alloc] initWithFrame:CGRectMake(col3,row2,sizer,sizer)];
-    box9image =[[UIImageView alloc] initWithFrame:CGRectMake(col3,row3,sizer,sizer)];
-    
-    [self.view addSubview:box1image];
-    [self.view addSubview:box2image];
-    [self.view addSubview:box3image];
-    [self.view addSubview:box4image];
-    [self.view addSubview:box5image];
-    [self.view addSubview:box6image];
-    [self.view addSubview:box7image];
-    [self.view addSubview:box8image];
-    [self.view addSubview:box9image];
-    */
-
-    if (animals) {
-    //draw an animal picture in the view
-        int startAnimal;
-        startAnimal=[self random22];
-        box1image.image = [self getAnimal:startAnimal];//[UIImage imageNamed:@"Fox"];
-        int a=startAnimal+1;
-        if (a>22) {
-            a=1;
-        }
-        box2image.image = [self getAnimal:a];
-        a=a+1;
-        if (a>22) {
-            a=1;
-        }
-        box3image.image = [self getAnimal:a];
-        a=a+1;
-        if (a>22) {
-            a=1;
-        }
-        box4image.image = [self getAnimal:a];
-        a=a+1;
-        if (a>22) {
-            a=1;
-        }
-        box5image.image = [self getAnimal:a];
-        a=a+1;
-        if (a>22) {
-            a=1;
-        }
-        box6image.image = [self getAnimal:a];
-        a=a+1;
-        if (a>22) {
-            a=1;
-        }
-        box7image.image = [self getAnimal:a];
-        a=a+1;
-        if (a>22) {
-            a=1;
-        }
-        box8image.image = [self getAnimal:a];
-        a=a+1;
-        if (a>22) {
-            a=1;
-        }
-        box9image.image = [self getAnimal:a];
-    }
-    /*
-     
-    float sizer;
-    
-    sizer=64; //singleton.blockSize;
-    
-    box1image.frame= CGRectMake(100, 100, sizer, sizer);
-    
-    box1image.frame = CGRectMake(box1image.frame.size.height,box1image.frame.size.width, sizer, sizer);
-    box2image.frame = CGRectMake(box2image.frame.size.height,box2image.frame.size.width, sizer, sizer);
-    box3image.frame = CGRectMake(box3image.frame.size.height,box3image.frame.size.width, sizer, sizer);
-    box4image.frame = CGRectMake(box4image.frame.size.height,box4image.frame.size.width, sizer, sizer);
-    box5image.frame = CGRectMake(box5image.frame.size.height,box5image.frame.size.width, sizer, sizer);
-    box6image.frame = CGRectMake(box6image.frame.size.height,box6image.frame.size.width, sizer, sizer);
-    box7image.frame = CGRectMake(box7image.frame.size.height,box7image.frame.size.width, sizer, sizer);
-    box8image.frame = CGRectMake(box8image.frame.size.height,box8image.frame.size.width, sizer, sizer);
-    box9image.frame = CGRectMake(box9image.frame.size.height,box9image.frame.size.width, sizer, sizer);
-    */
+    [self putAnimals];//place the correct random animal in the view
     
     [self setColours];
 
@@ -454,49 +385,6 @@
         reverse[x]=[self rev9Order:order[x]];
         NSLog(@"Order returned for Set: %d is:%@, reverse:%@",x, order[x], reverse[x]);
     }
-    //testing yto see what was made, can be turned off
-    NSLog(@"Order returned=First Set");
-    int no1=[self whichBlock:1 :1];
-    NSLog(@"No.1=%i",no1);
-    int no2=[self whichBlock:2 :1];
-    NSLog(@"No.2=%i",no2);
-    int no3=[self whichBlock:3 :1];
-    NSLog(@"No.3=%i",no3);
-    int no4=[self whichBlock:4 :1];
-    NSLog(@"No.4=%i",no4);
-    int no5=[self whichBlock:5 :1];
-    NSLog(@"No.5=%i",no5);
-    int no6=[self whichBlock:6 :1];
-    NSLog(@"No.6=%i",no6);
-    int no7=[self whichBlock:7 :1];
-    NSLog(@"No.7=%i",no7);
-    int no8=[self whichBlock:8 :1];
-    NSLog(@"No.8=%i",no8);
-    int no9=[self whichBlock:9 :1];
-    NSLog(@"No.9=%i",no9);
-
-    NSLog(@"Order returned=Second Set");
-    no1=[self whichBlock:1 :2];
-    NSLog(@"No.1=%i",no1);
-    no2=[self whichBlock:2 :2];
-    NSLog(@"No.2=%i",no2);
-    no3=[self whichBlock:3 :2];
-    NSLog(@"No.3=%i",no3);
-    no4=[self whichBlock:4 :2];
-    NSLog(@"No.4=%i",no4);
-    no5=[self whichBlock:5 :2];
-    NSLog(@"No.5=%i",no5);
-    no6=[self whichBlock:6 :2];
-    NSLog(@"No.6=%i",no6);
-    no7=[self whichBlock:7 :2];
-    NSLog(@"No.7=%i",no7);
-    no8=[self whichBlock:8 :2];
-    NSLog(@"No.8=%i",no8);
-    no9=[self whichBlock:9 :2];
-    NSLog(@"No.9=%i",no9);
-    
-    // don't bother, too difficult to do yet //[self rotAllBlocks];
-    //  [self sizeAllBlocks];
 }
 
 -(UIImage*)getAnimal:(int)animalNo{
@@ -651,14 +539,29 @@
                 angle[t] = 0;
         }
     }
-
+        
     //UITouch *touch = [touches anyObject];//some old example code if you used a touch rather than an image reference
+        
 
+        
     [UIView animateWithDuration:1.0
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
+        if(singleton.blockRotation){
+        /*
+        box1image.layer.anchorPoint = CGPointMake(.5,.5);
+        box2image.layer.anchorPoint = CGPointMake(.5,.5);
+        box3image.layer.anchorPoint = CGPointMake(.5,.5);
+        box4image.layer.anchorPoint = CGPointMake(.5,.5);
+        box5image.layer.anchorPoint = CGPointMake(.5,.5);
+        box6image.layer.anchorPoint = CGPointMake(.5,.5);
+        box7image.layer.anchorPoint = CGPointMake(.5,.5);
+        box8image.layer.anchorPoint = CGPointMake(.5,.5);
+        box9image.layer.anchorPoint = CGPointMake(.5,.5);*/
+        }
 
+                         
                          CGAffineTransform scaleTrans = CGAffineTransformMakeScale(scaleFactor, scaleFactor);
 
                          CGAffineTransform rotateTrans1 = CGAffineTransformMakeRotation(angle[1] * M_PI / 180);
@@ -680,6 +583,7 @@
                          box7image.transform = CGAffineTransformConcat(scaleTrans, rotateTrans7);
                          box8image.transform = CGAffineTransformConcat(scaleTrans, rotateTrans8);
                          box9image.transform = CGAffineTransformConcat(scaleTrans, rotateTrans9);
+                         
                      }completion:nil];
     }
 }
@@ -807,10 +711,6 @@
     delayMessage1 = singleton.messageTime/1000;
     //NSLog(@"show delay = %f",delayShow1);
     return delayMessage1;
-}
-
--(void)randomise_boxes{
-    //move all the boxes a bit up/down/left/right from origin to give appearance of random throw
 }
 
 -(void)display_blocks{
@@ -1034,7 +934,6 @@
             [self allButtonsBackgroundReset];// background colour reset to std
             break;
     }
-    
     [NSTimer scheduledTimerWithTimeInterval:showTime target:self selector:@selector(but1) userInfo:nil repeats:NO];
 }
 
@@ -1390,15 +1289,15 @@
 
 -(int)random22
 {
-    float num = 1;
-    for (int r=1; r<+arc4random_uniform(435); r++)
-        {
-        while (num>0)
-            {
-            num = arc4random_uniform(22); //1-21
-            }
-        }
-    return num;
+    int num1 = 1;
+            num1 = arc4random_uniform(22); //1-21
+    if (num1<1) {
+        num1=1;
+    }
+    if (num1>21) {
+        num1=21;
+    }
+    return num1;
 }
 
 -(int)randomPt
@@ -1450,10 +1349,14 @@
         {
         split1=1;
         }
+    
     int posrand=0;
+    
     posrand=(float)arc4random_uniform(range1)*split1;
+    
     NSLog(@"Random Pt:%i",posrand);
-    return posrand;
+    //*********************************************
+    return 0;//************************************ posrand;
 }
 
 -(void)updateBlockColours{

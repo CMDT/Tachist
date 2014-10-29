@@ -71,13 +71,13 @@
 -(IBAction)blk8BUT:(id)sender;
 -(IBAction)blk9BUT:(id)sender;
 
--(void)randomise_boxes;
 -(void)display_blocks;
 -(void)hide_blocks;
 -(void)showInfo;
 -(void)hideInfo;
 -(void)awakeFromNib;
-
+-(void)putAnimals;
+-(void)getAnimals;
 -(float) delayDelay;
 -(float) delayWait;
 -(float) delayShow;
@@ -93,7 +93,7 @@
 -(void)box1;
 
 -(void)but1;
-
+-(void)setBlockOrigins;
 -(void)nextStageMSG;
 -(void)stageEndMSG;
 -(void)endTestMSG;
