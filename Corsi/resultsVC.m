@@ -36,6 +36,8 @@
     resultsImage        = [resultsImage     imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     resultsImageSel     = [resultsImageSel  imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Results"        image:resultsImage selectedImage:       resultsImageSel];
+
+
 }
 - (void)didReceiveMemoryWarning
 {

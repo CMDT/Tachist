@@ -43,7 +43,7 @@ static mySingleton * sharedSingleton = nil;
             testDate,
             testTime,
             resultStrings,
-            resultStringRow,
+            resultStringRows,
             email,
             forwardTestDirection,
             blockRotation,

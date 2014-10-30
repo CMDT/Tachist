@@ -1283,23 +1283,23 @@
     
     //headers
     tempString=[NSString stringWithFormat:@"Corsi Block Tapping Test Results"];
-    singleton.resultStringRow[rsCounter]=tempString;
+    singleton.resultStringRows[rsCounter]=tempString;
     NSLog(@"%@",tempString);
     rsCounter=rsCounter+1;
     tempString=[NSString stringWithFormat:@"Date:%@, Time:%@",singleton.testDate,singleton.testTime];
-    singleton.resultStringRow[rsCounter]=tempString;
+    singleton.resultStringRows[rsCounter]=tempString;
     NSLog(@"%@",tempString);
     rsCounter=rsCounter+1;
     tempString=[NSString stringWithFormat:@"Tester:%@",singleton.testerName];
-    singleton.resultStringRow[rsCounter]=tempString;
+    singleton.resultStringRows[rsCounter]=tempString;
     NSLog(@"%@",tempString);
     rsCounter=rsCounter+1;
     tempString=[NSString stringWithFormat:@"Message Time:,%f, Wait Time:,%f, Show Time:,%f",singleton.startTime,singleton.waitTime,singleton.showTime];
-    singleton.resultStringRow[rsCounter]=tempString;
+    singleton.resultStringRows[rsCounter]=tempString;
     NSLog(@"%@",tempString);
     rsCounter=rsCounter+1;
     tempString=[NSString stringWithFormat:@"Canvas:%@, Block:%@, Show:%@",singleton.currentBackgroundColour,singleton.currentBlockColour,singleton.currentShowColour];
-    singleton.resultStringRow[rsCounter]=tempString;
+    singleton.resultStringRows[rsCounter]=tempString;
     NSLog(@"%@",tempString);
     rsCounter=rsCounter+1;
     
@@ -1324,15 +1324,15 @@
         forw=@"NO, Reverse Corsi Test";
     }
     tempString=[NSString stringWithFormat:@"Forward Test: %@, Block Size: %f, Block Rotation: %@, Block Animals: %@", forw, singleton.blockSize, rot, ani];
-    singleton.resultStringRow[rsCounter]=tempString;
+    singleton.resultStringRows[rsCounter]=tempString;
     NSLog(@"%@",tempString);
     rsCounter=rsCounter+1;
     tempString=[NSString stringWithFormat:@""];
-    singleton.resultStringRow[rsCounter]=tempString;
+    singleton.resultStringRows[rsCounter]=tempString;
     NSLog(@"%@",tempString);
     rsCounter=rsCounter+1;
     tempString=[NSString stringWithFormat:@"Test No,1,2,3,4,5,6,7,8,9,Correct,Wrong"];
-    singleton.resultStringRow[rsCounter]=tempString;
+    singleton.resultStringRows[rsCounter]=tempString;
     NSLog(@"%@",tempString);
     rsCounter=rsCounter+1;
     
@@ -1381,13 +1381,13 @@
         
         //finish off string from loop
         tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@"%d,%d", cor, wro]];
-        singleton.resultStringRow[rsCounter]=tempString;
+        singleton.resultStringRows[rsCounter]=tempString;
         NSLog(@"%@",tempString);
         rsCounter=rsCounter+1;
         
         //blankline
         tempString=[NSString stringWithFormat:@""];
-        singleton.resultStringRow[rsCounter]=tempString;
+        singleton.resultStringRows[rsCounter]=tempString;
         NSLog(@"%@",tempString);
         rsCounter=rsCounter+1;
         
@@ -1400,25 +1400,25 @@
     }
     //blankline
     tempString=[NSString stringWithFormat:@""];
-    singleton.resultStringRow[rsCounter]=tempString;
+    singleton.resultStringRows[rsCounter]=tempString;
     NSLog(@"%@",tempString);
     rsCounter=rsCounter+1;
     
     //put final totals
     rsCounter=rsCounter+1;
     tempString=[NSString stringWithFormat:@"Total Correct=%d, Total Wrong=%d",totcor, totwro];
-    singleton.resultStringRow[rsCounter]=tempString;
+    singleton.resultStringRows[rsCounter]=tempString;
     NSLog(@"%@",tempString);
     
     //end of results save
     rsCounter=rsCounter+1;
     tempString=[NSString stringWithFormat:@""];
-    singleton.resultStringRow[rsCounter]=tempString;
+    singleton.resultStringRows[rsCounter]=tempString;
     
     //end
     rsCounter=rsCounter+1;
     tempString=[NSString stringWithFormat:@"End of Test Results"];
-    singleton.resultStringRow[rsCounter]=tempString;
+    singleton.resultStringRows[rsCounter]=tempString;
     
     //jump to the results page
     [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(jumpToResultsView) userInfo:nil repeats:NO];
