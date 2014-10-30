@@ -1176,7 +1176,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WqZ-kI-dxD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="870" y="701"/>
+            <point key="canvasLocation" x="889" y="701"/>
+        </scene>
+        <!--Music-->
+        <scene sceneID="DCo-2z-Ij2">
+            <objects>
+                <viewController title="Music" id="zKO-Fa-Cfp" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="NlK-bZ-M1q"/>
+                        <viewControllerLayoutGuide type="bottom" id="8l3-KW-HNG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="KHO-Iv-G9X">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="q9W-We-iU9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1337" y="763"/>
         </scene>
         <!--CorsiTabController-->
         <scene sceneID="sw2-hC-uGP">
@@ -1487,12 +1505,12 @@ When all the sequence has been shown, try and remember the sequence and press th
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Et-jW-1Na" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="515" y="686"/>
+            <point key="canvasLocation" x="516" y="701"/>
         </scene>
         <!--Information-->
         <scene sceneID="UUY-XU-Df1">
             <objects>
-                <viewController storyboardIdentifier="info" title="Information" modalTransitionStyle="flipHorizontal" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fkz-qV-ETW" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InformationVC" title="Information" modalTransitionStyle="flipHorizontal" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fkz-qV-ETW" customClass="informationVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gXu-P1-4tU"/>
                         <viewControllerLayoutGuide type="bottom" id="anh-OF-JOE"/>
@@ -1537,12 +1555,27 @@ This version, MMU (c) 2014.
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jhx-3d-M11">
+                                <rect key="frame" x="20" y="467" width="281" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jHH-f1-a1U">
+                                <rect key="frame" x="38" y="401" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.89417350449999999" blue="0.6320989253" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <tabBarItem key="tabBarItem" tag="1" title="Information" image="Information" id="H2M-mc-v72">
                         <inset key="imageInsets" minX="15" minY="15" maxX="15" maxY="15"/>
                     </tabBarItem>
+                    <connections>
+                        <outlet property="infoLabel" destination="jhx-3d-M11" id="mjs-aZ-D1f"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2r7-HZ-XTl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

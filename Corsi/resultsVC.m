@@ -30,6 +30,13 @@
     // Do any additional setup after loading the view.
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    UIImage *resultsImage           = [UIImage imageNamed:@"Results"];
+    UIImage *resultsImageSel        = [UIImage imageNamed:@"Results"];
+    resultsImage        = [resultsImage     imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    resultsImageSel     = [resultsImageSel  imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Results"        image:resultsImage selectedImage:       resultsImageSel];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

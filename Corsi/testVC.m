@@ -199,6 +199,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     infoShow=singleton.onScreenInfo;
@@ -456,6 +457,12 @@
 //
 
 -(void)viewDidAppear:(BOOL)animated{
+    
+    UIImage *testImage      = [UIImage imageNamed:@"Test"];
+    UIImage *testImageSel   = [UIImage imageNamed:@"Test"];
+    testImage               = [testImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    testImageSel            = [testImageSel imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    self.tabBarItem         = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage selectedImage: testImageSel];
     
     [self initialiseBlocks];
     mySingleton *singleton = [mySingleton sharedSingleton];
@@ -1064,7 +1071,7 @@
     }
     [MessageView setImage: card[0].image];
     MessageView.hidden=NO;
-    [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(blankMSG2) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(jumpToResultsView) userInfo:nil repeats:NO];//@selector(blankMSG2) userInfo:nil repeats:NO];
 }
 
 -(void)endTestMSG {
@@ -1115,6 +1122,17 @@
     [self display_blocks];
     MessageView.hidden=YES;
     [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(box1) userInfo:nil repeats:NO];
+}
+
+-(void)jumpToResultsView {
+    [self buttonsDisable];
+    NSLog(@"(jumpToResultsView)");
+    [self hide_blocks];
+    MessageView.hidden=YES;
+    //jump to selector ResultsVC
+    [self.tabBarController setSelectedIndex:4];
+    
+
 }
 
 -(void)blankMSG3 {
@@ -1401,6 +1419,10 @@
     rsCounter=rsCounter+1;
     tempString=[NSString stringWithFormat:@"End of Test Results"];
     singleton.resultStringRow[rsCounter]=tempString;
+    
+    //jump to the results page
+    [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(jumpToResultsView) userInfo:nil repeats:NO];
+    
 }
 
 -(void)setColours{

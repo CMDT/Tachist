@@ -28,7 +28,11 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-   
+    UIImage *testImage      = [UIImage imageNamed:@"Test"];
+    UIImage *testImageSel   = [UIImage imageNamed:@"Test"];
+    testImage               = [testImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    testImageSel            = [testImageSel imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    self.tabBarItem         = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage selectedImage: testImageSel];
 
 }
 

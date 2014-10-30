@@ -92,6 +92,7 @@
 
 -(void)box1;
 
+-(void)jumpToResultsView;
 -(void)but1;
 //-(void)setBlockOrigins;
 -(void)nextStageMSG;

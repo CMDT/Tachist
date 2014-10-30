@@ -14,6 +14,8 @@
 
 @implementation informationVC
 
+@synthesize infoLabel;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -27,6 +29,15 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+        
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    UIImage *informationImage       = [UIImage imageNamed:@"Information"];
+    UIImage *informationImageSel    = [UIImage imageNamed:@"Information"];
+    informationImage    = [informationImage     imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    informationImageSel = [informationImageSel  imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Information" image:informationImage selectedImage: informationImageSel];
 }
 
 - (void)didReceiveMemoryWarning

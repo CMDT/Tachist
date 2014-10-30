@@ -94,6 +94,13 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL;
 }
 
 -(void)viewDidAppear:(BOOL)animated{
+    //assign images to tab bar items
+    UIImage *settingsImage          = [UIImage imageNamed:@"Settings"];
+    UIImage *settingsImageSel       = [UIImage imageNamed:@"Settings"];
+    settingsImage       = [settingsImage    imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    settingsImageSel    = [settingsImageSel imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Settings" image:settingsImage selectedImage: settingsImageSel];
+    
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     [showLBL setBackgroundColor:singleton.currentShowColour];
