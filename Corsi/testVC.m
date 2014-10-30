@@ -651,24 +651,37 @@
     //check for stage and test end
     if ((xcounter == finish) && (ncounter >= xcounter)) {
         //test is ended
+        //update all counters
+    ncounter = ncounter+1;   //block number 3-9 range
+    
+    if(ncounter>=xcounter+1){ //starts at 3 for 3 blocks, end stage, then new set, 3 for 4 blocks etc.
+        xcounter=xcounter+1; //stage counter 3-9 range
+        ncounter=0;
+    }
         isFinished=YES;
         [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(finalStageEndMSG) userInfo:nil repeats:NO];
     }else{
         if(ncounter>=xcounter){
-            //stage end 3
-            //[self hide_blocks];
+            //not finished, but ended a stage
+            //update all counters
+            ncounter = ncounter+1;   //block number 3-9 range
+
+            if(ncounter>=xcounter+1){ //starts at 3 for 3 blocks, end stage, then new set, 3 for 4 blocks etc.
+                xcounter=xcounter+1; //stage counter 3-9 range
+                ncounter=0;
+            }
             [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(stageEndMSG) userInfo:nil repeats:NO];
         }else{
             //not ended, carry on
+            //update all counters
+            ncounter = ncounter+1;   //block number 3-9 range
+
+            if(ncounter>=xcounter+1){ //starts at 3 for 3 blocks, end stage, then new set, 3 for 4 blocks etc.
+                xcounter=xcounter+1; //stage counter 3-9 range
+                ncounter=0;
+            }
             [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(box1) userInfo:nil repeats:NO];
         }
-    }
-    //update all counters
-    ncounter = ncounter+1;   //block number 3-9 range
-    
-    if(ncounter>=xcounter+1){ //starts at 3 for 3 blocks, end stage, then new set, 3 for 4 blocks etc.
-        ncounter=0;
-        xcounter=xcounter+1; //stage counter 3-9 range
     }
 }
 
@@ -825,10 +838,10 @@
     blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo+1];
     [self statusUpdate:pressNo+1];
     pressNo=pressNo+1;
-    if(pressNo >= xcounter-1){
-        [self stageChecks];
-    }else{
-        [self blankMSG3];
+    if(pressNo >= xcounter){
+        pressNo=0;
+        [self buttonsDisable];
+        [NSTimer scheduledTimerWithTimeInterval: (messageTime/2) target:self selector:@selector(blankMSG3) userInfo:nil repeats:NO];
     }
 }
 
@@ -838,10 +851,10 @@
     blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo+1];
     [self statusUpdate:pressNo+1];
     pressNo=pressNo+1;
-    if(pressNo >= xcounter-1){
-        [self stageChecks];
-    }else{
-        [self blankMSG3];
+    if(pressNo >= xcounter){
+        pressNo=0;
+        [self buttonsDisable];
+        [NSTimer scheduledTimerWithTimeInterval: (messageTime/2) target:self selector:@selector(blankMSG3) userInfo:nil repeats:NO];
     }
 }
 
@@ -852,9 +865,9 @@
     [self statusUpdate:pressNo+1];
     pressNo=pressNo+1;
     if(pressNo >= xcounter-1){
-        [self stageChecks];
-    }else{
-        [self blankMSG3];
+        pressNo=0;
+        [self buttonsDisable];
+        [NSTimer scheduledTimerWithTimeInterval: (messageTime/2) target:self selector:@selector(blankMSG3) userInfo:nil repeats:NO];
     }
 }
 
@@ -865,9 +878,9 @@
     [self statusUpdate:pressNo+1];
     pressNo=pressNo+1;
     if(pressNo >= xcounter-1){
-        [self stageChecks];
-    }else{
-        [self blankMSG3];
+        pressNo=0;
+        [self buttonsDisable];
+        [NSTimer scheduledTimerWithTimeInterval: (messageTime/2) target:self selector:@selector(blankMSG3) userInfo:nil repeats:NO];
     }
 }
 
@@ -878,9 +891,9 @@
     [self statusUpdate:pressNo+1];
     pressNo=pressNo+1;
     if(pressNo >= xcounter-1){
-        [self stageChecks];
-    }else{
-        [self blankMSG3];
+        pressNo=0;
+        [self buttonsDisable];
+        [NSTimer scheduledTimerWithTimeInterval: (messageTime/2) target:self selector:@selector(blankMSG3) userInfo:nil repeats:NO];
     }
 }
 
@@ -891,9 +904,9 @@
     [self statusUpdate:pressNo+1];
     pressNo=pressNo+1;
     if(pressNo >= xcounter-1){
-        [self stageChecks];
-    }else{
-        [self blankMSG3];
+        pressNo=0;
+        [self buttonsDisable];
+        [NSTimer scheduledTimerWithTimeInterval: (messageTime/2) target:self selector:@selector(blankMSG3) userInfo:nil repeats:NO];
     }
 }
 
@@ -904,9 +917,9 @@
     [self statusUpdate:pressNo+1];
     pressNo=pressNo+1;
     if(pressNo >= xcounter-1){
-        [self stageChecks];
-    }else{
-        [self blankMSG3];
+        pressNo=0;
+        [self buttonsDisable];
+        [NSTimer scheduledTimerWithTimeInterval: (messageTime/2) target:self selector:@selector(blankMSG3) userInfo:nil repeats:NO];
     }
 }
 
@@ -915,10 +928,11 @@
     guess[pressNo+1]=@"8";
     blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo+1];
     [self statusUpdate:pressNo+1];
+    pressNo=pressNo+1;
     if(pressNo >= xcounter-1){
-        [self stageChecks];
-    }else{
-        [self blankMSG3];
+        pressNo=0;
+        [self buttonsDisable];
+        [NSTimer scheduledTimerWithTimeInterval: (messageTime/2) target:self selector:@selector(blankMSG3) userInfo:nil repeats:NO];
     }
 }
 
@@ -929,14 +943,14 @@
     [self statusUpdate:pressNo+1];
     pressNo=pressNo+1;
     if(pressNo >= xcounter-1){
-        [self stageChecks];
-    }else{
-        [self blankMSG3];
+        pressNo=0;
+        [self buttonsDisable];
+        [NSTimer scheduledTimerWithTimeInterval: (messageTime/2) target:self selector:@selector(blankMSG3) userInfo:nil repeats:NO];
     }
 }
 
 -(void)getGuesses {
-        blkNoLBL.text = [NSString stringWithFormat:@"%i",0];
+    blkNoLBL.text = [NSString stringWithFormat:@"%i",0];
     //turns on the buttons, collects the xcounter guesses, forms a string, saves it and carries on with next stage
     [self buttonsEnable];
     if (infoShow) {
@@ -947,7 +961,7 @@
 
     NSLog(@"Press The Blocks in Order");
     
-    if(pressNo >= xcounter){
+    if(pressNo >= xcounter+1){
         pressNo=0;
         [self buttonsDisable];
         [NSTimer scheduledTimerWithTimeInterval: (messageTime/2) target:self selector:@selector(blankMSG3) userInfo:nil repeats:NO];
@@ -957,7 +971,7 @@
 }
 
 -(void)getFinalGuesses {
-        blkNoLBL.text = [NSString stringWithFormat:@"%i",0];
+    blkNoLBL.text = [NSString stringWithFormat:@"%i",0];
     //turns on the buttons, collects the xcounter guesses, forms a string, saves it and carries on with next stage
     if (infoShow) {
         statusMessageLBL.text = @"Recall The Sequence, touch the blocks.";
@@ -966,7 +980,7 @@
     }
     NSLog(@"Press The Blocks in Order");
     [self buttonsEnable];
-    if((pressNo >= xcounter)&&(isFinished==YES)){
+    if((pressNo >= xcounter+1)&&(isFinished==YES)){
         [self buttonsDisable];
         [NSTimer scheduledTimerWithTimeInterval: (messageTime/2) target:self selector:@selector(endTestMSG) userInfo:nil repeats:NO];
     }else{
@@ -975,7 +989,7 @@
 }
 
 -(void)guessMSG {
-        blkNoLBL.text = [NSString stringWithFormat:@"%i",0];
+    blkNoLBL.text = [NSString stringWithFormat:@"%i",0];
     NSLog(@"Guess Now");
     if (infoShow) {
         statusMessageLBL.text = @"Recall The Sequence, touch the blocks.";
@@ -1090,28 +1104,33 @@
 
 -(void)blankMSG {
     [self buttonsDisable];
-    NSLog(@"(blank)");
+    NSLog(@"(blankmsg)");
     MessageView.hidden=YES;
     [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(stageChecks) userInfo:nil repeats:NO];
 }
 
 -(void)blankMSG2 {
     [self buttonsDisable];
-    NSLog(@"(blank2)");
+    NSLog(@"(blankmsg2)");
     [self display_blocks];
     MessageView.hidden=YES;
-    [NSTimer scheduledTimerWithTimeInterval:messageTime*2 target:self selector:@selector(box1) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(box1) userInfo:nil repeats:NO];
 }
 
 -(void)blankMSG3 {
     [self buttonsDisable];
-    guessStr[xcounter]= [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@",guess[1],guess[2],guess[3],guess[4],guess[5],guess[6],guess[7],guess[8],guess[9]];
+    guessStr[xcounter-1]= [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@",guess[1],guess[2],guess[3],guess[4],guess[5],guess[6],guess[7],guess[8],guess[9]];
     [self statusUpdate:xcounter-1];
-    NSLog(@"(blank3 after buttons input %@)",guessStr[xcounter]);
+    NSLog(@"(blank3 after buttons input %@)",guessStr[xcounter-1]);
     [self display_blocks];
     MessageView.hidden=YES;
-        pressNo = 0; //reset counter for next time
-    [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(nextStageMSG) userInfo:nil repeats:NO];
+    if (isFinished) {
+        NSLog(@"(blank3 endtestmsg)");
+        [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(endTestMSG) userInfo:nil repeats:NO];
+    }else{
+        NSLog(@"(blank3 stagechecks)");
+        [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(stageChecks) userInfo:nil repeats:NO];
+    }
 }
 
 -(float)random9
