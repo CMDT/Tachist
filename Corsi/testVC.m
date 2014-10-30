@@ -1261,32 +1261,146 @@
 
     NSString *ee;
     NSString *ff;
+    int rsCounter = 0;
+    
+    //headers
+    tempString=[NSString stringWithFormat:@"Corsi Block Tapping Test Results"];
+    singleton.resultStringRow[rsCounter]=tempString;
+    NSLog(@"%@",tempString);
+    rsCounter=rsCounter+1;
+    tempString=[NSString stringWithFormat:@"Date:%@, Time:%@",singleton.testDate,singleton.testTime];
+    singleton.resultStringRow[rsCounter]=tempString;
+    NSLog(@"%@",tempString);
+    rsCounter=rsCounter+1;
+    tempString=[NSString stringWithFormat:@"Tester:%@",singleton.testerName];
+    singleton.resultStringRow[rsCounter]=tempString;
+    NSLog(@"%@",tempString);
+    rsCounter=rsCounter+1;
+    tempString=[NSString stringWithFormat:@"Message Time:,%f, Wait Time:,%f, Show Time:,%f",singleton.startTime,singleton.waitTime,singleton.showTime];
+    singleton.resultStringRow[rsCounter]=tempString;
+    NSLog(@"%@",tempString);
+    rsCounter=rsCounter+1;
+    tempString=[NSString stringWithFormat:@"Canvas:%@, Block:%@, Show:%@",singleton.currentBackgroundColour,singleton.currentBlockColour,singleton.currentShowColour];
+    singleton.resultStringRow[rsCounter]=tempString;
+    NSLog(@"%@",tempString);
+    rsCounter=rsCounter+1;
+    
+    NSString *rot;
+    NSString *ani;
+    NSString *forw;
+    NSString *ans;
+    
+    if (singleton.animals) {
+        ani=@"YES, random";
+    }else{
+        ani=@"NO, Plain";
+    }
+    if (singleton.blockRotation) {
+        rot=@"YES, random";
+    }else{
+        rot=@"NO, 90 degrees";
+    }
+    if (singleton.forwardTestDirection) {
+        forw=@"YES, Normal Test";
+    }else{
+        forw=@"NO, Reverse Corsi Test";
+    }
+    tempString=[NSString stringWithFormat:@"Forward Test: %@, Block Size: %f, Block Rotation: %@, Block Animals: %@", forw, singleton.blockSize, rot, ani];
+    singleton.resultStringRow[rsCounter]=tempString;
+    NSLog(@"%@",tempString);
+    rsCounter=rsCounter+1;
+    tempString=[NSString stringWithFormat:@""];
+    singleton.resultStringRow[rsCounter]=tempString;
+    NSLog(@"%@",tempString);
+    rsCounter=rsCounter+1;
+    tempString=[NSString stringWithFormat:@"Test No,1,2,3,4,5,6,7,8,9,Correct,Wrong"];
+    singleton.resultStringRow[rsCounter]=tempString;
+    NSLog(@"%@",tempString);
+    rsCounter=rsCounter+1;
+    
+    //body of results
+    
+    //reset tempstring before building a line of data
+    tempString=@"";
+    
+    //loop for test no
     for (int xx=start; xx<finish+1; xx++) {
+        
+        tempString = [NSString stringWithFormat:@"%d", xx-2];
+        
         cor=0;
         wro=0;
+        ans=@"";
+        //loop for test in line
         for (int q=0; q<xx; q++) {
-
+            //swap order for the reverse order if that was selected
             if (!singleton.forwardTestDirection) {
                 order[q]=reverse[q];
             }
-
+            //get the character at a position in the strings
             ee=[order[xx] substringWithRange:NSMakeRange(q, 1)];
             ff=[guessStr[xx] substringWithRange:NSMakeRange(q, 1)];
-            NSLog(@"....%@ - %@",ee,ff);
+            
+            //check for same digits in order and guess and count
             if ([ee isEqualToString: ff]) {
                 cor=cor+1;
                 totcor=totcor+1;
+                ans=@"1";
             }else{
                 wro=wro+1;
                 totwro=totwro+1;
+                ans=@"0";
             }
+            //put the individual components csv in string
+            tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@",%@", ans]];
         }
-        tempString=[NSString stringWithFormat:@"order=%@, guess=%@, Correct=%i, Wrong=%i",order[xx],guessStr[xx],cor,wro];
+        rsCounter=rsCounter+1;
+        
+        //add some commas
+        for (int y=1; y<11-xx; y++) {
+            tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@","]];
+        }
+        
+        //finish off string from loop
+        tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@"%d,%d", cor, wro]];
+        singleton.resultStringRow[rsCounter]=tempString;
         NSLog(@"%@",tempString);
+        rsCounter=rsCounter+1;
+        
+        //blankline
+        tempString=[NSString stringWithFormat:@""];
+        singleton.resultStringRow[rsCounter]=tempString;
+        NSLog(@"%@",tempString);
+        rsCounter=rsCounter+1;
+        
+        //put line of results
+        //rsCounter=rsCounter+1;
+        //tempString=[NSString stringWithFormat:@"order=%@, guess=%@, Correct=%i, Wrong=%i", [order[xx] substringWithRange:NSMakeRange(0, xx)], [guessStr[xx] substringWithRange:NSMakeRange(0, xx)],cor,wro];
+        //singleton.resultStringRow[rsCounter]=tempString;
+        //NSLog(@"%@",tempString);
 
     }
-    tempString=[NSString stringWithFormat:@"Total Correct=%d, Total Wrong=%d",totcor, totwro];
+    //blankline
+    tempString=[NSString stringWithFormat:@""];
+    singleton.resultStringRow[rsCounter]=tempString;
     NSLog(@"%@",tempString);
+    rsCounter=rsCounter+1;
+    
+    //put final totals
+    rsCounter=rsCounter+1;
+    tempString=[NSString stringWithFormat:@"Total Correct=%d, Total Wrong=%d",totcor, totwro];
+    singleton.resultStringRow[rsCounter]=tempString;
+    NSLog(@"%@",tempString);
+    
+    //end of results save
+    rsCounter=rsCounter+1;
+    tempString=[NSString stringWithFormat:@""];
+    singleton.resultStringRow[rsCounter]=tempString;
+    
+    //end
+    rsCounter=rsCounter+1;
+    tempString=[NSString stringWithFormat:@"End of Test Results"];
+    singleton.resultStringRow[rsCounter]=tempString;
 }
 
 -(void)setColours{
