@@ -18,25 +18,14 @@
 
     long double timerTime;
 
-    int   clickNumber;
     int   start;
     int   finish;
-
-    int blockx[9];
-    int blocky[9];
-    int adjustx[9];
-    int adjusty[9];
-    int blockRot[9];
 
     float blockSize;
     float waitTime;
     float startTime;
     float showTime;
     float messageTime;
-
-    Float32 *testTimez[7][9];
-    Float32 *testTimerz[7][9];
-    Float32 *timeGuess[7][9];
 
     BOOL forwardTestDirection;
     BOOL blockRotation;
@@ -46,10 +35,12 @@
     NSString *oldSubjectName;
     NSString *subjectName;
     NSString *testerName;
-    NSString *resultStrings;
     NSString *testDate;
     NSString *testTime;
     NSString *email;
+    NSString *resultStrings;
+
+    NSMutableArray *resultStringRows;
     
     UIView *bl1;
     UIView *bl2;
@@ -85,6 +76,7 @@
 @property (nonatomic,retain) NSString *oldSubjectName;
 @property (nonatomic,retain) NSString *subjectName;
 @property (nonatomic,retain) NSString *testerName;
+@property (nonatomic,retain) NSMutableArray *resultStringRow;
 @property (nonatomic,retain) NSString *resultStrings;
 @property (nonatomic,retain) NSString *testDate;
 @property (nonatomic,retain) NSString *testTime;

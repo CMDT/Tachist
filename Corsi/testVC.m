@@ -838,7 +838,7 @@
     blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo+1];
     [self statusUpdate:pressNo+1];
     pressNo=pressNo+1;
-    if(pressNo >= xcounter){
+    if(pressNo >= xcounter-1){
         pressNo=0;
         [self buttonsDisable];
         [NSTimer scheduledTimerWithTimeInterval: (messageTime/2) target:self selector:@selector(blankMSG3) userInfo:nil repeats:NO];
@@ -851,7 +851,7 @@
     blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo+1];
     [self statusUpdate:pressNo+1];
     pressNo=pressNo+1;
-    if(pressNo >= xcounter){
+    if(pressNo >= xcounter-1){
         pressNo=0;
         [self buttonsDisable];
         [NSTimer scheduledTimerWithTimeInterval: (messageTime/2) target:self selector:@selector(blankMSG3) userInfo:nil repeats:NO];
@@ -1239,6 +1239,7 @@
 }
 
 -(void)calculations{
+    mySingleton *singleton = [mySingleton sharedSingleton];
     NSLog(@"Calculations have started.");
     NSLog(@"String 1 was:%@, your guess:%@",order[1],guessStr[1]);
     NSLog(@"String 2 was:%@, your guess:%@",order[2],guessStr[2]);
@@ -1249,6 +1250,43 @@
     NSLog(@"String 7 was:%@, your guess:%@",order[7],guessStr[7]);
     NSLog(@"String 8 was:%@, your guess:%@",order[8],guessStr[8]);
     NSLog(@"String 9 was:%@, your guess:%@",order[9],guessStr[9]);
+
+    NSString * tempString;
+
+    int cor;
+    int wro;
+    int totcor=0;
+    int totwro=0;
+
+
+    NSString *ee;
+    NSString *ff;
+    for (int xx=start; xx<finish+1; xx++) {
+        cor=0;
+        wro=0;
+        for (int q=0; q<xx; q++) {
+
+            if (!singleton.forwardTestDirection) {
+                order[q]=reverse[q];
+            }
+
+            ee=[order[xx] substringWithRange:NSMakeRange(q, 1)];
+            ff=[guessStr[xx] substringWithRange:NSMakeRange(q, 1)];
+            NSLog(@"....%@ - %@",ee,ff);
+            if ([ee isEqualToString: ff]) {
+                cor=cor+1;
+                totcor=totcor+1;
+            }else{
+                wro=wro+1;
+                totwro=totwro+1;
+            }
+        }
+        tempString=[NSString stringWithFormat:@"order=%@, guess=%@, Correct=%i, Wrong=%i",order[xx],guessStr[xx],cor,wro];
+        NSLog(@"%@",tempString);
+
+    }
+    tempString=[NSString stringWithFormat:@"Total Correct=%d, Total Wrong=%d",totcor, totwro];
+    NSLog(@"%@",tempString);
 }
 
 -(void)setColours{

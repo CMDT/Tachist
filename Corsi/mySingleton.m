@@ -30,7 +30,6 @@ static mySingleton * sharedSingleton = nil;
             bl7,
             bl8,
             bl9,
-            clickNumber,
             showTime,
             start,
             startTime,
@@ -44,6 +43,7 @@ static mySingleton * sharedSingleton = nil;
             testDate,
             testTime,
             resultStrings,
+            resultStringRow,
             email,
             forwardTestDirection,
             blockRotation,
@@ -85,12 +85,12 @@ static mySingleton * sharedSingleton = nil;
         showTime    = 600;
         messageTime = 2000; //for on screen instructions and messages in time interval delay
         timerTime   = 0.0;
-        clickNumber = 0;
         blockRotation = NO;
         onScreenInfo  = YES;
         animals       = NO;
         forwardTestDirection = YES;
         oldSubjectName = @"Subject 1";
+        resultStrings = @"";
     }
     return self;
 }
