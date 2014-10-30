@@ -15,6 +15,24 @@
 
 @implementation resultsVC
 
+@synthesize
+//results Labels
+
+datelbl,
+timelbl,
+subjectlbl,
+testDate;
+
+@synthesize
+startDate,
+fileMgr,
+homeDir,
+filename,
+filepath,
+emaillbl
+;
+@synthesize resultTxtView,title;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -45,22 +63,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-@synthesize
-//results Labels
 
-datelbl,
-timelbl,
-subjectlbl,
-testDate;
-
-@synthesize
-startDate,
-fileMgr,
-homeDir,
-filename,
-filepath,
-emaillbl
-;
 
 -(NSString *) setFilename{
     mySingleton *singleton = [mySingleton sharedSingleton];
