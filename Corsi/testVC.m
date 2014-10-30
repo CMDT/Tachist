@@ -1071,7 +1071,7 @@
     }
     [MessageView setImage: card[0].image];
     MessageView.hidden=NO;
-    [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(jumpToResultsView) userInfo:nil repeats:NO];//@selector(blankMSG2) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(blankMSG2) userInfo:nil repeats:NO];
 }
 
 -(void)endTestMSG {

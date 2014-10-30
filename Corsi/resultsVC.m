@@ -49,12 +49,36 @@ emaillbl
 }
 
 -(void)viewDidAppear:(BOOL)animated{
+
+    mySingleton *singleton = [mySingleton sharedSingleton];
+
     UIImage *resultsImage           = [UIImage imageNamed:@"Results"];
     UIImage *resultsImageSel        = [UIImage imageNamed:@"Results"];
     resultsImage        = [resultsImage     imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     resultsImageSel     = [resultsImageSel  imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Results"        image:resultsImage selectedImage:       resultsImageSel];
 
+    //make a text file from the array of results
+    NSMutableString *element = [[NSMutableString alloc] init];
+    NSMutableString *printString = [NSMutableString stringWithString:@""];
+    for(int i=0; i< singleton.resultStringRows.count; i++)
+        {
+        element = [singleton.resultStringRows objectAtIndex: i];
+        [printString appendString:[NSString stringWithFormat:@"\n%@", element]];
+        }
+    [printString appendString:@""];
+
+    // NSLog(@"string to write pt1:%@",printString);
+    //CREATE FILE to save in Documents Directory
+    //nb Have to set info.plist environment variable to allow iTunes sharing if want to tx to iTunes etc this dir.
+
+    //UIViewController *files = [[UIViewController alloc] init];
+
+    singleton.resultStrings = printString;
+
+    resultTxtView.text = singleton.resultStrings;
+    //[self saveText];
+    [self WriteToStringFile:[printString mutableCopy]];
 
 }
 - (void)didReceiveMemoryWarning
