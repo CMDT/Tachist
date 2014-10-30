@@ -34,7 +34,7 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     UIImage *informationImage       = [UIImage imageNamed:@"Information"];
-    UIImage *informationImageSel    = [UIImage imageNamed:@"Information"];
+    UIImage *informationImageSel    = [UIImage imageNamed:@"InformationSel"];
     informationImage    = [informationImage     imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     informationImageSel = [informationImageSel  imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Information" image:informationImage selectedImage: informationImageSel];

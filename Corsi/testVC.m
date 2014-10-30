@@ -459,7 +459,7 @@
 -(void)viewDidAppear:(BOOL)animated{
     
     UIImage *testImage      = [UIImage imageNamed:@"Test"];
-    UIImage *testImageSel   = [UIImage imageNamed:@"Test"];
+    UIImage *testImageSel   = [UIImage imageNamed:@"TestSel"];
     testImage               = [testImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     testImageSel            = [testImageSel imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     self.tabBarItem         = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage selectedImage: testImageSel];

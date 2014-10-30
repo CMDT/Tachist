@@ -53,7 +53,7 @@ emaillbl
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     UIImage *resultsImage           = [UIImage imageNamed:@"Results"];
-    UIImage *resultsImageSel        = [UIImage imageNamed:@"Results"];
+    UIImage *resultsImageSel        = [UIImage imageNamed:@"ResultsSel"];
     resultsImage        = [resultsImage     imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     resultsImageSel     = [resultsImageSel  imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Results"        image:resultsImage selectedImage:       resultsImageSel];

@@ -96,7 +96,7 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL;
 -(void)viewDidAppear:(BOOL)animated{
     //assign images to tab bar items
     UIImage *settingsImage          = [UIImage imageNamed:@"Settings"];
-    UIImage *settingsImageSel       = [UIImage imageNamed:@"Settings"];
+    UIImage *settingsImageSel       = [UIImage imageNamed:@"SettingsSel"];
     settingsImage       = [settingsImage    imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     settingsImageSel    = [settingsImageSel imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Settings" image:settingsImage selectedImage: settingsImageSel];
