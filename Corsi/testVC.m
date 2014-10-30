@@ -498,6 +498,7 @@
     card[3] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-stage-end.png"]];
     card[4] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-calculating.png"]];
     card[5] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-touch-blocks.png"]];
+    card[6] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-results.png"]];
 }
 
 //
@@ -1128,7 +1129,8 @@
     [self buttonsDisable];
     NSLog(@"(jumpToResultsView)");
     [self hide_blocks];
-    MessageView.hidden=YES;
+    [MessageView setImage: card[6].image];
+    MessageView.hidden=NO;
     //jump to selector ResultsVC
     [self.tabBarController setSelectedIndex:4];
     

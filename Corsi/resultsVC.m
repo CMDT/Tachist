@@ -61,7 +61,8 @@ emaillbl
     //make a text file from the array of results
     NSMutableString *element = [[NSMutableString alloc] init];
     NSMutableString *printString = [NSMutableString stringWithString:@""];
-    for(int i=0; i< singleton.resultStringRows.count; i++)
+    int final=[singleton.resultStringRows.count];
+    for(int i=0; i< final; i++)
         {
         element = [singleton.resultStringRows objectAtIndex: i];
         [printString appendString:[NSString stringWithFormat:@"\n%@", element]];
