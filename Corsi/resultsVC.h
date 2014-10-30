@@ -28,7 +28,6 @@ IBOutlet UILabel     * statusMessageLab;
     UILabel         * timelbl;
     UILabel         * emaillbl;
     UILabel         * subjectlbl;
-    UITextView      * resultTxtView;
 }
 
 //file ops stuff
@@ -45,7 +44,6 @@ IBOutlet UILabel     * statusMessageLab;
 @property (nonatomic, strong) IBOutlet UILabel    * timelbl;
 @property (nonatomic, strong) IBOutlet UILabel    * emaillbl;
 @property (nonatomic, strong) IBOutlet UILabel    * subjectlbl;
-@property (nonatomic, strong) IBOutlet UITextView * resultTxtView;
 
 -(IBAction)showEmail:(id)sender;
 //-(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *) error;

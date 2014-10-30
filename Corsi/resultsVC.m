@@ -13,7 +13,10 @@
 
 @end
 
-@implementation resultsVC
+@implementation resultsVC{
+    IBOutlet UITextView *resultsTxtView;
+    IBOutlet UITextView *resultsViewBorder;
+}
 
 @synthesize
 //results Labels
@@ -31,7 +34,7 @@ filename,
 filepath,
 emaillbl
 ;
-@synthesize resultTxtView,title;
+@synthesize title;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -61,8 +64,8 @@ emaillbl
     //make a text file from the array of results
     NSMutableString *element = [[NSMutableString alloc] init];
     NSMutableString *printString = [NSMutableString stringWithString:@""];
-    int final=[singleton.resultStringRows.count];
-    for(int i=0; i< final; i++)
+    long final=singleton.resultStringRows.count;
+    for(long i=0; i< final; i++)
         {
         element = [singleton.resultStringRows objectAtIndex: i];
         [printString appendString:[NSString stringWithFormat:@"\n%@", element]];
@@ -77,7 +80,7 @@ emaillbl
 
     singleton.resultStrings = printString;
 
-    resultTxtView.text = singleton.resultStrings;
+    resultsTxtView.text = singleton.resultStrings;
     //[self saveText];
     [self WriteToStringFile:[printString mutableCopy]];
 

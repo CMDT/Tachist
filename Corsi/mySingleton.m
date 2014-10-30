@@ -91,8 +91,9 @@ static mySingleton * sharedSingleton = nil;
         forwardTestDirection = YES;
         oldSubjectName = @"Subject 1";
         resultStrings = @"";
-        [resultStringRows addObject:@"Corsi Block Tapping Test - MMU Cheshire, ESS"];
-    }
+        resultStringRows = [[NSMutableArray alloc]initWithObjects: nil];
+        email         =@"j.a.howell@mmu.ac.uk";
+        }
     return self;
 }
 @end
