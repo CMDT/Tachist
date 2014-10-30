@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "test32blk.png"
+      "filename" : "results32blu.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "test64blk@2x.png"
+      "filename" : "results64blu@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "test96blk@3x.png"
+      "filename" : "results96blu@3x.png"
     }
   ],
   "info" : {
