@@ -1259,6 +1259,11 @@
 -(void)calculations{
     mySingleton *singleton = [mySingleton sharedSingleton];
     NSLog(@"Calculations have started.");
+    
+    [singleton.resultStringRows removeAllObjects];
+    singleton.resultStrings=@"";
+    NSLog(@"Results array cleared, new results ready..");
+    
     NSLog(@"String 1 was:%@, your guess:%@",order[1],guessStr[1]);
     NSLog(@"String 2 was:%@, your guess:%@",order[2],guessStr[2]);
     NSLog(@"String 3 was:%@, your guess:%@",order[3],guessStr[3]);

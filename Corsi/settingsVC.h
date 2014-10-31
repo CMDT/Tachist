@@ -21,6 +21,7 @@
 #define kInfo       @"infoEnabled"
 #define kRot        @"rotationEnabled"
 #define kAnimals    @"animalsEnabled"
+#define kSounds     @"soundsEnabled"
 
 #define kBlockCol   @"blockColour"
 #define kShowCol    @"highlightColour"
@@ -52,6 +53,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *infoLBL;
 @property (strong, nonatomic) IBOutlet UILabel *rotateLBL;
 @property (strong, nonatomic) IBOutlet UILabel *animalsLBL;
+@property (strong, nonatomic) IBOutlet UILabel *soundsLBL;
 
 @property (retain, nonatomic) IBOutlet UIView *block1View;
 @property (retain, nonatomic) IBOutlet UIView *block2View;

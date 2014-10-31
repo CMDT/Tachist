@@ -48,7 +48,8 @@ static mySingleton * sharedSingleton = nil;
             forwardTestDirection,
             blockRotation,
             onScreenInfo,
-            animals
+            animals,
+            sounds
             ;
 
 #pragma mark -
@@ -79,15 +80,17 @@ static mySingleton * sharedSingleton = nil;
         currentStatusColour= [UIColor yellowColor];
         start       = 3;
         finish      = 9;
+        blockSize   = 40.00;
         blockSize   = 30.00;
         waitTime    = 1500;
         startTime   = 1000;
         showTime    = 600;
         messageTime = 2000; //for on screen instructions and messages in time interval delay
         timerTime   = 0.0;
-        blockRotation = NO;
+        blockRotation = YES;
         onScreenInfo  = YES;
         animals       = NO;
+        sounds        = NO;
         forwardTestDirection = YES;
         oldSubjectName = @"Subject 1";
         resultStrings = @"";

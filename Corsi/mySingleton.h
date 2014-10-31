@@ -31,6 +31,7 @@
     BOOL blockRotation;
     BOOL onScreenInfo;
     BOOL animals;
+    BOOL sounds;
     
     NSString *oldSubjectName;
     NSString *subjectName;
@@ -72,6 +73,7 @@
 @property (nonatomic) BOOL      blockRotation;
 @property (nonatomic) BOOL      onScreenInfo;
 @property (nonatomic) BOOL      animals;
+@property (nonatomic) BOOL      sounds;
 
 @property (nonatomic,retain) NSString *oldSubjectName;
 @property (nonatomic,retain) NSString *subjectName;

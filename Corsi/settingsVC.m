@@ -21,6 +21,7 @@
 #define kInfo       @"infoEnabled"
 #define kRot        @"rotationEnabled"
 #define kAnimals    @"animalsEnabled"
+#define kSounds     @"soundsEnabled"
 
 #define kBlockCol   @"blockColour"
 #define kShowCol    @"highlightColour"
@@ -58,6 +59,7 @@
     BOOL info;
     BOOL rotation;
     BOOL animals;
+    BOOL sounds;
     
     NSString *blockCol;
     NSString *showCol;
@@ -86,13 +88,18 @@
 
 @synthesize block1View,block2View,block3View,block4View,block5View;
 @synthesize block6View,block7View,block8View,block9View,settingsViewerVIEW;
-@synthesize  blockSizeLBL,blockFinishNumLBL,blockStartNumLBL,blockShowLBL,
-blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL;
+@synthesize blockSizeLBL,blockFinishNumLBL,blockStartNumLBL,blockShowLBL,
+blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL;
 
 -(void)viewWillAppear:(BOOL)animated{
     //when the view loads, before display does the code here
+    [self loadSettings:self];
 }
 
+-(void)viewWillDisappear:(BOOL)animated{
+    //when the view exits, save the plist settings for cold start data retreval
+    [self saveSettings:self];
+}
 -(void)viewDidAppear:(BOOL)animated{
     //assign images to tab bar items
     UIImage *settingsImage          = [UIImage imageNamed:@"Settings"];
@@ -142,6 +149,12 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL;
         animalsLBL.text=@"Animals";
     } else {
         animalsLBL.text=@"Square";
+    }
+    //animals flag
+    if(singleton.sounds==YES){
+        animalsLBL.text=@"Sound ON";
+    } else {
+        animalsLBL.text=@"Sound OFF";
     }
     //start, finish and sizes on screen from singleton
     blockStartNumLBL.text=[NSString stringWithFormat:@"%d",singleton.start];
@@ -267,6 +280,12 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL;
         animals =  NO;
         [defaults setBool:NO forKey:kAnimals];
     }
+    //set sounds
+    temp        = [defaults objectForKey:kSounds];
+    if( temp == nil ){
+        sounds =  NO;
+        [defaults setBool:NO forKey:kSounds];
+    }
     //set status messages
     temp        = [defaults objectForKey:kInfo];
     if( temp == nil ){
@@ -292,6 +311,7 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL;
     NSLog(@"info        :%@",[defaults objectForKey:kInfo]);
     NSLog(@"rotation    :%@",[defaults objectForKey:kRot]);
     NSLog(@"animals     :%@",[defaults objectForKey:kAnimals]);
+    NSLog(@"sounds      :%@",[defaults objectForKey:kSounds]);
     NSLog(@"block col   :%@",[defaults objectForKey:kBlockCol]);
     NSLog(@"show col    :%@",[defaults objectForKey:kShowCol]);
     NSLog(@"back col    :%@",[defaults objectForKey:kBackCol]);
@@ -508,6 +528,8 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL;
         [defaults setBool:NO forKey:kRot];
 
         [defaults setBool:NO forKey:kAnimals];
+    
+        [defaults setBool:NO forKey:kSounds];
 
         [defaults setBool:YES forKey:kInfo];
 
@@ -624,6 +646,12 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL;
         animals =  NO;
         [defaults setBool:NO forKey:kAnimals];
     }
+    //set sounds
+    temp        = [defaults objectForKey:kSounds];
+    if( temp == nil ){
+        sounds =  NO;
+        [defaults setBool:NO forKey:kSounds];
+    }
     //set status messages
     temp        = [defaults objectForKey:kInfo];
     if( temp == nil ){
@@ -649,6 +677,7 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL;
     singleton.onScreenInfo            = [defaults  boolForKey:kInfo];
     singleton.blockRotation           = [defaults  boolForKey:kRot];
     singleton.animals                 = [defaults  boolForKey:kAnimals];
+    singleton.sounds                  = [defaults  boolForKey:kSounds];
     singleton.currentBlockColour      = currentBlockColour;
     singleton.currentShowColour       = currentShowColour;
     singleton.currentBackgroundColour = currentBackgroundColour;
