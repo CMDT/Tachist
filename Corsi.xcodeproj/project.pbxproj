@@ -52,7 +52,6 @@
 		E10D017519B6024F00D9E5F8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E10D017419B6024F00D9E5F8 /* main.m */; };
 		E10D017919B6024F00D9E5F8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E10D017819B6024F00D9E5F8 /* AppDelegate.m */; };
 		E10D017C19B6024F00D9E5F8 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E10D017A19B6024F00D9E5F8 /* Main_iPhone.storyboard */; };
-		E10D017F19B6024F00D9E5F8 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E10D017D19B6024F00D9E5F8 /* Main_iPad.storyboard */; };
 		E10D018219B6024F00D9E5F8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E10D018119B6024F00D9E5F8 /* ViewController.m */; };
 		E10D018419B6024F00D9E5F8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E10D018319B6024F00D9E5F8 /* Images.xcassets */; };
 		E10D018B19B6024F00D9E5F8 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E10D018A19B6024F00D9E5F8 /* XCTest.framework */; };
@@ -66,6 +65,7 @@
 		E12DE08D1A03B09100172B36 /* BEEPJAZZ.caf in Resources */ = {isa = PBXBuildFile; fileRef = E12DE0871A03B09100172B36 /* BEEPJAZZ.caf */; };
 		E12DE08E1A03B09100172B36 /* BEEPPURE.caf in Resources */ = {isa = PBXBuildFile; fileRef = E12DE0881A03B09100172B36 /* BEEPPURE.caf */; };
 		E12DE08F1A03B09100172B36 /* KLICK.caf in Resources */ = {isa = PBXBuildFile; fileRef = E12DE0891A03B09100172B36 /* KLICK.caf */; };
+		E12DE0911A03DA4200172B36 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E12DE0901A03DA4200172B36 /* Main_iPad.storyboard */; };
 		E1B29EC119B7532E005B9C84 /* black72.png in Resources */ = {isa = PBXBuildFile; fileRef = E1B29EB419B7532E005B9C84 /* black72.png */; };
 		E1B29EC219B7532E005B9C84 /* blue72.png in Resources */ = {isa = PBXBuildFile; fileRef = E1B29EB519B7532E005B9C84 /* blue72.png */; };
 		E1B29EC319B7532E005B9C84 /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = E1B29EB619B7532E005B9C84 /* check.png */; };
@@ -158,7 +158,6 @@
 		E10D017719B6024F00D9E5F8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E10D017819B6024F00D9E5F8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		E10D017B19B6024F00D9E5F8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
-		E10D017E19B6024F00D9E5F8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
 		E10D018019B6024F00D9E5F8 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		E10D018119B6024F00D9E5F8 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		E10D018319B6024F00D9E5F8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -173,6 +172,7 @@
 		E12DE0871A03B09100172B36 /* BEEPJAZZ.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BEEPJAZZ.caf; sourceTree = "<group>"; };
 		E12DE0881A03B09100172B36 /* BEEPPURE.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BEEPPURE.caf; sourceTree = "<group>"; };
 		E12DE0891A03B09100172B36 /* KLICK.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = KLICK.caf; sourceTree = "<group>"; };
+		E12DE0901A03DA4200172B36 /* Main_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iPad.storyboard; sourceTree = "<group>"; };
 		E1B29EB419B7532E005B9C84 /* black72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = black72.png; sourceTree = "<group>"; };
 		E1B29EB519B7532E005B9C84 /* blue72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blue72.png; sourceTree = "<group>"; };
 		E1B29EB619B7532E005B9C84 /* check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check.png; sourceTree = "<group>"; };
@@ -274,7 +274,7 @@
 			isa = PBXGroup;
 			children = (
 				E10D017A19B6024F00D9E5F8 /* Main_iPhone.storyboard */,
-				E10D017D19B6024F00D9E5F8 /* Main_iPad.storyboard */,
+				E12DE0901A03DA4200172B36 /* Main_iPad.storyboard */,
 				E1DAD7A619B8A31700600608 /* mySingleton.h */,
 				E1DAD7A719B8A31700600608 /* mySingleton.m */,
 				E10D018019B6024F00D9E5F8 /* ViewController.h */,
@@ -498,7 +498,6 @@
 				91530B5819BE55B300D2026B /* corsi-stage-start.png in Resources */,
 				9113AFFE1A02EDA5000088D6 /* information96blk@3x.png in Resources */,
 				9113AFFC1A02EDA5000088D6 /* information64blk@2x.png in Resources */,
-				E10D017F19B6024F00D9E5F8 /* Main_iPad.storyboard in Resources */,
 				E10D018419B6024F00D9E5F8 /* Images.xcassets in Resources */,
 				E12DE08D1A03B09100172B36 /* BEEPJAZZ.caf in Resources */,
 				9113B0081A02EDA5000088D6 /* settings64blk@2x.png in Resources */,
@@ -518,6 +517,7 @@
 				9113B00F1A02EDA5000088D6 /* test64blu@2x.png in Resources */,
 				E10D017C19B6024F00D9E5F8 /* Main_iPhone.storyboard in Resources */,
 				E10D017319B6024F00D9E5F8 /* InfoPlist.strings in Resources */,
+				E12DE0911A03DA4200172B36 /* Main_iPad.storyboard in Resources */,
 				E1B29EC619B7532E005B9C84 /* cyan72.png in Resources */,
 				E1B29EC419B7532E005B9C84 /* checkbox.png in Resources */,
 				9113B0051A02EDA5000088D6 /* results96blu@3x.png in Resources */,
@@ -601,14 +601,6 @@
 				E10D017B19B6024F00D9E5F8 /* Base */,
 			);
 			name = Main_iPhone.storyboard;
-			sourceTree = "<group>";
-		};
-		E10D017D19B6024F00D9E5F8 /* Main_iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E10D017E19B6024F00D9E5F8 /* Base */,
-			);
-			name = Main_iPad.storyboard;
 			sourceTree = "<group>";
 		};
 		E10D019319B6024F00D9E5F8 /* InfoPlist.strings */ = {
@@ -703,7 +695,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Corsi/Corsi-Prefix.pch";
 				INFOPLIST_FILE = "Corsi/Corsi-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Corsi/TestFlightSDK3-3",
@@ -723,7 +715,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Corsi/Corsi-Prefix.pch";
 				INFOPLIST_FILE = "Corsi/Corsi-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Corsi/TestFlightSDK3-3",
