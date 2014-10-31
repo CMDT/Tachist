@@ -21,6 +21,7 @@
 - (IBAction)onScreenInfoSWT:(id)sender;
 - (IBAction)blockRotateSWT:(id)sender;
 - (IBAction)animalsSWT:(id)sender;
+- (IBAction)soundsSWT:(id)sender;
 
 - (void)buttonIncCheck;
 
@@ -39,4 +40,5 @@
 @property (weak, nonatomic) IBOutlet UISwitch *onScreenInfoSWT;
 @property (weak, nonatomic) IBOutlet UISwitch *blockRotateSWT;
 @property (weak, nonatomic) IBOutlet UISwitch *animalsSWT;
+@property (weak, nonatomic) IBOutlet UISwitch *soundsSWT;
 @end

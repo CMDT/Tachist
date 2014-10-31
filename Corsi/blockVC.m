@@ -26,7 +26,7 @@
 @synthesize blockFinishNumLBL,blockRotateSWT,blockSizeLBL,
 blockStartNumLBL,sizeMinusBTN,sizePlusBTN,startMinusBTN,
 startPlusBTN,onScreenInfoSWT,finishMinusBTN,finishPlusBTN,
-forwardTestSWT,animalsSWT;
+forwardTestSWT,animalsSWT,soundsSWT;
 
 -(void)viewDidAppear:(BOOL)animated{
     mySingleton *singleton = [mySingleton sharedSingleton];
@@ -51,6 +51,11 @@ forwardTestSWT,animalsSWT;
         animalsSWT.on=YES;
     }else{
         animalsSWT.on=NO;
+    }
+    if(singleton.sounds){
+        soundsSWT.on=YES;
+    }else{
+        soundsSWT.on=NO;
     }
     
     //blocks set
@@ -251,5 +256,16 @@ forwardTestSWT,animalsSWT;
         animals = NO;
     }
     singleton.animals=animals;
+}
+- (IBAction)soundsSWT:(id)sender{
+    mySingleton *singleton = [mySingleton sharedSingleton];
+    BOOL sounds;
+    if (soundsSWT.isOn)
+    {
+        sounds = YES;
+    } else {
+        sounds = NO;
+    }
+    singleton.sounds=sounds;
 }
 @end

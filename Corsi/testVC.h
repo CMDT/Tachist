@@ -7,11 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AudioToolbox/AudioToolbox.h>
+#import <AVFoundation/AVFoundation.h>
 
 @interface testVC : UIViewController{
-
+    SystemSoundID mySoundEffect;
+    AVAudioPlayer *backgroundMusicPlayer;
+    BOOL backIsStarted;
 }
+-(void)startStop;
+-(void)setVolumeValue;
+-(void)playMyEffect;
 
+@property (nonatomic, retain) AVAudioPlayer *backgroundMusicPlayer;
 @property (retain, nonatomic) IBOutlet UILabel     * headingLBL;
 @property (retain, nonatomic) IBOutlet UILabel     * statusMessageLBL;
 @property (retain, nonatomic) IBOutlet UIImageView * MessageView;

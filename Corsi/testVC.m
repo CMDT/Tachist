@@ -68,7 +68,7 @@
 @implementation testVC
 @synthesize
     box1iv,
-
+    backgroundMusicPlayer, //for sounds
     blkLBL,
     blkNoLBL,
     blkTotalLBL,
@@ -111,6 +111,57 @@
         // Custom initialization
     }
     return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    mySingleton *singleton = [mySingleton sharedSingleton];
+    
+    //sound stuff
+    backIsStarted=false;
+    NSString *backgroundMusicPath=[[NSBundle mainBundle]pathForResource:@"BEEP_FM" ofType:@"caf"];
+    NSURL *backgroundMusicURL=[NSURL fileURLWithPath:backgroundMusicPath];
+    NSError *error;
+    backgroundMusicPlayer=[[AVAudioPlayer alloc] initWithContentsOfURL:backgroundMusicURL error:&error];
+    [backgroundMusicPlayer setNumberOfLoops:3]; //-1 = forever
+    //prepare to play
+    NSString *mySoundEffectPath=[[NSBundle mainBundle]pathForResource:@"BEEPJAZZ" ofType:@"caf"];
+    NSURL *mySoundEffectURL=[NSURL fileURLWithPath:mySoundEffectPath];
+    AudioServicesCreateSystemSoundID(CFBridgingRetain(mySoundEffectURL),&mySoundEffect);
+    
+    infoShow=singleton.onScreenInfo;
+    
+    //make 9 sets of number strings
+    for (int x=1; x<10; x++) {
+        order[x]=[self make9order];
+        reverse[x]=[self rev9Order:order[x]];
+        NSLog(@"Order returned for Set: %d is:%@, reverse:%@",x, order[x], reverse[x]);
+    }
+}
+-(void)startStop{
+    //toggle the background sounds on/off
+    if (backIsStarted) {
+        [backgroundMusicPlayer stop];
+    }else{
+        [backgroundMusicPlayer prepareToPlay];
+        [backgroundMusicPlayer play];
+    }
+    backIsStarted=!backIsStarted;
+}
+
+-(void)setVolumeValue{
+    //set the volume of the sound
+    [backgroundMusicPlayer setVolume:5];
+}
+
+-(void)playMyEffect{
+    //make a noise, if the flag is on for sound
+        mySingleton *singleton = [mySingleton sharedSingleton];
+    if (singleton.sounds) {
+        AudioServicesPlaySystemSound(mySoundEffect);
+    }
 }
 
 -(void)initialiseBlocks{
@@ -193,22 +244,6 @@
         box7image.image = [self getAnimal:ani[2]];
         box8image.image = [self getAnimal:ani[4]];
         box9image.image = [self getAnimal:ani[6]];
-    }
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    mySingleton *singleton = [mySingleton sharedSingleton];
-
-    infoShow=singleton.onScreenInfo;
-
-    //make 9 sets of number strings
-    for (int x=1; x<10; x++) {
-        order[x]=[self make9order];
-        reverse[x]=[self rev9Order:order[x]];
-        NSLog(@"Order returned for Set: %d is:%@, reverse:%@",x, order[x], reverse[x]);
     }
 }
 
@@ -297,7 +332,9 @@
 
 -(IBAction)startTest:sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
-
+    
+    [self playMyEffect];
+    
     NSLog(@"Test has started");
     statusMessageLBL.text = @"The Test Has Started";
 
@@ -842,6 +879,8 @@
 
 -(IBAction)blk1BUT:(id)sender{
     //button 1 pressed
+    //AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    [self playMyEffect];
     guess[pressNo+1]=@"1";
     blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo+1];
     [self statusUpdate:pressNo+1];
@@ -855,6 +894,8 @@
 
 -(IBAction)blk2BUT:(id)sender{
     //button 2 pressed
+    //AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    [self playMyEffect];
     guess[pressNo+1]=@"2";
     blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo+1];
     [self statusUpdate:pressNo+1];
@@ -868,6 +909,8 @@
 
 -(IBAction)blk3BUT:(id)sender{
     //button 3 pressed
+    //AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    [self playMyEffect];
     guess[pressNo+1]=@"3";
     blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo+1];
     [self statusUpdate:pressNo+1];
@@ -881,6 +924,8 @@
 
 -(IBAction)blk4BUT:(id)sender{
     //button 4 pressed
+    //AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    [self playMyEffect];
     guess[pressNo+1]=@"4";
     blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo+1];
     [self statusUpdate:pressNo+1];
@@ -894,6 +939,8 @@
 
 -(IBAction)blk5BUT:(id)sender{
     //button 5 pressed
+    //AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    [self playMyEffect];
     guess[pressNo+1]=@"5";
     blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo+1];
     [self statusUpdate:pressNo+1];
@@ -907,6 +954,8 @@
 
 -(IBAction)blk6BUT:(id)sender{
     //button 6 pressed
+    //AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    [self playMyEffect];
     guess[pressNo+1]=@"6";
     blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo+1];
     [self statusUpdate:pressNo+1];
@@ -920,6 +969,8 @@
 
 -(IBAction)blk7BUT:(id)sender{
     //button 7 pressed
+    //AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    [self playMyEffect];
     guess[pressNo+1]=@"7";
     blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo+1];
     [self statusUpdate:pressNo+1];
@@ -933,6 +984,8 @@
 
 -(IBAction)blk8BUT:(id)sender{
     //button 8 pressed
+    //AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    [self playMyEffect];
     guess[pressNo+1]=@"8";
     blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo+1];
     [self statusUpdate:pressNo+1];
@@ -946,6 +999,8 @@
 
 -(IBAction)blk9BUT:(id)sender{
     //button 9 pressed
+    //AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    [self playMyEffect];
     guess[pressNo+1]=@"9";
     blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo+1];
     [self statusUpdate:pressNo+1];
@@ -1004,7 +1059,7 @@
 
         statusMessageLBL.text = @"";
 
-    [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(getGuesses) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(getGuesses) userInfo:nil repeats:NO];
 }
 
 -(void)finalGuessMSG {
@@ -1012,18 +1067,18 @@
 
         statusMessageLBL.text = @"";
 
-    [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(getFinalGuesses) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(getFinalGuesses) userInfo:nil repeats:NO];
 }
 
 -(void)stageEndMSG {
     [self buttonsDisable];
     NSLog(@"Stage Ending");
     if (infoShow) {
-        statusMessageLBL.text = @"The Stage has Ended, prepare to recall the  sequence of blocks.";
+        statusMessageLBL.text = @"";
     }else{
         statusMessageLBL.text = @"";
     }
-    [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(guessMSG) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(guessMSG) userInfo:nil repeats:NO];
 }
 
 -(void)finalStageEndMSG {
@@ -1031,11 +1086,11 @@
     NSLog(@"Final Stage Ending");
     isFinished=YES;
     if (infoShow) {
-        statusMessageLBL.text = @"The Final Stage has Ended, prepare to recall the  sequence of blocks.";
+        statusMessageLBL.text = @"";
     }else{
         statusMessageLBL.text = @"";
     }
-    [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(finalGuessMSG) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(finalGuessMSG) userInfo:nil repeats:NO];
 }
 
 -(void)nextStageMSG {
@@ -1112,15 +1167,15 @@
     [self buttonsDisable];
     NSLog(@"(blankmsg)");
     MessageView.hidden=YES;
-    [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(stageChecks) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:waitTime target:self selector:@selector(stageChecks) userInfo:nil repeats:NO];
 }
 
 -(void)blankMSG2 {
     [self buttonsDisable];
     NSLog(@"(blankmsg2)");
     [self display_blocks];
-    MessageView.hidden=YES;
-    [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(box1) userInfo:nil repeats:NO];
+    MessageView.hidden=YES;//maybe messagetime--v
+    [NSTimer scheduledTimerWithTimeInterval:waitTime target:self selector:@selector(box1) userInfo:nil repeats:NO];
 }
 
 -(void)jumpToResultsView {
@@ -1130,9 +1185,8 @@
     [MessageView setImage: card[6].image];
     MessageView.hidden=NO;
     //jump to selector ResultsVC
-    [self.tabBarController setSelectedIndex:4];
-    
-
+    //[self.tabBarController setSelectedIndex:4]; needs to be able to jump as well
+    //manual selection at present on tab bar
 }
 
 -(void)blankMSG3 {
@@ -1147,6 +1201,7 @@
         [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(endTestMSG) userInfo:nil repeats:NO];
     }else{
         NSLog(@"(blank3 stagechecks)");
+        statusMessageLBL.text = @"";
         [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(stageChecks) userInfo:nil repeats:NO];
     }
 }

@@ -224,7 +224,7 @@
             <key>Type</key>
             <string>PSToggleSwitchSpecifier</string>
             <key>Title</key>
-            <string Feedback Sounds  Enabled</string>
+            <string>Feedback Sounds Enabled</string>
         </dict>
 		<dict>
 			<key>Type</key>

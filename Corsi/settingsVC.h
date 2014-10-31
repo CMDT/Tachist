@@ -6,37 +6,13 @@
 //  Copyright (c) 2014 Manchester Metropolitan University - ESS - essmobile. All rights reserved.
 //
 
-
 #import <UIKit/UIKit.h>
-/*
-#define kEmail      @"emailAddress"
-#define kTester     @"testerName"
-#define kSubject    @"subjectName"
 
-#define kStart      @"startBlocks"
-#define kFinish     @"finishBlocks"
-#define kSize       @"blockSize"
-
-#define kForward    @"forwardTestEnabled"
-#define kInfo       @"infoEnabled"
-#define kRot        @"rotationEnabled"
-#define kAnimals    @"animalsEnabled"
-#define kSounds     @"soundsEnabled"
-
-#define kBlockCol   @"blockColour"
-#define kShowCol    @"highlightColour"
-#define kBackCol    @"backgroundColour"
-
-#define kDelay      @"blockDelay"
-#define kTime       @"blockTime"
-#define kShow       @"blockShow"
-
-#define kVersion    @"version"
-*/
 @interface settingsVC : UIViewController{
     UIView *settingsViewerVIEW;
 }
 
+@property (nonatomic,retain) UIViewController *settingsVC;
 @property (strong, nonatomic) IBOutlet UILabel *canvasLBL;
 @property (strong, nonatomic) IBOutlet UILabel *blockLBL;
 @property (strong, nonatomic) IBOutlet UILabel *showLBL;

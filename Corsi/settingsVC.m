@@ -89,16 +89,16 @@
 @synthesize block1View,block2View,block3View,block4View,block5View;
 @synthesize block6View,block7View,block8View,block9View,settingsViewerVIEW;
 @synthesize blockSizeLBL,blockFinishNumLBL,blockStartNumLBL,blockShowLBL,
-blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL;
+blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,settingsVC;
 
 -(void)viewWillAppear:(BOOL)animated{
     //when the view loads, before display does the code here
-    [self loadSettings:self];
+    //[self loadSettings:self];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     //when the view exits, save the plist settings for cold start data retreval
-    [self saveSettings:self];
+    //[self saveSettings:self];
 }
 -(void)viewDidAppear:(BOOL)animated{
     //assign images to tab bar items
@@ -148,13 +148,13 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL;
     if(singleton.animals==YES){
         animalsLBL.text=@"Animals";
     } else {
-        animalsLBL.text=@"Square";
+        animalsLBL.text=@"Blocks";
     }
     //animals flag
     if(singleton.sounds==YES){
-        animalsLBL.text=@"Sound ON";
+        soundsLBL.text=@"Sounds";
     } else {
-        animalsLBL.text=@"Sound OFF";
+        soundsLBL.text=@"Quiet";
     }
     //start, finish and sizes on screen from singleton
     blockStartNumLBL.text=[NSString stringWithFormat:@"%d",singleton.start];
@@ -174,6 +174,7 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    [self setDefaults];
 }
 
 - (void)didReceiveMemoryWarning
@@ -199,21 +200,21 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL;
     // if any are set to nil (no value on first run), put a temporary one in
     
 //block colour
-    currentBlockColour          = [defaults objectForKey:kBlockCol];
+    currentBlockColour     = [defaults objectForKey:kBlockCol];
     if(currentBlockColour  == nil ){
         currentBlockColour =  [UIColor blueColor];
         blockCol =@"Blue";
         [defaults setObject:@"Blue" forKey:kBlockCol];
     }
 //bacground colour
-    currentBackgroundColour          = [defaults objectForKey:kBackCol];
+    currentBackgroundColour     = [defaults objectForKey:kBackCol];
     if(currentBackgroundColour  == nil ){
         currentBackgroundColour =  [UIColor blackColor];
         backCol =@"Black";
         [defaults setObject:@"Black" forKey:kBackCol];
     }
 //show colour
-    currentShowColour          = [defaults objectForKey:kShowCol];
+    currentShowColour     = [defaults objectForKey:kShowCol];
     if(currentShowColour  == nil ){
         currentShowColour =  [UIColor orangeColor];
         showCol =@"Orange";
@@ -512,30 +513,18 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL;
     //show colour
 
         [defaults setObject:[self colourUIToString:singleton.currentShowColour] forKey:kShowCol];
-
         [defaults setObject:[NSString stringWithFormat:@"%d", singleton.start] forKey:kStart];
-
         [defaults setObject:[NSString stringWithFormat:@"%d", singleton.finish] forKey:kFinish];
-
-        [defaults setObject:[NSString stringWithFormat:@"%f", singleton.blockSize] forKey:kSize];
-
-        [defaults setObject:[NSString stringWithFormat:@"%f", singleton.startTime] forKey:kDelay];
-
-        [defaults setObject:[NSString stringWithFormat:@"%f", singleton.showTime] forKey:kShow];
-
-        [defaults setObject:[NSString stringWithFormat:@"%f", singleton.waitTime] forKey:kTime];
-
-        [defaults setBool:NO forKey:kRot];
-
-        [defaults setBool:NO forKey:kAnimals];
-    
-        [defaults setBool:NO forKey:kSounds];
-
-        [defaults setBool:YES forKey:kInfo];
-
-        [defaults setBool:YES forKey:kForward];
-
-    [defaults synchronize];
+        [defaults setObject:[NSString stringWithFormat:@"%2.0f", singleton.blockSize] forKey:kSize];
+        [defaults setObject:[NSString stringWithFormat:@"%2.0f", singleton.startTime] forKey:kDelay];
+        [defaults setObject:[NSString stringWithFormat:@"%2.0f", singleton.showTime] forKey:kShow];
+        [defaults setObject:[NSString stringWithFormat:@"%2.0f", singleton.waitTime] forKey:kTime];
+        [defaults setBool:singleton.blockRotation forKey:kRot];
+        [defaults setBool:singleton.animals forKey:kAnimals];
+        [defaults setBool:singleton.sounds forKey:kSounds];
+        [defaults setBool:singleton.onScreenInfo forKey:kInfo];
+        [defaults setBool:singleton.forwardTestDirection forKey:kForward];
+        [defaults synchronize];//make sure all are updated
 }
 
 -(IBAction)loadSettings:(id)sender{
@@ -688,6 +677,12 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL;
     //singleton.version             = [defaults objectForKey:kVersion];
 
     [defaults synchronize];
+    [self refreshView];
 }
 
+-(void)refreshView {
+    //make the colours change as now changed
+    [self viewDidLoad];
+    [self viewDidAppear:YES]; // If viewWillAppear also contains code
+}
 @end

@@ -60,6 +60,12 @@
 		E10D018D19B6024F00D9E5F8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E10D016C19B6024F00D9E5F8 /* UIKit.framework */; };
 		E10D019519B6024F00D9E5F8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E10D019319B6024F00D9E5F8 /* InfoPlist.strings */; };
 		E10D019719B6024F00D9E5F8 /* CorsiTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E10D019619B6024F00D9E5F8 /* CorsiTests.m */; };
+		E12DE08A1A03B09100172B36 /* AMFMBEEP.caf in Resources */ = {isa = PBXBuildFile; fileRef = E12DE0841A03B09100172B36 /* AMFMBEEP.caf */; };
+		E12DE08B1A03B09100172B36 /* BEEP_FM.caf in Resources */ = {isa = PBXBuildFile; fileRef = E12DE0851A03B09100172B36 /* BEEP_FM.caf */; };
+		E12DE08C1A03B09100172B36 /* BEEPDOUB.caf in Resources */ = {isa = PBXBuildFile; fileRef = E12DE0861A03B09100172B36 /* BEEPDOUB.caf */; };
+		E12DE08D1A03B09100172B36 /* BEEPJAZZ.caf in Resources */ = {isa = PBXBuildFile; fileRef = E12DE0871A03B09100172B36 /* BEEPJAZZ.caf */; };
+		E12DE08E1A03B09100172B36 /* BEEPPURE.caf in Resources */ = {isa = PBXBuildFile; fileRef = E12DE0881A03B09100172B36 /* BEEPPURE.caf */; };
+		E12DE08F1A03B09100172B36 /* KLICK.caf in Resources */ = {isa = PBXBuildFile; fileRef = E12DE0891A03B09100172B36 /* KLICK.caf */; };
 		E1B29EC119B7532E005B9C84 /* black72.png in Resources */ = {isa = PBXBuildFile; fileRef = E1B29EB419B7532E005B9C84 /* black72.png */; };
 		E1B29EC219B7532E005B9C84 /* blue72.png in Resources */ = {isa = PBXBuildFile; fileRef = E1B29EB519B7532E005B9C84 /* blue72.png */; };
 		E1B29EC319B7532E005B9C84 /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = E1B29EB619B7532E005B9C84 /* check.png */; };
@@ -161,6 +167,12 @@
 		E10D019219B6024F00D9E5F8 /* CorsiTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CorsiTests-Info.plist"; sourceTree = "<group>"; };
 		E10D019419B6024F00D9E5F8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E10D019619B6024F00D9E5F8 /* CorsiTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CorsiTests.m; sourceTree = "<group>"; };
+		E12DE0841A03B09100172B36 /* AMFMBEEP.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AMFMBEEP.caf; sourceTree = "<group>"; };
+		E12DE0851A03B09100172B36 /* BEEP_FM.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BEEP_FM.caf; sourceTree = "<group>"; };
+		E12DE0861A03B09100172B36 /* BEEPDOUB.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BEEPDOUB.caf; sourceTree = "<group>"; };
+		E12DE0871A03B09100172B36 /* BEEPJAZZ.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BEEPJAZZ.caf; sourceTree = "<group>"; };
+		E12DE0881A03B09100172B36 /* BEEPPURE.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BEEPPURE.caf; sourceTree = "<group>"; };
+		E12DE0891A03B09100172B36 /* KLICK.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = KLICK.caf; sourceTree = "<group>"; };
 		E1B29EB419B7532E005B9C84 /* black72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = black72.png; sourceTree = "<group>"; };
 		E1B29EB519B7532E005B9C84 /* blue72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blue72.png; sourceTree = "<group>"; };
 		E1B29EB619B7532E005B9C84 /* check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check.png; sourceTree = "<group>"; };
@@ -295,6 +307,12 @@
 		E10D016F19B6024F00D9E5F8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E12DE0841A03B09100172B36 /* AMFMBEEP.caf */,
+				E12DE0851A03B09100172B36 /* BEEP_FM.caf */,
+				E12DE0861A03B09100172B36 /* BEEPDOUB.caf */,
+				E12DE0871A03B09100172B36 /* BEEPJAZZ.caf */,
+				E12DE0881A03B09100172B36 /* BEEPPURE.caf */,
+				E12DE0891A03B09100172B36 /* KLICK.caf */,
 				91C10DB31A02F3A60014390A /* corsi-results.png */,
 				9113AFE21A02EDA5000088D6 /* information32blk.png */,
 				9113AFE31A02EDA5000088D6 /* information32blu.png */,
@@ -457,6 +475,7 @@
 				91E2633D19D8914B005B2643 /* check72grey.png in Resources */,
 				91CCCCF819D77AE000C742B6 /* purple72.png in Resources */,
 				91530B5519BE55B300D2026B /* corsi-calculating.png in Resources */,
+				E12DE08C1A03B09100172B36 /* BEEPDOUB.caf in Resources */,
 				9113B0001A02EDA5000088D6 /* results32blk.png in Resources */,
 				91530B5619BE55B300D2026B /* corsi-finished.png in Resources */,
 				E1B29EC519B7532E005B9C84 /* corsi.png in Resources */,
@@ -468,8 +487,10 @@
 				E1DAD7A119B87F8E00600608 /* email1@2x.png in Resources */,
 				E1B29EC719B7532E005B9C84 /* green72.png in Resources */,
 				9113B0041A02EDA5000088D6 /* results96blk@3x.png in Resources */,
+				E12DE08F1A03B09100172B36 /* KLICK.caf in Resources */,
 				9113B00B1A02EDA5000088D6 /* settings96blu@3x.png in Resources */,
 				91530B5719BE55B300D2026B /* corsi-stage-end.png in Resources */,
+				E12DE08A1A03B09100172B36 /* AMFMBEEP.caf in Resources */,
 				E1B29ECA19B7532E005B9C84 /* orange72.png in Resources */,
 				9113B0031A02EDA5000088D6 /* results64blu@2x.png in Resources */,
 				9113B00C1A02EDA5000088D6 /* test32blk.png in Resources */,
@@ -479,6 +500,7 @@
 				9113AFFC1A02EDA5000088D6 /* information64blk@2x.png in Resources */,
 				E10D017F19B6024F00D9E5F8 /* Main_iPad.storyboard in Resources */,
 				E10D018419B6024F00D9E5F8 /* Images.xcassets in Resources */,
+				E12DE08D1A03B09100172B36 /* BEEPJAZZ.caf in Resources */,
 				9113B0081A02EDA5000088D6 /* settings64blk@2x.png in Resources */,
 				9113AFFA1A02EDA5000088D6 /* information32blk.png in Resources */,
 				9113B00D1A02EDA5000088D6 /* test32blu.png in Resources */,
@@ -502,7 +524,9 @@
 				91C10DB41A02F3A60014390A /* corsi-results.png in Resources */,
 				9113B00A1A02EDA5000088D6 /* settings96blk@3x.png in Resources */,
 				9113AFFB1A02EDA5000088D6 /* information32blu.png in Resources */,
+				E12DE08B1A03B09100172B36 /* BEEP_FM.caf in Resources */,
 				9113AFFF1A02EDA5000088D6 /* information96blu@3x.png in Resources */,
+				E12DE08E1A03B09100172B36 /* BEEPPURE.caf in Resources */,
 				91CCCCF919D77AE000C742B6 /* lightgrey.png in Resources */,
 				91530B5419BE55B300D2026B /* corsi_start.png in Resources */,
 				9113AFFD1A02EDA5000088D6 /* information64blu@2x.png in Resources */,
