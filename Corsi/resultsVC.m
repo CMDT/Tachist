@@ -241,4 +241,28 @@ NSString * fileNameS = [NSString stringWithFormat:@"jon.csv"];
     NSLog(@"Finished Email");
 }
 
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+        NSLog(@"Mail cancelled");
+        break;
+        case MFMailComposeResultSaved:
+        NSLog(@"Mail saved");
+        break;
+        case MFMailComposeResultSent:
+        NSLog(@"Mail sent");
+        break;
+        case MFMailComposeResultFailed:
+        NSLog(@"Mail sent failure: %@", [error localizedDescription]);
+        break;
+        default:
+        break;
+    }
+
+    // Close the Mail Interface
+    [self dismissViewControllerAnimated:YES completion:NULL];
+NSLog(@"Email view now closed.");
+}
 @end
