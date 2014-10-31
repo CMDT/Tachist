@@ -178,7 +178,10 @@ emaillbl
     
     docsDir = dirPaths[0];
     
-    NSString * fileNameS = [NSString stringWithFormat:@"%@.csv", subjectlbl.text];
+    //NSString * fileNameS = [NSString stringWithFormat:@"%@.csv", subjectlbl.text];
+
+NSString * fileNameS = [NSString stringWithFormat:@"jon.csv"];
+
     dataFile = [docsDir stringByAppendingPathComponent:fileNameS];
     
     databuffer = [singleton.resultStrings dataUsingEncoding: NSASCIIStringEncoding];
@@ -188,13 +191,16 @@ emaillbl
 
 
 - (IBAction)showEmail:(id)sender {
+    NSLog(@"Sending Email");
     mySingleton *singleton = [mySingleton sharedSingleton];
-    NSString *emailTitle = [NSString stringWithFormat:@"Corsi App Data for: %@",singleton.oldSubjectName];
+    NSString *emailTitle = [NSString stringWithFormat:@"Corsi App Data: %@",singleton.oldSubjectName];
     NSString *messageBody = [NSString stringWithFormat:@"The test data for the subject:%@ taken at the date: %@ and time: %@, is attached as a text/csv file.  \n\nThe file is comma separated variable, csv extension.  \n\nThe data can be read by MS-Excel, then analysed by your own functions. \n\nSent by Corsi App.",singleton.oldSubjectName, singleton.testDate, singleton.testTime];
+
     //NSArray  *toRecipents = [NSArray arrayWithObject:@"j.a.howell@mmu.ac.uk"];
     NSArray  *toRecipents = [NSArray arrayWithObject:singleton.email];
     
     MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+    
     mc.mailComposeDelegate = self;
     [mc setSubject:emailTitle];
     [mc setMessageBody:messageBody isHTML:NO];
@@ -232,6 +238,7 @@ emaillbl
     
     // P              resent mail view controller on screen
     [self presentViewController:mc animated:YES completion:NULL];
+    NSLog(@"Finished Email");
 }
 
 @end

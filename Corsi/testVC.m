@@ -958,9 +958,10 @@
 }
 
 -(void)getGuesses {
+    [self buttonsEnable];
     blkNoLBL.text = [NSString stringWithFormat:@"%i",0];
     //turns on the buttons, collects the xcounter guesses, forms a string, saves it and carries on with next stage
-    [self buttonsEnable];
+    
     if (infoShow) {
         statusMessageLBL.text = @"Recall The Sequence, touch the blocks.";
     }else{
@@ -979,6 +980,7 @@
 }
 
 -(void)getFinalGuesses {
+    [self buttonsEnable];
     blkNoLBL.text = [NSString stringWithFormat:@"%i",0];
     //turns on the buttons, collects the xcounter guesses, forms a string, saves it and carries on with next stage
     if (infoShow) {
@@ -987,7 +989,7 @@
         statusMessageLBL.text = @"Recall";
     }
     NSLog(@"Press The Blocks in Order");
-    [self buttonsEnable];
+   
     if((pressNo >= xcounter+1)&&(isFinished==YES)){
         [self buttonsDisable];
         [NSTimer scheduledTimerWithTimeInterval: (messageTime/2) target:self selector:@selector(endTestMSG) userInfo:nil repeats:NO];
@@ -999,21 +1001,17 @@
 -(void)guessMSG {
     blkNoLBL.text = [NSString stringWithFormat:@"%i",0];
     NSLog(@"Guess Now");
-    if (infoShow) {
-        statusMessageLBL.text = @"Recall The Sequence, touch the blocks.";
-    }else{
-        statusMessageLBL.text = @"Recall";
-    }
+
+        statusMessageLBL.text = @"";
+
     [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(getGuesses) userInfo:nil repeats:NO];
 }
 
 -(void)finalGuessMSG {
         blkNoLBL.text = [NSString stringWithFormat:@"%i",0];
-    if (infoShow) {
-        statusMessageLBL.text = @"Recall The Sequence, touch the blocks.";
-    }else{
-        statusMessageLBL.text = @"Recall";
-    }
+
+        statusMessageLBL.text = @"";
+
     [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(getFinalGuesses) userInfo:nil repeats:NO];
 }
 
