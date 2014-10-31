@@ -32,7 +32,8 @@
     BOOL onScreenInfo;
     BOOL animals;
     BOOL sounds;
-    
+
+    NSString *beepEffect;//from plist
     NSString *oldSubjectName;
     NSString *subjectName;
     NSString *testerName;
@@ -40,8 +41,10 @@
     NSString *testTime;
     NSString *email;
     NSString *resultStrings;
+    NSString *displayStrings;
 
-    NSMutableArray *resultStringRows;
+    NSMutableArray *resultStringRows;//for Excel and data csv format
+    NSMutableArray *displayStringRows;//for screen display formatted to look nice
     
     UIView *bl1;
     UIView *bl2;
@@ -62,6 +65,8 @@
 
 @property (nonatomic) int       start;
 @property (nonatomic) int       finish;
+@property (nonatomic) NSString *beepEffect;
+
 @property (nonatomic) float     blockSize;
 @property (nonatomic) float     waitTime;
 @property (nonatomic) float     startTime;
@@ -79,7 +84,9 @@
 @property (nonatomic,retain) NSString *subjectName;
 @property (nonatomic,retain) NSString *testerName;
 @property (nonatomic,retain) NSMutableArray *resultStringRows;
+@property (nonatomic,retain) NSMutableArray *displayStringRows;
 @property (nonatomic,retain) NSString *resultStrings;
+@property (nonatomic,retain) NSString *displayStrings;
 @property (nonatomic,retain) NSString *testDate;
 @property (nonatomic,retain) NSString *testTime;
 @property (nonatomic,retain) NSString *email;

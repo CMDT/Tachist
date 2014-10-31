@@ -12,7 +12,7 @@
     UIView *settingsViewerVIEW;
 }
 
-@property (nonatomic,retain) UIViewController *settingsVC;
+@property (nonatomic,retain) UIViewController  *settingsVC;
 @property (strong, nonatomic) IBOutlet UILabel *canvasLBL;
 @property (strong, nonatomic) IBOutlet UILabel *blockLBL;
 @property (strong, nonatomic) IBOutlet UILabel *showLBL;
@@ -31,17 +31,17 @@
 @property (strong, nonatomic) IBOutlet UILabel *animalsLBL;
 @property (strong, nonatomic) IBOutlet UILabel *soundsLBL;
 
-@property (retain, nonatomic) IBOutlet UIView *block1View;
-@property (retain, nonatomic) IBOutlet UIView *block2View;
-@property (retain, nonatomic) IBOutlet UIView *block3View;
-@property (retain, nonatomic) IBOutlet UIView *block4View;
-@property (retain, nonatomic) IBOutlet UIView *block5View;
-@property (retain, nonatomic) IBOutlet UIView *block6View;
-@property (retain, nonatomic) IBOutlet UIView *block7View;
-@property (retain, nonatomic) IBOutlet UIView *block8View;
-@property (retain, nonatomic) IBOutlet UIView *block9View;
+@property (retain, nonatomic) IBOutlet UIView  *block1View;
+@property (retain, nonatomic) IBOutlet UIView  *block2View;
+@property (retain, nonatomic) IBOutlet UIView  *block3View;
+@property (retain, nonatomic) IBOutlet UIView  *block4View;
+@property (retain, nonatomic) IBOutlet UIView  *block5View;
+@property (retain, nonatomic) IBOutlet UIView  *block6View;
+@property (retain, nonatomic) IBOutlet UIView  *block7View;
+@property (retain, nonatomic) IBOutlet UIView  *block8View;
+@property (retain, nonatomic) IBOutlet UIView  *block9View;
 
-@property (retain, nonatomic) IBOutlet UIView *settingsViewerVIEW;
+@property (retain, nonatomic) IBOutlet UIView  *settingsViewerVIEW;
 
 -(void)setDefaults;
 -(UIColor*)colourPicker:(NSString*)colourName;

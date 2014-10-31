@@ -61,7 +61,7 @@ emaillbl
     resultsImageSel     = [resultsImageSel  imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Results"        image:resultsImage selectedImage:       resultsImageSel];
 
-    //make a text file from the array of results
+    //make a text file from the array of results for email csv attachment
     NSMutableString *element = [[NSMutableString alloc] init];
     NSMutableString *printString = [NSMutableString stringWithString:@""];
     long final=singleton.resultStringRows.count;
@@ -72,15 +72,27 @@ emaillbl
         }
     [printString appendString:@""];
 
+    //make a text file from the array of results for formatted display on screen
+    NSMutableString *element2 = [[NSMutableString alloc] init];
+    NSMutableString *printString2 = [NSMutableString stringWithString:@""];
+    long final2=singleton.displayStringRows.count;
+    for(long i=0; i< final2; i++)
+        {
+        element2 = [singleton.displayStringRows objectAtIndex: i];
+        [printString2 appendString:[NSString stringWithFormat:@"\n%@", element2]];
+        }
+    [printString2 appendString:@""];
+
     // NSLog(@"string to write pt1:%@",printString);
     //CREATE FILE to save in Documents Directory
     //nb Have to set info.plist environment variable to allow iTunes sharing if want to tx to iTunes etc this dir.
 
     //UIViewController *files = [[UIViewController alloc] init];
 
-    singleton.resultStrings = printString;
+    singleton.resultStrings = printString;//email csv
+    singleton.displayStrings = printString2;//screen
 
-    resultsTxtView.text = singleton.resultStrings;
+    resultsTxtView.text = singleton.displayStrings;
     //[self saveText];
     [self WriteToStringFile:[printString mutableCopy]];
 
@@ -160,6 +172,24 @@ emaillbl
     
     return retStr;
 }
+-(NSString*)getCurrentDate
+{
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+    [format setDateFormat:@"ddMMyy"];
+    NSDate *now = [NSDate date];
+    NSString *retStr = [format stringFromDate:now];
+
+    return retStr;
+}
+-(NSString*)getCurrentTime
+{
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+    [format setDateFormat:@"HHmmss"];
+    NSDate *now = [NSDate date];
+    NSString *retStr = [format stringFromDate:now];
+
+    return retStr;
+}
 
 - (void)saveText
 {
@@ -193,10 +223,14 @@ NSString * fileNameS = [NSString stringWithFormat:@"jon.csv"];
 - (IBAction)showEmail:(id)sender {
     NSLog(@"Sending Email");
     mySingleton *singleton = [mySingleton sharedSingleton];
+
+    singleton.testDate=[self getCurrentDate];
+    singleton.testTime=[self getCurrentTime];
+
     NSString *emailTitle = [NSString stringWithFormat:@"Corsi App Data: %@",singleton.oldSubjectName];
     NSString *messageBody = [NSString stringWithFormat:@"The test data for the subject:%@ taken at the date: %@ and time: %@, is attached as a text/csv file.  \n\nThe file is comma separated variable, csv extension.  \n\nThe data can be read by MS-Excel, then analysed by your own functions. \n\nSent by Corsi App.",singleton.oldSubjectName, singleton.testDate, singleton.testTime];
 
-    //NSArray  *toRecipents = [NSArray arrayWithObject:@"j.a.howell@mmu.ac.uk"];
+    //NSArray  *toRecipents = [NSArray arrayWithObject:@"j.a.howell@mmu.ac.uk"];//testing only
     NSArray  *toRecipents = [NSArray arrayWithObject:singleton.email];
     
     MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];

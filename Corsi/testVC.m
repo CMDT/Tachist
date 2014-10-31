@@ -36,6 +36,10 @@
     NSString *order[10];
     NSString *guess[10];
     NSString *reverse[10];
+    NSString *beepName;
+    NSString *subjectName;
+    NSString *email;
+    NSString *testerName;
     int score;
     int pressNo;
     NSString *orderStr[10];
@@ -121,13 +125,14 @@
     
     //sound stuff
     backIsStarted=false;
-    NSString *backgroundMusicPath=[[NSBundle mainBundle]pathForResource:@"BEEP_FM" ofType:@"caf"];
+    beepName=singleton.beepEffect;
+    NSString *backgroundMusicPath=[[NSBundle mainBundle]pathForResource:beepName ofType:@"caf"];
     NSURL *backgroundMusicURL=[NSURL fileURLWithPath:backgroundMusicPath];
     NSError *error;
     backgroundMusicPlayer=[[AVAudioPlayer alloc] initWithContentsOfURL:backgroundMusicURL error:&error];
     [backgroundMusicPlayer setNumberOfLoops:3]; //-1 = forever
     //prepare to play
-    NSString *mySoundEffectPath=[[NSBundle mainBundle]pathForResource:@"BEEPJAZZ" ofType:@"caf"];
+    NSString *mySoundEffectPath=[[NSBundle mainBundle]pathForResource:beepName ofType:@"caf"];
     NSURL *mySoundEffectURL=[NSURL fileURLWithPath:mySoundEffectPath];
     AudioServicesCreateSystemSoundID(CFBridgingRetain(mySoundEffectURL),&mySoundEffect);
     
@@ -358,7 +363,7 @@
     MessageTextView.hidden=YES;
     
     //start the timer
-    //self.startDate = [NSDate date];
+    //[self.startDate = [NSDate date];
     [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(boxInit) userInfo:nil repeats:NO];
 
     MessageView.hidden=NO;

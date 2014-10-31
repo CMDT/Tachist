@@ -49,7 +49,10 @@ static mySingleton * sharedSingleton = nil;
             blockRotation,
             onScreenInfo,
             animals,
-            sounds
+            sounds,
+            beepEffect,
+            displayStringRows,
+            displayStrings
             ;
 
 #pragma mark -
@@ -91,11 +94,14 @@ static mySingleton * sharedSingleton = nil;
         onScreenInfo  = YES;
         animals       = NO;
         sounds        = NO;
+        beepEffect    =@"BEEPJAZZ";
         forwardTestDirection = YES;
-        oldSubjectName = @"Subject 1";
-        resultStrings = @"";
-        resultStringRows = [[NSMutableArray alloc]initWithObjects: nil];
-        email         =@"j.a.howell@mmu.ac.uk";
+        oldSubjectName    = @"Subject 1";
+        resultStrings     = @"";
+        displayStrings    = @"";
+        resultStringRows  = [[NSMutableArray alloc]initWithObjects: nil];
+        displayStringRows = [[NSMutableArray alloc]initWithObjects: nil];
+        email             = @"test@test.com";
         }
     return self;
 }
