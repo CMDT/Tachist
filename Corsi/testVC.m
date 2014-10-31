@@ -686,7 +686,7 @@
     [self buttonsDisable];
     
     [MessageView setImage: card[0].image];
-    [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(startTestMSG) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:(messageTime*1.5) target:self selector:@selector(startTestMSG) userInfo:nil repeats:NO];
 }
 
 -(void)stageChecks {
@@ -1112,20 +1112,20 @@
 
     if (reverseTest) {
         if (infoShow) {
-            statusMessageLBL.text = @"Observe the sequence, recall in the reverse order by touching the blocks when asked.";
+            statusMessageLBL.text = @"Observe the sequence, recall in the reverse order.";
         }else{
             statusMessageLBL.text = @"Reverse Test";
         }
     }else{
         if (infoShow) {
-            statusMessageLBL.text = @"Observe the sequence, recall in the same order by touching the blocks when asked.";
+            statusMessageLBL.text = @"Observe the sequence, recall in the same order.";
         }else{
             statusMessageLBL.text = @"Forward Test";
         }
     }
     [MessageView setImage: card[0].image];
     MessageView.hidden=NO;
-    [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(blankMSG2) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval: messageTime*1.5 target:self selector:@selector(blankMSG2) userInfo:nil repeats:NO];
 }
 
 -(void)endTestMSG {
@@ -1134,7 +1134,7 @@
     NSLog(@"End Test");
     isFinished=YES;
     if (infoShow) {
-        statusMessageLBL.text = @"The test has now finished, you have completed all the stages.  In a few moments the results will be ready.";
+        statusMessageLBL.text = @"The test has now finished.";
     }else{
         statusMessageLBL.text = @"Finished";
     }
@@ -1152,7 +1152,7 @@
     isFinished=YES;
     NSLog(@"Calculating Test Results");
     if (infoShow) {
-      statusMessageLBL.text = @"The test results are being calculated, please wait a moment";
+      statusMessageLBL.text = @"The test results are being calculated.";
     }else{
         statusMessageLBL.text = @"";
     }
@@ -1175,7 +1175,7 @@
     NSLog(@"(blankmsg2)");
     [self display_blocks];
     MessageView.hidden=YES;//maybe messagetime--v
-    [NSTimer scheduledTimerWithTimeInterval:waitTime target:self selector:@selector(box1) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:startTime target:self selector:@selector(box1) userInfo:nil repeats:NO];
 }
 
 -(void)jumpToResultsView {
