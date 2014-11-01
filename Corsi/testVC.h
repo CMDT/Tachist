@@ -18,6 +18,8 @@
 -(void)startStop;
 -(void)setVolumeValue;
 -(void)playMyEffect;
+-(NSString*)getCurrentDate;
+-(NSString*)getCurrentTime;
 
 @property (nonatomic, retain) AVAudioPlayer *backgroundMusicPlayer;
 @property (retain, nonatomic) IBOutlet UILabel     * headingLBL;

@@ -206,26 +206,26 @@
 			<key>Title</key>
 			<string>Block Rotation Enabled</string>
 		</dict>
-        <dict>
-            <key>DefaultValue</key>
-            <false/>
-            <key>Key</key>
-            <string>animalsEnabled</string>
-            <key>Type</key>
-            <string>PSToggleSwitchSpecifier</string>
-            <key>Title</key>
-            <string>Animal Shapes Enabled</string>
-        </dict>
-        <dict>
-            <key>DefaultValue</key>
-            <false/>
-            <key>Key</key>
-            <string>soundsEnabled</string>
-            <key>Type</key>
-            <string>PSToggleSwitchSpecifier</string>
-            <key>Title</key>
-            <string>Feedback Sounds Enabled</string>
-        </dict>
+		<dict>
+			<key>DefaultValue</key>
+			<false/>
+			<key>Key</key>
+			<string>animalsEnabled</string>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Animal Shapes Enabled</string>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<false/>
+			<key>Key</key>
+			<string>soundsEnabled</string>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Feedback Sounds Enabled</string>
+		</dict>
 		<dict>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
@@ -364,34 +364,34 @@
 				<string>Dark Grey</string>
 			</array>
 		</dict>
-        <dict>
-            <key>DefaultValue</key>
-            <string>KLICK</string>
-            <key>Titles</key>
-            <array>
-                <string>KLICK</string>
-                <string>BEEPPURE</string>
-                <string>BEEP_FM</string>
-                <string>BEEPDOUB</string>
-                <string>AMFMBEEP</string>
-                <string>BEEPJAZZ</string>
-            </array>
-            <key>Key</key>
-            <string>beepEffect</string>
-            <key>Type</key>
-            <string>PSMultiValueSpecifier</string>
-            <key>Title</key>
-            <string>Beep Effect Name</string>
-            <key>Values</key>
-            <array>
-                <string>KLICK</string>
-                <string>BEEPPURE</string>
-                <string>BEEP_FM</string>
-                <string>BEEPDOUB</string>
-                <string>AMFMBEEP</string>
-                <string>BEEPJAZZ</string>
-            </array>
-        </dict>
+		<dict>
+			<key>DefaultValue</key>
+			<string>KLICK</string>
+			<key>Titles</key>
+			<array>
+				<string>KLICK</string>
+				<string>BEEPPURE</string>
+				<string>BEEP_FM</string>
+				<string>BEEPDOUB</string>
+				<string>AMFMBEEP</string>
+				<string>BEEPJAZZ</string>
+			</array>
+			<key>Key</key>
+			<string>beepEffect</string>
+			<key>Type</key>
+			<string>PSMultiValueSpecifier</string>
+			<key>Title</key>
+			<string>Beep Effect Name</string>
+			<key>Values</key>
+			<array>
+				<string>KLICK</string>
+				<string>BEEPPURE</string>
+				<string>BEEP_FM</string>
+				<string>BEEPDOUB</string>
+				<string>AMFMBEEP</string>
+				<string>BEEPJAZZ</string>
+			</array>
+		</dict>
 		<dict>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
@@ -406,7 +406,7 @@
 			<key>Key</key>
 			<string>blockDelay</string>
 			<key>DefaultValue</key>
-			<integer>1000</integer>
+			<integer>1500</integer>
 			<key>KeyboardType</key>
 			<string>NumberPad</string>
 		</dict>
@@ -430,7 +430,7 @@
 			<key>Key</key>
 			<string>blockShow</string>
 			<key>DefaultValue</key>
-			<integer>200</integer>
+			<integer>300</integer>
 			<key>KeyboardType</key>
 			<string>NumberPad</string>
 		</dict>
