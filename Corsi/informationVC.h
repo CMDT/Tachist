@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface informationVC : UIViewController{
-    UILabel *infoLabel;
+    UITextView *infoTextView;
 }
-@property (nonatomic,retain) IBOutlet UILabel *infoLabel;
+@property (nonatomic,retain) IBOutlet UITextView *infoTextView;
 @end

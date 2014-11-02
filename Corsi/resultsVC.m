@@ -14,8 +14,7 @@
 @end
 
 @implementation resultsVC{
-    IBOutlet UITextView *resultsTxtView;
-    IBOutlet UITextView *resultsViewBorder;
+    //IBOutlet UITextView *resultsViewBorder;
 }
 
 @synthesize
@@ -24,6 +23,7 @@
 datelbl,
 timelbl,
 subjectlbl,
+resultsTxtView,
 testDate;
 
 @synthesize
@@ -49,6 +49,14 @@ emaillbl
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    //default message in view text box
+    
+    NSString *resultsTempString = @"";
+
+    resultsTempString = @"Corsi Tapping Test results will appear here once a test has been completed\n\nThe previous test will stay visible until a new test is completed or you press the Home Button on your device.  Data can be sent by email as an attachment of type CSV.\n\nPlease ensure that you have set the email of the recipient in the device settings file before you select the email button.";
+
+    resultsTxtView.text = resultsTempString;
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -157,7 +165,7 @@ emaillbl
     BOOL ok;
     ok = [textToWrite writeToFile:filepath atomically:YES encoding:NSASCIIStringEncoding error:&err];
     if (!ok) {
-        (statusMessageLab.text=filepath, [err localizedFailureReason]);
+        //(statusMessageLab.text=filepath, [err localizedFailureReason]);
         //NSLog(@"Error writing file at %@\n%@", filepath, [err localizedFailureReason]);
     }
 }
@@ -193,7 +201,7 @@ emaillbl
 
 - (void)saveText
 {
-    statusMessageLab.text=@"Saving\nData\nFile.";
+    //statusMessageLab.text=@"Saving\nData\nFile.";
     mySingleton     * singleton = [mySingleton sharedSingleton];
     
     NSFileManager   * filemgr;
