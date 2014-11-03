@@ -41,6 +41,7 @@
     NSString *subjectName;
     NSString *email;
     NSString *testerName;
+    NSString *tempStartMessage;
     int score;
     int pressNo;
     NSString *orderStr[10];
@@ -526,6 +527,9 @@
     currentStatusColour     = singleton.currentStatusColour;
     
     [self setColours];
+    
+    tempStartMessage=@"You will be shown a sequence of blocks, observe the order and when prompted recall the sequence. The test will proceed until all the sections are completed.\n\nYou will exit the test if you select any other tab menu item during the test.  Only completed tests are calculated and available for analysis or email.\n\nPress the Start Button to begin when you are ready.";
+    MessageTextView.text=tempStartMessage;
     MessageTextView.hidden=NO;
     MessageView.hidden=YES;
     startBTN.hidden=NO;

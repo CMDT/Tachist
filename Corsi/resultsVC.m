@@ -238,7 +238,7 @@ title
     singleton.testTime=[self getCurrentTime];
 
     NSString *emailTitle = [NSString stringWithFormat:@"Corsi App Data: %@",singleton.oldSubjectName];
-    NSString *messageBody = [NSString stringWithFormat:@"The test data for the subject:%@ taken at the date: %@ and time: %@, is attached as a text/csv file.  \n\nThe file is comma separated variable, csv extension.  \n\nThe data can be read by MS-Excel, then analysed by your own functions. \n\nSent by Corsi App.  \n\nThe screen Data follows, the attached file is formatted for MS-Excel as a CSV \n\n%@.",singleton.oldSubjectName, singleton.testDate, singleton.testTime, resultsTempString];
+    NSString *messageBody = [NSString stringWithFormat:@"The test data for the subject:%@ taken at the date: %@ and time: %@, is attached as a text/csv file.\n\nThe file is comma separated variable, csv extension.\n\nThe data can be read by MS-Excel, then analysed by your own functions.\n\nThe screen Data follows, the attached file is formatted for MS-Excel as a CSV \n\n%@.\n\nSent by Corsi App.",singleton.oldSubjectName, singleton.testDate, singleton.testTime, singleton.displayStrings];
 
     //NSArray  *toRecipents = [NSArray arrayWithObject:@"j.a.howell@mmu.ac.uk"];//testing only
     NSArray  *toRecipents = [NSArray arrayWithObject:singleton.email];

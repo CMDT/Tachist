@@ -562,7 +562,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AS9-gv-3ec" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2431.5" y="-659.25"/>
+            <point key="canvasLocation" x="1836" y="-660"/>
         </scene>
         <!--Colour Settings-->
         <scene sceneID="f9J-gR-aMz">
@@ -1239,6 +1239,9 @@
                                 <rect key="frame" x="233" y="252" width="51" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="233" y="246" width="52" height="20"/>
+                                </variation>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="234" y="252" width="51" height="21"/>
                                 </variation>
@@ -1246,7 +1249,7 @@
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cCq-n8-ayX" userLabel="ForwardSwitch">
                                 <rect key="frame" x="235" y="78" width="51" height="31"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="235" y="78" width="51" height="31"/>
+                                    <rect key="frame" x="235" y="77" width="51" height="31"/>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="237" y="78" width="51" height="31"/>
@@ -1258,7 +1261,7 @@
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GM3-i7-do6" userLabel="InfoSwitch">
                                 <rect key="frame" x="234" y="146" width="51" height="31"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="234" y="146" width="51" height="31"/>
+                                    <rect key="frame" x="234" y="144" width="51" height="31"/>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="234" y="146" width="51" height="31"/>
@@ -1267,22 +1270,10 @@
                                     <action selector="onScreenInfoSWT:" destination="AeB-vP-vxl" eventType="valueChanged" id="Owc-4Z-iIt"/>
                                 </connections>
                             </switch>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xdV-1Q-cjf" userLabel="RotateSwitch">
-                                <rect key="frame" x="235" y="281" width="51" height="31"/>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="235" y="281" width="51" height="31"/>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="237" y="279" width="51" height="31"/>
-                                </variation>
-                                <connections>
-                                    <action selector="blockRotateSWT:" destination="AeB-vP-vxl" eventType="valueChanged" id="gRD-HH-542"/>
-                                </connections>
-                            </switch>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="dAh-gt-gNA" userLabel="RotateSwitch">
                                 <rect key="frame" x="235" y="349" width="51" height="31"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="235" y="349" width="51" height="31"/>
+                                    <rect key="frame" x="136" y="325" width="51" height="31"/>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="237" y="347" width="51" height="31"/>
@@ -1294,7 +1285,7 @@
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="HWX-rH-kjL" userLabel="AnimalsSwitch">
                                 <rect key="frame" x="234" y="213" width="51" height="31"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="234" y="213" width="51" height="31"/>
+                                    <rect key="frame" x="235" y="207" width="51" height="31"/>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="234" y="211" width="51" height="31"/>
@@ -1307,11 +1298,17 @@
                                 <rect key="frame" x="215" y="117" width="88" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="215" y="116" width="88" height="20"/>
+                                </variation>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Animals" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SNg-j7-KhH">
                                 <rect key="frame" x="214" y="185" width="88" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="214" y="183" width="88" height="20"/>
+                                </variation>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="214" y="184" width="88" height="21"/>
                                 </variation>
@@ -1351,6 +1348,9 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="19" y="444" width="180" height="56"/>
+                                </variation>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="15" y="308" width="180" height="46"/>
                                 </variation>
@@ -1363,6 +1363,9 @@
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="110" y="400" width="100" height="36"/>
+                                </variation>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="110" y="398" width="100" height="34"/>
                                 </variation>
@@ -1374,9 +1377,51 @@
                                 <rect key="frame" x="230" y="320" width="59" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="131" y="297" width="60" height="20"/>
+                                </variation>
                             </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="w9g-L9-55v">
+                                <rect key="frame" x="-61" y="-14" width="123" height="29"/>
+                                <segments>
+                                    <segment title="Klick"/>
+                                    <segment title="Pure"/>
+                                    <segment title="FM"/>
+                                    <segment title="Doub"/>
+                                    <segment title="AMFM"/>
+                                    <segment title="Jazz"/>
+                                </segments>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="15" y="364" width="289" height="29"/>
+                                </variation>
+                                <connections>
+                                    <action selector="soundsSEG:" destination="AeB-vP-vxl" eventType="valueChanged" id="liy-Ic-zCS"/>
+                                </connections>
+                            </segmentedControl>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xdV-1Q-cjf" userLabel="RotateSwitch">
+                                <rect key="frame" x="235" y="281" width="51" height="31"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="234" y="274" width="51" height="31"/>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="237" y="279" width="51" height="31"/>
+                                </variation>
+                                <connections>
+                                    <action selector="blockRotateSWT:" destination="AeB-vP-vxl" eventType="valueChanged" id="gRD-HH-542"/>
+                                </connections>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" red="0.72248651749291692" green="1" blue="0.85621864059333919" alpha="1" colorSpace="calibratedRGB"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="w9g-L9-55v"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="w9g-L9-55v"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="LhO-v0-eIv"/>
                     <connections>
@@ -1391,6 +1436,7 @@
                         <outlet property="onScreenInfoSWT" destination="GM3-i7-do6" id="Fw4-GE-h6f"/>
                         <outlet property="sizeMinusBTN" destination="wfN-L3-9uJ" id="m2P-Nd-AbP"/>
                         <outlet property="sizePlusBTN" destination="Uja-aR-EPR" id="xjd-uz-gQR"/>
+                        <outlet property="soundsSEG" destination="w9g-L9-55v" id="yf7-Io-MgL"/>
                         <outlet property="soundsSWT" destination="dAh-gt-gNA" id="yga-8K-Mla"/>
                         <outlet property="startMinusBTN" destination="BWP-Zo-8vw" id="Dnd-cp-65J"/>
                         <outlet property="startPlusBTN" destination="NcF-VA-g6L" id="pLd-Co-uUK"/>
@@ -1398,7 +1444,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hxI-4T-cjX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3105" y="-654.75"/>
+            <point key="canvasLocation" x="2518.5" y="-660"/>
         </scene>
         <!--Results-->
         <scene sceneID="XF9-yp-dwS">
@@ -1581,6 +1627,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" placeholderIntrinsicWidth="100" placeholderIntrinsicHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="3YN-so-yJM" userLabel="initial start text message">
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="16" y="153" width="288" height="215"/>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="16" y="144" width="288" height="120"/>
+                                </variation>
+                            </textView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6tj-yi-W4u">
                                 <rect key="frame" x="20" y="376" width="280" height="51"/>
                                 <color key="backgroundColor" red="0.80000001190000003" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -1589,6 +1646,9 @@
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="16" y="376" width="288" height="52"/>
+                                </variation>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="16" y="364" width="288" height="51"/>
                                 </variation>
@@ -1767,6 +1827,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="59" y="44" width="54" height="21"/>
+                                </variation>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="#" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cij-n4-yqw" userLabel="Label - #start">
                                 <rect key="frame" x="121" y="44" width="50" height="21"/>
@@ -1788,6 +1851,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="60" y="376" width="52" height="20"/>
+                                </variation>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="64" y="364" width="50" height="21"/>
                                 </variation>
@@ -1796,6 +1862,9 @@
                                 <rect key="frame" x="121" y="376" width="50" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="117" y="376" width="52" height="20"/>
+                                </variation>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="121" y="364" width="50" height="21"/>
                                 </variation>
@@ -1804,6 +1873,9 @@
                                 <rect key="frame" x="207" y="376" width="50" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="207" y="376" width="52" height="20"/>
+                                </variation>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="207" y="364" width="50" height="21"/>
                                 </variation>
@@ -1812,33 +1884,29 @@
                                 <rect key="frame" x="179" y="376" width="20" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="175" y="376" width="20" height="20"/>
+                                </variation>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="179" y="364" width="20" height="21"/>
                                 </variation>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" placeholderIntrinsicWidth="0.0" placeholderIntrinsicHeight="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="3YN-so-yJM">
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <string key="text">When you are ready, press the start button
-
-You will be shown the blocks, and after the start delay, some or all of the blocks will highlight for timed show, one after the other in a random sequence.
-
-When all the sequence has been shown, try and remember the sequence and press the blocks in that order.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="16" y="144" width="288" height="120"/>
-                                </variation>
-                            </textView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Status Message" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="hQf-Ml-LhR">
                                 <rect key="frame" x="20" y="394" width="280" height="49"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="16" y="394" width="288" height="48"/>
+                                </variation>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="16" y="382" width="288" height="49"/>
                                 </variation>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" placeholderIntrinsicWidth="0.0" placeholderIntrinsicHeight="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="2Pd-MY-wKc" userLabel="Image View message">
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="14" y="73" width="290" height="295"/>
+                                </variation>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="16" y="44" width="288" height="318"/>
                                 </variation>
@@ -1887,7 +1955,7 @@ When all the sequence has been shown, try and remember the sequence and press th
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Et-jW-1Na" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1720.5" y="-659.25"/>
+            <point key="canvasLocation" x="1155" y="-660"/>
         </scene>
         <!--Information-->
         <scene sceneID="UUY-XU-Df1">
@@ -2052,6 +2120,6 @@ Cgo
         <image name="yellow72.png" width="72" height="72"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="1gJ-g6-Scq"/>
+        <segue reference="6pf-b9-947"/>
     </inferredMetricsTieBreakers>
 </document>

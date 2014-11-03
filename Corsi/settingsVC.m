@@ -155,13 +155,14 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,set
     } else {
         animalsLBL.text=@"Blocks";
     }
-    //animals flag
+    //sounds flag
     if(singleton.sounds==YES){
         soundsLBL.text=@"Sounds";
+        beepName=singleton.beepEffect;
     } else {
         soundsLBL.text=@"Quiet";
     }
-    beepName=singleton.beepEffect;
+    
 
     //start, finish and sizes on screen from singleton
     blockStartNumLBL.text=[NSString stringWithFormat:@"%d",singleton.start];
@@ -181,6 +182,7 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,set
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
     [self setDefaults];
 }
 
@@ -194,13 +196,30 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,set
     //also used in Load Settings from k data store
     //edit this to take data from k data store in Apple Settings pane
 
-    NSURL *defaultPrefsFile     = [[NSBundle mainBundle]
-                                   URLForResource:@"Root" withExtension:@"plist"];
+    //+++
+    //for reading default value for Terminal
+    //NSString *testValue = [[NSUserDefaults standardUserDefaults] stringForKey:kFirstNameKey];
+    //if (testValue == nil)
+    //{
+        // no default values have been set, create them here based on what's in our Settings bundle info
+        NSString *pathStr = [[NSBundle mainBundle] bundlePath];
+        NSString *settingsBundlePath = [pathStr stringByAppendingPathComponent:@"Settings.bundle"];
+        //NSString *finalPath = [settingsBundlePath stringByAppendingPathComponent:@"Root.plist"];
+        NSString *defaultPrefsFile = [settingsBundlePath stringByAppendingPathComponent:@"Root.plist"];
+        //NSDictionary *settingsDict = [NSDictionary dictionaryWithContentsOfFile:finalPath];
+        NSDictionary *defaultPrefs = [NSDictionary dictionaryWithContentsOfFile:defaultPrefsFile];
+       // NSArray *prefSpecifierArray = [settingsDict objectForKey:@"PreferenceSpecifiers"];
+//}
+    //+++
+        
+    //NSURL *defaultPrefsFile     = [[NSBundle mainBundle]
+                                   //URLForResource:@"Root" withExtension:@"plist"];
 
-    NSDictionary *defaultPrefs  = [NSDictionary dictionaryWithContentsOfURL:defaultPrefsFile];
+    //NSDictionary *defaultPrefs  = [NSDictionary dictionaryWithContentsOfURL:defaultPrefsFile];
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaultPrefs];
 
     NSUserDefaults *defaults    = [NSUserDefaults standardUserDefaults];
+    
     [[NSUserDefaults standardUserDefaults] synchronize];
 
     //read the user defaults from the iPhone/iPad bundle
@@ -252,7 +271,7 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,set
         [defaults setObject:@"KLICK" forKey:kBeep];
     }
     //start block
-    NSString *temp        = [defaults objectForKey:kStart];
+    NSString *temp = [defaults objectForKey:kStart];
     if( temp == nil ){
         start =  3;
         [defaults setObject:@"3" forKey:kStart];
@@ -529,7 +548,7 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,set
 
         [defaults setObject:[self colourUIToString:singleton.currentShowColour] forKey:kShowCol];
     //sounds
-        [defaults setObject:[NSString stringWithFormat:@"%@", singleton.beepEffect] forKey:kBeep];
+        //[defaults setObject:[NSString stringWithFormat:@"%@", singleton.beepEffect] forKey:kBeep]; //only saved from plist at present
     //others
         [defaults setObject:[NSString stringWithFormat:@"%d", singleton.start] forKey:kStart];
         [defaults setObject:[NSString stringWithFormat:@"%d", singleton.finish] forKey:kFinish];
