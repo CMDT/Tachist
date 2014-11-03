@@ -15,6 +15,7 @@
 
 @implementation resultsVC{
     //IBOutlet UITextView *resultsViewBorder;
+    NSString *resultsTempString;
 }
 
 @synthesize
@@ -32,9 +33,9 @@ fileMgr,
 homeDir,
 filename,
 filepath,
-emaillbl
+emaillbl,
+title
 ;
-@synthesize title;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -51,12 +52,9 @@ emaillbl
     // Do any additional setup after loading the view.
     //default message in view text box
     
-    NSString *resultsTempString = @"";
-
-    resultsTempString = @"Corsi Tapping Test results will appear here once a test has been completed\n\nThe previous test will stay visible until a new test is completed or you press the Home Button on your device.  Data can be sent by email as an attachment of type CSV.\n\nPlease ensure that you have set the email of the recipient in the device settings file before you select the email button.";
+    resultsTempString = @"Corsi Tapping Test results will appear here once a test has been completed\n\nThe previous test will stay visible until a new test is completed or you press the Home Button on your device.\n\nData can be sent by email as an attachment of type CSV.\n\nPlease ensure that you have set the email of the recipient in the device settings file before you select the email button.";
 
     resultsTxtView.text = resultsTempString;
-    
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -99,19 +97,22 @@ emaillbl
 
     singleton.resultStrings = printString;//email csv
     singleton.displayStrings = printString2;//screen
-
-    resultsTxtView.text = singleton.displayStrings;
+    
+    //check if data exists, if not, display the holding message
+    if ([printString2 isEqualToString:@""]) {
+        resultsTxtView.text = resultsTempString;
+    }else{
+        resultsTxtView.text = singleton.displayStrings;
+    }
     //[self saveText];
     [self WriteToStringFile:[printString mutableCopy]];
-
 }
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
 
 -(NSString *) setFilename{
     mySingleton *singleton = [mySingleton sharedSingleton];
@@ -170,7 +171,6 @@ emaillbl
     }
 }
 
-
 -(NSString*)getCurrentDateTimeAsNSString
 {
     NSDateFormatter *format = [[NSDateFormatter alloc] init];
@@ -180,6 +180,7 @@ emaillbl
     
     return retStr;
 }
+
 -(NSString*)getCurrentDate
 {
     NSDateFormatter *format = [[NSDateFormatter alloc] init];
@@ -189,6 +190,7 @@ emaillbl
 
     return retStr;
 }
+
 -(NSString*)getCurrentTime
 {
     NSDateFormatter *format = [[NSDateFormatter alloc] init];
@@ -218,7 +220,7 @@ emaillbl
     
     //NSString * fileNameS = [NSString stringWithFormat:@"%@.csv", subjectlbl.text];
 
-NSString * fileNameS = [NSString stringWithFormat:@"jon.csv"];
+    NSString * fileNameS = [NSString stringWithFormat:@"jon.csv"];
 
     dataFile = [docsDir stringByAppendingPathComponent:fileNameS];
     
@@ -236,7 +238,7 @@ NSString * fileNameS = [NSString stringWithFormat:@"jon.csv"];
     singleton.testTime=[self getCurrentTime];
 
     NSString *emailTitle = [NSString stringWithFormat:@"Corsi App Data: %@",singleton.oldSubjectName];
-    NSString *messageBody = [NSString stringWithFormat:@"The test data for the subject:%@ taken at the date: %@ and time: %@, is attached as a text/csv file.  \n\nThe file is comma separated variable, csv extension.  \n\nThe data can be read by MS-Excel, then analysed by your own functions. \n\nSent by Corsi App.",singleton.oldSubjectName, singleton.testDate, singleton.testTime];
+    NSString *messageBody = [NSString stringWithFormat:@"The test data for the subject:%@ taken at the date: %@ and time: %@, is attached as a text/csv file.  \n\nThe file is comma separated variable, csv extension.  \n\nThe data can be read by MS-Excel, then analysed by your own functions. \n\nSent by Corsi App.  \n\nThe screen Data follows, the attached file is formatted for MS-Excel as a CSV \n\n%@.",singleton.oldSubjectName, singleton.testDate, singleton.testTime, resultsTempString];
 
     //NSArray  *toRecipents = [NSArray arrayWithObject:@"j.a.howell@mmu.ac.uk"];//testing only
     NSArray  *toRecipents = [NSArray arrayWithObject:singleton.email];
@@ -277,7 +279,6 @@ NSString * fileNameS = [NSString stringWithFormat:@"jon.csv"];
     
     // Add attachment
     [mc addAttachmentData:fileData mimeType:mimeType fileName:filename];
-    
     // P              resent mail view controller on screen
     [self presentViewController:mc animated:YES completion:NULL];
     NSLog(@"Finished Email");
@@ -302,9 +303,8 @@ NSString * fileNameS = [NSString stringWithFormat:@"jon.csv"];
         default:
         break;
     }
-
     // Close the Mail Interface
     [self dismissViewControllerAnimated:YES completion:NULL];
-NSLog(@"Email view now closed.");
+NSLog(@"Email View now closed.");
 }
 @end
