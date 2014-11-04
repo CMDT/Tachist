@@ -99,12 +99,7 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,set
 -(void)viewWillAppear:(BOOL)animated{
     //when the view loads, before display does the code here
     //[self loadSettings:self];
-    //assign images to tab bar items
-    UIImage *settingsImage          = [UIImage imageNamed:@"Settings"];
-    UIImage *settingsImageSel       = [UIImage imageNamed:@"SettingsSel"];
-    settingsImage       = [settingsImage    imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    settingsImageSel    = [settingsImageSel imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Settings" image:settingsImage selectedImage: settingsImageSel];
+
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -112,7 +107,12 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,set
     //[self saveSettings:self];
 }
 -(void)viewDidAppear:(BOOL)animated{
-
+    //assign images to tab bar items
+    UIImage *settingsImage          = [UIImage imageNamed:@"Settings"];
+    UIImage *settingsImageSel       = [UIImage imageNamed:@"SettingsSel"];
+    settingsImage       = [settingsImage    imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    settingsImageSel    = [settingsImageSel imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Settings" image:settingsImage selectedImage: settingsImageSel];
     
     mySingleton *singleton = [mySingleton sharedSingleton];
 

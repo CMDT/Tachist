@@ -365,7 +365,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.84290279212849473" green="0.9223086456184334" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="2" title="Settings" id="JfG-Kt-5KA">
+                    <tabBarItem key="tabBarItem" tag="2" title="Settings" image="Settings" id="JfG-Kt-5KA">
                         <inset key="imageInsets" minX="15" minY="15" maxX="15" maxY="15"/>
                     </tabBarItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
@@ -1613,7 +1613,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="4" title="Results" id="RRh-7Z-4U7">
+                    <tabBarItem key="tabBarItem" tag="4" title="Results" image="Results" id="RRh-7Z-4U7">
                         <inset key="imageInsets" minX="15" minY="15" maxX="15" maxY="15"/>
                     </tabBarItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
@@ -1629,9 +1629,9 @@
         <scene sceneID="sw2-hC-uGP">
             <objects>
                 <tabBarController title="CorsiTabController" definesPresentationContext="YES" providesPresentationContextTransitionStyle="YES" modalTransitionStyle="flipHorizontal" id="IKI-2A-uin" sceneMemberID="viewController">
-                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" barStyle="black" id="06U-FS-t22">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="06U-FS-t22">
                         <rect key="frame" x="129" y="330" width="163" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1946,7 +1946,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.89411771299999998" green="0.9450981021" blue="0.97254908080000002" alpha="1" colorSpace="deviceRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="3" title="Test" id="uI8-6A-gw6">
+                    <tabBarItem key="tabBarItem" tag="3" title="Test" image="Test" id="uI8-6A-gw6">
                         <inset key="imageInsets" minX="15" minY="15" maxX="15" maxY="15"/>
                     </tabBarItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
@@ -2138,7 +2138,7 @@ Cgo
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="1" title="Information" image="Test" id="H2M-mc-v72">
+                    <tabBarItem key="tabBarItem" tag="1" title="Information" image="Information" id="H2M-mc-v72">
                         <inset key="imageInsets" minX="15" minY="15" maxX="15" maxY="15"/>
                     </tabBarItem>
                     <connections>
@@ -2151,6 +2151,9 @@ Cgo
         </scene>
     </scenes>
     <resources>
+        <image name="Information" width="32" height="32"/>
+        <image name="Results" width="32" height="32"/>
+        <image name="Settings" width="32" height="32"/>
         <image name="Test" width="32" height="32"/>
         <image name="black72.png" width="72" height="72"/>
         <image name="blue72.png" width="72" height="72"/>
