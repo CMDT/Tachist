@@ -29,7 +29,7 @@
 @property (retain, nonatomic) IBOutlet UILabel *blockStartNumLBL;
 @property (retain, nonatomic) IBOutlet UILabel *blockFinishNumLBL;
 @property (retain, nonatomic) IBOutlet UILabel *blockSizeLBL;
-@property (strong, nonatomic) IBOutlet UISegmentedControl *soundsSEG;
+@property (weak,   nonatomic) IBOutlet UISegmentedControl *soundsSEG;
 
 @property (strong, nonatomic) IBOutlet UIButton *startMinusBTN;
 @property (strong, nonatomic) IBOutlet UIButton *finishMinusBTN;

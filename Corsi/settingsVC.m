@@ -99,6 +99,12 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,set
 -(void)viewWillAppear:(BOOL)animated{
     //when the view loads, before display does the code here
     //[self loadSettings:self];
+    //assign images to tab bar items
+    UIImage *settingsImage          = [UIImage imageNamed:@"Settings"];
+    UIImage *settingsImageSel       = [UIImage imageNamed:@"SettingsSel"];
+    settingsImage       = [settingsImage    imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    settingsImageSel    = [settingsImageSel imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Settings" image:settingsImage selectedImage: settingsImageSel];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -106,12 +112,7 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,set
     //[self saveSettings:self];
 }
 -(void)viewDidAppear:(BOOL)animated{
-    //assign images to tab bar items
-    UIImage *settingsImage          = [UIImage imageNamed:@"Settings"];
-    UIImage *settingsImageSel       = [UIImage imageNamed:@"SettingsSel"];
-    settingsImage       = [settingsImage    imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    settingsImageSel    = [settingsImageSel imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Settings" image:settingsImage selectedImage: settingsImageSel];
+
     
     mySingleton *singleton = [mySingleton sharedSingleton];
 
@@ -130,6 +131,7 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,set
     
     [canvasLBL setBackgroundColor: singleton.currentBackgroundColour];
     [settingsViewerVIEW setBackgroundColor:singleton.currentBackgroundColour];
+    
     
     //forward or revers test flag
     if(singleton.forwardTestDirection==YES){
@@ -162,7 +164,6 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,set
     } else {
         soundsLBL.text=@"Quiet";
     }
-    
 
     //start, finish and sizes on screen from singleton
     blockStartNumLBL.text=[NSString stringWithFormat:@"%d",singleton.start];
@@ -367,7 +368,7 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,set
                        ];
     //find the index value of each
     long item = [items indexOfObject: colourName];
-    
+
     //select the item number
     switch (item) {
         case 0:
@@ -431,6 +432,58 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,set
             break;
     }
     return colourUIName;
+}
+
+-(NSString*)effectPicker:(NSString*)effectName{
+        mySingleton *singleton = [mySingleton sharedSingleton];
+    NSString *effectName1;
+    //make an array of colour names
+    NSArray *items = @[
+                       @"KLICK", @"BEEPPURE", @"BEEP_FM", @"BEEPDOUB", @"AMFMBEEP",
+                       @"BEEPJAZZ"
+                       ];
+    //find the index value of each
+    long item = [items indexOfObject: effectName];
+    
+    //select the item number
+    switch (item) {
+        case 0:
+            // Item 1
+            effectName1 = @"KLICK";
+            singleton.segIndex=0;
+            break;
+        case 1:
+            // Item 2
+            effectName1 = @"BEEPPURE";
+            singleton.segIndex=1;
+            break;
+        case 2:
+            // Item 3
+            effectName1 = @"BEEP_FM";
+            singleton.segIndex=2;
+            break;
+        case 3:
+            // Item 4
+            effectName1 = @"BEEPDOUB";
+            singleton.segIndex=3;
+            break;
+        case 4:
+            // Item 5
+            effectName1 = @"AMFMBEEP";
+            singleton.segIndex=4;
+            break;
+        case 5:
+            // Item 6
+            effectName1 = @"BEEPJAZZ";
+            singleton.segIndex=5;
+            break;
+
+        default:
+            effectName1 = @"KLICK";
+            singleton.segIndex=0;
+            break;
+    }
+    return effectName1;
 }
 
 -(NSString*)colourUIToString:(UIColor*)myUIColour{
@@ -556,6 +609,7 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,set
         [defaults setObject:[NSString stringWithFormat:@"%2.0f", singleton.startTime] forKey:kDelay];
         [defaults setObject:[NSString stringWithFormat:@"%2.0f", singleton.showTime] forKey:kShow];
         [defaults setObject:[NSString stringWithFormat:@"%2.0f", singleton.waitTime] forKey:kTime];
+        [defaults setObject:[NSString stringWithFormat:@"%@", singleton.beepEffect] forKey:kBeep];
         [defaults setBool:singleton.blockRotation forKey:kRot];
         [defaults setBool:singleton.animals forKey:kAnimals];
         [defaults setBool:singleton.sounds forKey:kSounds];

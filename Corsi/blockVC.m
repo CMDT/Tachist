@@ -17,16 +17,19 @@
 }
 @end
 
-@implementation blockVC
+@implementation blockVC{
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
+
 @synthesize blockFinishNumLBL,blockRotateSWT,blockSizeLBL,
 blockStartNumLBL,sizeMinusBTN,sizePlusBTN,startMinusBTN,
 startPlusBTN,onScreenInfoSWT,finishMinusBTN,finishPlusBTN,
-forwardTestSWT,animalsSWT,soundsSWT;
+forwardTestSWT,animalsSWT,soundsSWT,soundsSEG;
 
 -(void)viewDidAppear:(BOOL)animated{
     mySingleton *singleton = [mySingleton sharedSingleton];
@@ -53,9 +56,12 @@ forwardTestSWT,animalsSWT,soundsSWT;
         animalsSWT.on=NO;
     }
     if(singleton.sounds){
+        soundsSEG.hidden=NO;
         soundsSWT.on=YES;
+        soundsSEG.selectedSegmentIndex=singleton.segIndex;
     }else{
         soundsSWT.on=NO;
+        soundsSEG.hidden=YES;
     }
     
     //blocks set
@@ -68,6 +74,42 @@ forwardTestSWT,animalsSWT,soundsSWT;
     blockSizeLBL.text=[NSString stringWithFormat:@"%2.0f",blockSize];
     [self buttonIncCheck];
 }
+- (IBAction)soundsSEG:(id)sender{
+    //sound effect name to load
+        mySingleton *singleton = [mySingleton sharedSingleton];
+    long seg = soundsSEG.selectedSegmentIndex;
+    switch (seg) {
+        case 0:
+            singleton.beepEffect=@"KLICK";
+            singleton.segIndex=0;
+            break;
+        case 1:
+            singleton.beepEffect=@"BEEPPURE";
+            singleton.segIndex=1;
+            break;
+        case 2:
+            singleton.beepEffect=@"BEEP_FM";
+            singleton.segIndex=2;
+            break;
+        case 3:
+            singleton.beepEffect=@"BEEPDOUB";
+            singleton.segIndex=3;
+            break;
+        case 4:
+            singleton.beepEffect=@"AMFMBEEP";
+            singleton.segIndex=4;
+            break;
+        case 5:
+            singleton.beepEffect=@"BEEPJAZZ";
+            singleton.segIndex=5;
+            break;
+        default:
+            singleton.beepEffect=@"KLICK";
+            singleton.segIndex=0;
+            break;
+    }
+}
+
 -(void)buttonIncCheck{
     if(start==3){
         startMinusBTN.alpha=0.3;
@@ -263,8 +305,10 @@ forwardTestSWT,animalsSWT,soundsSWT;
     if (soundsSWT.isOn)
     {
         sounds = YES;
+    soundsSEG.hidden=NO;
     } else {
         sounds = NO;
+        soundsSEG.hidden=YES;
     }
     singleton.sounds=sounds;
 }

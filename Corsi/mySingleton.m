@@ -52,8 +52,8 @@ static mySingleton * sharedSingleton = nil;
             sounds,
             beepEffect,
             displayStringRows,
-            displayStrings
-            ;
+            displayStrings,
+            segIndex;
 
 #pragma mark -
 #pragma mark Singleton Methods
@@ -94,7 +94,8 @@ static mySingleton * sharedSingleton = nil;
         onScreenInfo  = YES;
         animals       = NO;
         sounds        = NO;
-        beepEffect    =@"KLICK";
+        beepEffect    = @"KLICK";
+        segIndex      = 0;
         forwardTestDirection = YES;
         oldSubjectName    = @"Subject 1";
         resultStrings     = @"";

@@ -20,6 +20,7 @@
 
     int   start;
     int   finish;
+    long  segIndex;
 
     float blockSize;
     float waitTime;
@@ -65,7 +66,8 @@
 
 @property (nonatomic) int       start;
 @property (nonatomic) int       finish;
-@property (nonatomic) NSString *beepEffect;
+@property (nonatomic) NSString  *beepEffect;
+@property (nonatomic) long      segIndex;
 
 @property (nonatomic) float     blockSize;
 @property (nonatomic) float     waitTime;
