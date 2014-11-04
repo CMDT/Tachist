@@ -1547,8 +1547,8 @@
     [singleton.resultStringRows addObject:tempString];
 
 
-    tempString=[NSString stringWithFormat:@"Test No,1,2,3,4,5,6,7,8,9,Correct,Wrong"];
-    tempString2=[NSString stringWithFormat:@"Test No _ 1 _ 2 _ 3 _ 4 _ 5 _ 6 _ 7 _ 8 _ 9 _ C _ W"];
+    tempString=[NSString stringWithFormat:@"Test No,Sequence,Response,1,2,3,4,5,6,7,8,9,Correct,Wrong"];
+    tempString2=[NSString stringWithFormat:@"Test No                 _ 1_ 2_ 3_ 4_ 5_ 6_ 7_ 8_ 9_ C_ W"];
     [singleton.resultStringRows addObject:tempString];
     [singleton.displayStringRows addObject:tempString2];
 
@@ -1558,10 +1558,12 @@
     
     //loop for test no
     for (int xx=start; xx<finish+1; xx++) {
-        
+        //for stage no
         tempString = [NSString stringWithFormat:@"%d", xx-2];
         tempString2 = [NSString stringWithFormat:@" _ %d __  ", xx-2];
-        
+        //for order and guess
+        tempString = [NSString stringWithFormat:@"%@,%@", orderStr[xx-2],guessStr[xx-2]];
+        tempString2 = [NSString stringWithFormat:@"%@ _ %@", orderStr[xx-2],guessStr[xx-2]];
         cor=0;
         wro=0;
         ans=@"";

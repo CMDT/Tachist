@@ -21,20 +21,18 @@
 @synthesize
 //results Labels
 
-datelbl,
-timelbl,
-subjectlbl,
-resultsTxtView,
-testDate;
-
-@synthesize
-startDate,
-fileMgr,
-homeDir,
-filename,
-filepath,
-emaillbl,
-title
+    datelbl,
+    timelbl,
+    subjectlbl,
+    resultsTxtView,
+    testDate,
+    startDate,
+    fileMgr,
+    homeDir,
+    filename,
+    filepath,
+    emaillbl,
+    title
 ;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -52,7 +50,7 @@ title
     // Do any additional setup after loading the view.
     //default message in view text box
     
-    resultsTempString = @"Corsi Tapping Test results will appear here once a test has been completed\n\nThe previous test will stay visible until a new test is completed or you press the Home Button on your device.\n\nData can be sent by email as an attachment of type CSV.\n\nPlease ensure that you have set the email of the recipient in the device settings file before you select the email button.";
+    resultsTempString = @"Corsi Tapping Test results will appear here once a test has been completed.\n\nThe previous test will stay visible until a new test is completed or you press the Home Button on your device.\n\nData can be sent by email as an attachment of type CSV.\n\nPlease ensure that you have set the email of the recipient in the device settings file before you select the email button.";
 
     resultsTxtView.text = resultsTempString;
 }
@@ -65,12 +63,14 @@ title
     UIImage *resultsImageSel        = [UIImage imageNamed:@"ResultsSel"];
     resultsImage        = [resultsImage     imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     resultsImageSel     = [resultsImageSel  imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Results"        image:resultsImage selectedImage:       resultsImageSel];
+    self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Results" image:resultsImage selectedImage: resultsImageSel];
 
     //make a text file from the array of results for email csv attachment
     NSMutableString *element = [[NSMutableString alloc] init];
     NSMutableString *printString = [NSMutableString stringWithString:@""];
+    
     long final=singleton.resultStringRows.count;
+    
     for(long i=0; i< final; i++)
         {
         element = [singleton.resultStringRows objectAtIndex: i];
@@ -279,7 +279,7 @@ title
     
     // Add attachment
     [mc addAttachmentData:fileData mimeType:mimeType fileName:filename];
-    // P              resent mail view controller on screen
+    // Present mail view controller on screen
     [self presentViewController:mc animated:YES completion:NULL];
     NSLog(@"Finished Email");
 }
@@ -301,6 +301,7 @@ title
         NSLog(@"Mail sent failure: %@", [error localizedDescription]);
         break;
         default:
+        NSLog(@"Mail problem, not sent, failed, saved or cancelled... some other fault");
         break;
     }
     // Close the Mail Interface
