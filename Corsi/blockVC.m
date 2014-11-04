@@ -74,6 +74,7 @@ forwardTestSWT,animalsSWT,soundsSWT,soundsSEG;
     blockSizeLBL.text=[NSString stringWithFormat:@"%2.0f",blockSize];
     [self buttonIncCheck];
 }
+
 - (IBAction)soundsSEG:(id)sender{
     //sound effect name to load
         mySingleton *singleton = [mySingleton sharedSingleton];
