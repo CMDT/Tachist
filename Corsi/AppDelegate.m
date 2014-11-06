@@ -22,12 +22,14 @@
 
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Corsi Block Tapping Test" message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
 
-    UILabel *txtField = [[UILabel alloc] initWithFrame:CGRectMake(20.0, 0, 250.0, 120.0)];
+    UILabel *txtField = [[UILabel alloc] initWithFrame:CGRectMake(0,0,0,0)];
     [txtField setFont:[UIFont fontWithName:@"Serifa-Roman" size:(16.0f)]];
-    txtField.numberOfLines = 8;
-    txtField.textColor = [UIColor redColor];
-    txtField.text = @"To see details on how to use this Application and adjust its settings, please read the notes in the 'Information' section of the Tab Bar .\n\nThis Application is NOT for clinical use.";
+    txtField.numberOfLines = 9;
+    txtField.textColor = [UIColor darkGrayColor];
+    txtField.textAlignment = UITextAlignmentCenter;
+    txtField.text = @"To see details on how \nto use this Application \nand adjust its settings, \nplease read the notes in the \n'Information' section \nof the Tab Bar.\n\nThis Application is NOT for clinical use.";
     txtField.backgroundColor = [UIColor clearColor];
+    
     [alertView setValue:txtField forKeyPath:@"accessoryView"];//for ios 7 and above
     [alertView show];
 

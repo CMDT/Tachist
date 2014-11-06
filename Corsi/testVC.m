@@ -20,6 +20,7 @@
     int ncounter;
     
     BOOL isFinished;
+    BOOL isCalculating;
     BOOL stageEnded;
     BOOL resultsSaved;
     BOOL infoShow;
@@ -107,7 +108,8 @@
     MessageTextView,
     MessageView,
     scaleFactor,
-    testViewerView
+    testViewerView,
+    stopTestNowBTN
     ;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -122,11 +124,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    stopTestNowBTN.hidden=YES;
     mySingleton *singleton = [mySingleton sharedSingleton];
     
     //sound stuff
     backIsStarted=false;
+    
     beepName=singleton.beepEffect;
     NSString *backgroundMusicPath=[[NSBundle mainBundle]pathForResource:beepName ofType:@"caf"];
     NSURL *backgroundMusicURL=[NSURL fileURLWithPath:backgroundMusicPath];
@@ -341,6 +344,9 @@
     
     [self playMyEffect];
     
+    //blank out the tab bar during the test, no end until done now
+    self.tabBarController.tabBar.hidden = YES;
+    stopTestNowBTN.hidden=NO;
     NSLog(@"Test has started");
     statusMessageLBL.text = @"The Test Has Started";
 
@@ -528,20 +534,27 @@
     
     [self setColours];
     
-    tempStartMessage=@"You will be shown a sequence of blocks, observe the order, when prompted, recall the sequence. \n\nThe test will proceed until all the sections are completed.\n\nYou will exit the test if you select any other tab menu item during the test.\n\nOnly completed tests are valid and available for analysis or email.\n\nPress the 'Start Button' to begin the test.";
+    tempStartMessage=@"You will be shown a sequence of blocks, observe the order, when prompted, \nrecall the sequence. \n\nThe test will proceed until all the sections are completed.\n\nYou will exit the test if you select any other tab menu item during the test.\n\nOnly completed tests are valid and available for analysis or email.\n\nPress the 'Start Button' to begin the test.";
+    
     MessageTextView.text=tempStartMessage;
+    MessageTextView.font=[UIFont fontWithName:@"Serifa-Roman" size:(14.0f)];
+    MessageTextView.textAlignment=UITextAlignmentCenter;
     MessageTextView.hidden=NO;
     MessageView.hidden=YES;
     startBTN.hidden=NO;
 
     //initialise images for messages on messageview
-    card[0] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_start.png"]];
-    card[1] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-finished.png"]];
+    card[0] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_start3.png"]];
+    card[1] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_finish3.png"]];
     card[2] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-stage-start.png"]];
     card[3] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-stage-end.png"]];
-    card[4] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-calculating.png"]];
-    card[5] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-touch-blocks.png"]];
-    card[6] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-results.png"]];
+    card[4] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_calc3.png"]];
+    card[5] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-touch-blocks2.png"]];
+    card[6] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_results3.png"]];
+}
+
+-(IBAction)stopTestNow:(id)sender{
+    self.tabBarController.tabBar.hidden = NO;
 }
 
 //
@@ -673,6 +686,7 @@
     MessageView.hidden=YES;
     startBTN.hidden=YES;
     isFinished=NO;
+    isCalculating=NO;
     [self showInfo];
     
     //zero counters
@@ -812,7 +826,7 @@
             box9image.backgroundColor=currentShowColour;
             break;
         default:
-            [self allButtonsBackgroundReset];// background colour reset to std
+            [self allButtonsBackgroundReset];// background colour reset to std.
             break;
     }
     [NSTimer scheduledTimerWithTimeInterval:showTime target:self selector:@selector(but1) userInfo:nil repeats:NO];
@@ -1186,14 +1200,60 @@
         }
     }
     [MessageView setImage: card[0].image];
+    MessageView.hidden=YES;
+    [self animateMessageView];
+   
+    [NSTimer scheduledTimerWithTimeInterval: 5 target:self selector:@selector(blankMSG2) userInfo:nil repeats:NO];
+}
+
+-(void)animateMessageView{
+    [NSTimer scheduledTimerWithTimeInterval:0.0 target:self selector:@selector(animateMessageViewIN) userInfo:nil repeats:NO];
+}
+
+-(void)animateMessageViewIN{
+    MessageView.alpha = 0.0;
     MessageView.hidden=NO;
-    [NSTimer scheduledTimerWithTimeInterval: messageTime*1.5 target:self selector:@selector(blankMSG2) userInfo:nil repeats:NO];
+    [[MessageView superview] bringSubviewToFront:MessageView];
+    
+    //[UIView animateKeyframesWithDuration:1 delay:1 options:1 animations:^(){MessageView.alpha = 1.0;} completion:nil];
+    [UIView animateWithDuration:1
+                          delay:0  /* do not add a delay because we will use performSelector. */
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^ {
+                         MessageView.alpha = 1.0;
+                     }
+                     completion:^(BOOL finished) {[NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(animateMessageViewOUT) userInfo:nil repeats:NO];
+                                          }];
+    [UIView commitAnimations];
+    
+}
+
+-(void)animateMessageViewOUT{
+    
+    [[MessageView superview] bringSubviewToFront:MessageView];
+
+    [UIView animateWithDuration:1
+                          delay:1
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^ {
+                         if (isCalculating) {
+                             MessageView.alpha = 1.0;
+                         }else{
+                             MessageView.alpha = 0.0;
+                         }
+                     }
+                     completion:^(BOOL finished) {
+                     }];
+    
+    [UIView commitAnimations];
+    //[MessageView removeFromSuperview];
 }
 
 -(void)endTestMSG {
     //End of Test Message
     [self buttonsDisable];
     NSLog(@"End Test");
+    stopTestNowBTN.hidden=YES;
     isFinished=YES;
     if (infoShow) {
         statusMessageLBL.text = @"The test has now finished.";
@@ -1204,8 +1264,8 @@
     [self hide_blocks];
     [MessageView setImage: card[1].image];
     MessageView.hidden=NO;
-    
-    [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(calculatingMSG) userInfo:nil repeats:NO];
+    [self animateMessageView];
+    [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(calculatingMSG) userInfo:nil repeats:NO];
 }
 
 -(void)calculatingMSG {
@@ -1222,7 +1282,9 @@
     [self hideInfo];
     [MessageView setImage: card[4].image];
     MessageView.hidden=NO;
-    [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(calculations) userInfo:nil repeats:NO];
+    [self animateMessageView];
+
+    [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(calculations) userInfo:nil repeats:NO];
 }
 
 -(void)blankMSG {
@@ -1246,6 +1308,12 @@
     [self hide_blocks];
     [MessageView setImage: card[6].image];
     MessageView.hidden=NO;
+    isCalculating=YES;
+    
+    self.tabBarController.tabBar.hidden = NO;
+    
+    [self animateMessageView];
+
     //jump to selector ResultsVC
     //[self.tabBarController setSelectedIndex:4]; needs to be able to jump as well
     //manual selection at present on tab bar

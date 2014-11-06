@@ -21,7 +21,7 @@
 -(NSString*)getCurrentDate;
 -(NSString*)getCurrentTime;
 
-@property (nonatomic, retain) AVAudioPlayer *backgroundMusicPlayer;
+@property (nonatomic, retain) AVAudioPlayer        * backgroundMusicPlayer;
 @property (retain, nonatomic) IBOutlet UILabel     * headingLBL;
 @property (retain, nonatomic) IBOutlet UILabel     * statusMessageLBL;
 @property (retain, nonatomic) IBOutlet UIImageView * MessageView;
@@ -38,6 +38,7 @@
 @property (retain, nonatomic) IBOutlet UILabel * setNoLBL;
 @property (retain, nonatomic) IBOutlet UILabel * setOfLBL;
 @property (retain, nonatomic) IBOutlet UILabel * setTotalLBL;
+@property (retain, nonatomic) IBOutlet UIButton * stopTestNowBTN;
 
 //buttons over images
 @property (strong, nonatomic) IBOutlet UIButton * box1BTN;
@@ -66,10 +67,12 @@
 @property (strong, nonatomic) IBOutlet UIImageView   * box9image;
 
 @property (strong, nonatomic) IBOutlet UIView  * testViewerView;
+@property (strong, nonatomic) IBOutlet UIView  * tabBar;
 
 @property (nonatomic) float scaleFactor;
 
 -(IBAction)startTest:(id)sender;
+-(IBAction)stopTestNow:(id)sender;
 
 -(IBAction)blk1BUT:(id)sender;
 -(IBAction)blk2BUT:(id)sender;

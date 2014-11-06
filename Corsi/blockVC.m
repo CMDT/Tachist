@@ -24,6 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [[UISegmentedControl appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"Serifa-Roman" size:12.0], NSFontAttributeName, nil] forState:UIControlStateNormal];
 }
 
 @synthesize blockFinishNumLBL,blockRotateSWT,blockSizeLBL,
@@ -64,9 +65,10 @@ forwardTestSWT,animalsSWT,soundsSWT,soundsSEG;
         soundsSEG.hidden=YES;
     }
     if(singleton.segIndex){
+        soundsSEG.hidden=NO;
         soundsSEG.selectedSegmentIndex=singleton.segIndex;
     }else{
-        soundsSEG.hidden=YES;
+        //nothing
     }
 
     //blocks set
@@ -148,7 +150,7 @@ forwardTestSWT,animalsSWT,soundsSWT,soundsSEG;
         finishMinusBTN.alpha=1;
     }
 }
-#pragma mark Settings Actions Buttons
+
 - (IBAction)blockStartPlusBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
     start=singleton.start;
@@ -170,6 +172,7 @@ forwardTestSWT,animalsSWT,soundsSWT,soundsSEG;
     singleton.start  = start;
     singleton.finish = finish;
 }
+
 - (IBAction)blockFinishPlusBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
     start=singleton.start;
@@ -201,6 +204,7 @@ forwardTestSWT,animalsSWT,soundsSWT,soundsSEG;
     blockSizeLBL.text  = [NSString stringWithFormat:@"%2.0f", blockSize];
     singleton.blockSize    = blockSize;
 }
+
 - (IBAction)blockStartMinusBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
     start=singleton.start;
@@ -219,6 +223,7 @@ forwardTestSWT,animalsSWT,soundsSWT,soundsSEG;
     singleton.start  = start;
     singleton.finish = finish;
 }
+
 - (IBAction)blockFinishMinusBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
     start=singleton.start;
@@ -241,6 +246,7 @@ forwardTestSWT,animalsSWT,soundsSWT,soundsSEG;
     singleton.start  = start;
     singleton.finish = finish;
 }
+
 - (IBAction)blockSizeMinusBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
 
@@ -305,13 +311,14 @@ forwardTestSWT,animalsSWT,soundsSWT,soundsSEG;
     }
     singleton.animals=animals;
 }
+
 - (IBAction)soundsSWT:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
     BOOL sounds;
     if (soundsSWT.isOn)
     {
         sounds = YES;
-    soundsSEG.hidden=NO;
+        soundsSEG.hidden=NO;
     } else {
         sounds = NO;
         soundsSEG.hidden=YES;

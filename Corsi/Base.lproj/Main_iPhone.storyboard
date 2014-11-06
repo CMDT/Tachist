@@ -10,6 +10,11 @@
             <string>Serifa-Roman</string>
             <string>Serifa-Roman</string>
             <string>Serifa-Roman</string>
+            <string>Serifa-Roman</string>
+            <string>Serifa-Roman</string>
+            <string>Serifa-Roman</string>
+            <string>Serifa-Roman</string>
+            <string>Serifa-Roman</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -438,22 +443,22 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" id="VOD-f9-K3h" userLabel="start Delay TF">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="16" clearButtonMode="whileEditing" id="VOD-f9-K3h" userLabel="start Delay TF">
                                 <rect key="frame" x="19" y="47" width="84" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="Serifa-Roman" family="Serifa" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad" enablesReturnKeyAutomatically="YES"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" id="m3N-iD-FTR" userLabel="block timing TF">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="16" clearButtonMode="whileEditing" id="m3N-iD-FTR" userLabel="block timing TF">
                                 <rect key="frame" x="118" y="47" width="84" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="Serifa-Roman" family="Serifa" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad" enablesReturnKeyAutomatically="YES"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" id="5cC-7T-6C4" userLabel="block show TF">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="16" clearButtonMode="whileEditing" id="5cC-7T-6C4" userLabel="block show TF">
                                 <rect key="frame" x="220" y="47" width="84" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="Serifa-Roman" family="Serifa" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad" enablesReturnKeyAutomatically="YES"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="288" placeholderIntrinsicHeight="50" editable="NO" textAlignment="center" selectable="NO" id="DkR-Ej-5jq">
@@ -461,7 +466,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <string key="text">Start is the time delay before the fist block shows.  Block is the timing gap between show times, and Show is the time a block displays as a stimulus.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <fontDescription key="fontDescription" name="Serifa-Roman" family="Serifa" pointSize="11"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="100" minValue="0.0" maxValue="10000" id="l7E-zh-1cG">
@@ -1238,7 +1243,7 @@
                                 <rect key="frame" x="15" y="390" width="287" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="Serifa-Roman" family="Serifa" pointSize="11"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sounds" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="11q-48-HHg">
@@ -1567,7 +1572,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="100" placeholderIntrinsicHeight="100" editable="NO" selectable="NO" id="3YN-so-yJM" userLabel="initial start text message">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="100" placeholderIntrinsicHeight="100" editable="NO" textAlignment="center" selectable="NO" id="3YN-so-yJM" userLabel="initial start text message">
                                 <rect key="frame" x="16" y="162" width="288" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -1619,6 +1624,17 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="F14-pU-g4N">
+                                <rect key="frame" x="265" y="366" width="38" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Abort">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="stopTestNow:" destination="So4-z0-L3J" eventType="touchUpInside" id="srl-qm-tf5"/>
+                                    <segue destination="IKI-2A-uin" kind="modal" id="WKM-zk-lwO"/>
+                                </connections>
+                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="0.0" placeholderIntrinsicHeight="0.0" id="2Pd-MY-wKc" userLabel="Image View message">
                                 <rect key="frame" x="16" y="44" width="288" height="318"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1661,6 +1677,7 @@
                         <outlet property="setTotalLBL" destination="vWa-1z-H4Y" id="vTL-4b-CqP"/>
                         <outlet property="startBTN" destination="6tj-yi-W4u" id="NAh-9x-Ual"/>
                         <outlet property="statusMessageLBL" destination="hQf-Ml-LhR" id="ahX-sz-yNL"/>
+                        <outlet property="stopTestNowBTN" destination="F14-pU-g4N" id="Cyk-uX-VNe"/>
                         <outlet property="testViewerView" destination="lfF-OU-0B0" id="vJG-G9-Sde"/>
                     </connections>
                 </viewController>
@@ -1734,6 +1751,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="6pf-b9-947"/>
+        <segue reference="lkT-6I-6x4"/>
     </inferredMetricsTieBreakers>
 </document>

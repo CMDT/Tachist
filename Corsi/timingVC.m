@@ -136,19 +136,19 @@ blockWaitTimeTXT.text=[NSString stringWithFormat:@"%0.0f", (float)temp];
     if(textField==self->blockStartDelayTXT){
         blockStartDelayTXT.backgroundColor = [UIColor greenColor];
         textField.frame = CGRectMake(textField.frame.origin.x, (textField.frame.origin.y), textField.frame.size.width, textField.frame.size.height);
-        int oft=textField.frame.origin.y-270;
+        int oft=textField.frame.origin.y-190;
         [self keyBoardAppeared:oft];
     }
     if(textField==self->blockWaitTimeTXT){
         blockWaitTimeTXT.backgroundColor = [UIColor greenColor];
         textField.frame = CGRectMake(textField.frame.origin.x, (textField.frame.origin.y), textField.frame.size.width, textField.frame.size.height);
-        int oft=textField.frame.origin.y-270;
+        int oft=textField.frame.origin.y-190;
         [self keyBoardAppeared:oft];
     }
     if(textField==self->blockShowTimeTXT){
         blockShowTimeTXT.backgroundColor = [UIColor greenColor];
         textField.frame = CGRectMake(textField.frame.origin.x, (textField.frame.origin.y), textField.frame.size.width, textField.frame.size.height);
-        int oft=textField.frame.origin.y-270;
+        int oft=textField.frame.origin.y-190;
         [self keyBoardAppeared:oft];
     }
 }
