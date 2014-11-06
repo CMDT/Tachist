@@ -51,7 +51,7 @@
     //default message in view text box
     
     resultsTempString = @"Corsi Tapping Test results will appear here once a test has been completed.\n\nThe previous test will stay visible until a new test is completed or you press the Home Button on your device.\n\nData can be sent by email as an attachment of type CSV.\n\nPlease ensure that you have set the email of the recipient in the device settings file before you select the email button.";
-
+    resultsTxtView.font=[UIFont fontWithName:@"Serifa-Roman" size:11];
     resultsTxtView.text = resultsTempString;
 }
 
@@ -239,7 +239,7 @@
 
     NSString *emailTitle = [NSString stringWithFormat:@"Corsi App Data: %@",singleton.oldSubjectName];
     NSString *messageBody = [NSString stringWithFormat:@"The test data for the subject:%@ taken at the date: %@ and time: %@, is attached as a text/csv file.\n\nThe file is comma separated variable, csv extension.\n\nThe data can be read by MS-Excel, then analysed by your own functions.\n\nThe screen Data follows, the attached file is formatted for MS-Excel as a CSV \n\n%@.\n\nSent by Corsi App.",singleton.oldSubjectName, singleton.testDate, singleton.testTime, singleton.displayStrings];
-
+    
     //NSArray  *toRecipents = [NSArray arrayWithObject:@"j.a.howell@mmu.ac.uk"];//testing only
     NSArray  *toRecipents = [NSArray arrayWithObject:singleton.email];
     

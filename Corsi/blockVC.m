@@ -63,7 +63,12 @@ forwardTestSWT,animalsSWT,soundsSWT,soundsSEG;
         soundsSWT.on=NO;
         soundsSEG.hidden=YES;
     }
-    
+    if(singleton.segIndex){
+        soundsSEG.selectedSegmentIndex=singleton.segIndex;
+    }else{
+        soundsSEG.hidden=YES;
+    }
+
     //blocks set
     start=singleton.start;
     finish=singleton.finish;

@@ -99,6 +99,7 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,set
 -(void)viewWillAppear:(BOOL)animated{
     //when the view loads, before display does the code here
     //[self loadSettings:self];
+    //font 'Serifa-Roman.ttf' not Serifa 55 Roman.ttf
 
 }
 
@@ -113,7 +114,7 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,set
     settingsImage       = [settingsImage    imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     settingsImageSel    = [settingsImageSel imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Settings" image:settingsImage selectedImage: settingsImageSel];
-    
+
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     [showLBL setBackgroundColor:singleton.currentShowColour];
@@ -183,9 +184,8 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,set
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    
-    [self setDefaults];
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -761,6 +761,7 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,set
     singleton.animals                 = [defaults  boolForKey:kAnimals];
     singleton.sounds                  = [defaults  boolForKey:kSounds];
     singleton.beepEffect              = [defaults  objectForKey:kBeep];
+    [self effectPicker:singleton.beepEffect];
     singleton.currentBlockColour      = currentBlockColour;
     singleton.currentShowColour       = currentShowColour;
     singleton.currentBackgroundColour = currentBackgroundColour;

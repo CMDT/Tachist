@@ -1562,8 +1562,8 @@
         tempString = [NSString stringWithFormat:@"%d", xx-2];
         tempString2 = [NSString stringWithFormat:@" _ %d __  ", xx-2];
         //for order and guess
-        tempString = [NSString stringWithFormat:@"%@,%@", orderStr[xx-2],guessStr[xx-2]];
-        tempString2 = [NSString stringWithFormat:@"%@ _ %@", orderStr[xx-2],guessStr[xx-2]];
+        tempString = [NSString stringWithFormat:@"%@,%@", orderStr[xx],guessStr[xx]];
+        tempString2 = [NSString stringWithFormat:@"%@ _ %@", orderStr[xx],guessStr[xx]];
         cor=0;
         wro=0;
         ans=@"";
