@@ -32,5 +32,20 @@
     [[UITabBarItem appearance] setTitleTextAttributes:attributes forState:UIControlStateNormal];
 }
 
-
+/*
+ todo
+ 
+ excel move across one column due to missing test no.  Find added line feed and delete.
+ font size increase for labels and messages to fit better.
+ add new screen for participant and email added to plist and singleton.
+ change subject to particpant in plist
+ check out the version number.
+ add screen shots when done x 6 or so.
+ add descriptions and licence info.
+ see about charging 1 dollar per app.
+ check functions and remove dead code.
+ tidy up code.
+ make opening credits screen, same as start, but with added message.
+ 
+*/
 @end
