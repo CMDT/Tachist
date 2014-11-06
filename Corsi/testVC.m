@@ -34,9 +34,9 @@
     int total;
     float percent;
     float flash2;
-    NSString *order[10];
-    NSString *guess[10];
-    NSString *reverse[10];
+    NSString *order[12];
+    NSString *guess[12];
+    NSString *reverse[12];
     NSString *beepName;
     NSString *subjectName;
     NSString *email;
@@ -44,18 +44,18 @@
     NSString *tempStartMessage;
     int score;
     int pressNo;
-    NSString *orderStr[10];
-    NSString *reverseStr[10];
-    NSString *guessStr[10];
-    NSString *correct[10];
-    Float32 testTime[7][10];
-    Float32 testTimer[7][10];
+    NSString *orderStr[12];
+    NSString *reverseStr[12];
+    NSString *guessStr[12];
+    NSString *correct[12];
+    Float32 testTime[7][12];
+    Float32 testTimer[7][12];
     int testNo;
     int timingCalc;
     int reply1;
     long tm;
     BOOL analysisFlag;
-    Float32 timeGuess[7][10];
+    Float32 timeGuess[7][12];
     int start;
     int finish;
     float waitTime;
@@ -1555,15 +1555,23 @@
     //body of results
     //reset tempstring before building a line of data
     tempString=@"";
-    
+
     //loop for test no
     for (int xx=start; xx<finish+1; xx++) {
         //for stage no
-        tempString = [NSString stringWithFormat:@"%d", xx-2];
-        tempString2 = [NSString stringWithFormat:@" _ %d __  ", xx-2];
+    //add a few blanks to the strings to enable it to run over the 9 chars
+            order[xx]=[order[xx] stringByAppendingString:@"xxx"];
+            guessStr[xx]=[guessStr[xx] stringByAppendingString:@"xxx"];
         //for order and guess
-        tempString = [NSString stringWithFormat:@"%@,%@", orderStr[xx],guessStr[xx]];
-        tempString2 = [NSString stringWithFormat:@"%@ _ %@", orderStr[xx],guessStr[xx]];
+        if (xx<finish){
+            tempString = [NSString stringWithFormat:@"%d", xx-2];
+            tempString2 = [NSString stringWithFormat:@" _ %d __  ", xx-2];
+        }
+        ee=[order[xx] substringWithRange:NSMakeRange(0, xx)];
+        ff=[guessStr[xx] substringWithRange:NSMakeRange(0, xx)];
+
+        tempString = [NSString stringWithFormat:@"%@,%@", ee, ff];
+        tempString2 = [NSString stringWithFormat:@"%@ _ %@",ee, ff];
         cor=0;
         wro=0;
         ans=@"";
@@ -1575,6 +1583,9 @@
             if (!singleton.forwardTestDirection) {
                 order[q]=reverse[q];
             }
+
+
+
             //get the character at a position in the strings
             ee=[order[xx] substringWithRange:NSMakeRange(q, 1)];
             ff=[guessStr[xx] substringWithRange:NSMakeRange(q, 1)];

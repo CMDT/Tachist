@@ -9,6 +9,7 @@
             <string>Serifa-Roman</string>
             <string>Serifa-Roman</string>
             <string>Serifa-Roman</string>
+            <string>Serifa-Roman</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -1338,7 +1339,7 @@
                                     <accessibilityTraits key="traits" none="YES" staticText="YES"/>
                                 </accessibility>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="CourierNewPSMT" family="Courier New" pointSize="10"/>
+                                <fontDescription key="fontDescription" name="Serifa-Roman" family="Serifa" pointSize="9"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" enablesReturnKeyAutomatically="YES"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="iFj-sz-Pty">
