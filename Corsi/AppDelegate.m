@@ -22,30 +22,24 @@
 
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Corsi Block Tapping Test" message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
 
-    UILabel *txtField = [[UILabel alloc] initWithFrame:CGRectMake(0,0,0,0)];
-    [txtField setFont:[UIFont fontWithName:@"Serifa-Roman" size:(16.0f)]];
+    UILabel *txtField = [[UILabel alloc] initWithFrame:CGRectMake(5,5,180,230)];
+    //[txtField setFont:[UIFont fontWithName:@"Serifa-Roman" size:(16.0f)]];
     txtField.numberOfLines = 9;
     txtField.textColor = [UIColor darkGrayColor];
-    txtField.textAlignment = UITextAlignmentCenter;
-    txtField.text = @"To see details on how \nto use this Application \nand adjust its settings, \nplease read the notes in the \n'Information' section \nof the Tab Bar.\n\nThis Application is NOT for clinical use.";
+    txtField.textAlignment = NSTextAlignmentCenter;
+    txtField.text = @"To see details on how to use this Application and adjust its settings, please read the notes in the 'Information' section of the Tab Bar.\n\nThis Application is NOT for clinical use.";
     txtField.backgroundColor = [UIColor clearColor];
     
     [alertView setValue:txtField forKeyPath:@"accessoryView"];//for ios 7 and above
     [alertView show];
 
+    // set all labels to Serifa Font 24
 
-
-    //NSString *temp2 = [NSString stringWithFormat:@"Corsi Block Tapping Test"];
-    //UIAlertView *alert = [[UIAlertView alloc] initWithTitle:temp2 message:@"To understand this 'test' and its settings, please read the notes in the 'Information' section of the Tab Bar Menu before you use this Application." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-
-    //[alert show];
-    //set all labels to Serifa Font 24
-
-    UIFont *serifa12 = [UIFont fontWithName:@"Serifa-Roman" size:12];
+    // UIFont *serifa12 = [UIFont fontWithName:@"Serifa-Roman" size:14];
 
     
-    [[UILabel appearance] setFont:serifa12];
-    [[UIButton appearance] setFont:serifa12];//ignore warning as easiest way to alter all button fonts in one go
+    // [[UILabel appearance] setFont:serifa12];
+    // [[UIButton appearance] setFont:serifa12];//ignore warning as easiest way to alter all button fonts in one go
 
 
        return YES;

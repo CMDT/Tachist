@@ -63,9 +63,8 @@
 
     self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Results" image:resultsImage selectedImage: resultsImageSel];
     resultsTempString = @"Corsi Tapping Test results will appear here once a test has been completed.\n\nThe previous test will stay visible until a new test is completed or you press the Home Button on your device.\n\nData can be sent by email as an attachment of type CSV.\n\nPlease ensure that you have set the email of the recipient in the device settings file before you select the email button.";
-    resultsTxtView.font=[UIFont fontWithName:@"Serifa-Roman" size:11];
+    //resultsTxtView.font=[UIFont fontWithName:@"Serifa-Roman" size:16];
     resultsTxtView.text = resultsTempString;
-    resultsTxtView.font=[UIFont fontWithName:@"Serifa-Roman" size:9];
     //make a text file from the array of results for email csv attachment
     NSMutableString *element = [[NSMutableString alloc] init];
     NSMutableString *printString = [NSMutableString stringWithString:@""];
@@ -118,7 +117,7 @@
 -(NSString *) setFilename{
     mySingleton *singleton = [mySingleton sharedSingleton];
     NSString *extn = @"csv";
-    filename = [NSString stringWithFormat:@"%@.%@", singleton.oldSubjectName, extn];
+    filename = [NSString stringWithFormat:@"%@.%@", singleton.subjectName, extn];
     return filename;
 }
 
@@ -159,7 +158,7 @@
     //not exists, write
     //BOOL fileExists = FALSE;
     
-    singleton.subjectName = [singleton.oldSubjectName stringByAppendingString: [NSString stringWithFormat:@"_%@",[self getCurrentDateTimeAsNSString]]];
+    singleton.subjectName = [singleton.subjectName stringByAppendingString: [NSString stringWithFormat:@"_%@",[self getCurrentDateTimeAsNSString]]];
     
     //}
     //
@@ -185,7 +184,7 @@
 -(NSString*)getCurrentDate
 {
     NSDateFormatter *format = [[NSDateFormatter alloc] init];
-    [format setDateFormat:@"ddMMyy"];
+    [format setDateFormat:@"dd/MM/yyyy"];
     NSDate *now = [NSDate date];
     NSString *retStr = [format stringFromDate:now];
 
@@ -195,7 +194,7 @@
 -(NSString*)getCurrentTime
 {
     NSDateFormatter *format = [[NSDateFormatter alloc] init];
-    [format setDateFormat:@"HHmmss"];
+    [format setDateFormat:@"HH:mm:ss"];
     NSDate *now = [NSDate date];
     NSString *retStr = [format stringFromDate:now];
 
@@ -221,7 +220,7 @@
     
     //NSString * fileNameS = [NSString stringWithFormat:@"%@.csv", subjectlbl.text];
 
-    NSString * fileNameS = [NSString stringWithFormat:@"jon.csv"];
+    NSString * fileNameS = [NSString stringWithFormat:@"corsi.csv"];
 
     dataFile = [docsDir stringByAppendingPathComponent:fileNameS];
     
@@ -238,8 +237,8 @@
     singleton.testDate=[self getCurrentDate];
     singleton.testTime=[self getCurrentTime];
 
-    NSString *emailTitle = [NSString stringWithFormat:@"Corsi App Data: %@",singleton.oldSubjectName];
-    NSString *messageBody = [NSString stringWithFormat:@"The test data for the subject:%@ taken at the date: %@ and time: %@, is attached as a text/csv file.\n\nThe file is comma separated variable, csv extension.\n\nThe data can be read by MS-Excel, then analysed by your own functions.\n\nThe screen Data follows, the attached file is formatted for MS-Excel as a CSV \n\n%@.\n\nSent by Corsi App.",singleton.oldSubjectName, singleton.testDate, singleton.testTime, singleton.displayStrings];
+    NSString *emailTitle = [NSString stringWithFormat:@"Corsi App Data: %@",singleton.subjectName];
+    NSString *messageBody = [NSString stringWithFormat:@"The test data for the subject:%@ taken at the date: %@ and time: %@, is attached as a text/csv file.\n\nThe file is comma separated variable, csv extension.\n\nThe data can be read by MS-Excel, then analysed by your own functions.\n\nThe screen Data follows, the attached file is formatted for MS-Excel as a CSV \n\n%@.\n\nSent by Corsi App.",singleton.subjectName, singleton.testDate, singleton.testTime, singleton.displayStrings];
     
     //NSArray  *toRecipents = [NSArray arrayWithObject:@"j.a.howell@mmu.ac.uk"];//testing only
     NSArray  *toRecipents = [NSArray arrayWithObject:singleton.email];

@@ -40,6 +40,7 @@
 
 @implementation settingsVC
 {
+    int angle[10];
     int start;
     int finish;
     float blockSize;
@@ -178,6 +179,8 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,set
     blockStartLBL.text=[[NSString alloc]initWithFormat:@"%i",startTime];
     blockShowLBL.text=[[NSString alloc]initWithFormat:@"%i",showTime];
     blockWaitLBL.text=[[NSString alloc]initWithFormat:@"%i",waitTime];
+
+    [self putBlocksInPlace];
 }
 
 - (void)viewDidLoad
@@ -773,6 +776,209 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,set
 
     [defaults synchronize];
     [self refreshView];
+}
+
+-(float)randomDegrees359
+{
+    float degrees = 0;
+    degrees = arc4random_uniform(359); //was 359 //returns a value from 0 to 359, not 360;
+
+    //NSLog(@"Degs=%f",degrees);
+    return degrees;
+}
+
+-(void)putBlocksInPlace{
+    [self putAnimals];
+
+    mySingleton *singleton = [mySingleton sharedSingleton];
+
+    float blockSize1 = singleton.blockSize;
+    blockSize1 = blockSize1 / 55; // 55.00; //size picked against max size allowed here
+    if( blockSize1 <= 0.2){
+        blockSize1 = 0.2;
+    }
+    if( blockSize1 >= 1){
+        blockSize1 = 1;
+    }
+
+    float scaleFactor = blockSize1;
+
+
+    if(singleton.blockRotation){
+        for (int t = 0; t < 10; t++) {
+            angle[t] = self.randomDegrees359;
+        }
+    } else {
+        for (int t = 0; t < 10; t++) {
+            angle[t] = 0;
+        }
+    }
+
+    //UITouch *touch = [touches anyObject];//some old example code if you used a touch rather than an image reference
+    //make sure rotation is about the centre axis. 0,0 is bot left, .5,.5 is ctr, 1,1 is top rt, 1,.5 is mid right.
+
+    block1View.layer.anchorPoint = CGPointMake(.5,.5);
+    block2View.layer.anchorPoint = CGPointMake(.5,.5);
+    block3View.layer.anchorPoint = CGPointMake(.5,.5);
+    block4View.layer.anchorPoint = CGPointMake(.5,.5);
+    block5View.layer.anchorPoint = CGPointMake(.5,.5);
+    block6View.layer.anchorPoint = CGPointMake(.5,.5);
+    block7View.layer.anchorPoint = CGPointMake(.5,.5);
+    block8View.layer.anchorPoint = CGPointMake(.5,.5);
+    block9View.layer.anchorPoint = CGPointMake(.5,.5);
+
+    [UIView animateWithDuration:1.0
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+
+                     animations:^{
+
+                         CGAffineTransform scaleTrans = CGAffineTransformMakeScale(scaleFactor, scaleFactor);
+
+                         CGAffineTransform rotateTrans1 = CGAffineTransformMakeRotation(angle[1] * M_PI / 180);
+                         CGAffineTransform rotateTrans2 = CGAffineTransformMakeRotation(angle[2] * M_PI / 180);
+                         CGAffineTransform rotateTrans3 = CGAffineTransformMakeRotation(angle[3] * M_PI / 180);
+                         CGAffineTransform rotateTrans4 = CGAffineTransformMakeRotation(angle[4] * M_PI / 180);
+                         CGAffineTransform rotateTrans5 = CGAffineTransformMakeRotation(angle[5] * M_PI / 180);
+                         CGAffineTransform rotateTrans6 = CGAffineTransformMakeRotation(angle[6] * M_PI / 180);
+                         CGAffineTransform rotateTrans7 = CGAffineTransformMakeRotation(angle[7] * M_PI / 180);
+                         CGAffineTransform rotateTrans8 = CGAffineTransformMakeRotation(angle[8] * M_PI / 180);
+                         CGAffineTransform rotateTrans9 = CGAffineTransformMakeRotation(angle[9] * M_PI / 180);
+
+
+                         block1View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans1);
+                         block2View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans2);
+                         block3View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans3);
+                         block4View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans4);
+                         block5View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans5);
+                         block6View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans6);
+                         block7View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans7);
+                         block8View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans8);
+                         block9View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans9);
+
+                     }completion:nil];
+
+}
+
+-(int)random22
+{
+    int num1 = 1;
+    num1 = arc4random_uniform(22); //1-21
+    if (num1<1) {
+        num1=1;
+    }
+    if (num1>21) {
+        num1=21;
+    }
+    return num1;
+}
+
+-(void)putAnimals{
+    mySingleton *singleton = [mySingleton sharedSingleton];
+
+    if (singleton.animals) {
+        //draw an animal picture in the view
+        int ani[22];
+        NSLog(@"start");
+        for (int b=0; b<22; b++) {
+            ani[b]=b;
+        }
+        int temp=0;
+        int tt=0;
+        for (int b=0; b<2541; b++) {
+            tt=[self random22];
+            temp=ani[tt-1];
+            ani[tt-1]=ani[tt];
+            ani[tt]=temp;
+        }
+        NSLog(@"mix");
+        for (int b=0; b<22; b++) {
+            NSLog(@"animal:%d", ani[b]);
+        }
+        block1View.image = [self getAnimal:ani[1]];
+        block2View.image = [self getAnimal:ani[3]];
+        block3View.image = [self getAnimal:ani[5]];
+        block4View.image = [self getAnimal:ani[7]];
+        block5View.image = [self getAnimal:ani[8]];
+        block6View.image = [self getAnimal:ani[0]];
+        block7View.image = [self getAnimal:ani[2]];
+        block8View.image = [self getAnimal:ani[4]];
+        block9View.image = [self getAnimal:ani[6]];
+    }
+}
+
+-(UIImage*)getAnimal:(int)animalNo{
+    //pick an animal and return its image
+    UIImage *animal;
+    switch (animalNo) {
+        case 1:
+            animal = [UIImage imageNamed:@"Elephant"];
+            break;
+        case 2:
+            animal = [UIImage imageNamed:@"Donkey"];
+            break;
+        case 3:
+            animal = [UIImage imageNamed:@"Frog"];
+            break;
+        case 4:
+            animal = [UIImage imageNamed:@"Fox"];
+            break;
+        case 5:
+            animal = [UIImage imageNamed:@"Goat"];
+            break;
+        case 6:
+            animal = [UIImage imageNamed:@"Crab"];
+            break;
+        case 7:
+            animal = [UIImage imageNamed:@"Bear"];
+            break;
+        case 8:
+            animal = [UIImage imageNamed:@"Bird"];
+            break;
+        case 9:
+            animal = [UIImage imageNamed:@"Duck"];
+            break;
+        case 10:
+            animal = [UIImage imageNamed:@"Croc"];
+            break;
+        case 11:
+            animal = [UIImage imageNamed:@"Cow"];
+            break;
+        case 12:
+            animal = [UIImage imageNamed:@"Butterfly"];
+            break;
+        case 13:
+            animal = [UIImage imageNamed:@"Lion"];
+            break;
+        case 14:
+            animal = [UIImage imageNamed:@"Lama"];
+            break;
+        case 15:
+            animal = [UIImage imageNamed:@"Penguin"];
+            break;
+        case 16:
+            animal = [UIImage imageNamed:@"Fish"];
+            break;
+        case 17:
+            animal = [UIImage imageNamed:@"Seal"];
+            break;
+        case 18:
+            animal = [UIImage imageNamed:@"Tortoise"];
+            break;
+        case 19:
+            animal = [UIImage imageNamed:@"Rabbit"];
+            break;
+        case 20:
+            animal = [UIImage imageNamed:@"Pig"];
+            break;
+        case 21:
+            animal = [UIImage imageNamed:@"Squirel"];
+            break;
+        default:
+            animal = [UIImage imageNamed:@"Cat"];
+            break;
+    }
+    return animal;
 }
 
 -(void)refreshView {

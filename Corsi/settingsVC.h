@@ -31,15 +31,15 @@
 @property (strong, nonatomic) IBOutlet UILabel *animalsLBL;
 @property (strong, nonatomic) IBOutlet UILabel *soundsLBL;
 
-@property (retain, nonatomic) IBOutlet UIView  *block1View;
-@property (retain, nonatomic) IBOutlet UIView  *block2View;
-@property (retain, nonatomic) IBOutlet UIView  *block3View;
-@property (retain, nonatomic) IBOutlet UIView  *block4View;
-@property (retain, nonatomic) IBOutlet UIView  *block5View;
-@property (retain, nonatomic) IBOutlet UIView  *block6View;
-@property (retain, nonatomic) IBOutlet UIView  *block7View;
-@property (retain, nonatomic) IBOutlet UIView  *block8View;
-@property (retain, nonatomic) IBOutlet UIView  *block9View;
+@property (strong, nonatomic) IBOutlet UIImageView  *block1View;
+@property (strong, nonatomic) IBOutlet UIImageView  *block2View;
+@property (strong, nonatomic) IBOutlet UIImageView  *block3View;
+@property (strong, nonatomic) IBOutlet UIImageView  *block4View;
+@property (strong, nonatomic) IBOutlet UIImageView  *block5View;
+@property (strong, nonatomic) IBOutlet UIImageView  *block6View;
+@property (strong, nonatomic) IBOutlet UIImageView  *block7View;
+@property (strong, nonatomic) IBOutlet UIImageView  *block8View;
+@property (strong, nonatomic) IBOutlet UIImageView  *block9View;
 
 @property (retain, nonatomic) IBOutlet UIView  *settingsViewerVIEW;
 

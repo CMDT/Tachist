@@ -9,6 +9,10 @@
 #import "testVC.h"
 #import "mySingleton.h"
 
+#define kEmail      @"emailAddress"
+#define kTester     @"testerName"
+#define kSubject    @"subjectName"
+
 @interface testVC ()
 {
     NSNumber *box[10];
@@ -21,6 +25,7 @@
     
     BOOL isFinished;
     BOOL isCalculating;
+    BOOL isAlertFinished;
     BOOL stageEnded;
     BOOL resultsSaved;
     BOOL infoShow;
@@ -338,12 +343,88 @@
     }
     return revOrder;
 }
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    //an alert was detected, get the text filelds and update the singleton
+        mySingleton *singleton = [mySingleton sharedSingleton];
+    NSString * testerEmail =[[alertView textFieldAtIndex:0] text];
+    NSString * participant =[[alertView textFieldAtIndex:1] text];
+        NSLog(@"Tester Email    : %@", testerEmail);
+        NSLog(@"Participant     : %@", participant);
+
+    //test for blank names and details
+    if ([testerEmail isEqualToString:@""]) {
+        testerEmail=singleton.email;
+    }
+    if ([participant isEqualToString:@""]) {
+        testerEmail=singleton.subjectName;
+    }
+
+    //update singleton
+    singleton.email=testerEmail;
+    singleton.subjectName=participant;
+
+    //save to plist root
+    NSString *pathStr = [[NSBundle mainBundle] bundlePath];
+    NSString *settingsBundlePath = [pathStr stringByAppendingPathComponent:@"Settings.bundle"];
+    NSString *defaultPrefsFile = [settingsBundlePath stringByAppendingPathComponent:@"Root.plist"];
+    NSDictionary *defaultPrefs = [NSDictionary dictionaryWithContentsOfFile:defaultPrefsFile];
+   [[NSUserDefaults standardUserDefaults] registerDefaults:defaultPrefs];
+    NSUserDefaults *defaults    = [NSUserDefaults standardUserDefaults];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    //email name
+        [defaults setObject:testerEmail forKey:kEmail];
+    //subject name
+        [defaults setObject:participant forKey:kSubject];
+
+    isAlertFinished=YES;
+}
+
+-(void)participantEntry{
+    mySingleton *singleton = [mySingleton sharedSingleton];
+    //do a text input for the participant
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@""
+                                                     message:@"Enter Tester Email and Participant Code"
+                                                    delegate:self
+                                           cancelButtonTitle:nil //@"Cancel"
+                                           otherButtonTitles:@"Continue", nil];
+
+    alert.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;
+
+
+    UITextField * alertTextField1 = [alert textFieldAtIndex:0];
+    alertTextField1.keyboardType = UIKeyboardTypeEmailAddress;
+    alertTextField1.placeholder = singleton.email;
+
+
+    UITextField * alertTextField2 = [alert textFieldAtIndex:1];
+    alertTextField2.secureTextEntry=NO;
+    alertTextField2.keyboardType = UIKeyboardTypeDefault;
+    //if blank, add temp name, else add the current one
+    if ([singleton.subjectName isEqualToString:@""]) {
+        alertTextField2.placeholder = @"Participant Code";
+    }else{
+        alertTextField2.placeholder = singleton.subjectName;
+    }
+
+    [alert show];
+}
 
 -(IBAction)startTest:sender{
+    isAlertFinished=NO;
+
+    [self participantEntry];
+    [self startTestPart2];
+}
+
+-(void)startTestPart2{
+    //this will be looped until the text alert popup is finished
     mySingleton *singleton = [mySingleton sharedSingleton];
-    
+
+    if (isAlertFinished) {
+
     [self playMyEffect];
-    
+
+
     //blank out the tab bar during the test, no end until done now
     self.tabBarController.tabBar.hidden = YES;
     stopTestNowBTN.hidden=NO;
@@ -371,9 +452,13 @@
     
     //start the timer
     //[self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(boxInit) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(boxInit) userInfo:nil repeats:NO];
 
     MessageView.hidden=NO;
+    } else {
+        //participant alert not yet finished, loop
+        [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(startTestPart2) userInfo:nil repeats:NO];
+    }
 }
 
 -(float)randomDegrees359
@@ -534,11 +619,11 @@
     
     [self setColours];
     
-    tempStartMessage=@"You will be shown a sequence of blocks, observe the order, when prompted, \nrecall the sequence. \n\nThe test will proceed until all the sections are completed.\n\nYou will exit the test if you select any other tab menu item during the test.\n\nOnly completed tests are valid and available for analysis or email.\n\nPress the 'Start Button' to begin the test.";
+    tempStartMessage=@"You will be shown a sequence of blocks, observe the order when prompted, \n and recall the sequence when prompted. \n\nThe test will proceed until all the sections are completed.\n\nYou will exit the test if you select any other tab menu item during the test.\n\nOnly completed tests are valid and available for analysis or email.";
     
     MessageTextView.text=tempStartMessage;
-    MessageTextView.font=[UIFont fontWithName:@"Serifa-Roman" size:(14.0f)];
-    MessageTextView.textAlignment=UITextAlignmentCenter;
+    //MessageTextView.font=[UIFont fontWithName:@"Serifa-Roman" size:(14.0f)];
+    //MessageTextView.textAlignment = UITextAlignmentCenter;
     MessageTextView.hidden=NO;
     MessageView.hidden=YES;
     startBTN.hidden=NO;
