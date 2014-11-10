@@ -1,50 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="xej-tg-gJb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="IKI-2A-uin">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
-        <!--Opening Screen-->
-        <scene sceneID="779-yJ-tm0">
-            <objects>
-                <viewController autoresizesArchivedViewToFullSize="NO" title="Opening Screen" automaticallyAdjustsScrollViewInsets="NO" modalTransitionStyle="flipHorizontal" id="xej-tg-gJb" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="TCn-zD-SIb">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="emQ-Ud-fp1">
-                                <rect key="frame" x="16" y="424" width="288" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="CORSI Block Tapping Test">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="IKI-2A-uin" kind="modal" id="LRB-oy-sHi"/>
-                                </connections>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="corsiporpad.png" id="FTU-Fw-M6e">
-                                <rect key="frame" x="16" y="42" width="288" height="374"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="0.95234378850000001" blue="0.8036439179" alpha="1" colorSpace="calibratedRGB"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="90g-UV-7a4"/>
-                    <nil key="simulatedBottomBarMetrics"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wAv-vb-41Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1187.5" y="-652.5"/>
-        </scene>
         <!--Settings Overview-->
         <scene sceneID="haX-bd-tB3">
             <objects>
-                <viewController storyboardIdentifier="settings" title="Settings Overview" modalTransitionStyle="flipHorizontal" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NmM-sh-eu8" customClass="settingsVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="settings" autoresizesArchivedViewToFullSize="NO" title="Settings Overview" modalTransitionStyle="flipHorizontal" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NmM-sh-eu8" customClass="settingsVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8im-2Q-xAb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -198,7 +162,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Lxa-rf-pVu">
-                                        <rect key="frame" x="8" y="8" width="30" height="30"/>
+                                        <rect key="frame" x="16" y="15" width="30" height="30"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                     </imageView>
@@ -207,7 +171,7 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="UQZ-ee-1dD">
-                                        <rect key="frame" x="123" y="8" width="30" height="30"/>
+                                        <rect key="frame" x="117" y="15" width="30" height="30"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="etl-ZD-pjI">
@@ -223,15 +187,15 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="A0M-q5-bTX">
-                                        <rect key="frame" x="8" y="122" width="30" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Vvl-0g-XOV">
-                                        <rect key="frame" x="59" y="114" width="30" height="30"/>
+                                        <rect key="frame" x="16" y="114" width="30" height="30"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="7WN-xF-37q">
-                                        <rect key="frame" x="123" y="122" width="30" height="30"/>
+                                        <rect key="frame" x="117" y="114" width="30" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Vvl-0g-XOV">
+                                        <rect key="frame" x="65" y="114" width="30" height="30"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
                                 </subviews>
@@ -389,7 +353,7 @@
         <!--Timing Settings-->
         <scene sceneID="dDb-Sb-L7X">
             <objects>
-                <viewController storyboardIdentifier="timing" title="Timing Settings" definesPresentationContext="YES" providesPresentationContextTransitionStyle="YES" modalTransitionStyle="flipHorizontal" useStoryboardIdentifierAsRestorationIdentifier="YES" id="aRU-3a-nW6" customClass="timingVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="timing" autoresizesArchivedViewToFullSize="NO" title="Timing Settings" modalTransitionStyle="flipHorizontal" useStoryboardIdentifierAsRestorationIdentifier="YES" id="aRU-3a-nW6" customClass="timingVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OmU-AC-j7M">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -409,7 +373,7 @@
                                 </connections>
                             </slider>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start Delay mSec" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mk0-Pb-sg3">
-                                <rect key="frame" x="16" y="116" width="147" height="21"/>
+                                <rect key="frame" x="87" y="116" width="147" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -438,13 +402,6 @@
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Block Timing m Sec" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2O1-bp-9Dw">
                                 <rect key="frame" x="81" y="183" width="160" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Block Show m Sec " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Eea-ch-hje">
-                                <rect key="frame" x="154" y="250" width="151" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -504,6 +461,13 @@
                                     <segue destination="IKI-2A-uin" kind="modal" id="4QY-bk-59h"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Block Show m Sec " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Eea-ch-hje">
+                                <rect key="frame" x="86" y="250" width="151" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.90588241815567017" green="0.96078437566757202" blue="0.80784320831298828" alpha="1" colorSpace="deviceRGB"/>
                     </view>
@@ -525,7 +489,7 @@
         <!--Colour Settings-->
         <scene sceneID="f9J-gR-aMz">
             <objects>
-                <viewController storyboardIdentifier="colours" title="Colour Settings" definesPresentationContext="YES" providesPresentationContextTransitionStyle="YES" modalTransitionStyle="flipHorizontal" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2Wh-Zj-8FI" customClass="colourVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="colours" autoresizesArchivedViewToFullSize="NO" title="Colour Settings" modalTransitionStyle="flipHorizontal" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2Wh-Zj-8FI" customClass="colourVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DKw-3S-cET">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1097,7 +1061,7 @@
         <!--Block Settings-->
         <scene sceneID="fXO-cP-nio">
             <objects>
-                <viewController storyboardIdentifier="block" title="Block Settings" definesPresentationContext="YES" providesPresentationContextTransitionStyle="YES" modalTransitionStyle="flipHorizontal" useStoryboardIdentifierAsRestorationIdentifier="YES" id="AeB-vP-vxl" customClass="blockVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="block" autoresizesArchivedViewToFullSize="NO" title="Block Settings" modalTransitionStyle="flipHorizontal" useStoryboardIdentifierAsRestorationIdentifier="YES" id="AeB-vP-vxl" customClass="blockVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VXI-qN-Ju7">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1340,7 +1304,7 @@
         <!--Results-->
         <scene sceneID="XF9-yp-dwS">
             <objects>
-                <viewController storyboardIdentifier="results" title="Results" definesPresentationContext="YES" providesPresentationContextTransitionStyle="YES" modalTransitionStyle="flipHorizontal" useStoryboardIdentifierAsRestorationIdentifier="YES" id="APr-Tr-350" customClass="resultsVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="results" autoresizesArchivedViewToFullSize="NO" title="Results" modalTransitionStyle="flipHorizontal" useStoryboardIdentifierAsRestorationIdentifier="YES" id="APr-Tr-350" customClass="resultsVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lQv-c0-wS2">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1361,7 +1325,7 @@
                                     <accessibilityTraits key="traits" none="YES" staticText="YES"/>
                                 </accessibility>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="iFj-sz-Pty">
@@ -1394,7 +1358,7 @@
         <!--CorsiTabController-->
         <scene sceneID="sw2-hC-uGP">
             <objects>
-                <tabBarController autoresizesArchivedViewToFullSize="NO" title="CorsiTabController" id="IKI-2A-uin" sceneMemberID="viewController">
+                <tabBarController autoresizesArchivedViewToFullSize="NO" title="CorsiTabController" modalTransitionStyle="flipHorizontal" id="IKI-2A-uin" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="06U-FS-t22">
@@ -1416,7 +1380,7 @@
         <!--Test-->
         <scene sceneID="Hse-ve-D12">
             <objects>
-                <viewController storyboardIdentifier="testVC" title="Test" modalTransitionStyle="flipHorizontal" modalPresentationStyle="currentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="So4-z0-L3J" customClass="testVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="testVC" autoresizesArchivedViewToFullSize="NO" title="Test" modalTransitionStyle="flipHorizontal" modalPresentationStyle="currentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="So4-z0-L3J" customClass="testVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lfF-OU-0B0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1705,7 +1669,7 @@
         <!--Information-->
         <scene sceneID="UUY-XU-Df1">
             <objects>
-                <viewController storyboardIdentifier="InformationVC" title="Information" modalTransitionStyle="flipHorizontal" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fkz-qV-ETW" customClass="informationVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InformationVC" autoresizesArchivedViewToFullSize="NO" title="Information" modalTransitionStyle="flipHorizontal" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fkz-qV-ETW" customClass="informationVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pfM-kW-pZp">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1746,7 +1710,6 @@
         <image name="blue72.png" width="72" height="72"/>
         <image name="brown72.png" width="72" height="72"/>
         <image name="check72grey.png" width="72" height="72"/>
-        <image name="corsiporpad.png" width="1536" height="2048"/>
         <image name="cyan72.png" width="72" height="72"/>
         <image name="darkgrey72.png" width="72" height="72"/>
         <image name="green72.png" width="72" height="72"/>

@@ -16,24 +16,29 @@
     // Override point for customization after application launch.
 
     // start of your application:didFinishLaunchingWithOptions // ...
+    
     //[TestFlight takeOff:@"366e7ec5-6ae8-4163-ad1c-eb12570fb8da"];
     // The rest of your application:didFinishLaunchingWithOptions method// ...
-    //start the main App with a message
-
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Corsi Block Tapping Test" message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-
-
-    UILabel *txtField = [[UILabel alloc] initWithFrame:CGRectMake(5,5,180,230)];
-    //[txtField setFont:[UIFont fontWithName:@"Serifa-Roman" size:(16.0f)]];
-    txtField.numberOfLines = 9;
-    txtField.textColor = [UIColor darkGrayColor];
-    txtField.textAlignment = NSTextAlignmentCenter;
-    txtField.text = @"To see details on how to \nuse this Application\n and adjust its settings, \nplease read the notes in \nthe 'Information' section \nin the Tab Bar.\n\nThis Application is NOT \nfor clinical use.";
-    txtField.backgroundColor = [UIColor clearColor];
     
-    [alertView setValue:txtField forKeyPath:@"accessoryView"];//for ios 7 and above
+    //start the main App with a message
+    
+    sleep(4);
 
-    [alertView show];
+    //UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Corsi Block Tapping Test" message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+
+    //UILabel *txtField = [[UILabel alloc] initWithFrame:CGRectMake(5,5,180,230)];
+    
+    //[txtField setFont:[UIFont fontWithName:@"Serifa-Roman" size:(16.0f)]];
+    
+    //txtField.numberOfLines = 9;
+    //txtField.textColor = [UIColor darkGrayColor];
+    //txtField.textAlignment = NSTextAlignmentCenter;
+    //txtField.text = @"To see details on how to \nuse this Application\n and adjust its settings, \nplease read the notes in \nthe 'Information' section \nin the Tab Bar.\n\nThis Application is NOT \nfor clinical use.";
+    //txtField.backgroundColor = [UIColor clearColor];
+    
+    //[alertView setValue:txtField forKeyPath:@"accessoryView"];//for ios 7 and above
+
+    //[alertView show];
 
     // set all labels to Serifa Font 24
 
