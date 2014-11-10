@@ -99,23 +99,21 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,set
 
 -(void)viewWillAppear:(BOOL)animated{
     //when the view loads, before display does the code here
-    //[self loadSettings:self];
     //font 'Serifa-Roman.ttf' not Serifa 55 Roman.ttf
 
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     //when the view exits, save the plist settings for cold start data retreval
-    //[self saveSettings:self];
+
 }
 -(void)viewDidAppear:(BOOL)animated{
     //assign images to tab bar items
-    UIImage *settingsImage          = [UIImage imageNamed:@"Settings"];
-    UIImage *settingsImageSel       = [UIImage imageNamed:@"SettingsSel"];
+    UIImage *settingsImage          = [UIImage imageNamed:@"settings"];
+    UIImage *settingsImageSel       = [UIImage imageNamed:@"settingsSel"];
     settingsImage       = [settingsImage    imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     settingsImageSel    = [settingsImageSel imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Settings" image:settingsImage selectedImage: settingsImageSel];
-
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     [showLBL setBackgroundColor:singleton.currentShowColour];

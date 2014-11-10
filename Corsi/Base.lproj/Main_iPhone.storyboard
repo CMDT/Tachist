@@ -8,17 +8,13 @@
         <!--Opening Screen-->
         <scene sceneID="779-yJ-tm0">
             <objects>
-                <viewController autoresizesArchivedViewToFullSize="NO" title="Opening Screen" automaticallyAdjustsScrollViewInsets="NO" modalTransitionStyle="crossDissolve" id="xej-tg-gJb" sceneMemberID="viewController">
+                <viewController autoresizesArchivedViewToFullSize="NO" title="Opening Screen" automaticallyAdjustsScrollViewInsets="NO" modalTransitionStyle="flipHorizontal" id="xej-tg-gJb" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TCn-zD-SIb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="corsiporpad.png" id="FTU-Fw-M6e">
-                                <rect key="frame" x="0.0" y="73" width="320" height="421"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="emQ-Ud-fp1">
-                                <rect key="frame" x="16" y="494" width="288" height="35"/>
+                                <rect key="frame" x="16" y="424" width="288" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -27,9 +23,13 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="IKI-2A-uin" kind="modal" identifier="opening" id="nSo-05-sWv"/>
+                                    <segue destination="IKI-2A-uin" kind="modal" id="LRB-oy-sHi"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="corsiporpad.png" id="FTU-Fw-M6e">
+                                <rect key="frame" x="16" y="42" width="288" height="374"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.95234378850000001" blue="0.8036439179" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -39,14 +39,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wAv-vb-41Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-707" y="-652"/>
+            <point key="canvasLocation" x="-1187.5" y="-652.5"/>
         </scene>
         <!--Settings Overview-->
         <scene sceneID="haX-bd-tB3">
             <objects>
-                <viewController storyboardIdentifier="settings" title="Settings Overview" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NmM-sh-eu8" customClass="settingsVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="settings" title="Settings Overview" modalTransitionStyle="flipHorizontal" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NmM-sh-eu8" customClass="settingsVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8im-2Q-xAb">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sound" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Daz-n9-jND">
@@ -352,10 +352,9 @@
                         </subviews>
                         <color key="backgroundColor" red="0.84290279212849473" green="0.9223086456184334" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="2" title="Settings" image="settings" selectedImage="settings" id="JfG-Kt-5KA">
+                    <tabBarItem key="tabBarItem" title="Settings" image="settings" id="JfG-Kt-5KA">
                         <inset key="imageInsets" minX="15" minY="15" maxX="15" maxY="15"/>
                     </tabBarItem>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="animalsLBL" destination="KN7-lF-EgK" id="bky-dD-xmV"/>
                         <outlet property="block1View" destination="Lxa-rf-pVu" id="6gI-zr-5nm"/>
@@ -385,7 +384,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d6x-0F-1TZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-355" y="-652"/>
+            <point key="canvasLocation" x="-316.5" y="-652.5"/>
         </scene>
         <!--Timing Settings-->
         <scene sceneID="dDb-Sb-L7X">
@@ -502,13 +501,14 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="IKI-2A-uin" kind="modal" id="lkT-6I-6x4"/>
+                                    <segue destination="IKI-2A-uin" kind="modal" id="4QY-bk-59h"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.90588241815567017" green="0.96078437566757202" blue="0.80784320831298828" alpha="1" colorSpace="deviceRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="e1y-Fi-dEh"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="blockShowTimeSLD" destination="l7E-zh-1cG" id="env-wK-BxU"/>
                         <outlet property="blockShowTimeTXT" destination="5cC-7T-6C4" id="fbe-Vn-Oqg"/>
@@ -520,7 +520,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AS9-gv-3ec" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="16" y="371"/>
+            <point key="canvasLocation" x="-752" y="-19"/>
         </scene>
         <!--Colour Settings-->
         <scene sceneID="f9J-gR-aMz">
@@ -881,7 +881,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="IKI-2A-uin" kind="modal" id="1gJ-g6-Scq"/>
+                                    <segue destination="IKI-2A-uin" kind="modal" id="NxR-D6-a8L"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Psn-nV-lKo" userLabel="Button lt gr">
@@ -1042,6 +1042,7 @@
                         <color key="backgroundColor" red="1" green="0.95400038916987329" blue="0.9048870990508564" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="5sk-oO-RnB"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="b0" destination="7Ik-JQ-qwU" id="Oa8-t4-JlK"/>
                         <outlet property="b1" destination="iFI-rr-Ya6" id="doF-rN-sUh"/>
@@ -1057,7 +1058,6 @@
                         <outlet property="b7" destination="hWb-lh-54y" id="dlI-Q0-4Jy"/>
                         <outlet property="b8" destination="jk8-Gj-Hax" id="cQ3-Xn-mCz"/>
                         <outlet property="b9" destination="Aba-Q5-L0h" id="gNH-PQ-wLr"/>
-                        <outlet property="backButton" destination="bl3-LO-7bm" id="fZP-Eo-l7I"/>
                         <outlet property="c0" destination="t7a-91-dne" id="yXa-HI-Hsn"/>
                         <outlet property="c1" destination="oQG-GM-Xbr" id="1ib-Ws-avb"/>
                         <outlet property="c10" destination="S5d-ZU-ewd" id="EOU-co-gjb"/>
@@ -1092,7 +1092,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wFS-p1-DTW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="961" y="392"/>
+            <point key="canvasLocation" x="118" y="-19"/>
         </scene>
         <!--Block Settings-->
         <scene sceneID="fXO-cP-nio">
@@ -1307,13 +1307,14 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="IKI-2A-uin" kind="modal" id="6pf-b9-947"/>
+                                    <segue destination="IKI-2A-uin" kind="modal" id="F6T-YZ-MIn"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.72248651749291692" green="1" blue="0.85621864059333919" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="LhO-v0-eIv"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="animalsSWT" destination="HWX-rH-kjL" id="cmc-M8-TXW"/>
                         <outlet property="blockFinishNumLBL" destination="mZm-DS-8ej" id="Frp-b2-IWN"/>
@@ -1334,14 +1335,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hxI-4T-cjX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="492" y="392"/>
+            <point key="canvasLocation" x="-317" y="-19"/>
         </scene>
         <!--Results-->
         <scene sceneID="XF9-yp-dwS">
             <objects>
                 <viewController storyboardIdentifier="results" title="Results" definesPresentationContext="YES" providesPresentationContextTransitionStyle="YES" modalTransitionStyle="flipHorizontal" useStoryboardIdentifierAsRestorationIdentifier="YES" id="APr-Tr-350" customClass="resultsVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lQv-c0-wS2">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="284" placeholderIntrinsicHeight="21" text="Corsi Test Results" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IQW-SQ-4DV">
@@ -1379,47 +1380,45 @@
                         </subviews>
                         <color key="backgroundColor" red="0.89420127579999997" green="1" blue="0.66009751149999996" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="4" title="Results" image="ResultsSel" selectedImage="results" id="RRh-7Z-4U7">
+                    <tabBarItem key="tabBarItem" tag="2" title="Results" image="results" id="RRh-7Z-4U7">
                         <inset key="imageInsets" minX="15" minY="15" maxX="15" maxY="15"/>
                     </tabBarItem>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="resultsTxtView" destination="jSY-QQ-FBu" id="QRh-sf-HEF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WqZ-kI-dxD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="352" y="-652"/>
+            <point key="canvasLocation" x="551.5" y="-652.5"/>
         </scene>
         <!--CorsiTabController-->
         <scene sceneID="sw2-hC-uGP">
             <objects>
-                <tabBarController title="CorsiTabController" definesPresentationContext="YES" providesPresentationContextTransitionStyle="YES" modalTransitionStyle="flipHorizontal" id="IKI-2A-uin" sceneMemberID="viewController">
+                <tabBarController autoresizesArchivedViewToFullSize="NO" title="CorsiTabController" id="IKI-2A-uin" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="06U-FS-t22">
+                    <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="06U-FS-t22">
                         <rect key="frame" x="129" y="330" width="163" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="NmM-sh-eu8" kind="relationship" relationship="viewControllers" id="yLc-RD-KfT"/>
-                        <segue destination="fkz-qV-ETW" kind="relationship" relationship="viewControllers" id="27Y-Y6-uk1"/>
-                        <segue destination="APr-Tr-350" kind="relationship" relationship="viewControllers" id="m86-dW-K32"/>
-                        <segue destination="So4-z0-L3J" kind="relationship" relationship="viewControllers" id="6O8-Ht-9Ae"/>
-                        <segue destination="xej-tg-gJb" kind="push" identifier="startReturn" id="B2X-JM-vva"/>
+                        <segue destination="NmM-sh-eu8" kind="relationship" relationship="viewControllers" id="9hf-kb-xXY"/>
+                        <segue destination="fkz-qV-ETW" kind="relationship" relationship="viewControllers" id="J6C-3u-lmu"/>
+                        <segue destination="APr-Tr-350" kind="relationship" relationship="viewControllers" id="cqC-j1-pwA"/>
+                        <segue destination="So4-z0-L3J" kind="relationship" relationship="viewControllers" id="uFK-hx-o5Q"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Mf-qD-7gS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1055" y="-652"/>
+            <point key="canvasLocation" x="-751.5" y="-652.5"/>
         </scene>
         <!--Test-->
         <scene sceneID="Hse-ve-D12">
             <objects>
                 <viewController storyboardIdentifier="testVC" title="Test" modalTransitionStyle="flipHorizontal" modalPresentationStyle="currentContext" useStoryboardIdentifierAsRestorationIdentifier="YES" id="So4-z0-L3J" customClass="testVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lfF-OU-0B0">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CORSI Block Test" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gZD-J4-BaP">
@@ -1644,7 +1643,6 @@
                                 </state>
                                 <connections>
                                     <action selector="stopTestNow:" destination="So4-z0-L3J" eventType="touchUpInside" id="srl-qm-tf5"/>
-                                    <segue destination="IKI-2A-uin" kind="modal" id="WKM-zk-lwO"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="0.0" placeholderIntrinsicHeight="0.0" id="2Pd-MY-wKc" userLabel="Image View message">
@@ -1661,10 +1659,9 @@
                         </subviews>
                         <color key="backgroundColor" red="0.89411771299999998" green="0.9450981021" blue="0.97254908080000002" alpha="1" colorSpace="deviceRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="3" title="Test" image="TestSel" selectedImage="test" id="uI8-6A-gw6">
+                    <tabBarItem key="tabBarItem" tag="3" title="Test" image="test" id="uI8-6A-gw6">
                         <inset key="imageInsets" minX="15" minY="15" maxX="15" maxY="15"/>
                     </tabBarItem>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="MessageTextView" destination="3YN-so-yJM" id="sVl-kV-crl"/>
                         <outlet property="MessageView" destination="2Pd-MY-wKc" id="yWX-kc-hnE"/>
@@ -1703,14 +1700,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Et-jW-1Na" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="704" y="-652"/>
+            <point key="canvasLocation" x="983.5" y="-652.5"/>
         </scene>
         <!--Information-->
         <scene sceneID="UUY-XU-Df1">
             <objects>
                 <viewController storyboardIdentifier="InformationVC" title="Information" modalTransitionStyle="flipHorizontal" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fkz-qV-ETW" customClass="informationVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pfM-kW-pZp">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="280" placeholderIntrinsicHeight="21" text="Corsi Test Information" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kTD-oj-SgO">
@@ -1732,24 +1729,19 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.89417350449999999" blue="0.6320989253" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="1" title="Information" image="InformationSel" selectedImage="Information" id="H2M-mc-v72">
+                    <tabBarItem key="tabBarItem" tag="1" title="Information" image="information" id="H2M-mc-v72">
                         <inset key="imageInsets" minX="15" minY="15" maxX="15" maxY="15"/>
                     </tabBarItem>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="infoTextView" destination="24H-DS-3Oq" id="afq-9R-5HC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2r7-HZ-XTl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="0.0" y="-652"/>
+            <point key="canvasLocation" x="118.5" y="-652.5"/>
         </scene>
     </scenes>
     <resources>
-        <image name="Information" width="32" height="32"/>
-        <image name="InformationSel" width="32" height="32"/>
-        <image name="ResultsSel" width="32" height="32"/>
-        <image name="TestSel" width="32" height="32"/>
         <image name="black72.png" width="72" height="72"/>
         <image name="blue72.png" width="72" height="72"/>
         <image name="brown72.png" width="72" height="72"/>
@@ -1759,6 +1751,7 @@
         <image name="darkgrey72.png" width="72" height="72"/>
         <image name="green72.png" width="72" height="72"/>
         <image name="grey72.png" width="72" height="72"/>
+        <image name="information" width="32" height="32"/>
         <image name="lightgrey.png" width="72" height="72"/>
         <image name="magenta72.png" width="72" height="72"/>
         <image name="orange72.png" width="72" height="72"/>
@@ -1776,6 +1769,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="WKM-zk-lwO"/>
+        <segue reference="NxR-D6-a8L"/>
     </inferredMetricsTieBreakers>
 </document>

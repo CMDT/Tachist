@@ -590,14 +590,19 @@
 }
 //
 
--(void)viewDidAppear:(BOOL)animated{
-    
-    UIImage *testImage      = [UIImage imageNamed:@"Test"];
-    UIImage *testImageSel   = [UIImage imageNamed:@"TestSel"];
-    testImage               = [testImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    testImageSel            = [testImageSel imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    self.tabBarItem         = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage selectedImage: testImageSel];
+-(void)viewWillAppear:(BOOL)animated{
 
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+UIImage *testImage      = [UIImage imageNamed:@"test.png"];
+UIImage *testImageSel   = [UIImage imageNamed:@"testSel.png"];
+testImage               = [testImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+testImageSel            = [testImageSel imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+self.tabBarItem         = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage selectedImage: testImageSel];
+
+self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage selectedImage: testImageSel];
+    
     MessageTextView.hidden=YES;
     [self initialiseBlocks];
 
@@ -1572,6 +1577,8 @@
 
     NSString * tempString;
     NSString * tempString2;
+    NSString * tempString3;
+    NSString * tempString4;
 
     int cor;
     int wro;
@@ -1717,14 +1724,14 @@
             guessStr[xx]=[guessStr[xx] stringByAppendingString:@"xxx"];
         //for order and guess
         if (xx<finish){
-            tempString = [NSString stringWithFormat:@"%d", xx-2];
-            tempString2 = [NSString stringWithFormat:@" _ %d __  ", xx-2];
+            tempString3 = [NSString stringWithFormat:@"%d", xx-2];
+            tempString4 = [NSString stringWithFormat:@" _ %d __  ", xx-2];
         }
         ee=[order[xx] substringWithRange:NSMakeRange(0, xx)];
         ff=[guessStr[xx] substringWithRange:NSMakeRange(0, xx)];
 
-        tempString = [NSString stringWithFormat:@"%@,%@", ee, ff];
-        tempString2 = [NSString stringWithFormat:@"%@ _ %@",ee, ff];
+        tempString = [NSString stringWithFormat:@"%@,%@,%@", ee, ff,tempString3];
+        tempString2 = [NSString stringWithFormat:@"%@ _ %@_%@",ee, ff,tempString4];
         cor=0;
         wro=0;
         ans=@"";

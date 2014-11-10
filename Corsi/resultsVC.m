@@ -43,7 +43,9 @@
     }
     return self;
 }
+-(void)viewWillAppear:(BOOL)animated{
 
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -53,15 +55,14 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated{
-
-    mySingleton *singleton = [mySingleton sharedSingleton];
-
-    UIImage *resultsImage           = [UIImage imageNamed:@"Results"];
-    UIImage *resultsImageSel        = [UIImage imageNamed:@"ResultsSel"];
+    UIImage *resultsImage           = [UIImage imageNamed:@"results"];
+    UIImage *resultsImageSel        = [UIImage imageNamed:@"resultsSel"];
     resultsImage        = [resultsImage     imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     resultsImageSel     = [resultsImageSel  imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 
     self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Results" image:resultsImage selectedImage: resultsImageSel];
+    mySingleton *singleton = [mySingleton sharedSingleton];
+
     resultsTempString = @"Corsi Tapping Test results will appear here once a test has been completed.\n\nThe previous test will stay visible until a new test is completed or you press the Home Button on your device.\n\nData can be sent by email as an attachment of type CSV.\n\nPlease ensure that you have set the email of the recipient in the device settings file before you select the email button.";
     //resultsTxtView.font=[UIFont fontWithName:@"Serifa-Roman" size:16];
     resultsTxtView.text = resultsTempString;
