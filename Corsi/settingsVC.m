@@ -88,8 +88,6 @@
     NSArray *totalCorrect;
 }
 
-//maybe some missing, check
-
 @synthesize showLBL,blockLBL,canvasLBL;
 
 @synthesize block1View,block2View,block3View,block4View,block5View;
@@ -97,16 +95,6 @@
 @synthesize blockSizeLBL,blockFinishNumLBL,blockStartNumLBL,blockShowLBL,
 blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,settingsVC;
 
--(void)viewWillAppear:(BOOL)animated{
-    //when the view loads, before display does the code here
-    //font 'Serifa-Roman.ttf' not Serifa 55 Roman.ttf
-
-}
-
--(void)viewWillDisappear:(BOOL)animated{
-    //when the view exits, save the plist settings for cold start data retreval
-
-}
 -(void)viewDidAppear:(BOOL)animated{
     //assign images to tab bar items
     UIImage *settingsImage          = [UIImage imageNamed:@"settings"];
@@ -132,31 +120,34 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,set
     [canvasLBL setBackgroundColor: singleton.currentBackgroundColour];
     [settingsViewerVIEW setBackgroundColor:singleton.currentBackgroundColour];
     
-    
     //forward or revers test flag
     if(singleton.forwardTestDirection==YES){
         forwardLBL.text=@"Forward";
     } else {
         forwardLBL.text=@"Reverse";
     }
+    
     //on screen info during tests flag
     if(singleton.onScreenInfo==YES){
         infoLBL.text=@"Info.";
     } else {
         infoLBL.text=@"No Info";
     }
+    
     //rotation flag
     if(singleton.blockRotation==YES){
         rotateLBL.text=@"Rotated";
     } else {
         rotateLBL.text=@"Level";
     }
+    
     //animals flag
     if(singleton.animals==YES){
         animalsLBL.text=@"Animals";
     } else {
         animalsLBL.text=@"Blocks";
     }
+    
     //sounds flag
     if(singleton.sounds==YES){
         soundsLBL.text=@"Sounds";
@@ -166,17 +157,17 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,set
     }
 
     //start, finish and sizes on screen from singleton
-    blockStartNumLBL.text=[NSString stringWithFormat:@"%d",singleton.start];
-    blockFinishNumLBL.text=[NSString stringWithFormat:@"%d",singleton.finish];
-    blockSizeLBL.text=[NSString stringWithFormat:@"%2.0f",singleton.blockSize];
+    blockStartNumLBL.text   = [NSString stringWithFormat:@"%d",singleton.start];
+    blockFinishNumLBL.text  = [NSString stringWithFormat:@"%d",singleton.finish];
+    blockSizeLBL.text       = [NSString stringWithFormat:@"%2.0f",singleton.blockSize];
 
     startTime = singleton.startTime;
-    waitTime = singleton.waitTime;
-    showTime = singleton.showTime;
+    waitTime  = singleton.waitTime;
+    showTime  = singleton.showTime;
 
-    blockStartLBL.text=[[NSString alloc]initWithFormat:@"%i",startTime];
-    blockShowLBL.text=[[NSString alloc]initWithFormat:@"%i",showTime];
-    blockWaitLBL.text=[[NSString alloc]initWithFormat:@"%i",waitTime];
+    blockStartLBL.text = [[NSString alloc]initWithFormat:@"%i",startTime];
+    blockShowLBL.text  = [[NSString alloc]initWithFormat:@"%i",showTime];
+    blockWaitLBL.text  = [[NSString alloc]initWithFormat:@"%i",waitTime];
 
     [self putBlocksInPlace];
 }
@@ -187,7 +178,6 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,set
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -195,34 +185,14 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,set
 }
 
 - (void)setDefaults{
-    //also used in Load Settings from k data store
-    //edit this to take data from k data store in Apple Settings pane
-
-    //+++
-    //for reading default value for Terminal
-    //NSString *testValue = [[NSUserDefaults standardUserDefaults] stringForKey:kFirstNameKey];
-    //if (testValue == nil)
-    //{
-        // no default values have been set, create them here based on what's in our Settings bundle info
-        NSString *pathStr = [[NSBundle mainBundle] bundlePath];
-        NSString *settingsBundlePath = [pathStr stringByAppendingPathComponent:@"Settings.bundle"];
-        //NSString *finalPath = [settingsBundlePath stringByAppendingPathComponent:@"Root.plist"];
-        NSString *defaultPrefsFile = [settingsBundlePath stringByAppendingPathComponent:@"Root.plist"];
-        //NSDictionary *settingsDict = [NSDictionary dictionaryWithContentsOfFile:finalPath];
-        NSDictionary *defaultPrefs = [NSDictionary dictionaryWithContentsOfFile:defaultPrefsFile];
-       // NSArray *prefSpecifierArray = [settingsDict objectForKey:@"PreferenceSpecifiers"];
-//}
-    //+++
-        
-    //NSURL *defaultPrefsFile     = [[NSBundle mainBundle]
-                                   //URLForResource:@"Root" withExtension:@"plist"];
-
-    //NSDictionary *defaultPrefs  = [NSDictionary dictionaryWithContentsOfURL:defaultPrefsFile];
-    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultPrefs];
-
-    NSUserDefaults *defaults    = [NSUserDefaults standardUserDefaults];
-    
-    [[NSUserDefaults standardUserDefaults] synchronize];
+//set up the plist params
+        NSString *pathStr               = [[NSBundle mainBundle] bundlePath];
+        NSString *settingsBundlePath    = [pathStr stringByAppendingPathComponent:@"Settings.bundle"];
+        NSString *defaultPrefsFile      = [settingsBundlePath stringByAppendingPathComponent:@"Root.plist"];
+        NSDictionary *defaultPrefs      = [NSDictionary dictionaryWithContentsOfFile:defaultPrefsFile];
+        [[NSUserDefaults standardUserDefaults] registerDefaults:defaultPrefs];
+        NSUserDefaults *defaults        = [NSUserDefaults standardUserDefaults];
+        [[NSUserDefaults standardUserDefaults] synchronize];
 
     //read the user defaults from the iPhone/iPad bundle
     // if any are set to nil (no value on first run), put a temporary one in
@@ -234,7 +204,7 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,set
         blockCol =@"Blue";
         [defaults setObject:@"Blue" forKey:kBlockCol];
     }
-//bacground colour
+//background colour
     currentBackgroundColour     = [defaults objectForKey:kBackCol];
     if(currentBackgroundColour  == nil ){
         currentBackgroundColour =  [UIColor blackColor];
@@ -336,7 +306,7 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,set
     }
 
     //for testing what is written, can be rem'd out later
-    NSLog(@"What is in the plist on first load:-->");
+    /* NSLog(@"What is in the plist on first load:-->");
     NSLog(@"tester      :%@",[defaults objectForKey:kTester]);
     NSLog(@"subject     :%@",[defaults objectForKey:kSubject]);
     NSLog(@"email       :%@",[defaults objectForKey:kEmail]);
@@ -355,7 +325,7 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,set
     NSLog(@"delay       :%@",[defaults objectForKey:kDelay]);
     NSLog(@"time        :%@",[defaults objectForKey:kTime]);
     NSLog(@"show        :%@",[defaults objectForKey:kShow]);
-    NSLog(@"version     :%@",[defaults objectForKey:kVersion]);
+    NSLog(@"version     :%@",[defaults objectForKey:kVersion]); */
 }
 
 -(UIColor*)colourPicker:(NSString*)colourName{
@@ -577,32 +547,31 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,set
 
 -(IBAction)saveSettings:(id)sender{
 
-    mySingleton *singleton = [mySingleton sharedSingleton];
+    mySingleton *singleton   = [mySingleton sharedSingleton];
 
-    NSURL *defaultPrefsFile = [[NSBundle mainBundle]
+    NSURL *defaultPrefsFile  = [[NSBundle mainBundle]
                                URLForResource:@"Root" withExtension:@"plist"];
-    NSDictionary *defaults1 =
-    [NSDictionary dictionaryWithContentsOfURL:defaultPrefsFile];
+    NSDictionary *defaults1  = [NSDictionary dictionaryWithContentsOfURL:defaultPrefsFile];
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaults1];
     //
-    NSUserDefaults *defaults    = [NSUserDefaults standardUserDefaults];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
     //read the user defaults from the iPhone/iPad bundle
     // if any are set to nil (no value on first run), put a temporary one in
     NSLog(@"Saving settings to singleton...");
+    
     //block colour
-
         [defaults setObject:[self colourUIToString:singleton.currentBlockColour] forKey:kBlockCol];
 
     //background colour
-
         [defaults setObject:[self colourUIToString:singleton.currentBackgroundColour] forKey:kBackCol];
 
     //show colour
-
         [defaults setObject:[self colourUIToString:singleton.currentShowColour] forKey:kShowCol];
+    
     //sounds
         //[defaults setObject:[NSString stringWithFormat:@"%@", singleton.beepEffect] forKey:kBeep]; //only saved from plist at present
+    
     //others
         [defaults setObject:[NSString stringWithFormat:@"%d", singleton.start] forKey:kStart];
         [defaults setObject:[NSString stringWithFormat:@"%d", singleton.finish] forKey:kFinish];
@@ -620,7 +589,7 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,set
 }
 
 -(IBAction)loadSettings:(id)sender{
-
+    //load from the plist, or put in a default if missing
     mySingleton *singleton = [mySingleton sharedSingleton];
     
     NSURL *defaultPrefsFile     = [[NSBundle mainBundle]
@@ -637,7 +606,7 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,set
     // if any are set to nil (no value on first run), put a temporary one in
     
     blockCol          = [defaults objectForKey:kBlockCol];
-    if(currentBlockColour  == nil ){
+    if(blockCol  == nil ){
         currentBlockColour =  [UIColor blueColor];
         blockCol =@"Blue";
         [defaults setObject:@"Blue" forKey:kBlockCol];
@@ -646,7 +615,7 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,set
     }
     //background colour
     backCol         = [defaults objectForKey:kBackCol];
-    if(currentBackgroundColour  == nil ){
+    if(backCol  == nil ){
         currentBackgroundColour =  [UIColor blackColor];
         backCol =@"Black";
         [defaults setObject:@"Black" forKey:kBackCol];
@@ -655,7 +624,7 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,set
     }
     //show colour
     showCol          = [defaults objectForKey:kShowCol];
-    if(currentShowColour  == nil ){
+    if(showCol  == nil ){
         currentShowColour =  [UIColor orangeColor];
         showCol =@"Orange";
         [defaults setObject:@"Orange" forKey:kShowCol];
@@ -663,8 +632,9 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,set
         currentShowColour = [self colourPicker:showCol];
     }
     
-    NSString *temp        = [defaults objectForKey:kStart];
-    if( temp == nil ){
+    NSString *temp;
+    temp        = [defaults objectForKey:kStart];
+        if( temp == nil ){
         start =  3;
         [defaults setObject:@"3" forKey:kStart];
     }
@@ -791,7 +761,7 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,set
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     float blockSize1 = singleton.blockSize;
-    blockSize1 = blockSize1 / 55; // 55.00; //size picked against max size allowed here
+    blockSize1 = blockSize1 / 60; // 55.00; //size picked against max size allowed here
     if( blockSize1 <= 0.2){
         blockSize1 = 0.2;
     }
@@ -800,7 +770,6 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,set
     }
 
     float scaleFactor = blockSize1;
-
 
     if(singleton.blockRotation){
         for (int t = 0; t < 10; t++) {
@@ -855,7 +824,6 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,set
                          block9View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans9);
 
                      }completion:nil];
-
 }
 
 -(int)random22
@@ -889,10 +857,12 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,set
             ani[tt-1]=ani[tt];
             ani[tt]=temp;
         }
-        NSLog(@"mix");
-        for (int b=0; b<22; b++) {
-            NSLog(@"animal:%d", ani[b]);
-        }
+        
+        //NSLog(@"mix");
+        //for (int b=0; b<22; b++) {
+            //NSLog(@"animal:%d", ani[b]);
+        //}
+        
         block1View.image = [self getAnimal:ani[1]];
         block2View.image = [self getAnimal:ani[3]];
         block3View.image = [self getAnimal:ani[5]];

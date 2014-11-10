@@ -57,8 +57,8 @@
 -(void)viewDidAppear:(BOOL)animated{
     UIImage *resultsImage           = [UIImage imageNamed:@"results"];
     UIImage *resultsImageSel        = [UIImage imageNamed:@"resultsSel"];
-    resultsImage        = [resultsImage     imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    resultsImageSel     = [resultsImageSel  imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    resultsImage                    = [resultsImage     imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    resultsImageSel                 = [resultsImageSel  imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 
     self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Results" image:resultsImage selectedImage: resultsImageSel];
     mySingleton *singleton = [mySingleton sharedSingleton];
@@ -67,7 +67,7 @@
     //resultsTxtView.font=[UIFont fontWithName:@"Serifa-Roman" size:16];
     resultsTxtView.text = resultsTempString;
     //make a text file from the array of results for email csv attachment
-    NSMutableString *element = [[NSMutableString alloc] init];
+    NSMutableString *element     = [[NSMutableString alloc] init];
     NSMutableString *printString = [NSMutableString stringWithString:@""];
     
     long final=singleton.resultStringRows.count;
@@ -96,14 +96,14 @@
 
     //UIViewController *files = [[UIViewController alloc] init];
 
-    singleton.resultStrings = printString;//email csv
+    singleton.resultStrings  = printString;//email csv
     singleton.displayStrings = printString2;//screen
     
     //check if data exists, if not, display the holding message
     if ([printString2 isEqualToString:@""]) {
-        resultsTxtView.text = resultsTempString;
+        resultsTxtView.text  = resultsTempString;
     }else{
-        resultsTxtView.text = singleton.displayStrings;
+        resultsTxtView.text  = singleton.displayStrings;
     }
     //[self saveText];
     [self WriteToStringFile:[printString mutableCopy]];
@@ -238,8 +238,8 @@
     singleton.testDate=[self getCurrentDate];
     singleton.testTime=[self getCurrentTime];
 
-    NSString *emailTitle = [NSString stringWithFormat:@"Corsi App Data: %@",singleton.subjectName];
-    NSString *messageBody = [NSString stringWithFormat:@"The test data for the subject:%@ taken at the date: %@ and time: %@, is attached as a text/csv file.\n\nThe file is comma separated variable, csv extension.\n\nThe data can be read by MS-Excel, then analysed by your own functions.\n\nThe screen Data follows, the attached file is formatted for MS-Excel as a CSV \n\n%@.\n\nSent by Corsi App.",singleton.subjectName, singleton.testDate, singleton.testTime, singleton.displayStrings];
+    NSString *emailTitle = [NSString stringWithFormat:@"Corsi App Data: %@",singleton.oldSubjectName];
+    NSString *messageBody = [NSString stringWithFormat:@"The test data for the subject:%@ taken at the date: %@ and time: %@, is attached as a text/csv file.\n\nThe file is comma separated variable, csv extension.\n\nThe data can be read by MS-Excel, then analysed by your own functions.\n\nThe screen Data follows, the attached file is formatted for MS-Excel as a CSV \n\n%@.\n\nSent by Corsi App.",singleton.oldSubjectName, singleton.testDate, singleton.testTime, singleton.displayStrings];
     
     //NSArray  *toRecipents = [NSArray arrayWithObject:@"j.a.howell@mmu.ac.uk"];//testing only
     NSArray  *toRecipents = [NSArray arrayWithObject:singleton.email];
@@ -290,23 +290,23 @@
     switch (result)
     {
         case MFMailComposeResultCancelled:
-        NSLog(@"Mail cancelled");
+        //NSLog(@"Mail cancelled");
         break;
         case MFMailComposeResultSaved:
-        NSLog(@"Mail saved");
+        //NSLog(@"Mail saved");
         break;
         case MFMailComposeResultSent:
-        NSLog(@"Mail sent");
+        //NSLog(@"Mail sent");
         break;
         case MFMailComposeResultFailed:
-        NSLog(@"Mail sent failure: %@", [error localizedDescription]);
+        //NSLog(@"Mail sent failure: %@", [error localizedDescription]);
         break;
         default:
-        NSLog(@"Mail problem, not sent, failed, saved or cancelled... some other fault");
+        //NSLog(@"Mail problem, not sent, failed, saved or cancelled... some other fault");
         break;
     }
     // Close the Mail Interface
     [self dismissViewControllerAnimated:YES completion:NULL];
-NSLog(@"Email View now closed.");
+//NSLog(@"Email View now closed.");
 }
 @end

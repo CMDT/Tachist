@@ -11,7 +11,6 @@
 
 @interface colourVC ()
 {
-
 }
 @end
 
@@ -26,12 +25,10 @@ c0,c1,c10,c11,c12,c13,c2,c3,c4,c5,c6,c7,c8,c9;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-
 }
 
-
 -(void)viewDidDisappear:(BOOL)animated{
-    
+    //blank
 }
 
 - (void)didReceiveMemoryWarning {
@@ -2221,11 +2218,12 @@ c0,c1,c10,c11,c12,c13,c2,c3,c4,c5,c6,c7,c8,c9;
         statusMessage.text=@"Block and Show Colours must be different";
         isColourOK = NO;
     }
-    if(singleton.currentBlockColour == singleton.currentBackgroundColour){
+    //allowing block and background to be same for extra options of scene display with animals or invisible block test
+    //if(singleton.currentBlockColour == singleton.currentBackgroundColour){
         //cant have block and backgrond the same
-        statusMessage.text=@"Canvas and Block Colours must be different";
-        isColourOK = NO;
-    }
+        //statusMessage.text=@"Canvas and Block Colours must be different";
+        //isColourOK = NO;
+    //}
     
     if(isColourOK){
         backButton.hidden=NO;

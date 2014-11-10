@@ -24,21 +24,21 @@
     
     sleep(4);
 
-    //UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Corsi Block Tapping Test" message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Corsi Block Tapping Test" message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
 
-    //UILabel *txtField = [[UILabel alloc] initWithFrame:CGRectMake(5,5,180,230)];
+    UILabel *txtField = [[UILabel alloc] initWithFrame:CGRectMake(5,5,180,230)];
     
-    //[txtField setFont:[UIFont fontWithName:@"Serifa-Roman" size:(16.0f)]];
+    [txtField setFont:[UIFont fontWithName:@"Serifa-Roman" size:(16.0f)]];
     
-    //txtField.numberOfLines = 9;
-    //txtField.textColor = [UIColor darkGrayColor];
-    //txtField.textAlignment = NSTextAlignmentCenter;
-    //txtField.text = @"To see details on how to \nuse this Application\n and adjust its settings, \nplease read the notes in \nthe 'Information' section \nin the Tab Bar.\n\nThis Application is NOT \nfor clinical use.";
-    //txtField.backgroundColor = [UIColor clearColor];
+    txtField.numberOfLines = 9;
+    txtField.textColor = [UIColor darkGrayColor];
+    txtField.textAlignment = NSTextAlignmentCenter;
+    txtField.text = @"To see details on how to \nuse this Application\n and adjust its settings, \nplease read the notes in \nthe 'Information' section \nin the Tab Bar.\n\nThis Application is NOT \nfor clinical use.";
+    txtField.backgroundColor = [UIColor clearColor];
     
-    //[alertView setValue:txtField forKeyPath:@"accessoryView"];//for ios 7 and above
+    [alertView setValue:txtField forKeyPath:@"accessoryView"];//for ios 7 and above
 
-    //[alertView show];
+    [alertView show];
 
     // set all labels to Serifa Font 24
 

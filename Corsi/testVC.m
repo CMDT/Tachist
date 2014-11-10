@@ -154,7 +154,7 @@
     for (int x=1; x<10; x++) {
         order[x]=[self make9order];
         reverse[x]=[self rev9Order:order[x]];
-        NSLog(@"Order returned for Set: %d is:%@, reverse:%@",x, order[x], reverse[x]);
+        //NSLog(@"Order returned for Set: %d is:%@, reverse:%@",x, order[x], reverse[x]);
     }
 }
 
@@ -222,7 +222,7 @@
     for (int x=1; x<10; x++) {
         order[x]=[self make9order];
         reverse[x]=[self rev9Order:order[x]];
-        NSLog(@"Order returned for Set: %d is:%@, reverse:%@",x, order[x], reverse[x]);
+        //NSLog(@"Order returned for Set: %d is:%@, reverse:%@",x, order[x], reverse[x]);
     }
     // don't bother, too difficult to do yet //[self rotAllBlocks];
 }
@@ -348,28 +348,28 @@
         mySingleton *singleton = [mySingleton sharedSingleton];
     NSString * testerEmail =[[alertView textFieldAtIndex:0] text];
     NSString * participant =[[alertView textFieldAtIndex:1] text];
-        NSLog(@"Tester Email    : %@", testerEmail);
-        NSLog(@"Participant     : %@", participant);
+        //NSLog(@"Tester Email    : %@", testerEmail);
+        //NSLog(@"Participant     : %@", participant);
 
     //test for blank names and details
     if ([testerEmail isEqualToString:@""]) {
         testerEmail=singleton.email;
     }
     if ([participant isEqualToString:@""]) {
-        testerEmail=singleton.subjectName;
+        testerEmail=singleton.oldSubjectName;
     }
 
     //update singleton
-    singleton.email=testerEmail;
-    singleton.subjectName=participant;
+    singleton.email          = testerEmail;
+    singleton.oldSubjectName = participant;
 
     //save to plist root
     NSString *pathStr = [[NSBundle mainBundle] bundlePath];
     NSString *settingsBundlePath = [pathStr stringByAppendingPathComponent:@"Settings.bundle"];
-    NSString *defaultPrefsFile = [settingsBundlePath stringByAppendingPathComponent:@"Root.plist"];
-    NSDictionary *defaultPrefs = [NSDictionary dictionaryWithContentsOfFile:defaultPrefsFile];
+    NSString *defaultPrefsFile   = [settingsBundlePath stringByAppendingPathComponent:@"Root.plist"];
+    NSDictionary *defaultPrefs   = [NSDictionary dictionaryWithContentsOfFile:defaultPrefsFile];
    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultPrefs];
-    NSUserDefaults *defaults    = [NSUserDefaults standardUserDefaults];
+    NSUserDefaults *defaults     = [NSUserDefaults standardUserDefaults];
     [[NSUserDefaults standardUserDefaults] synchronize];
     //email name
         [defaults setObject:testerEmail forKey:kEmail];
@@ -403,7 +403,7 @@
     if ([singleton.subjectName isEqualToString:@""]) {
         alertTextField2.placeholder = @"Participant Code";
     }else{
-        alertTextField2.placeholder = singleton.subjectName;
+        alertTextField2.placeholder = singleton.oldSubjectName;
     }
 
     [alert show];
@@ -1608,12 +1608,12 @@ self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage se
 
     tempString=[NSString stringWithFormat:@"Tester:     %@", singleton.testerName];
     [singleton.resultStringRows addObject:tempString];
-    tempString=[NSString stringWithFormat:@"Participant:%@", singleton.subjectName];
+    tempString=[NSString stringWithFormat:@"Participant:%@", singleton.oldSubjectName];
     [singleton.resultStringRows addObject:tempString];
 
     tempString2=[NSString stringWithFormat:@"Tester Name:       %@", singleton.testerName];
     [singleton.displayStringRows addObject:tempString2];
-    tempString2=[NSString stringWithFormat:@"Participant Code: %@", singleton.subjectName];
+    tempString2=[NSString stringWithFormat:@"Participant Code: %@", singleton.oldSubjectName];
     [singleton.displayStringRows addObject:tempString2];
 
     tempString=[NSString stringWithFormat:@""];
