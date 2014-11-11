@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 Manchester Metropolitan University - ESS - essmobile. All rights reserved.
 //
 
-
 @interface mySingleton : NSObject {
     // add all the objects that you want to be globally abailable here:
     
@@ -20,7 +19,7 @@
 
     int   start;
     int   finish;
-    long  segIndex;
+    long  segIndex;//for sound feedback
 
     float blockSize;
     float waitTime;
@@ -59,14 +58,14 @@
 }
 
 //eg::: @property (nonatomic) int  offset;
-@property (nonatomic, retain) UIColor *currentBackgroundColour;
-@property (nonatomic, retain) UIColor *currentShowColour;
-@property (nonatomic, retain) UIColor *currentBlockColour;
-@property (nonatomic, retain) UIColor *currentStatusColour;
+@property (nonatomic, retain) UIColor * currentBackgroundColour;
+@property (nonatomic, retain) UIColor * currentShowColour;
+@property (nonatomic, retain) UIColor * currentBlockColour;
+@property (nonatomic, retain) UIColor * currentStatusColour;
 
 @property (nonatomic) int       start;
 @property (nonatomic) int       finish;
-@property (nonatomic) NSString  *beepEffect;
+
 @property (nonatomic) long      segIndex;
 
 @property (nonatomic) float     blockSize;
@@ -82,28 +81,29 @@
 @property (nonatomic) BOOL      animals;
 @property (nonatomic) BOOL      sounds;
 
-@property (nonatomic,retain) NSString *oldSubjectName;
-@property (nonatomic,retain) NSString *subjectName;
-@property (nonatomic,retain) NSString *testerName;
-@property (nonatomic,retain) NSMutableArray *resultStringRows;
-@property (nonatomic,retain) NSMutableArray *displayStringRows;
-@property (nonatomic,retain) NSString *resultStrings;
-@property (nonatomic,retain) NSString *displayStrings;
-@property (nonatomic,retain) NSString *testDate;
-@property (nonatomic,retain) NSString *testTime;
-@property (nonatomic,retain) NSString *email;
+@property (nonatomic,retain) NSString * beepEffect;
+@property (nonatomic,retain) NSString * oldSubjectName;
+@property (nonatomic,retain) NSString * subjectName;
+@property (nonatomic,retain) NSString * testerName;
+@property (nonatomic,retain) NSMutableArray * resultStringRows;
+@property (nonatomic,retain) NSMutableArray * displayStringRows;
+@property (nonatomic,retain) NSString * resultStrings;
+@property (nonatomic,retain) NSString * displayStrings;
+@property (nonatomic,retain) NSString * testDate;
+@property (nonatomic,retain) NSString * testTime;
+@property (nonatomic,retain) NSString * email;
 
 @property (nonatomic) long double timerTime;
 
-@property (nonatomic, retain) UIView *bl1;
-@property (nonatomic, retain) UIView *bl2;
-@property (nonatomic, retain) UIView *bl3;
-@property (nonatomic, retain) UIView *bl4;
-@property (nonatomic, retain) UIView *bl5;
-@property (nonatomic, retain) UIView *bl6;
-@property (nonatomic, retain) UIView *bl7;
-@property (nonatomic, retain) UIView *bl8;
-@property (nonatomic, retain) UIView *bl9;
+@property (nonatomic, retain) UIView * bl1;
+@property (nonatomic, retain) UIView * bl2;
+@property (nonatomic, retain) UIView * bl3;
+@property (nonatomic, retain) UIView * bl4;
+@property (nonatomic, retain) UIView * bl5;
+@property (nonatomic, retain) UIView * bl6;
+@property (nonatomic, retain) UIView * bl7;
+@property (nonatomic, retain) UIView * bl8;
+@property (nonatomic, retain) UIView * bl9;
 
 //set up singleton shared
 

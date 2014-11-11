@@ -26,6 +26,7 @@
     BOOL isFinished;
     BOOL isCalculating;
     BOOL isAlertFinished;
+    BOOL isAborted;
     BOOL stageEnded;
     BOOL resultsSaved;
     BOOL infoShow;
@@ -130,7 +131,10 @@
 {
     [super viewDidLoad];
     stopTestNowBTN.hidden=YES;
+    MessageView.hidden=YES;
     mySingleton *singleton = [mySingleton sharedSingleton];
+    
+    isAborted=NO;
     
     //sound stuff
     backIsStarted=false;
@@ -381,6 +385,9 @@
 
 -(void)participantEntry{
     mySingleton *singleton = [mySingleton sharedSingleton];
+    //clear the underlying text message instructions
+    MessageTextView.hidden=YES;
+    
     //do a text input for the participant
     UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@""
                                                      message:@"Enter Tester Email and Participant Code"
@@ -413,6 +420,7 @@
     isAlertFinished=NO;
 
     [self participantEntry];
+    
     [self startTestPart2];
 }
 
@@ -422,13 +430,12 @@
 
     if (isAlertFinished) {
 
-    [self playMyEffect];
-
+        [self playMyEffect];//beep effect if on
 
     //blank out the tab bar during the test, no end until done now
     self.tabBarController.tabBar.hidden = YES;
     stopTestNowBTN.hidden=NO;
-    NSLog(@"Test has started");
+    //NSLog(@"Test has started");
     statusMessageLBL.text = @"The Test Has Started";
 
     startBTN.hidden   = YES;
@@ -443,8 +450,6 @@
     showTime    =[self delayShow];
     waitTime    =[self delayWait];
     messageTime =[self delayMessage];
-
-    //[self hide_blocks];
     
     [self hideInfo];
     
@@ -452,9 +457,9 @@
     
     //start the timer
     //[self.startDate = [NSDate date];
-        [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(boxInit) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(boxInit) userInfo:nil repeats:NO];
 
-    MessageView.hidden=NO;
+    //MessageView.hidden=NO;
     } else {
         //participant alert not yet finished, loop
         [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(startTestPart2) userInfo:nil repeats:NO];
@@ -591,7 +596,7 @@
 //
 
 -(void)viewWillAppear:(BOOL)animated{
-
+    //blank
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -605,14 +610,16 @@ self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage se
     
     MessageTextView.hidden=YES;
     [self initialiseBlocks];
+    isAborted=NO;
 
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     [self allButtonsBackgroundReset];
     //hide unhide labels, screens and buttons
 
-    startBTN.hidden  = NO;
-    headingLBL.hidden= NO;
+    startBTN.hidden   = NO;
+    headingLBL.hidden = NO;
+    isAborted         = NO;
 
     [self hideInfo];
 
@@ -629,22 +636,47 @@ self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage se
     MessageTextView.text=tempStartMessage;
     //MessageTextView.font=[UIFont fontWithName:@"Serifa-Roman" size:(14.0f)];
     //MessageTextView.textAlignment = UITextAlignmentCenter;
-    MessageTextView.hidden=NO;
-    MessageView.hidden=YES;
-    startBTN.hidden=NO;
+    MessageTextView.hidden = NO;
+    MessageView.hidden     = YES;
+    startBTN.hidden        = NO;
 
     //initialise images for messages on messageview
-    card[0] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_start3.png"]];
-    card[1] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_finish3.png"]];
+    card[0] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_start3.png"]];    //start
+    card[1] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_finish3.png"]];   //finish
     card[2] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-stage-start.png"]];
     card[3] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-stage-end.png"]];
-    card[4] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_calc3.png"]];
+    card[4] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_calc3.png"]];     //calculations
     card[5] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-touch-blocks2.png"]];
-    card[6] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_results3.png"]];
+    card[6] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_results3.png"]];  //results
+    card[7] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_cancelled.png"]]; //cancel message
+    card[8] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_blank.png"]];     //just a blank card
+    card[9] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_cubes.png"]];     //picture of some coloured blocks
 }
 
 -(IBAction)stopTestNow:(id)sender{
+    stopTestNowBTN.hidden=YES;
+    
+    //Calculate stats and outputs
+    [self buttonsDisable];
+    
+    isFinished         = YES;
+    MessageView.hidden = NO;
+    isCalculating      = YES;
+    isAborted          = YES;
+    [self hide_blocks];
+    [MessageView setImage: card[7].image];
+    [self animateMessageViewIN];
+    [self hideInfo];
     self.tabBarController.tabBar.hidden = NO;
+    
+//halt here, user selects new menu option to proceed
+    [MessageView setImage: card[7].image];
+    [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(abortWasPressed) userInfo:nil repeats:NO];
+}
+
+-(void)abortWasPressed{
+    //the end...
+    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(self) userInfo:nil repeats:NO];
 }
 
 //
@@ -759,8 +791,9 @@ self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage se
 }
 
 -(void)boxInit {
-    NSLog(@"box init");
-
+    stopTestNowBTN.hidden=NO;
+    //NSLog(@"box init");
+    if (!isAborted) {
     if (infoShow) {
         statusMessageLBL.text = @"Observe Blocks, Start of Test";
     }else{
@@ -793,9 +826,11 @@ self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage se
     
     [MessageView setImage: card[0].image];
     [NSTimer scheduledTimerWithTimeInterval:(messageTime*1.5) target:self selector:@selector(startTestMSG) userInfo:nil repeats:NO];
+    }
 }
 
 -(void)stageChecks {
+    if (!isAborted) {
     if (isFinished) { //definitely ended, to catch second round of checks
         [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(endTestMSG) userInfo:nil repeats:NO];
     }
@@ -833,6 +868,10 @@ self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage se
             }
             [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(box1) userInfo:nil repeats:NO];
         }
+    }
+    }else{
+        //aborted end
+        [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(box1) userInfo:nil repeats:NO];
     }
 }
 
@@ -984,7 +1023,7 @@ self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage se
 }
 
 -(void)waiting{
-    //do nothing, wiat for a new key press after flashing the button
+    //do nothing, wait for a new key press after flashing the button
 }
 
 -(IBAction)blk1BUT:(id)sender{
@@ -1209,7 +1248,7 @@ self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage se
     }else{
         statusMessageLBL.text = @"Recall";
     }
-    NSLog(@"Press The Blocks in Order");
+    //NSLog(@"Press The Blocks in Order");
    
     if((pressNo >= xcounter+1)&&(isFinished==YES)){
         [self buttonsDisable];
@@ -1221,7 +1260,7 @@ self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage se
 
 -(void)guessMSG {
     blkNoLBL.text = [NSString stringWithFormat:@"%i",0];
-    NSLog(@"Guess Now");
+    //NSLog(@"Guess Now");
 
         statusMessageLBL.text = @"";
 
@@ -1238,7 +1277,7 @@ self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage se
 
 -(void)stageEndMSG {
     [self buttonsDisable];
-    NSLog(@"Stage Ending");
+    //NSLog(@"Stage Ending");
     if (infoShow) {
         statusMessageLBL.text = @"";
     }else{
@@ -1249,7 +1288,7 @@ self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage se
 
 -(void)finalStageEndMSG {
     [self buttonsDisable];
-    NSLog(@"Final Stage Ending");
+    //NSLog(@"Final Stage Ending");
     isFinished=YES;
     if (infoShow) {
         statusMessageLBL.text = @"";
@@ -1261,7 +1300,7 @@ self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage se
 
 -(void)nextStageMSG {
     [self buttonsDisable];
-    NSLog(@"Stage Starting");
+    //NSLog(@"Stage Starting");
     if (infoShow) {
         statusMessageLBL.text = @"Observe the Blocks";
     }else{
@@ -1272,9 +1311,11 @@ self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage se
 }
 
 -(void)startTestMSG {
+    if (!isAborted) {
+
     //Start of Test Message
     [self buttonsDisable];
-    NSLog(@"Start Test");
+    //NSLog(@"Start Test");
 
     if (reverseTest) {
         if (infoShow) {
@@ -1294,6 +1335,7 @@ self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage se
     [self animateMessageView];
    
     [NSTimer scheduledTimerWithTimeInterval: 5 target:self selector:@selector(blankMSG2) userInfo:nil repeats:NO];
+    }
 }
 
 -(void)animateMessageView{
@@ -1314,7 +1356,7 @@ self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage se
                      }
                      completion:^(BOOL finished) {[NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(animateMessageViewOUT) userInfo:nil repeats:NO];
                                           }];
-    [UIView commitAnimations];
+    //[UIView commitAnimations];
     
 }
 
@@ -1335,11 +1377,13 @@ self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage se
                      completion:^(BOOL finished) {
                      }];
     
-    [UIView commitAnimations];
+    //[UIView commitAnimations];
     //[MessageView removeFromSuperview];
 }
 
 -(void)endTestMSG {
+    if (!isAborted) {
+
     //End of Test Message
     [self buttonsDisable];
     NSLog(@"End Test");
@@ -1356,10 +1400,15 @@ self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage se
     MessageView.hidden=NO;
     [self animateMessageView];
     [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(calculatingMSG) userInfo:nil repeats:NO];
+    }
 }
 
 -(void)calculatingMSG {
+    if (!isAborted) {
+
     //Calculate stats and outputs
+    if (!isAborted) {
+
     [self buttonsDisable];
     isFinished=YES;
     NSLog(@"Calculating Test Results");
@@ -1375,24 +1424,34 @@ self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage se
     [self animateMessageView];
 
     [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(calculations) userInfo:nil repeats:NO];
+    }
+    }
 }
 
 -(void)blankMSG {
+    if (!isAborted) {
+
     [self buttonsDisable];
     NSLog(@"(blankmsg)");
     MessageView.hidden=YES;
     [NSTimer scheduledTimerWithTimeInterval:waitTime target:self selector:@selector(stageChecks) userInfo:nil repeats:NO];
+    }
 }
 
 -(void)blankMSG2 {
+    if (!isAborted) {
+
     [self buttonsDisable];
     NSLog(@"(blankmsg2)");
     [self display_blocks];
     MessageView.hidden=YES;//maybe messagetime--v
     [NSTimer scheduledTimerWithTimeInterval:startTime target:self selector:@selector(box1) userInfo:nil repeats:NO];
+    }
 }
 
 -(void)jumpToResultsView {
+    if (!isAborted) {
+
     [self buttonsDisable];
     NSLog(@"(jumpToResultsView)");
     [self hide_blocks];
@@ -1407,9 +1466,12 @@ self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage se
     //jump to selector ResultsVC
     //[self.tabBarController setSelectedIndex:4]; needs to be able to jump as well
     //manual selection at present on tab bar
+    }
 }
 
 -(void)blankMSG3 {
+    if (!isAborted) {
+
     [self buttonsDisable];
     guessStr[xcounter-1]= [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@",guess[1],guess[2],guess[3],guess[4],guess[5],guess[6],guess[7],guess[8],guess[9]];
     [self statusUpdate:xcounter-1];
@@ -1423,6 +1485,7 @@ self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage se
         NSLog(@"(blank3 stagechecks)");
         statusMessageLBL.text = @"";
         [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(stageChecks) userInfo:nil repeats:NO];
+    }
     }
 }
 
@@ -1549,6 +1612,8 @@ self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage se
     return retStr;
 }
 -(void)calculations{
+    if (!isAborted) {
+
     mySingleton *singleton = [mySingleton sharedSingleton];
     NSLog(@"Calculations have started.");
 
@@ -1823,6 +1888,7 @@ self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage se
 
     //jump to the results page
     [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(jumpToResultsView) userInfo:nil repeats:NO];
+    }
 }
 
 -(void)setColours{

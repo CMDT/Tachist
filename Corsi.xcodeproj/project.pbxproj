@@ -32,13 +32,7 @@
 		9113B0101A02EDA5000088D6 /* test96blk@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9113AFF81A02EDA5000088D6 /* test96blk@3x.png */; };
 		9113B0111A02EDA5000088D6 /* test96blu@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9113AFF91A02EDA5000088D6 /* test96blu@3x.png */; };
 		914892B71A09627100687220 /* Serifa 55 Roman.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 914892B61A09627100687220 /* Serifa 55 Roman.ttf */; };
-		91530B5419BE55B300D2026B /* corsi_start.png in Resources */ = {isa = PBXBuildFile; fileRef = 91530B4F19BE55B300D2026B /* corsi_start.png */; };
-		91530B5519BE55B300D2026B /* corsi-calculating.png in Resources */ = {isa = PBXBuildFile; fileRef = 91530B5019BE55B300D2026B /* corsi-calculating.png */; };
-		91530B5619BE55B300D2026B /* corsi-finished.png in Resources */ = {isa = PBXBuildFile; fileRef = 91530B5119BE55B300D2026B /* corsi-finished.png */; };
-		91530B5719BE55B300D2026B /* corsi-stage-end.png in Resources */ = {isa = PBXBuildFile; fileRef = 91530B5219BE55B300D2026B /* corsi-stage-end.png */; };
-		91530B5819BE55B300D2026B /* corsi-stage-start.png in Resources */ = {isa = PBXBuildFile; fileRef = 91530B5319BE55B300D2026B /* corsi-stage-start.png */; };
 		918DCC841A0EC4F600412D58 /* corsiporpad.png in Resources */ = {isa = PBXBuildFile; fileRef = 918DCC831A0EC4F600412D58 /* corsiporpad.png */; };
-		91C10DB41A02F3A60014390A /* corsi-results.png in Resources */ = {isa = PBXBuildFile; fileRef = 91C10DB31A02F3A60014390A /* corsi-results.png */; };
 		91CCCCF819D77AE000C742B6 /* purple72.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CCCCF419D77AE000C742B6 /* purple72.png */; };
 		91CCCCF919D77AE000C742B6 /* lightgrey.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CCCCF519D77AE000C742B6 /* lightgrey.png */; };
 		91CCCCFA19D77AE000C742B6 /* darkgrey72.png in Resources */ = {isa = PBXBuildFile; fileRef = 91CCCCF619D77AE000C742B6 /* darkgrey72.png */; };
@@ -67,15 +61,13 @@
 		E12DE08D1A03B09100172B36 /* BEEPJAZZ.caf in Resources */ = {isa = PBXBuildFile; fileRef = E12DE0871A03B09100172B36 /* BEEPJAZZ.caf */; };
 		E12DE08E1A03B09100172B36 /* BEEPPURE.caf in Resources */ = {isa = PBXBuildFile; fileRef = E12DE0881A03B09100172B36 /* BEEPPURE.caf */; };
 		E12DE08F1A03B09100172B36 /* KLICK.caf in Resources */ = {isa = PBXBuildFile; fileRef = E12DE0891A03B09100172B36 /* KLICK.caf */; };
-		E17487C51A0BC61A0053C058 /* corsi_results2.png in Resources */ = {isa = PBXBuildFile; fileRef = E17487C01A0BC61A0053C058 /* corsi_results2.png */; };
-		E17487C61A0BC61A0053C058 /* corsi_calc2.png in Resources */ = {isa = PBXBuildFile; fileRef = E17487C11A0BC61A0053C058 /* corsi_calc2.png */; };
-		E17487C71A0BC61A0053C058 /* corsi_start2.png in Resources */ = {isa = PBXBuildFile; fileRef = E17487C21A0BC61A0053C058 /* corsi_start2.png */; };
-		E17487C81A0BC61A0053C058 /* corsi_finished2.png in Resources */ = {isa = PBXBuildFile; fileRef = E17487C31A0BC61A0053C058 /* corsi_finished2.png */; };
-		E17487C91A0BC61A0053C058 /* corsi-touch-blocks2.png in Resources */ = {isa = PBXBuildFile; fileRef = E17487C41A0BC61A0053C058 /* corsi-touch-blocks2.png */; };
 		E17487CE1A0BC7B80053C058 /* corsi_calc3.png in Resources */ = {isa = PBXBuildFile; fileRef = E17487CA1A0BC7B80053C058 /* corsi_calc3.png */; };
 		E17487CF1A0BC7B80053C058 /* corsi_finish3.png in Resources */ = {isa = PBXBuildFile; fileRef = E17487CB1A0BC7B80053C058 /* corsi_finish3.png */; };
 		E17487D01A0BC7B80053C058 /* corsi_start3.png in Resources */ = {isa = PBXBuildFile; fileRef = E17487CC1A0BC7B80053C058 /* corsi_start3.png */; };
 		E17487D11A0BC7B80053C058 /* corsi_results3.png in Resources */ = {isa = PBXBuildFile; fileRef = E17487CD1A0BC7B80053C058 /* corsi_results3.png */; };
+		E18485E51A124127002CFFD9 /* corsi_cubes.png in Resources */ = {isa = PBXBuildFile; fileRef = E18485E21A124127002CFFD9 /* corsi_cubes.png */; };
+		E18485E61A124127002CFFD9 /* corsi_blank.png in Resources */ = {isa = PBXBuildFile; fileRef = E18485E31A124127002CFFD9 /* corsi_blank.png */; };
+		E18485E71A124127002CFFD9 /* corsi_cancelled.png in Resources */ = {isa = PBXBuildFile; fileRef = E18485E41A124127002CFFD9 /* corsi_cancelled.png */; };
 		E1B29EC119B7532E005B9C84 /* black72.png in Resources */ = {isa = PBXBuildFile; fileRef = E1B29EB419B7532E005B9C84 /* black72.png */; };
 		E1B29EC219B7532E005B9C84 /* blue72.png in Resources */ = {isa = PBXBuildFile; fileRef = E1B29EB519B7532E005B9C84 /* blue72.png */; };
 		E1B29EC319B7532E005B9C84 /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = E1B29EB619B7532E005B9C84 /* check.png */; };
@@ -102,7 +94,6 @@
 		E1DAD7AE19B8A95000600608 /* testVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1DAD7AD19B8A95000600608 /* testVC.m */; };
 		E1DAD7B119B8A98800600608 /* resultsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1DAD7B019B8A98800600608 /* resultsVC.m */; };
 		E1DAD7B419B8A9A500600608 /* informationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1DAD7B319B8A9A500600608 /* informationVC.m */; };
-		E1FAECF019F7F0870098A243 /* corsi-touch-blocks.png in Resources */ = {isa = PBXBuildFile; fileRef = E1FAECEF19F7F0870098A243 /* corsi-touch-blocks.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -141,13 +132,7 @@
 		9113AFF81A02EDA5000088D6 /* test96blk@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "test96blk@3x.png"; sourceTree = "<group>"; };
 		9113AFF91A02EDA5000088D6 /* test96blu@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "test96blu@3x.png"; sourceTree = "<group>"; };
 		914892B61A09627100687220 /* Serifa 55 Roman.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Serifa 55 Roman.ttf"; sourceTree = "<group>"; };
-		91530B4F19BE55B300D2026B /* corsi_start.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = corsi_start.png; sourceTree = "<group>"; };
-		91530B5019BE55B300D2026B /* corsi-calculating.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "corsi-calculating.png"; sourceTree = "<group>"; };
-		91530B5119BE55B300D2026B /* corsi-finished.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "corsi-finished.png"; sourceTree = "<group>"; };
-		91530B5219BE55B300D2026B /* corsi-stage-end.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "corsi-stage-end.png"; sourceTree = "<group>"; };
-		91530B5319BE55B300D2026B /* corsi-stage-start.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "corsi-stage-start.png"; sourceTree = "<group>"; };
 		918DCC831A0EC4F600412D58 /* corsiporpad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = corsiporpad.png; path = Images.xcassets/LaunchImage.launchimage/corsiporpad.png; sourceTree = "<group>"; };
-		91C10DB31A02F3A60014390A /* corsi-results.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "corsi-results.png"; sourceTree = "<group>"; };
 		91CCCCF419D77AE000C742B6 /* purple72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = purple72.png; sourceTree = "<group>"; };
 		91CCCCF519D77AE000C742B6 /* lightgrey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lightgrey.png; sourceTree = "<group>"; };
 		91CCCCF619D77AE000C742B6 /* darkgrey72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = darkgrey72.png; sourceTree = "<group>"; };
@@ -184,15 +169,13 @@
 		E12DE0871A03B09100172B36 /* BEEPJAZZ.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BEEPJAZZ.caf; sourceTree = "<group>"; };
 		E12DE0881A03B09100172B36 /* BEEPPURE.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BEEPPURE.caf; sourceTree = "<group>"; };
 		E12DE0891A03B09100172B36 /* KLICK.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = KLICK.caf; sourceTree = "<group>"; };
-		E17487C01A0BC61A0053C058 /* corsi_results2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = corsi_results2.png; sourceTree = "<group>"; };
-		E17487C11A0BC61A0053C058 /* corsi_calc2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = corsi_calc2.png; sourceTree = "<group>"; };
-		E17487C21A0BC61A0053C058 /* corsi_start2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = corsi_start2.png; sourceTree = "<group>"; };
-		E17487C31A0BC61A0053C058 /* corsi_finished2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = corsi_finished2.png; sourceTree = "<group>"; };
-		E17487C41A0BC61A0053C058 /* corsi-touch-blocks2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "corsi-touch-blocks2.png"; sourceTree = "<group>"; };
 		E17487CA1A0BC7B80053C058 /* corsi_calc3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = corsi_calc3.png; sourceTree = "<group>"; };
 		E17487CB1A0BC7B80053C058 /* corsi_finish3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = corsi_finish3.png; sourceTree = "<group>"; };
 		E17487CC1A0BC7B80053C058 /* corsi_start3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = corsi_start3.png; sourceTree = "<group>"; };
 		E17487CD1A0BC7B80053C058 /* corsi_results3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = corsi_results3.png; sourceTree = "<group>"; };
+		E18485E21A124127002CFFD9 /* corsi_cubes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = corsi_cubes.png; sourceTree = "<group>"; };
+		E18485E31A124127002CFFD9 /* corsi_blank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = corsi_blank.png; sourceTree = "<group>"; };
+		E18485E41A124127002CFFD9 /* corsi_cancelled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = corsi_cancelled.png; sourceTree = "<group>"; };
 		E1B29EB419B7532E005B9C84 /* black72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = black72.png; sourceTree = "<group>"; };
 		E1B29EB519B7532E005B9C84 /* blue72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blue72.png; sourceTree = "<group>"; };
 		E1B29EB619B7532E005B9C84 /* check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check.png; sourceTree = "<group>"; };
@@ -227,7 +210,6 @@
 		E1DAD7B019B8A98800600608 /* resultsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = resultsVC.m; sourceTree = "<group>"; };
 		E1DAD7B219B8A9A500600608 /* informationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = informationVC.h; sourceTree = "<group>"; };
 		E1DAD7B319B8A9A500600608 /* informationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = informationVC.m; sourceTree = "<group>"; };
-		E1FAECEF19F7F0870098A243 /* corsi-touch-blocks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "corsi-touch-blocks.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -326,6 +308,9 @@
 		E10D016F19B6024F00D9E5F8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E18485E21A124127002CFFD9 /* corsi_cubes.png */,
+				E18485E31A124127002CFFD9 /* corsi_blank.png */,
+				E18485E41A124127002CFFD9 /* corsi_cancelled.png */,
 				918DCC831A0EC4F600412D58 /* corsiporpad.png */,
 				E17487CA1A0BC7B80053C058 /* corsi_calc3.png */,
 				E17487CB1A0BC7B80053C058 /* corsi_finish3.png */,
@@ -338,12 +323,6 @@
 				E12DE0871A03B09100172B36 /* BEEPJAZZ.caf */,
 				E12DE0881A03B09100172B36 /* BEEPPURE.caf */,
 				E12DE0891A03B09100172B36 /* KLICK.caf */,
-				91C10DB31A02F3A60014390A /* corsi-results.png */,
-				E17487C01A0BC61A0053C058 /* corsi_results2.png */,
-				E17487C11A0BC61A0053C058 /* corsi_calc2.png */,
-				E17487C21A0BC61A0053C058 /* corsi_start2.png */,
-				E17487C31A0BC61A0053C058 /* corsi_finished2.png */,
-				E17487C41A0BC61A0053C058 /* corsi-touch-blocks2.png */,
 				9113AFE21A02EDA5000088D6 /* information32blk.png */,
 				9113AFE31A02EDA5000088D6 /* information32blu.png */,
 				9113AFE41A02EDA5000088D6 /* information64blk@2x.png */,
@@ -373,12 +352,6 @@
 				91CCCCF519D77AE000C742B6 /* lightgrey.png */,
 				91CCCCF619D77AE000C742B6 /* darkgrey72.png */,
 				91CCCCF719D77AE000C742B6 /* brown72.png */,
-				91530B4F19BE55B300D2026B /* corsi_start.png */,
-				91530B5019BE55B300D2026B /* corsi-calculating.png */,
-				91530B5119BE55B300D2026B /* corsi-finished.png */,
-				91530B5219BE55B300D2026B /* corsi-stage-end.png */,
-				91530B5319BE55B300D2026B /* corsi-stage-start.png */,
-				E1FAECEF19F7F0870098A243 /* corsi-touch-blocks.png */,
 				E1DAD79819B87F8E00600608 /* email.png */,
 				E1DAD79919B87F8E00600608 /* email1@2x.png */,
 				E1DAD79A19B87F8E00600608 /* email2.png */,
@@ -502,18 +475,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E17487C91A0BC61A0053C058 /* corsi-touch-blocks2.png in Resources */,
 				91E2633D19D8914B005B2643 /* check72grey.png in Resources */,
 				91CCCCF819D77AE000C742B6 /* purple72.png in Resources */,
-				91530B5519BE55B300D2026B /* corsi-calculating.png in Resources */,
 				E12DE08C1A03B09100172B36 /* BEEPDOUB.caf in Resources */,
 				9113B0001A02EDA5000088D6 /* results32blk.png in Resources */,
-				91530B5619BE55B300D2026B /* corsi-finished.png in Resources */,
 				E1B29EC519B7532E005B9C84 /* corsi.png in Resources */,
 				9113B0071A02EDA5000088D6 /* settings32blu.png in Resources */,
+				E18485E71A124127002CFFD9 /* corsi_cancelled.png in Resources */,
 				E1DAD7A219B87F8E00600608 /* email2.png in Resources */,
 				E1B8888719B9E8BB006597C5 /* Settings.bundle in Resources */,
 				E1B29ECD19B7532E005B9C84 /* yellow72.png in Resources */,
+				E18485E61A124127002CFFD9 /* corsi_blank.png in Resources */,
 				9113B0091A02EDA5000088D6 /* settings64blu@2x.png in Resources */,
 				E1DAD7A119B87F8E00600608 /* email1@2x.png in Resources */,
 				E1B29EC719B7532E005B9C84 /* green72.png in Resources */,
@@ -522,14 +494,12 @@
 				E12DE08F1A03B09100172B36 /* KLICK.caf in Resources */,
 				914892B71A09627100687220 /* Serifa 55 Roman.ttf in Resources */,
 				9113B00B1A02EDA5000088D6 /* settings96blu@3x.png in Resources */,
-				91530B5719BE55B300D2026B /* corsi-stage-end.png in Resources */,
 				E12DE08A1A03B09100172B36 /* AMFMBEEP.caf in Resources */,
 				E1B29ECA19B7532E005B9C84 /* orange72.png in Resources */,
 				9113B0031A02EDA5000088D6 /* results64blu@2x.png in Resources */,
 				E17487CE1A0BC7B80053C058 /* corsi_calc3.png in Resources */,
 				9113B00C1A02EDA5000088D6 /* test32blk.png in Resources */,
 				9113B0111A02EDA5000088D6 /* test96blu@3x.png in Resources */,
-				91530B5819BE55B300D2026B /* corsi-stage-start.png in Resources */,
 				9113AFFE1A02EDA5000088D6 /* information96blk@3x.png in Resources */,
 				9113AFFC1A02EDA5000088D6 /* information64blk@2x.png in Resources */,
 				E10D018419B6024F00D9E5F8 /* Images.xcassets in Resources */,
@@ -537,7 +507,6 @@
 				9113B0081A02EDA5000088D6 /* settings64blk@2x.png in Resources */,
 				9113AFFA1A02EDA5000088D6 /* information32blk.png in Resources */,
 				9113B00D1A02EDA5000088D6 /* test32blu.png in Resources */,
-				E1FAECF019F7F0870098A243 /* corsi-touch-blocks.png in Resources */,
 				E17487D01A0BC7B80053C058 /* corsi_start3.png in Resources */,
 				E1DAD7A019B87F8E00600608 /* email.png in Resources */,
 				91CCCCFA19D77AE000C742B6 /* darkgrey72.png in Resources */,
@@ -552,25 +521,20 @@
 				9113B00F1A02EDA5000088D6 /* test64blu@2x.png in Resources */,
 				E10D017C19B6024F00D9E5F8 /* Main_iPhone.storyboard in Resources */,
 				E17487CF1A0BC7B80053C058 /* corsi_finish3.png in Resources */,
-				E17487C51A0BC61A0053C058 /* corsi_results2.png in Resources */,
 				E10D017319B6024F00D9E5F8 /* InfoPlist.strings in Resources */,
 				E1B29EC619B7532E005B9C84 /* cyan72.png in Resources */,
-				E17487C61A0BC61A0053C058 /* corsi_calc2.png in Resources */,
 				E1B29EC419B7532E005B9C84 /* checkbox.png in Resources */,
 				9113B0051A02EDA5000088D6 /* results96blu@3x.png in Resources */,
+				E18485E51A124127002CFFD9 /* corsi_cubes.png in Resources */,
 				918DCC841A0EC4F600412D58 /* corsiporpad.png in Resources */,
-				91C10DB41A02F3A60014390A /* corsi-results.png in Resources */,
 				9113B00A1A02EDA5000088D6 /* settings96blk@3x.png in Resources */,
 				9113AFFB1A02EDA5000088D6 /* information32blu.png in Resources */,
 				E12DE08B1A03B09100172B36 /* BEEP_FM.caf in Resources */,
 				9113AFFF1A02EDA5000088D6 /* information96blu@3x.png in Resources */,
 				E12DE08E1A03B09100172B36 /* BEEPPURE.caf in Resources */,
-				E17487C81A0BC61A0053C058 /* corsi_finished2.png in Resources */,
 				91CCCCF919D77AE000C742B6 /* lightgrey.png in Resources */,
-				91530B5419BE55B300D2026B /* corsi_start.png in Resources */,
 				9113AFFD1A02EDA5000088D6 /* information64blu@2x.png in Resources */,
 				9113B0061A02EDA5000088D6 /* settings32blk.png in Resources */,
-				E17487C71A0BC61A0053C058 /* corsi_start2.png in Resources */,
 				E1B29ECB19B7532E005B9C84 /* red72.png in Resources */,
 				9113B0021A02EDA5000088D6 /* results64blk@2x.png in Resources */,
 				91CCCCFB19D77AE000C742B6 /* brown72.png in Resources */,
