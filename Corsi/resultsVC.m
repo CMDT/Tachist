@@ -16,6 +16,8 @@
 @implementation resultsVC{
     //IBOutlet UITextView *resultsViewBorder;
     NSString *resultsTempString;
+    UILabel *titleLab;//title
+    UILabel *resultLab;//result
 }
 
 @synthesize
@@ -69,6 +71,9 @@
     resultsImage                    = [resultsImage     imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     resultsImageSel                 = [resultsImageSel  imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 
+    tableView.hidden=YES;
+    resultsTxtView.hidden=NO;
+    
     self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Results" image:resultsImage selectedImage: resultsImageSel];
     mySingleton *singleton = [mySingleton sharedSingleton];
 
@@ -111,8 +116,13 @@
     //check if data exists, if not, display the holding message
     if ([printString2 isEqualToString:@""]) {
         resultsTxtView.text  = resultsTempString;
+        tableView.hidden=YES;
+        resultsTxtView.hidden=NO;
+
     }else{
         resultsTxtView.text  = singleton.displayStrings;
+        tableView.hidden=NO;
+        resultsTxtView.hidden=YES;
     }
     //[self saveText];
     [self WriteToStringFile:[printString mutableCopy]];
@@ -146,9 +156,6 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
-    
-    
-
     // Configure the cell...
     //cell.textLabel.text = [arrItems objectAtIndex:indexPath.row];
     //old way when cell had no labels in it
@@ -156,19 +163,16 @@
     //  cell.textLabel.font = [UIFont systemFontOfSize:8.0];
     
     //new way with one long label for titles and one short one, starting jhalfway for the data
-    UILabel *titleLab = (UILabel *)[cell viewWithTag:100];
-    [titleLab setText:[singleton.displayStringRows objectAtIndex:indexPath.row]];
-    //UILabel *resultLab = (UILabel *)[cell viewWithTag:200];
-    //[resultLab setText:[singleton.displayStringRows objectAtIndex:indexPath.row]];
+    titleLab = (UILabel *)[cell viewWithTag:100];
+    [titleLab setText:[singleton.displayStringRows objectAtIndex:indexPath.row]];//title on left
+    resultLab = (UILabel *)[cell viewWithTag:200];
+    [resultLab setText:[singleton.displayStringRows objectAtIndex:indexPath.row]];//results on right (or none if heading
     
     //done in storyboard
     //[titleLab setFont: [UIFont fontWithName:@"Arial" size:12.0]];
     //[resultLab setFont: [UIFont fontWithName:@"Arial" size:9.0]];
     
-    
-    
     return cell;
-    
     
 /*
  //example of label and button populating a cell
@@ -188,25 +192,30 @@
 {
     //sets row heights
     if (indexPath.row == 0) {
-        return 25;//first row is for heading, hence bigger
+        return 35;//first row is for heading, hence bigger
     } else {
-        return 15;//all other rows
+        return 25;//all other rows
     }
 }
+
 - (void)tableView: (UITableView*)tableView
   willDisplayCell: (UITableViewCell*)cell
 forRowAtIndexPath: (NSIndexPath*)indexPath
 {
     if (indexPath.row==0) {
-        cell.backgroundColor = [UIColor colorWithRed: 1.0 green: 0.8 blue: 0.8 alpha: 1.0];
-        cell.textLabel.backgroundColor = [UIColor clearColor];
-        cell.detailTextLabel.backgroundColor = [UIColor clearColor];
+        //cell.backgroundColor = [UIColor colorWithRed: 1.0 green: 0.8 blue: 0.8 alpha: 1.0];
+        //cell.textLabel.backgroundColor = [UIColor clearColor];
+        //cell.detailTextLabel.backgroundColor = [UIColor clearColor];
+        titleLab.backgroundColor=[UIColor colorWithRed: 1.0 green: 0.8 blue: 0.8 alpha: 1.0];
+        resultLab.backgroundColor=[UIColor colorWithRed: 1.0 green: 0.8 blue: 0.8 alpha: 1.0];
     }else{
-    cell.backgroundColor = indexPath.row % 2
-    ? [UIColor colorWithRed: 1.0 green: 1.0 blue: 0.95 alpha: 0.9]
-    : [UIColor whiteColor];
-    cell.textLabel.backgroundColor = [UIColor clearColor];
-    cell.detailTextLabel.backgroundColor = [UIColor clearColor];
+    //cell.backgroundColor = indexPath.row % 2
+    //? [UIColor colorWithRed: 1.0 green: 1.0 blue: 0.95 alpha: 0.9]
+    //: [UIColor whiteColor];
+    //cell.textLabel.backgroundColor = [UIColor clearColor];
+    //cell.detailTextLabel.backgroundColor = [UIColor clearColor];
+        titleLab.backgroundColor=[UIColor colorWithRed: 1.0 green: 1.0 blue: 0.95 alpha: 0.9];
+        resultLab.backgroundColor=[UIColor colorWithRed: 1.0 green: 1.0 blue: 0.95 alpha: 0.9];
     }
 }
 

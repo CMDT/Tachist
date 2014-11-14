@@ -406,24 +406,25 @@
     }
     return revOrder;
 }
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     //an alert was detected, get the text filelds and update the singleton
         mySingleton *singleton = [mySingleton sharedSingleton];
-    NSString * testerEmail =[[alertView textFieldAtIndex:0] text];
-    NSString * participant =[[alertView textFieldAtIndex:1] text];
+    //NSString * testerEmail =[[alertView textFieldAtIndex:0] text];
+    NSString * participant =[[alertView textFieldAtIndex:0] text];//used to be 1 for dual entry, 0 for single
         //NSLog(@"Tester Email    : %@", testerEmail);
         //NSLog(@"Participant     : %@", participant);
 
     //test for blank names and details
-    if ([testerEmail isEqualToString:@""]) {
-        testerEmail=singleton.email;
-    }
+    //if ([testerEmail isEqualToString:@""]) {
+    //    testerEmail=singleton.email;
+    //}
     if ([participant isEqualToString:@""]) {
-        testerEmail=singleton.subjectName;
+        subjectName=singleton.subjectName;
     }
 
     //update singleton
-    singleton.email       = testerEmail;
+    //singleton.email       = testerEmail;
     singleton.subjectName = participant;
 
     //save to plist root
@@ -435,7 +436,7 @@
     NSUserDefaults *defaults     = [NSUserDefaults standardUserDefaults];
     [[NSUserDefaults standardUserDefaults] synchronize];
     //email name
-        [defaults setObject:testerEmail forKey:kEmail];
+        //[defaults setObject:testerEmail forKey:kEmail];
     //subject name
         [defaults setObject:participant forKey:kSubject];
 
@@ -448,21 +449,26 @@
     MessageTextView.hidden=YES;
     
     //do a text input for the participant
-    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@""
+    //two line alert
+    /*UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@""
                                                      message:@"Enter Tester Email and Participant Code"
                                                     delegate:self
                                            cancelButtonTitle:nil //@"Cancel"
+                                           otherButtonTitles:@"Continue", nil]; 
+     alert.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;*/
+    //one line alert
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@""
+                                                     message:@"Enter Participant Code For This Test"
+                                                    delegate:self
+                                           cancelButtonTitle:nil //@"Cancel"
                                            otherButtonTitles:@"Continue", nil];
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
 
-    alert.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;
+    //UITextField * alertTextField1 = [alert textFieldAtIndex:0];
+    //alertTextField1.keyboardType = UIKeyboardTypeEmailAddress;
+    //alertTextField1.placeholder = singleton.email;
 
-
-    UITextField * alertTextField1 = [alert textFieldAtIndex:0];
-    alertTextField1.keyboardType = UIKeyboardTypeEmailAddress;
-    alertTextField1.placeholder = singleton.email;
-
-
-    UITextField * alertTextField2 = [alert textFieldAtIndex:1];
+    UITextField * alertTextField2 = [alert textFieldAtIndex:0];//used to be 1 for dual entry, 0 for single
     alertTextField2.secureTextEntry = NO;
     alertTextField2.keyboardType = UIKeyboardTypeDefault;
     //if blank, add temp name, else add the current one
@@ -1791,13 +1797,13 @@
         //for order and guess
 
             tempString3 = [NSString stringWithFormat:@"%d", xx-2];
-            tempString4 = [NSString stringWithFormat:@" _ %d __  ", xx-2];
+            //tempString4 = [NSString stringWithFormat:@"%d", xx-2];
 
         ee=[order[xx] substringWithRange:NSMakeRange(0, xx)];
         ff=[guessStr[xx] substringWithRange:NSMakeRange(0, xx)];
 
         tempString = [NSString stringWithFormat:@"%@,%@,%@", tempString3, ee, ff];
-        tempString2 = [NSString stringWithFormat:@"%@  %@_%@",tempString4, ee, ff];
+        tempString2 = [NSString stringWithFormat:@"%@  %@_%@",tempString3, ee, ff];
         cor=0;
         wro=0;
         ans=@"";
