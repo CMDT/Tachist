@@ -1397,7 +1397,7 @@
     stopTestNowBTN.hidden=YES;
     isFinished=YES;
     if (infoShow) {
-        statusMessageLBL.text = @"The test has now finished.";
+        statusMessageLBL.text = @"The test has finished.";
     }else{
         statusMessageLBL.text = @"Finished";
     }
