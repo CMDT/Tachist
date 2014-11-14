@@ -209,14 +209,14 @@
     startBTN.hidden        = NO;
 
     //initialise images for messages on messageview
-    card[0] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_start3.png"]];    //start
-    card[1] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_finish3.png"]];   //finish
+    card[0] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"started.png"]];    //start
+    card[1] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"finished.png"]];   //finish
     card[2] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-stage-start.png"]];
     card[3] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-stage-end.png"]];
-    card[4] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_calc3.png"]];     //calculations
+    card[4] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"calculating.png"]];     //calculations
     card[5] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-touch-blocks2.png"]];
-    card[6] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_results3.png"]];  //results
-    card[7] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_cancelled.png"]]; //cancel message
+    card[6] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"results.png"]];  //results
+    card[7] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"cancelled.png"]]; //cancel message
     card[8] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_blank.png"]];     //just a blank card
     card[9] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_cubes.png"]];     //picture of some coloured blocks
 }
