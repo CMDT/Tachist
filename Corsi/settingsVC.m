@@ -637,6 +637,9 @@ emailLBL;
         [defaults setBool:singleton.sounds forKey:kSounds];
         [defaults setBool:singleton.onScreenInfo forKey:kInfo];
         [defaults setBool:singleton.forwardTestDirection forKey:kForward];
+        [defaults setObject:[NSString stringWithFormat:@"%@", singleton.subjectName] forKey:kSubject];
+        [defaults setObject:[NSString stringWithFormat:@"%@", singleton.email] forKey:kEmail];
+        [defaults setObject:[NSString stringWithFormat:@"%@", singleton.testerName] forKey:kTester];
         [defaults synchronize];//make sure all are updated
 }
 

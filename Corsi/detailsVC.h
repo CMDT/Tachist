@@ -12,6 +12,6 @@
 
 @property (strong, nonatomic) IBOutlet UITextField * testerNameTXT;
 @property (strong, nonatomic) IBOutlet UITextField * emailTXT;
-@property (strong, nonatomic) IBOutlet UITextField * particitantTXT;
+@property (strong, nonatomic) IBOutlet UITextField * participantTXT;
 
 @end

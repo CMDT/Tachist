@@ -22,7 +22,7 @@
 @synthesize
     emailTXT,
     testerNameTXT,
-    particitantTXT;
+    participantTXT;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -30,7 +30,7 @@
     //delegates for text filed entries
     emailTXT.delegate           = self;
     testerNameTXT.delegate      = self;
-    particitantTXT.delegate     = self;
+    participantTXT.delegate     = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,14 +47,13 @@
     NSDictionary *defaultPrefs      = [NSDictionary dictionaryWithContentsOfFile:defaultPrefsFile];
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaultPrefs];
     NSUserDefaults *defaults        = [NSUserDefaults standardUserDefaults];
-
-
+    [[NSUserDefaults standardUserDefaults] synchronize];
     //save the updated names to plist
     [defaults setObject:singleton.subjectName forKey:kSubject];
     [defaults setObject:singleton.testerName forKey:kTester];
     [defaults setObject:singleton.email forKey:kEmail];
 
-    [[NSUserDefaults standardUserDefaults] synchronize];
+
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -68,9 +67,9 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 
     //subject name
-    particitantTXT.text     = [defaults objectForKey:kSubject];
-    if([particitantTXT.text  isEqualToString: @ "" ]){
-        particitantTXT.text =  @"Participant";
+    participantTXT.text     = [defaults objectForKey:kSubject];
+    if([participantTXT.text  isEqualToString: @ "" ]){
+        participantTXT.text =  @"Participant";
         [defaults setObject:@"Participant" forKey:kSubject];
     }
     //tester name
@@ -109,8 +108,8 @@
         int oft=textField.frame.origin.y-190;
         [self keyBoardAppeared:oft];
     }
-    if(textField==self->particitantTXT){
-        particitantTXT.backgroundColor = [UIColor greenColor];
+    if(textField==self->participantTXT){
+        participantTXT.backgroundColor = [UIColor greenColor];
         textField.frame = CGRectMake(textField.frame.origin.x, (textField.frame.origin.y), textField.frame.size.width, textField.frame.size.height);
         int oft=textField.frame.origin.y-190;
         [self keyBoardAppeared:oft];
@@ -127,12 +126,12 @@
     mySingleton *singleton = [mySingleton sharedSingleton];
     //move the screen back to the original place
     [self keyBoardDisappeared:0];
-    particitantTXT.backgroundColor  = [UIColor whiteColor];
+    participantTXT.backgroundColor  = [UIColor whiteColor];
     testerNameTXT.backgroundColor   = [UIColor whiteColor];
     emailTXT.backgroundColor        = [UIColor whiteColor];
 
 
-    singleton.subjectName   = particitantTXT.text;
+    singleton.subjectName   = participantTXT.text;
     singleton.testerName    = testerNameTXT.text;
     singleton.email         = emailTXT.text;
 }

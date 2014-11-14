@@ -145,7 +145,14 @@
     mySingleton *singleton = [mySingleton sharedSingleton];
     // Return the number of rows in the section.
     //return [arrItems count];
-    return [singleton.displayStringRows count];
+    long a=[singleton.displayStringRows count];
+    long b=[singleton.displayStringTitles count];
+    //to stop exceeding past array bounds
+    if (a<b) {
+        return a;
+    }else{
+        return b;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView1 cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -164,7 +171,7 @@
     
     //new way with one long label for titles and one short one, starting jhalfway for the data
     titleLab = (UILabel *)[cell viewWithTag:100];
-    [titleLab setText:[singleton.displayStringRows objectAtIndex:indexPath.row]];//title on left
+    [titleLab setText:[singleton.displayStringTitles objectAtIndex:indexPath.row]];//title on left
     resultLab = (UILabel *)[cell viewWithTag:200];
     [resultLab setText:[singleton.displayStringRows objectAtIndex:indexPath.row]];//results on right (or none if heading
     

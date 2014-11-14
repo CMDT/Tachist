@@ -1484,14 +1484,14 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wsi-gV-R4V" id="Xld-YH-dVK">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CIQ-zK-fnX" userLabel="title Label">
-                                                    <rect key="frame" x="8" y="-4" width="272" height="35"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.89999999999999991" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CIQ-zK-fnX" userLabel="title Label">
+                                                    <rect key="frame" x="8" y="1" width="174" height="34"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="200" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YK8-xK-DoW" userLabel="results Label">
-                                                    <rect key="frame" x="142" y="-4" width="138" height="35"/>
+                                                    <rect key="frame" x="181" y="1" width="99" height="34"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1534,7 +1534,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WqZ-kI-dxD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-251" y="-690"/>
+            <point key="canvasLocation" x="-251" y="-699"/>
         </scene>
         <!--CorsiTabController-->
         <scene sceneID="sw2-hC-uGP">
@@ -1970,7 +1970,7 @@ The Participant is also able to be set at the start of each test session.</strin
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="emailTXT" destination="02u-QU-jzB" id="nA6-aV-wRO"/>
-                        <outlet property="particitantTXT" destination="HcB-np-kN5" id="W2t-0C-II2"/>
+                        <outlet property="participantTXT" destination="HcB-np-kN5" id="zQZ-N6-zbf"/>
                         <outlet property="testerNameTXT" destination="69b-pW-mRS" id="tqq-yo-aRm"/>
                     </connections>
                 </viewController>
@@ -2001,6 +2001,6 @@ The Participant is also able to be set at the start of each test session.</strin
         <image name="yellow72.png" width="72" height="72"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="4QY-bk-59h"/>
+        <segue reference="RjO-h2-VtH"/>
     </inferredMetricsTieBreakers>
 </document>

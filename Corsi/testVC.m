@@ -493,7 +493,6 @@
     }else{
         alertTextField2.placeholder = singleton.subjectName;
     }
-
     [alert show];
 }
 
@@ -1700,32 +1699,54 @@
     NSString * ff;
 
     //headers
+        //l1
     tempString=[NSString stringWithFormat:@"Corsi Block Tapping Test Results"];
-    [singleton.resultStringRows addObject: tempString];
-    [singleton.displayStringRows addObject: tempString];
+        [singleton.resultStringRows addObject: tempString];//csv
 
+        [singleton.displayStringTitles addObject:tempString ];//title
+        [singleton.displayStringRows addObject: @""];//data
+        
+        //l2
     tempString=[NSString stringWithFormat:@""];
         //[singleton.displayStringRows addObject:tempString];
     [singleton.resultStringRows addObject:tempString];
+
+        //l3
+    tempString  = @"Date:";
+
+    tempString2 =[NSString stringWithFormat:@"%@", singleton.testDate];
+    [singleton.displayStringTitles addObject:tempString ];//title
+    [singleton.displayStringRows addObject: tempString2];//data
+
+    tempString2=[NSString stringWithFormat:@"%@", singleton.testTime];
+    tempString  = @"Time:";
+    [singleton.displayStringTitles addObject:tempString ];//title
+    [singleton.displayStringRows addObject: tempString2];//data
 
     tempString=[NSString stringWithFormat:@"Date: %@, Time: %@", singleton.testDate, singleton.testTime];
-    tempString2=[NSString stringWithFormat:@"Test Date: %@, Test Time: %@", singleton.testDate, singleton.testTime];
     [singleton.resultStringRows addObject:tempString];
-    [singleton.displayStringRows addObject:tempString2];
+
+        //l4
+        //[singleton.displayStringRows addObject:tempString2];
 
     tempString=[NSString stringWithFormat:@""];
         //[singleton.displayStringRows addObject:tempString];
     [singleton.resultStringRows addObject:tempString];
 
+        //l5
     tempString=[NSString stringWithFormat:@"Tester:     %@", singleton.testerName];
     [singleton.resultStringRows addObject:tempString];
+
     tempString=[NSString stringWithFormat:@"Participant:%@", singleton.subjectName];
     [singleton.resultStringRows addObject:tempString];
 
-    tempString2=[NSString stringWithFormat:@"Tester Name:       %@", singleton.testerName];
+    tempString2=[NSString stringWithFormat:@"%@", singleton.testerName];
     [singleton.displayStringRows addObject:tempString2];
-    tempString2=[NSString stringWithFormat:@"Participant Code: %@", singleton.subjectName];
+        [singleton.displayStringTitles addObject:@"Tester Name:"];
+    tempString2=[NSString stringWithFormat:@"%@", singleton.subjectName];
     [singleton.displayStringRows addObject:tempString2];
+[singleton.displayStringTitles addObject:@"Participant Code:"];
+
 
     tempString=[NSString stringWithFormat:@""];
         //[singleton.displayStringRows addObject:tempString];
