@@ -719,7 +719,7 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,set
     }
     
     //for testing what is written, can be rem'd out later
-    NSLog(@"Loading from PLIST... sending to singleton");
+    //NSLog(@"Loading from PLIST... sending to singleton");
     singleton.testerName              = [defaults  objectForKey:kTester];
     singleton.subjectName             = [defaults  objectForKey:kSubject];
     singleton.email                   = [defaults  objectForKey:kEmail];
@@ -812,7 +812,6 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,set
                          CGAffineTransform rotateTrans8 = CGAffineTransformMakeRotation(angle[8] * M_PI / 180);
                          CGAffineTransform rotateTrans9 = CGAffineTransformMakeRotation(angle[9] * M_PI / 180);
 
-
                          block1View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans1);
                          block2View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans2);
                          block3View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans3);
@@ -845,7 +844,7 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,set
     if (singleton.animals) {
         //draw an animal picture in the view
         int ani[22];
-        NSLog(@"start");
+        //NSLog(@"start");
         for (int b=0; b<22; b++) {
             ani[b]=b;
         }

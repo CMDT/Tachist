@@ -162,6 +162,60 @@
     }
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    UIImage *testImage      = [UIImage imageNamed:@"test.png"];
+    UIImage *testImageSel   = [UIImage imageNamed:@"testSel.png"];
+    testImage               = [testImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    testImageSel            = [testImageSel imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    self.tabBarItem         = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage selectedImage: testImageSel];
+
+    self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage selectedImage: testImageSel];
+
+    MessageTextView.hidden=YES;
+    [self initialiseBlocks];
+    isAborted=NO;
+
+    mySingleton *singleton = [mySingleton sharedSingleton];
+
+    [self allButtonsBackgroundReset];
+    //hide unhide labels, screens and buttons
+
+    startBTN.hidden   = NO;
+    headingLBL.hidden = NO;
+    isAborted         = NO;
+
+    [self hideInfo];
+
+    testViewerView.backgroundColor=singleton.currentBackgroundColour;
+    currentBackgroundColour = singleton.currentBackgroundColour;
+    currentBlockColour      = singleton.currentBlockColour;
+    currentShowColour       = singleton.currentShowColour;
+    currentStatusColour     = singleton.currentStatusColour;
+
+    [self setColours];
+
+    tempStartMessage=@"You will be shown a sequence of blocks, observe the order when prompted, \n and recall the sequence when prompted. \n\nThe test will proceed until all the sections are completed.\n\nYou will exit the test if you select any other tab menu item during the test.\n\nOnly completed tests are valid and available for analysis or email.";
+
+    MessageTextView.text=tempStartMessage;
+    //MessageTextView.font=[UIFont fontWithName:@"Serifa-Roman" size:(14.0f)];
+    //MessageTextView.textAlignment = UITextAlignmentCenter;
+    MessageTextView.hidden = NO;
+    MessageView.hidden     = YES;
+    startBTN.hidden        = NO;
+
+    //initialise images for messages on messageview
+    card[0] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_start3.png"]];    //start
+    card[1] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_finish3.png"]];   //finish
+    card[2] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-stage-start.png"]];
+    card[3] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-stage-end.png"]];
+    card[4] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_calc3.png"]];     //calculations
+    card[5] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-touch-blocks2.png"]];
+    card[6] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_results3.png"]];  //results
+    card[7] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_cancelled.png"]]; //cancel message
+    card[8] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_blank.png"]];     //just a blank card
+    card[9] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_cubes.png"]];     //picture of some coloured blocks
+}
+
 -(void)startStop{
     //toggle the background sounds on/off
     if (backIsStarted) {
@@ -235,10 +289,10 @@
     if (animals) {
         //draw an animal picture in the view
         int ani[22];
-        NSLog(@"start");
+        //NSLog(@"start");
         for (int b=0; b<22; b++) {
             ani[b]=b;
-            NSLog(@"animal:%d", ani[b]);
+            //NSLog(@"animal:%d", ani[b]);
         }
         int temp=0;
         int tt=0;
@@ -248,11 +302,11 @@
             ani[tt-1]=ani[tt];
             ani[tt]=temp;
         }
-        NSLog(@"mix");
+        //NSLog(@"mix");
         for (int b=0; b<22; b++) {
-            NSLog(@"animal:%d", ani[b]);
+            //NSLog(@"animal:%d", ani[b]);
         }
-        NSLog(@"end");
+        //NSLog(@"end");
         box1image.image = [self getAnimal:ani[1]];
         box2image.image = [self getAnimal:ani[3]];
         box3image.image = [self getAnimal:ani[5]];
@@ -360,12 +414,12 @@
         testerEmail=singleton.email;
     }
     if ([participant isEqualToString:@""]) {
-        testerEmail=singleton.oldSubjectName;
+        testerEmail=singleton.subjectName;
     }
 
     //update singleton
-    singleton.email          = testerEmail;
-    singleton.oldSubjectName = participant;
+    singleton.email       = testerEmail;
+    singleton.subjectName = participant;
 
     //save to plist root
     NSString *pathStr = [[NSBundle mainBundle] bundlePath];
@@ -404,13 +458,13 @@
 
 
     UITextField * alertTextField2 = [alert textFieldAtIndex:1];
-    alertTextField2.secureTextEntry=NO;
+    alertTextField2.secureTextEntry = NO;
     alertTextField2.keyboardType = UIKeyboardTypeDefault;
     //if blank, add temp name, else add the current one
     if ([singleton.subjectName isEqualToString:@""]) {
         alertTextField2.placeholder = @"Participant Code";
     }else{
-        alertTextField2.placeholder = singleton.oldSubjectName;
+        alertTextField2.placeholder = singleton.subjectName;
     }
 
     [alert show];
@@ -594,64 +648,6 @@
     // Dispose of any resources that can be recreated.
 }
 //
-
--(void)viewWillAppear:(BOOL)animated{
-    //blank
-}
-
--(void)viewDidAppear:(BOOL)animated{
-UIImage *testImage      = [UIImage imageNamed:@"test.png"];
-UIImage *testImageSel   = [UIImage imageNamed:@"testSel.png"];
-testImage               = [testImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-testImageSel            = [testImageSel imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-self.tabBarItem         = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage selectedImage: testImageSel];
-
-self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage selectedImage: testImageSel];
-    
-    MessageTextView.hidden=YES;
-    [self initialiseBlocks];
-    isAborted=NO;
-
-    mySingleton *singleton = [mySingleton sharedSingleton];
-
-    [self allButtonsBackgroundReset];
-    //hide unhide labels, screens and buttons
-
-    startBTN.hidden   = NO;
-    headingLBL.hidden = NO;
-    isAborted         = NO;
-
-    [self hideInfo];
-
-    testViewerView.backgroundColor=singleton.currentBackgroundColour;
-    currentBackgroundColour = singleton.currentBackgroundColour;
-    currentBlockColour      = singleton.currentBlockColour;
-    currentShowColour       = singleton.currentShowColour;
-    currentStatusColour     = singleton.currentStatusColour;
-    
-    [self setColours];
-    
-    tempStartMessage=@"You will be shown a sequence of blocks, observe the order when prompted, \n and recall the sequence when prompted. \n\nThe test will proceed until all the sections are completed.\n\nYou will exit the test if you select any other tab menu item during the test.\n\nOnly completed tests are valid and available for analysis or email.";
-    
-    MessageTextView.text=tempStartMessage;
-    //MessageTextView.font=[UIFont fontWithName:@"Serifa-Roman" size:(14.0f)];
-    //MessageTextView.textAlignment = UITextAlignmentCenter;
-    MessageTextView.hidden = NO;
-    MessageView.hidden     = YES;
-    startBTN.hidden        = NO;
-
-    //initialise images for messages on messageview
-    card[0] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_start3.png"]];    //start
-    card[1] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_finish3.png"]];   //finish
-    card[2] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-stage-start.png"]];
-    card[3] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-stage-end.png"]];
-    card[4] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_calc3.png"]];     //calculations
-    card[5] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-touch-blocks2.png"]];
-    card[6] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_results3.png"]];  //results
-    card[7] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_cancelled.png"]]; //cancel message
-    card[8] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_blank.png"]];     //just a blank card
-    card[9] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_cubes.png"]];     //picture of some coloured blocks
-}
 
 -(IBAction)stopTestNow:(id)sender{
     stopTestNowBTN.hidden=YES;
@@ -1630,7 +1626,7 @@ self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage se
 
     NSLog(@"Results array cleared, new results ready..");
     
-    NSLog(@"String 1 was:%@, your guess:%@",order[1],guessStr[1]);
+   /* NSLog(@"String 1 was:%@, your guess:%@",order[1],guessStr[1]);
     NSLog(@"String 2 was:%@, your guess:%@",order[2],guessStr[2]);
     NSLog(@"String 3 was:%@, your guess:%@",order[3],guessStr[3]);
     NSLog(@"String 4 was:%@, your guess:%@",order[4],guessStr[4]);
@@ -1638,7 +1634,7 @@ self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage se
     NSLog(@"String 6 was:%@, your guess:%@",order[6],guessStr[6]);
     NSLog(@"String 7 was:%@, your guess:%@",order[7],guessStr[7]);
     NSLog(@"String 8 was:%@, your guess:%@",order[8],guessStr[8]);
-    NSLog(@"String 9 was:%@, your guess:%@",order[9],guessStr[9]);
+    NSLog(@"String 9 was:%@, your guess:%@",order[9],guessStr[9]);*/
 
     NSString * tempString;
     NSString * tempString2;
@@ -1659,7 +1655,7 @@ self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage se
     [singleton.displayStringRows addObject: tempString];
 
     tempString=[NSString stringWithFormat:@""];
-    [singleton.displayStringRows addObject:tempString];
+        //[singleton.displayStringRows addObject:tempString];
     [singleton.resultStringRows addObject:tempString];
 
     tempString=[NSString stringWithFormat:@"Date: %@, Time: %@", singleton.testDate, singleton.testTime];
@@ -1668,21 +1664,21 @@ self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage se
     [singleton.displayStringRows addObject:tempString2];
 
     tempString=[NSString stringWithFormat:@""];
-    [singleton.displayStringRows addObject:tempString];
+        //[singleton.displayStringRows addObject:tempString];
     [singleton.resultStringRows addObject:tempString];
 
     tempString=[NSString stringWithFormat:@"Tester:     %@", singleton.testerName];
     [singleton.resultStringRows addObject:tempString];
-    tempString=[NSString stringWithFormat:@"Participant:%@", singleton.oldSubjectName];
+    tempString=[NSString stringWithFormat:@"Participant:%@", singleton.subjectName];
     [singleton.resultStringRows addObject:tempString];
 
     tempString2=[NSString stringWithFormat:@"Tester Name:       %@", singleton.testerName];
     [singleton.displayStringRows addObject:tempString2];
-    tempString2=[NSString stringWithFormat:@"Participant Code: %@", singleton.oldSubjectName];
+    tempString2=[NSString stringWithFormat:@"Participant Code: %@", singleton.subjectName];
     [singleton.displayStringRows addObject:tempString2];
 
     tempString=[NSString stringWithFormat:@""];
-    [singleton.displayStringRows addObject:tempString];
+        //[singleton.displayStringRows addObject:tempString];
     [singleton.resultStringRows addObject:tempString];
 
     tempString=[NSString stringWithFormat:@"Message Time: %2.0f ms",singleton.startTime];
@@ -1760,7 +1756,7 @@ self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage se
 
     tempString=[NSString stringWithFormat:@""];
     [singleton.resultStringRows addObject:tempString];
-    [singleton.displayStringRows addObject:tempString];
+        //[singleton.displayStringRows addObject:tempString];
 
 
     tempString=[NSString stringWithFormat:@"(1 = correct number in correct sequence, 0 = wrong number in sequence)"];
@@ -1768,7 +1764,7 @@ self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage se
     [singleton.resultStringRows addObject:tempString];
 
     tempString=[NSString stringWithFormat:@""];
-    [singleton.displayStringRows addObject:tempString];
+        //[singleton.displayStringRows addObject:tempString];
     [singleton.resultStringRows addObject:tempString];
 
 
@@ -1788,15 +1784,15 @@ self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage se
             order[xx]=[order[xx] stringByAppendingString:@"xxx"];
             guessStr[xx]=[guessStr[xx] stringByAppendingString:@"xxx"];
         //for order and guess
-        if (xx<finish){
-            tempString3 = [NSString stringWithFormat:@"%d", xx-2];
+
+            tempString3 = [NSString stringWithFormat:@"%d,", xx-2];
             tempString4 = [NSString stringWithFormat:@" _ %d __  ", xx-2];
-        }
+
         ee=[order[xx] substringWithRange:NSMakeRange(0, xx)];
         ff=[guessStr[xx] substringWithRange:NSMakeRange(0, xx)];
 
-        tempString = [NSString stringWithFormat:@"%@,%@,%@", ee, ff,tempString3];
-        tempString2 = [NSString stringWithFormat:@"%@ _ %@_%@",ee, ff,tempString4];
+        tempString = [NSString stringWithFormat:@"%@,%@,%@", tempString3, ee, ff];
+        tempString2 = [NSString stringWithFormat:@"%@ _ %@_%@",tempString4, ee, ff];
         cor=0;
         wro=0;
         ans=@"";
@@ -1812,8 +1808,8 @@ self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage se
 
 
             //get the character at a position in the strings
-            ee=[order[xx] substringWithRange:NSMakeRange(q, 1)];
-            ff=[guessStr[xx] substringWithRange:NSMakeRange(q, 1)];
+            ee = [order[xx] substringWithRange:NSMakeRange(q, 1)];
+            ff = [guessStr[xx] substringWithRange:NSMakeRange(q, 1)];
             
             //check for same digits in order and guess and count
             if ([ee isEqualToString: ff]) {
@@ -1847,13 +1843,13 @@ self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage se
         //blankline
         tempString=[NSString stringWithFormat:@""];
         [singleton.resultStringRows addObject:tempString];
-        [singleton.displayStringRows addObject:tempString];
+        //[singleton.displayStringRows addObject:tempString];
 
     }
     //blankline
     tempString=[NSString stringWithFormat:@""];
     [singleton.resultStringRows addObject:tempString];
-    [singleton.displayStringRows addObject:tempString];
+        //[singleton.displayStringRows addObject:tempString];
 
     //put final totals
     tempString=[NSString stringWithFormat:@"Total Possible = %d", totcor+totwro];
@@ -1862,7 +1858,7 @@ self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage se
     //blankline
     tempString=[NSString stringWithFormat:@""];
     [singleton.resultStringRows addObject:tempString];
-    [singleton.displayStringRows addObject:tempString];
+        //[singleton.displayStringRows addObject:tempString];
 
     tempString=[NSString stringWithFormat:@"Total Correct = %d, Total Wrong = %d",totcor, totwro];
     [singleton.resultStringRows addObject:tempString];
@@ -1871,7 +1867,7 @@ self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage se
     //end of results save
     tempString=[NSString stringWithFormat:@""];
     [singleton.resultStringRows addObject:tempString];
-    [singleton.displayStringRows addObject:tempString];
+        //[singleton.displayStringRows addObject:tempString];
 
     //end
     tempString=[NSString stringWithFormat:@"End of Corsi Test Results"];

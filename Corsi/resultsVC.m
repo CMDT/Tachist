@@ -32,7 +32,8 @@
     filename,
     filepath,
     emaillbl,
-    title
+    tableView,
+    arrItems //  temp array of itmes for results display
 ;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -51,7 +52,15 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     //default message in view text box
-
+    arrItems = [[NSMutableArray alloc] initWithObjects:
+                @"Item 1",
+                @"Item 2",
+                @"Item 3",
+                @"Item 4",
+                @"Item 5",
+                @"Item six",
+                nil
+                ];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -115,6 +124,63 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    // Return the number of sections.
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    mySingleton *singleton = [mySingleton sharedSingleton];
+    // Return the number of rows in the section.
+    //return [arrItems count];
+    return [singleton.displayStringRows count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView1 cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    mySingleton *singleton = [mySingleton sharedSingleton];
+    static NSString *cellIdentifier = @"Cell";
+    UITableViewCell *cell = [tableView1 dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    cell.textLabel.font = [UIFont systemFontOfSize:8.0];
+
+
+    // Configure the cell...
+    //cell.textLabel.text = [arrItems objectAtIndex:indexPath.row];
+    cell.textLabel.text = [singleton.displayStringRows objectAtIndex:indexPath.row];
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //sets row heights
+    if (indexPath.row == 0) {
+        return 25;//first row is for heading, hence bigger
+    } else {
+        return 15;//all other rows
+    }
+}
+- (void)tableView: (UITableView*)tableView
+  willDisplayCell: (UITableViewCell*)cell
+forRowAtIndexPath: (NSIndexPath*)indexPath
+{
+    if (indexPath.row==0) {
+        cell.backgroundColor = [UIColor colorWithRed: 1.0 green: 0.8 blue: 0.8 alpha: 1.0];
+        cell.textLabel.backgroundColor = [UIColor clearColor];
+        cell.detailTextLabel.backgroundColor = [UIColor clearColor];
+    }else{
+    cell.backgroundColor = indexPath.row % 2
+    ? [UIColor colorWithRed: 1.0 green: 1.0 blue: 0.95 alpha: 0.9]
+    : [UIColor whiteColor];
+    cell.textLabel.backgroundColor = [UIColor clearColor];
+    cell.detailTextLabel.backgroundColor = [UIColor clearColor];
+    }
+}
+
 -(NSString *) setFilename{
     mySingleton *singleton = [mySingleton sharedSingleton];
     NSString *extn = @"csv";
@@ -132,7 +198,7 @@
     return docsDir;
 }
 
-/*Create a new file*/
+/* Create a new file */
 -(void)WriteToStringFile:(NSMutableString *)textToWrite{
     mySingleton *singleton = [mySingleton sharedSingleton];
     //int trynumber = 0;
@@ -151,7 +217,7 @@
     //BOOL fileExists = TRUE;
     
     
-    //singleton.subjectName = [singleton.oldSubjectName stringByAppendingString: [NSString stringWithFormat:@"_%@_%i",[self getCurrentDateTimeAsNSString], trynumber]];
+    //singleton.subjectName = [singleton.olsSubjectName stringByAppendingString: [NSString stringWithFormat:@"_%@_%i",[self getCurrentDateTimeAsNSString], trynumber]];
     //[self WriteToStringFile:textToWrite];
     //    }
     //else
@@ -159,7 +225,7 @@
     //not exists, write
     //BOOL fileExists = FALSE;
     
-    singleton.subjectName = [singleton.subjectName stringByAppendingString: [NSString stringWithFormat:@"_%@",[self getCurrentDateTimeAsNSString]]];
+    singleton.oldSubjectName = [singleton.subjectName stringByAppendingString: [NSString stringWithFormat:@"_%@",[self getCurrentDateTimeAsNSString]]];
     
     //}
     //
@@ -239,7 +305,7 @@
     singleton.testTime=[self getCurrentTime];
 
     NSString *emailTitle = [NSString stringWithFormat:@"Corsi App Data: %@",singleton.oldSubjectName];
-    NSString *messageBody = [NSString stringWithFormat:@"The test data for the subject:%@ taken at the date: %@ and time: %@, is attached as a text/csv file.\n\nThe file is comma separated variable, csv extension.\n\nThe data can be read by MS-Excel, then analysed by your own functions.\n\nThe screen Data follows, the attached file is formatted for MS-Excel as a CSV \n\n%@.\n\nSent by Corsi App.",singleton.oldSubjectName, singleton.testDate, singleton.testTime, singleton.displayStrings];
+    NSString *messageBody = [NSString stringWithFormat:@"The test data for the subject:%@ taken at the date: %@ and time: %@, is attached as a text/csv file.\n\nThe file is comma separated variable, csv extension.\n\nThe data can be read by MS-Excel, then analysed by your own functions.\n\nThe screen Data follows, the attached file is formatted for MS-Excel as a CSV \n\n%@.\n\nSent by Corsi App.",singleton.subjectName, singleton.testDate, singleton.testTime, singleton.displayStrings];
     
     //NSArray  *toRecipents = [NSArray arrayWithObject:@"j.a.howell@mmu.ac.uk"];//testing only
     NSArray  *toRecipents = [NSArray arrayWithObject:singleton.email];

@@ -182,7 +182,8 @@ blockWaitTimeTXT.text=[NSString stringWithFormat:@"%0.0f", (float)temp];
                          self.view.frame = CGRectMake(frame.origin.x, -oft, frame.size.width, frame.size.height);
                      }
                      completion:^(BOOL finished){
-                     }];
+                     }
+     ];
 }
 
 -(void) keyBoardDisappeared :(int)oft
@@ -197,7 +198,8 @@ blockWaitTimeTXT.text=[NSString stringWithFormat:@"%0.0f", (float)temp];
                          self.view.frame = CGRectMake(frame.origin.x, oft, frame.size.width, frame.size.height);
                      }
                      completion:^(BOOL finished){
-                     }];
+                     }
+     ];
     blockStartDelaySLD.value = [blockStartDelayTXT.text intValue];
     blockWaitTimeSLD.value = [blockWaitTimeTXT.text intValue];
     blockShowTimeSLD.value = [blockShowTimeTXT.text intValue];

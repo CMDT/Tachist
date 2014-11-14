@@ -7,9 +7,12 @@
 //
 
 #import "AppDelegate.h"
-#import "TestFlight.h"
+//#import "TestFlight.h"
+#import "resultsVC.h"
 
-@implementation AppDelegate
+@implementation AppDelegate{
+    NSMutableArray *_players;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -39,6 +42,7 @@
     [alertView setValue:txtField forKeyPath:@"accessoryView"];//for ios 7 and above
 
     [alertView show];
+    
 
     // set all labels to Serifa Font 24
 

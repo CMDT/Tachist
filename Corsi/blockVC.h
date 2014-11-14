@@ -43,4 +43,5 @@
 @property (weak, nonatomic) IBOutlet UISwitch *blockRotateSWT;
 @property (weak, nonatomic) IBOutlet UISwitch *animalsSWT;
 @property (weak, nonatomic) IBOutlet UISwitch *soundsSWT;
+
 @end

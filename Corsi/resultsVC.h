@@ -37,14 +37,18 @@ IBOutlet UITextView    * resultsTxtView;
 @property(nonatomic,retain) NSString      * filepath;
 
 //dates
-@property (nonatomic, copy) NSDate * startDate;
-@property (nonatomic, copy) NSDate * testDate;
+@property (nonatomic, copy) NSDate        * startDate;
+@property (nonatomic, copy) NSDate        * testDate;
 
-@property (nonatomic, strong) IBOutlet UILabel    * datelbl;
-@property (nonatomic, strong) IBOutlet UILabel    * timelbl;
-@property (nonatomic, strong) IBOutlet UILabel    * emaillbl;
-@property (nonatomic, strong) IBOutlet UILabel    * subjectlbl;
-@property (nonatomic, strong) UITextView  * resultsTxtView;
+@property (nonatomic, strong) IBOutlet UILabel     * datelbl;
+@property (nonatomic, strong) IBOutlet UILabel     * timelbl;
+@property (nonatomic, strong) IBOutlet UILabel     * emaillbl;
+@property (nonatomic, strong) IBOutlet UILabel     * subjectlbl;
+@property (nonatomic, strong) UITextView           * resultsTxtView;
+@property (strong, nonatomic) IBOutlet UITableView * tableView;
+
+//array for table - test only
+@property (nonatomic,strong) NSMutableArray *arrItems;
 
 -(IBAction)showEmail:(id)sender;
 //-(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *) error;
