@@ -16,6 +16,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *canvasLBL;
 @property (strong, nonatomic) IBOutlet UILabel *blockLBL;
 @property (strong, nonatomic) IBOutlet UILabel *showLBL;
+@property (strong, nonatomic) IBOutlet UILabel *testerLBL;
+@property (strong, nonatomic) IBOutlet UILabel *emailLBL;
 
 @property (strong, nonatomic) IBOutlet UILabel *blockSizeLBL;
 @property (strong, nonatomic) IBOutlet UILabel *blockStartNumLBL;

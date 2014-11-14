@@ -181,6 +181,22 @@
     isAborted=NO;
 
     mySingleton *singleton = [mySingleton sharedSingleton];
+    //plist defaults
+    NSString *pathStr               = [[NSBundle mainBundle] bundlePath];
+    NSString *settingsBundlePath    = [pathStr stringByAppendingPathComponent:@"Settings.bundle"];
+    NSString *defaultPrefsFile      = [settingsBundlePath stringByAppendingPathComponent:@"Root.plist"];
+    NSDictionary *defaultPrefs      = [NSDictionary dictionaryWithContentsOfFile:defaultPrefsFile];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultPrefs];
+    NSUserDefaults *defaults        = [NSUserDefaults standardUserDefaults];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    //subject name
+    subjectName     = [defaults objectForKey:kSubject];
+    if(subjectName  == nil ){
+        subjectName =  @"Participant";
+        [defaults setObject:@"Participant" forKey:kSubject];
+        singleton.subjectName=subjectName;
+
+    }
 
     [self allButtonsBackgroundReset];
     //hide unhide labels, screens and buttons
@@ -191,11 +207,11 @@
 
     [self hideInfo];
 
-    testViewerView.backgroundColor=singleton.currentBackgroundColour;
-    currentBackgroundColour = singleton.currentBackgroundColour;
-    currentBlockColour      = singleton.currentBlockColour;
-    currentShowColour       = singleton.currentShowColour;
-    currentStatusColour     = singleton.currentStatusColour;
+    testViewerView.backgroundColor  = singleton.currentBackgroundColour;
+    currentBackgroundColour         = singleton.currentBackgroundColour;
+    currentBlockColour              = singleton.currentBlockColour;
+    currentShowColour               = singleton.currentShowColour;
+    currentStatusColour             = singleton.currentStatusColour;
 
     [self setColours];
 
@@ -215,7 +231,7 @@
     card[3] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-stage-end.png"]];
     card[4] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"calculating.png"]];     //calculations
     card[5] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-touch-blocks2.png"]];
-    card[6] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"results.png"]];  //results
+    card[6] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"mresults.png"]];  //results
     card[7] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"cancelled.png"]]; //cancel message
     card[8] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_blank.png"]];     //just a blank card
     card[9] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_cubes.png"]];     //picture of some coloured blocks
@@ -907,6 +923,8 @@
 }
 
 -(void)box1 {
+    if (!isAborted) {
+
     //block button inputs for now, re-enable after stage end.
     [self buttonsDisable];
     
@@ -966,13 +984,17 @@
             break;
     }
     [NSTimer scheduledTimerWithTimeInterval:showTime target:self selector:@selector(but1) userInfo:nil repeats:NO];
+    }
 }
 
 -(void)but1 {
+    if (!isAborted) {
+
     [self buttonsDisable];
     //clears the block, waits and then sends to check to see if any end, stage or flag is passed
     [self allButtonsBackgroundReset];// background colour reset to std
     [NSTimer scheduledTimerWithTimeInterval:waitTime target:self selector:@selector(stageChecks) userInfo:nil repeats:NO];
+    }
 }
 
 -(void)allButtonsBackgroundReset {
@@ -1225,6 +1247,8 @@
 }
 
 -(void)getGuesses {
+    if (!isAborted) {
+
     [self buttonsEnable];
     blkNoLBL.text = [NSString stringWithFormat:@"%i",0];
     //turns on the buttons, collects the xcounter guesses, forms a string, saves it and carries on with next stage
@@ -1244,9 +1268,11 @@
     }else{
         [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(self) userInfo:nil repeats:NO];
     }
+    }
 }
 
 -(void)getFinalGuesses {
+    if (!isAborted) {
     [self buttonsEnable];
     blkNoLBL.text = [NSString stringWithFormat:@"%i",0];
     //turns on the buttons, collects the xcounter guesses, forms a string, saves it and carries on with next stage
@@ -1263,26 +1289,32 @@
     }else{
         [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(self) userInfo:nil repeats:NO];
     }
+    }
 }
 
 -(void)guessMSG {
+    if (!isAborted) {
     blkNoLBL.text = [NSString stringWithFormat:@"%i",0];
     //NSLog(@"Guess Now");
 
         statusMessageLBL.text = @"";
 
     [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(getGuesses) userInfo:nil repeats:NO];
+    }
 }
 
 -(void)finalGuessMSG {
+    if (!isAborted) {
         blkNoLBL.text = [NSString stringWithFormat:@"%i",0];
 
         statusMessageLBL.text = @"";
 
     [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(getFinalGuesses) userInfo:nil repeats:NO];
+    }
 }
 
 -(void)stageEndMSG {
+    if (!isAborted) {
     [self buttonsDisable];
     //NSLog(@"Stage Ending");
     if (infoShow) {
@@ -1291,9 +1323,11 @@
         statusMessageLBL.text = @"";
     }
     [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(guessMSG) userInfo:nil repeats:NO];
+    }
 }
 
 -(void)finalStageEndMSG {
+    if (!isAborted) {
     [self buttonsDisable];
     //NSLog(@"Final Stage Ending");
     isFinished=YES;
@@ -1303,9 +1337,11 @@
         statusMessageLBL.text = @"";
     }
     [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(finalGuessMSG) userInfo:nil repeats:NO];
+    }
 }
 
 -(void)nextStageMSG {
+    if (!isAborted) {
     [self buttonsDisable];
     //NSLog(@"Stage Starting");
     if (infoShow) {
@@ -1315,6 +1351,7 @@
     }
     pressNo=0;
     [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(blankMSG) userInfo:nil repeats:NO];
+    }
 }
 
 -(void)startTestMSG {
@@ -1582,6 +1619,7 @@
 }
 
 -(void)updateBlockColours{
+    if (!isAborted) {
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     currentBlockColour     = singleton.currentBlockColour;
@@ -1599,6 +1637,7 @@
     self.box7image.backgroundColor=currentBlockColour;
     self.box8image.backgroundColor=currentBlockColour;
     self.box9image.backgroundColor=currentBlockColour;
+    }
 }
 
 -(NSString*)getCurrentDate{
@@ -1650,7 +1689,7 @@
     NSString * tempString;
     NSString * tempString2;
     NSString * tempString3;
-    NSString * tempString4;
+        //NSString * tempString4;
 
     int cor;
     int wro;

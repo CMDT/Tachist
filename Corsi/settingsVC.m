@@ -88,12 +88,34 @@
     NSArray *totalCorrect;
 }
 
-@synthesize showLBL,blockLBL,canvasLBL;
-
-@synthesize block1View,block2View,block3View,block4View,block5View;
-@synthesize block6View,block7View,block8View,block9View,settingsViewerVIEW;
-@synthesize blockSizeLBL,blockFinishNumLBL,blockStartNumLBL,blockShowLBL,
-blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,settingsVC;
+@synthesize
+showLBL,
+blockLBL,
+canvasLBL,
+block1View,
+block2View,
+block3View,
+block4View,
+block5View,
+block6View,
+block7View,
+block8View,
+block9View,
+settingsViewerVIEW,
+blockSizeLBL,
+blockFinishNumLBL,
+blockStartNumLBL,
+blockShowLBL,
+blockStartLBL,
+blockWaitLBL,
+forwardLBL,
+rotateLBL,
+infoLBL,
+animalsLBL,
+soundsLBL,
+settingsVC,
+testerLBL,
+emailLBL;
 
 -(void)viewDidAppear:(BOOL)animated{
     //assign images to tab bar items
@@ -103,6 +125,21 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,set
     settingsImageSel    = [settingsImageSel imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Settings" image:settingsImage selectedImage: settingsImageSel];
     mySingleton *singleton = [mySingleton sharedSingleton];
+
+    NSString * pathStr               = [[NSBundle mainBundle] bundlePath];
+    NSString * settingsBundlePath    = [pathStr stringByAppendingPathComponent:@"Settings.bundle"];
+    NSString * defaultPrefsFile      = [settingsBundlePath stringByAppendingPathComponent:@"Root.plist"];
+    NSDictionary * defaultPrefs      = [NSDictionary dictionaryWithContentsOfFile:defaultPrefsFile];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultPrefs];
+    NSUserDefaults *defaults        = [NSUserDefaults standardUserDefaults];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
+    singleton.testerName              = [defaults  objectForKey:kTester];
+    singleton.subjectName             = [defaults  objectForKey:kSubject];
+    singleton.email                   = [defaults  objectForKey:kEmail];
+
+    emailLBL.text   = singleton.email;
+    testerLBL.text  = singleton.testerName;
 
     [showLBL setBackgroundColor:singleton.currentShowColour];
     [block5View setBackgroundColor:singleton.currentShowColour];
@@ -169,13 +206,28 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,set
     blockShowLBL.text  = [[NSString alloc]initWithFormat:@"%i",showTime];
     blockWaitLBL.text  = [[NSString alloc]initWithFormat:@"%i",waitTime];
 
+    testerLBL.text=singleton.testerName;
+    emailLBL.text=singleton.email;
+    
     [self putBlocksInPlace];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    mySingleton *singleton = [mySingleton sharedSingleton];
 	// Do any additional setup after loading the view, typically from a nib.
+    NSString * pathStr               = [[NSBundle mainBundle] bundlePath];
+    NSString * settingsBundlePath    = [pathStr stringByAppendingPathComponent:@"Settings.bundle"];
+    NSString * defaultPrefsFile      = [settingsBundlePath stringByAppendingPathComponent:@"Root.plist"];
+    NSDictionary * defaultPrefs      = [NSDictionary dictionaryWithContentsOfFile:defaultPrefsFile];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultPrefs];
+    NSUserDefaults *defaults        = [NSUserDefaults standardUserDefaults];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
+    singleton.testerName              = [defaults  objectForKey:kTester];
+    singleton.subjectName             = [defaults  objectForKey:kSubject];
+    singleton.email                   = [defaults  objectForKey:kEmail];
 }
 
 - (void)didReceiveMemoryWarning
@@ -856,12 +908,6 @@ blockStartLBL,blockWaitLBL,forwardLBL,rotateLBL,infoLBL,animalsLBL,soundsLBL,set
             ani[tt-1]=ani[tt];
             ani[tt]=temp;
         }
-        
-        //NSLog(@"mix");
-        //for (int b=0; b<22; b++) {
-            //NSLog(@"animal:%d", ani[b]);
-        //}
-        
         block1View.image = [self getAnimal:ani[1]];
         block2View.image = [self getAnimal:ani[3]];
         block3View.image = [self getAnimal:ani[5]];
