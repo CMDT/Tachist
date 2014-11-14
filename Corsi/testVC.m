@@ -15,14 +15,38 @@
 
 @interface testVC ()
 {
-    NSNumber *box[10];
-    UIImageView *card[11];
     int startcounter;
     int finishcounter;
     int stageCounter;
     int xcounter;
     int ncounter;
+    int xAdj[10];
+    int yAdj[10];
+    int angle[10];
+    int total;
+    int score;
+    int pressNo;
+    int testNo;
+    int timingCalc;
+    int reply1;
+    int start;
+    int finish;
     
+    long tm;
+    
+    float waitTime;
+    float startTime;
+    float showTime;
+    float messageTime;
+    float blockSize1;
+    float percent;
+    float flash2;
+    
+    Float32 testTime[7][12];
+    Float32 testTimer[7][12];
+    Float32 timeGuess[7][12];
+    
+    BOOL analysisFlag;
     BOOL isFinished;
     BOOL isCalculating;
     BOOL isAlertFinished;
@@ -31,16 +55,9 @@
     BOOL resultsSaved;
     BOOL infoShow;
     BOOL reverseTest;
-    float blockSize1;
     BOOL rotateBlocks;
     BOOL animals;
-    
-    int xAdj[10];
-    int yAdj[10];
-    int angle[10];
-    int total;
-    float percent;
-    float flash2;
+
     NSString *order[12];
     NSString *guess[12];
     NSString *reverse[12];
@@ -49,38 +66,26 @@
     NSString *email;
     NSString *testerName;
     NSString *tempStartMessage;
-    int score;
-    int pressNo;
     NSString *orderStr[12];
     NSString *reverseStr[12];
     NSString *guessStr[12];
     NSString *correct[12];
-    Float32 testTime[7][12];
-    Float32 testTimer[7][12];
-    int testNo;
-    int timingCalc;
-    int reply1;
-    long tm;
-    BOOL analysisFlag;
-    Float32 timeGuess[7][12];
-    int start;
-    int finish;
-    float waitTime;
-    float startTime;
-    float showTime;
-    float messageTime;
 
     UIColor *currentBlockColour;
     UIColor *currentShowColour;
     UIColor *currentBackgroundColour;
     UIColor *currentStatusColour;
+    
+    NSNumber *box[10];
+    
+    UIImageView *card[11];
+    
     NSArray *totalCorrect;
 }
 @end
 
 @implementation testVC
 @synthesize
-    box1iv,
     backgroundMusicPlayer, //for sounds
     blkLBL,
     blkNoLBL,
@@ -1643,11 +1648,11 @@
 
     int cor;
     int wro;
-    int totcor=0;
-    int totwro=0;
+    int totcor = 0;
+    int totwro = 0;
 
-    NSString *ee;
-    NSString *ff;
+    NSString * ee;
+    NSString * ff;
 
     //headers
     tempString=[NSString stringWithFormat:@"Corsi Block Tapping Test Results"];
@@ -1769,7 +1774,7 @@
 
 
     tempString=[NSString stringWithFormat:@"Test No,Sequence,Response,1,2,3,4,5,6,7,8,9,Correct,Wrong"];
-    tempString2=[NSString stringWithFormat:@"Test No                 _ 1_ 2_ 3_ 4_ 5_ 6_ 7_ 8_ 9_ C_ W"];
+    tempString2=[NSString stringWithFormat:@"Test No                  1 2 3_ 4_ 5_ 6_ 7_ 8_ 9_ C_ W"];
     [singleton.resultStringRows addObject:tempString];
     [singleton.displayStringRows addObject:tempString2];
 
@@ -1785,14 +1790,14 @@
             guessStr[xx]=[guessStr[xx] stringByAppendingString:@"xxx"];
         //for order and guess
 
-            tempString3 = [NSString stringWithFormat:@"%d,", xx-2];
+            tempString3 = [NSString stringWithFormat:@"%d", xx-2];
             tempString4 = [NSString stringWithFormat:@" _ %d __  ", xx-2];
 
         ee=[order[xx] substringWithRange:NSMakeRange(0, xx)];
         ff=[guessStr[xx] substringWithRange:NSMakeRange(0, xx)];
 
         tempString = [NSString stringWithFormat:@"%@,%@,%@", tempString3, ee, ff];
-        tempString2 = [NSString stringWithFormat:@"%@ _ %@_%@",tempString4, ee, ff];
+        tempString2 = [NSString stringWithFormat:@"%@  %@_%@",tempString4, ee, ff];
         cor=0;
         wro=0;
         ans=@"";

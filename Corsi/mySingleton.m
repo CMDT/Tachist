@@ -21,15 +21,6 @@ static mySingleton * sharedSingleton = nil;
             currentBackgroundColour,
             currentStatusColour,
             blockSize,
-            bl1,
-            bl2,
-            bl3,
-            bl4,
-            bl5,
-            bl6,
-            bl7,
-            bl8,
-            bl9,
             showTime,
             start,
             startTime,
@@ -42,8 +33,9 @@ static mySingleton * sharedSingleton = nil;
             testerName,
             testDate,
             testTime,
-            resultStrings,
-            resultStringRows,
+            resultStrings,//string
+            resultStringRows,//array
+
             email,
             forwardTestDirection,
             blockRotation,
@@ -51,9 +43,14 @@ static mySingleton * sharedSingleton = nil;
             animals,
             sounds,
             beepEffect,
-            displayStringRows,
-            displayStrings,
-            segIndex;
+
+            displayStrings,//result item
+            displayStringRows,//array
+            
+            displayStringsTitle,//result title
+            displayStringTitles,//array
+
+            segIndex;//sounds
 
 #pragma mark -
 #pragma mark Singleton Methods
@@ -75,36 +72,38 @@ static mySingleton * sharedSingleton = nil;
 
 - (id) init {
     if(self = [super init]) {
+        //only runs if no data or first run to give default values
         
         //eg:::       offset=30;
         
-    currentBackgroundColour = [UIColor blackColor];
-        currentBlockColour  = [UIColor darkGrayColor];
-        currentShowColour   = [UIColor orangeColor];
-        currentStatusColour = [UIColor yellowColor];
-        start               = 3;
-        finish              = 9;
-        blockSize           = 40.00;
-        blockSize           = 30.00;
-        waitTime            = 1500;
-        startTime           = 1500;
-        showTime            = 600;
-        messageTime         = 2000; //for on screen instructions and messages in time interval delay
-        timerTime           = 0.0;
-        blockRotation       = YES;
-        onScreenInfo        = YES;
-        animals             = NO;
-        sounds              = NO;
-        beepEffect          = @"KLICK";
-        segIndex            = 0;
+    currentBackgroundColour  = [UIColor blackColor];
+        currentBlockColour   = [UIColor darkGrayColor];
+        currentShowColour    = [UIColor orangeColor];
+        currentStatusColour  = [UIColor yellowColor];
+        start                = 3;
+        finish               = 9;
+        blockSize            = 40.00;
+        blockSize            = 30.00;
+        waitTime             = 1500;
+        startTime            = 1500;
+        showTime             = 600;
+        messageTime          = 2000; //for on screen instructions and messages in time interval delay
+        timerTime            = 0.0;
+        blockRotation        = YES;
+        onScreenInfo         = YES;
+        animals              = NO;
+        sounds               = NO;
+        beepEffect           = @"KLICK";
+        segIndex             = 0;
         forwardTestDirection = YES;
-        oldSubjectName      = @"Participant 1";
-        subjectName         = @"Participant 1";
-        resultStrings       = @"";
-        displayStrings      = @"";
-        resultStringRows    = [[NSMutableArray alloc]initWithObjects: nil];
-        displayStringRows   = [[NSMutableArray alloc]initWithObjects: nil];
-        email               = @"test@test.com";
+        oldSubjectName       = @"Participant 1";
+        subjectName          = @"Participant 1";
+        resultStrings        = @"";
+        displayStrings       = @"";
+        resultStringRows     = [[NSMutableArray alloc]initWithObjects: nil];//clear the arrays of any data
+        displayStringRows    = [[NSMutableArray alloc]initWithObjects: nil];
+        displayStringTitles  = [[NSMutableArray alloc]initWithObjects: nil];
+        email                = @"test@test.com";
         }
     return self;
 }

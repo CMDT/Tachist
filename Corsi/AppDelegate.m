@@ -11,7 +11,7 @@
 #import "resultsVC.h"
 
 @implementation AppDelegate{
-    NSMutableArray *_players;
+    
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions

@@ -146,13 +146,42 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
-    cell.textLabel.font = [UIFont systemFontOfSize:8.0];
-
+    
+    
 
     // Configure the cell...
     //cell.textLabel.text = [arrItems objectAtIndex:indexPath.row];
-    cell.textLabel.text = [singleton.displayStringRows objectAtIndex:indexPath.row];
+    //old way when cell had no labels in it
+    //  cell.textLabel.text = [singleton.displayStringRows objectAtIndex:indexPath.row];
+    //  cell.textLabel.font = [UIFont systemFontOfSize:8.0];
+    
+    //new way with one long label for titles and one short one, starting jhalfway for the data
+    UILabel *titleLab = (UILabel *)[cell viewWithTag:100];
+    [titleLab setText:[singleton.displayStringRows objectAtIndex:indexPath.row]];
+    //UILabel *resultLab = (UILabel *)[cell viewWithTag:200];
+    //[resultLab setText:[singleton.displayStringRows objectAtIndex:indexPath.row]];
+    
+    //done in storyboard
+    //[titleLab setFont: [UIFont fontWithName:@"Arial" size:12.0]];
+    //[resultLab setFont: [UIFont fontWithName:@"Arial" size:9.0]];
+    
+    
+    
     return cell;
+    
+    
+/*
+ //example of label and button populating a cell
+ - (UITableViewCell *)tableView: (UITableView *)tableView cellForRowAtIndexPath: (NSIndexPath *)indexPath { 
+ UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"tvcItems"]; 
+ UILabel *lblName = (UILabel *)[cell viewWithTag:100]; 
+ [lblName setText:[maTheData objectAtIndex:[indexPath row]]]; 
+ UIButton *btnName = (UIButton *)[cell viewWithTag:200]; 
+ [btnName setTitle:[maTheData objectAtIndex:[indexPath row]] forState:UIControlStateNormal]; 
+ return cell; 
+ } -
+ 
+ */
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

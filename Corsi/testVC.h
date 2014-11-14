@@ -15,11 +15,6 @@
     AVAudioPlayer *backgroundMusicPlayer;
     BOOL backIsStarted;
 }
--(void)startStop;
--(void)setVolumeValue;
--(void)playMyEffect;
--(NSString*)getCurrentDate;
--(NSString*)getCurrentTime;
 
 @property (nonatomic, retain) AVAudioPlayer        * backgroundMusicPlayer;
 @property (retain, nonatomic) IBOutlet UILabel     * headingLBL;
@@ -55,7 +50,6 @@
 @property (strong, nonatomic) IBOutlet UIButton * startBTN;
 
 //images for the boxes
-@property (strong, nonatomic) IBOutlet UIImageView   * box1iv;
 @property (strong, nonatomic) IBOutlet UIImageView   * box1image;
 @property (strong, nonatomic) IBOutlet UIImageView   * box2image;
 @property (strong, nonatomic) IBOutlet UIImageView   * box3image;
@@ -67,7 +61,6 @@
 @property (strong, nonatomic) IBOutlet UIImageView   * box9image;
 
 @property (strong, nonatomic) IBOutlet UIView  * testViewerView;
-@property (strong, nonatomic) IBOutlet UIView  * tabBar;
 
 @property (nonatomic) float scaleFactor;
 
@@ -84,30 +77,25 @@
 -(IBAction)blk8BUT:(id)sender;
 -(IBAction)blk9BUT:(id)sender;
 
--(void)display_blocks;
--(void)hide_blocks;
--(void)showInfo;
--(void)hideInfo;
--(void)awakeFromNib;
--(void)putAnimals;
-//-(void)getAnimals;
 -(float) delayDelay;
 -(float) delayWait;
 -(float) delayShow;
 -(float) random9;
--(int) random22;
 
+-(UIImage*)getAnimal:(int)animalNo;
+
+-(NSString*)getCurrentDate;
+-(NSString*)getCurrentTime;
 -(NSString*) make9order;
 -(NSString*) rev9Order:(NSString*)forOrder;
 
+-(int) random22;
 -(int) whichBlock: (int) number :(int) stage;
+
 -(void)allButtonsBackgroundReset;
-
 -(void)box1;
-
 -(void)jumpToResultsView;
 -(void)but1;
-//-(void)setBlockOrigins;
 -(void)nextStageMSG;
 -(void)stageEndMSG;
 -(void)endTestMSG;
@@ -119,7 +107,15 @@
 -(void)buttonsEnable;
 -(void)buttonsDisable;
 -(int)randomPt;
--(UIImage*)getAnimal:(int)animalNo;
 -(void)setColours;
+-(void)display_blocks;
+-(void)hide_blocks;
+-(void)showInfo;
+-(void)hideInfo;
+-(void)awakeFromNib;
+-(void)putAnimals;
+-(void)startStop;
+-(void)setVolumeValue;
+-(void)playMyEffect;
 
 @end
