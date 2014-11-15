@@ -169,9 +169,9 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     UIImage *testImage      = [UIImage imageNamed:@"test.png"];
-    UIImage *testImageSel   = [UIImage imageNamed:@"testSel.png"];
-    testImage               = [testImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    testImageSel            = [testImageSel imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIImage *testImageSel   = [UIImage imageNamed:@"test.png"];
+    testImage               = [testImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    testImageSel            = [testImageSel imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     self.tabBarItem         = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage selectedImage: testImageSel];
 
     self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage selectedImage: testImageSel];

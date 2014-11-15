@@ -31,7 +31,7 @@
 
     UILabel *txtField = [[UILabel alloc] initWithFrame:CGRectMake(5,5,180,230)];
     
-    [txtField setFont:[UIFont fontWithName:@"Serifa-Roman" size:(16.0f)]];
+    //[txtField setFont:[UIFont fontWithName:@"Serifa-Roman" size:(16.0f)]];
     
     txtField.numberOfLines = 9;
     txtField.textColor = [UIColor darkGrayColor];

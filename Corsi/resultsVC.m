@@ -67,9 +67,9 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     UIImage *resultsImage           = [UIImage imageNamed:@"results"];
-    UIImage *resultsImageSel        = [UIImage imageNamed:@"resultsSel"];
-    resultsImage                    = [resultsImage     imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    resultsImageSel                 = [resultsImageSel  imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIImage *resultsImageSel        = [UIImage imageNamed:@"results"];
+    resultsImage                    = [resultsImage     imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    resultsImageSel                 = [resultsImageSel  imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
 
     tableView.hidden=YES;
     resultsTxtView.hidden=NO;

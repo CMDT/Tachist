@@ -120,9 +120,9 @@ emailLBL;
 -(void)viewDidAppear:(BOOL)animated{
     //assign images to tab bar items
     UIImage *settingsImage          = [UIImage imageNamed:@"settings"];
-    UIImage *settingsImageSel       = [UIImage imageNamed:@"settingsSel"];
-    settingsImage       = [settingsImage    imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    settingsImageSel    = [settingsImageSel imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIImage *settingsImageSel       = [UIImage imageNamed:@"settings"];
+    settingsImage       = [settingsImage    imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    settingsImageSel    = [settingsImageSel imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Settings" image:settingsImage selectedImage: settingsImageSel];
     mySingleton *singleton = [mySingleton sharedSingleton];
 
@@ -215,19 +215,9 @@ emailLBL;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    mySingleton *singleton = [mySingleton sharedSingleton];
 	// Do any additional setup after loading the view, typically from a nib.
-    NSString * pathStr               = [[NSBundle mainBundle] bundlePath];
-    NSString * settingsBundlePath    = [pathStr stringByAppendingPathComponent:@"Settings.bundle"];
-    NSString * defaultPrefsFile      = [settingsBundlePath stringByAppendingPathComponent:@"Root.plist"];
-    NSDictionary * defaultPrefs      = [NSDictionary dictionaryWithContentsOfFile:defaultPrefsFile];
-    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultPrefs];
-    NSUserDefaults *defaults        = [NSUserDefaults standardUserDefaults];
-    [[NSUserDefaults standardUserDefaults] synchronize];
 
-    singleton.testerName              = [defaults  objectForKey:kTester];
-    singleton.subjectName             = [defaults  objectForKey:kSubject];
-    singleton.email                   = [defaults  objectForKey:kEmail];
+    [self setDefaults];
 }
 
 - (void)didReceiveMemoryWarning
@@ -358,7 +348,7 @@ emailLBL;
     }
 
     //for testing what is written, can be rem'd out later
-    /* NSLog(@"What is in the plist on first load:-->");
+     NSLog(@"What is in the plist on first load:-->");
     NSLog(@"tester      :%@",[defaults objectForKey:kTester]);
     NSLog(@"subject     :%@",[defaults objectForKey:kSubject]);
     NSLog(@"email       :%@",[defaults objectForKey:kEmail]);
@@ -377,7 +367,7 @@ emailLBL;
     NSLog(@"delay       :%@",[defaults objectForKey:kDelay]);
     NSLog(@"time        :%@",[defaults objectForKey:kTime]);
     NSLog(@"show        :%@",[defaults objectForKey:kShow]);
-    NSLog(@"version     :%@",[defaults objectForKey:kVersion]); */
+    NSLog(@"version     :%@",[defaults objectForKey:kVersion]);
 }
 
 -(UIColor*)colourPicker:(NSString*)colourName{
