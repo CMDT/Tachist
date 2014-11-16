@@ -441,8 +441,6 @@
 
     //update singleton
     //singleton.email       = testerEmail;
-    singleton.subjectName = participant;
-
     //save to plist root
     NSString *pathStr = [[NSBundle mainBundle] bundlePath];
     NSString *settingsBundlePath = [pathStr stringByAppendingPathComponent:@"Settings.bundle"];
@@ -455,6 +453,7 @@
         //[defaults setObject:testerEmail forKey:kEmail];
     //subject name
         [defaults setObject:participant forKey:kSubject];
+        singleton.subjectName=participant;
 
     isAlertFinished=YES;
 }
@@ -1688,7 +1687,7 @@
     NSString * tempString;
     NSString * tempString2;
     NSString * tempString3;
-        //NSString * tempString4;
+    NSString * tempString4;
 
     int cor;
     int wro;
@@ -1702,10 +1701,22 @@
         //l1
     tempString=[NSString stringWithFormat:@"Corsi Block Tapping Test Results"];
         [singleton.resultStringRows addObject: tempString];//csv
-
         [singleton.displayStringTitles addObject:tempString ];//title
         [singleton.displayStringRows addObject: @""];//data
-        
+
+
+        //**** start new block ****
+        //tempString4 = @"some title";
+        //[singleton.displayStringTitles addObject:tempString4 ];//title
+
+        //tempString  = [NSString stringWithFormat:@"Date: %@, Time: %@", singleton.testDate, singleton.testTime];
+        //[singleton.resultStringRows addObject: tempString];//csv
+
+        //tempString2 = [NSString stringWithFormat:@"%@", singleton.testDate];
+        //[singleton.displayStringRows addObject: tempString2];//data
+        //**** end new block ****
+
+
         //l2
     tempString=[NSString stringWithFormat:@""];
         //[singleton.displayStringRows addObject:tempString];
@@ -1733,44 +1744,72 @@
         //[singleton.displayStringRows addObject:tempString];
     [singleton.resultStringRows addObject:tempString];
 
-        //l5
-    tempString=[NSString stringWithFormat:@"Tester:     %@", singleton.testerName];
+        tempString4 = @"Tester:";
+        [singleton.displayStringTitles addObject:tempString4 ];//title
+
+        tempString  = [NSString stringWithFormat:@"Tester: %@", singleton.testerName];
+        [singleton.resultStringRows addObject: tempString];//csv
+
+        tempString2 = [NSString stringWithFormat:@"%@", singleton.testerName];
+        [singleton.displayStringRows addObject: tempString2];//data
+
+        tempString4 = @"Participant No:";
+        [singleton.displayStringTitles addObject:tempString4 ];//title
+
+        tempString  = [NSString stringWithFormat:@"Participant No: %@", singleton.subjectName];
+        [singleton.resultStringRows addObject: tempString];//csv
+
+        tempString2 = [NSString stringWithFormat:@"%@", singleton.subjectName];
+        [singleton.displayStringRows addObject: tempString2];//data
+
+        tempString=[NSString stringWithFormat:@""];//csv
+
     [singleton.resultStringRows addObject:tempString];
 
-    tempString=[NSString stringWithFormat:@"Participant:%@", singleton.subjectName];
-    [singleton.resultStringRows addObject:tempString];
+        tempString4 = @"Start Time";
+        [singleton.displayStringTitles addObject:tempString4 ];//title
 
-    tempString2=[NSString stringWithFormat:@"%@", singleton.testerName];
-    [singleton.displayStringRows addObject:tempString2];
-        [singleton.displayStringTitles addObject:@"Tester Name:"];
-    tempString2=[NSString stringWithFormat:@"%@", singleton.subjectName];
-    [singleton.displayStringRows addObject:tempString2];
-[singleton.displayStringTitles addObject:@"Participant Code:"];
+        tempString=[NSString stringWithFormat:@"Start Time %2.0f ms",singleton.startTime];//csv
+        [singleton.resultStringRows addObject:tempString];//csv
 
+        tempString2 = [NSString stringWithFormat:@"%2.0f ms", singleton.startTime];
+        [singleton.displayStringRows addObject: tempString2];//data
 
-    tempString=[NSString stringWithFormat:@""];
-        //[singleton.displayStringRows addObject:tempString];
-    [singleton.resultStringRows addObject:tempString];
+        tempString4 = @"Wait Time";
+        [singleton.displayStringTitles addObject:tempString4 ];//title
+        tempString=[NSString stringWithFormat:@"Wait Time %2.0f ms",singleton.startTime];//csv
+        [singleton.resultStringRows addObject:tempString];//csv
 
-    tempString=[NSString stringWithFormat:@"Message Time: %2.0f ms",singleton.startTime];
-    [singleton.resultStringRows addObject:tempString];
-    [singleton.displayStringRows addObject:tempString];
-    tempString=[NSString stringWithFormat:@"   Wait Time: %2.0f ms",singleton.waitTime];
-    [singleton.resultStringRows addObject:tempString];
-    [singleton.displayStringRows addObject:tempString];
+        tempString2 = [NSString stringWithFormat:@"%2.0f ms", singleton.waitTime];
+        [singleton.displayStringRows addObject: tempString2];//data
+
     tempString=[NSString stringWithFormat:@"   Show Time: %2.0f ms",singleton.showTime];
     [singleton.resultStringRows addObject:tempString];
-    [singleton.displayStringRows addObject:tempString];
+        tempString=[NSString stringWithFormat:@"Show Time"];
+        [singleton.displayStringTitles addObject:tempString ];//title
+        tempString=[NSString stringWithFormat:@"%2.0f ms", singleton.showTime];
+        [singleton.displayStringRows addObject: tempString ];//data
 
     tempString=[NSString stringWithFormat:@"Canvas: %@",[self colourUIToString:(singleton.currentBackgroundColour)]];
-    [singleton.resultStringRows addObject:tempString];
-    [singleton.displayStringRows addObject:tempString];
-    tempString=[NSString stringWithFormat:@"Block:    %@",[self colourUIToString:(singleton.currentBlockColour)]];
-    [singleton.resultStringRows addObject:tempString];
-    [singleton.displayStringRows addObject:tempString];
+        [singleton.resultStringRows addObject:tempString];//csv
+        tempString=[NSString stringWithFormat:@"Canvas"];
+        [singleton.displayStringTitles addObject:tempString ];//title
+        tempString=[NSString stringWithFormat:@"%@", [self colourUIToString:(singleton.currentBackgroundColour)]];
+        [singleton.displayStringRows addObject: tempString ];//data
+
     tempString=[NSString stringWithFormat:@"Show:    %@",[self colourUIToString:(singleton.currentShowColour)]];
-    [singleton.resultStringRows addObject:tempString];
-    [singleton.displayStringRows addObject:tempString];
+        [singleton.resultStringRows addObject:tempString];//csv
+        tempString=[NSString stringWithFormat:@"Show"];
+        [singleton.displayStringTitles addObject:tempString ];//title
+        tempString=[NSString stringWithFormat:@"%@", [self colourUIToString:(singleton.currentShowColour)]];
+        [singleton.displayStringRows addObject: tempString ];//data
+
+    tempString=[NSString stringWithFormat:@"Block: %@",[self colourUIToString:(singleton.currentBlockColour)]];
+        [singleton.resultStringRows addObject:tempString];//csv
+        tempString=[NSString stringWithFormat:@"Block"];
+        [singleton.displayStringTitles addObject:tempString ];//title
+        tempString=[NSString stringWithFormat:@"%@", [self colourUIToString:(singleton.currentBlockColour)]];
+        [singleton.displayStringRows addObject: tempString ];//data
 
     NSString *rot;
     NSString *ani;
@@ -1806,47 +1845,74 @@
     beep2=singleton.beepEffect;
 
     tempString=[NSString stringWithFormat:@"Forward Test:   %@", forw];
-    [singleton.resultStringRows addObject:tempString];
-    [singleton.displayStringRows addObject:tempString];
+        [singleton.resultStringRows addObject:tempString];//csv
+        tempString=[NSString stringWithFormat:@"Forward Test"];
+        [singleton.displayStringTitles addObject:tempString ];//title
+        tempString=[NSString stringWithFormat:@"%@", forw];
+        [singleton.displayStringRows addObject: tempString ];//data
+
     tempString=[NSString stringWithFormat:@"Block Size:       %2.0f",singleton.blockSize];
-    [singleton.resultStringRows addObject:tempString];
-    [singleton.displayStringRows addObject:tempString];
+        [singleton.resultStringRows addObject:tempString];//csv
+        tempString=[NSString stringWithFormat:@"Block Size"];
+        [singleton.displayStringTitles addObject:tempString ];//title
+        tempString=[NSString stringWithFormat:@"%2.0f", singleton.blockSize];
+        [singleton.displayStringRows addObject: tempString ];//data
+
     tempString=[NSString stringWithFormat:@"Block Rotation: %@",rot];
-    [singleton.resultStringRows addObject:tempString];
-    [singleton.displayStringRows addObject:tempString];
+        [singleton.resultStringRows addObject:tempString];//csv
+        tempString=[NSString stringWithFormat:@"Block Rotation"];
+        [singleton.displayStringTitles addObject:tempString ];//title
+        tempString=[NSString stringWithFormat:@"%@", rot];
+        [singleton.displayStringRows addObject: tempString ];//data
+//line
     tempString=[NSString stringWithFormat:@"Block Animals:  %@", ani];
-    [singleton.resultStringRows addObject:tempString];
-    [singleton.displayStringRows addObject:tempString];
-    tempString=[NSString stringWithFormat:@"Beep Que         %@", beep];
-    [singleton.resultStringRows addObject:tempString];
-    [singleton.displayStringRows addObject:tempString];
+        [singleton.resultStringRows addObject:tempString];//csv
+        tempString=[NSString stringWithFormat:@"Block Animals"];
+        [singleton.displayStringTitles addObject:tempString ];//title
+        tempString=[NSString stringWithFormat:@"%@", ani];
+        [singleton.displayStringRows addObject: tempString ];//data
+
+    //line
+    tempString=[NSString stringWithFormat:@"Beep Que       %@", beep];
+        [singleton.resultStringRows addObject:tempString];//csv
+    tempString=[NSString stringWithFormat:@"Beep Que"];
+    [singleton.displayStringTitles addObject:tempString ];//title
+    tempString=[NSString stringWithFormat:@"%@", beep];
+    [singleton.displayStringRows addObject: tempString ];//data
+
+    //line
     tempString=[NSString stringWithFormat:@"Beep Name       %@", beep2];
     [singleton.resultStringRows addObject:tempString];
-    [singleton.displayStringRows addObject:tempString];
+    tempString=[NSString stringWithFormat:@"Beep Name"];
+    [singleton.displayStringTitles addObject:tempString ];//title
+    tempString=[NSString stringWithFormat:@"%@", beep2];
+    [singleton.displayStringRows addObject: tempString ];//data
 
-
+    //line
     tempString=[NSString stringWithFormat:@""];
-    [singleton.resultStringRows addObject:tempString];
-        //[singleton.displayStringRows addObject:tempString];
+    [singleton.resultStringRows addObject:tempString];//csv
 
-
+    //line
     tempString=[NSString stringWithFormat:@"(1 = correct number in correct sequence, 0 = wrong number in sequence)"];
-    [singleton.displayStringRows addObject:tempString];
-    [singleton.resultStringRows addObject:tempString];
-
+        [singleton.resultStringRows addObject:tempString];//csv
+    tempString=[NSString stringWithFormat:@"1=Correct, 0=Wrong"];
+    [singleton.displayStringTitles addObject:tempString ];//title
     tempString=[NSString stringWithFormat:@""];
-        //[singleton.displayStringRows addObject:tempString];
+    [singleton.displayStringRows addObject:tempString];//data
+
+    //line
+    tempString=[NSString stringWithFormat:@""];//csv
     [singleton.resultStringRows addObject:tempString];
 
-
+        //line
     tempString=[NSString stringWithFormat:@"Test No,Sequence,Response,1,2,3,4,5,6,7,8,9,Correct,Wrong"];
-    tempString2=[NSString stringWithFormat:@"Test No                  1 2 3_ 4_ 5_ 6_ 7_ 8_ 9_ C_ W"];
+    tempString2=[NSString stringWithFormat:@"Test:123456789_CW"];
     [singleton.resultStringRows addObject:tempString];
-    [singleton.displayStringRows addObject:tempString2];
 
     //body of results
     //reset tempstring before building a line of data
     tempString=@"";
+    tempString2=@"  ";
 
     //loop for test no
     for (int xx=start; xx<finish+1; xx++) {
@@ -1857,13 +1923,19 @@
         //for order and guess
 
             tempString3 = [NSString stringWithFormat:@"%d", xx-2];
-            //tempString4 = [NSString stringWithFormat:@"%d", xx-2];
 
         ee=[order[xx] substringWithRange:NSMakeRange(0, xx)];
         ff=[guessStr[xx] substringWithRange:NSMakeRange(0, xx)];
 
         tempString = [NSString stringWithFormat:@"%@,%@,%@", tempString3, ee, ff];
-        tempString2 = [NSString stringWithFormat:@"%@  %@_%@",tempString3, ee, ff];
+        tempString2 = [NSString stringWithFormat:@"%@:%@-%@",tempString3, ee, ff];
+
+        tempString3=[NSString stringWithFormat:@"No:Ord:Test"];
+        [singleton.displayStringTitles addObject:tempString3];//title
+        [singleton.displayStringRows addObject: tempString2];//data
+
+        tempString2=@"";
+
         cor=0;
         wro=0;
         ans=@"";
@@ -1887,12 +1959,12 @@
                 cor=cor+1;
                 totcor=totcor+1;
                 ans=@"1";
-                ans2=@" _ 1";
+                ans2=@"1";
             }else{
                 wro=wro+1;
                 totwro=totwro+1;
                 ans=@"0";
-                ans2=@" _ 0";
+                ans2=@"0";
             }
             //put the individual components csv in string
             tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@",%@", ans]];
@@ -1902,56 +1974,80 @@
         //add some commas
         for (int y=1; y<11-xx; y++) {
             tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@","]];
-            tempString2 = [NSString stringWithFormat:@"%@%@", tempString2, [NSString stringWithFormat:@" _  "]];
+            tempString2 = [NSString stringWithFormat:@"%@%@", tempString2, [NSString stringWithFormat:@"_"]];
         }
         
         //finish off string from loop
-        tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@"%d,%d", cor, wro]];
-        tempString2 = [NSString stringWithFormat:@"%@%@", tempString2, [NSString stringWithFormat:@"_ %d _ %d", cor, wro]];
-        [singleton.resultStringRows addObject:tempString];
-        [singleton.displayStringRows addObject:tempString2];
+
+        tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@"%d, %d", cor, wro]];
+        tempString2 = [NSString stringWithFormat:@"%@%@", tempString2, [NSString stringWithFormat:@"c%dw%d", cor, wro]];
+        //line
+
+        //tempString4=[NSString stringWithFormat:@"Test:123456789_CW"];
+        //[singleton.displayStringTitles addObject:tempString4];//title
+        //[singleton.displayStringRows addObject: @""];//data
+        tempString3=[NSString stringWithFormat:@"DATA:"];
+        [singleton.displayStringTitles addObject:tempString3 ];//title
+        [singleton.displayStringRows addObject: tempString2];//data
+        [singleton.resultStringRows addObject:tempString];//csv
 
         //blankline
+
         tempString=[NSString stringWithFormat:@""];
-        [singleton.resultStringRows addObject:tempString];
-        //[singleton.displayStringRows addObject:tempString];
+        [singleton.resultStringRows addObject:tempString];//csv
 
     }
+
+
     //blankline
     tempString=[NSString stringWithFormat:@""];
-    [singleton.resultStringRows addObject:tempString];
-        //[singleton.displayStringRows addObject:tempString];
+    [singleton.resultStringRows addObject:tempString];//csv
 
     //put final totals
+    //line
+    tempString=[NSString stringWithFormat:@"Total Possible"];
+    [singleton.displayStringTitles addObject:tempString ];//title
+    tempString=[NSString stringWithFormat:@"%d", totcor+totwro];
+    [singleton.displayStringRows addObject: tempString];//data
     tempString=[NSString stringWithFormat:@"Total Possible = %d", totcor+totwro];
-    [singleton.resultStringRows addObject:tempString];
-    [singleton.displayStringRows addObject:tempString];
+    [singleton.resultStringRows addObject:tempString];//csv
+
     //blankline
     tempString=[NSString stringWithFormat:@""];
-    [singleton.resultStringRows addObject:tempString];
-        //[singleton.displayStringRows addObject:tempString];
+    [singleton.resultStringRows addObject:tempString];//csv
 
+    //line
+    tempString=[NSString stringWithFormat:@"Total Correct"];
+    [singleton.displayStringTitles addObject:tempString ];//title
+    tempString=[NSString stringWithFormat:@"%d", totcor];
+    [singleton.displayStringRows addObject: tempString];//data
+    tempString=[NSString stringWithFormat:@"Total Wrong"];
+    [singleton.displayStringTitles addObject:tempString ];//title
+    tempString=[NSString stringWithFormat:@"%d", totwro];
+    [singleton.displayStringRows addObject: tempString];//data
     tempString=[NSString stringWithFormat:@"Total Correct = %d, Total Wrong = %d",totcor, totwro];
-    [singleton.resultStringRows addObject:tempString];
-    [singleton.displayStringRows addObject:tempString];
-
-    //end of results save
-    tempString=[NSString stringWithFormat:@""];
-    [singleton.resultStringRows addObject:tempString];
-        //[singleton.displayStringRows addObject:tempString];
-
-    //end
-    tempString=[NSString stringWithFormat:@"End of Corsi Test Results"];
-    [singleton.resultStringRows addObject:tempString];
-    [singleton.displayStringRows addObject:tempString];
+    [singleton.resultStringRows addObject:tempString];//csv
 
     //blank
+    [singleton.resultStringRows addObject: @""];//csv
+
+    //line
+    tempString=[NSString stringWithFormat:@"End of Corsi Test Results"];
+    [singleton.displayStringTitles addObject:tempString ];//title
+    [singleton.resultStringRows addObject: tempString];//csv
+    [singleton.displayStringRows addObject: @""];//data
+
+    //line
     tempString=[NSString stringWithFormat:@"(c) MMU 2014 EES"];
-    [singleton.resultStringRows addObject:tempString];
-    [singleton.displayStringRows addObject:tempString];
-    tempString=[NSString stringWithFormat:@"- www.ess.mmu.ac.uk/apps/corsi"];
-    [singleton.resultStringRows addObject:tempString];
-    [singleton.displayStringRows addObject:tempString];
+    [singleton.displayStringTitles addObject:tempString ]; //title
+    [singleton.resultStringRows addObject:tempString]; //csv
+    [singleton.displayStringRows addObject:@""]; //data
+
+    //last line
+    tempString=[NSString stringWithFormat:@"www.ess.mmu.ac.uk/apps/corsi"];
+    [singleton.displayStringTitles addObject:tempString ]; //title
+    [singleton.resultStringRows addObject: tempString]; //csv
+    [singleton.displayStringRows addObject: @""]; //data
 
     //jump to the results page
     [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(jumpToResultsView) userInfo:nil repeats:NO];

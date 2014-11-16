@@ -227,6 +227,7 @@ emailLBL;
 }
 
 - (void)setDefaults{
+        mySingleton *singleton = [mySingleton sharedSingleton];
 //set up the plist params
         NSString *pathStr               = [[NSBundle mainBundle] bundlePath];
         NSString *settingsBundlePath    = [pathStr stringByAppendingPathComponent:@"Settings.bundle"];
@@ -266,6 +267,8 @@ emailLBL;
         subjectName =  @"Participant";
         [defaults setObject:@"Participant" forKey:kSubject];
     }
+     singleton.subjectName=subjectName;
+
     //tester name
     testerName     = [defaults objectForKey:kTester];
     if(testerName  == nil ){
@@ -348,7 +351,7 @@ emailLBL;
     }
 
     //for testing what is written, can be rem'd out later
-     NSLog(@"What is in the plist on first load:-->");
+    NSLog(@"What is in the plist on first load:-->");
     NSLog(@"tester      :%@",[defaults objectForKey:kTester]);
     NSLog(@"subject     :%@",[defaults objectForKey:kSubject]);
     NSLog(@"email       :%@",[defaults objectForKey:kEmail]);
