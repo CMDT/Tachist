@@ -765,7 +765,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Corsi/Corsi-Prefix.pch";
 				INFOPLIST_FILE = "Corsi/Corsi-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Corsi/TestFlightSDK3-3",
@@ -785,7 +785,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Corsi/Corsi-Prefix.pch";
 				INFOPLIST_FILE = "Corsi/Corsi-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Corsi/TestFlightSDK3-3",
@@ -799,7 +799,7 @@
 		E10D019E19B6024F00D9E5F8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Corsi.app/Corsi";
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -813,7 +813,7 @@
 				);
 				INFOPLIST_FILE = "CorsiTests/CorsiTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Corsi.app/Corsi";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
@@ -821,7 +821,7 @@
 		E10D019F19B6024F00D9E5F8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Corsi.app/Corsi";
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -831,7 +831,7 @@
 				GCC_PREFIX_HEADER = "Corsi/Corsi-Prefix.pch";
 				INFOPLIST_FILE = "CorsiTests/CorsiTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Corsi.app/Corsi";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;

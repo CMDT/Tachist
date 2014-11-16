@@ -25,7 +25,7 @@
     
     //start the main App with a message
     
-    sleep(4);
+    sleep(2);// wait while the user looks at the logos....
 
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Corsi Block Tapping Test" message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
 

@@ -100,25 +100,25 @@
 
     //page1
     // change the color of the text box when you touch it
-
+    //turned off the screen move, as not needed on this page
 
     if(textField==self->emailTXT){
         emailTXT.backgroundColor = [UIColor greenColor];
-        textField.frame = CGRectMake(textField.frame.origin.x, (textField.frame.origin.y), textField.frame.size.width, textField.frame.size.height);
-        int oft=textField.frame.origin.y-190;
-        [self keyBoardAppeared:oft];
+        //textField.frame = CGRectMake(textField.frame.origin.x, (textField.frame.origin.y), textField.frame.size.width, textField.frame.size.height);
+        //int oft=textField.frame.origin.y-190;
+        //[self keyBoardAppeared:oft];
     }
     if(textField==self->participantTXT){
         participantTXT.backgroundColor = [UIColor greenColor];
-        textField.frame = CGRectMake(textField.frame.origin.x, (textField.frame.origin.y), textField.frame.size.width, textField.frame.size.height);
-        int oft=textField.frame.origin.y-190;
-        [self keyBoardAppeared:oft];
+        //textField.frame = CGRectMake(textField.frame.origin.x, (textField.frame.origin.y), textField.frame.size.width, textField.frame.size.height);
+        //int oft=textField.frame.origin.y-190;
+        //[self keyBoardAppeared:oft];
     }
     if(textField==self->testerNameTXT){
         testerNameTXT.backgroundColor = [UIColor greenColor];
-        textField.frame = CGRectMake(textField.frame.origin.x, (textField.frame.origin.y), textField.frame.size.width, textField.frame.size.height);
-        int oft=textField.frame.origin.y-190;
-        [self keyBoardAppeared:oft];
+        //textField.frame = CGRectMake(textField.frame.origin.x, (textField.frame.origin.y), textField.frame.size.width, textField.frame.size.height);
+        //int oft=textField.frame.origin.y-190;
+        //[self keyBoardAppeared:oft];
     }
 }
 
@@ -137,6 +137,7 @@
 }
 
 -(void) keyBoardAppeared :(int)oft
+//not needed here
 {
     //move screen up or down as needed to avoid text field entry
     CGRect frame = self.view.frame;
@@ -153,6 +154,7 @@
 }
 
 -(void) keyBoardDisappeared :(int)oft
+//not needed here
 {
     //move the screen back to original position
     CGRect frame = self.view.frame;

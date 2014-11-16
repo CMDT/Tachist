@@ -115,8 +115,8 @@ animalsLBL,
 soundsLBL,
 settingsVC,
 testerLBL,
-emailLBL,
-subjectLBL;
+emailLBL;
+//subjectLBL;
 
 -(void)viewDidAppear:(BOOL)animated{
     //assign images to tab bar items
@@ -141,7 +141,7 @@ subjectLBL;
 
     emailLBL.text   = singleton.email;
     testerLBL.text  = singleton.testerName;
-    subjectLBL.text  = singleton.subjectName;
+    //subjectLBL.text  = singleton.subjectName;//not shown in view controller at present
 
     [showLBL setBackgroundColor:singleton.currentShowColour];
     [block5View setBackgroundColor:singleton.currentShowColour];

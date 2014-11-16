@@ -168,6 +168,11 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated{
+    [self hideInfo];
+    MessageTextView.hidden=YES;
+    startBTN.hidden   = NO;
+    headingLBL.hidden = NO;
+    isAborted         = NO;
     UIImage *testImage      = [UIImage imageNamed:@"test.png"];
     UIImage *testImageSel   = [UIImage imageNamed:@"test.png"];
     testImage               = [testImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
@@ -176,28 +181,20 @@
 
     self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage selectedImage: testImageSel];
 
-    MessageTextView.hidden=YES;
     [self initialiseBlocks];
     isAborted=NO;
 
     mySingleton *singleton = [mySingleton sharedSingleton];
     //plist defaults
-    NSString *pathStr               = [[NSBundle mainBundle] bundlePath];
-    NSString *settingsBundlePath    = [pathStr stringByAppendingPathComponent:@"Settings.bundle"];
-    NSString *defaultPrefsFile      = [settingsBundlePath stringByAppendingPathComponent:@"Root.plist"];
-    NSDictionary *defaultPrefs      = [NSDictionary dictionaryWithContentsOfFile:defaultPrefsFile];
-    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultPrefs];
-    NSUserDefaults *defaults        = [NSUserDefaults standardUserDefaults];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    //NSString *pathStr               = [[NSBundle mainBundle] bundlePath];
+    //NSString *settingsBundlePath    = [pathStr stringByAppendingPathComponent:@"Settings.bundle"];
+    //NSString *defaultPrefsFile      = [settingsBundlePath stringByAppendingPathComponent:@"Root.plist"];
+    //NSDictionary *defaultPrefs      = [NSDictionary dictionaryWithContentsOfFile:defaultPrefsFile];
+    //[[NSUserDefaults standardUserDefaults] registerDefaults:defaultPrefs];
+    //NSUserDefaults *defaults        = [NSUserDefaults standardUserDefaults];
+    //[[NSUserDefaults standardUserDefaults] synchronize];
 
     [self allButtonsBackgroundReset];
-    //hide unhide labels, screens and buttons
-
-    startBTN.hidden   = NO;
-    headingLBL.hidden = NO;
-    isAborted         = NO;
-
-    [self hideInfo];
 
     testViewerView.backgroundColor  = singleton.currentBackgroundColour;
     currentBackgroundColour         = singleton.currentBackgroundColour;
@@ -288,6 +285,7 @@
     }
     
     infoShow=singleton.onScreenInfo;
+    reverseTest=singleton.forwardTestDirection;
     
     //make 9 sets of number strings
     for (int x=1; x<10; x++) {
@@ -417,9 +415,11 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     //an alert was detected, get the text filelds and update the singleton
-        mySingleton *singleton = [mySingleton sharedSingleton];
+    //mySingleton *singleton = [mySingleton sharedSingleton];
     //NSString * testerEmail =[[alertView textFieldAtIndex:0] text];
-    NSString * participant =[[alertView textFieldAtIndex:0] text];//used to be 1 for dual entry, 0 for single
+
+    NSString * participant=@"empty field";
+    participant=[[alertView textFieldAtIndex:0] text];//used to be 1 for dual entry, 0 for single
         //NSLog(@"Tester Email    : %@", testerEmail);
         //NSLog(@"Participant     : %@", participant);
 
@@ -431,18 +431,22 @@
     //update singleton
     //singleton.email       = testerEmail;
     //save to plist root
-    NSString *pathStr = [[NSBundle mainBundle] bundlePath];
-    NSString *settingsBundlePath = [pathStr stringByAppendingPathComponent:@"Settings.bundle"];
-    NSString *defaultPrefsFile   = [settingsBundlePath stringByAppendingPathComponent:@"Root.plist"];
-    NSDictionary *defaultPrefs   = [NSDictionary dictionaryWithContentsOfFile:defaultPrefsFile];
-   [[NSUserDefaults standardUserDefaults] registerDefaults:defaultPrefs];
-    NSUserDefaults *defaults     = [NSUserDefaults standardUserDefaults];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+
     //email name
         //[defaults setObject:testerEmail forKey:kEmail];
     //subject name
+    if (participant==nil||[participant isEqualToString:@""]) {
+        //no name was input, use the old one, do nothing
+    }else{
+        NSString *pathStr = [[NSBundle mainBundle] bundlePath];
+        NSString *settingsBundlePath = [pathStr stringByAppendingPathComponent:@"Settings.bundle"];
+        NSString *defaultPrefsFile   = [settingsBundlePath stringByAppendingPathComponent:@"Root.plist"];
+        NSDictionary *defaultPrefs   = [NSDictionary dictionaryWithContentsOfFile:defaultPrefsFile];
+        [[NSUserDefaults standardUserDefaults] registerDefaults:defaultPrefs];
+        NSUserDefaults *defaults     = [NSUserDefaults standardUserDefaults];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         [defaults setObject:participant forKey:kSubject];
-
+    }
     isAlertFinished=YES;
 }
 
@@ -1239,11 +1243,19 @@
     blkNoLBL.text = [NSString stringWithFormat:@"%i",0];
     //turns on the buttons, collects the xcounter guesses, forms a string, saves it and carries on with next stage
     
-    if (infoShow) {
-        statusMessageLBL.text = @"Recall The Sequence, touch the blocks.";
-    }else{
-        statusMessageLBL.text = @"Recall";
-    }
+        if (!reverseTest) {
+            if (infoShow) {
+                statusMessageLBL.text = @"Recall the sequence in the reverse order.";
+            }else{
+                statusMessageLBL.text = @"Reverse Test";
+            }
+        }else{
+            if (infoShow) {
+                statusMessageLBL.text = @"Recall the sequence in the same order.";
+            }else{
+                statusMessageLBL.text = @"Forward Test";
+            }
+        }
 
     NSLog(@"Press The Blocks in Order");
     
@@ -1262,11 +1274,20 @@
     [self buttonsEnable];
     blkNoLBL.text = [NSString stringWithFormat:@"%i",0];
     //turns on the buttons, collects the xcounter guesses, forms a string, saves it and carries on with next stage
-    if (infoShow) {
-        statusMessageLBL.text = @"Recall The Sequence, touch the blocks.";
-    }else{
-        statusMessageLBL.text = @"Recall";
-    }
+        if (!reverseTest) {
+            if (infoShow) {
+                statusMessageLBL.text = @"Recall the sequence in the reverse order.";
+            }else{
+                statusMessageLBL.text = @"Reverse Test";
+            }
+        }else{
+            if (infoShow) {
+                statusMessageLBL.text = @"Recall the sequence in the same order.";
+            }else{
+                statusMessageLBL.text = @"Forward Test";
+            }
+        }
+
     //NSLog(@"Press The Blocks in Order");
    
     if((pressNo >= xcounter+1)&&(isFinished==YES)){
@@ -1347,7 +1368,7 @@
     [self buttonsDisable];
     //NSLog(@"Start Test");
 
-    if (reverseTest) {
+    if (!reverseTest) {
         if (infoShow) {
             statusMessageLBL.text = @"Observe the sequence, recall in the reverse order.";
         }else{
@@ -1420,9 +1441,9 @@
     stopTestNowBTN.hidden=YES;
     isFinished=YES;
     if (infoShow) {
-        statusMessageLBL.text = @"The test has finished.";
+        statusMessageLBL.text = @"The Test has Finished.";
     }else{
-        statusMessageLBL.text = @"Finished";
+        statusMessageLBL.text = @"Finished The Test";
     }
     [self hideInfo];
     [self hide_blocks];
@@ -1445,7 +1466,7 @@
     if (infoShow) {
       statusMessageLBL.text = @"The test results are being calculated.";
     }else{
-        statusMessageLBL.text = @"";
+        statusMessageLBL.text = @"Calculating";
     }
     [self hide_blocks];
     [self hideInfo];
@@ -1927,7 +1948,7 @@
         cor=0;
         wro=0;
         ans=@"";
-        ans2=@"";
+        ans2=@"..:";
 
         //loop for test in line
         for (int q=0; q<xx; q++) {
@@ -1962,7 +1983,7 @@
         //add some commas
         for (int y=1; y<11-xx; y++) {
             tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@","]];
-            tempString2 = [NSString stringWithFormat:@"%@%@", tempString2, [NSString stringWithFormat:@"_"]];
+            tempString2 = [NSString stringWithFormat:@"%@%@", tempString2, [NSString stringWithFormat:@"."]];
         }
         
         //finish off string from loop

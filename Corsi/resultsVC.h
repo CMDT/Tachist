@@ -26,7 +26,7 @@ IBOutlet UITextView    * resultsTxtView;
     NSDate          * testDate;
     UILabel         * datelbl;
     UILabel         * timelbl;
-    UILabel         * emaillbl;
+    UIButton        * emailBTN;
     UILabel         * subjectlbl;
 }
 
@@ -40,10 +40,8 @@ IBOutlet UITextView    * resultsTxtView;
 @property (nonatomic, copy) NSDate        * startDate;
 @property (nonatomic, copy) NSDate        * testDate;
 
-@property (nonatomic, strong) IBOutlet UILabel     * datelbl;
-@property (nonatomic, strong) IBOutlet UILabel     * timelbl;
-@property (nonatomic, strong) IBOutlet UILabel     * emaillbl;
-@property (nonatomic, strong) IBOutlet UILabel     * subjectlbl;
+
+@property (nonatomic, strong) IBOutlet UIButton    * emailBTN;
 @property (nonatomic, strong) UITextView           * resultsTxtView;
 @property (strong, nonatomic) IBOutlet UITableView * tableView;
 
@@ -51,7 +49,7 @@ IBOutlet UITextView    * resultsTxtView;
 @property (nonatomic,strong) NSMutableArray *arrItems;
 
 -(IBAction)showEmail:(id)sender;
-//-(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *) error;
+
 -(NSString *) GetDocumentDirectory;
 -(NSString *) setFilename;
 -(void) WriteToStringFile:(NSMutableString *)textToWrite;

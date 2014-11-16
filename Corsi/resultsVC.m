@@ -23,9 +23,6 @@
 @synthesize
 //results Labels
 
-    datelbl,
-    timelbl,
-    subjectlbl,
     resultsTxtView,
     testDate,
     startDate,
@@ -33,7 +30,7 @@
     homeDir,
     filename,
     filepath,
-    emaillbl,
+    emailBTN,
     tableView,
     arrItems //  temp array of itmes for results display
 ;
@@ -54,15 +51,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     //default message in view text box
-    arrItems = [[NSMutableArray alloc] initWithObjects:
-                @"Item 1",
-                @"Item 2",
-                @"Item 3",
-                @"Item 4",
-                @"Item 5",
-                @"Item six",
-                nil
-                ];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -72,6 +60,7 @@
     resultsImageSel                 = [resultsImageSel  imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
 
     tableView.hidden=YES;
+    emailBTN.hidden=YES;
     resultsTxtView.hidden=NO;
     
     self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Results" image:resultsImage selectedImage: resultsImageSel];
@@ -117,11 +106,13 @@
     if ([printString2 isEqualToString:@""]) {
         resultsTxtView.text  = resultsTempString;
         tableView.hidden=YES;
+        emailBTN.hidden=YES;
         resultsTxtView.hidden=NO;
 
     }else{
         resultsTxtView.text  = singleton.displayStrings;
         tableView.hidden=NO;
+        emailBTN.hidden=NO;
         resultsTxtView.hidden=YES;
     }
     //[self saveText];
@@ -191,7 +182,6 @@
  [btnName setTitle:[maTheData objectAtIndex:[indexPath row]] forState:UIControlStateNormal]; 
  return cell; 
  } -
- 
  */
 }
 
@@ -199,7 +189,7 @@
 {
     //sets row heights
     if (indexPath.row == 0) {
-        return 35;//first row is for heading, hence bigger
+        return 30;//first row is for heading, hence bigger
     } else {
         return 25;//all other rows
     }
@@ -215,14 +205,23 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
         //cell.detailTextLabel.backgroundColor = [UIColor clearColor];
         titleLab.backgroundColor=[UIColor colorWithRed: 1.0 green: 0.8 blue: 0.8 alpha: 1.0];
         resultLab.backgroundColor=[UIColor colorWithRed: 1.0 green: 0.8 blue: 0.8 alpha: 1.0];
+        titleLab.textAlignment=NSTextAlignmentCenter;
+        resultLab.hidden=YES;
+        
     }else{
     //cell.backgroundColor = indexPath.row % 2
     //? [UIColor colorWithRed: 1.0 green: 1.0 blue: 0.95 alpha: 0.9]
     //: [UIColor whiteColor];
     //cell.textLabel.backgroundColor = [UIColor clearColor];
     //cell.detailTextLabel.backgroundColor = [UIColor clearColor];
-        titleLab.backgroundColor=[UIColor colorWithRed: 1.0 green: 1.0 blue: 0.95 alpha: 0.9];
-        resultLab.backgroundColor=[UIColor colorWithRed: 1.0 green: 1.0 blue: 0.95 alpha: 0.9];
+        titleLab.backgroundColor=[UIColor colorWithRed: 1.0 green: 1.0 blue: 0.95 alpha: 1];
+        resultLab.backgroundColor=[UIColor colorWithRed: 1.0 green: 1.0 blue: 0.95 alpha: 1];
+        titleLab.textAlignment=NSTextAlignmentLeft;
+        if ([resultLab.text isEqualToString: @""]) {
+            resultLab.hidden=YES;
+        }else{
+            resultLab.hidden=NO;
+        }
     }
 }
 
@@ -350,7 +349,7 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
     singleton.testTime=[self getCurrentTime];
 
     NSString *emailTitle = [NSString stringWithFormat:@"Corsi App Data: %@",singleton.oldSubjectName];
-    NSString *messageBody = [NSString stringWithFormat:@"The test data for the subject:%@ taken at the date: %@ and time: %@, is attached as a text/csv file.\n\nThe file is comma separated variable, csv extension.\n\nThe data can be read by MS-Excel, then analysed by your own functions.\n\nThe screen Data follows, the attached file is formatted for MS-Excel as a CSV \n\n%@.\n\nSent by Corsi App.",singleton.subjectName, singleton.testDate, singleton.testTime, singleton.displayStrings];
+    NSString *messageBody = [NSString stringWithFormat:@"The test data for the subject:%@ taken at the date: %@ and time: %@, is attached as a text/csv file.\n\nThe file is comma separated variable, csv extension.\n\nThe data can be read by MS-Excel, then analysed by your own functions.\n\nThe screen Data follows, the attached file is formatted for MS-Excel as a CSV \n\n.\n\nSent by Corsi App.",singleton.subjectName, singleton.testDate, singleton.testTime];
     
     //NSArray  *toRecipents = [NSArray arrayWithObject:@"j.a.howell@mmu.ac.uk"];//testing only
     NSArray  *toRecipents = [NSArray arrayWithObject:singleton.email];
