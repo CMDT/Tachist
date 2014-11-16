@@ -115,7 +115,8 @@ animalsLBL,
 soundsLBL,
 settingsVC,
 testerLBL,
-emailLBL;
+emailLBL,
+subjectLBL;
 
 -(void)viewDidAppear:(BOOL)animated{
     //assign images to tab bar items
@@ -140,6 +141,7 @@ emailLBL;
 
     emailLBL.text   = singleton.email;
     testerLBL.text  = singleton.testerName;
+    subjectLBL.text  = singleton.subjectName;
 
     [showLBL setBackgroundColor:singleton.currentShowColour];
     [block5View setBackgroundColor:singleton.currentShowColour];
@@ -267,7 +269,6 @@ emailLBL;
         subjectName =  @"Participant";
         [defaults setObject:@"Participant" forKey:kSubject];
     }
-     singleton.subjectName=subjectName;
 
     //tester name
     testerName     = [defaults objectForKey:kTester];
@@ -717,6 +718,7 @@ emailLBL;
         subjectName =  @"Participant";
         [defaults setObject:@"Participant" forKey:kSubject];
     }
+
     //tester name
     temp     = [defaults objectForKey:kTester];
     if(temp  == nil ){

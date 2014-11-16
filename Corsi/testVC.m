@@ -189,14 +189,6 @@
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaultPrefs];
     NSUserDefaults *defaults        = [NSUserDefaults standardUserDefaults];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    //subject name
-    subjectName     = [defaults objectForKey:kSubject];
-    if(subjectName  == nil ){
-        subjectName =  @"Participant";
-        [defaults setObject:@"Participant" forKey:kSubject];
-        singleton.subjectName=subjectName;
-
-    }
 
     [self allButtonsBackgroundReset];
     //hide unhide labels, screens and buttons
@@ -435,9 +427,6 @@
     //if ([testerEmail isEqualToString:@""]) {
     //    testerEmail=singleton.email;
     //}
-    if ([participant isEqualToString:@""]) {
-        subjectName=singleton.subjectName;
-    }
 
     //update singleton
     //singleton.email       = testerEmail;
@@ -453,7 +442,6 @@
         //[defaults setObject:testerEmail forKey:kEmail];
     //subject name
         [defaults setObject:participant forKey:kSubject];
-        singleton.subjectName=participant;
 
     isAlertFinished=YES;
 }

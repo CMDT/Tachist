@@ -26,9 +26,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    //for tab bar, maybe needs to be in appdelegate
 	// Do any additional setup after loading the view, typically from a nib.
     NSMutableDictionary *attributes = [NSMutableDictionary dictionaryWithDictionary: [[UITabBarItem appearance] titleTextAttributesForState:UIControlStateNormal]];
-    [attributes setValue:[UIFont fontWithName:@"Serifa-Roman" size:10] forKey:NSFontAttributeName];
+    //[attributes setValue:[UIFont fontWithName:@"Serifa-Roman" size:10] forKey:NSFontAttributeName];
     [[UITabBarItem appearance] setTitleTextAttributes:attributes forState:UIControlStateNormal];
 }
 

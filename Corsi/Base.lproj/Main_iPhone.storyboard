@@ -489,6 +489,18 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wgD-mj-D3W">
+                                <rect key="frame" x="187" y="431" width="117" height="17"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Parti" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hDW-We-hrE">
+                                <rect key="frame" x="151" y="431" width="33" height="17"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.84290279212849473" green="0.9223086456184334" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -540,6 +552,7 @@
                         <outlet property="settingsViewerVIEW" destination="cMY-uT-543" id="h6q-3w-JpM"/>
                         <outlet property="showLBL" destination="4Na-W1-WhI" id="rEj-tq-t31"/>
                         <outlet property="soundsLBL" destination="Daz-n9-jND" id="JV3-Dp-eWY"/>
+                        <outlet property="subjectLBL" destination="wgD-mj-D3W" id="B3r-pW-VA5"/>
                         <outlet property="testerLBL" destination="Tzh-eM-tkI" id="26h-w1-7DR"/>
                     </connections>
                 </viewController>

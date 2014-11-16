@@ -47,17 +47,7 @@
     NSMutableArray * resultStringRows;//for Excel and data csv format
     NSMutableArray * displayStringRows;//for screen display formatted to look nice
     NSMutableArray * displayStringTitles;
-    
-    /*UIView * bl1;
-    UIView * bl2;
-    UIView * bl3;
-    UIView * bl4;
-    UIView * bl5;
-    UIView * bl6;
-    UIView * bl7;
-    UIView * bl8;
-    UIView * bl9;*/
-}
+    }
 
 //eg::: @property (nonatomic) int  offset;
 @property (nonatomic, retain) UIColor * currentBackgroundColour;
@@ -94,19 +84,6 @@
 @property (nonatomic,retain) NSString * displayStringsTitle;
 @property (nonatomic,retain) NSString * testDate;
 @property (nonatomic,retain) NSString * testTime;
-
-
-/*
-@property (nonatomic, retain) UIView * bl1; //blocks
-@property (nonatomic, retain) UIView * bl2;
-@property (nonatomic, retain) UIView * bl3;
-@property (nonatomic, retain) UIView * bl4;
-@property (nonatomic, retain) UIView * bl5;
-@property (nonatomic, retain) UIView * bl6;
-@property (nonatomic, retain) UIView * bl7;
-@property (nonatomic, retain) UIView * bl8;
-@property (nonatomic, retain) UIView * bl9;
- */
 
 @property (nonatomic,retain) NSMutableArray * resultStringRows;    //for the Excel formatted text, csv
 @property (nonatomic,retain) NSMutableArray * displayStringRows;   //for the result string, one row per item
