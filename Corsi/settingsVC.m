@@ -635,6 +635,13 @@ emailLBL;
         [defaults setObject:[NSString stringWithFormat:@"%@", singleton.email] forKey:kEmail];
         [defaults setObject:[NSString stringWithFormat:@"%@", singleton.testerName] forKey:kTester];
         [defaults synchronize];//make sure all are updated
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"CORSI TEST SETTINGS"
+                                                     message:@"The settings were SAVED for the test."
+                                                    delegate:self
+                                           cancelButtonTitle:nil //@"Cancel"
+                                           otherButtonTitles:@"OK", nil];
+    alert.alertViewStyle = UIAlertViewStyleDefault;
+    [alert show];
 }
 
 -(IBAction)loadSettings:(id)sender{
@@ -794,6 +801,14 @@ emailLBL;
 
     [defaults synchronize];
     [self refreshView];
+
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"CORSI TEST SETTINGS"
+                                                     message:@"The settings were LOADED for the test."
+                                                    delegate:self
+                                           cancelButtonTitle:nil //@"Cancel"
+                                           otherButtonTitles:@"OK", nil];
+    alert.alertViewStyle = UIAlertViewStyleDefault;
+    [alert show];
 }
 
 -(float)randomDegrees359

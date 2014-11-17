@@ -185,14 +185,6 @@
     isAborted=NO;
 
     mySingleton *singleton = [mySingleton sharedSingleton];
-    //plist defaults
-    //NSString *pathStr               = [[NSBundle mainBundle] bundlePath];
-    //NSString *settingsBundlePath    = [pathStr stringByAppendingPathComponent:@"Settings.bundle"];
-    //NSString *defaultPrefsFile      = [settingsBundlePath stringByAppendingPathComponent:@"Root.plist"];
-    //NSDictionary *defaultPrefs      = [NSDictionary dictionaryWithContentsOfFile:defaultPrefsFile];
-    //[[NSUserDefaults standardUserDefaults] registerDefaults:defaultPrefs];
-    //NSUserDefaults *defaults        = [NSUserDefaults standardUserDefaults];
-    //[[NSUserDefaults standardUserDefaults] synchronize];
 
     [self allButtonsBackgroundReset];
 
@@ -204,11 +196,12 @@
 
     [self setColours];
 
-    tempStartMessage=@"You will be shown a sequence of blocks, observe the order when prompted, \n and recall the sequence when prompted. \n\nThe test will proceed until all the sections are completed.\n\nYou will exit the test if you select any other tab menu item during the test.\n\nOnly completed tests are valid and available for analysis or email.";
+    tempStartMessage=@"You will be shown a sequence of colourd blocks. \n\nObserve the order shown, then recall \nthe sequence when prompted. \n\nThe test will proceed until all the sections are completed.\n\nYou will exit the test if you touch the 'Cancel' button during the test.\n\nOnly completed tests are valid and available for analysis and email.";
 
-    MessageTextView.text=tempStartMessage;
+    MessageTextView.text = tempStartMessage;
+    MessageTextView.textAlignment = NSTextAlignmentCenter;
     //MessageTextView.font=[UIFont fontWithName:@"Serifa-Roman" size:(14.0f)];
-    //MessageTextView.textAlignment = UITextAlignmentCenter;
+
     MessageTextView.hidden = NO;
     MessageView.hidden     = YES;
     startBTN.hidden        = NO;
@@ -418,7 +411,7 @@
     //mySingleton *singleton = [mySingleton sharedSingleton];
     //NSString * testerEmail =[[alertView textFieldAtIndex:0] text];
 
-    NSString * participant=@"empty field";
+    NSString * participant=@"none";
     participant=[[alertView textFieldAtIndex:0] text];//used to be 1 for dual entry, 0 for single
         //NSLog(@"Tester Email    : %@", testerEmail);
         //NSLog(@"Participant     : %@", participant);
@@ -464,11 +457,11 @@
                                            otherButtonTitles:@"Continue", nil]; 
      alert.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;*/
     //one line alert
-    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@""
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"CORSI TEST START"
                                                      message:@"Enter Participant Code For This Test"
                                                     delegate:self
                                            cancelButtonTitle:nil //@"Cancel"
-                                           otherButtonTitles:@"Continue", nil];
+                                           otherButtonTitles:@"Type New or Continue", nil];
     alert.alertViewStyle = UIAlertViewStylePlainTextInput;
 
     //UITextField * alertTextField1 = [alert textFieldAtIndex:0];
@@ -1672,7 +1665,8 @@
 
     //clear arrays for results strings
     [singleton.resultStringRows removeAllObjects];
-    [singleton.resultStringRows removeAllObjects];
+    [singleton.displayStringRows removeAllObjects];
+    [singleton.displayStringTitles removeAllObjects];
 
     //clear output strings
     singleton.resultStrings=@"";
@@ -1989,7 +1983,7 @@
         //finish off string from loop
 
         tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@"%d, %d", cor, wro]];
-        tempString2 = [NSString stringWithFormat:@"%@%@", tempString2, [NSString stringWithFormat:@"c%dw%d", cor, wro]];
+        tempString2 = [NSString stringWithFormat:@"  :%@%@", tempString2, [NSString stringWithFormat:@"c%dw%d", cor, wro]];
         //line
 
         //tempString4=[NSString stringWithFormat:@"Test:123456789_CW"];
@@ -2181,5 +2175,9 @@
             break;
     }
     return myColour;
+}
+
+- (IBAction)returnToStepOne:(UIStoryboardSegue *)segue {
+    NSLog(@"And now we are back.");
 }
 @end

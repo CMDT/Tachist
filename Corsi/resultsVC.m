@@ -8,6 +8,7 @@
 
 #import "resultsVC.h"
 #import "mySingleton.h"
+#define kSubject    @"subjectName"
 
 @interface resultsVC ()
 
@@ -72,7 +73,14 @@
     //make a text file from the array of results for email csv attachment
     NSMutableString *element     = [[NSMutableString alloc] init];
     NSMutableString *printString = [NSMutableString stringWithString:@""];
-    
+
+    NSURL *defaultPrefsFile     = [[NSBundle mainBundle] URLForResource:@"Root" withExtension:@"plist"];
+    NSDictionary *defaultPrefs  = [NSDictionary dictionaryWithContentsOfURL:defaultPrefsFile];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultPrefs];
+    NSUserDefaults *defaults    = [NSUserDefaults standardUserDefaults];
+    [defaults synchronize];
+    singleton.subjectName       = [defaults  objectForKey:kSubject];
+
     long final=singleton.resultStringRows.count;
     
     for(long i=0; i< final; i++)
@@ -349,7 +357,7 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
     singleton.testTime=[self getCurrentTime];
 
     NSString *emailTitle = [NSString stringWithFormat:@"Corsi App Data: %@",singleton.oldSubjectName];
-    NSString *messageBody = [NSString stringWithFormat:@"The test data for the subject:%@ taken at the date: %@ and time: %@, is attached as a text/csv file.\n\nThe file is comma separated variable, csv extension.\n\nThe data can be read by MS-Excel, then analysed by your own functions.\n\nThe screen Data follows, the attached file is formatted for MS-Excel as a CSV \n\n.\n\nSent by Corsi App.",singleton.subjectName, singleton.testDate, singleton.testTime];
+    NSString *messageBody = [NSString stringWithFormat:@"The test data for the subject:%@ taken at the date: %@ and time: %@, is attached as a text/csv file.\n\nThe file format is comma separated variable with a csv extension.\n\nThe data can be read by MS-Excel, then analysed by your own functions.\n\nSent by the Corsi App.",singleton.subjectName, singleton.testDate, singleton.testTime];
     
     //NSArray  *toRecipents = [NSArray arrayWithObject:@"j.a.howell@mmu.ac.uk"];//testing only
     NSArray  *toRecipents = [NSArray arrayWithObject:singleton.email];
