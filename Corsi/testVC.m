@@ -196,7 +196,7 @@
 
     [self setColours];
 
-    tempStartMessage=@"You will be shown a sequence of colourd blocks. \n\nObserve the order shown, then recall \nthe sequence when prompted. \n\nThe test will proceed until all the sections are completed.\n\nYou will exit the test if you touch the 'Cancel' button during the test.\n\nOnly completed tests are valid and available for analysis and email.";
+    tempStartMessage=@"You will be shown a sequence of coloured blocks. \n\nObserve the order shown, then recall \nthe sequence when prompted. \n\nThe test will proceed until all the sections are completed.\n\nYou will exit the test if you touch the 'Cancel' button during the test.\n\nOnly completed tests are valid and available for analysis and email.";
 
     MessageTextView.text = tempStartMessage;
     MessageTextView.textAlignment = NSTextAlignmentCenter;
@@ -408,7 +408,7 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     //an alert was detected, get the text filelds and update the singleton
-    //mySingleton *singleton = [mySingleton sharedSingleton];
+    mySingleton *singleton = [mySingleton sharedSingleton];
     //NSString * testerEmail =[[alertView textFieldAtIndex:0] text];
 
     NSString * participant=@"none";
@@ -438,7 +438,10 @@
         [[NSUserDefaults standardUserDefaults] registerDefaults:defaultPrefs];
         NSUserDefaults *defaults     = [NSUserDefaults standardUserDefaults];
         [[NSUserDefaults standardUserDefaults] synchronize];
+        //for plist
         [defaults setObject:participant forKey:kSubject];
+        //for singleton
+        singleton.subjectName = participant;
     }
     isAlertFinished=YES;
 }
@@ -458,10 +461,10 @@
      alert.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;*/
     //one line alert
     UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"CORSI TEST START"
-                                                     message:@"Enter Participant Code For This Test"
+                                                     message:@"Enter a Participant Code For This Test\nor to use the pervious one, \ntouch 'continue'"
                                                     delegate:self
                                            cancelButtonTitle:nil //@"Cancel"
-                                           otherButtonTitles:@"Type New or Continue", nil];
+                                           otherButtonTitles:@"Continue", nil];
     alert.alertViewStyle = UIAlertViewStylePlainTextInput;
 
     //UITextField * alertTextField1 = [alert textFieldAtIndex:0];
@@ -907,33 +910,32 @@
 
 -(void)box1 {
     if (!isAborted) {
-
-    //block button inputs for now, re-enable after stage end.
-    [self buttonsDisable];
+        //block button inputs for now, re-enable after stage end.
+        [self buttonsDisable];
     
-    //display status
-    blkTotalLBL.text = [NSString stringWithFormat:@"%d", xcounter];
-    blkNoLBL.text    = [NSString stringWithFormat:@"%d", ncounter];
-    setNoLBL.text    = [NSString stringWithFormat:@"%d", xcounter-2];
-    setTotalLBL.text = [NSString stringWithFormat:@"%d", finish-2];
-    [self showInfo];
-    //hide all messages except blocks
-    MessageTextView.hidden=YES;
-    MessageView.hidden=YES;
-    startBTN.hidden=YES;
+        //display status
+        blkTotalLBL.text = [NSString stringWithFormat:@"%d", xcounter];
+        blkNoLBL.text    = [NSString stringWithFormat:@"%d", ncounter];
+        setNoLBL.text    = [NSString stringWithFormat:@"%d", xcounter-2];
+        setTotalLBL.text = [NSString stringWithFormat:@"%d", finish-2];
+        [self showInfo];
+        //hide all messages except blocks
+        MessageTextView.hidden=YES;
+        MessageView.hidden=YES;
+        startBTN.hidden=YES;
     
-    //display blocks
-    [self display_blocks];
+        //display blocks
+        [self display_blocks];
 
-    if (infoShow) {
-        statusMessageLBL.text = @"Observe Block Sequence";
-    }else{
-        statusMessageLBL.text = @"Observe";
-    }
+        if (infoShow) {
+            statusMessageLBL.text = @"Observe Block Sequence";
+        }else{
+            statusMessageLBL.text = @"Observe";
+        }
 
-    int t=[self whichBlock:ncounter :xcounter];
-    NSLog(@"block showing : %i seq : %i set : %i", t, ncounter, xcounter);
-    //show the t block
+        int t=[self whichBlock:ncounter :xcounter];
+        NSLog(@"block showing : %i seq : %i set : %i", t, ncounter, xcounter);
+        //show the t block
     switch (t) {
         case 1:
             box1image.backgroundColor=currentShowColour;
@@ -965,18 +967,17 @@
         default:
             [self allButtonsBackgroundReset];// background colour reset to std.
             break;
-    }
-    [NSTimer scheduledTimerWithTimeInterval:showTime target:self selector:@selector(but1) userInfo:nil repeats:NO];
+        }
+        [NSTimer scheduledTimerWithTimeInterval:showTime target:self selector:@selector(but1) userInfo:nil repeats:NO];
     }
 }
 
 -(void)but1 {
     if (!isAborted) {
-
-    [self buttonsDisable];
-    //clears the block, waits and then sends to check to see if any end, stage or flag is passed
-    [self allButtonsBackgroundReset];// background colour reset to std
-    [NSTimer scheduledTimerWithTimeInterval:waitTime target:self selector:@selector(stageChecks) userInfo:nil repeats:NO];
+        [self buttonsDisable];
+        //clears the block, waits and then sends to check to see if any end, stage or flag is passed
+        [self allButtonsBackgroundReset];// background colour reset to std
+        [NSTimer scheduledTimerWithTimeInterval:waitTime target:self selector:@selector(stageChecks) userInfo:nil repeats:NO];
     }
 }
 
@@ -1231,10 +1232,9 @@
 
 -(void)getGuesses {
     if (!isAborted) {
-
-    [self buttonsEnable];
-    blkNoLBL.text = [NSString stringWithFormat:@"%i",0];
-    //turns on the buttons, collects the xcounter guesses, forms a string, saves it and carries on with next stage
+        [self buttonsEnable];
+        blkNoLBL.text = [NSString stringWithFormat:@"%i",0];
+        //turns on the buttons, collects the xcounter guesses, forms a string, saves it and carries on with next stage
     
         if (!reverseTest) {
             if (infoShow) {
@@ -1250,23 +1250,23 @@
             }
         }
 
-    NSLog(@"Press The Blocks in Order");
+        NSLog(@"Press The Blocks in Order");
     
-    if(pressNo >= xcounter+1){
-        pressNo=0;
-        [self buttonsDisable];
-        [NSTimer scheduledTimerWithTimeInterval: (messageTime/2) target:self selector:@selector(blankMSG3) userInfo:nil repeats:NO];
-    }else{
-        [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(self) userInfo:nil repeats:NO];
-    }
+        if(pressNo >= xcounter+1){
+            pressNo=0;
+            [self buttonsDisable];
+            [NSTimer scheduledTimerWithTimeInterval: (messageTime/2) target:self selector:@selector(blankMSG3) userInfo:nil repeats:NO];
+        }else{
+            [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(self) userInfo:nil repeats:NO];
+        }
     }
 }
 
 -(void)getFinalGuesses {
     if (!isAborted) {
-    [self buttonsEnable];
-    blkNoLBL.text = [NSString stringWithFormat:@"%i",0];
-    //turns on the buttons, collects the xcounter guesses, forms a string, saves it and carries on with next stage
+        [self buttonsEnable];
+        blkNoLBL.text = [NSString stringWithFormat:@"%i",0];
+        //turns on the buttons, collects the xcounter guesses, forms a string, saves it and carries on with next stage
         if (!reverseTest) {
             if (infoShow) {
                 statusMessageLBL.text = @"Recall the sequence in the reverse order.";
@@ -1281,104 +1281,99 @@
             }
         }
 
-    //NSLog(@"Press The Blocks in Order");
+        //NSLog(@"Press The Blocks in Order");
    
-    if((pressNo >= xcounter+1)&&(isFinished==YES)){
+        if((pressNo >= xcounter+1)&&(isFinished==YES)){
         [self buttonsDisable];
-        [NSTimer scheduledTimerWithTimeInterval: (messageTime/2) target:self selector:@selector(endTestMSG) userInfo:nil repeats:NO];
-    }else{
-        [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(self) userInfo:nil repeats:NO];
-    }
+            [NSTimer scheduledTimerWithTimeInterval: (messageTime/2) target:self selector:@selector(endTestMSG) userInfo:nil repeats:NO];
+        }else{
+            [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(self) userInfo:nil repeats:NO];
+        }
     }
 }
 
 -(void)guessMSG {
     if (!isAborted) {
-    blkNoLBL.text = [NSString stringWithFormat:@"%i",0];
-    //NSLog(@"Guess Now");
-
+        blkNoLBL.text = [NSString stringWithFormat:@"%i",0];
+        //NSLog(@"Guess Now");
         statusMessageLBL.text = @"";
-
-    [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(getGuesses) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(getGuesses) userInfo:nil repeats:NO];
     }
 }
 
 -(void)finalGuessMSG {
     if (!isAborted) {
         blkNoLBL.text = [NSString stringWithFormat:@"%i",0];
-
         statusMessageLBL.text = @"";
-
-    [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(getFinalGuesses) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(getFinalGuesses) userInfo:nil repeats:NO];
     }
 }
 
 -(void)stageEndMSG {
     if (!isAborted) {
-    [self buttonsDisable];
-    //NSLog(@"Stage Ending");
-    if (infoShow) {
-        statusMessageLBL.text = @"";
-    }else{
-        statusMessageLBL.text = @"";
-    }
-    [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(guessMSG) userInfo:nil repeats:NO];
+        [self buttonsDisable];
+        //NSLog(@"Stage Ending");
+        if (infoShow) {
+            statusMessageLBL.text = @"";
+        }else{
+            statusMessageLBL.text = @"";
+        }
+        [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(guessMSG) userInfo:nil repeats:NO];
     }
 }
 
 -(void)finalStageEndMSG {
     if (!isAborted) {
-    [self buttonsDisable];
-    //NSLog(@"Final Stage Ending");
-    isFinished=YES;
-    if (infoShow) {
-        statusMessageLBL.text = @"";
-    }else{
-        statusMessageLBL.text = @"";
-    }
-    [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(finalGuessMSG) userInfo:nil repeats:NO];
+        [self buttonsDisable];
+        //NSLog(@"Final Stage Ending");
+        isFinished=YES;
+        if (infoShow) {
+            statusMessageLBL.text = @"";
+        }else{
+            statusMessageLBL.text = @"";
+        }
+        [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(finalGuessMSG) userInfo:nil repeats:NO];
     }
 }
 
 -(void)nextStageMSG {
     if (!isAborted) {
-    [self buttonsDisable];
-    //NSLog(@"Stage Starting");
-    if (infoShow) {
-        statusMessageLBL.text = @"Observe the Blocks";
-    }else{
-        statusMessageLBL.text = @"Observe";
-    }
-    pressNo=0;
-    [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(blankMSG) userInfo:nil repeats:NO];
+        [self buttonsDisable];
+        //NSLog(@"Stage Starting");
+        if (infoShow) {
+            statusMessageLBL.text = @"Observe the Blocks";
+        }else{
+            statusMessageLBL.text = @"Observe";
+        }
+        pressNo = 0;
+        [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(blankMSG) userInfo:nil repeats:NO];
     }
 }
 
 -(void)startTestMSG {
     if (!isAborted) {
+        //Start of Test Message
+        [self buttonsDisable];
+        //NSLog(@"Start Test");
 
-    //Start of Test Message
-    [self buttonsDisable];
-    //NSLog(@"Start Test");
-
-    if (!reverseTest) {
-        if (infoShow) {
-            statusMessageLBL.text = @"Observe the sequence, recall in the reverse order.";
+        if (!reverseTest) {
+            if (infoShow) {
+                statusMessageLBL.text = @"Observe the sequence, recall in the reverse order.";
+            }else{
+                statusMessageLBL.text = @"Reverse Test";
+            }
         }else{
-            statusMessageLBL.text = @"Reverse Test";
+            if (infoShow) {
+                statusMessageLBL.text = @"Observe the sequence, recall in the same order.";
+            }else{
+                statusMessageLBL.text = @"Forward Test";
+            }
         }
-    }else{
-        if (infoShow) {
-            statusMessageLBL.text = @"Observe the sequence, recall in the same order.";
-        }else{
-            statusMessageLBL.text = @"Forward Test";
-        }
-    }
-    [MessageView setImage: card[0].image];
-    MessageView.hidden=YES;
-    [self animateMessageView];
+        [MessageView setImage: card[0].image];
+        MessageView.hidden=YES;
+        [self animateMessageView];
    
-    [NSTimer scheduledTimerWithTimeInterval: 5 target:self selector:@selector(blankMSG2) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval: 5 target:self selector:@selector(blankMSG2) userInfo:nil repeats:NO];
     }
 }
 
@@ -1387,6 +1382,7 @@
 }
 
 -(void)animateMessageViewIN{
+    //ease in
     MessageView.alpha = 0.0;
     MessageView.hidden=NO;
     [[MessageView superview] bringSubviewToFront:MessageView];
@@ -1400,12 +1396,10 @@
                      }
                      completion:^(BOOL finished) {[NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(animateMessageViewOUT) userInfo:nil repeats:NO];
                                           }];
-    //[UIView commitAnimations];
-    
 }
 
 -(void)animateMessageViewOUT{
-    
+    //ease out
     [[MessageView superview] bringSubviewToFront:MessageView];
 
     [UIView animateWithDuration:1
@@ -1420,92 +1414,81 @@
                      }
                      completion:^(BOOL finished) {
                      }];
-    
-    //[UIView commitAnimations];
-    //[MessageView removeFromSuperview];
 }
 
 -(void)endTestMSG {
     if (!isAborted) {
-
-    //End of Test Message
-    [self buttonsDisable];
-    NSLog(@"End Test");
-    stopTestNowBTN.hidden=YES;
-    isFinished=YES;
-    if (infoShow) {
-        statusMessageLBL.text = @"The Test has Finished.";
-    }else{
-        statusMessageLBL.text = @"Finished The Test";
-    }
-    [self hideInfo];
-    [self hide_blocks];
-    [MessageView setImage: card[1].image];
-    MessageView.hidden=NO;
-    [self animateMessageView];
-    [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(calculatingMSG) userInfo:nil repeats:NO];
+        //End of Test Message
+        [self buttonsDisable];
+        //NSLog(@"End Test");
+        stopTestNowBTN.hidden=YES;
+        isFinished=YES;
+        if (infoShow) {
+            statusMessageLBL.text = @"The Test has Finished.";
+        }else{
+            statusMessageLBL.text = @"Finished The Test";
+        }
+        [self hideInfo];
+        [self hide_blocks];
+        [MessageView setImage: card[1].image];
+        MessageView.hidden=NO;
+        [self animateMessageView];
+        [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(calculatingMSG) userInfo:nil repeats:NO];
     }
 }
 
 -(void)calculatingMSG {
     if (!isAborted) {
+        //Calculate stats and outputs
+        [self buttonsDisable];
+        isFinished=YES;
+        //NSLog(@"Calculating Test Results");
+        if (infoShow) {
+            statusMessageLBL.text = @"The test results are being calculated.";
+        }else{
+            statusMessageLBL.text = @"Calculating";
+        }
+        [self hide_blocks];
+        [self hideInfo];
+        [MessageView setImage: card[4].image];
+        MessageView.hidden=NO;
+        [self animateMessageView];
 
-    //Calculate stats and outputs
-    if (!isAborted) {
-
-    [self buttonsDisable];
-    isFinished=YES;
-    NSLog(@"Calculating Test Results");
-    if (infoShow) {
-      statusMessageLBL.text = @"The test results are being calculated.";
-    }else{
-        statusMessageLBL.text = @"Calculating";
-    }
-    [self hide_blocks];
-    [self hideInfo];
-    [MessageView setImage: card[4].image];
-    MessageView.hidden=NO;
-    [self animateMessageView];
-
-    [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(calculations) userInfo:nil repeats:NO];
-    }
+        [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(calculations) userInfo:nil repeats:NO];
     }
 }
 
 -(void)blankMSG {
     if (!isAborted) {
-
-    [self buttonsDisable];
-    NSLog(@"(blankmsg)");
-    MessageView.hidden=YES;
-    [NSTimer scheduledTimerWithTimeInterval:waitTime target:self selector:@selector(stageChecks) userInfo:nil repeats:NO];
+        [self buttonsDisable];
+        //NSLog(@"(blankmsg)");
+        MessageView.hidden=YES;
+        [NSTimer scheduledTimerWithTimeInterval:waitTime target:self selector:@selector(stageChecks) userInfo:nil repeats:NO];
     }
 }
 
 -(void)blankMSG2 {
     if (!isAborted) {
-
-    [self buttonsDisable];
-    NSLog(@"(blankmsg2)");
-    [self display_blocks];
-    MessageView.hidden=YES;//maybe messagetime--v
-    [NSTimer scheduledTimerWithTimeInterval:startTime target:self selector:@selector(box1) userInfo:nil repeats:NO];
+        [self buttonsDisable];
+        //NSLog(@"(blankmsg2)");
+        [self display_blocks];
+        MessageView.hidden=YES;//maybe messagetime--v
+        [NSTimer scheduledTimerWithTimeInterval:startTime target:self selector:@selector(box1) userInfo:nil repeats:NO];
     }
 }
 
 -(void)jumpToResultsView {
     if (!isAborted) {
-
-    [self buttonsDisable];
-    NSLog(@"(jumpToResultsView)");
-    [self hide_blocks];
-    [MessageView setImage: card[6].image];
-    MessageView.hidden=NO;
-    isCalculating=YES;
+        [self buttonsDisable];
+        //NSLog(@"(jumpToResultsView)");
+        [self hide_blocks];
+        [MessageView setImage: card[6].image];
+        MessageView.hidden=NO;
+        isCalculating=YES;
     
-    self.tabBarController.tabBar.hidden = NO;
+        self.tabBarController.tabBar.hidden = NO;
     
-    [self animateMessageView];
+        [self animateMessageView];
 
     //jump to selector ResultsVC
     //[self.tabBarController setSelectedIndex:4]; needs to be able to jump as well
@@ -1515,7 +1498,6 @@
 
 -(void)blankMSG3 {
     if (!isAborted) {
-
     [self buttonsDisable];
     guessStr[xcounter-1]= [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@",guess[1],guess[2],guess[3],guess[4],guess[5],guess[6],guess[7],guess[8],guess[9]];
     [self statusUpdate:xcounter-1];
@@ -1534,6 +1516,7 @@
 }
 
 -(float)random9
+//for the blocks
 {
     float num = 1;
     for (int r=1; r<+arc4random_uniform(321); r++)
@@ -1547,6 +1530,7 @@
 }
 
 -(int)random22
+//for the animal graphics
 {
     int num1 = 1;
             num1 = arc4random_uniform(22); //1-21
@@ -1560,6 +1544,7 @@
 }
 
 -(int)randomPt
+//a random point to put a block away from origin depending on block size
 {
     mySingleton *singleton = [mySingleton sharedSingleton];
     int range1;
@@ -1613,8 +1598,7 @@
     
     posrand=(float)arc4random_uniform(range1)*split1;
     
-    NSLog(@"Random Pt:%i",posrand);
-    //*********************************************
+    //NSLog(@"Random Pt:%i",posrand);
     return posrand;
 }
 
@@ -1645,7 +1629,6 @@
     [format setDateFormat:@"dd/MM/yy"];
     NSDate *now = [NSDate date];
     NSString *retStr = [format stringFromDate:now];
-
     return retStr;
 }
 
@@ -1654,7 +1637,6 @@
     [format setDateFormat:@"HH:mm:ss"];
     NSDate *now = [NSDate date];
     NSString *retStr = [format stringFromDate:now];
-
     return retStr;
 }
 -(void)calculations{
@@ -1702,115 +1684,93 @@
 
     //headers
         //l1
-    tempString=[NSString stringWithFormat:@"Corsi Block Tapping Test Results"];
+    tempString=@"Corsi Block Tapping Test Results";
         [singleton.resultStringRows addObject: tempString];//csv
         [singleton.displayStringTitles addObject:tempString ];//title
         [singleton.displayStringRows addObject: @""];//data
+        
+    //blank
+    tempString=@"";
+    [singleton.resultStringRows addObject:tempString];//csv
 
-
-        //**** start new block ****
-        //tempString4 = @"some title";
-        //[singleton.displayStringTitles addObject:tempString4 ];//title
-
-        //tempString  = [NSString stringWithFormat:@"Date: %@, Time: %@", singleton.testDate, singleton.testTime];
-        //[singleton.resultStringRows addObject: tempString];//csv
-
-        //tempString2 = [NSString stringWithFormat:@"%@", singleton.testDate];
-        //[singleton.displayStringRows addObject: tempString2];//data
-        //**** end new block ****
-
-
-        //l2
-    tempString=[NSString stringWithFormat:@""];
-        //[singleton.displayStringRows addObject:tempString];
-    [singleton.resultStringRows addObject:tempString];
-
-        //l3
     tempString  = @"Date:";
-
-    tempString2 =[NSString stringWithFormat:@"%@", singleton.testDate];
+    tempString2 =singleton.testDate;
     [singleton.displayStringTitles addObject:tempString ];//title
     [singleton.displayStringRows addObject: tempString2];//data
 
-    tempString2=[NSString stringWithFormat:@"%@", singleton.testTime];
     tempString  = @"Time:";
+    tempString2=singleton.testTime;
     [singleton.displayStringTitles addObject:tempString ];//title
     [singleton.displayStringRows addObject: tempString2];//data
 
-    tempString=[NSString stringWithFormat:@"Date: %@, Time: %@", singleton.testDate, singleton.testTime];
+    tempString=[NSString stringWithFormat:@"Date: %@", singleton.testDate];//csv
+    [singleton.resultStringRows addObject:tempString];
+    tempString=[NSString stringWithFormat:@"Time: %@", singleton.testTime];//csv
     [singleton.resultStringRows addObject:tempString];
 
-        //l4
-        //[singleton.displayStringRows addObject:tempString2];
-
-    tempString=[NSString stringWithFormat:@""];
-        //[singleton.displayStringRows addObject:tempString];
-    [singleton.resultStringRows addObject:tempString];
+    tempString=@"";
+    [singleton.resultStringRows addObject:tempString];//csv
 
         tempString4 = @"Tester:";
         [singleton.displayStringTitles addObject:tempString4 ];//title
 
-        tempString  = [NSString stringWithFormat:@"Tester: %@", singleton.testerName];
+        tempString  = [NSString stringWithFormat:@"Tester:, %@", singleton.testerName];
         [singleton.resultStringRows addObject: tempString];//csv
 
-        tempString2 = [NSString stringWithFormat:@"%@", singleton.testerName];
+        tempString2 = singleton.testerName;
         [singleton.displayStringRows addObject: tempString2];//data
 
         tempString4 = @"Participant No:";
         [singleton.displayStringTitles addObject:tempString4 ];//title
 
-        tempString  = [NSString stringWithFormat:@"Participant No: %@", singleton.subjectName];
+        tempString  = [NSString stringWithFormat:@"Participant No:, %@", singleton.subjectName];
         [singleton.resultStringRows addObject: tempString];//csv
 
-        tempString2 = [NSString stringWithFormat:@"%@", singleton.subjectName];
+        tempString2 = singleton.subjectName;
         [singleton.displayStringRows addObject: tempString2];//data
-
-        tempString=[NSString stringWithFormat:@""];//csv
-
-    [singleton.resultStringRows addObject:tempString];
+//blank
+        tempString=@"";
+        [singleton.resultStringRows addObject:tempString];//csv
 
         tempString4 = @"Start Time";
         [singleton.displayStringTitles addObject:tempString4 ];//title
-
-        tempString=[NSString stringWithFormat:@"Start Time %2.0f ms",singleton.startTime];//csv
+        tempString=[NSString stringWithFormat:@"Start Time:, %2.0f, ms",singleton.startTime];//csv
         [singleton.resultStringRows addObject:tempString];//csv
-
         tempString2 = [NSString stringWithFormat:@"%2.0f ms", singleton.startTime];
         [singleton.displayStringRows addObject: tempString2];//data
 
         tempString4 = @"Wait Time";
         [singleton.displayStringTitles addObject:tempString4 ];//title
-        tempString=[NSString stringWithFormat:@"Wait Time %2.0f ms",singleton.startTime];//csv
+        tempString=[NSString stringWithFormat:@"Wait Time:, %2.0f, ms",singleton.startTime];//csv
         [singleton.resultStringRows addObject:tempString];//csv
-
         tempString2 = [NSString stringWithFormat:@"%2.0f ms", singleton.waitTime];
         [singleton.displayStringRows addObject: tempString2];//data
-
-    tempString=[NSString stringWithFormat:@"   Show Time: %2.0f ms",singleton.showTime];
-    [singleton.resultStringRows addObject:tempString];
-        tempString=[NSString stringWithFormat:@"Show Time"];
-        [singleton.displayStringTitles addObject:tempString ];//title
+        
+        tempString4=@"Show Time";
+        tempString=[NSString stringWithFormat:@"   Show Time:, %2.0f, ms",singleton.showTime];
+        [singleton.resultStringRows addObject:tempString];
+        [singleton.displayStringTitles addObject:tempString4 ];//title
         tempString=[NSString stringWithFormat:@"%2.0f ms", singleton.showTime];
         [singleton.displayStringRows addObject: tempString ];//data
-
-    tempString=[NSString stringWithFormat:@"Canvas: %@",[self colourUIToString:(singleton.currentBackgroundColour)]];
+        
+        tempString4=@"Canvas";
+        tempString=[NSString stringWithFormat:@"Canvas:, %@",[self colourUIToString:(singleton.currentBackgroundColour)]];
         [singleton.resultStringRows addObject:tempString];//csv
-        tempString=[NSString stringWithFormat:@"Canvas"];
-        [singleton.displayStringTitles addObject:tempString ];//title
+        [singleton.displayStringTitles addObject:tempString4 ];//title
         tempString=[NSString stringWithFormat:@"%@", [self colourUIToString:(singleton.currentBackgroundColour)]];
         [singleton.displayStringRows addObject: tempString ];//data
-
-    tempString=[NSString stringWithFormat:@"Show:    %@",[self colourUIToString:(singleton.currentShowColour)]];
+        
+        tempString4=@"Show";
+        tempString=[NSString stringWithFormat:@"Show:,    %@",[self colourUIToString:(singleton.currentShowColour)]];
         [singleton.resultStringRows addObject:tempString];//csv
-        tempString=[NSString stringWithFormat:@"Show"];
-        [singleton.displayStringTitles addObject:tempString ];//title
+        [singleton.displayStringTitles addObject:tempString4 ];//title
         tempString=[NSString stringWithFormat:@"%@", [self colourUIToString:(singleton.currentShowColour)]];
         [singleton.displayStringRows addObject: tempString ];//data
 
-    tempString=[NSString stringWithFormat:@"Block: %@",[self colourUIToString:(singleton.currentBlockColour)]];
+        tempString4=@"Block";
+        tempString=[NSString stringWithFormat:@"Block:, %@",[self colourUIToString:(singleton.currentBlockColour)]];
         [singleton.resultStringRows addObject:tempString];//csv
-        tempString=[NSString stringWithFormat:@"Block"];
-        [singleton.displayStringTitles addObject:tempString ];//title
+        [singleton.displayStringTitles addObject:tempString4 ];//title
         tempString=[NSString stringWithFormat:@"%@", [self colourUIToString:(singleton.currentBlockColour)]];
         [singleton.displayStringRows addObject: tempString ];//data
 
@@ -1824,19 +1784,19 @@
     NSString *ans2;
     
     if (singleton.animals) {
-        ani=@"YES, Random";
+        ani=@"YES Random";
     }else{
-        ani=@"NO, Plain";
+        ani=@"NO Plain";
     }
     if (singleton.blockRotation) {
-        rot=@"YES, Random";
+        rot=@"YES Random";
     }else{
-        rot=@"NO, 90 degrees";
+        rot=@"NO 90 degrees";
     }
     if (singleton.forwardTestDirection) {
-        forw=@"YES, Normal Test";
+        forw=@"YES Normal Test";
     }else{
-        forw=@"NO, Reverse Test";
+        forw=@"NO Reverse Test";
     }
     if (singleton.sounds) {
         beep=@"Beep ON";
@@ -1846,61 +1806,65 @@
         beep2=@"(none)";
     }
     beep2=singleton.beepEffect;
-
-    tempString=[NSString stringWithFormat:@"Forward Test:   %@", forw];
-        [singleton.resultStringRows addObject:tempString];//csv
-        tempString=[NSString stringWithFormat:@"Forward Test"];
-        [singleton.displayStringTitles addObject:tempString ];//title
-        tempString=[NSString stringWithFormat:@"%@", forw];
-        [singleton.displayStringRows addObject: tempString ];//data
-
-    tempString=[NSString stringWithFormat:@"Block Size:       %2.0f",singleton.blockSize];
-        [singleton.resultStringRows addObject:tempString];//csv
-        tempString=[NSString stringWithFormat:@"Block Size"];
-        [singleton.displayStringTitles addObject:tempString ];//title
-        tempString=[NSString stringWithFormat:@"%2.0f", singleton.blockSize];
-        [singleton.displayStringRows addObject: tempString ];//data
-
-    tempString=[NSString stringWithFormat:@"Block Rotation: %@",rot];
-        [singleton.resultStringRows addObject:tempString];//csv
-        tempString=[NSString stringWithFormat:@"Block Rotation"];
-        [singleton.displayStringTitles addObject:tempString ];//title
-        tempString=[NSString stringWithFormat:@"%@", rot];
-        [singleton.displayStringRows addObject: tempString ];//data
-//line
-    tempString=[NSString stringWithFormat:@"Block Animals:  %@", ani];
-        [singleton.resultStringRows addObject:tempString];//csv
-        tempString=[NSString stringWithFormat:@"Block Animals"];
-        [singleton.displayStringTitles addObject:tempString ];//title
-        tempString=[NSString stringWithFormat:@"%@", ani];
-        [singleton.displayStringRows addObject: tempString ];//data
+        
+    //line
+    tempString=[NSString stringWithFormat:@"Forward Test:,%@", forw];
+    [singleton.resultStringRows addObject:tempString];//csv
+    tempString=@"Forward Test";
+    [singleton.displayStringTitles addObject:tempString ];//title
+    tempString=[NSString stringWithFormat:@"%@", forw];
+    [singleton.displayStringRows addObject: tempString ];//data
+        
+    //line
+    tempString=[NSString stringWithFormat:@"Block Size:,%2.0f",singleton.blockSize];
+    [singleton.resultStringRows addObject:tempString];//csv
+    tempString=@"Block Size";
+    [singleton.displayStringTitles addObject:tempString ];//title
+    tempString=[NSString stringWithFormat:@"%2.0f", singleton.blockSize];
+    [singleton.displayStringRows addObject: tempString ];//data
+        
+    //line
+    tempString=[NSString stringWithFormat:@"Block Rotation:,%@",rot];
+    [singleton.resultStringRows addObject:tempString];//csv
+    tempString=@"Block Rotation";
+    [singleton.displayStringTitles addObject:tempString ];//title
+    tempString=[NSString stringWithFormat:@"%@", rot];
+    [singleton.displayStringRows addObject: tempString ];//data
+        
+    //line
+    tempString=[NSString stringWithFormat:@"Block Animals:,%@", ani];
+    [singleton.resultStringRows addObject:tempString];//csv
+    tempString=@"Block Animals";
+    [singleton.displayStringTitles addObject:tempString ];//title
+    tempString=[NSString stringWithFormat:@"%@", ani];
+    [singleton.displayStringRows addObject: tempString ];//data
 
     //line
-    tempString=[NSString stringWithFormat:@"Beep Que       %@", beep];
-        [singleton.resultStringRows addObject:tempString];//csv
-    tempString=[NSString stringWithFormat:@"Beep Que"];
+    tempString=[NSString stringWithFormat:@"Beep Que:,%@", beep];
+    [singleton.resultStringRows addObject:tempString];//csv
+    tempString=@"Beep Que";
     [singleton.displayStringTitles addObject:tempString ];//title
     tempString=[NSString stringWithFormat:@"%@", beep];
     [singleton.displayStringRows addObject: tempString ];//data
 
     //line
-    tempString=[NSString stringWithFormat:@"Beep Name       %@", beep2];
+    tempString=[NSString stringWithFormat:@"Beep Name:,%@", beep2];
     [singleton.resultStringRows addObject:tempString];
-    tempString=[NSString stringWithFormat:@"Beep Name"];
+    tempString=@"Beep Name";
     [singleton.displayStringTitles addObject:tempString ];//title
     tempString=[NSString stringWithFormat:@"%@", beep2];
     [singleton.displayStringRows addObject: tempString ];//data
 
     //line
-    tempString=[NSString stringWithFormat:@""];
+    tempString=@"";
     [singleton.resultStringRows addObject:tempString];//csv
 
     //line
-    tempString=[NSString stringWithFormat:@"(1 = correct number in correct sequence, 0 = wrong number in sequence)"];
-        [singleton.resultStringRows addObject:tempString];//csv
-    tempString=[NSString stringWithFormat:@"1=Correct, 0=Wrong"];
+    tempString=@"(1 = correct number in correct sequence, 0 = wrong number in sequence)";
+    [singleton.resultStringRows addObject:tempString];//csv
+    tempString=@"1 = Correct, 0 = Wrong";
     [singleton.displayStringTitles addObject:tempString ];//title
-    tempString=[NSString stringWithFormat:@""];
+    tempString=@"";
     [singleton.displayStringRows addObject:tempString];//data
 
     //line
@@ -1908,8 +1872,8 @@
     [singleton.resultStringRows addObject:tempString];
 
         //line
-    tempString=[NSString stringWithFormat:@"Test No,Sequence,Response,1,2,3,4,5,6,7,8,9,Correct,Wrong"];
-    tempString2=[NSString stringWithFormat:@"Test:123456789_CW"];
+    tempString=@"Test No,Sequence,Response,1,2,3,4,5,6,7,8,9,Correct,Wrong";
+    tempString2=@"Test:123456789_CW";
     [singleton.resultStringRows addObject:tempString];
 
     //body of results
@@ -1925,7 +1889,7 @@
             guessStr[xx]=[guessStr[xx] stringByAppendingString:@"xxx"];
         //for order and guess
 
-            tempString3 = [NSString stringWithFormat:@"%d", xx-2];
+        tempString3 = [NSString stringWithFormat:@"%d", xx-2];
 
         ee=[order[xx] substringWithRange:NSMakeRange(0, xx)];
         ff=[guessStr[xx] substringWithRange:NSMakeRange(0, xx)];
@@ -1933,7 +1897,7 @@
         tempString = [NSString stringWithFormat:@"%@,%@,%@", tempString3, ee, ff];
         tempString2 = [NSString stringWithFormat:@"%@:%@-%@",tempString3, ee, ff];
 
-        tempString3=[NSString stringWithFormat:@"No:Ord:Test"];
+        tempString3=@"No:Ord:Test";
         [singleton.displayStringTitles addObject:tempString3];//title
         [singleton.displayStringRows addObject: tempString2];//data
 
@@ -1950,9 +1914,6 @@
             if (!singleton.forwardTestDirection) {
                 order[q]=reverse[q];
             }
-
-
-
             //get the character at a position in the strings
             ee = [order[xx] substringWithRange:NSMakeRange(q, 1)];
             ff = [guessStr[xx] substringWithRange:NSMakeRange(q, 1)];
@@ -1981,7 +1942,6 @@
         }
         
         //finish off string from loop
-
         tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@"%d, %d", cor, wro]];
         tempString2 = [NSString stringWithFormat:@"  :%@%@", tempString2, [NSString stringWithFormat:@"c%dw%d", cor, wro]];
         //line
@@ -1989,69 +1949,73 @@
         //tempString4=[NSString stringWithFormat:@"Test:123456789_CW"];
         //[singleton.displayStringTitles addObject:tempString4];//title
         //[singleton.displayStringRows addObject: @""];//data
-        tempString3=[NSString stringWithFormat:@"DATA:"];
+        tempString3=@"DATA:";
         [singleton.displayStringTitles addObject:tempString3 ];//title
         [singleton.displayStringRows addObject: tempString2];//data
         [singleton.resultStringRows addObject:tempString];//csv
 
         //blankline
-
-        tempString=[NSString stringWithFormat:@""];
+        tempString=@"";
         [singleton.resultStringRows addObject:tempString];//csv
-
     }
-
-
-    //blankline
-    tempString=[NSString stringWithFormat:@""];
+    //blank
+    tempString=@"";
     [singleton.resultStringRows addObject:tempString];//csv
 
     //put final totals
     //line
-    tempString=[NSString stringWithFormat:@"Total Possible"];
+    tempString=@"Total Possible";
     [singleton.displayStringTitles addObject:tempString ];//title
     tempString=[NSString stringWithFormat:@"%d", totcor+totwro];
     [singleton.displayStringRows addObject: tempString];//data
-    tempString=[NSString stringWithFormat:@"Total Possible = %d", totcor+totwro];
+    tempString=[NSString stringWithFormat:@"Total Possible:,%d", totcor+totwro];
     [singleton.resultStringRows addObject:tempString];//csv
 
     //blankline
-    tempString=[NSString stringWithFormat:@""];
+    tempString=@"";
     [singleton.resultStringRows addObject:tempString];//csv
 
     //line
-    tempString=[NSString stringWithFormat:@"Total Correct"];
+    tempString=@"Total Correct";
     [singleton.displayStringTitles addObject:tempString ];//title
     tempString=[NSString stringWithFormat:@"%d", totcor];
     [singleton.displayStringRows addObject: tempString];//data
-    tempString=[NSString stringWithFormat:@"Total Wrong"];
+    tempString=@"Total Wrong";
     [singleton.displayStringTitles addObject:tempString ];//title
     tempString=[NSString stringWithFormat:@"%d", totwro];
     [singleton.displayStringRows addObject: tempString];//data
-    tempString=[NSString stringWithFormat:@"Total Correct = %d, Total Wrong = %d",totcor, totwro];
+    tempString=[NSString stringWithFormat:@"Total Correct:,%d",totcor];
+    [singleton.resultStringRows addObject:tempString];//csv
+    tempString=[NSString stringWithFormat:@"Total Wrong:,%d",totwro];
     [singleton.resultStringRows addObject:tempString];//csv
 
     //blank
     [singleton.resultStringRows addObject: @""];//csv
 
     //line
-    tempString=[NSString stringWithFormat:@"End of Corsi Test Results"];
+    tempString=@"End of Corsi Test Results";
     [singleton.displayStringTitles addObject:tempString ];//title
     [singleton.resultStringRows addObject: tempString];//csv
     [singleton.displayStringRows addObject: @""];//data
 
     //line
-    tempString=[NSString stringWithFormat:@"(c) MMU 2014 EES"];
+    tempString=@"(c) MMU 2014 EES";
     [singleton.displayStringTitles addObject:tempString ]; //title
     [singleton.resultStringRows addObject:tempString]; //csv
     [singleton.displayStringRows addObject:@""]; //data
 
-    //last line
-    tempString=[NSString stringWithFormat:@"www.ess.mmu.ac.uk/apps/corsi"];
+    //last line of data
+    tempString=@"www.ess.mmu.ac.uk/apps/corsi";
     [singleton.displayStringTitles addObject:tempString ]; //title
     [singleton.resultStringRows addObject: tempString]; //csv
     [singleton.displayStringRows addObject: @""]; //data
-
+        
+    //last line blank for display
+    tempString=@"";
+    [singleton.displayStringTitles addObject:tempString ]; //title
+    [singleton.resultStringRows addObject: tempString]; //csv
+    [singleton.displayStringRows addObject: tempString]; //data
+        
     //jump to the results page
     [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(jumpToResultsView) userInfo:nil repeats:NO];
     }
@@ -2093,22 +2057,23 @@
     NSString * myColour;
 
     //make an array of colour names
-    NSArray *items = @[
-                       [UIColor blackColor],
-                       [UIColor blueColor],
-                       [UIColor greenColor],
-                       [UIColor redColor],
-                       [UIColor cyanColor],
-                       [UIColor whiteColor],
-                       [UIColor yellowColor],
-                       [UIColor magentaColor],
-                       [UIColor grayColor],
-                       [UIColor orangeColor],
-                       [UIColor brownColor],
-                       [UIColor purpleColor],
-                       [UIColor darkGrayColor],
-                       [UIColor lightGrayColor]
-                       ];
+    NSArray *items =
+    @[
+        [UIColor blackColor],
+        [UIColor blueColor],
+        [UIColor greenColor],
+        [UIColor redColor],
+        [UIColor cyanColor],
+        [UIColor whiteColor],
+        [UIColor yellowColor],
+        [UIColor magentaColor],
+        [UIColor grayColor],
+        [UIColor orangeColor],
+        [UIColor brownColor],
+        [UIColor purpleColor],
+        [UIColor darkGrayColor],
+        [UIColor lightGrayColor]
+    ];
     //find the index value of each
     long item = [items indexOfObject: myUIColour];
 

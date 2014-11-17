@@ -109,9 +109,7 @@ blockShowLBL,
 blockStartLBL,
 blockWaitLBL,
 forwardLBL,
-rotateLBL,
 infoLBL,
-animalsLBL,
 soundsLBL,
 settingsVC,
 testerLBL,
@@ -173,20 +171,6 @@ emailLBL;
         infoLBL.text=@"No Info";
     }
     
-    //rotation flag
-    if(singleton.blockRotation==YES){
-        rotateLBL.text=@"Rotated";
-    } else {
-        rotateLBL.text=@"Level";
-    }
-    
-    //animals flag
-    if(singleton.animals==YES){
-        animalsLBL.text=@"Animals";
-    } else {
-        animalsLBL.text=@"Blocks";
-    }
-    
     //sounds flag
     if(singleton.sounds==YES){
         soundsLBL.text=@"Sounds";
@@ -229,8 +213,7 @@ emailLBL;
 }
 
 - (void)setDefaults{
-        mySingleton *singleton = [mySingleton sharedSingleton];
-//set up the plist params
+    //set up the plist params
         NSString *pathStr               = [[NSBundle mainBundle] bundlePath];
         NSString *settingsBundlePath    = [pathStr stringByAppendingPathComponent:@"Settings.bundle"];
         NSString *defaultPrefsFile      = [settingsBundlePath stringByAppendingPathComponent:@"Root.plist"];
@@ -352,7 +335,7 @@ emailLBL;
     }
 
     //for testing what is written, can be rem'd out later
-    NSLog(@"What is in the plist on first load:-->");
+   /* NSLog(@"What is in the plist on first load:-->");
     NSLog(@"tester      :%@",[defaults objectForKey:kTester]);
     NSLog(@"subject     :%@",[defaults objectForKey:kSubject]);
     NSLog(@"email       :%@",[defaults objectForKey:kEmail]);
@@ -371,7 +354,7 @@ emailLBL;
     NSLog(@"delay       :%@",[defaults objectForKey:kDelay]);
     NSLog(@"time        :%@",[defaults objectForKey:kTime]);
     NSLog(@"show        :%@",[defaults objectForKey:kShow]);
-    NSLog(@"version     :%@",[defaults objectForKey:kVersion]);
+    NSLog(@"version     :%@",[defaults objectForKey:kVersion]);*/
 }
 
 -(UIColor*)colourPicker:(NSString*)colourName{
@@ -725,7 +708,6 @@ emailLBL;
         subjectName =  @"Participant";
         [defaults setObject:@"Participant" forKey:kSubject];
     }
-
     //tester name
     temp     = [defaults objectForKey:kTester];
     if(temp  == nil ){
@@ -886,7 +868,6 @@ emailLBL;
                          block7View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans7);
                          block8View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans8);
                          block9View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans9);
-
                      }completion:nil];
 }
 
