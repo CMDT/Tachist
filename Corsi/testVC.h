@@ -16,6 +16,8 @@
     BOOL backIsStarted;
 }
 
+@property (nonatomic, copy) NSDate * startDate;
+
 @property (nonatomic, retain) AVAudioPlayer        * backgroundMusicPlayer;
 @property (retain, nonatomic) IBOutlet UILabel     * headingLBL;
 @property (retain, nonatomic) IBOutlet UILabel     * statusMessageLBL;

@@ -42,9 +42,19 @@
     float percent;
     float flash2;
     
-    Float32 testTime[7][12];
-    Float32 testTimer[7][12];
-    Float32 timeGuess[7][12];
+    //for timing
+    float testReactionTime[10];     //each group
+    float reactionTime[7][12];      //each test
+    float totalReactionTime;        //total for all tests
+    float shortestReactionTime[10]; //for each group
+    float longestReactionTime[10];
+    float averageReactionTime[10];
+    
+    double noOfSeconds;
+    
+    //Float32 testTime[7][12];
+    //Float32 testTimer[7][12];
+    //Float32 timeGuess[7][12];
     
     BOOL analysisFlag;
     BOOL isFinished;
@@ -196,7 +206,7 @@
 
     [self setColours];
 
-    tempStartMessage=@"You will be shown a sequence of coloured blocks. \n\nObserve the order shown, then recall \nthe sequence when prompted. \n\nThe test will proceed until all the sections are completed.\n\nYou will exit the test if you touch the 'Cancel' button during the test.\n\nOnly completed tests are valid and available for analysis and email.";
+    tempStartMessage=@"You will be shown a sequence of coloured blocks. \n\nObserve the order shown, then recall \nthe sequence when prompted. \n\nThe test will proceed until all the sections are completed.\n\nYou will exit the test if you touch the 'Cancel Test' button during the test.\n\nOnly completed tests are valid and available for analysis and email.";
 
     MessageTextView.text = tempStartMessage;
     MessageTextView.textAlignment = NSTextAlignmentCenter;
@@ -800,14 +810,15 @@
 }
 
 -(void)boxInit {
+    [self buttonsDisable];
     stopTestNowBTN.hidden=NO;
     //NSLog(@"box init");
     if (!isAborted) {
-    if (infoShow) {
-        statusMessageLBL.text = @"Observe Blocks, Start of Test";
-    }else{
-        statusMessageLBL.text = @"";
-    }
+        if (infoShow) {
+            statusMessageLBL.text = @"Observe Blocks, Start of Test";
+        }else{
+            statusMessageLBL.text = @"";
+        }
     
     [self display_blocks];
     
@@ -825,14 +836,23 @@
     xcounter = start; //default is 3 but could be 3-9 range depending on settings
     ncounter = 1;
     pressNo  = 0; //set initial no of presses
-    
+        
+        //reset the timers
+        totalReactionTime=0.00;
+        for (int cnt=0; cnt<7; cnt++) {
+            shortestReactionTime[cnt]=10000.00;
+            longestReactionTime[cnt]=-10000.00;
+            averageReactionTime[cnt]=0.00;
+            for (int dnt=0; dnt<13; dnt++) {
+                reactionTime[cnt][dnt]=0.00;
+            }
+        }
+        
     blkTotalLBL.text = [NSString stringWithFormat:@"%d", xcounter];
     blkNoLBL.text    = [NSString stringWithFormat:@"%d", 0];
     setNoLBL.text    = [NSString stringWithFormat:@"%d", xcounter-2];
     setTotalLBL.text = [NSString stringWithFormat:@"%d", finish-2];
 
-    [self buttonsDisable];
-    
     [MessageView setImage: card[0].image];
     [NSTimer scheduledTimerWithTimeInterval:(messageTime*1.5) target:self selector:@selector(startTestMSG) userInfo:nil repeats:NO];
     }
@@ -994,66 +1014,50 @@
 }
 
 -(void)statusUpdate:(int)press{
-    if (infoShow) {
+    //type in the guesses if the info flag is on
+    if (!isAborted) {
+        if (infoShow) {
+        switch (press) {
+            case 1:
+                statusMessageLBL.text = [NSString stringWithFormat:@"%@",guess[1]];
+            break;
+            case 2:
+                statusMessageLBL.text = [NSString stringWithFormat:@"%@%@",guess[1],guess[2]];
+            break;
+            case 3:
+                statusMessageLBL.text = [NSString stringWithFormat:@"%@%@%@",guess[1],guess[2],guess[3]];
+            break;
+            case 4:
+                statusMessageLBL.text = [NSString stringWithFormat:@"%@%@%@%@",guess[1],guess[2],guess[3],guess[4]];
+            break;
+            case 5:
+                statusMessageLBL.text = [NSString stringWithFormat:@"%@%@%@%@%@",guess[1],guess[2],guess[3],guess[4],guess[5]];
+            break;
+            case 6:
+                statusMessageLBL.text = [NSString stringWithFormat:@"%@%@%@%@%@%@",guess[1],guess[2],guess[3],guess[4],guess[5],guess[6]];
+            break;
+            case 7:
+                statusMessageLBL.text = [NSString stringWithFormat:@"%@%@%@%@%@%@%@",guess[1],guess[2],guess[3],guess[4],guess[5],guess[6],guess[7]];
+            break;
+            case 8:
+                statusMessageLBL.text = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@",guess[1],guess[2],guess[3],guess[4],guess[5],guess[6],guess[7],guess[8]];
+            break;
+            case 9:
+                statusMessageLBL.text = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@",guess[1],guess[2],guess[3],guess[4],guess[5],guess[6],guess[7],guess[8],guess[9]];
+            break;
 
-    switch (press) {
-        case 1:
-            statusMessageLBL.text = [NSString stringWithFormat:@"%@",guess[1]];
+            default:
+                statusMessageLBL.text = @"Touch the blocks in sequence";
             break;
-        case 2:
-            statusMessageLBL.text = [NSString stringWithFormat:@"%@%@",guess[1],guess[2]];
-            break;
-        case 3:
-            statusMessageLBL.text = [NSString stringWithFormat:@"%@%@%@",guess[1],guess[2],guess[3]];
-            break;
-        case 4:
-            statusMessageLBL.text = [NSString stringWithFormat:@"%@%@%@%@",guess[1],guess[2],guess[3],guess[4]];
-            break;
-        case 5:
-            statusMessageLBL.text = [NSString stringWithFormat:@"%@%@%@%@%@",guess[1],guess[2],guess[3],guess[4],guess[5]];
-            break;
-        case 6:
-            statusMessageLBL.text = [NSString stringWithFormat:@"%@%@%@%@%@%@",guess[1],guess[2],guess[3],guess[4],guess[5],guess[6]];
-            break;
-        case 7:
-            statusMessageLBL.text = [NSString stringWithFormat:@"%@%@%@%@%@%@%@",guess[1],guess[2],guess[3],guess[4],guess[5],guess[6],guess[7]];
-            break;
-        case 8:
-            statusMessageLBL.text = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@",guess[1],guess[2],guess[3],guess[4],guess[5],guess[6],guess[7],guess[8]];
-            break;
-        case 9:
-            statusMessageLBL.text = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@",guess[1],guess[2],guess[3],guess[4],guess[5],guess[6],guess[7],guess[8],guess[9]];
-            break;
-
-        default:
-            statusMessageLBL.text = @"Touch the blocks in sequence";
-            break;
+        }
+        }else{
+            statusMessageLBL.text = @"Recall";
+        }
     }
-    }else{
-        statusMessageLBL.text = @"Recall";
-    }
-        //guessStr[xcounter]= [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@",guess[1],guess[2],guess[3],guess[4],guess[5],guess[6],guess[7],guess[8],guess[9]];
 }
 
 -(void)waiting{
     //do nothing, wait for a new key press after flashing the button
-}
-
--(IBAction)blk1BUT:(id)sender{
-    //button 1 pressed
-    box1image.backgroundColor=currentShowColour;
-    //AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-    [self playMyEffect];
-    guess[pressNo+1]=@"1";
-    blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo+1];
-    [self statusUpdate:pressNo+1];
-    pressNo=pressNo+1;
-    if(pressNo >= xcounter-1){
-        pressNo=0;
-        [self buttonsDisable];
-        [NSTimer scheduledTimerWithTimeInterval: (messageTime/2) target:self selector:@selector(blankMSG3) userInfo:nil repeats:NO];
-    }
-    [NSTimer scheduledTimerWithTimeInterval: flash2 target:self selector:@selector(blankMSGbut1) userInfo:nil repeats:NO];
 }
 
 -(void)blankMSGbut1 {
@@ -1093,8 +1097,31 @@
     [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(waiting) userInfo:nil repeats:NO];
 }
 
+-(IBAction)blk1BUT:(id)sender{
+    //button 1 pressed
+    //read the timer
+    noOfSeconds = (double)[self.startDate timeIntervalSinceNow]* -1000;
+    reactionTime[xcounter-1][pressNo] = noOfSeconds;
+    box1image.backgroundColor=currentShowColour;
+    //AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    [self playMyEffect];
+    guess[pressNo+1]=@"1";
+    blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo+1];
+    [self statusUpdate:pressNo+1];
+    pressNo=pressNo+1;
+    if(pressNo >= xcounter-1){
+        pressNo=0;
+        [self buttonsDisable];
+        [NSTimer scheduledTimerWithTimeInterval: (messageTime/2) target:self selector:@selector(blankMSG3) userInfo:nil repeats:NO];
+    }
+    [NSTimer scheduledTimerWithTimeInterval: flash2 target:self selector:@selector(blankMSGbut1) userInfo:nil repeats:NO];
+}
+
 -(IBAction)blk2BUT:(id)sender{
     //button 2 pressed
+    //read the timer
+    noOfSeconds = (double)[self.startDate timeIntervalSinceNow]* -1000;
+    reactionTime[xcounter-1][pressNo] = noOfSeconds;
     box2image.backgroundColor=currentShowColour;
     //AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     [self playMyEffect];
@@ -1110,9 +1137,11 @@
     [NSTimer scheduledTimerWithTimeInterval: flash2 target:self selector:@selector(blankMSGbut2) userInfo:nil repeats:NO];
 }
 
-
 -(IBAction)blk3BUT:(id)sender{
     //button 3 pressed
+    //read the timer
+    noOfSeconds = (double)[self.startDate timeIntervalSinceNow]* -1000;
+    reactionTime[xcounter-1][pressNo] = noOfSeconds;
     box3image.backgroundColor=currentShowColour;
     //AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     [self playMyEffect];
@@ -1130,6 +1159,9 @@
 
 -(IBAction)blk4BUT:(id)sender{
     //button 4 pressed
+    //read the timer
+    noOfSeconds = (double)[self.startDate timeIntervalSinceNow]* -1000;
+    reactionTime[xcounter-1][pressNo] = noOfSeconds;
     box4image.backgroundColor=currentShowColour;
     //AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     [self playMyEffect];
@@ -1147,6 +1179,9 @@
 
 -(IBAction)blk5BUT:(id)sender{
     //button 5 pressed
+    //read the timer
+    noOfSeconds = (double)[self.startDate timeIntervalSinceNow]* -1000;
+    reactionTime[xcounter-1][pressNo] = noOfSeconds;
     box5image.backgroundColor=currentShowColour;
     //AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     [self playMyEffect];
@@ -1164,6 +1199,9 @@
 
 -(IBAction)blk6BUT:(id)sender{
     //button 6 pressed
+    //read the timer
+    noOfSeconds = (double)[self.startDate timeIntervalSinceNow]* -1000;
+    reactionTime[xcounter-1][pressNo] = noOfSeconds;
     box6image.backgroundColor=currentShowColour;
     //AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     [self playMyEffect];
@@ -1181,6 +1219,9 @@
 
 -(IBAction)blk7BUT:(id)sender{
     //button 7 pressed
+    //read the timer
+    noOfSeconds = (double)[self.startDate timeIntervalSinceNow]* -1000;
+    reactionTime[xcounter-1][pressNo] = noOfSeconds;
     box7image.backgroundColor=currentShowColour;
     //AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     [self playMyEffect];
@@ -1198,6 +1239,9 @@
 
 -(IBAction)blk8BUT:(id)sender{
     //button 8 pressed
+    //read the timer
+    noOfSeconds = (double)[self.startDate timeIntervalSinceNow]* -1000;
+    reactionTime[xcounter-1][pressNo] = noOfSeconds;
     box8image.backgroundColor=currentShowColour;
     //AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     [self playMyEffect];
@@ -1215,6 +1259,10 @@
 
 -(IBAction)blk9BUT:(id)sender{
     //button 9 pressed
+    //read the timer
+    noOfSeconds = (double)[self.startDate timeIntervalSinceNow]* -1000;
+    reactionTime[xcounter-1][pressNo] = noOfSeconds;
+    
     box9image.backgroundColor=currentShowColour;
     //AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     [self playMyEffect];
@@ -1250,8 +1298,11 @@
             }
         }
 
-        NSLog(@"Press The Blocks in Order");
-    
+        //NSLog(@"Press The Blocks in Order");
+        
+        //read the timer
+        self.startDate=[NSDate date];
+        
         if(pressNo >= xcounter+1){
             pressNo=0;
             [self buttonsDisable];
@@ -1271,20 +1322,24 @@
             if (infoShow) {
                 statusMessageLBL.text = @"Recall the sequence in the reverse order.";
             }else{
-                statusMessageLBL.text = @"Reverse Test";
+                statusMessageLBL.text = @"Recall Reverse Test";
             }
         }else{
             if (infoShow) {
                 statusMessageLBL.text = @"Recall the sequence in the same order.";
             }else{
-                statusMessageLBL.text = @"Forward Test";
+                statusMessageLBL.text = @"Recall Forward Test";
             }
         }
 
         //NSLog(@"Press The Blocks in Order");
-   
+        
+        //read the timer
+        self.startDate=[NSDate date];
+        
         if((pressNo >= xcounter+1)&&(isFinished==YES)){
         [self buttonsDisable];
+            
             [NSTimer scheduledTimerWithTimeInterval: (messageTime/2) target:self selector:@selector(endTestMSG) userInfo:nil repeats:NO];
         }else{
             [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(self) userInfo:nil repeats:NO];
@@ -1360,13 +1415,13 @@
             if (infoShow) {
                 statusMessageLBL.text = @"Observe the sequence, recall in the reverse order.";
             }else{
-                statusMessageLBL.text = @"Reverse Test";
+                statusMessageLBL.text = @"Observe";
             }
         }else{
             if (infoShow) {
                 statusMessageLBL.text = @"Observe the sequence, recall in the same order.";
             }else{
-                statusMessageLBL.text = @"Forward Test";
+                statusMessageLBL.text = @"Observe";
             }
         }
         [MessageView setImage: card[0].image];
@@ -1426,7 +1481,7 @@
         if (infoShow) {
             statusMessageLBL.text = @"The Test has Finished.";
         }else{
-            statusMessageLBL.text = @"Finished The Test";
+            statusMessageLBL.text = @"The Test has Finished";
         }
         [self hideInfo];
         [self hide_blocks];
@@ -1446,7 +1501,7 @@
         if (infoShow) {
             statusMessageLBL.text = @"The test results are being calculated.";
         }else{
-            statusMessageLBL.text = @"Calculating";
+            statusMessageLBL.text = @"Calculating...";
         }
         [self hide_blocks];
         [self hideInfo];
@@ -1639,11 +1694,12 @@
     NSString *retStr = [format stringFromDate:now];
     return retStr;
 }
+
 -(void)calculations{
     if (!isAborted) {
 
     mySingleton *singleton = [mySingleton sharedSingleton];
-    NSLog(@"Calculations have started.");
+    //NSLog(@"Calculations have started.");
 
     //clear arrays for results strings
     [singleton.resultStringRows removeAllObjects];
@@ -1657,7 +1713,7 @@
     singleton.testTime=[self getCurrentTime];
     singleton.testDate=[self getCurrentDate];
 
-    NSLog(@"Results array cleared, new results ready..");
+    //NSLog(@"Results array cleared, new results ready..");
     
    /* NSLog(@"String 1 was:%@, your guess:%@",order[1],guessStr[1]);
     NSLog(@"String 2 was:%@, your guess:%@",order[2],guessStr[2]);
@@ -1683,11 +1739,11 @@
     NSString * ff;
 
     //headers
-        //l1
+    //line
     tempString=@"Corsi Block Tapping Test Results";
-        [singleton.resultStringRows addObject: tempString];//csv
-        [singleton.displayStringTitles addObject:tempString ];//title
-        [singleton.displayStringRows addObject: @""];//data
+    [singleton.resultStringRows addObject: tempString];//csv
+    [singleton.displayStringTitles addObject:tempString ];//title
+    [singleton.displayStringRows addObject: @""];//data
         
     //blank
     tempString=@"";
@@ -1958,6 +2014,39 @@
         tempString=@"";
         [singleton.resultStringRows addObject:tempString];//csv
     }
+        NSLog(@"Timings follow\n");
+        //for timing strings
+        for (int aa=start; aa<finish+1; aa++) {
+            for (int bb=0; bb<aa; bb++) {
+                //NSLog(@"reaction time:%d-%d-%f",aa,bb,reactionTime[aa][bb]);
+                //total time
+                totalReactionTime=totalReactionTime+reactionTime[aa][bb];
+                testReactionTime[aa]=testReactionTime[aa]+reactionTime[aa][bb];
+                
+                //min
+                if (shortestReactionTime[aa] > reactionTime[aa][bb]) {
+                    shortestReactionTime[aa] = reactionTime[aa][bb];
+                }
+            
+                //max
+                if (longestReactionTime[aa] < reactionTime[aa][bb]) {
+                    longestReactionTime[aa] = reactionTime[aa][bb];
+                }
+                NSLog(@"reaction time:%f",reactionTime[aa][bb]);
+            }
+
+            //avg
+            
+            averageReactionTime[aa]=testReactionTime[aa]/aa;
+            NSLog(@"test reaction time:%f",testReactionTime[aa]);
+            NSLog(@"min reaction time:%f",shortestReactionTime[aa]);
+            NSLog(@"max reaction time:%f",longestReactionTime[aa]);
+            NSLog(@"avg reaction time:%f",averageReactionTime[aa]);
+        }
+
+        NSLog(@"total reaction time:%f",totalReactionTime);
+        
+        
     //blank
     tempString=@"";
     [singleton.resultStringRows addObject:tempString];//csv

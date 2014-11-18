@@ -619,7 +619,7 @@ emailLBL;
         [defaults setObject:[NSString stringWithFormat:@"%@", singleton.testerName] forKey:kTester];
         [defaults synchronize];//make sure all are updated
     UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"CORSI TEST SETTINGS"
-                                                     message:@"The settings were SAVED for the test."
+                                                     message:@"\nThe settings were \n\n'SAVED' \n\nfor the tests.\n\nYou can recall these with \n'Load' on this screen."
                                                     delegate:self
                                            cancelButtonTitle:nil //@"Cancel"
                                            otherButtonTitles:@"OK", nil];
@@ -785,7 +785,7 @@ emailLBL;
     [self refreshView];
 
     UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"CORSI TEST SETTINGS"
-                                                     message:@"The settings were LOADED for the test."
+                                                     message:@"\nThe settings were \n\n'LOADED' \n\nfor the tests."
                                                     delegate:self
                                            cancelButtonTitle:nil //@"Cancel"
                                            otherButtonTitles:@"OK", nil];

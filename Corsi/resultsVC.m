@@ -67,7 +67,7 @@
     self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Results" image:resultsImage selectedImage: resultsImageSel];
     mySingleton *singleton = [mySingleton sharedSingleton];
 
-    resultsTempString = @"Corsi Tapping Test results will appear here once a test has been completed.\n\nThe previous test will stay visible until a new test is completed or you press the Home Button on your device.\n\nData can be sent by email as an attachment of type CSV.\n\nPlease ensure that you have set the email of the recipient in the device settings file before you select the email button.";
+    resultsTempString = @"\n\nThe Corsi Tapping Test results and analysis will appear in a table here, once a test has been completed.\n\nThe last test to be completed will stay visible until a new test is finished, or you press the Home Button on your device.\n\nPressing the home button deletes any data not sent by email and resets the Application.\n\nData can be sent by Email as an Attachment of extension type CSV, which can be read by other applications such as a spreadsheet.\n\nPlease ensure that you have set the Email Address of the recipient before you select the email option.";
     //resultsTxtView.font=[UIFont fontWithName:@"Serifa-Roman" size:16];
     resultsTxtView.text = resultsTempString;
     //make a text file from the array of results for email csv attachment

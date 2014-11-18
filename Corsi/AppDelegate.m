@@ -36,7 +36,7 @@
     txtField.numberOfLines = 9;
     txtField.textColor = [UIColor darkGrayColor];
     txtField.textAlignment = NSTextAlignmentCenter;
-    txtField.text = @"To see details on how to \nuse this Application\n and adjust its settings, \nplease read the notes in \nthe 'Information' section \nin the Tab Bar.\n\nThis Application is NOT \nfor clinical use.";
+    txtField.text = @"To see details on how to \nuse this Application\n and adjust its settings, \nplease read the notes in \nthe 'Information' section \nof the Tab Bar.\n\nThis Application is NOT \nfor clinical use.";
     txtField.backgroundColor = [UIColor clearColor];
     
     [alertView setValue:txtField forKeyPath:@"accessoryView"];//for ios 7 and above
