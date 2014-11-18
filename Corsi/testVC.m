@@ -43,18 +43,14 @@
     float flash2;
     
     //for timing
-    float testReactionTime[10];     //each group
-    float reactionTime[7][12];      //each test
-    float totalReactionTime;        //total for all tests
-    float shortestReactionTime[10]; //for each group
-    float longestReactionTime[10];
-    float averageReactionTime[10];
+    Float32 testReactionTime[10];     //each group
+    Float32 reactionTime[7][12];      //each test
+    Float32 totalReactionTime;        //total for all tests
+    Float32 shortestReactionTime[10]; //for each group
+    Float32 longestReactionTime[10];
+    Float32 averageReactionTime[10];
     
     double noOfSeconds;
-    
-    //Float32 testTime[7][12];
-    //Float32 testTimer[7][12];
-    //Float32 timeGuess[7][12];
     
     BOOL analysisFlag;
     BOOL isFinished;
@@ -842,7 +838,18 @@
     blkNoLBL.text    = [NSString stringWithFormat:@"%d", 0];
     setNoLBL.text    = [NSString stringWithFormat:@"%d", xcounter-2];
     setTotalLBL.text = [NSString stringWithFormat:@"%d", finish-2];
-
+        
+        //reset the timer vars
+        totalReactionTime=0.00f;
+        for (int cnt=0; cnt<7; cnt++) {
+            shortestReactionTime[cnt]   = 10000.00f;
+            longestReactionTime[cnt]    = -10000.00f;
+            averageReactionTime[cnt]    = 0.00f;
+            for (int dnt=0; dnt<13; dnt++) {
+                reactionTime[cnt][dnt]  = 0.00f;
+            }
+        }
+        
     [MessageView setImage: card[0].image];
     [NSTimer scheduledTimerWithTimeInterval:(messageTime*1.5) target:self selector:@selector(startTestMSG) userInfo:nil repeats:NO];
     }
@@ -1829,20 +1836,20 @@
 
         tempString4 = @"Start Time";
         [singleton.displayStringTitles addObject:tempString4 ];//title
-        tempString=[NSString stringWithFormat:@"Start Time:, %2.0f, ms",singleton.startTime];//csv
+        tempString=[NSString stringWithFormat:@"Start Time:, %.0f, ms",singleton.startTime];//csv
         [singleton.resultStringRows addObject:tempString];//csv
         tempString2 = [NSString stringWithFormat:@"%2.0f ms", singleton.startTime];
         [singleton.displayStringRows addObject: tempString2];//data
 
         tempString4 = @"Wait Time";
         [singleton.displayStringTitles addObject:tempString4 ];//title
-        tempString=[NSString stringWithFormat:@"Wait Time:, %2.0f, ms",singleton.startTime];//csv
+        tempString=[NSString stringWithFormat:@"Wait Time:, %.0f, ms",singleton.startTime];//csv
         [singleton.resultStringRows addObject:tempString];//csv
         tempString2 = [NSString stringWithFormat:@"%2.0f ms", singleton.waitTime];
         [singleton.displayStringRows addObject: tempString2];//data
         
         tempString4=@"Show Time";
-        tempString=[NSString stringWithFormat:@"   Show Time:, %2.0f, ms",singleton.showTime];
+        tempString=[NSString stringWithFormat:@"   Show Time:, %.0f, ms",singleton.showTime];
         [singleton.resultStringRows addObject:tempString];
         [singleton.displayStringTitles addObject:tempString4 ];//title
         tempString=[NSString stringWithFormat:@"%2.0f ms", singleton.showTime];
@@ -1911,11 +1918,11 @@
     [singleton.displayStringRows addObject: tempString ];//data
         
     //line
-    tempString=[NSString stringWithFormat:@"Block Size:,%2.0f",singleton.blockSize];
+    tempString=[NSString stringWithFormat:@"Block Size:,%.0f",singleton.blockSize];
     [singleton.resultStringRows addObject:tempString];//csv
     tempString=@"Block Size";
     [singleton.displayStringTitles addObject:tempString ];//title
-    tempString=[NSString stringWithFormat:@"%2.0f", singleton.blockSize];
+    tempString=[NSString stringWithFormat:@"%.0f", singleton.blockSize];
     [singleton.displayStringRows addObject: tempString ];//data
         
     //line
@@ -2049,49 +2056,38 @@
         [singleton.displayStringRows addObject: tempString2];//data
         [singleton.resultStringRows addObject:tempString];//csv
 
+
+    }
         //blankline
         tempString=@"";
         [singleton.resultStringRows addObject:tempString];//csv
-    }
+        
+        //nb arrays and vars zeroed in boxinit before timings start.
+        
         NSLog(@"Timings follow");
         NSLog(@"--------------");
         
         //for timing strings
-        float tempCalcR                 = 0.00;
-        float actualReactionTime[7][12];
-        float firstPress                = 0.00;
-        int cc                          = 0;
+        Float32 tempCalcR                 = 0.00f;
+        Float32 actualReactionTime[7][12];
+        Float32 firstPress                = 0.00f;
+        int cc                            = 0;
         
-        //reset the timer vars
-        totalReactionTime=0.00;
-        for (int cnt=0; cnt<7; cnt++) {
-            shortestReactionTime[cnt]=10000.00;
-            longestReactionTime[cnt]=-10000.00;
-            averageReactionTime[cnt]=0.00;
-            for (int dnt=0; dnt<13; dnt++) {
-                reactionTime[cnt][dnt]=0.00;
-            }
-        }
-        
-        totalReactionTime = 0.00;
-        
-        //blank
-        tempString=@"";
-        [singleton.resultStringRows addObject:tempString];//csv
+        totalReactionTime = 0.00f;
         
         //do the timings output to csv
         tempString=[NSString stringWithFormat:@"Timings Output"];
         [singleton.resultStringRows addObject:tempString];//csv
         
-        tempString=@"Test No,,,1,2,3,4,5,6,7,8,9,Total,Min,Max,Average";
+        tempString=@"Test No,,,1,2,3,4,5,6,7,8,9,Total-1,Min-1,Max-1,Average-1,,TotalT,MinT,MaxT,Average-T";
         [singleton.resultStringRows addObject:tempString];//csv
         
         for (int aa = start; aa < finish+1; aa++) {
             
             firstPress = reactionTime[aa][0];
-            testReactionTime[aa] = 0.00;
+            testReactionTime[aa] = 0.00f;
             
-            tempString=[NSString stringWithFormat:@"%d,,", aa];
+            tempString=[NSString stringWithFormat:@"%d,,", aa-2];
             
             for (int bb = 0; bb < aa; bb++) {
                 //NSLog(@"reaction time:%d-%d-%f",aa,bb,reactionTime[aa][bb]);
@@ -2109,32 +2105,58 @@
                 testReactionTime[aa] = testReactionTime[aa] + actualReactionTime[aa][bb];
                 
                 //min
-                if ((shortestReactionTime[aa] > actualReactionTime[aa][bb]) && (actualReactionTime[aa][bb] > 0)) {
+                if ((shortestReactionTime[aa] > actualReactionTime[aa][bb]) && (bb>0)) {
                     shortestReactionTime[aa] = actualReactionTime[aa][bb];
                 }
+     
                 //max
                 if (longestReactionTime[aa] < actualReactionTime[aa][bb]) {
                     longestReactionTime[aa] = actualReactionTime[aa][bb];
                 }
-                //times
-                NSLog(@"reaction time:            r-%f mS", actualReactionTime[aa][bb]);
-                tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@",%2.0f",actualReactionTime[aa][bb]]];
 
-                NSLog(@"cumulative reaction time: c-%f mS", reactionTime[aa][bb]);
+                //times
+                
+                if (bb == 0) {
+                    tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@",%.0f", reactionTime[aa][0]]];
+                    NSLog(@"reaction time:            r-%.0f mS", reactionTime[aa][bb]);
+                }else{
+                    tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@",%.0f", actualReactionTime[aa][bb]]];
+                    NSLog(@"reaction time:            r-%.0f mS", actualReactionTime[aa][bb]);
+                }
+                //NSLog(@"cumulative reaction time: c-%.0f mS", reactionTime[aa][bb]);
             }
-            //avg
-            averageReactionTime[aa] = testReactionTime[aa] / aa;
-            
+                
             //add some commas
-            for (int y=1; y<11-aa; y++) {
+            for (int y=1; y<10-aa; y++) {
                 tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@","]];//csv
                 //tempString2 = [NSString stringWithFormat:@"%@%@", tempString2, [NSString stringWithFormat:@"."]];//data
             }
+            
+            //avg
+            averageReactionTime[aa] = testReactionTime[aa] / (Float32)(aa-1);
+            
             //stage end totals
-            tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@",%2.0f",testReactionTime[aa]]];
-            tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@",%2.0f",shortestReactionTime[aa]]];
-            tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@",%2.0f",longestReactionTime[aa]]];
-            tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@",%2.0f",averageReactionTime[aa]]];
+            tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@",%.0f", testReactionTime[aa]]];
+            tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@",%.0f", shortestReactionTime[aa]]];
+            tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@",%.0f", longestReactionTime[aa]]];
+            tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@",%.0f,", averageReactionTime[aa]]];
+            
+            if (longestReactionTime[aa] < reactionTime[aa][0]) {
+                longestReactionTime[aa] = reactionTime[aa][0];
+            }
+            if (shortestReactionTime[aa] > reactionTime[aa][0]) {
+                shortestReactionTime[aa] = reactionTime[aa][0];
+            }
+            tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@",%.0f", testReactionTime[aa]+reactionTime[aa][0]]];
+            tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@",%.0f", shortestReactionTime[aa]]];
+            tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@",%.0f", longestReactionTime[aa]]];
+            
+            //add 1st reaction
+            testReactionTime[aa] = testReactionTime[aa] + reactionTime[aa][0];
+            
+            //avg
+            averageReactionTime[aa] = testReactionTime[aa] / (Float32)aa;
+            tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@",%.0f", averageReactionTime[aa]]];
             
             [singleton.resultStringRows addObject:tempString];//csv
 
@@ -2145,20 +2167,17 @@
             //May need to visit this area of calculation to determine best approach.
             //For now, 1=0, then followed by difference between each and the previous time.  Total time is just the 2nd to the last,
             //as the start delay is not used (but could be!).
-            
-            NSLog(@"   test reaction time:  %2.0f", testReactionTime[aa]);
-            NSLog(@"   min reaction time:   %2.0f", shortestReactionTime[aa]);
-            NSLog(@"   max reaction time:   %f2.0", longestReactionTime[aa]);
-            NSLog(@"   avg reaction time:   %2.0f", averageReactionTime[aa]);
         }
+        
         //blank
         tempString=@"";
         [singleton.resultStringRows addObject:tempString];//csv
         
         //total time
-        NSLog(@"total reaction time: %2.0f", totalReactionTime);
-        NSLog(@"* -------------- *");
-        tempString=[NSString stringWithFormat:@"Total Reaction Time:, %2.0f", totalReactionTime];
+        //NSLog(@"total reaction time: %f", totalReactionTime);
+        //NSLog(@"* -------------- *");
+        
+        tempString=[NSString stringWithFormat:@"Total Reaction Time:, %.0f", totalReactionTime];
         [singleton.resultStringRows addObject:tempString];//csv
         
     //blank
@@ -2171,7 +2190,7 @@
     [singleton.displayStringTitles addObject:tempString ];//title
     tempString=[NSString stringWithFormat:@"%d", totcor+totwro];
     [singleton.displayStringRows addObject: tempString];//data
-    tempString=[NSString stringWithFormat:@"Total Possible:,%d", totcor+totwro];
+    tempString=[NSString stringWithFormat:@"Total Possible:, %d", totcor+totwro];
     [singleton.resultStringRows addObject:tempString];//csv
 
     //blankline
@@ -2187,9 +2206,9 @@
     [singleton.displayStringTitles addObject:tempString ];//title
     tempString=[NSString stringWithFormat:@"%d", totwro];
     [singleton.displayStringRows addObject: tempString];//data
-    tempString=[NSString stringWithFormat:@"Total Correct:,%d",totcor];
+    tempString=[NSString stringWithFormat:@"Total Correct:, %d",totcor];
     [singleton.resultStringRows addObject:tempString];//csv
-    tempString=[NSString stringWithFormat:@"Total Wrong:,%d",totwro];
+    tempString=[NSString stringWithFormat:@"Total Wrong:, %d",totwro];
     [singleton.resultStringRows addObject:tempString];//csv
 
     //blank
