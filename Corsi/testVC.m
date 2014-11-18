@@ -145,6 +145,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     stopTestNowBTN.hidden=YES;
     MessageView.hidden=YES;
     mySingleton *singleton = [mySingleton sharedSingleton];
@@ -837,17 +838,6 @@
     ncounter = 1;
     pressNo  = 0; //set initial no of presses
         
-        //reset the timers
-        totalReactionTime=0.00;
-        for (int cnt=0; cnt<7; cnt++) {
-            shortestReactionTime[cnt]=10000.00;
-            longestReactionTime[cnt]=-10000.00;
-            averageReactionTime[cnt]=0.00;
-            for (int dnt=0; dnt<13; dnt++) {
-                reactionTime[cnt][dnt]=0.00;
-            }
-        }
-        
     blkTotalLBL.text = [NSString stringWithFormat:@"%d", xcounter];
     blkNoLBL.text    = [NSString stringWithFormat:@"%d", 0];
     setNoLBL.text    = [NSString stringWithFormat:@"%d", xcounter-2];
@@ -1373,7 +1363,32 @@
         }else{
             statusMessageLBL.text = @"";
         }
+        //[NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(guessMSG) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(halt) userInfo:nil repeats:NO];
+    }
+}
+
+-(void)halt{
+    isAlertFinished = NO;
+    
+    UIAlertView * Alert = [[UIAlertView alloc] initWithTitle:@"RECAL"
+                                                     message:@"The recall will start\nwhen this alert dissapears"
+                                                    delegate:self
+                                           cancelButtonTitle:nil //@"Cancel"
+                                           otherButtonTitles:@"START NOW", nil];
+    Alert.alertViewStyle = UIAlertViewStyleDefault;
+
+    [Alert show];
+    [self haltPart2];
+
+}
+
+
+-(void)haltPart2{
+    if (isAlertFinished == YES) {
         [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(guessMSG) userInfo:nil repeats:NO];
+    }else{
+        [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(haltPart2) userInfo:nil repeats:NO];
     }
 }
 
@@ -1387,7 +1402,31 @@
         }else{
             statusMessageLBL.text = @"";
         }
+        //[NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(finalGuessMSG) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(finalHalt) userInfo:nil repeats:NO];
+    }
+}
+
+-(void)finalHalt{
+    isAlertFinished = NO;
+    
+    UIAlertView * Alert = [[UIAlertView alloc] initWithTitle:@"RECAL"
+                                                     message:@"The final recall will start\nwhen this alert dissapears"
+                                                    delegate:self
+                                           cancelButtonTitle:nil //@"Cancel"
+                                           otherButtonTitles:@"START NOW", nil];
+    Alert.alertViewStyle = UIAlertViewStyleDefault;
+    
+    [Alert show];
+    [self haltPart2];
+    
+}
+
+-(void)finalHaltPart2{
+    if (isAlertFinished == YES) {
         [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(finalGuessMSG) userInfo:nil repeats:NO];
+    }else{
+        [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(finalHaltPart2) userInfo:nil repeats:NO];
     }
 }
 
@@ -2014,41 +2053,83 @@
         tempString=@"";
         [singleton.resultStringRows addObject:tempString];//csv
     }
-        NSLog(@"Timings follow\n");
+        NSLog(@"Timings follow");
+        NSLog(@"--------------");
+        
         //for timing strings
-        for (int aa=start; aa<finish+1; aa++) {
-            for (int bb=0; bb<aa; bb++) {
+        float tempCalcR                 = 0.00;
+        float actualReactionTime[7][12];
+        float firstPress                = 0.00;
+        int cc                          = 0;
+        
+        //reset the timers
+        totalReactionTime=0.00;
+        for (int cnt=0; cnt<7; cnt++) {
+            shortestReactionTime[cnt]=10000.00;
+            longestReactionTime[cnt]=-10000.00;
+            averageReactionTime[cnt]=0.00;
+            for (int dnt=0; dnt<13; dnt++) {
+                reactionTime[cnt][dnt]=0.00;
+            }
+        }
+        
+        totalReactionTime = 0.00;
+        
+        
+        for (int aa = start; aa < finish+1; aa++) {
+            
+            firstPress = reactionTime[aa][0];
+            testReactionTime[aa] = 0.00;
+            
+            for (int bb = 0; bb < aa; bb++) {
                 //NSLog(@"reaction time:%d-%d-%f",aa,bb,reactionTime[aa][bb]);
                 //total time
-                totalReactionTime=totalReactionTime+reactionTime[aa][bb];
-                testReactionTime[aa]=testReactionTime[aa]+reactionTime[aa][bb];
+                if (bb == 0) {
+                    cc = 0;
+                }else{
+                    cc = bb - 1;
+                }
+                tempCalcR = reactionTime[aa][cc];
+                
+                actualReactionTime[aa][bb]   = reactionTime[aa][bb] - tempCalcR;
+                
+                totalReactionTime    = totalReactionTime    + actualReactionTime[aa][bb];
+                testReactionTime[aa] = testReactionTime[aa] + actualReactionTime[aa][bb];
                 
                 //min
-                if (shortestReactionTime[aa] > reactionTime[aa][bb]) {
-                    shortestReactionTime[aa] = reactionTime[aa][bb];
+                if ((shortestReactionTime[aa] > actualReactionTime[aa][bb]) && (actualReactionTime[aa][bb] > 0)) {
+                    shortestReactionTime[aa] = actualReactionTime[aa][bb];
                 }
-            
                 //max
-                if (longestReactionTime[aa] < reactionTime[aa][bb]) {
-                    longestReactionTime[aa] = reactionTime[aa][bb];
+                if (longestReactionTime[aa] < actualReactionTime[aa][bb]) {
+                    longestReactionTime[aa] = actualReactionTime[aa][bb];
                 }
-                NSLog(@"reaction time:%f",reactionTime[aa][bb]);
+                NSLog(@"reaction time:            r-%f mS", actualReactionTime[aa][bb]);
+                NSLog(@"cumulative reaction time: c-%f mS", reactionTime[aa][bb]);
             }
-
             //avg
             
-            averageReactionTime[aa]=testReactionTime[aa]/aa;
-            NSLog(@"test reaction time:%f",testReactionTime[aa]);
-            NSLog(@"min reaction time:%f",shortestReactionTime[aa]);
-            NSLog(@"max reaction time:%f",longestReactionTime[aa]);
-            NSLog(@"avg reaction time:%f",averageReactionTime[aa]);
+            averageReactionTime[aa] = testReactionTime[aa] / aa;
+            
+            //1st one is zero, so don't count that.
+            //Need to take into account that timing starts after 1st guess is received, although timer starts when user is asked
+            //to reply.  This means that depending on rection time of 1st guess, this can be bigger for the first go.
+            //After the 1st one, the user will be more rhythmical and probably more meaningful results.
+            //May need to visit this area of calculation to determine best approach.
+            //For now, 1=0, then followed by difference between each and the previous time.  Total time is just the 2nd to the last,
+            //as the start delay is not used (but could be!).
+            
+            NSLog(@"   test reaction time:  %f", testReactionTime[aa]);
+            NSLog(@"   min reaction time:   %f", shortestReactionTime[aa]);
+            NSLog(@"   max reaction time:   %f", longestReactionTime[aa]);
+            NSLog(@"   avg reaction time:   %f", averageReactionTime[aa]);
         }
 
-        NSLog(@"total reaction time:%f",totalReactionTime);
+            NSLog(@"total reaction time: %f", totalReactionTime);
         
         
     //blank
-    tempString=@"";
+    tempString=@"* * * * * * * *";
     [singleton.resultStringRows addObject:tempString];//csv
 
     //put final totals

@@ -359,9 +359,12 @@
                                 <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YiZ-Nh-6f7">
-                                <rect key="frame" x="16" y="403" width="127" height="24"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YiZ-Nh-6f7">
+                                <rect key="frame" x="16" y="481" width="127" height="30"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="127" id="EpG-wq-VP4"/>
+                                </constraints>
                                 <state key="normal" title="Load">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -493,9 +496,12 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G4q-T5-oDu">
-                                <rect key="frame" x="187" y="403" width="117" height="24"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G4q-T5-oDu">
+                                <rect key="frame" x="187" y="481" width="117" height="30"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="117" id="ZvQ-k5-gpm"/>
+                                </constraints>
                                 <state key="normal" title="Save">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -514,6 +520,12 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.84290279212849473" green="0.9223086456184334" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="G4q-T5-oDu" firstAttribute="trailing" secondItem="8im-2Q-xAb" secondAttribute="trailingMargin" id="BiW-pm-scg"/>
+                            <constraint firstItem="VLf-kY-dNJ" firstAttribute="top" secondItem="G4q-T5-oDu" secondAttribute="bottom" constant="8" id="cdB-S2-c9Z"/>
+                            <constraint firstItem="VLf-kY-dNJ" firstAttribute="top" secondItem="YiZ-Nh-6f7" secondAttribute="bottom" constant="8" id="qrc-SX-10X"/>
+                            <constraint firstItem="YiZ-Nh-6f7" firstAttribute="leading" secondItem="8im-2Q-xAb" secondAttribute="leadingMargin" id="xJs-57-ihG"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Settings" image="settings" id="JfG-Kt-5KA">
                         <inset key="imageInsets" minX="15" minY="15" maxX="15" maxY="15"/>
