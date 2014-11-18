@@ -1371,8 +1371,8 @@
 -(void)halt{
     isAlertFinished = NO;
     
-    UIAlertView * Alert = [[UIAlertView alloc] initWithTitle:@"RECAL"
-                                                     message:@"The recall will start\nwhen this alert dissapears"
+    UIAlertView * Alert  = [[UIAlertView alloc] initWithTitle:@"RECAL"
+                                                     message:@"The recall will start when \nthis message dissapears"
                                                     delegate:self
                                            cancelButtonTitle:nil //@"Cancel"
                                            otherButtonTitles:@"START NOW", nil];
@@ -1411,7 +1411,7 @@
     isAlertFinished = NO;
     
     UIAlertView * Alert = [[UIAlertView alloc] initWithTitle:@"RECAL"
-                                                     message:@"The final recall will start\nwhen this alert dissapears"
+                                                     message:@"The final recall will start \nwhen this message dissapears"
                                                     delegate:self
                                            cancelButtonTitle:nil //@"Cancel"
                                            otherButtonTitles:@"START NOW", nil];
@@ -1489,7 +1489,7 @@
                          MessageView.alpha = 1.0;
                      }
                      completion:^(BOOL finished) {[NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(animateMessageViewOUT) userInfo:nil repeats:NO];
-                                          }];
+                    }];
 }
 
 -(void)animateMessageViewOUT{
@@ -2062,7 +2062,7 @@
         float firstPress                = 0.00;
         int cc                          = 0;
         
-        //reset the timers
+        //reset the timer vars
         totalReactionTime=0.00;
         for (int cnt=0; cnt<7; cnt++) {
             shortestReactionTime[cnt]=10000.00;
@@ -2075,11 +2075,23 @@
         
         totalReactionTime = 0.00;
         
+        //blank
+        tempString=@"";
+        [singleton.resultStringRows addObject:tempString];//csv
+        
+        //do the timings output to csv
+        tempString=[NSString stringWithFormat:@"Timings Output"];
+        [singleton.resultStringRows addObject:tempString];//csv
+        
+        tempString=@"Test No,,,1,2,3,4,5,6,7,8,9,Total,Min,Max,Average";
+        [singleton.resultStringRows addObject:tempString];//csv
         
         for (int aa = start; aa < finish+1; aa++) {
             
             firstPress = reactionTime[aa][0];
             testReactionTime[aa] = 0.00;
+            
+            tempString=[NSString stringWithFormat:@"%d,,", aa];
             
             for (int bb = 0; bb < aa; bb++) {
                 //NSLog(@"reaction time:%d-%d-%f",aa,bb,reactionTime[aa][bb]);
@@ -2104,13 +2116,28 @@
                 if (longestReactionTime[aa] < actualReactionTime[aa][bb]) {
                     longestReactionTime[aa] = actualReactionTime[aa][bb];
                 }
+                //times
                 NSLog(@"reaction time:            r-%f mS", actualReactionTime[aa][bb]);
+                tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@",%2.0f",actualReactionTime[aa][bb]]];
+
                 NSLog(@"cumulative reaction time: c-%f mS", reactionTime[aa][bb]);
             }
             //avg
-            
             averageReactionTime[aa] = testReactionTime[aa] / aa;
             
+            //add some commas
+            for (int y=1; y<11-aa; y++) {
+                tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@","]];//csv
+                //tempString2 = [NSString stringWithFormat:@"%@%@", tempString2, [NSString stringWithFormat:@"."]];//data
+            }
+            //stage end totals
+            tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@",%2.0f",testReactionTime[aa]]];
+            tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@",%2.0f",shortestReactionTime[aa]]];
+            tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@",%2.0f",longestReactionTime[aa]]];
+            tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@",%2.0f",averageReactionTime[aa]]];
+            
+            [singleton.resultStringRows addObject:tempString];//csv
+
             //1st one is zero, so don't count that.
             //Need to take into account that timing starts after 1st guess is received, although timer starts when user is asked
             //to reply.  This means that depending on rection time of 1st guess, this can be bigger for the first go.
@@ -2119,17 +2146,23 @@
             //For now, 1=0, then followed by difference between each and the previous time.  Total time is just the 2nd to the last,
             //as the start delay is not used (but could be!).
             
-            NSLog(@"   test reaction time:  %f", testReactionTime[aa]);
-            NSLog(@"   min reaction time:   %f", shortestReactionTime[aa]);
-            NSLog(@"   max reaction time:   %f", longestReactionTime[aa]);
-            NSLog(@"   avg reaction time:   %f", averageReactionTime[aa]);
+            NSLog(@"   test reaction time:  %2.0f", testReactionTime[aa]);
+            NSLog(@"   min reaction time:   %2.0f", shortestReactionTime[aa]);
+            NSLog(@"   max reaction time:   %f2.0", longestReactionTime[aa]);
+            NSLog(@"   avg reaction time:   %2.0f", averageReactionTime[aa]);
         }
-
-            NSLog(@"total reaction time: %f", totalReactionTime);
+        //blank
+        tempString=@"";
+        [singleton.resultStringRows addObject:tempString];//csv
         
+        //total time
+        NSLog(@"total reaction time: %2.0f", totalReactionTime);
+        NSLog(@"* -------------- *");
+        tempString=[NSString stringWithFormat:@"Total Reaction Time:, %2.0f", totalReactionTime];
+        [singleton.resultStringRows addObject:tempString];//csv
         
     //blank
-    tempString=@"* * * * * * * *";
+    tempString=@"";
     [singleton.resultStringRows addObject:tempString];//csv
 
     //put final totals

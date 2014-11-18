@@ -25,17 +25,16 @@
 @property (retain, nonatomic) IBOutlet UITextView  * MessageTextView;
 
 //labels for the stages, hide if not needed
-@property (retain, nonatomic) IBOutlet UILabel * blkLBL;
-@property (retain, nonatomic) IBOutlet UILabel * blkNoLBL;
-@property (retain, nonatomic) IBOutlet UILabel * blkOfLBL;
-@property (retain, nonatomic) IBOutlet UILabel * blkTotalLBL;
+@property (retain, nonatomic) IBOutlet UILabel  * blkLBL;
+@property (retain, nonatomic) IBOutlet UILabel  * blkNoLBL;
+@property (retain, nonatomic) IBOutlet UILabel  * blkOfLBL;
+@property (retain, nonatomic) IBOutlet UILabel  * blkTotalLBL;
 
 //labels for the stages if needed, hide if not
-@property (retain, nonatomic) IBOutlet UILabel * setLBL;
-@property (retain, nonatomic) IBOutlet UILabel * setNoLBL;
-@property (retain, nonatomic) IBOutlet UILabel * setOfLBL;
-@property (retain, nonatomic) IBOutlet UILabel * setTotalLBL;
-@property (retain, nonatomic) IBOutlet UIButton * stopTestNowBTN;
+@property (retain, nonatomic) IBOutlet UILabel  * setLBL;
+@property (retain, nonatomic) IBOutlet UILabel  * setNoLBL;
+@property (retain, nonatomic) IBOutlet UILabel  * setOfLBL;
+@property (retain, nonatomic) IBOutlet UILabel  * setTotalLBL;
 
 //buttons over images
 @property (strong, nonatomic) IBOutlet UIButton * box1BTN;
@@ -50,6 +49,7 @@
 
 //buttons for control
 @property (strong, nonatomic) IBOutlet UIButton * startBTN;
+@property (retain, nonatomic) IBOutlet UIButton * stopTestNowBTN;
 
 //images for the boxes
 @property (strong, nonatomic) IBOutlet UIImageView   * box1image;
@@ -119,5 +119,9 @@
 -(void)startStop;
 -(void)setVolumeValue;
 -(void)playMyEffect;
+-(void)halt;
+-(void)finalHalt;
+-(void)haltPart2;
+-(void)finalHaltPart2;
 
 @end
