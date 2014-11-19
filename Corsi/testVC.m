@@ -1594,7 +1594,12 @@
     //jump to selector ResultsVC
     //[self.tabBarController setSelectedIndex:4]; needs to be able to jump as well
     //manual selection at present on tab bar
+        [NSTimer scheduledTimerWithTimeInterval:startTime target:self selector:@selector(waitForever) userInfo:nil repeats:NO];
     }
+}
+
+-(void)waitForever{
+    //stop
 }
 
 -(void)blankMSG3 {
@@ -2069,7 +2074,7 @@
         
         //for timing strings
         Float32 tempCalcR                 = 0.00f;
-        Float32 actualReactionTime[7][12];
+        Float32 actualReactionTime[12][15];
         Float32 firstPress                = 0.00f;
         int cc                            = 0;
         
@@ -2121,7 +2126,7 @@
                     NSLog(@"reaction time:            r-%.0f mS", reactionTime[aa][bb]);
                 }else{
                     tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@",%.0f", actualReactionTime[aa][bb]]];
-                    NSLog(@"reaction time:            r-%.0f mS", actualReactionTime[aa][bb]);
+                    NSLog(@"reaction time:            r-%.0f mS aa=%d bb=%d", actualReactionTime[aa][bb],aa,bb);
                 }
                 //NSLog(@"cumulative reaction time: c-%.0f mS", reactionTime[aa][bb]);
             }
