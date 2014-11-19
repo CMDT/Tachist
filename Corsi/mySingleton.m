@@ -78,30 +78,29 @@ static mySingleton * sharedSingleton = nil;
         
     currentBackgroundColour  = [UIColor blackColor];
         currentBlockColour   = [UIColor darkGrayColor];
-        currentShowColour    = [UIColor orangeColor];
+        currentShowColour    = [UIColor yellowColor];
         currentStatusColour  = [UIColor yellowColor];
         start                = 3;
         finish               = 9;
-        blockSize            = 40.00;
-        blockSize            = 30.00;
-        waitTime             = 1500;
-        startTime            = 1500;
+        blockSize            = 45.00;
+        waitTime             = 1200;
+        startTime            = 1000;
         showTime             = 600;
         messageTime          = 2000; //for on screen instructions and messages in time interval delay
         timerTime            = 0.0;
         blockRotation        = YES;
         onScreenInfo         = YES;
         animals              = NO;
-        sounds               = NO;
-        beepEffect           = @"KLICK";
-        segIndex             = 0;
+        sounds               = YES;
+        beepEffect           = @"JAZZ";
+        segIndex             = 6;
         forwardTestDirection = YES;
         resultStrings        = @"";
         displayStrings       = @"";
         resultStringRows     = [[NSMutableArray alloc]initWithObjects: nil];//clear the arrays of any data
         displayStringRows    = [[NSMutableArray alloc]initWithObjects: nil];
         displayStringTitles  = [[NSMutableArray alloc]initWithObjects: nil];
-        email                = @"test@test.com";
+        email                = @"@";
         }
     return self;
 }

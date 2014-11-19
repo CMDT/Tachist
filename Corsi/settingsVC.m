@@ -70,6 +70,7 @@
     NSString *subjectName;
     NSString *email;
     NSString *testerName;
+    NSString *version;
 
     CGPoint blk1pos;
     CGPoint blk2pos;
@@ -224,13 +225,18 @@ emailLBL;
 
     //read the user defaults from the iPhone/iPad bundle
     // if any are set to nil (no value on first run), put a temporary one in
-    
+    //version
+    version     = [defaults objectForKey:kVersion];
+    if(version  == nil ){
+        version =  @"v1.0.0";
+        [defaults setObject:@"v1.0.0" forKey:kVersion];
+    }
 //block colour
     currentBlockColour     = [defaults objectForKey:kBlockCol];
     if(currentBlockColour  == nil ){
-        currentBlockColour =  [UIColor blueColor];
-        blockCol =@"Blue";
-        [defaults setObject:@"Blue" forKey:kBlockCol];
+        currentBlockColour =  [UIColor darkGrayColor];
+        blockCol =@"Dark Gray";
+        [defaults setObject:@"Dark Gray" forKey:kBlockCol];
     }
 //background colour
     currentBackgroundColour     = [defaults objectForKey:kBackCol];
@@ -242,15 +248,15 @@ emailLBL;
 //show colour
     currentShowColour     = [defaults objectForKey:kShowCol];
     if(currentShowColour  == nil ){
-        currentShowColour =  [UIColor orangeColor];
-        showCol =@"Orange";
-        [defaults setObject:@"Orange" forKey:kShowCol];
+        currentShowColour =  [UIColor yellowColor];
+        showCol =@"Yellow";
+        [defaults setObject:@"Yellow" forKey:kShowCol];
     }
     //subject name
     subjectName     = [defaults objectForKey:kSubject];
     if(subjectName  == nil ){
-        subjectName =  @"Participant";
-        [defaults setObject:@"Participant" forKey:kSubject];
+        subjectName =  @"Par";
+        [defaults setObject:@"Par" forKey:kSubject];
     }
 
     //tester name
@@ -268,8 +274,8 @@ emailLBL;
     //beep Effect Name
     beepName     = [defaults objectForKey:kBeep];
     if(beepName  == nil ){
-        beepName =  @"KLICK";
-        [defaults setObject:@"KLICK" forKey:kBeep];
+        beepName =  @"BEEPJAZZ";
+        [defaults setObject:@"BEEPJAZZ" forKey:kBeep];
     }
     //start block
     NSString *temp = [defaults objectForKey:kStart];
@@ -285,18 +291,18 @@ emailLBL;
     }
     temp        = [defaults objectForKey:kSize];
     if( temp == nil ){
-        blockSize =  30.00;
-        [defaults setObject:@"30.00" forKey:kSize];
+        blockSize =  45.00;
+        [defaults setObject:@"45.00" forKey:kSize];
     }
     temp        = [defaults objectForKey:kDelay];
     if( temp == nil ){
-        waitTime=  500;
-        [defaults setObject:@"500" forKey:kDelay];
+        waitTime=  1200;
+        [defaults setObject:@"1200" forKey:kDelay];
     }
     temp        = [defaults objectForKey:kShow];
     if( temp == nil ){
-        showTime =  200;
-        [defaults setObject:@"200" forKey:kShow];
+        showTime =  600;
+        [defaults setObject:@"600" forKey:kShow];
     }
     temp        = [defaults objectForKey:kTime];
     if( temp == nil ){
@@ -306,8 +312,8 @@ emailLBL;
     //set rotate
     temp        = [defaults objectForKey:kRot];
     if( temp == nil ){
-        rotation =  NO;
-        [defaults setBool:NO forKey:kRot];
+        rotation =  YES;
+        [defaults setBool:YES forKey:kRot];
     }
     //set animals
     temp        = [defaults objectForKey:kAnimals];
@@ -318,8 +324,8 @@ emailLBL;
     //set sounds
     temp        = [defaults objectForKey:kSounds];
     if( temp == nil ){
-        sounds =  NO;
-        [defaults setBool:NO forKey:kSounds];
+        sounds =  YES;
+        [defaults setBool:YES forKey:kSounds];
     }
     //set status messages
     temp        = [defaults objectForKey:kInfo];
@@ -333,28 +339,6 @@ emailLBL;
         forward =  YES;
         [defaults setBool:YES forKey:kForward];
     }
-
-    //for testing what is written, can be rem'd out later
-   /* NSLog(@"What is in the plist on first load:-->");
-    NSLog(@"tester      :%@",[defaults objectForKey:kTester]);
-    NSLog(@"subject     :%@",[defaults objectForKey:kSubject]);
-    NSLog(@"email       :%@",[defaults objectForKey:kEmail]);
-    NSLog(@"start       :%@",[defaults objectForKey:kStart]);
-    NSLog(@"finish      :%@",[defaults objectForKey:kFinish]);
-    NSLog(@"size        :%@",[defaults objectForKey:kSize]);
-    NSLog(@"forward     :%@",[defaults objectForKey:kForward]);
-    NSLog(@"info        :%@",[defaults objectForKey:kInfo]);
-    NSLog(@"rotation    :%@",[defaults objectForKey:kRot]);
-    NSLog(@"animals     :%@",[defaults objectForKey:kAnimals]);
-    NSLog(@"sounds      :%@",[defaults objectForKey:kSounds]);
-    NSLog(@"beep        :%@",[defaults objectForKey:kBeep]);
-    NSLog(@"block col   :%@",[defaults objectForKey:kBlockCol]);
-    NSLog(@"show col    :%@",[defaults objectForKey:kShowCol]);
-    NSLog(@"back col    :%@",[defaults objectForKey:kBackCol]);
-    NSLog(@"delay       :%@",[defaults objectForKey:kDelay]);
-    NSLog(@"time        :%@",[defaults objectForKey:kTime]);
-    NSLog(@"show        :%@",[defaults objectForKey:kShow]);
-    NSLog(@"version     :%@",[defaults objectForKey:kVersion]);*/
 }
 
 -(UIColor*)colourPicker:(NSString*)colourName{
@@ -646,9 +630,9 @@ emailLBL;
     
     blockCol          = [defaults objectForKey:kBlockCol];
     if(blockCol  == nil ){
-        currentBlockColour =  [UIColor blueColor];
-        blockCol =@"Blue";
-        [defaults setObject:@"Blue" forKey:kBlockCol];
+        currentBlockColour =  [UIColor darkGrayColor];
+        blockCol =@"Dark Gray";
+        [defaults setObject:@"Dark Gray" forKey:kBlockCol];
     }else{
         currentBlockColour = [self colourPicker:blockCol];
     }
@@ -664,9 +648,9 @@ emailLBL;
     //show colour
     showCol          = [defaults objectForKey:kShowCol];
     if(showCol  == nil ){
-        currentShowColour =  [UIColor orangeColor];
-        showCol =@"Orange";
-        [defaults setObject:@"Orange" forKey:kShowCol];
+        currentShowColour =  [UIColor yellowColor];
+        showCol =@"Yellow";
+        [defaults setObject:@"Yellow" forKey:kShowCol];
     }else{
         currentShowColour = [self colourPicker:showCol];
     }
@@ -684,18 +668,18 @@ emailLBL;
     }
     temp        = [defaults objectForKey:kSize];
     if( temp == nil ){
-        blockSize =  30.00;
-        [defaults setObject:@"30.00" forKey:kSize];
+        blockSize =  45.00;
+        [defaults setObject:@"45.00" forKey:kSize];
     }
     temp        = [defaults objectForKey:kDelay];
     if( temp == nil ){
-        waitTime=  500;
-        [defaults setObject:@"500" forKey:kDelay];
+        waitTime=  1200;
+        [defaults setObject:@"1200" forKey:kDelay];
     }
     temp        = [defaults objectForKey:kShow];
     if( temp == nil ){
-        showTime =  200;
-        [defaults setObject:@"200" forKey:kShow];
+        showTime =  600;
+        [defaults setObject:@"600" forKey:kShow];
     }
     temp        = [defaults objectForKey:kTime];
     if( temp == nil ){
@@ -705,8 +689,8 @@ emailLBL;
     //subject name
     temp     = [defaults objectForKey:kSubject];
     if(temp  == nil ){
-        subjectName =  @"Participant";
-        [defaults setObject:@"Participant" forKey:kSubject];
+        subjectName =  @"Par";
+        [defaults setObject:@"Par" forKey:kSubject];
     }
     //tester name
     temp     = [defaults objectForKey:kTester];
@@ -717,14 +701,14 @@ emailLBL;
     //email name
     temp     = [defaults objectForKey:kEmail];
     if(temp  == nil ){
-        email =  @"me@gmail.com";
-        [defaults setObject:@"me@gmail.com" forKey:kEmail];
+        email =  @"me@test.com";
+        [defaults setObject:@"me@test.com" forKey:kEmail];
     }
     //set rotate
     temp        = [defaults objectForKey:kRot];
     if( temp == nil ){
-        rotation =  NO;
-        [defaults setBool:NO forKey:kRot];
+        rotation =  YES;
+        [defaults setBool:YES forKey:kRot];
     }
     //set animals
     temp        = [defaults objectForKey:kAnimals];
@@ -735,14 +719,14 @@ emailLBL;
     //set sounds
     temp        = [defaults objectForKey:kSounds];
     if( temp == nil ){
-        sounds =  NO;
-        [defaults setBool:NO forKey:kSounds];
+        sounds =  YES;
+        [defaults setBool:YES forKey:kSounds];
     }
     //beep Effect Name
     beepName     = [defaults objectForKey:kBeep];
     if(beepName  == nil ){
-        beepName =  @"KLICK";
-        [defaults setObject:@"KLICK" forKey:kBeep];
+        beepName =  @"BEEPJAZZ";
+        [defaults setObject:@"BEEPJAZZ" forKey:kBeep];
     }
     //set status messages
     temp        = [defaults objectForKey:kInfo];
