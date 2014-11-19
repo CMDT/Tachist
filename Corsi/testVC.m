@@ -436,7 +436,8 @@
         //[defaults setObject:testerEmail forKey:kEmail];
     //subject name
     if (participant==nil||[participant isEqualToString:@""]) {
-        //no name was input, use the old one, do nothing
+        singleton.oldSubjectName = [singleton.subjectName stringByAppendingString: [NSString stringWithFormat:@"_%@",[self getCurrentDateTimeAsNSString]]];
+        //no name was input, use the old one
     }else{
         NSString *pathStr = [[NSBundle mainBundle] bundlePath];
         NSString *settingsBundlePath = [pathStr stringByAppendingPathComponent:@"Settings.bundle"];
@@ -449,8 +450,39 @@
         [defaults setObject:participant forKey:kSubject];
         //for singleton
         singleton.subjectName = participant;
+        singleton.oldSubjectName = [singleton.subjectName stringByAppendingString: [NSString stringWithFormat:@"_%@",[self getCurrentDateTimeAsNSString]]];
     }
     isAlertFinished=YES;
+}
+
+-(NSString*)getCurrentDateTimeAsNSString
+{
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+    [format setDateFormat:@"ddMMyyHHmmss"];
+    NSDate *now = [NSDate date];
+    NSString *retStr = [format stringFromDate:now];
+    
+    return retStr;
+}
+
+-(NSString*)getCurrentDate
+{
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+    [format setDateFormat:@"dd/MM/yyyy"];
+    NSDate *now = [NSDate date];
+    NSString *retStr = [format stringFromDate:now];
+    
+    return retStr;
+}
+
+-(NSString*)getCurrentTime
+{
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+    [format setDateFormat:@"HH:mm:ss"];
+    NSDate *now = [NSDate date];
+    NSString *retStr = [format stringFromDate:now];
+    
+    return retStr;
 }
 
 -(void)participantEntry{
@@ -1730,21 +1762,6 @@
     }
 }
 
--(NSString*)getCurrentDate{
-    NSDateFormatter *format = [[NSDateFormatter alloc] init];
-    [format setDateFormat:@"dd/MM/yy"];
-    NSDate *now = [NSDate date];
-    NSString *retStr = [format stringFromDate:now];
-    return retStr;
-}
-
--(NSString*)getCurrentTime{
-    NSDateFormatter *format = [[NSDateFormatter alloc] init];
-    [format setDateFormat:@"HH:mm:ss"];
-    NSDate *now = [NSDate date];
-    NSString *retStr = [format stringFromDate:now];
-    return retStr;
-}
 
 -(void)calculations{
     if (!isAborted) {
@@ -2072,6 +2089,19 @@
         NSLog(@"Timings follow");
         NSLog(@"--------------");
         
+        //check timing data is within limits and set max/mins if extended.  Crash possible if very long times get through.
+        Float32 react=0.00f;
+        for (int aa = 0; aa < start; aa++) {
+            for (int bb = 0; bb < aa; bb++) {
+                //make positive
+                react = abs(reactionTime[aa][bb]);
+                if (react>60000) {//about 60 seconds in ms
+                    react=60001;//one more so I can see if it was set or was a default
+                }
+                reactionTime[aa][bb] = react;
+            }
+        }
+        
         //for timing strings
         Float32 tempCalcR                 = 0.00f;
         Float32 actualReactionTime[12][15];
@@ -2089,7 +2119,7 @@
         
         for (int aa = start; aa < finish+1; aa++) {
             
-            firstPress = reactionTime[aa][0];
+            firstPress = abs(reactionTime[aa][0]);
             testReactionTime[aa] = 0.00f;
             
             tempString=[NSString stringWithFormat:@"%d,,", aa-2];
@@ -2102,21 +2132,21 @@
                 }else{
                     cc = bb - 1;
                 }
-                tempCalcR = reactionTime[aa][cc];
+                tempCalcR = abs(reactionTime[aa][cc]);
                 
-                actualReactionTime[aa][bb]   = reactionTime[aa][bb] - tempCalcR;
+                actualReactionTime[aa][bb]   = abs(reactionTime[aa][bb] - tempCalcR);
                 
-                totalReactionTime    = totalReactionTime    + actualReactionTime[aa][bb];
-                testReactionTime[aa] = testReactionTime[aa] + actualReactionTime[aa][bb];
+                totalReactionTime    = abs(totalReactionTime    + actualReactionTime[aa][bb]);
+                testReactionTime[aa] = abs(testReactionTime[aa] + actualReactionTime[aa][bb]);
                 
                 //min
                 if ((shortestReactionTime[aa] > actualReactionTime[aa][bb]) && (bb>0)) {
-                    shortestReactionTime[aa] = actualReactionTime[aa][bb];
+                    shortestReactionTime[aa] = abs(actualReactionTime[aa][bb]);
                 }
      
                 //max
                 if (longestReactionTime[aa] < actualReactionTime[aa][bb]) {
-                    longestReactionTime[aa] = actualReactionTime[aa][bb];
+                    longestReactionTime[aa] = abs(actualReactionTime[aa][bb]);
                 }
 
                 //times
@@ -2137,8 +2167,8 @@
                 //tempString2 = [NSString stringWithFormat:@"%@%@", tempString2, [NSString stringWithFormat:@"."]];//data
             }
             
-            //avg
-            averageReactionTime[aa] = testReactionTime[aa] / (Float32)(aa-1);
+            //avg absolute
+            averageReactionTime[aa] = abs(testReactionTime[aa] / (Float32)(aa-1));
             
             //stage end totals
             tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@",%.0f", testReactionTime[aa]]];
@@ -2147,23 +2177,27 @@
             tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@",%.0f,", averageReactionTime[aa]]];
             
             if (longestReactionTime[aa] < reactionTime[aa][0]) {
-                longestReactionTime[aa] = reactionTime[aa][0];
+                longestReactionTime[aa] = abs(reactionTime[aa][0]);
+
             }
             if (shortestReactionTime[aa] > reactionTime[aa][0]) {
-                shortestReactionTime[aa] = reactionTime[aa][0];
+                shortestReactionTime[aa] = abs(reactionTime[aa][0]);
             }
             tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@",%.0f", testReactionTime[aa]+reactionTime[aa][0]]];
             tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@",%.0f", shortestReactionTime[aa]]];
             tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@",%.0f", longestReactionTime[aa]]];
             
             //add 1st reaction
-            testReactionTime[aa] = testReactionTime[aa] + reactionTime[aa][0];
+            testReactionTime[aa] = abs(testReactionTime[aa] + reactionTime[aa][0]);
             
             //avg
-            averageReactionTime[aa] = testReactionTime[aa] / (Float32)aa;
+            averageReactionTime[aa] = abs(testReactionTime[aa] / (Float32)aa);
             tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@",%.0f", averageReactionTime[aa]]];
             
             [singleton.resultStringRows addObject:tempString];//csv
+            
+            //add the first guess on to the totals
+            totalReactionTime = abs(totalReactionTime + reactionTime[aa][0]);
 
             //1st one is zero, so don't count that.
             //Need to take into account that timing starts after 1st guess is received, although timer starts when user is asked

@@ -236,7 +236,7 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
 -(NSString *) setFilename{
     mySingleton *singleton = [mySingleton sharedSingleton];
     NSString *extn = @"csv";
-    filename = [NSString stringWithFormat:@"%@.%@", singleton.subjectName, extn];
+    filename = [NSString stringWithFormat:@"%@.%@", singleton.oldSubjectName, extn];
     return filename;
 }
 
@@ -252,7 +252,7 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
 
 /* Create a new file */
 -(void)WriteToStringFile:(NSMutableString *)textToWrite{
-    mySingleton *singleton = [mySingleton sharedSingleton];
+    //mySingleton *singleton = [mySingleton sharedSingleton];
     //int trynumber = 0;
     filepath = [[NSString alloc] init];
     NSError *err;
@@ -277,7 +277,8 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
     //not exists, write
     //BOOL fileExists = FALSE;
     
-    singleton.oldSubjectName = [singleton.subjectName stringByAppendingString: [NSString stringWithFormat:@"_%@",[self getCurrentDateTimeAsNSString]]];
+    //unrem if necessary
+    ///////******** singleton.oldSubjectName = [singleton.subjectName stringByAppendingString: [NSString stringWithFormat:@"_%@",[self getCurrentDateTimeAsNSString]]];
     
     //}
     //
@@ -337,9 +338,9 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
     
     docsDir = dirPaths[0];
     
-    //NSString * fileNameS = [NSString stringWithFormat:@"%@.csv", subjectlbl.text];
+    NSString * fileNameS = [NSString stringWithFormat:@"%@.csv", singleton.oldSubjectName];
 
-    NSString * fileNameS = [NSString stringWithFormat:@"corsi.csv"];
+    //NSString * fileNameS = [NSString stringWithFormat:@"corsi.csv"];
 
     dataFile = [docsDir stringByAppendingPathComponent:fileNameS];
     
@@ -357,7 +358,7 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
     singleton.testTime=[self getCurrentTime];
 
     NSString *emailTitle = [NSString stringWithFormat:@"Corsi App Data: %@",singleton.oldSubjectName];
-    NSString *messageBody = [NSString stringWithFormat:@"The test data for the subject:%@ taken at the date: %@ and time: %@, is attached as a text/csv file.\n\nThe file format is comma separated variable with a csv extension.\n\nThe data can be read by MS-Excel, then analysed by your own functions.\n\nSent by the Corsi App.",singleton.subjectName, singleton.testDate, singleton.testTime];
+    NSString *messageBody = [NSString stringWithFormat:@"The test data for the subject:%@ taken at the date: %@ and time: %@, is attached as a text/csv file.\n\nThe file format is comma separated variable with a csv extension.\n\nThe data can be read by MS-Excel, then analysed by your own functions.\n\nSent by the Corsi App.",singleton.oldSubjectName, singleton.testDate, singleton.testTime];
     
     //NSArray  *toRecipents = [NSArray arrayWithObject:@"j.a.howell@mmu.ac.uk"];//testing only
     NSArray  *toRecipents = [NSArray arrayWithObject:singleton.email];
@@ -400,7 +401,7 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
     [mc addAttachmentData:fileData mimeType:mimeType fileName:filename];
     // Present mail view controller on screen
     [self presentViewController:mc animated:YES completion:NULL];
-    NSLog(@"Finished Email");
+    //NSLog(@"Finished Email");
 }
 
 - (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
