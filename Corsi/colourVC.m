@@ -298,498 +298,229 @@ c0,c1,c10,c11,c12,c13,c2,c3,c4,c5,c6,c7,c8,c9;
     [self showCurrentShow];
     [self showCurrentCanvas];
 }
+-(void)showSelectedCase:(int)block{
+    [s0 setSelected:NO];
+    [s1 setSelected:NO];
+    [s2 setSelected:NO];
+    [s3 setSelected:NO];
+    [s4 setSelected:NO];
+    [s5 setSelected:NO];
+    [s6 setSelected:NO];
+    [s7 setSelected:NO];
+    [s8 setSelected:NO];
+    [s9 setSelected:NO];
+    [s10 setSelected:NO];
+    [s11 setSelected:NO];
+    [s12 setSelected:NO];
+    [s13 setSelected:NO];
+    
+    switch (block) {
+        case 0:
+            [s0 setSelected:YES];
+            break;
+        case 1:
+            [s1 setSelected:YES];
+            break;
+        case 2:
+            [s2 setSelected:YES];
+            break;
+        case 3:
+            [s3 setSelected:YES];
+            break;
+        case 4:
+            [s4 setSelected:YES];
+            break;
+        case 5:
+            [s5 setSelected:YES];
+            break;
+        case 6:
+            [s6 setSelected:YES];
+            break;
+        case 7:
+            [s7 setSelected:YES];
+            break;
+        case 8:
+            [s8 setSelected:YES];
+            break;
+        case 9:
+            [s9 setSelected:YES];
+            break;
+        case 10:
+            [s10 setSelected:YES];
+            break;
+        case 11:
+            [s11 setSelected:YES];
+            break;
+        case 12:
+            [s12 setSelected:YES];
+            break;
+        case 13:
+            [s13 setSelected:YES];
+            break;
+        default:
+            break;
+    }
+}
+
 
 -(void)showSelected:(id)sender{
     switch ([sender tag]) {
+    case 0:
+        [self showSelectedCase:0];
+        break;
+    case 1:
+            [self showSelectedCase:1];
+        break;
+    case 2:
+            [self showSelectedCase:2];
+        break;
+    case 3:
+            [self showSelectedCase:3];
+        break;
+    case 4:
+            [self showSelectedCase:4];
+        break;
+    case 5:
+            [self showSelectedCase:5];
+        break;
+    case 6:
+            [self showSelectedCase:6];
+        break;
+    case 7:
+            [self showSelectedCase:7];
+        break;
+    case 8:
+            [self showSelectedCase:8];
+        break;
+    case 9:
+            [self showSelectedCase:9];
+        break;
+    case 10:
+            [self showSelectedCase:10];
+        break;
+    case 11:
+            [self showSelectedCase:11];
+        break;
+    case 12:
+            [self showSelectedCase:12];
+        break;
+    case 13:
+            [self showSelectedCase:13];
+        break;
+    default:
+    // do nothing
+        break;
+    }
+}
+
+-(void)canvasSelectedCase:(int)block{
+    [c0 setSelected:NO];
+    [c1 setSelected:NO];
+    [c2 setSelected:NO];
+    [c3 setSelected:NO];
+    [c4 setSelected:NO];
+    [c5 setSelected:NO];
+    [c6 setSelected:NO];
+    [c7 setSelected:NO];
+    [c8 setSelected:NO];
+    [c9 setSelected:NO];
+    [c10 setSelected:NO];
+    [c11 setSelected:NO];
+    [c12 setSelected:NO];
+    [c13 setSelected:NO];
+    
+    switch (block) {
         case 0:
-            if([s0 isSelected]==YES)
-                {
-                [s0 setSelected:YES];
-                [s1 setSelected:NO];
-                [s2 setSelected:NO];
-                [s3 setSelected:NO];
-                [s4 setSelected:NO];
-                [s5 setSelected:NO];
-                [s6 setSelected:NO];
-                [s7 setSelected:NO];
-                [s8 setSelected:NO];
-                [s9 setSelected:NO];
-                [s10 setSelected:NO];
-                [s11 setSelected:NO];
-                [s12 setSelected:NO];
-                [s13 setSelected:NO];
-                }
-            else{
-                [s0 setSelected:YES];
-                [s1 setSelected:NO];
-                [s2 setSelected:NO];
-                [s3 setSelected:NO];
-                [s4 setSelected:NO];
-                [s5 setSelected:NO];
-                [s6 setSelected:NO];
-                [s7 setSelected:NO];
-                [s8 setSelected:NO];
-                [s9 setSelected:NO];
-                [s10 setSelected:NO];
-                [s11 setSelected:NO];
-                [s12 setSelected:NO];
-                [s13 setSelected:NO];
-            }
+            [c0 setSelected:YES];
             break;
         case 1:
-            if([s1 isSelected]==YES)
-                {
-                [s0 setSelected:NO];
-                [s1 setSelected:YES];
-                [s2 setSelected:NO];
-                [s3 setSelected:NO];
-                [s4 setSelected:NO];
-                [s5 setSelected:NO];
-                [s6 setSelected:NO];
-                [s7 setSelected:NO];
-                [s8 setSelected:NO];
-                [s9 setSelected:NO];
-                [s10 setSelected:NO];
-                [s11 setSelected:NO];
-                [s12 setSelected:NO];
-                [s13 setSelected:NO];
-                }
-            else{
-                [s1 setSelected:YES];
-                [s0 setSelected:NO];
-                [s2 setSelected:NO];
-                [s3 setSelected:NO];
-                [s4 setSelected:NO];
-                [s5 setSelected:NO];
-                [s6 setSelected:NO];
-                [s7 setSelected:NO];
-                [s8 setSelected:NO];
-                [s9 setSelected:NO];
-                [s10 setSelected:NO];
-                [s11 setSelected:NO];
-                [s12 setSelected:NO];
-                [s13 setSelected:NO];
-            }
+            [c1 setSelected:YES];
             break;
         case 2:
-            if([s2 isSelected]==YES)
-                {
-                [s0 setSelected:NO];
-                [s1 setSelected:NO];
-                [s2 setSelected:YES];
-                [s3 setSelected:NO];
-                [s4 setSelected:NO];
-                [s5 setSelected:NO];
-                [s6 setSelected:NO];
-                [s7 setSelected:NO];
-                [s8 setSelected:NO];
-                [s9 setSelected:NO];
-                [s10 setSelected:NO];
-                [s11 setSelected:NO];
-                [s12 setSelected:NO];
-                [s13 setSelected:NO];
-                }
-            else{
-                [s2 setSelected:YES];
-                [s0 setSelected:NO];
-                [s1 setSelected:NO];
-                [s3 setSelected:NO];
-                [s4 setSelected:NO];
-                [s5 setSelected:NO];
-                [s6 setSelected:NO];
-                [s7 setSelected:NO];
-                [s8 setSelected:NO];
-                [s9 setSelected:NO];
-                [s10 setSelected:NO];
-                [s11 setSelected:NO];
-                [s12 setSelected:NO];
-                [s13 setSelected:NO];
-            }
+            [c2 setSelected:YES];
             break;
         case 3:
-            if([s3 isSelected]==YES)
-                {
-                [s0 setSelected:NO];
-                [s1 setSelected:NO];
-                [s2 setSelected:NO];
-                [s3 setSelected:YES];
-                [s4 setSelected:NO];
-                [s5 setSelected:NO];
-                [s6 setSelected:NO];
-                [s7 setSelected:NO];
-                [s8 setSelected:NO];
-                [s9 setSelected:NO];
-                [s10 setSelected:NO];
-                [s11 setSelected:NO];
-                [s12 setSelected:NO];
-                [s13 setSelected:NO];
-                }
-            else{
-                [s3 setSelected:YES];
-                [s0 setSelected:NO];
-                [s2 setSelected:NO];
-                [s1 setSelected:NO];
-                [s4 setSelected:NO];
-                [s5 setSelected:NO];
-                [s6 setSelected:NO];
-                [s7 setSelected:NO];
-                [s8 setSelected:NO];
-                [s9 setSelected:NO];
-                [s10 setSelected:NO];
-                [s11 setSelected:NO];
-                [s12 setSelected:NO];
-                [s13 setSelected:NO];
-            }
+            [c3 setSelected:YES];
             break;
         case 4:
-            if([s4 isSelected]==YES)
-                {
-                [s0 setSelected:NO];
-                [s1 setSelected:NO];
-                [s2 setSelected:NO];
-                [s3 setSelected:NO];
-                [s4 setSelected:YES];
-                [s5 setSelected:NO];
-                [s6 setSelected:NO];
-                [s7 setSelected:NO];
-                [s8 setSelected:NO];
-                [s9 setSelected:NO];
-                [s10 setSelected:NO];
-                [s11 setSelected:NO];
-                [s12 setSelected:NO];
-                [s13 setSelected:NO];
-                }
-            else{
-                [s4 setSelected:YES];
-                [s0 setSelected:NO];
-                [s2 setSelected:NO];
-                [s3 setSelected:NO];
-                [s1 setSelected:NO];
-                [s5 setSelected:NO];
-                [s6 setSelected:NO];
-                [s7 setSelected:NO];
-                [s8 setSelected:NO];
-                [s9 setSelected:NO];
-                [s10 setSelected:NO];
-                [s11 setSelected:NO];
-                [s12 setSelected:NO];
-                [s13 setSelected:NO];
-            }
+            [c4 setSelected:YES];
             break;
         case 5:
-            if([s5 isSelected]==YES)
-                {
-                [s0 setSelected:NO];
-                [s1 setSelected:NO];
-                [s2 setSelected:NO];
-                [s3 setSelected:NO];
-                [s4 setSelected:NO];
-                [s5 setSelected:YES];
-                [s6 setSelected:NO];
-                [s7 setSelected:NO];
-                [s8 setSelected:NO];
-                [s9 setSelected:NO];
-                [s10 setSelected:NO];
-                [s11 setSelected:NO];
-                [s12 setSelected:NO];
-                [s13 setSelected:NO];
-                }
-            else{
-                [s5 setSelected:YES];
-                [s0 setSelected:NO];
-                [s2 setSelected:NO];
-                [s3 setSelected:NO];
-                [s4 setSelected:NO];
-                [s1 setSelected:NO];
-                [s6 setSelected:NO];
-                [s7 setSelected:NO];
-                [s8 setSelected:NO];
-                [s9 setSelected:NO];
-                [s10 setSelected:NO];
-                [s11 setSelected:NO];
-                [s12 setSelected:NO];
-                [s13 setSelected:NO];
-            }
+            [c5 setSelected:YES];
             break;
         case 6:
-            if([s6 isSelected]==YES)
-                {
-                [s0 setSelected:NO];
-                [s1 setSelected:NO];
-                [s2 setSelected:NO];
-                [s3 setSelected:NO];
-                [s4 setSelected:NO];
-                [s5 setSelected:NO];
-                [s6 setSelected:YES];
-                [s7 setSelected:NO];
-                [s8 setSelected:NO];
-                [s9 setSelected:NO];
-                [s10 setSelected:NO];
-                [s11 setSelected:NO];
-                [s12 setSelected:NO];
-                [s13 setSelected:NO];
-                }
-            else{
-                [s6 setSelected:YES];
-                [s0 setSelected:NO];
-                [s2 setSelected:NO];
-                [s3 setSelected:NO];
-                [s4 setSelected:NO];
-                [s5 setSelected:NO];
-                [s1 setSelected:NO];
-                [s7 setSelected:NO];
-                [s8 setSelected:NO];
-                [s9 setSelected:NO];
-                [s10 setSelected:NO];
-                [s11 setSelected:NO];
-                [s12 setSelected:NO];
-                [s13 setSelected:NO];
-            }
+            [c6 setSelected:YES];
             break;
         case 7:
-            if([s7 isSelected]==YES)
-                {
-                [s0 setSelected:NO];
-                [s1 setSelected:NO];
-                [s2 setSelected:NO];
-                [s3 setSelected:NO];
-                [s4 setSelected:NO];
-                [s5 setSelected:NO];
-                [s6 setSelected:NO];
-                [s7 setSelected:YES];
-                [s8 setSelected:NO];
-                [s9 setSelected:NO];
-                [s10 setSelected:NO];
-                [s11 setSelected:NO];
-                [s12 setSelected:NO];
-                [s13 setSelected:NO];
-                }
-            else{
-                [s7 setSelected:YES];
-                [s0 setSelected:NO];
-                [s2 setSelected:NO];
-                [s3 setSelected:NO];
-                [s4 setSelected:NO];
-                [s5 setSelected:NO];
-                [s6 setSelected:NO];
-                [s1 setSelected:NO];
-                [s8 setSelected:NO];
-                [s9 setSelected:NO];
-                [s10 setSelected:NO];
-                [s11 setSelected:NO];
-                [s12 setSelected:NO];
-                [s13 setSelected:NO];
-            }
+            [c7 setSelected:YES];
             break;
         case 8:
-            if([s8 isSelected]==YES)
-                {
-                [s0 setSelected:NO];
-                [s1 setSelected:NO];
-                [s2 setSelected:NO];
-                [s3 setSelected:NO];
-                [s4 setSelected:NO];
-                [s5 setSelected:NO];
-                [s6 setSelected:NO];
-                [s7 setSelected:NO];
-                [s8 setSelected:YES];
-                [s9 setSelected:NO];
-                [s10 setSelected:NO];
-                [s11 setSelected:NO];
-                [s12 setSelected:NO];
-                [s13 setSelected:NO];
-                }
-            else{
-                [s8 setSelected:YES];
-                [s0 setSelected:NO];
-                [s2 setSelected:NO];
-                [s3 setSelected:NO];
-                [s4 setSelected:NO];
-                [s5 setSelected:NO];
-                [s6 setSelected:NO];
-                [s7 setSelected:NO];
-                [s1 setSelected:NO];
-                [s9 setSelected:NO];
-                [s10 setSelected:NO];
-                [s11 setSelected:NO];
-                [s12 setSelected:NO];
-                [s13 setSelected:NO];
-            }
+            [c8 setSelected:YES];
             break;
         case 9:
-            if([s9 isSelected]==YES)
-                {
-                [s0 setSelected:NO];
-                [s1 setSelected:NO];
-                [s2 setSelected:NO];
-                [s3 setSelected:NO];
-                [s4 setSelected:NO];
-                [s5 setSelected:NO];
-                [s6 setSelected:NO];
-                [s7 setSelected:NO];
-                [s8 setSelected:NO];
-                [s9 setSelected:YES];
-                [s10 setSelected:NO];
-                [s11 setSelected:NO];
-                [s12 setSelected:NO];
-                [s13 setSelected:NO];
-                }
-            else{
-                [s9 setSelected:YES];
-                [s0 setSelected:NO];
-                [s2 setSelected:NO];
-                [s3 setSelected:NO];
-                [s4 setSelected:NO];
-                [s5 setSelected:NO];
-                [s6 setSelected:NO];
-                [s7 setSelected:NO];
-                [s8 setSelected:NO];
-                [s1 setSelected:NO];
-                [s10 setSelected:NO];
-                [s11 setSelected:NO];
-                [s12 setSelected:NO];
-                [s13 setSelected:NO];
-            }
+            [c9 setSelected:YES];
             break;
         case 10:
-            if([s10 isSelected]==YES)
-                {
-                [s0 setSelected:NO];
-                [s1 setSelected:NO];
-                [s2 setSelected:NO];
-                [s3 setSelected:NO];
-                [s4 setSelected:NO];
-                [s5 setSelected:NO];
-                [s6 setSelected:NO];
-                [s7 setSelected:NO];
-                [s8 setSelected:NO];
-                [s9 setSelected:NO];
-                [s10 setSelected:YES];
-                [s11 setSelected:NO];
-                [s12 setSelected:NO];
-                [s13 setSelected:NO];
-                }
-            else{
-                [s10 setSelected:YES];
-                [s0 setSelected:NO];
-                [s2 setSelected:NO];
-                [s3 setSelected:NO];
-                [s4 setSelected:NO];
-                [s5 setSelected:NO];
-                [s6 setSelected:NO];
-                [s7 setSelected:NO];
-                [s8 setSelected:NO];
-                [s9 setSelected:NO];
-                [s1 setSelected:NO];
-                [s11 setSelected:NO];
-                [s12 setSelected:NO];
-                [s13 setSelected:NO];
-            }
+            [c10 setSelected:YES];
             break;
         case 11:
-            if([s11 isSelected]==YES)
-                {
-                [s0 setSelected:NO];
-                [s1 setSelected:NO];
-                [s2 setSelected:NO];
-                [s3 setSelected:NO];
-                [s4 setSelected:NO];
-                [s5 setSelected:NO];
-                [s6 setSelected:NO];
-                [s7 setSelected:NO];
-                [s8 setSelected:NO];
-                [s9 setSelected:NO];
-                [s10 setSelected:NO];
-                [s11 setSelected:YES];
-                [s12 setSelected:NO];
-                [s13 setSelected:NO];
-                }
-            else{
-                [s11 setSelected:YES];
-                [s0 setSelected:NO];
-                [s2 setSelected:NO];
-                [s3 setSelected:NO];
-                [s4 setSelected:NO];
-                [s5 setSelected:NO];
-                [s6 setSelected:NO];
-                [s7 setSelected:NO];
-                [s8 setSelected:NO];
-                [s9 setSelected:NO];
-                [s10 setSelected:NO];
-                [s1 setSelected:NO];
-                [s12 setSelected:NO];
-                [s13 setSelected:NO];
-            }
+            [c11 setSelected:YES];
             break;
         case 12:
-            if([s12 isSelected]==YES)
-                {
-                [s0 setSelected:NO];
-                [s1 setSelected:NO];
-                [s2 setSelected:NO];
-                [s3 setSelected:NO];
-                [s4 setSelected:NO];
-                [s5 setSelected:NO];
-                [s6 setSelected:NO];
-                [s7 setSelected:NO];
-                [s8 setSelected:NO];
-                [s9 setSelected:NO];
-                [s10 setSelected:NO];
-                [s11 setSelected:NO];
-                [s12 setSelected:YES];
-                [s13 setSelected:NO];
-                }
-            else{
-                [s12 setSelected:YES];
-                [s0 setSelected:NO];
-                [s2 setSelected:NO];
-                [s3 setSelected:NO];
-                [s4 setSelected:NO];
-                [s5 setSelected:NO];
-                [s6 setSelected:NO];
-                [s7 setSelected:NO];
-                [s8 setSelected:NO];
-                [s9 setSelected:NO];
-                [s10 setSelected:NO];
-                [s11 setSelected:NO];
-                [s1 setSelected:NO];
-                [s13 setSelected:NO];
-            }
+            [c12 setSelected:YES];
             break;
         case 13:
-            if([s13 isSelected]==YES)
-                {
-                [s0 setSelected:NO];
-                [s1 setSelected:NO];
-                [s2 setSelected:NO];
-                [s3 setSelected:NO];
-                [s4 setSelected:NO];
-                [s5 setSelected:NO];
-                [s6 setSelected:NO];
-                [s7 setSelected:NO];
-                [s8 setSelected:NO];
-                [s9 setSelected:NO];
-                [s10 setSelected:NO];
-                [s11 setSelected:NO];
-                [s12 setSelected:NO];
-                [s13 setSelected:YES];
-                }
-            else{
-                [s13 setSelected:YES];
-                [s0 setSelected:NO];
-                [s2 setSelected:NO];
-                [s3 setSelected:NO];
-                [s4 setSelected:NO];
-                [s5 setSelected:NO];
-                [s6 setSelected:NO];
-                [s7 setSelected:NO];
-                [s8 setSelected:NO];
-                [s9 setSelected:NO];
-                [s10 setSelected:NO];
-                [s11 setSelected:NO];
-                [s12 setSelected:NO];
-                [s1 setSelected:NO];
-            }
+            [c13 setSelected:YES];
+            break;
+        default:
+            break;
+    }
+}
+
+
+-(void)canvasSelected:(id)sender{
+    switch ([sender tag]) {
+        case 0:
+            [self canvasSelectedCase:0];
+            break;
+        case 1:
+            [self canvasSelectedCase:1];
+            break;
+        case 2:
+            [self canvasSelectedCase:2];
+            break;
+        case 3:
+            [self canvasSelectedCase:3];
+            break;
+        case 4:
+            [self canvasSelectedCase:4];
+            break;
+        case 5:
+            [self canvasSelectedCase:5];
+            break;
+        case 6:
+            [self canvasSelectedCase:6];
+            break;
+        case 7:
+            [self canvasSelectedCase:7];
+            break;
+        case 8:
+            [self canvasSelectedCase:8];
+            break;
+        case 9:
+            [self canvasSelectedCase:9];
+            break;
+        case 10:
+            [self canvasSelectedCase:10];
+            break;
+        case 11:
+            [self canvasSelectedCase:11];
+            break;
+        case 12:
+            [self canvasSelectedCase:12];
+            break;
+        case 13:
+            [self canvasSelectedCase:13];
             break;
         default:
             // do nothing
@@ -797,997 +528,116 @@ c0,c1,c10,c11,c12,c13,c2,c3,c4,c5,c6,c7,c8,c9;
     }
 }
 
--(void)canvasSelected:(id)sender{
-    switch ([sender tag]) {
+-(void)blockSelectedCase:(int)block{
+    [b0 setSelected:NO];
+    [b1 setSelected:NO];
+    [b2 setSelected:NO];
+    [b3 setSelected:NO];
+    [b4 setSelected:NO];
+    [b5 setSelected:NO];
+    [b6 setSelected:NO];
+    [b7 setSelected:NO];
+    [b8 setSelected:NO];
+    [b9 setSelected:NO];
+    [b10 setSelected:NO];
+    [b11 setSelected:NO];
+    [b12 setSelected:NO];
+    [b13 setSelected:NO];
+    
+    switch (block) {
         case 0:
-            if([c0 isSelected]==YES)
-                {
-                [c0 setSelected:YES];
-                [c1 setSelected:NO];
-                [c2 setSelected:NO];
-                [c3 setSelected:NO];
-                [c4 setSelected:NO];
-                [c5 setSelected:NO];
-                [c6 setSelected:NO];
-                [c7 setSelected:NO];
-                [c8 setSelected:NO];
-                [c9 setSelected:NO];
-                [c10 setSelected:NO];
-                [c11 setSelected:NO];
-                [c12 setSelected:NO];
-                [c13 setSelected:NO];
-                }
-            else{
-                [c0 setSelected:YES];
-                [c1 setSelected:NO];
-                [c2 setSelected:NO];
-                [c3 setSelected:NO];
-                [c4 setSelected:NO];
-                [c5 setSelected:NO];
-                [c6 setSelected:NO];
-                [c7 setSelected:NO];
-                [c8 setSelected:NO];
-                [c9 setSelected:NO];
-                [c10 setSelected:NO];
-                [c11 setSelected:NO];
-                [c12 setSelected:NO];
-                [c13 setSelected:NO];
-            }
+            [b0 setSelected:YES];
             break;
         case 1:
-            if([c1 isSelected]==YES)
-                {
-                [c1 setSelected:YES];
-                [c0 setSelected:NO];
-                [c2 setSelected:NO];
-                [c3 setSelected:NO];
-                [c4 setSelected:NO];
-                [c5 setSelected:NO];
-                [c6 setSelected:NO];
-                [c7 setSelected:NO];
-                [c8 setSelected:NO];
-                [c9 setSelected:NO];
-                [c10 setSelected:NO];
-                [c11 setSelected:NO];
-                [c12 setSelected:NO];
-                [c13 setSelected:NO];
-                }
-            else{
-                [c1 setSelected:YES];
-                [c0 setSelected:NO];
-                [c2 setSelected:NO];
-                [c3 setSelected:NO];
-                [c4 setSelected:NO];
-                [c5 setSelected:NO];
-                [c6 setSelected:NO];
-                [c7 setSelected:NO];
-                [c8 setSelected:NO];
-                [c9 setSelected:NO];
-                [c10 setSelected:NO];
-                [c11 setSelected:NO];
-                [c12 setSelected:NO];
-                [c13 setSelected:NO];
-            }
+            [b1 setSelected:YES];
             break;
         case 2:
-            if([c2 isSelected]==YES)
-                {
-                [c2 setSelected:YES];
-                [c1 setSelected:NO];
-                [c0 setSelected:NO];
-                [c3 setSelected:NO];
-                [c4 setSelected:NO];
-                [c5 setSelected:NO];
-                [c6 setSelected:NO];
-                [c7 setSelected:NO];
-                [c8 setSelected:NO];
-                [c9 setSelected:NO];
-                [c10 setSelected:NO];
-                [c11 setSelected:NO];
-                [c12 setSelected:NO];
-                [c13 setSelected:NO];
-                }
-            else{
-                [c2 setSelected:YES];
-                [c1 setSelected:NO];
-                [c0 setSelected:NO];
-                [c3 setSelected:NO];
-                [c4 setSelected:NO];
-                [c5 setSelected:NO];
-                [c6 setSelected:NO];
-                [c7 setSelected:NO];
-                [c8 setSelected:NO];
-                [c9 setSelected:NO];
-                [c10 setSelected:NO];
-                [c11 setSelected:NO];
-                [c12 setSelected:NO];
-                [c13 setSelected:NO];
-            }
+            [b2 setSelected:YES];
             break;
         case 3:
-            if([c3 isSelected]==YES)
-                {
-                [c3 setSelected:YES];
-                [c1 setSelected:NO];
-                [c2 setSelected:NO];
-                [c0 setSelected:NO];
-                [c4 setSelected:NO];
-                [c5 setSelected:NO];
-                [c6 setSelected:NO];
-                [c7 setSelected:NO];
-                [c8 setSelected:NO];
-                [c9 setSelected:NO];
-                [c10 setSelected:NO];
-                [c11 setSelected:NO];
-                [c12 setSelected:NO];
-                [c13 setSelected:NO];
-                }
-            else{
-                [c3 setSelected:YES];
-                [c1 setSelected:NO];
-                [c2 setSelected:NO];
-                [c0 setSelected:NO];
-                [c4 setSelected:NO];
-                [c5 setSelected:NO];
-                [c6 setSelected:NO];
-                [c7 setSelected:NO];
-                [c8 setSelected:NO];
-                [c9 setSelected:NO];
-                [c10 setSelected:NO];
-                [c11 setSelected:NO];
-                [c12 setSelected:NO];
-                [c13 setSelected:NO];
-            }
+            [b3 setSelected:YES];
             break;
         case 4:
-            if([c4 isSelected]==YES)
-                {
-                [c4 setSelected:YES];
-                [c1 setSelected:NO];
-                [c2 setSelected:NO];
-                [c3 setSelected:NO];
-                [c0 setSelected:NO];
-                [c5 setSelected:NO];
-                [c6 setSelected:NO];
-                [c7 setSelected:NO];
-                [c8 setSelected:NO];
-                [c9 setSelected:NO];
-                [c10 setSelected:NO];
-                [c11 setSelected:NO];
-                [c12 setSelected:NO];
-                [c13 setSelected:NO];
-                }
-            else{
-                [c4 setSelected:YES];
-                [c1 setSelected:NO];
-                [c2 setSelected:NO];
-                [c3 setSelected:NO];
-                [c0 setSelected:NO];
-                [c5 setSelected:NO];
-                [c6 setSelected:NO];
-                [c7 setSelected:NO];
-                [c8 setSelected:NO];
-                [c9 setSelected:NO];
-                [c10 setSelected:NO];
-                [c11 setSelected:NO];
-                [c12 setSelected:NO];
-                [c13 setSelected:NO];
-            }
+            [b4 setSelected:YES];
             break;
         case 5:
-            if([c5 isSelected]==YES)
-                {
-                [c5 setSelected:YES];
-                [c1 setSelected:NO];
-                [c2 setSelected:NO];
-                [c3 setSelected:NO];
-                [c4 setSelected:NO];
-                [c0 setSelected:NO];
-                [c6 setSelected:NO];
-                [c7 setSelected:NO];
-                [c8 setSelected:NO];
-                [c9 setSelected:NO];
-                [c10 setSelected:NO];
-                [c11 setSelected:NO];
-                [c12 setSelected:NO];
-                [c13 setSelected:NO];
-                }
-            else{
-                [c5 setSelected:YES];
-                [c1 setSelected:NO];
-                [c2 setSelected:NO];
-                [c3 setSelected:NO];
-                [c4 setSelected:NO];
-                [c0 setSelected:NO];
-                [c6 setSelected:NO];
-                [c7 setSelected:NO];
-                [c8 setSelected:NO];
-                [c9 setSelected:NO];
-                [c10 setSelected:NO];
-                [c11 setSelected:NO];
-                [c12 setSelected:NO];
-                [c13 setSelected:NO];
-            }
+            [b5 setSelected:YES];
             break;
         case 6:
-            if([c6 isSelected]==YES)
-                {
-                [c6 setSelected:YES];
-                [c1 setSelected:NO];
-                [c2 setSelected:NO];
-                [c3 setSelected:NO];
-                [c4 setSelected:NO];
-                [c5 setSelected:NO];
-                [c0 setSelected:NO];
-                [c7 setSelected:NO];
-                [c8 setSelected:NO];
-                [c9 setSelected:NO];
-                [c10 setSelected:NO];
-                [c11 setSelected:NO];
-                [c12 setSelected:NO];
-                [c13 setSelected:NO];
-                }
-            else{
-                [c6 setSelected:YES];
-                [c1 setSelected:NO];
-                [c2 setSelected:NO];
-                [c3 setSelected:NO];
-                [c4 setSelected:NO];
-                [c5 setSelected:NO];
-                [c0 setSelected:NO];
-                [c7 setSelected:NO];
-                [c8 setSelected:NO];
-                [c9 setSelected:NO];
-                [c10 setSelected:NO];
-                [c11 setSelected:NO];
-                [c12 setSelected:NO];
-                [c13 setSelected:NO];
-            }
+            [b6 setSelected:YES];
             break;
         case 7:
-            if([c7 isSelected]==YES)
-                {
-                [c7 setSelected:YES];
-                [c1 setSelected:NO];
-                [c2 setSelected:NO];
-                [c3 setSelected:NO];
-                [c4 setSelected:NO];
-                [c5 setSelected:NO];
-                [c6 setSelected:NO];
-                [c0 setSelected:NO];
-                [c8 setSelected:NO];
-                [c9 setSelected:NO];
-                [c10 setSelected:NO];
-                [c11 setSelected:NO];
-                [c12 setSelected:NO];
-                [c13 setSelected:NO];
-                }
-            else{
-                [c7 setSelected:YES];
-                [c1 setSelected:NO];
-                [c2 setSelected:NO];
-                [c3 setSelected:NO];
-                [c4 setSelected:NO];
-                [c5 setSelected:NO];
-                [c6 setSelected:NO];
-                [c0 setSelected:NO];
-                [c8 setSelected:NO];
-                [c9 setSelected:NO];
-                [c10 setSelected:NO];
-                [c11 setSelected:NO];
-                [c12 setSelected:NO];
-                [c13 setSelected:NO];
-            }
+            [b7 setSelected:YES];
             break;
         case 8:
-            if([c8 isSelected]==YES)
-                {
-                [c8 setSelected:YES];
-                [c1 setSelected:NO];
-                [c2 setSelected:NO];
-                [c3 setSelected:NO];
-                [c4 setSelected:NO];
-                [c5 setSelected:NO];
-                [c6 setSelected:NO];
-                [c7 setSelected:NO];
-                [c0 setSelected:NO];
-                [c9 setSelected:NO];
-                [c10 setSelected:NO];
-                [c11 setSelected:NO];
-                [c12 setSelected:NO];
-                [c13 setSelected:NO];
-                }
-            else{
-                [c8 setSelected:YES];
-                [c1 setSelected:NO];
-                [c2 setSelected:NO];
-                [c3 setSelected:NO];
-                [c4 setSelected:NO];
-                [c5 setSelected:NO];
-                [c6 setSelected:NO];
-                [c7 setSelected:NO];
-                [c0 setSelected:NO];
-                [c9 setSelected:NO];
-                [c10 setSelected:NO];
-                [c11 setSelected:NO];
-                [c12 setSelected:NO];
-                [c13 setSelected:NO];
-            }
+            [b8 setSelected:YES];
             break;
         case 9:
-            if([c9 isSelected]==YES)
-                {
-                [c9 setSelected:YES];
-                [c1 setSelected:NO];
-                [c2 setSelected:NO];
-                [c3 setSelected:NO];
-                [c4 setSelected:NO];
-                [c5 setSelected:NO];
-                [c6 setSelected:NO];
-                [c7 setSelected:NO];
-                [c8 setSelected:NO];
-                [c0 setSelected:NO];
-                [c10 setSelected:NO];
-                [c11 setSelected:NO];
-                [c12 setSelected:NO];
-                [c13 setSelected:NO];
-                }
-            else{
-                [c9 setSelected:YES];
-                [c1 setSelected:NO];
-                [c2 setSelected:NO];
-                [c3 setSelected:NO];
-                [c4 setSelected:NO];
-                [c5 setSelected:NO];
-                [c6 setSelected:NO];
-                [c7 setSelected:NO];
-                [c8 setSelected:NO];
-                [c0 setSelected:NO];
-                [c10 setSelected:NO];
-                [c11 setSelected:NO];
-                [c12 setSelected:NO];
-                [c13 setSelected:NO];
-            }
+            [b9 setSelected:YES];
             break;
         case 10:
-            if([c10 isSelected]==YES)
-                {
-                [c10 setSelected:YES];
-                [c1 setSelected:NO];
-                [c2 setSelected:NO];
-                [c3 setSelected:NO];
-                [c4 setSelected:NO];
-                [c5 setSelected:NO];
-                [c6 setSelected:NO];
-                [c7 setSelected:NO];
-                [c8 setSelected:NO];
-                [c9 setSelected:NO];
-                [c0 setSelected:NO];
-                [c11 setSelected:NO];
-                [c12 setSelected:NO];
-                [c13 setSelected:NO];
-                }
-            else{
-                [c10 setSelected:YES];
-                [c1 setSelected:NO];
-                [c2 setSelected:NO];
-                [c3 setSelected:NO];
-                [c4 setSelected:NO];
-                [c5 setSelected:NO];
-                [c6 setSelected:NO];
-                [c7 setSelected:NO];
-                [c8 setSelected:NO];
-                [c9 setSelected:NO];
-                [c0 setSelected:NO];
-                [c11 setSelected:NO];
-                [c12 setSelected:NO];
-                [c13 setSelected:NO];
-            }
+            [b10 setSelected:YES];
             break;
         case 11:
-            if([c11 isSelected]==YES)
-                {
-                [c1 setSelected:YES];
-                [c1 setSelected:NO];
-                [c2 setSelected:NO];
-                [c3 setSelected:NO];
-                [c4 setSelected:NO];
-                [c5 setSelected:NO];
-                [c6 setSelected:NO];
-                [c7 setSelected:NO];
-                [c8 setSelected:NO];
-                [c9 setSelected:NO];
-                [c10 setSelected:NO];
-                [c0 setSelected:NO];
-                [c12 setSelected:NO];
-                [c13 setSelected:NO];
-                }
-            else{
-                [c11 setSelected:YES];
-                [c1 setSelected:NO];
-                [c2 setSelected:NO];
-                [c3 setSelected:NO];
-                [c4 setSelected:NO];
-                [c5 setSelected:NO];
-                [c6 setSelected:NO];
-                [c7 setSelected:NO];
-                [c8 setSelected:NO];
-                [c9 setSelected:NO];
-                [c10 setSelected:NO];
-                [c0 setSelected:NO];
-                [c12 setSelected:NO];
-                [c13 setSelected:NO];
-            }
+            [b11 setSelected:YES];
             break;
         case 12:
-            if([c12 isSelected]==YES)
-                {
-                [c12 setSelected:YES];
-                [c1 setSelected:NO];
-                [c2 setSelected:NO];
-                [c3 setSelected:NO];
-                [c4 setSelected:NO];
-                [c5 setSelected:NO];
-                [c6 setSelected:NO];
-                [c7 setSelected:NO];
-                [c8 setSelected:NO];
-                [c9 setSelected:NO];
-                [c10 setSelected:NO];
-                [c11 setSelected:NO];
-                [c0 setSelected:NO];
-                [c13 setSelected:NO];
-                }
-            else{
-                [c12 setSelected:YES];
-                [c1 setSelected:NO];
-                [c2 setSelected:NO];
-                [c3 setSelected:NO];
-                [c4 setSelected:NO];
-                [c5 setSelected:NO];
-                [c6 setSelected:NO];
-                [c7 setSelected:NO];
-                [c8 setSelected:NO];
-                [c9 setSelected:NO];
-                [c10 setSelected:NO];
-                [c11 setSelected:NO];
-                [c0 setSelected:NO];
-                [c13 setSelected:NO];
-            }
+            [b12 setSelected:YES];
             break;
         case 13:
-            if([c13 isSelected]==YES)
-                {
-                [c13 setSelected:YES];
-                [c1 setSelected:NO];
-                [c2 setSelected:NO];
-                [c3 setSelected:NO];
-                [c4 setSelected:NO];
-                [c5 setSelected:NO];
-                [c6 setSelected:NO];
-                [c7 setSelected:NO];
-                [c8 setSelected:NO];
-                [c9 setSelected:NO];
-                [c10 setSelected:NO];
-                [c11 setSelected:NO];
-                [c12 setSelected:NO];
-                [c0 setSelected:NO];
-                }
-            else{
-                [c13 setSelected:YES];
-                [c1 setSelected:NO];
-                [c2 setSelected:NO];
-                [c3 setSelected:NO];
-                [c4 setSelected:NO];
-                [c5 setSelected:NO];
-                [c6 setSelected:NO];
-                [c7 setSelected:NO];
-                [c8 setSelected:NO];
-                [c9 setSelected:NO];
-                [c10 setSelected:NO];
-                [c11 setSelected:NO];
-                [c12 setSelected:NO];
-                [c0 setSelected:NO];
-            }
+            [b13 setSelected:YES];
             break;
         default:
             break;
-    }//etc for rest of 12, then for canvas and block
+    }
 }
-
 
 -(void)blockSelected:(id)sender{
     switch ([sender tag]) {
         case 0:
-            if([b0 isSelected]==YES)
-                {
-                [b0 setSelected:YES];
-                [b1 setSelected:NO];
-                [b2 setSelected:NO];
-                [b3 setSelected:NO];
-                [b4 setSelected:NO];
-                [b5 setSelected:NO];
-                [b6 setSelected:NO];
-                [b7 setSelected:NO];
-                [b8 setSelected:NO];
-                [b9 setSelected:NO];
-                [b10 setSelected:NO];
-                [b11 setSelected:NO];
-                [b12 setSelected:NO];
-                [b13 setSelected:NO];
-                }
-            else{
-                [b0 setSelected:YES];
-                [b1 setSelected:NO];
-                [b2 setSelected:NO];
-                [b3 setSelected:NO];
-                [b4 setSelected:NO];
-                [b5 setSelected:NO];
-                [b6 setSelected:NO];
-                [b7 setSelected:NO];
-                [b8 setSelected:NO];
-                [b9 setSelected:NO];
-                [b10 setSelected:NO];
-                [b11 setSelected:NO];
-                [b12 setSelected:NO];
-                [b13 setSelected:NO];
-            }
+            [self blockSelectedCase:0];
             break;
         case 1:
-            if([b1 isSelected]==YES)
-                {
-                [b0 setSelected:NO];
-                [b1 setSelected:YES];
-                [b2 setSelected:NO];
-                [b3 setSelected:NO];
-                [b4 setSelected:NO];
-                [b5 setSelected:NO];
-                [b6 setSelected:NO];
-                [b7 setSelected:NO];
-                [b8 setSelected:NO];
-                [b9 setSelected:NO];
-                [b10 setSelected:NO];
-                [b11 setSelected:NO];
-                [b12 setSelected:NO];
-                [b13 setSelected:NO];
-                }
-            else{
-                [b1 setSelected:YES];
-                [b0 setSelected:NO];
-                [b2 setSelected:NO];
-                [b3 setSelected:NO];
-                [b4 setSelected:NO];
-                [b5 setSelected:NO];
-                [b6 setSelected:NO];
-                [b7 setSelected:NO];
-                [b8 setSelected:NO];
-                [b9 setSelected:NO];
-                [b10 setSelected:NO];
-                [b11 setSelected:NO];
-                [b12 setSelected:NO];
-                [b13 setSelected:NO];
-            }
+            [self blockSelectedCase:1];
             break;
         case 2:
-            if([b2 isSelected]==YES)
-                {
-                [b0 setSelected:NO];
-                [b1 setSelected:NO];
-                [b2 setSelected:YES];
-                [b3 setSelected:NO];
-                [b4 setSelected:NO];
-                [b5 setSelected:NO];
-                [b6 setSelected:NO];
-                [b7 setSelected:NO];
-                [b8 setSelected:NO];
-                [b9 setSelected:NO];
-                [b10 setSelected:NO];
-                [b11 setSelected:NO];
-                [b12 setSelected:NO];
-                [b13 setSelected:NO];
-                }
-            else{
-                [b2 setSelected:YES];
-                [b0 setSelected:NO];
-                [b1 setSelected:NO];
-                [b3 setSelected:NO];
-                [b4 setSelected:NO];
-                [b5 setSelected:NO];
-                [b6 setSelected:NO];
-                [b7 setSelected:NO];
-                [b8 setSelected:NO];
-                [b9 setSelected:NO];
-                [b10 setSelected:NO];
-                [b11 setSelected:NO];
-                [b12 setSelected:NO];
-                [b13 setSelected:NO];
-            }
+            [self blockSelectedCase:2];
             break;
         case 3:
-            if([b3 isSelected]==YES)
-                {
-                [b0 setSelected:NO];
-                [b1 setSelected:NO];
-                [b2 setSelected:NO];
-                [b3 setSelected:YES];
-                [b4 setSelected:NO];
-                [b5 setSelected:NO];
-                [b6 setSelected:NO];
-                [b7 setSelected:NO];
-                [b8 setSelected:NO];
-                [b9 setSelected:NO];
-                [b10 setSelected:NO];
-                [b11 setSelected:NO];
-                [b12 setSelected:NO];
-                [b13 setSelected:NO];
-                }
-            else{
-                [b3 setSelected:YES];
-                [b0 setSelected:NO];
-                [b2 setSelected:NO];
-                [b1 setSelected:NO];
-                [b4 setSelected:NO];
-                [b5 setSelected:NO];
-                [b6 setSelected:NO];
-                [b7 setSelected:NO];
-                [b8 setSelected:NO];
-                [b9 setSelected:NO];
-                [b10 setSelected:NO];
-                [b11 setSelected:NO];
-                [b12 setSelected:NO];
-                [b13 setSelected:NO];
-            }
+            [self blockSelectedCase:3];
             break;
         case 4:
-            if([b4 isSelected]==YES)
-                {
-                [b0 setSelected:NO];
-                [b1 setSelected:NO];
-                [b2 setSelected:NO];
-                [b4 setSelected:YES];
-                [b3 setSelected:NO];
-                [b5 setSelected:NO];
-                [b6 setSelected:NO];
-                [b7 setSelected:NO];
-                [b8 setSelected:NO];
-                [b9 setSelected:NO];
-                [b10 setSelected:NO];
-                [b11 setSelected:NO];
-                [b12 setSelected:NO];
-                [b13 setSelected:NO];
-                }
-            else{
-                [b4 setSelected:YES];
-                [b0 setSelected:NO];
-                [b2 setSelected:NO];
-                [b1 setSelected:NO];
-                [b3 setSelected:NO];
-                [b5 setSelected:NO];
-                [b6 setSelected:NO];
-                [b7 setSelected:NO];
-                [b8 setSelected:NO];
-                [b9 setSelected:NO];
-                [b10 setSelected:NO];
-                [b11 setSelected:NO];
-                [b12 setSelected:NO];
-                [b13 setSelected:NO];
-            }
+            [self blockSelectedCase:4];
             break;
         case 5:
-            if([b5 isSelected]==YES)
-                {
-                [b0 setSelected:NO];
-                [b1 setSelected:NO];
-                [b2 setSelected:NO];
-                [b5 setSelected:YES];
-                [b4 setSelected:NO];
-                [b3 setSelected:NO];
-                [b6 setSelected:NO];
-                [b7 setSelected:NO];
-                [b8 setSelected:NO];
-                [b9 setSelected:NO];
-                [b10 setSelected:NO];
-                [b11 setSelected:NO];
-                [b12 setSelected:NO];
-                [b13 setSelected:NO];
-                }
-            else{
-                [b5 setSelected:YES];
-                [b0 setSelected:NO];
-                [b2 setSelected:NO];
-                [b1 setSelected:NO];
-                [b4 setSelected:NO];
-                [b3 setSelected:NO];
-                [b6 setSelected:NO];
-                [b7 setSelected:NO];
-                [b8 setSelected:NO];
-                [b9 setSelected:NO];
-                [b10 setSelected:NO];
-                [b11 setSelected:NO];
-                [b12 setSelected:NO];
-                [b13 setSelected:NO];
-            }
+            [self blockSelectedCase:5];
             break;
         case 6:
-            if([b6 isSelected]==YES)
-                {
-                [b0 setSelected:NO];
-                [b1 setSelected:NO];
-                [b2 setSelected:NO];
-                [b6 setSelected:YES];
-                [b4 setSelected:NO];
-                [b5 setSelected:NO];
-                [b3 setSelected:NO];
-                [b7 setSelected:NO];
-                [b8 setSelected:NO];
-                [b9 setSelected:NO];
-                [b10 setSelected:NO];
-                [b11 setSelected:NO];
-                [b12 setSelected:NO];
-                [b13 setSelected:NO];
-                }
-            else{
-                [b6 setSelected:YES];
-                [b0 setSelected:NO];
-                [b2 setSelected:NO];
-                [b1 setSelected:NO];
-                [b4 setSelected:NO];
-                [b5 setSelected:NO];
-                [b3 setSelected:NO];
-                [b7 setSelected:NO];
-                [b8 setSelected:NO];
-                [b9 setSelected:NO];
-                [b10 setSelected:NO];
-                [b11 setSelected:NO];
-                [b12 setSelected:NO];
-                [b13 setSelected:NO];
-            }
+            [self blockSelectedCase:6];
             break;
         case 7:
-            if([b7 isSelected]==YES)
-                {
-                [b0 setSelected:NO];
-                [b1 setSelected:NO];
-                [b2 setSelected:NO];
-                [b7 setSelected:YES];
-                [b4 setSelected:NO];
-                [b5 setSelected:NO];
-                [b6 setSelected:NO];
-                [b3 setSelected:NO];
-                [b8 setSelected:NO];
-                [b9 setSelected:NO];
-                [b10 setSelected:NO];
-                [b11 setSelected:NO];
-                [b12 setSelected:NO];
-                [b13 setSelected:NO];
-                }
-            else{
-                [b7 setSelected:YES];
-                [b0 setSelected:NO];
-                [b2 setSelected:NO];
-                [b1 setSelected:NO];
-                [b4 setSelected:NO];
-                [b5 setSelected:NO];
-                [b6 setSelected:NO];
-                [b3 setSelected:NO];
-                [b8 setSelected:NO];
-                [b9 setSelected:NO];
-                [b10 setSelected:NO];
-                [b11 setSelected:NO];
-                [b12 setSelected:NO];
-                [b13 setSelected:NO];
-            }
+            [self blockSelectedCase:7];
             break;
         case 8:
-            if([b8 isSelected]==YES)
-                {
-                [b0 setSelected:NO];
-                [b1 setSelected:NO];
-                [b2 setSelected:NO];
-                [b8 setSelected:YES];
-                [b4 setSelected:NO];
-                [b5 setSelected:NO];
-                [b6 setSelected:NO];
-                [b7 setSelected:NO];
-                [b3 setSelected:NO];
-                [b9 setSelected:NO];
-                [b10 setSelected:NO];
-                [b11 setSelected:NO];
-                [b12 setSelected:NO];
-                [b13 setSelected:NO];
-                }
-            else{
-                [b8 setSelected:YES];
-                [b0 setSelected:NO];
-                [b2 setSelected:NO];
-                [b1 setSelected:NO];
-                [b4 setSelected:NO];
-                [b5 setSelected:NO];
-                [b6 setSelected:NO];
-                [b7 setSelected:NO];
-                [b3 setSelected:NO];
-                [b9 setSelected:NO];
-                [b10 setSelected:NO];
-                [b11 setSelected:NO];
-                [b12 setSelected:NO];
-                [b13 setSelected:NO];
-            }
+            [self blockSelectedCase:8];
             break;
         case 9:
-            if([b9 isSelected]==YES)
-                {
-                [b0 setSelected:NO];
-                [b1 setSelected:NO];
-                [b2 setSelected:NO];
-                [b3 setSelected:YES];
-                [b4 setSelected:NO];
-                [b5 setSelected:NO];
-                [b6 setSelected:NO];
-                [b7 setSelected:NO];
-                [b8 setSelected:NO];
-                [b3 setSelected:NO];
-                [b10 setSelected:NO];
-                [b11 setSelected:NO];
-                [b12 setSelected:NO];
-                [b13 setSelected:NO];
-                }
-            else{
-                [b9 setSelected:YES];
-                [b0 setSelected:NO];
-                [b2 setSelected:NO];
-                [b1 setSelected:NO];
-                [b4 setSelected:NO];
-                [b5 setSelected:NO];
-                [b6 setSelected:NO];
-                [b7 setSelected:NO];
-                [b8 setSelected:NO];
-                [b3 setSelected:NO];
-                [b10 setSelected:NO];
-                [b11 setSelected:NO];
-                [b12 setSelected:NO];
-                [b13 setSelected:NO];
-            }
+            [self blockSelectedCase:9];
             break;
         case 10:
-            if([b10 isSelected]==YES)
-                {
-                [b0 setSelected:NO];
-                [b1 setSelected:NO];
-                [b2 setSelected:NO];
-                [b10 setSelected:YES];
-                [b4 setSelected:NO];
-                [b5 setSelected:NO];
-                [b6 setSelected:NO];
-                [b7 setSelected:NO];
-                [b8 setSelected:NO];
-                [b9 setSelected:NO];
-                [b3 setSelected:NO];
-                [b11 setSelected:NO];
-                [b12 setSelected:NO];
-                [b13 setSelected:NO];
-                }
-            else{
-                [b10 setSelected:YES];
-                [b0 setSelected:NO];
-                [b2 setSelected:NO];
-                [b1 setSelected:NO];
-                [b4 setSelected:NO];
-                [b5 setSelected:NO];
-                [b6 setSelected:NO];
-                [b7 setSelected:NO];
-                [b8 setSelected:NO];
-                [b9 setSelected:NO];
-                [b3 setSelected:NO];
-                [b11 setSelected:NO];
-                [b12 setSelected:NO];
-                [b13 setSelected:NO];
-            }
+            [self blockSelectedCase:10];
             break;
         case 11:
-            if([b11 isSelected]==YES)
-                {
-                [b0 setSelected:NO];
-                [b1 setSelected:NO];
-                [b2 setSelected:NO];
-                [b11 setSelected:YES];
-                [b4 setSelected:NO];
-                [b5 setSelected:NO];
-                [b6 setSelected:NO];
-                [b7 setSelected:NO];
-                [b8 setSelected:NO];
-                [b9 setSelected:NO];
-                [b10 setSelected:NO];
-                [b3 setSelected:NO];
-                [b12 setSelected:NO];
-                [b13 setSelected:NO];
-                }
-            else{
-                [b11 setSelected:YES];
-                [b0 setSelected:NO];
-                [b2 setSelected:NO];
-                [b1 setSelected:NO];
-                [b4 setSelected:NO];
-                [b5 setSelected:NO];
-                [b6 setSelected:NO];
-                [b7 setSelected:NO];
-                [b8 setSelected:NO];
-                [b9 setSelected:NO];
-                [b10 setSelected:NO];
-                [b3 setSelected:NO];
-                [b12 setSelected:NO];
-                [b13 setSelected:NO];
-            }
+            [self blockSelectedCase:11];
             break;
         case 12:
-            if([b12 isSelected]==YES)
-                {
-                [b0 setSelected:NO];
-                [b1 setSelected:NO];
-                [b2 setSelected:NO];
-                [b12 setSelected:YES];
-                [b4 setSelected:NO];
-                [b5 setSelected:NO];
-                [b6 setSelected:NO];
-                [b7 setSelected:NO];
-                [b8 setSelected:NO];
-                [b9 setSelected:NO];
-                [b10 setSelected:NO];
-                [b11 setSelected:NO];
-                [b3 setSelected:NO];
-                [b13 setSelected:NO];
-                }
-            else{
-                [b12 setSelected:YES];
-                [b0 setSelected:NO];
-                [b2 setSelected:NO];
-                [b1 setSelected:NO];
-                [b4 setSelected:NO];
-                [b5 setSelected:NO];
-                [b6 setSelected:NO];
-                [b7 setSelected:NO];
-                [b8 setSelected:NO];
-                [b9 setSelected:NO];
-                [b10 setSelected:NO];
-                [b11 setSelected:NO];
-                [b3 setSelected:NO];
-                [b13 setSelected:NO];
-            }
+            [self blockSelectedCase:12];
             break;
         case 13:
-            if([b13 isSelected]==YES)
-                {
-                [b0 setSelected:NO];
-                [b1 setSelected:NO];
-                [b2 setSelected:NO];
-                [b3 setSelected:NO];
-                [b4 setSelected:NO];
-                [b5 setSelected:NO];
-                [b6 setSelected:NO];
-                [b7 setSelected:NO];
-                [b8 setSelected:NO];
-                [b9 setSelected:NO];
-                [b10 setSelected:NO];
-                [b11 setSelected:NO];
-                [b12 setSelected:NO];
-                [b13 setSelected:YES];
-                }
-            else{
-                [b13 setSelected:YES];
-                [b0 setSelected:NO];
-                [b2 setSelected:NO];
-                [b3 setSelected:NO];
-                [b4 setSelected:NO];
-                [b5 setSelected:NO];
-                [b6 setSelected:NO];
-                [b7 setSelected:NO];
-                [b8 setSelected:NO];
-                [b9 setSelected:NO];
-                [b10 setSelected:NO];
-                [b11 setSelected:NO];
-                [b12 setSelected:NO];
-                [b1 setSelected:NO];
-            }
+            [self blockSelectedCase:13];
             break;
         default:
+            // do nothing
             break;
     }
 }
@@ -1940,88 +790,71 @@ c0,c1,c10,c11,c12,c13,c2,c3,c4,c5,c6,c7,c8,c9;
 #pragma mark Block Colours Setting Actions
 - (IBAction)BlockColourBlaBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
-
     singleton.currentBlockColour=[UIColor blackColor];
     [self checkColourCombinations];
 }
-
 - (IBAction)BlockColourBluBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
-
     singleton.currentBlockColour=[UIColor blueColor];
     [self checkColourCombinations];
 }
-
 - (IBAction)BlockColourRedBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
-
     singleton.currentBlockColour=[UIColor redColor];
     [self checkColourCombinations];
 }
 - (IBAction)BlockColourOraBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
-
     singleton.currentBlockColour=[UIColor orangeColor];
     [self checkColourCombinations];
-
 }
 - (IBAction)BlockColourGreBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
-
     singleton.currentBlockColour=[UIColor greenColor];
     [self checkColourCombinations];
 }
 - (IBAction)BlockColourYelBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
-
     singleton.currentBlockColour=[UIColor yellowColor];
     [self checkColourCombinations];
 }
 - (IBAction)BlockColourMagBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
-
     singleton.currentBlockColour=[UIColor magentaColor];
     [self checkColourCombinations];
 }
 - (IBAction)BlockColourGraBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
-
     singleton.currentBlockColour=[UIColor grayColor];
     [self checkColourCombinations];
 }
 - (IBAction)BlockColourWhiBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
-
     singleton.currentBlockColour=[UIColor whiteColor];
     [self checkColourCombinations];
 }
 - (IBAction)BlockColourCyaBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
-
     singleton.currentBlockColour=[UIColor cyanColor];
     [self checkColourCombinations];
 }
 - (IBAction)BlockColourPurBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
-
     singleton.currentBlockColour=[UIColor purpleColor];
     [self checkColourCombinations];
 }
 - (IBAction)BlockColourBroBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
-
     singleton.currentBlockColour=[UIColor brownColor];
     [self checkColourCombinations];
 }
 - (IBAction)BlockColourDkGBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
-
     singleton.currentBlockColour=[UIColor darkGrayColor];
     [self checkColourCombinations];
 }
 - (IBAction)BlockColourLtGBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
-
     singleton.currentBlockColour=[UIColor lightGrayColor];
     [self checkColourCombinations];
 }
@@ -2029,86 +862,73 @@ c0,c1,c10,c11,c12,c13,c2,c3,c4,c5,c6,c7,c8,c9;
 #pragma mark Show Highlight Colours Setting Actions
 - (IBAction)BlockHighlightColourBlaBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
-
     singleton.currentShowColour=[UIColor blackColor];
     [self checkColourCombinations];
 }
 - (IBAction)BlockHighlightColourGraBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
-
     singleton.currentShowColour=[UIColor grayColor];
     [self checkColourCombinations];
 }
 - (IBAction)BlockHighlightColourBluBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
-
     singleton.currentShowColour=[UIColor blueColor];
     [self checkColourCombinations];
 }
 - (IBAction)BlockHighlightColourRedBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
-
     singleton.currentShowColour=[UIColor redColor];
     [self checkColourCombinations];
 }
 - (IBAction)BlockHighlightColourOraBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
-
     singleton.currentShowColour=[UIColor orangeColor];
     [self checkColourCombinations];
 }
 - (IBAction)BlockHighlightColourMagBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
-    
+
     singleton.currentShowColour=[UIColor magentaColor];
     [self checkColourCombinations];
 }
 - (IBAction)BlockHighlightColourGreBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
-
     singleton.currentShowColour=[UIColor greenColor];
     [self checkColourCombinations];
 }
 - (IBAction)BlockHighlightColourCyaBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
-
     singleton.currentShowColour=[UIColor cyanColor];
     [self checkColourCombinations];
 }
 - (IBAction)BlockHighlightColourYelBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
-
     singleton.currentShowColour=[UIColor yellowColor];
     [self checkColourCombinations];
 }
 - (IBAction)BlockHighlightColourWhiBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
-
     singleton.currentShowColour=[UIColor whiteColor];
     [self checkColourCombinations];
 }
 
 - (IBAction)BlockHighlightColourPurBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
-
     singleton.currentShowColour=[UIColor purpleColor];
     [self checkColourCombinations];
 }
 - (IBAction)BlockHighlightColourBroBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
-
     singleton.currentShowColour=[UIColor brownColor];
     [self checkColourCombinations];
 }
 - (IBAction)BlockHighlightColourDkGBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
-
     singleton.currentShowColour=[UIColor darkGrayColor];
     [self checkColourCombinations];
 }
 - (IBAction)BlockHighlightColourLtGBTN:(id)sender{
     mySingleton *singleton = [mySingleton sharedSingleton];
-
     singleton.currentShowColour=[UIColor lightGrayColor];
     [self checkColourCombinations];
 }
