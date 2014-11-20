@@ -11,5 +11,7 @@
 @interface informationVC : UIViewController{
     UITextView *infoTextView;
 }
+
 @property (nonatomic,retain) IBOutlet UITextView *infoTextView;
+
 @end

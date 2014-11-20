@@ -13,6 +13,7 @@
 {
     int start;
     int finish;
+    
     float blockSize;
 }
 @end
@@ -23,17 +24,35 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    [[UISegmentedControl appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"Serifa-Roman" size:12.0], NSFontAttributeName, nil] forState:UIControlStateNormal];
+    //font attr of seg display, off at present
+
+    //[[UISegmentedControl appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"Serifa-Roman" size:12.0], NSFontAttributeName, nil] forState:UIControlStateNormal];
 }
 
-@synthesize blockFinishNumLBL,blockRotateSWT,blockSizeLBL,
-blockStartNumLBL,sizeMinusBTN,sizePlusBTN,startMinusBTN,
-startPlusBTN,onScreenInfoSWT,finishMinusBTN,finishPlusBTN,
-forwardTestSWT,animalsSWT,soundsSWT,soundsSEG;
+@synthesize
+blockFinishNumLBL,
+blockSizeLBL,
+blockStartNumLBL,
+
+sizeMinusBTN,
+sizePlusBTN,
+startMinusBTN,
+startPlusBTN,
+finishMinusBTN,
+finishPlusBTN,
+
+onScreenInfoSWT,
+blockRotateSWT,
+forwardTestSWT,
+animalsSWT,
+soundsSWT,
+
+soundsSEG;
 
 -(void)viewDidAppear:(BOOL)animated{
     mySingleton *singleton = [mySingleton sharedSingleton];
+    soundsSEG.selectedSegmentIndex = singleton.segIndex;
+
     
     //switches set
     if(singleton.blockRotation){
@@ -88,51 +107,52 @@ forwardTestSWT,animalsSWT,soundsSWT,soundsSEG;
     long seg = soundsSEG.selectedSegmentIndex;
     switch (seg) {
         case 0:
-            singleton.beepEffect=@"KLICK";
-            singleton.segIndex=0;
+            singleton.beepEffect = @"KLICK";
+            singleton.segIndex   = 0;
             break;
         case 1:
-            singleton.beepEffect=@"BEEPPURE";
-            singleton.segIndex=1;
+            singleton.beepEffect = @"BEEPPURE";
+            singleton.segIndex   = 1;
             break;
         case 2:
-            singleton.beepEffect=@"BEEP_FM";
-            singleton.segIndex=2;
+            singleton.beepEffect = @"BEEP_FM";
+            singleton.segIndex   = 2;
             break;
         case 3:
-            singleton.beepEffect=@"BEEPDOUB";
-            singleton.segIndex=3;
+            singleton.beepEffect = @"BEEPDOUB";
+            singleton.segIndex   = 3;
             break;
         case 4:
-            singleton.beepEffect=@"AMFMBEEP";
-            singleton.segIndex=4;
+            singleton.beepEffect = @"AMFMBEEP";
+            singleton.segIndex   = 4;
             break;
         case 5:
-            singleton.beepEffect=@"BEEPJAZZ";
-            singleton.segIndex=5;
+            singleton.beepEffect = @"BEEPJAZZ";
+            singleton.segIndex   = 5;
             break;
         default:
-            singleton.beepEffect=@"KLICK";
-            singleton.segIndex=0;
+            singleton.beepEffect = @"BEEPJAZZ";
+            singleton.segIndex   = 5;
             break;
     }
 }
 
 -(void)buttonIncCheck{
+    //change alpha value of graphic if range exceeded
     if(start==3){
-        startMinusBTN.alpha=0.3;
+        startMinusBTN.alpha  = 0.3;
     }
     if(finish==9){
-        finishPlusBTN.alpha=0.3;
+        finishPlusBTN.alpha  = 0.3;
     }
     if(finish==3){
-        finishMinusBTN.alpha=0.3;
+        finishMinusBTN.alpha = 0.3;
     }
     if(start==9){
-        startPlusBTN.alpha=0.3;
+        startPlusBTN.alpha   = 0.3;
     }
     if(start==finish){
-        startPlusBTN.alpha=0.3;
+        startPlusBTN.alpha   = 0.3;
         finishMinusBTN.alpha=0.3;
     }
     if(blockSize==55){
@@ -152,6 +172,7 @@ forwardTestSWT,animalsSWT,soundsSWT,soundsSEG;
 }
 
 - (IBAction)blockStartPlusBTN:(id)sender{
+    //increment start
     mySingleton *singleton = [mySingleton sharedSingleton];
     start=singleton.start;
     finish=singleton.finish;
@@ -167,6 +188,7 @@ forwardTestSWT,animalsSWT,soundsSWT,soundsSEG;
         start=finish;
     }
     [self buttonIncCheck];
+    
     blockStartNumLBL.text  = [NSString stringWithFormat:@"%d",start];
     blockFinishNumLBL.text = [NSString stringWithFormat:@"%d",finish];
     singleton.start  = start;
@@ -174,6 +196,7 @@ forwardTestSWT,animalsSWT,soundsSWT,soundsSEG;
 }
 
 - (IBAction)blockFinishPlusBTN:(id)sender{
+    //increment finish
     mySingleton *singleton = [mySingleton sharedSingleton];
     start=singleton.start;
     finish=singleton.finish;
@@ -192,6 +215,7 @@ forwardTestSWT,animalsSWT,soundsSWT,soundsSEG;
 }
 
 - (IBAction)blockSizePlusBTN:(id)sender{
+    //increment size
     mySingleton *singleton = [mySingleton sharedSingleton];
     blockSize=singleton.blockSize;
     blockSize=blockSize+5;
@@ -206,6 +230,7 @@ forwardTestSWT,animalsSWT,soundsSWT,soundsSEG;
 }
 
 - (IBAction)blockStartMinusBTN:(id)sender{
+    //decrement start
     mySingleton *singleton = [mySingleton sharedSingleton];
     start=singleton.start;
     finish=singleton.finish;
@@ -225,6 +250,7 @@ forwardTestSWT,animalsSWT,soundsSWT,soundsSEG;
 }
 
 - (IBAction)blockFinishMinusBTN:(id)sender{
+    //decrement finish
     mySingleton *singleton = [mySingleton sharedSingleton];
     start=singleton.start;
     finish=singleton.finish;
@@ -248,6 +274,7 @@ forwardTestSWT,animalsSWT,soundsSWT,soundsSEG;
 }
 
 - (IBAction)blockSizeMinusBTN:(id)sender{
+    //decrement size
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     blockSize=singleton.blockSize;
@@ -265,6 +292,7 @@ forwardTestSWT,animalsSWT,soundsSWT,soundsSEG;
 }
 
 - (IBAction)forwardTestSWT:(id)sender{
+    //test direction switch
     mySingleton *singleton = [mySingleton sharedSingleton];
     BOOL forwardTestDirection;
     if(forwardTestSWT.isOn){
@@ -276,6 +304,7 @@ forwardTestSWT,animalsSWT,soundsSWT,soundsSEG;
 }
 
 - (IBAction)onScreenInfoSWT:(id)sender{
+    //information messages switch
     mySingleton *singleton = [mySingleton sharedSingleton];
     
     BOOL screenInfoDisplayed;
@@ -289,6 +318,7 @@ forwardTestSWT,animalsSWT,soundsSWT,soundsSEG;
 }
 
 - (IBAction)blockRotateSWT:(id)sender{
+    //block rotation switch
     mySingleton *singleton = [mySingleton sharedSingleton];
     BOOL rotate;
     if (blockRotateSWT.isOn)
@@ -301,6 +331,7 @@ forwardTestSWT,animalsSWT,soundsSWT,soundsSEG;
 }
 
 - (IBAction)animalsSWT:(id)sender{
+    //animals graphics switch
     mySingleton *singleton = [mySingleton sharedSingleton];
     BOOL animals;
     if (animalsSWT.isOn)
@@ -313,6 +344,7 @@ forwardTestSWT,animalsSWT,soundsSWT,soundsSEG;
 }
 
 - (IBAction)soundsSWT:(id)sender{
+    //feedback sounds switch
     mySingleton *singleton = [mySingleton sharedSingleton];
     BOOL sounds;
     if (soundsSWT.isOn)

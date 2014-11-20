@@ -366,7 +366,7 @@
 		</dict>
 		<dict>
 			<key>DefaultValue</key>
-			<string></string>
+			<string>BEEPJAZZ</string>
 			<key>Titles</key>
 			<array>
 				<string>KLICK</string>

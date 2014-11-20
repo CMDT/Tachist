@@ -27,17 +27,13 @@ c0,c1,c10,c11,c12,c13,c2,c3,c4,c5,c6,c7,c8,c9;
     // Do any additional setup after loading the view.
 }
 
--(void)viewDidDisappear:(BOOL)animated{
-    //blank
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
 -(void)viewDidAppear:(BOOL)animated{
-    //radio buttons
+    //radio type graphic buttons
     //s0 = [[UIButton alloc] initWithFrame:CGRectMake(0, 80, 30, 30)];
     [s0 setTag:0];
     [s0 setImage:[UIImage imageNamed:@"black72.png"] forState:UIControlStateNormal];
@@ -2204,9 +2200,10 @@ c0,c1,c10,c11,c12,c13,c2,c3,c4,c5,c6,c7,c8,c9;
 }
 
 -(void)checkColourCombinations{
+//check colour combinations, and if OK, allow back button
     mySingleton *singleton = [mySingleton sharedSingleton];
     BOOL isColourOK = YES;
-    //check colour combinations, and if OK, allow back button
+    
     
     if(singleton.currentBackgroundColour == singleton.currentShowColour){
         //cant have background and show the same

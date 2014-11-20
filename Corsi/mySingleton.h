@@ -19,7 +19,6 @@
     int   finish;
     
     long  segIndex;//for sound feedback
-    long double timerTime;
     
     float blockSize;
     float waitTime;
@@ -49,7 +48,6 @@
     NSMutableArray * displayStringTitles;
     }
 
-//eg::: @property (nonatomic) int  offset;
 @property (nonatomic, retain) UIColor * currentBackgroundColour;
 @property (nonatomic, retain) UIColor * currentShowColour;
 @property (nonatomic, retain) UIColor * currentBlockColour;
@@ -59,8 +57,6 @@
 @property (nonatomic) int       finish;
 
 @property (nonatomic) long      segIndex; //sound
-
-@property (nonatomic) long double timerTime;
 
 @property (nonatomic) float     blockSize; // values of options
 @property (nonatomic) float     waitTime;
@@ -88,8 +84,8 @@
 @property (nonatomic,retain) NSMutableArray * resultStringRows;    //for the Excel formatted text, csv
 @property (nonatomic,retain) NSMutableArray * displayStringRows;   //for the result string, one row per item
 @property (nonatomic,retain) NSMutableArray * displayStringTitles; //for the title label for the result, one per item/row  title:item of result
-//set up singleton shared
 
+//set up singleton shared
 +(mySingleton *)sharedSingleton;
 
 @end

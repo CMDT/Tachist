@@ -44,7 +44,6 @@
     int angle[10];
     int start;
     int finish;
-    float blockSize;
     int waitTime;
     int startTime;
     int showTime;
@@ -57,6 +56,8 @@
     int rot7;
     int rot8;
     int rot9;
+    
+    float blockSize;
     
     BOOL forward;
     BOOL info;
@@ -91,35 +92,35 @@
 }
 
 @synthesize
-showLBL,
-blockLBL,
-canvasLBL,
-block1View,
-block2View,
-block3View,
-block4View,
-block5View,
-block6View,
-block7View,
-block8View,
-block9View,
-settingsViewerVIEW,
-blockSizeLBL,
-blockFinishNumLBL,
-blockStartNumLBL,
-blockShowLBL,
-blockStartLBL,
-blockWaitLBL,
-forwardLBL,
-infoLBL,
-soundsLBL,
-settingsVC,
-testerLBL,
-emailLBL;
-//subjectLBL;
+    showLBL,
+    blockLBL,
+    canvasLBL,
+    block1View,
+    block2View,
+    block3View,
+    block4View,
+    block5View,
+    block6View,
+    block7View,
+    block8View,
+    block9View,
+    settingsViewerVIEW,
+    blockSizeLBL,
+    blockFinishNumLBL,
+    blockStartNumLBL,
+    blockShowLBL,
+    blockStartLBL,
+    blockWaitLBL,
+    forwardLBL,
+    infoLBL,
+    soundsLBL,
+    settingsVC,
+    testerLBL,
+    emailLBL;
+//subjectLBL;//re instate if work out way to fit on screen space
 
 -(void)viewDidAppear:(BOOL)animated{
-    //assign images to tab bar items
+//assign images to tab bar items
     UIImage *settingsImage          = [UIImage imageNamed:@"settings"];
     UIImage *settingsImageSel       = [UIImage imageNamed:@"settings"];
     settingsImage       = [settingsImage    imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
@@ -178,10 +179,13 @@ emailLBL;
     if(singleton.sounds==YES){
         soundsLBL.text=@"Sounds";
         beepName=singleton.beepEffect;
+        [self effectPicker:beepName];
     } else {
         soundsLBL.text=@"Quiet";
+        
     }
-
+    [self effectPicker:beepName];
+    
     //start, finish and sizes on screen from singleton
     blockStartNumLBL.text   = [NSString stringWithFormat:@"%d",singleton.start];
     blockFinishNumLBL.text  = [NSString stringWithFormat:@"%d",singleton.finish];
@@ -201,8 +205,6 @@ emailLBL;
     [self putBlocksInPlace];
 }
 
-
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -218,6 +220,7 @@ emailLBL;
 }
 
 - (void)setDefaults{
+    mySingleton *singleton = [mySingleton sharedSingleton];
     //set up the plist params
         NSString *pathStr               = [[NSBundle mainBundle] bundlePath];
         NSString *settingsBundlePath    = [pathStr stringByAppendingPathComponent:@"Settings.bundle"];
@@ -229,7 +232,7 @@ emailLBL;
 
     //read the user defaults from the iPhone/iPad bundle
     // if any are set to nil (no value on first run), put a temporary one in
-    //version
+//version
     version     = [defaults objectForKey:kVersion];
     if(version  == nil ){
         version =  @"v1.0.0";
@@ -256,88 +259,92 @@ emailLBL;
         showCol =@"Yellow";
         [defaults setObject:@"Yellow" forKey:kShowCol];
     }
-    //subject name
+//subject name
     subjectName     = [defaults objectForKey:kSubject];
     if(subjectName  == nil ){
         subjectName =  @"Par";
         [defaults setObject:@"Par" forKey:kSubject];
     }
-
-    //tester name
+//tester name
     testerName     = [defaults objectForKey:kTester];
     if(testerName  == nil ){
         testerName =  @"Me";
         [defaults setObject:@"Me" forKey:kTester];
     }
-    //email name
+//email name
     email     = [defaults objectForKey:kEmail];
     if(email  == nil ){
         email =  @"me@gmail.com";
         [defaults setObject:@"me@gmail.com" forKey:kEmail];
     }
-    //beep Effect Name
+//beep Effect Name
     beepName     = [defaults objectForKey:kBeep];
     if(beepName  == nil ){
         beepName =  @"BEEPJAZZ";
+        singleton.segIndex = 5;
         [defaults setObject:@"BEEPJAZZ" forKey:kBeep];
     }
-    //start block
+//start block
     NSString *temp = [defaults objectForKey:kStart];
     if( temp == nil ){
         start =  3;
         [defaults setObject:@"3" forKey:kStart];
     }
-    //finish block
+//finish block
     temp        = [defaults objectForKey:kFinish];
     if( temp == nil ){
         finish =  9;
         [defaults setObject:@"9" forKey:kFinish];
     }
+//block size
     temp        = [defaults objectForKey:kSize];
     if( temp == nil ){
         blockSize =  45.00;
         [defaults setObject:@"45.00" forKey:kSize];
     }
+//wait time
     temp        = [defaults objectForKey:kDelay];
     if( temp == nil ){
-        waitTime=  1200;
-        [defaults setObject:@"1200" forKey:kDelay];
+        waitTime=  1500;
+        [defaults setObject:@"1500" forKey:kDelay];
     }
+//show time
     temp        = [defaults objectForKey:kShow];
     if( temp == nil ){
-        showTime =  600;
-        [defaults setObject:@"600" forKey:kShow];
+        showTime =  1500;
+        [defaults setObject:@"1500" forKey:kShow];
     }
+//start time
     temp        = [defaults objectForKey:kTime];
     if( temp == nil ){
-        startTime =  1000;
-        [defaults setObject:@"1000" forKey:kTime];
+        startTime =  1500;
+        [defaults setObject:@"1500" forKey:kTime];
     }
-    //set rotate
+//set rotate
     temp        = [defaults objectForKey:kRot];
     if( temp == nil ){
         rotation =  YES;
         [defaults setBool:YES forKey:kRot];
     }
-    //set animals
+//set animals
     temp        = [defaults objectForKey:kAnimals];
     if( temp == nil ){
         animals =  NO;
         [defaults setBool:NO forKey:kAnimals];
     }
-    //set sounds
+//set sounds
     temp        = [defaults objectForKey:kSounds];
     if( temp == nil ){
         sounds =  YES;
         [defaults setBool:YES forKey:kSounds];
     }
-    //set status messages
+//set status messages
     temp        = [defaults objectForKey:kInfo];
     if( temp == nil ){
         info =  YES;
         [defaults setBool:YES forKey:kInfo];
     }
-    //set forward/reverse
+//set forward/reverse
     temp        = [defaults objectForKey:kForward];
     if( temp == nil ){
         forward =  YES;
@@ -423,13 +430,14 @@ emailLBL;
 }
 
 -(NSString*)effectPicker:(NSString*)effectName{
-        mySingleton *singleton = [mySingleton sharedSingleton];
+    mySingleton *singleton = [mySingleton sharedSingleton];
     NSString *effectName1;
     //make an array of colour names
     NSArray *items = @[
-                       @"KLICK", @"BEEPPURE", @"BEEP_FM", @"BEEPDOUB", @"AMFMBEEP",
-                       @"BEEPJAZZ"
-                       ];
+         @"KLICK", @"BEEPPURE",
+         @"BEEP_FM", @"BEEPDOUB",
+         @"AMFMBEEP", @"BEEPJAZZ"
+         ];
     //find the index value of each
     long item = [items indexOfObject: effectName];
     
@@ -438,37 +446,37 @@ emailLBL;
         case 0:
             // Item 1
             effectName1 = @"KLICK";
-            singleton.segIndex=0;
+            singleton.segIndex = 0;
             break;
         case 1:
             // Item 2
             effectName1 = @"BEEPPURE";
-            singleton.segIndex=1;
+            singleton.segIndex = 1;
             break;
         case 2:
             // Item 3
             effectName1 = @"BEEP_FM";
-            singleton.segIndex=2;
+            singleton.segIndex = 2;
             break;
         case 3:
             // Item 4
             effectName1 = @"BEEPDOUB";
-            singleton.segIndex=3;
+            singleton.segIndex = 3;
             break;
         case 4:
             // Item 5
             effectName1 = @"AMFMBEEP";
-            singleton.segIndex=4;
+            singleton.segIndex = 4;
             break;
         case 5:
             // Item 6
             effectName1 = @"BEEPJAZZ";
-            singleton.segIndex=5;
+            singleton.segIndex = 5;
             break;
 
         default:
-            effectName1 = @"KLICK";
-            singleton.segIndex=0;
+            effectName1 = @"BEEPJAZZ";
+            singleton.segIndex = 5;
             break;
     }
     return effectName1;
@@ -479,21 +487,21 @@ emailLBL;
     
     //make an array of colour names
     NSArray *items = @[
-                       [UIColor blackColor],
-                       [UIColor blueColor],
-                       [UIColor greenColor],
-                       [UIColor redColor],
-                       [UIColor cyanColor],
-                       [UIColor whiteColor],
-                       [UIColor yellowColor],
-                       [UIColor magentaColor],
-                       [UIColor grayColor],
-                       [UIColor orangeColor],
-                       [UIColor brownColor],
-                       [UIColor purpleColor],
-                       [UIColor darkGrayColor],
-                       [UIColor lightGrayColor]
-                       ];
+        [UIColor blackColor],
+        [UIColor blueColor],
+        [UIColor greenColor],
+        [UIColor redColor],
+        [UIColor cyanColor],
+        [UIColor whiteColor],
+        [UIColor yellowColor],
+        [UIColor magentaColor],
+        [UIColor grayColor],
+        [UIColor orangeColor],
+        [UIColor brownColor],
+        [UIColor purpleColor],
+        [UIColor darkGrayColor],
+        [UIColor lightGrayColor]
+        ];
     //find the index value of each
     long item = [items indexOfObject: myUIColour];
     
@@ -616,7 +624,7 @@ emailLBL;
 }
 
 -(IBAction)loadSettings:(id)sender{
-    //load from the plist, or put in a default if missing
+//load from the plist, or put in a default if missing
     mySingleton *singleton = [mySingleton sharedSingleton];
     
     NSURL *defaultPrefsFile     = [[NSBundle mainBundle]
@@ -629,7 +637,7 @@ emailLBL;
 
     [defaults synchronize];
     
-    //read the user defaults from the iPhone/iPad bundle
+//read the user defaults from the iPhone/iPad bundle
     // if any are set to nil (no value on first run), put a temporary one in
     
     blockCol          = [defaults objectForKey:kBlockCol];
@@ -640,7 +648,7 @@ emailLBL;
     }else{
         currentBlockColour = [self colourPicker:blockCol];
     }
-    //background colour
+//background colour
     backCol         = [defaults objectForKey:kBackCol];
     if(backCol  == nil ){
         currentBackgroundColour =  [UIColor blackColor];
@@ -649,7 +657,7 @@ emailLBL;
     }else{
         currentBackgroundColour = [self colourPicker:backCol];
     }
-    //show colour
+//show colour
     showCol          = [defaults objectForKey:kShowCol];
     if(showCol  == nil ){
         currentShowColour =  [UIColor yellowColor];
@@ -658,94 +666,100 @@ emailLBL;
     }else{
         currentShowColour = [self colourPicker:showCol];
     }
-    
+//start
     NSString *temp;
     temp        = [defaults objectForKey:kStart];
         if( temp == nil ){
         start =  3;
         [defaults setObject:@"3" forKey:kStart];
     }
+//finish
     temp        = [defaults objectForKey:kFinish];
     if( temp == nil ){
         finish =  9;
         [defaults setObject:@"9" forKey:kFinish];
     }
+//block size
     temp        = [defaults objectForKey:kSize];
     if( temp == nil ){
         blockSize =  45.00;
         [defaults setObject:@"45.00" forKey:kSize];
     }
+//wait time
     temp        = [defaults objectForKey:kDelay];
     if( temp == nil ){
-        waitTime=  1200;
-        [defaults setObject:@"1200" forKey:kDelay];
+        waitTime=  1500;
+        [defaults setObject:@"1500" forKey:kDelay];
     }
+//show time
     temp        = [defaults objectForKey:kShow];
     if( temp == nil ){
-        showTime =  600;
-        [defaults setObject:@"600" forKey:kShow];
+        showTime =  1500;
+        [defaults setObject:@"1500" forKey:kShow];
     }
+//start time
     temp        = [defaults objectForKey:kTime];
     if( temp == nil ){
-        startTime =  1000;
-        [defaults setObject:@"1000" forKey:kTime];
+        startTime =  1500;
+        [defaults setObject:@"1500" forKey:kTime];
     }
-    //subject name
+//subject name
     temp     = [defaults objectForKey:kSubject];
     if(temp  == nil ){
         subjectName =  @"Par";
         [defaults setObject:@"Par" forKey:kSubject];
     }
-    //tester name
+//tester name
     temp     = [defaults objectForKey:kTester];
     if(temp  == nil ){
         testerName =  @"Me";
         [defaults setObject:@"Me" forKey:kTester];
     }
-    //email name
+//email name
     temp     = [defaults objectForKey:kEmail];
     if(temp  == nil ){
         email =  @"me@test.com";
         [defaults setObject:@"me@test.com" forKey:kEmail];
     }
-    //set rotate
+//set rotate
     temp        = [defaults objectForKey:kRot];
     if( temp == nil ){
         rotation =  YES;
         [defaults setBool:YES forKey:kRot];
     }
-    //set animals
+//set animals
     temp        = [defaults objectForKey:kAnimals];
     if( temp == nil ){
         animals =  NO;
         [defaults setBool:NO forKey:kAnimals];
     }
-    //set sounds
+//set sounds
     temp        = [defaults objectForKey:kSounds];
     if( temp == nil ){
         sounds =  YES;
         [defaults setBool:YES forKey:kSounds];
     }
-    //beep Effect Name
+//beep Effect Name
     beepName     = [defaults objectForKey:kBeep];
     if(beepName  == nil ){
         beepName =  @"BEEPJAZZ";
         [defaults setObject:@"BEEPJAZZ" forKey:kBeep];
     }
-    //set status messages
+    [self effectPicker:beepName];
+//set status messages
     temp        = [defaults objectForKey:kInfo];
     if( temp == nil ){
         info =  YES;
         [defaults setBool:YES forKey:kInfo];
     }
-    //set forward/reverse
+//set forward/reverse
     temp        = [defaults objectForKey:kForward];
     if( temp == nil ){
         forward =  YES;
         [defaults setBool:YES forKey:kForward];
     }
     
-    //for testing what is written, can be rem'd out later
+//for testing what is written, can be rem'd out later
     //NSLog(@"Loading from PLIST... sending to singleton");
     singleton.testerName              = [defaults  objectForKey:kTester];
     singleton.subjectName             = [defaults  objectForKey:kSubject];
@@ -760,6 +774,7 @@ emailLBL;
     singleton.sounds                  = [defaults  boolForKey:kSounds];
     singleton.beepEffect              = [defaults  objectForKey:kBeep];
     [self effectPicker:singleton.beepEffect];
+    
     singleton.currentBlockColour      = currentBlockColour;
     singleton.currentShowColour       = currentShowColour;
     singleton.currentBackgroundColour = currentBackgroundColour;
@@ -818,7 +833,6 @@ emailLBL;
 
     //UITouch *touch = [touches anyObject];//some old example code if you used a touch rather than an image reference
     //make sure rotation is about the centre axis. 0,0 is bot left, .5,.5 is ctr, 1,1 is top rt, 1,.5 is mid right.
-
     block1View.layer.anchorPoint = CGPointMake(.5,.5);
     block2View.layer.anchorPoint = CGPointMake(.5,.5);
     block3View.layer.anchorPoint = CGPointMake(.5,.5);
@@ -830,33 +844,33 @@ emailLBL;
     block9View.layer.anchorPoint = CGPointMake(.5,.5);
 
     [UIView animateWithDuration:1.0
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveEaseInOut
+               delay:0.0
+             options:UIViewAnimationOptionCurveEaseInOut
 
-                     animations:^{
+      animations:^{
 
-                         CGAffineTransform scaleTrans = CGAffineTransformMakeScale(scaleFactor, scaleFactor);
+          CGAffineTransform scaleTrans = CGAffineTransformMakeScale(scaleFactor, scaleFactor);
 
-                         CGAffineTransform rotateTrans1 = CGAffineTransformMakeRotation(angle[1] * M_PI / 180);
-                         CGAffineTransform rotateTrans2 = CGAffineTransformMakeRotation(angle[2] * M_PI / 180);
-                         CGAffineTransform rotateTrans3 = CGAffineTransformMakeRotation(angle[3] * M_PI / 180);
-                         CGAffineTransform rotateTrans4 = CGAffineTransformMakeRotation(angle[4] * M_PI / 180);
-                         CGAffineTransform rotateTrans5 = CGAffineTransformMakeRotation(angle[5] * M_PI / 180);
-                         CGAffineTransform rotateTrans6 = CGAffineTransformMakeRotation(angle[6] * M_PI / 180);
-                         CGAffineTransform rotateTrans7 = CGAffineTransformMakeRotation(angle[7] * M_PI / 180);
-                         CGAffineTransform rotateTrans8 = CGAffineTransformMakeRotation(angle[8] * M_PI / 180);
-                         CGAffineTransform rotateTrans9 = CGAffineTransformMakeRotation(angle[9] * M_PI / 180);
+          CGAffineTransform rotateTrans1 = CGAffineTransformMakeRotation(angle[1] * M_PI / 180);
+          CGAffineTransform rotateTrans2 = CGAffineTransformMakeRotation(angle[2] * M_PI / 180);
+          CGAffineTransform rotateTrans3 = CGAffineTransformMakeRotation(angle[3] * M_PI / 180);
+          CGAffineTransform rotateTrans4 = CGAffineTransformMakeRotation(angle[4] * M_PI / 180);
+          CGAffineTransform rotateTrans5 = CGAffineTransformMakeRotation(angle[5] * M_PI / 180);
+          CGAffineTransform rotateTrans6 = CGAffineTransformMakeRotation(angle[6] * M_PI / 180);
+          CGAffineTransform rotateTrans7 = CGAffineTransformMakeRotation(angle[7] * M_PI / 180);
+          CGAffineTransform rotateTrans8 = CGAffineTransformMakeRotation(angle[8] * M_PI / 180);
+          CGAffineTransform rotateTrans9 = CGAffineTransformMakeRotation(angle[9] * M_PI / 180);
 
-                         block1View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans1);
-                         block2View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans2);
-                         block3View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans3);
-                         block4View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans4);
-                         block5View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans5);
-                         block6View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans6);
-                         block7View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans7);
-                         block8View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans8);
-                         block9View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans9);
-                     }completion:nil];
+          block1View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans1);
+          block2View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans2);
+          block3View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans3);
+          block4View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans4);
+          block5View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans5);
+          block6View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans6);
+          block7View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans7);
+          block8View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans8);
+          block9View.transform = CGAffineTransformConcat(scaleTrans, rotateTrans9);
+      }completion:nil];
 }
 
 -(int)random22

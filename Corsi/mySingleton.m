@@ -16,41 +16,40 @@ static mySingleton * sharedSingleton = nil;
 
 // eg::: @synthesize offset;
 @synthesize
-            currentShowColour,
-            currentBlockColour,
-            currentBackgroundColour,
-            currentStatusColour,
-            blockSize,
-            showTime,
-            start,
-            startTime,
-            finish,
-            timerTime,
-            waitTime,
-            messageTime,
-            oldSubjectName,
-            subjectName,
-            testerName,
-            testDate,
-            testTime,
-            resultStrings,//string
-            resultStringRows,//array
+    currentShowColour,
+    currentBlockColour,
+    currentBackgroundColour,
+    currentStatusColour,
+    blockSize,
+    showTime,
+    start,
+    startTime,
+    finish,
+    waitTime,
+    messageTime,
+    oldSubjectName,
+    subjectName,
+    testerName,
+    testDate,
+    testTime,
+    resultStrings,      //string
+    resultStringRows,   //array
 
-            email,
-            forwardTestDirection,
-            blockRotation,
-            onScreenInfo,
-            animals,
-            sounds,
-            beepEffect,
+    email,
+    forwardTestDirection,
+    blockRotation,
+    onScreenInfo,
+    animals,
+    sounds,
+    beepEffect,
 
-            displayStrings,//result item
-            displayStringRows,//array
-            
-            displayStringsTitle,//result title
-            displayStringTitles,//array
+    displayStrings,     //result item
+    displayStringRows,  //array
+    
+    displayStringsTitle,//result title
+    displayStringTitles,//array
 
-            segIndex;//sounds
+    segIndex;           //sounds
 
 #pragma mark -
 #pragma mark Singleton Methods
@@ -72,9 +71,7 @@ static mySingleton * sharedSingleton = nil;
 
 - (id) init {
     if(self = [super init]) {
-        //only runs if no data or first run to give default values
-        
-        //eg:::       offset=30;
+    //only runs if no data or first run to give default values
         
     currentBackgroundColour  = [UIColor blackColor];
         currentBlockColour   = [UIColor darkGrayColor];
@@ -83,17 +80,16 @@ static mySingleton * sharedSingleton = nil;
         start                = 3;
         finish               = 9;
         blockSize            = 45.00;
-        waitTime             = 1200;
-        startTime            = 1000;
-        showTime             = 600;
+        waitTime             = 1500;
+        startTime            = 1500;
+        showTime             = 1500;
         messageTime          = 2000; //for on screen instructions and messages in time interval delay
-        timerTime            = 0.0;
         blockRotation        = YES;
         onScreenInfo         = YES;
         animals              = NO;
         sounds               = YES;
         beepEffect           = @"BEEPJAZZ";
-        segIndex             = 6;
+        segIndex             = 5;
         forwardTestDirection = YES;
         resultStrings        = @"";
         displayStrings       = @"";
