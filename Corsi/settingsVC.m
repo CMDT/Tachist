@@ -8,6 +8,7 @@
 
 #import "settingsVC.h"
 #import "mySingleton.h"
+#import "resultsVC.h"
 
 #define kEmail      @"emailAddress"
 #define kTester     @"testerName"
@@ -124,6 +125,7 @@ emailLBL;
     settingsImage       = [settingsImage    imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     settingsImageSel    = [settingsImageSel imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Settings" image:settingsImage selectedImage: settingsImageSel];
+
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     NSString * pathStr               = [[NSBundle mainBundle] bundlePath];
@@ -198,6 +200,8 @@ emailLBL;
     
     [self putBlocksInPlace];
 }
+
+
 
 - (void)viewDidLoad
 {

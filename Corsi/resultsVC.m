@@ -44,9 +44,7 @@
     }
     return self;
 }
--(void)viewWillAppear:(BOOL)animated{
 
-}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -59,12 +57,12 @@
     UIImage *resultsImageSel        = [UIImage imageNamed:@"results"];
     resultsImage                    = [resultsImage     imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     resultsImageSel                 = [resultsImageSel  imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Results" image:resultsImage selectedImage: resultsImageSel];
 
     tableView.hidden=YES;
     emailBTN.hidden=YES;
     resultsTxtView.hidden=NO;
-    
-    self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Results" image:resultsImage selectedImage: resultsImageSel];
+
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     resultsTempString = @"\n\nThe Corsi Tapping Test results and analysis will appear in a table here, once a test has been completed.\n\nThe last test to be completed will stay visible until a new test is finished, or you press the Home Button on your device.\n\nPressing the home button deletes any data not sent by email and resets the Application.\n\nData can be sent by Email as an Attachment of extension type CSV, which can be read by other applications such as a spreadsheet.\n\nPlease ensure that you have set the Email Address of the recipient before you select the email option.";
@@ -80,35 +78,37 @@
     NSUserDefaults *defaults    = [NSUserDefaults standardUserDefaults];
     [defaults synchronize];
     singleton.subjectName       = [defaults  objectForKey:kSubject];
-
-    long final=singleton.resultStringRows.count;
     
-    for(long i=0; i< final; i++)
-        {
-        element = [singleton.resultStringRows objectAtIndex: i];
-        [printString appendString:[NSString stringWithFormat:@"\n%@", element]];
+    long final=singleton.resultStringRows.count;
+    if (final > 0) {
+        for(long i=0; i< final; i++){
+            element = [singleton.resultStringRows objectAtIndex: i];
+            [printString appendString:[NSString stringWithFormat:@"\n%@", element]];
         }
-    [printString appendString:@""];
+        [printString appendString:@""];
+    }
 
     //make a text file from the array of results for formatted display on screen
     NSMutableString *element2 = [[NSMutableString alloc] init];
     NSMutableString *printString2 = [NSMutableString stringWithString:@""];
-    long final2=singleton.displayStringRows.count;
-    for(long i=0; i< final2; i++)
-        {
-        element2 = [singleton.displayStringRows objectAtIndex: i];
-        [printString2 appendString:[NSString stringWithFormat:@"\n%@", element2]];
-        }
-    [printString2 appendString:@""];
 
+    long final2 = singleton.displayStringRows.count;
+
+    if (final2 > 0) {
+        for(long i=0; i< final2; i++){
+            element2 = [singleton.displayStringRows objectAtIndex: i];
+            [printString2 appendString:[NSString stringWithFormat:@"\n%@", element2]];
+        }
+        [printString2 appendString:@""];
+    }
     // NSLog(@"string to write pt1:%@",printString);
     //CREATE FILE to save in Documents Directory
     //nb Have to set info.plist environment variable to allow iTunes sharing if want to tx to iTunes etc this dir.
 
     //UIViewController *files = [[UIViewController alloc] init];
 
-    singleton.resultStrings  = printString;//email csv
-    singleton.displayStrings = printString2;//screen
+    singleton.resultStrings  = printString;  //email csv etc
+    singleton.displayStrings = printString2; //screen
     
     //check if data exists, if not, display the holding message
     if ([printString2 isEqualToString:@""]) {
@@ -124,7 +124,9 @@
         resultsTxtView.hidden=YES;
     }
     //[self saveText];
-    [self WriteToStringFile:[printString mutableCopy]];
+    if (![printString isEqualToString: @""]) {
+        [self WriteToStringFile:[printString mutableCopy]];
+    }
 }
 
 - (void)didReceiveMemoryWarning

@@ -542,7 +542,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d6x-0F-1TZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1029" y="-763"/>
+            <point key="canvasLocation" x="-1003" y="-746"/>
         </scene>
         <!--Timing Settings-->
         <scene sceneID="dDb-Sb-L7X">
@@ -1560,7 +1560,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WqZ-kI-dxD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-251" y="-702"/>
+            <point key="canvasLocation" x="-268" y="-790"/>
         </scene>
         <!--CorsiTabController-->
         <scene sceneID="sw2-hC-uGP">
@@ -2085,6 +2085,6 @@ at the start of each test session.</string>
         <image name="yellow72.png" width="72" height="72"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="4QY-bk-59h"/>
+        <segue reference="NxR-D6-a8L"/>
     </inferredMetricsTieBreakers>
 </document>

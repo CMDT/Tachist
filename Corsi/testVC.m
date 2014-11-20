@@ -151,10 +151,12 @@
     //sound stuff
     backIsStarted=false;
     
-    beepName=singleton.beepEffect;
+    beepName = singleton.beepEffect;
+
     NSString *backgroundMusicPath=[[NSBundle mainBundle]pathForResource:beepName ofType:@"caf"];
     NSURL *backgroundMusicURL=[NSURL fileURLWithPath:backgroundMusicPath];
     NSError *error;
+    
     backgroundMusicPlayer=[[AVAudioPlayer alloc] initWithContentsOfURL:backgroundMusicURL error:&error];
     [backgroundMusicPlayer setNumberOfLoops:3]; //-1 = forever
     //prepare to play
@@ -220,7 +222,8 @@
     card[3] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-stage-end.png"]];
     card[4] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"calculating.png"]];     //calculations
     card[5] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-touch-blocks2.png"]];
-    card[6] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"mresults.png"]];  //results
+    //card[6] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"mresults.png"]];  //results
+    card[6] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_cubes.png"]];  //results
     card[7] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"cancelled.png"]]; //cancel message
     card[8] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_blank.png"]];     //just a blank card
     card[9] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_cubes.png"]];     //picture of some coloured blocks
@@ -283,8 +286,6 @@
         box7image.transform = CGAffineTransformTranslate(box7image.transform,[self randomPt]-sizeb, [self randomPt]);
         box8image.transform = CGAffineTransformTranslate(box8image.transform,[self randomPt]-sizeb, [self randomPt]);
         box9image.transform = CGAffineTransformTranslate(box9image.transform,[self randomPt]-sizeb, [self randomPt]);
-
-
     }
     
     infoShow=singleton.onScreenInfo;
@@ -545,7 +546,8 @@
     self.tabBarController.tabBar.hidden = YES;
     stopTestNowBTN.hidden=NO;
     //NSLog(@"Test has started");
-    statusMessageLBL.text = @"The Test Has Started";
+    //statusMessageLBL.text = @"The Test Has Started";
+        statusMessageLBL.text = @"";
 
     startBTN.hidden   = YES;
     headingLBL.hidden = YES;
@@ -721,19 +723,14 @@
     self.tabBarController.tabBar.hidden = NO;
     
 //halt here, user selects new menu option to proceed
-    [MessageView setImage: card[7].image];
-    [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(abortWasPressed) userInfo:nil repeats:NO];
+[MessageView setImage: card[7].image]; //hold message if not faded out (set animate out to hold for this one if needed
+    [NSTimer scheduledTimerWithTimeInterval:4 target:self selector:@selector(abortWasPressed) userInfo:nil repeats:NO];
 }
 
 -(void)abortWasPressed{
     //the end...
-    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(self) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(selectTabBarSettings) userInfo:nil repeats:NO];
 }
-
-//
--(void)awakeFromNib {
-    statusMessageLBL.text=@"The App is Awake...";
- }
 
 //
 -(float) delayDelay
@@ -847,7 +844,7 @@
     //NSLog(@"box init");
     if (!isAborted) {
         if (infoShow) {
-            statusMessageLBL.text = @"Observe Blocks, Start of Test";
+            statusMessageLBL.text = @"";
         }else{
             statusMessageLBL.text = @"";
         }
@@ -862,8 +859,7 @@
     startBTN.hidden=YES;
     isFinished=NO;
     isCalculating=NO;
-    [self showInfo];
-    
+
     //zero counters
     xcounter = start; //default is 3 but could be 3-9 range depending on settings
     ncounter = 1;
@@ -980,7 +976,7 @@
         [self display_blocks];
 
         if (infoShow) {
-            statusMessageLBL.text = @"Observe Block Sequence";
+            statusMessageLBL.text = @"Observe";
         }else{
             statusMessageLBL.text = @"Observe";
         }
@@ -1079,7 +1075,7 @@
             break;
 
             default:
-                statusMessageLBL.text = @"Touch the blocks in sequence";
+                statusMessageLBL.text = @"Recall";
             break;
         }
         }else{
@@ -1329,7 +1325,6 @@
                 statusMessageLBL.text = @"Forward Test";
             }
         }
-
         //NSLog(@"Press The Blocks in Order");
         
         //read the timer
@@ -1422,9 +1417,7 @@
 
     [Alert show];
     [self haltPart2];
-
 }
-
 
 -(void)haltPart2{
     if (isAlertFinished == YES) {
@@ -1477,7 +1470,7 @@
         [self buttonsDisable];
         //NSLog(@"Stage Starting");
         if (infoShow) {
-            statusMessageLBL.text = @"Observe the Blocks";
+            statusMessageLBL.text = @"Observe";
         }else{
             statusMessageLBL.text = @"Observe";
         }
@@ -1491,16 +1484,16 @@
         //Start of Test Message
         [self buttonsDisable];
         //NSLog(@"Start Test");
-
+        [self showInfo];
         if (!reverseTest) {
             if (infoShow) {
-                statusMessageLBL.text = @"Observe the sequence, recall in the reverse order.";
+                statusMessageLBL.text = @"Observe";
             }else{
                 statusMessageLBL.text = @"Observe";
             }
         }else{
             if (infoShow) {
-                statusMessageLBL.text = @"Observe the sequence, recall in the same order.";
+                statusMessageLBL.text = @"Observe";
             }else{
                 statusMessageLBL.text = @"Observe";
             }
@@ -1524,13 +1517,13 @@
     [[MessageView superview] bringSubviewToFront:MessageView];
     
     //[UIView animateKeyframesWithDuration:1 delay:1 options:1 animations:^(){MessageView.alpha = 1.0;} completion:nil];
-    [UIView animateWithDuration:1
+    [UIView animateWithDuration:1.2
                           delay:0  /* do not add a delay because we will use performSelector. */
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^ {
-                         MessageView.alpha = 1.0;
+                         MessageView.alpha = 1.0; //fade in
                      }
-                     completion:^(BOOL finished) {[NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(animateMessageViewOUT) userInfo:nil repeats:NO];
+                     completion:^(BOOL finished) {[NSTimer scheduledTimerWithTimeInterval:2.2 target:self selector:@selector(animateMessageViewOUT) userInfo:nil repeats:NO];
                     }];
 }
 
@@ -1538,18 +1531,20 @@
     //ease out
     [[MessageView superview] bringSubviewToFront:MessageView];
 
-    [UIView animateWithDuration:1
+    [UIView animateWithDuration:1.2
                           delay:1
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^ {
-                         if (isCalculating) {
+                         /*if (isCalculating) { //do not fade out, keep display on
                              MessageView.alpha = 1.0;
                          }else{
                              MessageView.alpha = 0.0;
-                         }
+                         }*/
+                         MessageView.alpha = 0.0; //fade out
                      }
                      completion:^(BOOL finished) {
                      }];
+    //nothing else to do, the image was shown
 }
 
 -(void)endTestMSG {
@@ -1569,7 +1564,7 @@
         [MessageView setImage: card[1].image];
         MessageView.hidden=NO;
         [self animateMessageView];
-        [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(calculatingMSG) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:5.5 target:self selector:@selector(calculatingMSG) userInfo:nil repeats:NO];
     }
 }
 
@@ -1590,7 +1585,7 @@
         MessageView.hidden=NO;
         [self animateMessageView];
 
-        [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(calculations) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:5.5 target:self selector:@selector(calculations) userInfo:nil repeats:NO];
     }
 }
 
@@ -1627,16 +1622,58 @@
         [self animateMessageView];
 
     //jump to selector ResultsVC
-    //[self.tabBarController setSelectedIndex:4]; needs to be able to jump as well
-    //manual selection at present on tab bar
-        [NSTimer scheduledTimerWithTimeInterval:startTime target:self selector:@selector(waitForever) userInfo:nil repeats:NO];
+
+        [NSTimer scheduledTimerWithTimeInterval:3.5 target:self selector:@selector(selectTabBarResults) userInfo:nil repeats:NO];
+    }else{
+        //jump to selector SettingsVC
+
+        [NSTimer scheduledTimerWithTimeInterval:3.5 target:self selector:@selector(selectTabBarSettings) userInfo:nil repeats:NO];
     }
 }
 
--(void)waitForever{
-    //stop
+-(void)selectTabBarResults{
+    MessageView.hidden = YES;
+    //jump to the results view
+        int controllerIndex = 2;
+
+        UITabBarController *tabBarController = self.tabBarController;
+        UIView * fromView = tabBarController.selectedViewController.view;
+        UIView * toView = [[tabBarController.viewControllers objectAtIndex:controllerIndex] view];
+
+        // Transition using a page curl.
+        [UIView transitionFromView:fromView
+                            toView:toView
+                          duration:2.0
+                           options:(controllerIndex > tabBarController.selectedIndex ? UIViewAnimationOptionTransitionFlipFromLeft: UIViewAnimationOptionTransitionCurlDown)
+                        completion:^(BOOL finished) {
+                            if (finished) {
+                                tabBarController.selectedIndex = controllerIndex;
+                            }
+                        }];
+    //results VC jump
 }
 
+-(void)selectTabBarSettings{
+    MessageView.hidden = YES;
+    //jump to the setting view
+    int controllerIndex = 0;
+
+    UITabBarController *tabBarController = self.tabBarController;
+    UIView * fromView = tabBarController.selectedViewController.view;
+    UIView * toView = [[tabBarController.viewControllers objectAtIndex:controllerIndex] view];
+
+    // Transition using a page curl.
+    [UIView transitionFromView:fromView
+                        toView:toView
+                      duration:2.0
+                       options:(controllerIndex > tabBarController.selectedIndex ? UIViewAnimationOptionTransitionFlipFromRight : UIViewAnimationOptionTransitionCurlDown)
+                    completion:^(BOOL finished) {
+                        if (finished) {
+                            tabBarController.selectedIndex = controllerIndex;
+                        }
+                    }];
+    //settings VC jump
+}
 -(void)blankMSG3 {
     if (!isAborted) {
     [self buttonsDisable];
@@ -1767,6 +1804,7 @@
 
 
 -(void)calculations{
+    MessageView.hidden = YES;
     if (!isAborted) {
 
     mySingleton *singleton = [mySingleton sharedSingleton];
@@ -2407,6 +2445,6 @@
 }
 
 - (IBAction)returnToStepOne:(UIStoryboardSegue *)segue {
-    NSLog(@"And now we are back.");
+    //NSLog(@"And now we are back.");
 }
 @end

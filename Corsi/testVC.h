@@ -114,7 +114,6 @@
 -(void)hide_blocks;
 -(void)showInfo;
 -(void)hideInfo;
--(void)awakeFromNib;
 -(void)putAnimals;
 -(void)startStop;
 -(void)setVolumeValue;
