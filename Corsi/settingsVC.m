@@ -126,7 +126,7 @@
     settingsImage       = [settingsImage    imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     settingsImageSel    = [settingsImageSel imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Settings" image:settingsImage selectedImage: settingsImageSel];
-
+    self.tabBarController.tabBar.hidden = NO;
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     NSString * pathStr               = [[NSBundle mainBundle] bundlePath];
@@ -187,17 +187,21 @@
     [self effectPicker:beepName];
     
     //start, finish and sizes on screen from singleton
-    blockStartNumLBL.text   = [NSString stringWithFormat:@"%d",singleton.start];
-    blockFinishNumLBL.text  = [NSString stringWithFormat:@"%d",singleton.finish];
-    blockSizeLBL.text       = [NSString stringWithFormat:@"%2.0f",singleton.blockSize];
+    blockStartNumLBL.text   = [NSString stringWithFormat:@"%d",    singleton.start];
+    blockFinishNumLBL.text  = [NSString stringWithFormat:@"%d",    singleton.finish];
+    blockSizeLBL.text       = [NSString stringWithFormat:@"%2.0f", singleton.blockSize];
 
     startTime = singleton.startTime;
     waitTime  = singleton.waitTime;
     showTime  = singleton.showTime;
 
-    blockStartLBL.text = [[NSString alloc]initWithFormat:@"%i",startTime];
-    blockShowLBL.text  = [[NSString alloc]initWithFormat:@"%i",showTime];
-    blockWaitLBL.text  = [[NSString alloc]initWithFormat:@"%i",waitTime];
+    blockStartLBL.textAlignment = NSTextAlignmentCenter;
+    blockShowLBL.textAlignment = NSTextAlignmentCenter;
+    blockWaitLBL.textAlignment = NSTextAlignmentCenter;
+
+    blockStartLBL.text = [[NSString alloc]initWithFormat:@"%i", startTime];
+    blockShowLBL.text  = [[NSString alloc]initWithFormat:@"%i", showTime];
+    blockWaitLBL.text  = [[NSString alloc]initWithFormat:@"%i", waitTime];
 
     testerLBL.text=singleton.testerName;
     emailLBL.text=singleton.email;

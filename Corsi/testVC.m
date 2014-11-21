@@ -91,6 +91,7 @@
 @end
 
 @implementation testVC
+
 @synthesize
     backgroundMusicPlayer, //for sounds
     blkLBL,
@@ -218,8 +219,8 @@
     //initialise images for messages on messageview
     card[0] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"started.png"]];    //start
     card[1] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"finished.png"]];   //finish
-    //card[2] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-stage-start.png"]];
-    //card[3] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-stage-end.png"]];
+    card[2] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"loading.png"]];    //loading
+    card[3] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"recall.png"]];     //recall
     card[4] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"calculating.png"]];     //calculations
     //card[5] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-touch-blocks2.png"]];
     card[6] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"redblocks800.png"]];  //results
@@ -529,10 +530,13 @@
 }
 
 -(IBAction)startTest:sender{
+    MessageView.hidden=NO;
+    [MessageView setImage: card[2].image]; //loading message
+    [self animateMessageViewOUT2:0.5];
+
     isAlertFinished=NO;
-    
+    self.tabBarController.tabBar.hidden = YES;
     MessageTextView.hidden=YES;
-    MessageView.hidden=YES;
     startBTN.hidden=YES;
     statusMessageLBL.hidden=YES;
     
@@ -546,29 +550,29 @@
 -(void)startTestPart2{
     //this will be looped until the text alert popup is finished
     mySingleton *singleton = [mySingleton sharedSingleton];
-
+        MessageTextView.hidden=YES;
     if (isAlertFinished) {
         MessageTextView.hidden=YES;
         [self hideInfo];
         [self playMyEffect];//beep effect if on
 
-    //blank out the tab bar during the test, no end until done now
-    self.tabBarController.tabBar.hidden = YES;
-    stopTestNowBTN.hidden=NO;
-    //NSLog(@"Test has started");
-    //statusMessageLBL.text = @"The Test Has Started";
+        //blank out the tab bar during the test, no end until done now
+        self.tabBarController.tabBar.hidden = YES;
+        stopTestNowBTN.hidden=NO;
+        //NSLog(@"Test has started");
+        //statusMessageLBL.text = @"The Test Has Started";
         statusMessageLBL.text = @"";
 
-    startBTN.hidden   = YES;
-    headingLBL.hidden = YES;
+        startBTN.hidden   = YES;
+        headingLBL.hidden = YES;
 
-    start       = singleton.start;
-    finish      = singleton.finish;
+        start       = singleton.start;
+        finish      = singleton.finish;
     
-    startTime   =[self delayDelay];
-    showTime    =[self delayShow];
-    waitTime    =[self delayWait];
-    messageTime =[self delayMessage];
+        startTime   =[self delayDelay];
+        showTime    =[self delayShow];
+        waitTime    =[self delayWait];
+        messageTime =[self delayMessage];
     
         //start test, the alert was dismissed
         [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(boxInit) userInfo:nil repeats:NO];
@@ -712,7 +716,7 @@
     MessageView.hidden = NO;
     [self hideInfo];
     [self hide_blocks];
-    self.tabBarController.tabBar.hidden = NO;
+
     
     //Cancel, return to settings after message
     [self buttonsDisable];
@@ -1376,7 +1380,7 @@
 
 -(void)guessMSG {
     if (!isAborted) {
-        blkNoLBL.text = [NSString stringWithFormat:@"%i",0];
+        blkNoLBL.text = [NSString stringWithFormat:@"%i", 0];
         //NSLog(@"Guess Now");
         statusMessageLBL.text = @"";
         [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(getGuesses) userInfo:nil repeats:NO];
@@ -1385,7 +1389,7 @@
 
 -(void)finalGuessMSG {
     if (!isAborted) {
-        blkNoLBL.text = [NSString stringWithFormat:@"%i",0];
+        blkNoLBL.text = [NSString stringWithFormat:@"%i", 0];
         statusMessageLBL.text = @"";
         [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(getFinalGuesses) userInfo:nil repeats:NO];
     }
@@ -1396,7 +1400,7 @@
         [self buttonsDisable];
         //NSLog(@"Stage Ending");
         if (infoShow) {
-            statusMessageLBL.text = @"";
+            statusMessageLBL.text = @"Prepare to Recall";
         }else{
             statusMessageLBL.text = @"";
         }
@@ -1406,20 +1410,28 @@
 }
 
 -(void)halt{
-    isAlertFinished = NO;
+    //isAlertFinished = NO;
     
-    UIAlertView * Alert  = [[UIAlertView alloc] initWithTitle:@"RECAL"
-                                                     message:@"The recall will start when \nthis message dissapears"
-                                                    delegate:self
-                                           cancelButtonTitle:nil //@"Cancel"
-                                           otherButtonTitles:@"START NOW", nil];
-    Alert.alertViewStyle = UIAlertViewStyleDefault;
+    //UIAlertView * Alert  = [[UIAlertView alloc] initWithTitle:@"RECAL"
+    //                                                message:@"The recall will start as soon as\nthis message dissapears..."
+    //                                                delegate:self
+    //                                       cancelButtonTitle:nil //@"Cancel"
+    //                         otherButtonTitles:@"RECALL NOW", nil];
 
-    [Alert show];
-    [self haltPart2];
+    //Alert.alertViewStyle = UIAlertViewStyleDefault;
+
+    //[Alert show];
+
+    //[self haltPart2];
+    MessageView.hidden=NO;
+    MessageView.alpha=0.70;
+    [MessageView setImage: card[3].image];
+    [NSTimer scheduledTimerWithTimeInterval: 1.2 target:self selector:@selector(haltPart2) userInfo:nil repeats:NO];
 }
 
 -(void)haltPart2{
+    MessageView.hidden=YES;
+    isAlertFinished=YES;
     if (isAlertFinished == YES) {
         [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(guessMSG) userInfo:nil repeats:NO];
     }else{
@@ -1443,21 +1455,29 @@
 }
 
 -(void)finalHalt{
-    isAlertFinished = NO;
+    //isAlertFinished = NO;
     
-    UIAlertView * Alert = [[UIAlertView alloc] initWithTitle:@"RECAL"
-                                                     message:@"The final recall will start \nwhen this message dissapears"
-                                                    delegate:self
-                                           cancelButtonTitle:nil //@"Cancel"
-                                           otherButtonTitles:@"START NOW", nil];
-    Alert.alertViewStyle = UIAlertViewStyleDefault;
+    //UIAlertView * Alert = [[UIAlertView alloc] initWithTitle:@"RECAL"
+    //                                                 message:@"The recall will start as soon as\nthis message dissapears..."
+    //                                               delegate:self
+    //                                       cancelButtonTitle:nil //@"Cancel"
+                           //otherButtonTitles:@"RECALL NOW", nil];
+                           //otherButtonTitles:nil, nil];
+                           //Alert.alertViewStyle = UIAlertViewStyleDefault;
     
-    [Alert show];
-    [self haltPart2];
+    //[Alert show];
+    //[self haltPart2];
+    MessageView.hidden=NO;
+    MessageView.alpha=0.70;
+    [MessageView setImage: card[3].image];
+
+    [NSTimer scheduledTimerWithTimeInterval: 1.2 target:self selector:@selector(finalHaltPart2) userInfo:nil repeats:NO];
     
 }
 
 -(void)finalHaltPart2{
+    MessageView.hidden=YES;
+    isAlertFinished=YES;
     if (isAlertFinished == YES) {
         [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(finalGuessMSG) userInfo:nil repeats:NO];
     }else{
@@ -1507,17 +1527,35 @@
     
     //[UIView animateKeyframesWithDuration:1 delay:1 options:1 animations:^(){MessageView.alpha = 1.0;} completion:nil];
     [UIView animateWithDuration:1.2
+              delay:0  /* do not add a delay because we will use performSelector. */
+            options:UIViewAnimationOptionCurveEaseInOut
+         animations:^ {
+        MessageView.alpha = 1.0; //fade in
+                      }
+        completion:^(BOOL finished) {[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(animateMessageViewOUT) userInfo:nil repeats:NO];
+                      }];
+}
+
+-(void)animateMessageViewIN2:(float)dur{
+    //ease in
+    MessageView.alpha = 0.0;
+    MessageView.hidden=NO;
+    [[MessageView superview] bringSubviewToFront:MessageView];
+
+    //[UIView animateKeyframesWithDuration:1 delay:1 options:1 animations:^(){MessageView.alpha = 1.0;} completion:nil];
+    [UIView animateWithDuration:dur
                           delay:0  /* do not add a delay because we will use performSelector. */
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^ {
                          MessageView.alpha = 1.0; //fade in
                      }
-                     completion:^(BOOL finished) {[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(animateMessageViewOUT) userInfo:nil repeats:NO];
-                    }];
+                     completion:^(BOOL finished) {[NSTimer scheduledTimerWithTimeInterval:dur target:self selector:@selector(animateMessageViewOUT) userInfo:nil repeats:NO];
+                     }];
 }
 
 -(void)animateMessageViewOUT{
     //ease out
+    MessageView.hidden=NO;
     [[MessageView superview] bringSubviewToFront:MessageView];
 
     [UIView animateWithDuration:1.0
@@ -1529,6 +1567,27 @@
                          }else{
                              MessageView.alpha = 0.0;
                          }*/
+                         MessageView.alpha = 0.0; //fade out
+                     }
+                     completion:^(BOOL finished) {
+                     }];
+    //nothing else to do, the image was shown
+}
+
+-(void)animateMessageViewOUT2:(float)dur{
+    //ease out
+    MessageView.hidden=NO;
+    [[MessageView superview] bringSubviewToFront:MessageView];
+
+    [UIView animateWithDuration:dur
+                          delay:dur
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^ {
+                         /*if (isCalculating) { //do not fade out, keep display on
+                          MessageView.alpha = 1.0;
+                          }else{
+                          MessageView.alpha = 0.0;
+                          }*/
                          MessageView.alpha = 0.0; //fade out
                      }
                      completion:^(BOOL finished) {
@@ -1635,7 +1694,6 @@
 }
 
 -(void)selectTabBarResults{
-    MessageView.hidden = YES;
     //jump to the results view
         int controllerIndex = 2;
 
@@ -1657,7 +1715,7 @@
 }
 
 -(void)selectTabBarSettings{
-    MessageView.hidden = YES;
+
     //jump to the setting view
     int controllerIndex = 0;
 
@@ -1677,6 +1735,7 @@
                     }];
     //settings VC jump
 }
+
 -(void)blankMSG3 {
     if (!isAborted) {
     [self buttonsDisable];

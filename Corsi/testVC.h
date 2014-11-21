@@ -122,5 +122,10 @@
 -(void)finalHalt;
 -(void)haltPart2;
 -(void)finalHaltPart2;
+-(void)animateMessageViewOUT2:(float)dur;
+-(void)animateMessageViewIN2:(float)dur;
+-(void)animateMessageView;
+-(void)animateMessageViewOUT;
+-(void)animateMessageViewIN;
 
 @end

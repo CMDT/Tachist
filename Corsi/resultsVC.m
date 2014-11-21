@@ -62,6 +62,7 @@
     tableView.hidden=YES;
     emailBTN.hidden=YES;
     resultsTxtView.hidden=NO;
+    self.tabBarController.tabBar.hidden = NO;
 
     mySingleton *singleton = [mySingleton sharedSingleton];
 

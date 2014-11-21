@@ -37,9 +37,9 @@
     // Do any additional setup after loading the view.
 
     //delegates for text filed entries
-    blockStartDelayTXT.delegate    = self;
-    blockShowTimeTXT.delegate     = self;
-    blockWaitTimeTXT.delegate     = self;
+    blockStartDelayTXT.delegate = self;
+    blockShowTimeTXT.delegate   = self;
+    blockWaitTimeTXT.delegate   = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -110,10 +110,11 @@ blockWaitTimeTXT.text=[NSString stringWithFormat:@"%0.0f", (float)temp];
 -(void)viewDidAppear:(BOOL)animated{
     mySingleton *singleton = [mySingleton sharedSingleton];
     
-    timingMessage = @"Start is the time delay before the fist block shows.  Block is the timing gap between show times, and Show is the time a block displays as a stimulus.";
+        timingMessage = @"'Start' is the time delay before the first block shows.\n'Block' is the timing gap between show times, and\n'Show' is the time a block displays as a stimulus.";
     timeMessageTXT.backgroundColor = [UIColor whiteColor];
-    
+
     timeMessageTXT.text = timingMessage;
+    timeMessageTXT.textAlignment = NSTextAlignmentCenter;
 
     startTime = singleton.startTime;
     waitTime = singleton.waitTime;
@@ -124,8 +125,8 @@ blockWaitTimeTXT.text=[NSString stringWithFormat:@"%0.0f", (float)temp];
     blockShowTimeSLD.value = showTime;
     
     blockStartDelayTXT.text=[NSString stringWithFormat:@"%0.0f", (float)blockStartDelaySLD.value];
-    blockWaitTimeTXT.text=[NSString stringWithFormat:@"%0.0f", (float)blockWaitTimeSLD.value];
-    blockShowTimeTXT.text=[NSString stringWithFormat:@"%0.0f", (float)blockShowTimeSLD.value];
+    blockWaitTimeTXT.text=[NSString stringWithFormat:  @"%0.0f", (float)blockWaitTimeSLD.value];
+    blockShowTimeTXT.text=[NSString stringWithFormat:  @"%0.0f", (float)blockShowTimeSLD.value];
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -166,6 +167,9 @@ blockWaitTimeTXT.text=[NSString stringWithFormat:@"%0.0f", (float)temp];
 
 -(void)checkTimingValuesAreValid{
     //check each entry and return the default if not
+
+    mySingleton *singleton = [mySingleton sharedSingleton];
+
     int startTemp = [blockStartDelayTXT.text intValue];
     int waitTemp = [blockWaitTimeTXT.text intValue];
     int showTemp = [blockShowTimeTXT.text intValue];
@@ -212,7 +216,11 @@ blockWaitTimeTXT.text=[NSString stringWithFormat:@"%0.0f", (float)temp];
     blockStartDelayTXT.text  = [NSString stringWithFormat:@"%d", startTemp];
     blockWaitTimeTXT.text    = [NSString stringWithFormat:@"%d", waitTemp];
     blockShowTimeTXT.text    = [NSString stringWithFormat:@"%d", showTemp];
-    
+
+    singleton.startTime = [blockStartDelayTXT.text intValue];
+    singleton.waitTime  = [blockWaitTimeTXT.text intValue];
+    singleton.showTime  = [blockShowTimeTXT.text intValue];
+
     if (flag==YES) {
         entryIsValid = YES;
     }else{
@@ -235,25 +243,25 @@ blockWaitTimeTXT.text=[NSString stringWithFormat:@"%0.0f", (float)temp];
     
     if (entryIsValid) {
 
-        timingMessage = @"'Start' is the time delay before the first block shows.  'Block' is the timing gap between show times,\nand 'Show' is the time a block displays as a stimulus.";
+        timingMessage = @"'Start' is the time delay before the first block shows.\n'Block' is the timing gap between show times, and\n'Show' is the time a block displays as a stimulus.";
         timeMessageTXT.backgroundColor = [UIColor whiteColor];
-        
         timeMessageTXT.text = timingMessage;
+        timeMessageTXT.textAlignment = NSTextAlignmentCenter;
     }else{
-        
-    
         blockStartDelaySLD.value = [blockStartDelayTXT.text intValue];
         blockWaitTimeSLD.value   = [blockWaitTimeTXT.text intValue];
         blockShowTimeSLD.value   = [blockShowTimeTXT.text intValue];
 
         singleton.startTime = [blockStartDelayTXT.text intValue];
-        singleton.waitTime  =  [blockWaitTimeTXT.text intValue];
+        singleton.waitTime  = [blockWaitTimeTXT.text intValue];
         singleton.showTime  = [blockShowTimeTXT.text intValue];
     
-    timingMessage = @"The value in cyan has exceeded\nthe limits of between 0 to 10000.\n\n";
-    timeMessageTXT.backgroundColor = [UIColor colorWithRed:255.0/255 green:220.0/255 blue:220.0/255 alpha:0.75];
+    timingMessage = @"The value in cyan has exceeded\nthe limits of between 0 to 10000,\nand has been adjusted.";
+
+    timeMessageTXT.backgroundColor = [UIColor colorWithRed:190.0/255 green:255.0/255 blue:255.0/255 alpha:0.75];
     
     timeMessageTXT.text = timingMessage;
+        timeMessageTXT.textAlignment = NSTextAlignmentCenter;
     }
 }
 

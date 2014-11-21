@@ -46,14 +46,12 @@ blockRotateSWT,
 forwardTestSWT,
 animalsSWT,
 soundsSWT,
-
 soundsSEG;
 
 -(void)viewDidAppear:(BOOL)animated{
     mySingleton *singleton = [mySingleton sharedSingleton];
     soundsSEG.selectedSegmentIndex = singleton.segIndex;
 
-    
     //switches set
     if(singleton.blockRotation){
         blockRotateSWT.on=YES;
@@ -82,12 +80,6 @@ soundsSEG;
     }else{
         soundsSWT.on=NO;
         soundsSEG.hidden=YES;
-    }
-    if(singleton.segIndex){
-        soundsSEG.hidden=NO;
-        soundsSEG.selectedSegmentIndex=singleton.segIndex;
-    }else{
-        //nothing
     }
 
     //blocks set
@@ -296,11 +288,11 @@ soundsSEG;
     mySingleton *singleton = [mySingleton sharedSingleton];
     BOOL forwardTestDirection;
     if(forwardTestSWT.isOn){
-        forwardTestDirection=YES;
+        forwardTestDirection = YES;
     }else{
-        forwardTestDirection=NO;
+        forwardTestDirection = NO;
     }
-    singleton.forwardTestDirection=forwardTestDirection;
+    singleton.forwardTestDirection = forwardTestDirection;
 }
 
 - (IBAction)onScreenInfoSWT:(id)sender{
@@ -327,7 +319,7 @@ soundsSEG;
         } else {
         rotate = NO;
         }
-    singleton.blockRotation=rotate;
+    singleton.blockRotation = rotate;
 }
 
 - (IBAction)animalsSWT:(id)sender{
@@ -340,7 +332,7 @@ soundsSEG;
     } else {
         animals = NO;
     }
-    singleton.animals=animals;
+    singleton.animals = animals;
 }
 
 - (IBAction)soundsSWT:(id)sender{
@@ -355,6 +347,6 @@ soundsSEG;
         sounds = NO;
         soundsSEG.hidden=YES;
     }
-    singleton.sounds=sounds;
+    singleton.sounds = sounds;
 }
 @end
