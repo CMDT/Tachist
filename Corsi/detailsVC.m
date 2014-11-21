@@ -104,32 +104,32 @@
 
     if(textField==self->emailTXT){
         emailTXT.backgroundColor = [UIColor greenColor];
-        //textField.frame = CGRectMake(textField.frame.origin.x, (textField.frame.origin.y), textField.frame.size.width, textField.frame.size.height);
-        //int oft=textField.frame.origin.y-190;
-        //[self keyBoardAppeared:oft];
+        textField.frame = CGRectMake(textField.frame.origin.x, (textField.frame.origin.y), textField.frame.size.width, textField.frame.size.height);
+        int oft=textField.frame.origin.y-215;
+        [self keyBoardAppeared:oft];
     }
     if(textField==self->participantTXT){
         participantTXT.backgroundColor = [UIColor greenColor];
-        //textField.frame = CGRectMake(textField.frame.origin.x, (textField.frame.origin.y), textField.frame.size.width, textField.frame.size.height);
-        //int oft=textField.frame.origin.y-190;
-        //[self keyBoardAppeared:oft];
+        textField.frame = CGRectMake(textField.frame.origin.x, (textField.frame.origin.y), textField.frame.size.width, textField.frame.size.height);
+        int oft=textField.frame.origin.y-215;
+        [self keyBoardAppeared:oft];
     }
     if(textField==self->testerNameTXT){
         testerNameTXT.backgroundColor = [UIColor greenColor];
-        //textField.frame = CGRectMake(textField.frame.origin.x, (textField.frame.origin.y), textField.frame.size.width, textField.frame.size.height);
-        //int oft=textField.frame.origin.y-190;
-        //[self keyBoardAppeared:oft];
+        textField.frame = CGRectMake(textField.frame.origin.x, (textField.frame.origin.y), textField.frame.size.width, textField.frame.size.height);
+        int oft=textField.frame.origin.y-215;
+        [self keyBoardAppeared:oft];
     }
 }
 
 -(void)textFieldDidEndEditing:(UITextField *) textField {
     mySingleton *singleton = [mySingleton sharedSingleton];
+    
     //move the screen back to the original place
     [self keyBoardDisappeared:0];
     participantTXT.backgroundColor  = [UIColor whiteColor];
     testerNameTXT.backgroundColor   = [UIColor whiteColor];
     emailTXT.backgroundColor        = [UIColor whiteColor];
-
 
     singleton.subjectName   = participantTXT.text;
     singleton.testerName    = testerNameTXT.text;
@@ -137,12 +137,11 @@
 }
 
 -(void) keyBoardAppeared :(int)oft
-//not needed here
 {
     //move screen up or down as needed to avoid text field entry
     CGRect frame = self.view.frame;
     //oft= the y of the text field?  make some code to find it
-    [UIView animateWithDuration:1.0
+    [UIView animateWithDuration:0.5
                           delay:0.5
                         options: UIViewAnimationOptionCurveEaseOut
                      animations:^{
@@ -154,12 +153,11 @@
 }
 
 -(void) keyBoardDisappeared :(int)oft
-//not needed here
 {
     //move the screen back to original position
     CGRect frame = self.view.frame;
     //oft= the y of the text field?  make some code to find it
-    [UIView animateWithDuration:1.0
+    [UIView animateWithDuration:0.5
                           delay:0.5
                         options: UIViewAnimationOptionCurveEaseOut
                      animations:^{

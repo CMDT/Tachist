@@ -61,6 +61,7 @@
 		E12DE08D1A03B09100172B36 /* BEEPJAZZ.caf in Resources */ = {isa = PBXBuildFile; fileRef = E12DE0871A03B09100172B36 /* BEEPJAZZ.caf */; };
 		E12DE08E1A03B09100172B36 /* BEEPPURE.caf in Resources */ = {isa = PBXBuildFile; fileRef = E12DE0881A03B09100172B36 /* BEEPPURE.caf */; };
 		E12DE08F1A03B09100172B36 /* KLICK.caf in Resources */ = {isa = PBXBuildFile; fileRef = E12DE0891A03B09100172B36 /* KLICK.caf */; };
+		E168CF841A1F3D5A00BA650E /* redblocks800.png in Resources */ = {isa = PBXBuildFile; fileRef = E168CF831A1F3D5A00BA650E /* redblocks800.png */; };
 		E17487CE1A0BC7B80053C058 /* corsi_calc3.png in Resources */ = {isa = PBXBuildFile; fileRef = E17487CA1A0BC7B80053C058 /* corsi_calc3.png */; };
 		E17487CF1A0BC7B80053C058 /* corsi_finish3.png in Resources */ = {isa = PBXBuildFile; fileRef = E17487CB1A0BC7B80053C058 /* corsi_finish3.png */; };
 		E17487D01A0BC7B80053C058 /* corsi_start3.png in Resources */ = {isa = PBXBuildFile; fileRef = E17487CC1A0BC7B80053C058 /* corsi_start3.png */; };
@@ -184,6 +185,7 @@
 		E12DE0871A03B09100172B36 /* BEEPJAZZ.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BEEPJAZZ.caf; sourceTree = "<group>"; };
 		E12DE0881A03B09100172B36 /* BEEPPURE.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BEEPPURE.caf; sourceTree = "<group>"; };
 		E12DE0891A03B09100172B36 /* KLICK.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = KLICK.caf; sourceTree = "<group>"; };
+		E168CF831A1F3D5A00BA650E /* redblocks800.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redblocks800.png; sourceTree = "<group>"; };
 		E17487CA1A0BC7B80053C058 /* corsi_calc3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = corsi_calc3.png; sourceTree = "<group>"; };
 		E17487CB1A0BC7B80053C058 /* corsi_finish3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = corsi_finish3.png; sourceTree = "<group>"; };
 		E17487CC1A0BC7B80053C058 /* corsi_start3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = corsi_start3.png; sourceTree = "<group>"; };
@@ -338,6 +340,7 @@
 		E10D016F19B6024F00D9E5F8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E168CF831A1F3D5A00BA650E /* redblocks800.png */,
 				E1BB538A1A166F83004A5527 /* calculating.png */,
 				E1BB538B1A166F83004A5527 /* calculating@2x.png */,
 				E1BB538C1A166F83004A5527 /* calculating@3x.png */,
@@ -578,6 +581,7 @@
 				E1BB53A31A166F83004A5527 /* mresults@2x.png in Resources */,
 				E1B29EC619B7532E005B9C84 /* cyan72.png in Resources */,
 				E1B29EC419B7532E005B9C84 /* checkbox.png in Resources */,
+				E168CF841A1F3D5A00BA650E /* redblocks800.png in Resources */,
 				9113B0051A02EDA5000088D6 /* results96blu@3x.png in Resources */,
 				E18485E51A124127002CFFD9 /* corsi_cubes.png in Resources */,
 				E1BB53A61A166F83004A5527 /* started@2x.png in Resources */,

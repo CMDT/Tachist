@@ -218,15 +218,14 @@
     //initialise images for messages on messageview
     card[0] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"started.png"]];    //start
     card[1] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"finished.png"]];   //finish
-    card[2] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-stage-start.png"]];
-    card[3] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-stage-end.png"]];
+    //card[2] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-stage-start.png"]];
+    //card[3] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-stage-end.png"]];
     card[4] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"calculating.png"]];     //calculations
-    card[5] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-touch-blocks2.png"]];
-    //card[6] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"mresults.png"]];  //results
-    card[6] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_cubes.png"]];  //results
+    //card[5] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-touch-blocks2.png"]];
+    card[6] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"redblocks800.png"]];  //results
     card[7] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"cancelled.png"]]; //cancel message
-    card[8] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_blank.png"]];     //just a blank card
-    card[9] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_cubes.png"]];     //picture of some coloured blocks
+    //card[8] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_blank.png"]];     //just a blank card
+    //card[9] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"redblocks800.png"]];     //picture of some coloured blocks
 }
 
 -(void)startStop{
@@ -503,8 +502,8 @@
                                            otherButtonTitles:@"Continue", nil]; 
      alert.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;*/
     //one line alert
-    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"CORSI TEST START"
-                                                     message:@"Enter a Participant Code For This Test\nor to use the pervious one, \ntouch 'continue'"
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@""//@"CORSI TEST START"
+                                                     message:@"Enter a Participant Code For This Test, or to use the pervious one, \ntouch 'continue'"
                                                     delegate:self
                                            cancelButtonTitle:nil //@"Cancel"
                                            otherButtonTitles:@"Continue", nil];
@@ -516,7 +515,10 @@
 
     UITextField * alertTextField2 = [alert textFieldAtIndex:0];//used to be 1 for dual entry, 0 for single
     alertTextField2.secureTextEntry = NO;
+    alertTextField2.textAlignment = NSTextAlignmentCenter;
     alertTextField2.keyboardType = UIKeyboardTypeDefault;
+    alertTextField2.textAlignment =NSTextAlignmentNatural;
+    [alertTextField2 setFont:[UIFont fontWithName:@"Helvetica-Bold" size:(28.0)]];
     //if blank, add temp name, else add the current one
     if ([singleton.subjectName isEqualToString:@""]) {
         alertTextField2.placeholder = @"Participant Code";
@@ -528,6 +530,13 @@
 
 -(IBAction)startTest:sender{
     isAlertFinished=NO;
+    
+    MessageTextView.hidden=YES;
+    MessageView.hidden=YES;
+    startBTN.hidden=YES;
+    statusMessageLBL.hidden=YES;
+    
+    [self hide_blocks];
 
     [self participantEntry];
     
@@ -539,7 +548,8 @@
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     if (isAlertFinished) {
-
+        MessageTextView.hidden=YES;
+        [self hideInfo];
         [self playMyEffect];//beep effect if on
 
     //blank out the tab bar during the test, no end until done now
@@ -552,8 +562,6 @@
     startBTN.hidden   = YES;
     headingLBL.hidden = YES;
 
-    [self setColours];
-
     start       = singleton.start;
     finish      = singleton.finish;
     
@@ -562,17 +570,10 @@
     waitTime    =[self delayWait];
     messageTime =[self delayMessage];
     
-    [self hideInfo];
-    
-    MessageTextView.hidden=YES;
-    
-    //start the timer
-    //[self.startDate = [NSDate date];
-        [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(boxInit) userInfo:nil repeats:NO];
-
-    //MessageView.hidden=NO;
+        //start test, the alert was dismissed
+        [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(boxInit) userInfo:nil repeats:NO];
     } else {
-        //participant alert not yet finished, loop
+        //participant alert not yet finished, loop back
         [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(startTestPart2) userInfo:nil repeats:NO];
     }
 }
@@ -708,28 +709,29 @@
 
 -(IBAction)stopTestNow:(id)sender{
     stopTestNowBTN.hidden=YES;
+    MessageView.hidden = NO;
+    [self hideInfo];
+    [self hide_blocks];
+    self.tabBarController.tabBar.hidden = NO;
     
-    //Calculate stats and outputs
+    //Cancel, return to settings after message
     [self buttonsDisable];
     
     isFinished         = YES;
-    MessageView.hidden = NO;
     isCalculating      = YES;
     isAborted          = YES;
-    [self hide_blocks];
-    [MessageView setImage: card[7].image];
-    [self animateMessageViewIN];
-    [self hideInfo];
-    self.tabBarController.tabBar.hidden = NO;
     
+    [MessageView setImage: card[7].image];//cancelled image
+    [self animateMessageViewIN];
+
 //halt here, user selects new menu option to proceed
-[MessageView setImage: card[7].image]; //hold message if not faded out (set animate out to hold for this one if needed
-    [NSTimer scheduledTimerWithTimeInterval:4 target:self selector:@selector(abortWasPressed) userInfo:nil repeats:NO];
+    //[MessageView setImage: card[7].image]; //hold message if not faded out (set animate out to hold for this one if needed
+    [NSTimer scheduledTimerWithTimeInterval:3.5 target:self selector:@selector(abortWasPressed) userInfo:nil repeats:NO];
 }
 
 -(void)abortWasPressed{
     //the end...
-        [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(selectTabBarSettings) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(selectTabBarSettings) userInfo:nil repeats:NO];
 }
 
 //
@@ -840,23 +842,23 @@
 
 -(void)boxInit {
     [self buttonsDisable];
+    MessageTextView.hidden=YES;
+    startBTN.hidden=YES;
     stopTestNowBTN.hidden=NO;
+    
     //NSLog(@"box init");
     if (!isAborted) {
         if (infoShow) {
-            statusMessageLBL.text = @"";
+            statusMessageLBL.text = @"The Test is Starting now...";
         }else{
             statusMessageLBL.text = @"";
         }
-    
-    [self display_blocks];
+    //[MessageView setImage: card[0].image];
+    //[self display_blocks];
     
     [self hideInfo];
     [self allButtonsBackgroundReset];// background colour reset to std
 
-    MessageTextView.hidden=YES;
-    MessageView.hidden=YES;
-    startBTN.hidden=YES;
     isFinished=NO;
     isCalculating=NO;
 
@@ -880,52 +882,50 @@
                 reactionTime[cnt][dnt]  = 0.00f;
             }
         }
-        
-    [MessageView setImage: card[0].image];
-    [NSTimer scheduledTimerWithTimeInterval:(messageTime*1.5) target:self selector:@selector(startTestMSG) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(startTestMSG) userInfo:nil repeats:NO];
     }
 }
 
 -(void)stageChecks {
     if (!isAborted) {
-    if (isFinished) { //definitely ended, to catch second round of checks
-        [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(endTestMSG) userInfo:nil repeats:NO];
-    }
+        if (isFinished) { //definitely ended, to catch second round of checks
+            [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(endTestMSG) userInfo:nil repeats:NO];
+        }
     //check for stage and test end
-    if ((xcounter == finish) && (ncounter >= xcounter)) {
+        if ((xcounter == finish) && (ncounter >= xcounter)) {
         //test is ended
         //update all counters
-    ncounter = ncounter+1;   //block number 3-9 range
+            ncounter = ncounter+1;   //block number 3-9 range
     
-    if(ncounter>=xcounter+1){ //starts at 3 for 3 blocks, end stage, then new set, 3 for 4 blocks etc.
-        xcounter=xcounter+1; //stage counter 3-9 range
-        ncounter=0;
-    }
-        isFinished=YES;
-        [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(finalStageEndMSG) userInfo:nil repeats:NO];
-    }else{
-        if(ncounter>=xcounter){
-            //not finished, but ended a stage
-            //update all counters
-            ncounter = ncounter+1;   //block number 3-9 range
-
             if(ncounter>=xcounter+1){ //starts at 3 for 3 blocks, end stage, then new set, 3 for 4 blocks etc.
                 xcounter=xcounter+1; //stage counter 3-9 range
                 ncounter=0;
             }
-            [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(stageEndMSG) userInfo:nil repeats:NO];
+            isFinished=YES;
+            [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(finalStageEndMSG) userInfo:nil repeats:NO];
         }else{
-            //not ended, carry on
-            //update all counters
-            ncounter = ncounter+1;   //block number 3-9 range
+            if(ncounter>=xcounter){
+                //not finished, but ended a stage
+                //update all counters
+                ncounter = ncounter+1;   //block number 3-9 range
 
-            if(ncounter>=xcounter+1){ //starts at 3 for 3 blocks, end stage, then new set, 3 for 4 blocks etc.
-                xcounter=xcounter+1; //stage counter 3-9 range
-                ncounter=0;
+                if(ncounter>=xcounter+1){ //starts at 3 for 3 blocks, end stage, then new set, 3 for 4 blocks etc.
+                    xcounter=xcounter+1; //stage counter 3-9 range
+                    ncounter=0;
+                }
+                [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(stageEndMSG) userInfo:nil repeats:NO];
+            }else{
+                //not ended, carry on
+                //update all counters
+                ncounter = ncounter+1;   //block number 3-9 range
+
+                if(ncounter>=xcounter+1){ //starts at 3 for 3 blocks, end stage, then new set, 3 for 4 blocks etc.
+                    xcounter=xcounter+1; //stage counter 3-9 range
+                    ncounter=0;
+                }
+                [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(box1) userInfo:nil repeats:NO];
             }
-            [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(box1) userInfo:nil repeats:NO];
         }
-    }
     }else{
         //aborted end
         [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(box1) userInfo:nil repeats:NO];
@@ -1343,7 +1343,7 @@
 -(void)getFinalGuesses {
     if (!isAborted) {
         [self buttonsEnable];
-        blkNoLBL.text = [NSString stringWithFormat:@"%i",0];
+        blkNoLBL.text = [NSString stringWithFormat:@"%i", 0];
         //turns on the buttons, collects the xcounter guesses, forms a string, saves it and carries on with next stage
         if (!reverseTest) {
             if (infoShow) {
@@ -1484,25 +1484,14 @@
         //Start of Test Message
         [self buttonsDisable];
         //NSLog(@"Start Test");
-        [self showInfo];
-        if (!reverseTest) {
-            if (infoShow) {
-                statusMessageLBL.text = @"Observe";
-            }else{
-                statusMessageLBL.text = @"Observe";
-            }
-        }else{
-            if (infoShow) {
-                statusMessageLBL.text = @"Observe";
-            }else{
-                statusMessageLBL.text = @"Observe";
-            }
-        }
-        [MessageView setImage: card[0].image];
         MessageView.hidden=YES;
+        [MessageView setImage: card[0].image];
+        
         [self animateMessageView];
    
-        [NSTimer scheduledTimerWithTimeInterval: 5 target:self selector:@selector(blankMSG2) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval: 5.5 target:self selector:@selector(blankMSG2) userInfo:nil repeats:NO];
+        
+        [self setColours];
     }
 }
 
@@ -1523,7 +1512,7 @@
                      animations:^ {
                          MessageView.alpha = 1.0; //fade in
                      }
-                     completion:^(BOOL finished) {[NSTimer scheduledTimerWithTimeInterval:2.2 target:self selector:@selector(animateMessageViewOUT) userInfo:nil repeats:NO];
+                     completion:^(BOOL finished) {[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(animateMessageViewOUT) userInfo:nil repeats:NO];
                     }];
 }
 
@@ -1531,8 +1520,8 @@
     //ease out
     [[MessageView superview] bringSubviewToFront:MessageView];
 
-    [UIView animateWithDuration:1.2
-                          delay:1
+    [UIView animateWithDuration:1.0
+                          delay:1.2
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^ {
                          /*if (isCalculating) { //do not fade out, keep display on
@@ -1563,8 +1552,8 @@
         [self hide_blocks];
         [MessageView setImage: card[1].image];
         MessageView.hidden=NO;
-        [self animateMessageView];
-        [NSTimer scheduledTimerWithTimeInterval:5.5 target:self selector:@selector(calculatingMSG) userInfo:nil repeats:NO];
+        [self animateMessageViewIN];
+        [NSTimer scheduledTimerWithTimeInterval:4 target:self selector:@selector(calculatingMSG) userInfo:nil repeats:NO];
     }
 }
 
@@ -1583,9 +1572,9 @@
         [self hideInfo];
         [MessageView setImage: card[4].image];
         MessageView.hidden=NO;
-        [self animateMessageView];
+        [self animateMessageViewIN];
 
-        [NSTimer scheduledTimerWithTimeInterval:5.5 target:self selector:@selector(calculations) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(calculations) userInfo:nil repeats:NO];
     }
 }
 
@@ -1603,6 +1592,20 @@
         [self buttonsDisable];
         //NSLog(@"(blankmsg2)");
         [self display_blocks];
+        [self showInfo];
+        if (!reverseTest) {
+            if (infoShow) {
+                statusMessageLBL.text = @"Observe";
+            }else{
+                statusMessageLBL.text = @"Observe";
+            }
+        }else{
+            if (infoShow) {
+                statusMessageLBL.text = @"Observe";
+            }else{
+                statusMessageLBL.text = @"Observe";
+            }
+        }
         MessageView.hidden=YES;//maybe messagetime--v
         [NSTimer scheduledTimerWithTimeInterval:startTime target:self selector:@selector(box1) userInfo:nil repeats:NO];
     }
@@ -1619,15 +1622,15 @@
     
         self.tabBarController.tabBar.hidden = NO;
     
-        [self animateMessageView];
-
+        [self animateMessageViewIN];
+        [MessageView setImage: card[6].image];
     //jump to selector ResultsVC
 
-        [NSTimer scheduledTimerWithTimeInterval:3.5 target:self selector:@selector(selectTabBarResults) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(selectTabBarResults) userInfo:nil repeats:NO];
     }else{
         //jump to selector SettingsVC
 
-        [NSTimer scheduledTimerWithTimeInterval:3.5 target:self selector:@selector(selectTabBarSettings) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(selectTabBarSettings) userInfo:nil repeats:NO];
     }
 }
 
@@ -1804,7 +1807,7 @@
 
 
 -(void)calculations{
-    MessageView.hidden = YES;
+    //MessageView.hidden = YES;
     if (!isAborted) {
 
     mySingleton *singleton = [mySingleton sharedSingleton];

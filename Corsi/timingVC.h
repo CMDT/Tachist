@@ -18,6 +18,8 @@
 @property (strong, nonatomic) IBOutlet UITextField *blockWaitTimeTXT;
 @property (strong, nonatomic) IBOutlet UITextField *blockShowTimeTXT;
 
+@property (strong, nonatomic) IBOutlet UITextView *timeMessageTXT;
+
 - (IBAction)blockStartDelaySLD:(UISlider *)sender;
 - (IBAction)blockWaitTimeSLD  :(UISlider *)sender;
 - (IBAction)blockShowTimeSLD  :(UISlider *)sender;

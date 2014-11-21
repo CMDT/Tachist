@@ -14,7 +14,12 @@
     int showTime;
     int waitTime;
     int startTime;
+    
+    BOOL entryIsValid;
+    
+    NSString * timingMessage;
 }
+
 @end
 
 @implementation timingVC
@@ -24,7 +29,8 @@
             blockStartDelayTXT,
             blockWaitTimeTXT,
             blockStartDelaySLD,
-            blockWaitTimeSLD;
+            blockWaitTimeSLD,
+            timeMessageTXT;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -103,6 +109,11 @@ blockWaitTimeTXT.text=[NSString stringWithFormat:@"%0.0f", (float)temp];
 
 -(void)viewDidAppear:(BOOL)animated{
     mySingleton *singleton = [mySingleton sharedSingleton];
+    
+    timingMessage = @"Start is the time delay before the fist block shows.  Block is the timing gap between show times, and Show is the time a block displays as a stimulus.";
+    timeMessageTXT.backgroundColor = [UIColor whiteColor];
+    
+    timeMessageTXT.text = timingMessage;
 
     startTime = singleton.startTime;
     waitTime = singleton.waitTime;
@@ -136,38 +147,114 @@ blockWaitTimeTXT.text=[NSString stringWithFormat:@"%0.0f", (float)temp];
     if(textField==self->blockStartDelayTXT){
         blockStartDelayTXT.backgroundColor = [UIColor greenColor];
         textField.frame = CGRectMake(textField.frame.origin.x, (textField.frame.origin.y), textField.frame.size.width, textField.frame.size.height);
-        int oft=textField.frame.origin.y-190;
+        int oft=textField.frame.origin.y-195;
         [self keyBoardAppeared:oft];
     }
     if(textField==self->blockWaitTimeTXT){
         blockWaitTimeTXT.backgroundColor = [UIColor greenColor];
         textField.frame = CGRectMake(textField.frame.origin.x, (textField.frame.origin.y), textField.frame.size.width, textField.frame.size.height);
-        int oft=textField.frame.origin.y-190;
+        int oft=textField.frame.origin.y-195;
         [self keyBoardAppeared:oft];
     }
     if(textField==self->blockShowTimeTXT){
         blockShowTimeTXT.backgroundColor = [UIColor greenColor];
         textField.frame = CGRectMake(textField.frame.origin.x, (textField.frame.origin.y), textField.frame.size.width, textField.frame.size.height);
-        int oft=textField.frame.origin.y-190;
+        int oft=textField.frame.origin.y-195;
         [self keyBoardAppeared:oft];
+    }
+}
+
+-(void)checkTimingValuesAreValid{
+    //check each entry and return the default if not
+    int startTemp = [blockStartDelayTXT.text intValue];
+    int waitTemp = [blockWaitTimeTXT.text intValue];
+    int showTemp = [blockShowTimeTXT.text intValue];
+    
+    bool flag=YES;
+    entryIsValid = YES;
+    
+    if (startTemp<0) {
+        startTemp=0;
+        flag=NO;
+        blockStartDelayTXT.backgroundColor  = [UIColor cyanColor];
+    }
+    if (startTemp>10000) {
+        startTemp=10000;
+        flag=NO;
+        blockStartDelayTXT.backgroundColor  = [UIColor cyanColor];
+    }
+    if (waitTemp<0) {
+        waitTemp=0;
+        flag=NO;
+        blockWaitTimeTXT.backgroundColor    = [UIColor cyanColor];
+
+    }
+    if (waitTemp>10000) {
+        waitTemp=10000;
+        flag=NO;
+        blockWaitTimeTXT.backgroundColor    = [UIColor cyanColor];
+
+    }
+    if (showTemp<0) {
+        showTemp=0;
+        flag=NO;
+        blockShowTimeTXT.backgroundColor    = [UIColor cyanColor];
+    }
+    if (showTemp>10000) {
+        showTemp=10000;
+        flag=NO;
+        blockShowTimeTXT.backgroundColor    = [UIColor cyanColor];
+    }
+    blockStartDelaySLD.value = startTemp;
+    blockWaitTimeSLD.value   = waitTemp;
+    blockShowTimeSLD.value   = showTemp;
+    
+    blockStartDelayTXT.text  = [NSString stringWithFormat:@"%d", startTemp];
+    blockWaitTimeTXT.text    = [NSString stringWithFormat:@"%d", waitTemp];
+    blockShowTimeTXT.text    = [NSString stringWithFormat:@"%d", showTemp];
+    
+    if (flag==YES) {
+        entryIsValid = YES;
+    }else{
+        entryIsValid = NO;
     }
 }
 
 -(void)textFieldDidEndEditing:(UITextField *) textField {
     mySingleton *singleton = [mySingleton sharedSingleton];
+    
     //move the screen back to the original place
+    
     [self keyBoardDisappeared:0];
-    blockStartDelayTXT.backgroundColor  = [UIColor whiteColor];
-    blockWaitTimeTXT.backgroundColor    = [UIColor whiteColor];
-    blockShowTimeTXT.backgroundColor    = [UIColor whiteColor];
+   
+        blockStartDelayTXT.backgroundColor  = [UIColor whiteColor];
+        blockWaitTimeTXT.backgroundColor    = [UIColor whiteColor];
+        blockShowTimeTXT.backgroundColor    = [UIColor whiteColor];
+    
+    [self checkTimingValuesAreValid];
+    
+    if (entryIsValid) {
 
-    blockStartDelaySLD.value = [blockStartDelayTXT.text intValue];
-    blockWaitTimeSLD.value = [blockWaitTimeTXT.text intValue];
-    blockShowTimeSLD.value = [blockShowTimeTXT.text intValue];
+        timingMessage = @"'Start' is the time delay before the first block shows.  'Block' is the timing gap between show times,\nand 'Show' is the time a block displays as a stimulus.";
+        timeMessageTXT.backgroundColor = [UIColor whiteColor];
+        
+        timeMessageTXT.text = timingMessage;
+    }else{
+        
+    
+        blockStartDelaySLD.value = [blockStartDelayTXT.text intValue];
+        blockWaitTimeSLD.value   = [blockWaitTimeTXT.text intValue];
+        blockShowTimeSLD.value   = [blockShowTimeTXT.text intValue];
 
-    singleton.startTime = [blockStartDelayTXT.text intValue];
-    singleton.waitTime =  [blockWaitTimeTXT.text intValue];
-    singleton.showTime = [blockShowTimeTXT.text intValue];
+        singleton.startTime = [blockStartDelayTXT.text intValue];
+        singleton.waitTime  =  [blockWaitTimeTXT.text intValue];
+        singleton.showTime  = [blockShowTimeTXT.text intValue];
+    
+    timingMessage = @"The value in cyan has exceeded\nthe limits of between 0 to 10000.\n\n";
+    timeMessageTXT.backgroundColor = [UIColor colorWithRed:255.0/255 green:220.0/255 blue:220.0/255 alpha:0.75];
+    
+    timeMessageTXT.text = timingMessage;
+    }
 }
 
 -(void) keyBoardAppeared :(int)oft
@@ -175,7 +262,7 @@ blockWaitTimeTXT.text=[NSString stringWithFormat:@"%0.0f", (float)temp];
     //move screen up or down as needed to avoid text field entry
     CGRect frame = self.view.frame;
     //oft= the y of the text field?  make some code to find it
-    [UIView animateWithDuration:1.0
+    [UIView animateWithDuration:0.5
                           delay:0.5
                         options: UIViewAnimationOptionCurveEaseOut
                      animations:^{
@@ -191,7 +278,7 @@ blockWaitTimeTXT.text=[NSString stringWithFormat:@"%0.0f", (float)temp];
     //move the screen back to original position
     CGRect frame = self.view.frame;
     //oft= the y of the text field?  make some code to find it
-    [UIView animateWithDuration:1.0
+    [UIView animateWithDuration:0.5
                           delay:0.5
                         options: UIViewAnimationOptionCurveEaseOut
                      animations:^{

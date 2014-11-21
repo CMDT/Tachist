@@ -25,9 +25,9 @@
     //start the main App with a message
 
 
-    sleep(2);// wait while the user looks at the logos....
+    sleep(2);// wait while the user looks at the logos.... and enjoys them...?
 
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Corsi Block Tapping Test" message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Corsi Block Tapping Test" message:@"" delegate:self cancelButtonTitle:@"Continue" otherButtonTitles:nil];
 
     UILabel *txtField = [[UILabel alloc] initWithFrame:CGRectMake(5,5,180,230)];
     
@@ -36,6 +36,7 @@
     txtField.numberOfLines = 9;
     txtField.textColor = [UIColor darkGrayColor];
     txtField.textAlignment = NSTextAlignmentCenter;
+    
     txtField.text = @"To see details on how to \nuse this Application\n and adjust its settings, \nplease read the notes in \nthe 'Information' section \nof the Tab Bar.\n\nThis Application is NOT \nfor clinical use.";
     txtField.backgroundColor = [UIColor clearColor];
     
