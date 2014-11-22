@@ -42,7 +42,7 @@
 			<key>Type</key>
 			<string>PSTextFieldSpecifier</string>
 			<key>Title</key>
-			<string>Subject Name</string>
+			<string>Participant Name</string>
 			<key>IsSecure</key>
 			<false/>
 			<key>AutocapitalizationType</key>
@@ -140,7 +140,7 @@
 			<key>Key</key>
 			<string>blockSize</string>
 			<key>DefaultValue</key>
-			<integer>30</integer>
+			<integer>45</integer>
 			<key>Values</key>
 			<array>
 				<integer>5</integer>
@@ -218,7 +218,7 @@
 		</dict>
 		<dict>
 			<key>DefaultValue</key>
-			<false/>
+			<true/>
 			<key>Key</key>
 			<string>soundsEnabled</string>
 			<key>Type</key>
@@ -240,7 +240,7 @@
 			<key>Key</key>
 			<string>blockColour</string>
 			<key>DefaultValue</key>
-			<string>Orange</string>
+			<string>DarkGrey</string>
 			<key>Values</key>
 			<array>
 				<string>White</string>
@@ -278,7 +278,7 @@
 		</dict>
 		<dict>
 			<key>DefaultValue</key>
-			<string></string>
+			<string>Yellow</string>
 			<key>Titles</key>
 			<array>
 				<string>White</string>
@@ -322,7 +322,7 @@
 		</dict>
 		<dict>
 			<key>DefaultValue</key>
-			<string></string>
+			<string>Black</string>
 			<key>Titles</key>
 			<array>
 				<string>White</string>
@@ -418,7 +418,7 @@
 			<key>Key</key>
 			<string>blockTime</string>
 			<key>DefaultValue</key>
-			<integer>500</integer>
+			<integer>1500</integer>
 			<key>KeyboardType</key>
 			<string>NumberPad</string>
 		</dict>
@@ -430,7 +430,7 @@
 			<key>Key</key>
 			<string>blockShow</string>
 			<key>DefaultValue</key>
-			<integer>300</integer>
+			<integer>1500</integer>
 			<key>KeyboardType</key>
 			<string>NumberPad</string>
 		</dict>
@@ -444,7 +444,7 @@
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
-			<string>Version 1.0.7 (c) MMU 2014 J.A.Howell</string>
+			<string>Version 1.0.0 (c) MMU 2014 J.A.Howell, ESS, Cheshire.</string>
 			<key>Key</key>
 			<string>version</string>
 		</dict>

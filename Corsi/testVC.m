@@ -878,7 +878,7 @@
         
         //reset the timer vars
         totalReactionTime=0.00f;
-        for (int cnt=0; cnt<7; cnt++) {
+        for (int cnt=0; cnt<10; cnt++) {
             shortestReactionTime[cnt]   = 10000.00f;
             longestReactionTime[cnt]    = -10000.00f;
             averageReactionTime[cnt]    = 0.00f;
@@ -2243,12 +2243,12 @@
                 testReactionTime[aa] = abs(testReactionTime[aa] + actualReactionTime[aa][bb]);
                 
                 //min
-                if ((shortestReactionTime[aa] > actualReactionTime[aa][bb]) && (bb>0)) {
+                if ((shortestReactionTime[aa] > abs(actualReactionTime[aa][bb])) && (bb>0)) {
                     shortestReactionTime[aa] = abs(actualReactionTime[aa][bb]);
                 }
      
                 //max
-                if (longestReactionTime[aa] < actualReactionTime[aa][bb]) {
+                if (longestReactionTime[aa] < abs(actualReactionTime[aa][bb])) {
                     longestReactionTime[aa] = abs(actualReactionTime[aa][bb]);
                 }
 
@@ -2279,11 +2279,11 @@
             tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@",%.0f", longestReactionTime[aa]]];
             tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@",%.0f,", averageReactionTime[aa]]];
             
-            if (longestReactionTime[aa] < reactionTime[aa][0]) {
+            if (longestReactionTime[aa] < abs(reactionTime[aa][0])) {
                 longestReactionTime[aa] = abs(reactionTime[aa][0]);
 
             }
-            if (shortestReactionTime[aa] > reactionTime[aa][0]) {
+            if (shortestReactionTime[aa] > abs(reactionTime[aa][0])){
                 shortestReactionTime[aa] = abs(reactionTime[aa][0]);
             }
             tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@",%.0f", testReactionTime[aa]+reactionTime[aa][0]]];
