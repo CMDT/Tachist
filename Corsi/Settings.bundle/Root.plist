@@ -240,7 +240,7 @@
 			<key>Key</key>
 			<string>blockColour</string>
 			<key>DefaultValue</key>
-			<string>DarkGrey</string>
+			<string>Dark Gray</string>
 			<key>Values</key>
 			<array>
 				<string>White</string>
@@ -254,9 +254,9 @@
 				<string>Cyan</string>
 				<string>Brown</string>
 				<string>Black</string>
-				<string>Light Grey</string>
-				<string>Grey</string>
-				<string>Dark Grey</string>
+				<string>Light Gray</string>
+				<string>Gray</string>
+				<string>Dark Gray</string>
 			</array>
 			<key>Titles</key>
 			<array>
@@ -271,9 +271,9 @@
 				<string>Cyan</string>
 				<string>Brown</string>
 				<string>Black</string>
-				<string>Light Grey</string>
-				<string>Grey</string>
-				<string>Dark Grey</string>
+				<string>Light Gray</string>
+				<string>Gray</string>
+				<string>Dark Gray</string>
 			</array>
 		</dict>
 		<dict>
@@ -292,9 +292,9 @@
 				<string>Cyan</string>
 				<string>Brown</string>
 				<string>Black</string>
-				<string>Light Grey</string>
-				<string>Grey</string>
-				<string>Dark Grey</string>
+				<string>Light Gray</string>
+				<string>Gray</string>
+				<string>Dark Gray</string>
 			</array>
 			<key>Key</key>
 			<string>highlightColour</string>
@@ -315,9 +315,9 @@
 				<string>Cyan</string>
 				<string>Brown</string>
 				<string>Black</string>
-				<string>Light Grey</string>
-				<string>Grey</string>
-				<string>Dark Grey</string>
+				<string>Light Gray</string>
+				<string>Gray</string>
+				<string>Dark Gray</string>
 			</array>
 		</dict>
 		<dict>
@@ -336,9 +336,9 @@
 				<string>Cyan</string>
 				<string>Brown</string>
 				<string>Black</string>
-				<string>Light Grey</string>
-				<string>Grey</string>
-				<string>Dark Grey</string>
+				<string>Light Gray</string>
+				<string>Gray</string>
+				<string>Dark Gray</string>
 			</array>
 			<key>Key</key>
 			<string>backgroundColour</string>
@@ -359,9 +359,9 @@
 				<string>Cyan</string>
 				<string>Brown</string>
 				<string>Black</string>
-				<string>Light Grey</string>
-				<string>Grey</string>
-				<string>Dark Grey</string>
+				<string>Light Gray</string>
+				<string>Gray</string>
+				<string>Dark Gray</string>
 			</array>
 		</dict>
 		<dict>

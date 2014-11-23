@@ -1023,8 +1023,7 @@ c0,c1,c10,c11,c12,c13,c2,c3,c4,c5,c6,c7,c8,c9;
 //check colour combinations, and if OK, allow back button
     mySingleton *singleton = [mySingleton sharedSingleton];
     BOOL isColourOK = YES;
-    
-    
+
     if(singleton.currentBackgroundColour == singleton.currentShowColour){
         //cant have background and show the same
         statusMessage.text=@"Canvas and Show Colours must be different";
@@ -1036,6 +1035,7 @@ c0,c1,c10,c11,c12,c13,c2,c3,c4,c5,c6,c7,c8,c9;
         isColourOK = NO;
     }
     //allowing block and background to be same for extra options of scene display with animals or invisible block test
+    
     //if(singleton.currentBlockColour == singleton.currentBackgroundColour){
         //cant have block and backgrond the same
         //statusMessage.text=@"Canvas and Block Colours must be different";

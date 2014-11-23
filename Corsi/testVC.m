@@ -2193,25 +2193,25 @@
         NSLog(@"--------------");
         
         //check timing data is within limits and set max/mins if extended.  Crash possible if very long times get through.
-        Float32 react=0.00f;
+        Float32 react=0.00;
         for (int aa = 0; aa < start; aa++) {
-            for (int bb = 0; bb < aa; bb++) {
+            for (int bb = 0; bb < aa-1; bb++) {
                 //make positive
                 react = abs(reactionTime[aa][bb]);
-                if (react>60000) {//about 60 seconds in ms
-                    react=60001;//one more so I can see if it was set or was a default
+                if (react>60000.00) {//about 60 seconds in ms
+                    react=60001.00;//one more so I can see if it was set or was a default
                 }
                 reactionTime[aa][bb] = react;
             }
         }
         
         //for timing strings
-        Float32 tempCalcR                 = 0.00f;
+        Float32 tempCalcR                 = 0.00;
         Float32 actualReactionTime[12][15];
-        Float32 firstPress                = 0.00f;
+        Float32 firstPress                = 0.00;
         int cc                            = 0;
         
-        totalReactionTime = 0.00f;
+        totalReactionTime = 0.00;
         
         //do the timings output to csv
         tempString=[NSString stringWithFormat:@"Timings Output"];
@@ -2223,11 +2223,11 @@
         for (int aa = start; aa < finish+1; aa++) {
             
             firstPress = abs(reactionTime[aa][0]);
-            testReactionTime[aa] = 0.00f;
+            testReactionTime[aa] = 0.00;
             
             tempString=[NSString stringWithFormat:@"%d,,", aa-2];
             
-            for (int bb = 0; bb < aa; bb++) {
+            for (int bb = 0; bb < aa-1; bb++) {
                 //NSLog(@"reaction time:%d-%d-%f",aa,bb,reactionTime[aa][bb]);
                 //total time
                 if (bb == 0) {
@@ -2318,7 +2318,15 @@
         //total time
         //NSLog(@"total reaction time: %f", totalReactionTime);
         //NSLog(@"* -------------- *");
-        
+
+        //some test code to see data================
+        //for (int rr=0; rr< finish+1;rr++){
+        //    for (int ss=0; ss<rr; ss++) {
+        //        NSLog(@"React %i, %i : %f",rr,ss,reactionTime[rr][ss]);
+        //    }
+        //}
+            //=======================================
+
         tempString=[NSString stringWithFormat:@"Total Reaction Time:, %.0f", totalReactionTime];
         [singleton.resultStringRows addObject:tempString];//csv
         
@@ -2477,7 +2485,7 @@
             break;
         case 8:
             // Item 9
-            myColour = @"Grey";
+            myColour = @"Gray";
             break;
         case 9:
             // Item 10
@@ -2493,14 +2501,14 @@
             break;
         case 12:
             // Item 13
-            myColour = @"Dark Grey";
+            myColour = @"Dark Gray";
             break;
         case 13:
             // Item 14
-            myColour = @"Light Grey";
+            myColour = @"Light Gray";
             break;
         default:
-            myColour = @"Orange";
+            myColour = @"Yellow";
             break;
     }
     return myColour;

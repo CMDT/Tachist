@@ -134,20 +134,20 @@
     NSString * defaultPrefsFile      = [settingsBundlePath stringByAppendingPathComponent:@"Root.plist"];
     NSDictionary * defaultPrefs      = [NSDictionary dictionaryWithContentsOfFile:defaultPrefsFile];
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaultPrefs];
-    NSUserDefaults *defaults        = [NSUserDefaults standardUserDefaults];
+    NSUserDefaults *defaults         = [NSUserDefaults standardUserDefaults];
     [[NSUserDefaults standardUserDefaults] synchronize];
 
-    singleton.testerName              = [defaults  objectForKey:kTester];
-    singleton.subjectName             = [defaults  objectForKey:kSubject];
-    singleton.email                   = [defaults  objectForKey:kEmail];
+    singleton.testerName             = [defaults  objectForKey:kTester];
+    singleton.subjectName            = [defaults  objectForKey:kSubject];
+    singleton.email                  = [defaults  objectForKey:kEmail];
 
     emailLBL.text   = singleton.email;
     testerLBL.text  = singleton.testerName;
     //subjectLBL.text  = singleton.subjectName;//not shown in view controller at present
 
-    [showLBL setBackgroundColor:singleton.currentShowColour];
+    [showLBL setBackgroundColor:   singleton.currentShowColour];
     [block5View setBackgroundColor:singleton.currentShowColour];
-    [blockLBL setBackgroundColor:singleton.currentBlockColour];
+    [blockLBL setBackgroundColor:  singleton.currentBlockColour];
 
     [block1View setBackgroundColor:singleton.currentBlockColour];
     [block2View setBackgroundColor:singleton.currentBlockColour];
@@ -278,8 +278,8 @@
 //email name
     email     = [defaults objectForKey:kEmail];
     if(email  == nil ){
-        email =  @"me@gmail.com";
-        [defaults setObject:@"me@gmail.com" forKey:kEmail];
+        email =  @"me@test.com";
+        [defaults setObject:@"me@test.com" forKey:kEmail];
     }
 //beep Effect Name
     beepName     = [defaults objectForKey:kBeep];
@@ -361,9 +361,9 @@
     //make an array of colour names
     NSArray *items = @[
                        @"Black", @"Blue", @"Green", @"Red", @"Cyan",
-                       @"White", @"Yellow", @"Magenta", @"Grey",
+                       @"White", @"Yellow", @"Magenta", @"Gray",
                        @"Orange", @"Brown", @"Purple",
-                       @"Dark Grey", @"Light Grey"
+                       @"Dark Gray", @"Light Gray"
                        ];
     //find the index value of each
     long item = [items indexOfObject: colourName];
@@ -427,7 +427,7 @@
             colourUIName = [UIColor lightGrayColor];
             break;
         default:
-            colourUIName = [UIColor orangeColor];
+            colourUIName = [UIColor yellowColor];
             break;
     }
     return colourUIName;
@@ -545,7 +545,7 @@
             break;
         case 8:
             // Item 9
-            myColour = @"Grey";
+            myColour = @"Gray";
             break;
         case 9:
             // Item 10
@@ -561,14 +561,14 @@
             break;
         case 12:
             // Item 13
-            myColour = @"Dark Grey";
+            myColour = @"Dark Gray";
             break;
         case 13:
             // Item 14
-            myColour = @"Light Grey";
+            myColour = @"Light Gray";
             break;
         default:
-            myColour = @"Orange";
+            myColour = @"Yellow";
             break;
     }
     return myColour;
