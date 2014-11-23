@@ -594,10 +594,7 @@
 				GCC_PREFIX_HEADER = "Corsi/Corsi-Prefix.pch";
 				INFOPLIST_FILE = "Corsi/Corsi-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Corsi/TestFlightSDK3-3",
-				);
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
@@ -614,10 +611,7 @@
 				GCC_PREFIX_HEADER = "Corsi/Corsi-Prefix.pch";
 				INFOPLIST_FILE = "Corsi/Corsi-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Corsi/TestFlightSDK3-3",
-				);
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;

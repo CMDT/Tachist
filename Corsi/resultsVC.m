@@ -8,7 +8,8 @@
 
 #import "resultsVC.h"
 #import "mySingleton.h"
-#define kSubject    @"subjectName"
+
+#define kSubject  @"subjectName"
 
 @interface resultsVC ()
 
