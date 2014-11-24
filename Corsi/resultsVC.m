@@ -32,6 +32,7 @@
     filepath,
     emailBTN,
     tableView,
+    heading,
     arrItems //  temp array of itmes for results display
 ;
 
@@ -48,6 +49,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    heading.hidden = NO;
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -60,6 +62,7 @@
     tableView.hidden      = YES;
     emailBTN.hidden       = YES;
     resultsTxtView.hidden = NO;
+    heading.hidden        = NO;
     self.tabBarController.tabBar.hidden = NO;
 
     mySingleton *singleton = [mySingleton sharedSingleton];
@@ -113,6 +116,8 @@
     singleton.displayStrings = printString2; //screen
     
     //check if data exists, if not, display the holding message
+    
+    
     if ([printString2 isEqualToString:@""]) {
         resultsTxtView.text  = resultsTempString;
         tableView.hidden=YES;
@@ -218,13 +223,23 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
         resultLab.hidden=YES;
         
     }else{
+        
     //cell.backgroundColor = indexPath.row % 2 //every other row colour change
     //? [UIColor colorWithRed: 1.0 green: 1.0 blue: 0.95 alpha: 0.9]
     //: [UIColor whiteColor];
     //cell.textLabel.backgroundColor = [UIColor clearColor];
     //cell.detailTextLabel.backgroundColor = [UIColor clearColor];
-        titleLab.backgroundColor=[UIColor colorWithRed: 1.0 green: 1.0 blue: 0.95 alpha: 1];
-        resultLab.backgroundColor=[UIColor colorWithRed: 1.0 green: 1.0 blue: 0.95 alpha: 1];
+        
+        //titleLab.backgroundColor=[UIColor colorWithRed: 1.0 green: 1.0 blue: 0.95 alpha: 1];
+        //resultLab.backgroundColor=[UIColor colorWithRed: 1.0 green: 1.0 blue: 0.95 alpha: 1];
+        
+        titleLab.backgroundColor = indexPath.row % 2 //every other row colour change
+        ? [UIColor colorWithRed: 1 green: 1 blue: 0.85 alpha: 0.90]
+        : [UIColor whiteColor];
+        resultLab.backgroundColor = indexPath.row % 2 //every other row colour change
+        ? [UIColor colorWithRed: 1 green: 1 blue: 0.85 alpha: 0.90]
+        : [UIColor whiteColor];
+        
         titleLab.textAlignment=NSTextAlignmentLeft;
         if ([resultLab.text isEqualToString: @""]) {
             resultLab.hidden=YES;

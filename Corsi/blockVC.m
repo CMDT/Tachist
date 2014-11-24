@@ -89,7 +89,7 @@ soundsSEG;
 
     blockFinishNumLBL.text=[NSString stringWithFormat:@"%d",finish];
     blockStartNumLBL.text=[NSString stringWithFormat:@"%d",start];
-    blockSizeLBL.text=[NSString stringWithFormat:@"%2.0f",blockSize];
+    blockSizeLBL.text=[NSString stringWithFormat:@"%.0f",blockSize];
     [self buttonIncCheck];
 }
 

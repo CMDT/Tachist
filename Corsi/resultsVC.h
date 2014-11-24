@@ -44,6 +44,7 @@ IBOutlet UITextView    * resultsTxtView;
 @property (nonatomic, strong) IBOutlet UIButton    * emailBTN;
 @property (nonatomic, strong) UITextView           * resultsTxtView;
 @property (strong, nonatomic) IBOutlet UITableView * tableView;
+@property (strong, nonatomic) IBOutlet UILabel     * heading;
 
 //array for table - test only
 @property (nonatomic,strong) NSMutableArray *arrItems;

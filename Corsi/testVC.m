@@ -1937,21 +1937,21 @@
         [singleton.displayStringTitles addObject:tempString4 ];//title
         tempString=[NSString stringWithFormat:@"Start Time:, %.0f, ms",singleton.startTime];//csv
         [singleton.resultStringRows addObject:tempString];//csv
-        tempString2 = [NSString stringWithFormat:@"%2.0f ms", singleton.startTime];
+        tempString2 = [NSString stringWithFormat:@"%.0f ms", singleton.startTime];
         [singleton.displayStringRows addObject: tempString2];//data
 
         tempString4 = @"Wait Time";
         [singleton.displayStringTitles addObject:tempString4 ];//title
         tempString=[NSString stringWithFormat:@"Wait Time:, %.0f, ms",singleton.startTime];//csv
         [singleton.resultStringRows addObject:tempString];//csv
-        tempString2 = [NSString stringWithFormat:@"%2.0f ms", singleton.waitTime];
+        tempString2 = [NSString stringWithFormat:@"%.0f ms", singleton.waitTime];
         [singleton.displayStringRows addObject: tempString2];//data
         
         tempString4=@"Show Time";
         tempString=[NSString stringWithFormat:@"   Show Time:, %.0f, ms",singleton.showTime];
         [singleton.resultStringRows addObject:tempString];
         [singleton.displayStringTitles addObject:tempString4 ];//title
-        tempString=[NSString stringWithFormat:@"%2.0f ms", singleton.showTime];
+        tempString=[NSString stringWithFormat:@"%.0f ms", singleton.showTime];
         [singleton.displayStringRows addObject: tempString ];//data
         
         tempString4=@"Canvas";
@@ -2017,11 +2017,11 @@
     [singleton.displayStringRows addObject: tempString ];//data
         
     //line
-    tempString=[NSString stringWithFormat:@"Block Size:,%.0f",singleton.blockSize];
+    tempString=[NSString stringWithFormat:@"Block Size:,%.0f", singleton.blockSize];
     [singleton.resultStringRows addObject:tempString];//csv
     tempString=@"Block Size";
     [singleton.displayStringTitles addObject:tempString ];//title
-    tempString=[NSString stringWithFormat:@"%.0f", singleton.blockSize];
+    tempString=[NSString stringWithFormat:@"%0.0f ", singleton.blockSize];
     [singleton.displayStringRows addObject: tempString ];//data
         
     //line
@@ -2169,7 +2169,7 @@
         //check timing data is within limits and set max/mins if extended.  Crash possible if very long times get through.
         Float32 react=0.00;
         for (int aa = 0; aa < start; aa++) {
-            for (int bb = 0; bb < aa-1; bb++) {
+            for (int bb = 0; bb < aa; bb++) {
                 //make positive
                 react = abs(reactionTime[aa][bb]);
                 if (react>60000.00) {//about 60 seconds in ms
@@ -2201,7 +2201,7 @@
             
             tempString=[NSString stringWithFormat:@"%d,,", aa-2];
             
-            for (int bb = 0; bb < aa-1; bb++) {
+            for (int bb = 0; bb < aa; bb++) {
                 //NSLog(@"reaction time:%d-%d-%f",aa,bb,reactionTime[aa][bb]);
                 //total time
                 if (bb == 0) {
@@ -2266,12 +2266,20 @@
             
             //add 1st reaction
             testReactionTime[aa] = abs(testReactionTime[aa] + reactionTime[aa][0]);
+            tempString=@"No. Test Reaction Time";
+            [singleton.displayStringTitles addObject:tempString ];//title
+            tempString=[NSString stringWithFormat:@"   %d: %.0f", aa-2, testReactionTime[aa]];
+            [singleton.displayStringRows addObject: tempString];//data
             
             //avg
             averageReactionTime[aa] = abs(testReactionTime[aa] / (Float32)aa);
             tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@",%.0f", averageReactionTime[aa]]];
             
             [singleton.resultStringRows addObject:tempString];//csv
+            tempString=@"Average Reaction Time";
+            [singleton.displayStringTitles addObject:tempString ];//title
+            tempString=[NSString stringWithFormat:@"%.0f", averageReactionTime[aa]];
+            [singleton.displayStringRows addObject: tempString];//data
             
             //add the first guess on to the totals
             totalReactionTime = abs(totalReactionTime + reactionTime[aa][0]);
@@ -2300,7 +2308,11 @@
         //    }
         //}
             //=======================================
-
+        tempString=@"Total Reaction Time";
+        [singleton.displayStringTitles addObject:tempString ];//title
+        tempString=[NSString stringWithFormat:@"%.0f", totalReactionTime];
+        [singleton.displayStringRows addObject: tempString];//data
+        
         tempString=[NSString stringWithFormat:@"Total Reaction Time:, %.0f", totalReactionTime];
         [singleton.resultStringRows addObject:tempString];//csv
         
