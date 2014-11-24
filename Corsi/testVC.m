@@ -143,6 +143,8 @@
     
     stopTestNowBTN.hidden=YES;
     MessageView.hidden=YES;
+    [self hideInfo];
+    [self hide_blocks];
     mySingleton *singleton = [mySingleton sharedSingleton];
     
     isAborted=NO;
@@ -707,7 +709,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-//
 
 -(IBAction)stopTestNow:(id)sender{
     stopTestNowBTN.hidden=YES;
@@ -1408,19 +1409,6 @@
 }
 
 -(void)halt{
-    //isAlertFinished = NO;
-    
-    //UIAlertView * Alert  = [[UIAlertView alloc] initWithTitle:@"RECAL"
-    //                                                message:@"The recall will start as soon as\nthis message dissapears..."
-    //                                                delegate:self
-    //                                       cancelButtonTitle:nil //@"Cancel"
-    //                         otherButtonTitles:@"RECALL NOW", nil];
-
-    //Alert.alertViewStyle = UIAlertViewStyleDefault;
-
-    //[Alert show];
-
-    //[self haltPart2];
     MessageView.hidden=NO;
     MessageView.alpha=0.70;
     [MessageView setImage: card[3].image];
@@ -1453,18 +1441,6 @@
 }
 
 -(void)finalHalt{
-    //isAlertFinished = NO;
-    
-    //UIAlertView * Alert = [[UIAlertView alloc] initWithTitle:@"RECAL"
-    //                                                 message:@"The recall will start as soon as\nthis message dissapears..."
-    //                                               delegate:self
-    //                                       cancelButtonTitle:nil //@"Cancel"
-                           //otherButtonTitles:@"RECALL NOW", nil];
-                           //otherButtonTitles:nil, nil];
-                           //Alert.alertViewStyle = UIAlertViewStyleDefault;
-    
-    //[Alert show];
-    //[self haltPart2];
     MessageView.hidden=NO;
     MessageView.alpha=0.70;
     [MessageView setImage: card[3].image];

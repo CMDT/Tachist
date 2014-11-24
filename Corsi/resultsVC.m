@@ -65,20 +65,23 @@
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     resultsTempString = @"\n\nThe Corsi Block Tapping Test results and analysis will appear in a table here, once a test has been completed.\n\nTest results will stay visible until a new test is finished, or you press the Home Button on your device.\n\nPressing the home button deletes all unsent email data and resets the Application.\n\nData viewed on screen can be sent by Email as a text file attachment of type CSV, which can be read by many other applications such as a spreadsheets.\n\nPlease ensure that you have correctly set the receiving Email Address.\n\nThe data sent by Email contains reaction timing information not shown on this screen.";
+    
     //resultsTxtView.font=[UIFont fontWithName:@"Serifa-Roman" size:16];
     resultsTxtView.text = resultsTempString;
-    //make a text file from the array of results for email csv attachment
-    NSMutableString *element     = [[NSMutableString alloc] init];
-    NSMutableString *printString = [NSMutableString stringWithString:@""];
-
-    NSURL *defaultPrefsFile     = [[NSBundle mainBundle] URLForResource:@"Root" withExtension:@"plist"];
-    NSDictionary *defaultPrefs  = [NSDictionary dictionaryWithContentsOfURL:defaultPrefsFile];
-    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultPrefs];
-    NSUserDefaults *defaults    = [NSUserDefaults standardUserDefaults];
-    [defaults synchronize];
-    singleton.subjectName       = [defaults  objectForKey:kSubject];
     
-    long final=singleton.resultStringRows.count;
+    //make a text file from the array of results for email csv attachment
+    NSMutableString * element               = [[NSMutableString alloc] init];
+    NSMutableString * printString           = [NSMutableString stringWithString:@""];
+
+    NSURL           * defaultPrefsFile      = [[NSBundle mainBundle] URLForResource:@"Root" withExtension:@"plist"];
+    NSDictionary    * defaultPrefs          = [NSDictionary dictionaryWithContentsOfURL:defaultPrefsFile];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultPrefs];
+    NSUserDefaults  * defaults              = [NSUserDefaults standardUserDefaults];
+    [defaults synchronize];
+    
+    singleton.subjectName                   = [defaults  objectForKey:kSubject];
+    
+    long final = singleton.resultStringRows.count;
     if (final > 0) {
         for(long i=0; i< final; i++){
             element = [singleton.resultStringRows objectAtIndex: i];
@@ -209,16 +212,13 @@
 forRowAtIndexPath: (NSIndexPath*)indexPath
 {
     if (indexPath.row==0) {
-        //cell.backgroundColor = [UIColor colorWithRed: 1.0 green: 0.8 blue: 0.8 alpha: 1.0];
-        //cell.textLabel.backgroundColor = [UIColor clearColor];
-        //cell.detailTextLabel.backgroundColor = [UIColor clearColor];
         titleLab.backgroundColor=[UIColor colorWithRed: 1.0 green: 0.8 blue: 0.8 alpha: 1.0];
         resultLab.backgroundColor=[UIColor colorWithRed: 1.0 green: 0.8 blue: 0.8 alpha: 1.0];
         titleLab.textAlignment=NSTextAlignmentCenter;
         resultLab.hidden=YES;
         
     }else{
-    //cell.backgroundColor = indexPath.row % 2
+    //cell.backgroundColor = indexPath.row % 2 //every other row colour change
     //? [UIColor colorWithRed: 1.0 green: 1.0 blue: 0.95 alpha: 0.9]
     //: [UIColor whiteColor];
     //cell.textLabel.backgroundColor = [UIColor clearColor];
@@ -235,19 +235,23 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
 }
 
 -(NSString *) setFilename{
-    mySingleton *singleton = [mySingleton sharedSingleton];
+    //mySingleton *singleton = [mySingleton sharedSingleton];
     NSString *extn = @"csv";
-    filename = [NSString stringWithFormat:@"%@.%@", singleton.oldSubjectName, extn];
+    // filename = [NSString stringWithFormat:@"%@.%@", singleton.oldSubjectName, extn];
+    filename = [NSString stringWithFormat:@"%@.%@", @"corsi", extn];
     return filename;
 }
 
 //find the home directory for Document
 -(NSString *)GetDocumentDirectory{
-    fileMgr  = [NSFileManager defaultManager];
     NSString * docsDir;
     NSArray  * dirPaths;
+    
+    fileMgr  = [NSFileManager defaultManager];
+
     dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     docsDir  = dirPaths[0];
+    
     return docsDir;
 }
 
@@ -339,9 +343,8 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
     
     docsDir = dirPaths[0];
     
-    NSString * fileNameS = [NSString stringWithFormat:@"%@.csv", singleton.oldSubjectName];
-
-    //NSString * fileNameS = [NSString stringWithFormat:@"corsi.csv"];
+    //NSString * fileNameS = [NSString stringWithFormat:@"%@.csv", singleton.oldSubjectName];
+    NSString * fileNameS = @"corsi.csv";
 
     dataFile = [docsDir stringByAppendingPathComponent:fileNameS];
     
@@ -349,7 +352,6 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
     [filemgr createFileAtPath: dataFile
                      contents: databuffer attributes:nil];
 }
-
 
 - (IBAction)showEmail:(id)sender {
     NSLog(@"Sending Email");
@@ -427,6 +429,8 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
     }
     // Close the Mail Interface
     [self dismissViewControllerAnimated:YES completion:NULL];
+    
 //NSLog(@"Email View now closed.");
 }
+
 @end
