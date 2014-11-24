@@ -85,8 +85,6 @@
     NSNumber *box[10];
     
     UIImageView *card[11];
-    
-    NSArray *totalCorrect;
 }
 @end
 

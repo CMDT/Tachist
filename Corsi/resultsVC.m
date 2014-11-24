@@ -18,13 +18,11 @@
 @implementation resultsVC{
     //IBOutlet UITextView *resultsViewBorder;
     NSString *resultsTempString;
-    UILabel *titleLab;//title
-    UILabel *resultLab;//result
+    UILabel *titleLab;    //title
+    UILabel *resultLab;   //result
 }
 
 @synthesize
-//results Labels
-
     resultsTxtView,
     testDate,
     startDate,
@@ -50,7 +48,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    //default message in view text box
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -60,14 +57,14 @@
     resultsImageSel                 = [resultsImageSel  imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Results" image:resultsImage selectedImage: resultsImageSel];
 
-    tableView.hidden=YES;
-    emailBTN.hidden=YES;
-    resultsTxtView.hidden=NO;
+    tableView.hidden      = YES;
+    emailBTN.hidden       = YES;
+    resultsTxtView.hidden = NO;
     self.tabBarController.tabBar.hidden = NO;
 
     mySingleton *singleton = [mySingleton sharedSingleton];
 
-    resultsTempString = @"\n\nThe Corsi Tapping Test results and analysis will appear in a table here, once a test has been completed.\n\nThe last test to be completed will stay visible until a new test is finished, or you press the Home Button on your device.\n\nPressing the home button deletes any data not sent by email and resets the Application.\n\nData can be sent by Email as an Attachment of extension type CSV, which can be read by other applications such as a spreadsheet.\n\nPlease ensure that you have set the Email Address of the recipient before you select the email option.";
+    resultsTempString = @"\n\nThe Corsi Block Tapping Test results and analysis will appear in a table here, once a test has been completed.\n\nTest results will stay visible until a new test is finished, or you press the Home Button on your device.\n\nPressing the home button deletes all unsent email data and resets the Application.\n\nData viewed on screen can be sent by Email as a text file attachment of type CSV, which can be read by many other applications such as a spreadsheets.\n\nPlease ensure that you have correctly set the receiving Email Address.\n\nThe data sent by Email contains reaction timing information not shown on this screen.";
     //resultsTxtView.font=[UIFont fontWithName:@"Serifa-Roman" size:16];
     resultsTxtView.text = resultsTempString;
     //make a text file from the array of results for email csv attachment

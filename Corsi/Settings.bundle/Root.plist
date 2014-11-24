@@ -438,16 +438,48 @@
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
-			<string>Version</string>
+			<string>CORSI Version Information</string>
 		</dict>
 		<dict>
 			<key>Type</key>
-			<string>PSGroupSpecifier</string>
+			<string>PSTitleValueSpecifier</string>
 			<key>Title</key>
-			<string>Version 1.0.0 (c) MMU 2014 J.A.Howell, ESS, Cheshire.</string>
+			<string>Version Number:</string>
 			<key>Key</key>
-			<string>version</string>
+			<string>version0</string>
+			<key>DefaultValue</key>
+			<string>1.0.0.24.11.14</string>
 		</dict>
+        <dict>
+            <key>Type</key>
+            <string>PSTitleValueSpecifier</string>
+            <key>Title</key>
+            <string>Copyright:</string>
+            <key>Key</key>
+            <string>version1</string>
+            <key>DefaultValue</key>
+            <string>MMU (c) 2014</string>
+        </dict>
+        <dict>
+            <key>Type</key>
+            <string>PSTitleValueSpecifier</string>
+            <key>Title</key>
+            <string>Author:</string>
+            <key>Key</key>
+            <string>version2</string>
+            <key>DefaultValue</key>
+            <string>j.a.howell@mmu.ac.uk</string>
+        </dict>
+        <dict>
+            <key>Type</key>
+            <string>PSTitleValueSpecifier</string>
+            <key>Title</key>
+            <string>Web:</string>
+            <key>Key</key>
+            <string>version3</string>
+            <key>DefaultValue</key>
+            <string>http://www.mmu.ac.uk</string>
+        </dict>
 	</array>
 	<key>StringsTable</key>
 	<string>Root</string>

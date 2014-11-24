@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Manchester Metropolitan University - ESS - essmobile. All rights reserved.
 //
 
+// NB. *** on new version, set detials in defaults function
+
 #import "settingsVC.h"
 #import "mySingleton.h"
 #import "resultsVC.h"
@@ -33,7 +35,10 @@
 #define kTime       @"blockTime"
 #define kShow       @"blockShow"
 
-#define kVersion    @"version"
+#define kVersion0    @"version0"
+#define kVersion1    @"version1"
+#define kVersion2    @"version2"
+#define kVersion3    @"version3"
 
 @interface settingsVC ()
 
@@ -65,14 +70,19 @@
     BOOL animals;
     BOOL sounds;
     
-    NSString *blockCol;
-    NSString *showCol;
-    NSString *backCol;
-    NSString *beepName;
-    NSString *subjectName;
-    NSString *email;
-    NSString *testerName;
-    NSString *version;
+    NSString * blockCol;
+    NSString * showCol;
+    NSString * backCol;
+    NSString * beepName;
+    NSString * subjectName;
+    NSString * email;
+    NSString * testerName;
+    
+    //for plist version group
+    NSString * version0; //version number
+    NSString * version1; //copyright info
+    NSString * version2; //author info
+    NSString * version3; //web site info
 
     CGPoint blk1pos;
     CGPoint blk2pos;
@@ -84,11 +94,9 @@
     CGPoint blk8pos;
     CGPoint blk9pos;
     
-    UIColor *currentBlockColour;
-    UIColor *currentShowColour;
-    UIColor *currentBackgroundColour;
-    
-    NSArray *totalCorrect;
+    UIColor * currentBlockColour;
+    UIColor * currentShowColour;
+    UIColor * currentBackgroundColour;
 }
 
 @synthesize
@@ -182,22 +190,22 @@
         [self effectPicker:beepName];
     } else {
         soundsLBL.text=@"Quiet";
-        
     }
+    
     [self effectPicker:beepName];
     
     //start, finish and sizes on screen from singleton
     blockStartNumLBL.text   = [NSString stringWithFormat:@"%d",    singleton.start];
     blockFinishNumLBL.text  = [NSString stringWithFormat:@"%d",    singleton.finish];
-    blockSizeLBL.text       = [NSString stringWithFormat:@"%2.0f", singleton.blockSize];
+    blockSizeLBL.text       = [NSString stringWithFormat:@"%.0f",  singleton.blockSize];
 
     startTime = singleton.startTime;
     waitTime  = singleton.waitTime;
     showTime  = singleton.showTime;
 
     blockStartLBL.textAlignment = NSTextAlignmentCenter;
-    blockShowLBL.textAlignment = NSTextAlignmentCenter;
-    blockWaitLBL.textAlignment = NSTextAlignmentCenter;
+    blockShowLBL.textAlignment  = NSTextAlignmentCenter;
+    blockWaitLBL.textAlignment  = NSTextAlignmentCenter;
 
     blockStartLBL.text = [[NSString alloc]initWithFormat:@"%i", startTime];
     blockShowLBL.text  = [[NSString alloc]initWithFormat:@"%i", showTime];
@@ -236,12 +244,23 @@
 
     //read the user defaults from the iPhone/iPad bundle
     // if any are set to nil (no value on first run), put a temporary one in
-//version
-    version     = [defaults objectForKey:kVersion];
-    if(version  == nil ){
-        version =  @"v1.0.0";
-        [defaults setObject:@"v1.0.0" forKey:kVersion];
-    }
+    
+//*************************************************************
+//version, set anyway *****************************************
+//*************************************************************
+        version0 =  @"v1.0.0.24.11.14";        // version   *** keep short
+        version1 =  @"MMU (c) 2014";           // copyright *** limited line space
+        version2 =  @"j.a.howell@mmu.ac.uk";   // author    *** to display on device
+        version3 =  @"http://www.mmu.ac.uk";   // web site  *** settings screen
+//*************************************************************
+        [defaults setObject:version0 forKey:kVersion0];   //***
+        [defaults setObject:version1 forKey:kVersion1];   //***
+        [defaults setObject:version2 forKey:kVersion2];   //***
+        [defaults setObject:version3 forKey:kVersion3];   //***
+//*************************************************************
+//version set end *********************************************
+//*************************************************************
+
 //block colour
     currentBlockColour     = [defaults objectForKey:kBlockCol];
     if(currentBlockColour  == nil ){
@@ -292,37 +311,37 @@
     NSString *temp = [defaults objectForKey:kStart];
     if( temp == nil ){
         start =  3;
-        [defaults setObject:@"3" forKey:kStart];
+        [defaults setInteger:start forKey:kStart];
     }
 //finish block
     temp        = [defaults objectForKey:kFinish];
     if( temp == nil ){
         finish =  9;
-        [defaults setObject:@"9" forKey:kFinish];
+        [defaults setInteger:finish forKey:kFinish];
     }
-//block size
+    //block size
     temp        = [defaults objectForKey:kSize];
     if( temp == nil ){
         blockSize =  45.00;
-        [defaults setObject:@"45.00" forKey:kSize];
+        [defaults setInteger:blockSize forKey:kSize];
     }
 //wait time
     temp        = [defaults objectForKey:kDelay];
     if( temp == nil ){
         waitTime=  1500;
-        [defaults setObject:@"1500" forKey:kDelay];
+        [defaults setInteger:waitTime forKey:kDelay];
     }
 //show time
     temp        = [defaults objectForKey:kShow];
     if( temp == nil ){
         showTime =  1500;
-        [defaults setObject:@"1500" forKey:kShow];
+        [defaults setInteger:showTime forKey:kShow];
     }
 //start time
     temp        = [defaults objectForKey:kTime];
     if( temp == nil ){
         startTime =  1500;
-        [defaults setObject:@"1500" forKey:kTime];
+        [defaults setInteger:startTime forKey:kTime];
     }
 //set rotate
     temp        = [defaults objectForKey:kRot];
@@ -599,15 +618,15 @@
         [defaults setObject:[self colourUIToString:singleton.currentShowColour] forKey:kShowCol];
     
     //sounds
-        //[defaults setObject:[NSString stringWithFormat:@"%@", singleton.beepEffect] forKey:kBeep]; //only saved from plist at present
+        [defaults setObject:[NSString stringWithFormat:@"%@", singleton.beepEffect] forKey:kBeep];
     
     //others
         [defaults setObject:[NSString stringWithFormat:@"%d", singleton.start] forKey:kStart];
         [defaults setObject:[NSString stringWithFormat:@"%d", singleton.finish] forKey:kFinish];
-        [defaults setObject:[NSString stringWithFormat:@"%2.0f", singleton.blockSize] forKey:kSize];
-        [defaults setObject:[NSString stringWithFormat:@"%2.0f", singleton.startTime] forKey:kDelay];
-        [defaults setObject:[NSString stringWithFormat:@"%2.0f", singleton.showTime] forKey:kShow];
-        [defaults setObject:[NSString stringWithFormat:@"%2.0f", singleton.waitTime] forKey:kTime];
+        [defaults setObject:[NSString stringWithFormat:@"%.0f", singleton.blockSize] forKey:kSize];
+        [defaults setObject:[NSString stringWithFormat:@"%.0f", singleton.startTime] forKey:kDelay];
+        [defaults setObject:[NSString stringWithFormat:@"%.0f", singleton.showTime] forKey:kShow];
+        [defaults setObject:[NSString stringWithFormat:@"%.0f", singleton.waitTime] forKey:kTime];
         [defaults setObject:[NSString stringWithFormat:@"%@", singleton.beepEffect] forKey:kBeep];
         [defaults setBool:singleton.blockRotation forKey:kRot];
         [defaults setBool:singleton.animals forKey:kAnimals];
@@ -643,128 +662,18 @@
     
 //read the user defaults from the iPhone/iPad bundle
     // if any are set to nil (no value on first run), put a temporary one in
+ 
+    [self setDefaults];
+//block colour  
+    currentBlockColour      = [self colourPicker:[defaults objectForKey:kBlockCol]];
     
-    blockCol          = [defaults objectForKey:kBlockCol];
-    if(blockCol  == nil ){
-        currentBlockColour =  [UIColor darkGrayColor];
-        blockCol =@"Dark Gray";
-        [defaults setObject:@"Dark Gray" forKey:kBlockCol];
-    }else{
-        currentBlockColour = [self colourPicker:blockCol];
-    }
 //background colour
-    backCol         = [defaults objectForKey:kBackCol];
-    if(backCol  == nil ){
-        currentBackgroundColour =  [UIColor blackColor];
-        backCol =@"Black";
-        [defaults setObject:@"Black" forKey:kBackCol];
-    }else{
-        currentBackgroundColour = [self colourPicker:backCol];
-    }
+    currentBackgroundColour = [self colourPicker:[defaults objectForKey:kBackCol]];
+
 //show colour
-    showCol          = [defaults objectForKey:kShowCol];
-    if(showCol  == nil ){
-        currentShowColour =  [UIColor yellowColor];
-        showCol =@"Yellow";
-        [defaults setObject:@"Yellow" forKey:kShowCol];
-    }else{
-        currentShowColour = [self colourPicker:showCol];
-    }
-//start
-    NSString *temp;
-    temp        = [defaults objectForKey:kStart];
-        if( temp == nil ){
-        start =  3;
-        [defaults setObject:@"3" forKey:kStart];
-    }
-//finish
-    temp        = [defaults objectForKey:kFinish];
-    if( temp == nil ){
-        finish =  9;
-        [defaults setObject:@"9" forKey:kFinish];
-    }
-//block size
-    temp        = [defaults objectForKey:kSize];
-    if( temp == nil ){
-        blockSize =  45.00;
-        [defaults setObject:@"45.00" forKey:kSize];
-    }
-//wait time
-    temp        = [defaults objectForKey:kDelay];
-    if( temp == nil ){
-        waitTime=  1500;
-        [defaults setObject:@"1500" forKey:kDelay];
-    }
-//show time
-    temp        = [defaults objectForKey:kShow];
-    if( temp == nil ){
-        showTime =  1500;
-        [defaults setObject:@"1500" forKey:kShow];
-    }
-//start time
-    temp        = [defaults objectForKey:kTime];
-    if( temp == nil ){
-        startTime =  1500;
-        [defaults setObject:@"1500" forKey:kTime];
-    }
-//subject name
-    temp     = [defaults objectForKey:kSubject];
-    if(temp  == nil ){
-        subjectName =  @"Par";
-        [defaults setObject:@"Par" forKey:kSubject];
-    }
-//tester name
-    temp     = [defaults objectForKey:kTester];
-    if(temp  == nil ){
-        testerName =  @"Me";
-        [defaults setObject:@"Me" forKey:kTester];
-    }
-//email name
-    temp     = [defaults objectForKey:kEmail];
-    if(temp  == nil ){
-        email =  @"me@test.com";
-        [defaults setObject:@"me@test.com" forKey:kEmail];
-    }
-//set rotate
-    temp        = [defaults objectForKey:kRot];
-    if( temp == nil ){
-        rotation =  YES;
-        [defaults setBool:YES forKey:kRot];
-    }
-//set animals
-    temp        = [defaults objectForKey:kAnimals];
-    if( temp == nil ){
-        animals =  NO;
-        [defaults setBool:NO forKey:kAnimals];
-    }
-//set sounds
-    temp        = [defaults objectForKey:kSounds];
-    if( temp == nil ){
-        sounds =  YES;
-        [defaults setBool:YES forKey:kSounds];
-    }
-//beep Effect Name
-    beepName     = [defaults objectForKey:kBeep];
-    if(beepName  == nil ){
-        beepName =  @"BEEPJAZZ";
-        [defaults setObject:@"BEEPJAZZ" forKey:kBeep];
-    }
-    [self effectPicker:beepName];
-//set status messages
-    temp        = [defaults objectForKey:kInfo];
-    if( temp == nil ){
-        info =  YES;
-        [defaults setBool:YES forKey:kInfo];
-    }
-//set forward/reverse
-    temp        = [defaults objectForKey:kForward];
-    if( temp == nil ){
-        forward =  YES;
-        [defaults setBool:YES forKey:kForward];
-    }
+    currentShowColour       = [self colourPicker:[defaults objectForKey:kShowCol]];
     
-//for testing what is written, can be rem'd out later
-    //NSLog(@"Loading from PLIST... sending to singleton");
+//everything else
     singleton.testerName              = [defaults  objectForKey:kTester];
     singleton.subjectName             = [defaults  objectForKey:kSubject];
     singleton.email                   = [defaults  objectForKey:kEmail];
@@ -801,6 +710,7 @@
 }
 
 -(float)randomDegrees359
+//for spinning the blocks if rotation is set to YES
 {
     float degrees = 0;
     degrees = arc4random_uniform(359); //was 359 //returns a value from 0 to 359, not 360;
@@ -810,6 +720,7 @@
 }
 
 -(void)putBlocksInPlace{
+    //draw the blocks
     [self putAnimals];
 
     mySingleton *singleton = [mySingleton sharedSingleton];
@@ -879,6 +790,7 @@
 
 -(int)random22
 {
+    //a random number between 1 and 21 for animal pictures
     int num1 = 1;
     num1 = arc4random_uniform(22); //1-21
     if (num1<1) {
@@ -891,6 +803,7 @@
 }
 
 -(void)putAnimals{
+    //place the animal pictures
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     if (singleton.animals) {
@@ -999,4 +912,5 @@
     [self viewDidLoad];
     [self viewDidAppear:YES]; // If viewWillAppear also contains code
 }
+
 @end

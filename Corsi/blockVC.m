@@ -217,7 +217,7 @@ soundsSEG;
         blockSize=55;
     }
     [self buttonIncCheck];
-    blockSizeLBL.text  = [NSString stringWithFormat:@"%2.0f", blockSize];
+    blockSizeLBL.text  = [NSString stringWithFormat:@"%.0f", blockSize];
     singleton.blockSize    = blockSize;
 }
 
@@ -279,7 +279,7 @@ soundsSEG;
     }
 
     [self buttonIncCheck];
-    blockSizeLBL.text  = [NSString stringWithFormat:@"%2.0f", blockSize];
+    blockSizeLBL.text  = [NSString stringWithFormat:@"%.0f", blockSize];
     singleton.blockSize    = blockSize;
 }
 
