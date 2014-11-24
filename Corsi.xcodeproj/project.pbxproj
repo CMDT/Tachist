@@ -39,6 +39,7 @@
 		E10D018D19B6024F00D9E5F8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E10D016C19B6024F00D9E5F8 /* UIKit.framework */; };
 		E10D019519B6024F00D9E5F8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E10D019319B6024F00D9E5F8 /* InfoPlist.strings */; };
 		E10D019719B6024F00D9E5F8 /* CorsiTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E10D019619B6024F00D9E5F8 /* CorsiTests.m */; };
+		E12257041A23915C007CBEF7 /* colourSelVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E12257031A23915C007CBEF7 /* colourSelVC.m */; };
 		E12DE08A1A03B09100172B36 /* AMFMBEEP.caf in Resources */ = {isa = PBXBuildFile; fileRef = E12DE0841A03B09100172B36 /* AMFMBEEP.caf */; };
 		E12DE08B1A03B09100172B36 /* BEEP_FM.caf in Resources */ = {isa = PBXBuildFile; fileRef = E12DE0851A03B09100172B36 /* BEEP_FM.caf */; };
 		E12DE08C1A03B09100172B36 /* BEEPDOUB.caf in Resources */ = {isa = PBXBuildFile; fileRef = E12DE0861A03B09100172B36 /* BEEPDOUB.caf */; };
@@ -122,6 +123,8 @@
 		E10D019219B6024F00D9E5F8 /* CorsiTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CorsiTests-Info.plist"; sourceTree = "<group>"; };
 		E10D019419B6024F00D9E5F8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E10D019619B6024F00D9E5F8 /* CorsiTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CorsiTests.m; sourceTree = "<group>"; };
+		E12257021A23915C007CBEF7 /* colourSelVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = colourSelVC.h; sourceTree = "<group>"; };
+		E12257031A23915C007CBEF7 /* colourSelVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = colourSelVC.m; sourceTree = "<group>"; };
 		E12DE0841A03B09100172B36 /* AMFMBEEP.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AMFMBEEP.caf; sourceTree = "<group>"; };
 		E12DE0851A03B09100172B36 /* BEEP_FM.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BEEP_FM.caf; sourceTree = "<group>"; };
 		E12DE0861A03B09100172B36 /* BEEPDOUB.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BEEPDOUB.caf; sourceTree = "<group>"; };
@@ -225,6 +228,8 @@
 				E1DAD7AA19B8A92400600608 /* settingsVC.m */,
 				91E2633319D88D04005B2643 /* colourVC.h */,
 				91E2633419D88D04005B2643 /* colourVC.m */,
+				E12257021A23915C007CBEF7 /* colourSelVC.h */,
+				E12257031A23915C007CBEF7 /* colourSelVC.m */,
 				91E2633619D88D47005B2643 /* timingVC.h */,
 				91E2633719D88D47005B2643 /* timingVC.m */,
 				91E2633919D88D68005B2643 /* blockVC.h */,
@@ -457,6 +462,7 @@
 				E1DAD7A819B8A31700600608 /* mySingleton.m in Sources */,
 				E1DAD7B119B8A98800600608 /* resultsVC.m in Sources */,
 				91E2633519D88D04005B2643 /* colourVC.m in Sources */,
+				E12257041A23915C007CBEF7 /* colourSelVC.m in Sources */,
 				E1DAD7AB19B8A92400600608 /* settingsVC.m in Sources */,
 				E10D017919B6024F00D9E5F8 /* AppDelegate.m in Sources */,
 				E10D017519B6024F00D9E5F8 /* main.m in Sources */,
