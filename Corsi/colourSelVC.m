@@ -147,6 +147,7 @@ colourArrayBack, colourArrayShow, colourArrayBlock, backBTN, messageTextView;
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
     {
     backBTN.hidden=NO;
+    NSString * mess=nil;
     int blockc=14;
     if (pickerView.tag==0) { //block
     switch(row)
@@ -391,20 +392,22 @@ colourArrayBack, colourArrayShow, colourArrayBlock, backBTN, messageTextView;
         }
     }
     backBTN.hidden=NO;
-    NSString * mess=@"";
+
     if (backgr == showc) {
         mess=@"Cannot have Show and Background Colours the same";
         backBTN.hidden=YES;
-    }
-    if (blockc == showc) {
-        mess=@"Cannot have Show and Block Colours the same";
-        backBTN.hidden=YES;
-    }
-    if (blockc == backgr) {
-        mess=@"Although you can select the same block and background colours, it is not used often due to the unusual effect in a test.";
-        backBTN.hidden=NO;
-    }
-    self.messageTextView.text=mess;
+        }else{
+            if (blockc == showc) {
+                mess=@"Cannot have Show and Block Colours the same";
+                backBTN.hidden=YES;
+                }else{
+                    if (blockc == backgr) {
+                        mess=@"Although you can select the same block and background colours, it is not used often due to the unusual effect in a test.";
+                        backBTN.hidden=NO;
+                    }
+                }
+        }
+    self.messageTextView.text = mess;
 }
 
 @end
