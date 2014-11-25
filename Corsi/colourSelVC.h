@@ -17,10 +17,16 @@
 
 @property (strong, nonatomic) IBOutlet UIImageView  * backCol;
 @property (strong, nonatomic) IBOutlet UIImageView  * showCol;
-@property (strong, nonatomic) IBOutlet UIImageView  * blockCol;
+@property (strong, nonatomic) IBOutlet UIImageView  * blockCol1;
+@property (strong, nonatomic) IBOutlet UIImageView  * blockCol2;
+@property (strong, nonatomic) IBOutlet UIImageView  * blockCol3;
+@property (strong, nonatomic) IBOutlet UIImageView  * blockCol4;
+@property (strong, nonatomic) IBOutlet UIImageView  * blockCol5;
+
 
 @property (strong, nonatomic)          NSArray      * colourArrayBack;
 @property (strong, nonatomic)          NSArray      * colourArrayShow;
 @property (strong, nonatomic)          NSArray      * colourArrayBlock;
 
+@property (strong, nonatomic) IBOutlet UIButton * backBTN;
 @end
