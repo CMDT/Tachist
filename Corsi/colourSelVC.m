@@ -20,9 +20,20 @@ showPicker, blockPicker, backPicker,
 showCol,
 backCol,
 blockCol1,blockCol2, blockCol3, blockCol4, blockCol5,
-colourArrayBack, colourArrayShow, colourArrayBlock, backBTN;
+colourArrayBack, colourArrayShow, colourArrayBlock, backBTN, messageTextView;
 
 - (void)viewDidLoad {
+    [self.backPicker setBackgroundColor:[UIColor blackColor]];
+    [self.showPicker setBackgroundColor:[UIColor yellowColor]];
+    [self.blockPicker setBackgroundColor:[UIColor darkGrayColor]];
+
+    self.backCol.backgroundColor    = [UIColor blackColor];
+    self.showCol.backgroundColor    = [UIColor yellowColor];
+    self.blockCol1.backgroundColor  = [UIColor darkGrayColor];
+    self.blockCol2.backgroundColor  = [UIColor darkGrayColor];
+    self.blockCol3.backgroundColor  = [UIColor darkGrayColor];
+    self.blockCol4.backgroundColor  = [UIColor darkGrayColor];
+    self.blockCol5.backgroundColor  = [UIColor darkGrayColor];
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.colourArrayBack  = [[NSArray alloc] initWithObjects:
@@ -88,7 +99,17 @@ colourArrayBack, colourArrayShow, colourArrayBlock, backBTN;
 }
 
 -(void)viewDidAppear:(BOOL)animated{
-    [backPicker setBackgroundColor:[UIColor cyanColor]];
+    [self.backPicker setBackgroundColor:[UIColor blackColor]];
+    [self.showPicker setBackgroundColor:[UIColor yellowColor]];
+    [self.blockPicker setBackgroundColor:[UIColor darkGrayColor]];
+
+    self.backCol.backgroundColor    = [UIColor blackColor];
+    self.showCol.backgroundColor    = [UIColor yellowColor];
+    self.blockCol1.backgroundColor  = [UIColor darkGrayColor];
+    self.blockCol2.backgroundColor  = [UIColor darkGrayColor];
+    self.blockCol3.backgroundColor  = [UIColor darkGrayColor];
+    self.blockCol4.backgroundColor  = [UIColor darkGrayColor];
+    self.blockCol5.backgroundColor  = [UIColor darkGrayColor];
 }
 
 -(void)didReceiveMemoryWarning {
@@ -139,11 +160,11 @@ colourArrayBack, colourArrayShow, colourArrayBlock, backBTN;
             blockc=0;
             break;
             case 1:
-            self.blockCol1.backgroundColor = [UIColor blackColor];
-            self.blockCol2.backgroundColor = [UIColor blackColor];
-            self.blockCol3.backgroundColor = [UIColor blackColor];
-            self.blockCol4.backgroundColor = [UIColor blackColor];
-            self.blockCol5.backgroundColor = [UIColor blackColor];
+            self.blockCol1.backgroundColor = [UIColor blueColor];
+            self.blockCol2.backgroundColor = [UIColor blueColor];
+            self.blockCol3.backgroundColor = [UIColor blueColor];
+            self.blockCol4.backgroundColor = [UIColor blueColor];
+            self.blockCol5.backgroundColor = [UIColor blueColor];
             blockc=1;
             break;
             case 2:
@@ -307,7 +328,7 @@ colourArrayBack, colourArrayShow, colourArrayBlock, backBTN;
         }
     }
     int showc=14;
-    if (pickerView.tag==2)
+    if (pickerView.tag==1)
         { //show
         switch(row)
         { //show
@@ -369,20 +390,21 @@ colourArrayBack, colourArrayShow, colourArrayBlock, backBTN;
                 break;
         }
     }
+    backBTN.hidden=NO;
     NSString * mess=@"";
-    if (backgr==showc) {
+    if (backgr == showc) {
         mess=@"Cannot have Show and Background Colours the same";
         backBTN.hidden=YES;
     }
-    if (blockc==showc) {
+    if (blockc == showc) {
         mess=@"Cannot have Show and Block Colours the same";
         backBTN.hidden=YES;
     }
-    if (blockc==backgr) {
+    if (blockc == backgr) {
         mess=@"Although you can select the same block and background colours, it is not used often due to the unusual effect in a test.";
         backBTN.hidden=NO;
     }
-
+    self.messageTextView.text=mess;
 }
 
 @end
