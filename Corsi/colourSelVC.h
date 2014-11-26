@@ -31,6 +31,7 @@
 @property (strong, nonatomic)          NSArray      * colourArrayBack;
 @property (strong, nonatomic)          NSArray      * colourArrayShow;
 @property (strong, nonatomic)          NSArray      * colourArrayBlock;
+@property (strong, nonatomic)          NSArray      * images;
 
 @property (strong, nonatomic) IBOutlet UIButton * backBTN;
 @end

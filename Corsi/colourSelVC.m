@@ -27,7 +27,7 @@ showPicker, blockPicker, backPicker,
 showCol,
 backCol,
 blockCol1,blockCol2, blockCol3, blockCol4, blockCol5,
-colourArrayBack, colourArrayShow, colourArrayBlock, backBTN, messageTextView;
+colourArrayBack, colourArrayShow, colourArrayBlock, backBTN, messageTextView, images;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -65,20 +65,41 @@ colourArrayBack, colourArrayShow, colourArrayBlock, backBTN, messageTextView;
                              @"light Gray",     //13
                              nil
                              ];
+
     //now copy the array to the other two for the picker controls
     self.colourArrayShow  = [[NSArray alloc] initWithArray:colourArrayBack copyItems:YES];
     self.colourArrayBlock  = [[NSArray alloc] initWithArray:colourArrayBack copyItems:YES];
 
-//    images =[[NSArray alloc]initWithObjects: [[UIImageView alloc] initWithImage:[UIImage
-//                                                                                 imageNamed:@"ball.png"]],
-//             [[UIImageView alloc] initWithImage:[UIImage
-//                                                 imageNamed:@"car.png"]],
-//             [[UIImageView alloc] initWithImage:[UIImage
-//                                                 imageNamed:@"train.png"]],
-//             [[UIImageView alloc] initWithImage:[UIImage
-//                                                 imageNamed:@"rabbit.png"]],
-//             [[UIImageView alloc] initWithImage:[UIImage
-//                                                 imageNamed:@"bird.png"]], nil];
+    [self colourChecks]; //initialise messages after check on combinations
+
+    images =[[NSArray alloc]initWithObjects:
+             [[UIImageView alloc] initWithImage:[UIImage
+                                                 imageNamed:@"black25.png"]],
+             [[UIImageView alloc] initWithImage:[UIImage
+                                                 imageNamed:@"blue25.png"]],
+             [[UIImageView alloc] initWithImage:[UIImage
+                                                 imageNamed:@"green25.png"]],
+             [[UIImageView alloc] initWithImage:[UIImage
+                                                 imageNamed:@"red25.png"]],
+             [[UIImageView alloc] initWithImage:[UIImage
+                                                 imageNamed:@"cyan25.png"]],
+             [[UIImageView alloc] initWithImage:[UIImage
+                                                 imageNamed:@"white25.png"]],
+             [[UIImageView alloc] initWithImage:[UIImage
+                                                 imageNamed:@"yellow25.png"]],
+             [[UIImageView alloc] initWithImage:[UIImage
+                                                 imageNamed:@"magenta25.png"]],
+             [[UIImageView alloc] initWithImage:[UIImage
+                                                 imageNamed:@"gray25.png"]],
+             [[UIImageView alloc] initWithImage:[UIImage
+                                                 imageNamed:@"orange25.png"]],
+             [[UIImageView alloc] initWithImage:[UIImage
+                                                 imageNamed:@"brown25.png"]],
+             [[UIImageView alloc] initWithImage:[UIImage
+                                                 imageNamed:@"darkGray25.png"]],
+             [[UIImageView alloc] initWithImage:[UIImage
+                                                 imageNamed:@"lightGray25.png"]],
+                       nil];
 }
 
 -(IBAction)bSpin
@@ -131,7 +152,7 @@ colourArrayBack, colourArrayShow, colourArrayBlock, backBTN, messageTextView;
     label.textColor = [UIColor blackColor];
     label.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14];
     label.textAlignment=NSTextAlignmentCenter;
-    label.text = [NSString stringWithFormat:@" %@", colourArrayBack[row]];
+    label.text = [NSString stringWithFormat:@"%@ %@",  colourArrayBack[row]];
 
     return label;
 }
@@ -561,12 +582,11 @@ colourArrayBack, colourArrayShow, colourArrayBlock, backBTN, messageTextView;
 -(void)colourChecks{
     mySingleton *singleton = [mySingleton sharedSingleton];
     BOOL isValidColour = YES;
-    if (backgr!=showc && blockc!=showc) {
 
     backBTN.hidden=NO;
     mess=@"Colour selection valid.";
     messageTextView.backgroundColor=[UIColor greenColor];
-    }else{
+
     if (backgr == showc) {
         messageTextView.backgroundColor=[UIColor redColor];
         mess=@"Cannot have Show and Background Colours the same";
@@ -579,12 +599,12 @@ colourArrayBack, colourArrayShow, colourArrayBlock, backBTN, messageTextView;
         backBTN.hidden=YES;
         isValidColour = NO;
     }
-    if (blockc == backgr && blockc!=showc && backgr!=showc) {
+    if ((blockc == backgr) && (blockc!=showc)) {
         messageTextView.backgroundColor=[UIColor yellowColor];
         mess=@"Although you can select the same block and background colours, it is not used often due to the unusual effect in a test.";
         backBTN.hidden=NO;
         isValidColour = YES;
-    }
+
     }
     self.messageTextView.text = mess;// display message
     if (isValidColour) {
