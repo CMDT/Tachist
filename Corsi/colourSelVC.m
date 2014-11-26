@@ -7,12 +7,13 @@
 //
 
 #import "colourSelVC.h"
+#import "mySingleton.h"
 
 @interface colourSelVC (){
-    int showc;
+    int showc;          // rows for each colour
     int blockc;
     int backgr;
-    NSString * mess;
+    NSString * mess;    //message
 }
 
 @end
@@ -29,83 +30,93 @@ blockCol1,blockCol2, blockCol3, blockCol4, blockCol5,
 colourArrayBack, colourArrayShow, colourArrayBlock, backBTN, messageTextView;
 
 - (void)viewDidLoad {
-
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    mySingleton *singleton = [mySingleton sharedSingleton];
+    UIColor * bac;
+    bac = (singleton.currentBackgroundColour);
+    UIColor * blc;
+    blc = (singleton.currentBlockColour);
+    UIColor * sho;
+    sho = (singleton.currentShowColour);
 
-    backCol.backgroundColor    = [UIColor blackColor];
-    showCol.backgroundColor    = [UIColor yellowColor];
-    blockCol1.backgroundColor  = [UIColor darkGrayColor];
-    blockCol2.backgroundColor  = [UIColor darkGrayColor];
-    blockCol3.backgroundColor  = [UIColor darkGrayColor];
-    blockCol4.backgroundColor  = [UIColor darkGrayColor];
-    blockCol5.backgroundColor  = [UIColor darkGrayColor];
-    
+    backCol.backgroundColor    = bac;
+    showCol.backgroundColor    = sho;
+    blockCol1.backgroundColor  = blc;
+    blockCol2.backgroundColor  = blc;
+    blockCol3.backgroundColor  = blc;
+    blockCol4.backgroundColor  = blc;
+    blockCol5.backgroundColor  = blc;
+
     self.colourArrayBack  = [[NSArray alloc] initWithObjects:
-    @"black",
-    @"blue",
-    @"green",
-    @"red",
-    @"cyan",
-    @"white",
-    @"yellow",
-    @"magenta",
-    @"gray",
-    @"orangeColor",
-    @"brownColor",
-    @"purpleColor",
-    @"darkGrayColor",
-    @"lightGray",
-     nil
-    ];
+                             @"Black",          //0 colour number
+                             @"Blue",           //1
+                             @"Green",          //2
+                             @"Red",            //3
+                             @"Cyan",           //4
+                             @"White",          //5
+                             @"Yellow",         //6
+                             @"Magenta",        //7
+                             @"Gray",           //8
+                             @"Orange",         //9
+                             @"Brown",          //10
+                             @"Purple",         //11
+                             @"Dark Gray",      //12
+                             @"light Gray",     //13
+                             nil
+                             ];
+    //now copy the array to the other two for the picker controls
+    self.colourArrayShow  = [[NSArray alloc] initWithArray:colourArrayBack copyItems:YES];
+    self.colourArrayBlock  = [[NSArray alloc] initWithArray:colourArrayBack copyItems:YES];
+
+//    images =[[NSArray alloc]initWithObjects: [[UIImageView alloc] initWithImage:[UIImage
+//                                                                                 imageNamed:@"ball.png"]],
+//             [[UIImageView alloc] initWithImage:[UIImage
+//                                                 imageNamed:@"car.png"]],
+//             [[UIImageView alloc] initWithImage:[UIImage
+//                                                 imageNamed:@"train.png"]],
+//             [[UIImageView alloc] initWithImage:[UIImage
+//                                                 imageNamed:@"rabbit.png"]],
+//             [[UIImageView alloc] initWithImage:[UIImage
+//                                                 imageNamed:@"bird.png"]], nil];
+}
+
+-(IBAction)bSpin
+{
+    mySingleton *singleton = [mySingleton sharedSingleton];
+    //need to pick a random value - this returns an int32 //modulus by a number to get the remainder
+    //this will be between 0 and number-1
+    int value = [self colourUIToString:singleton.currentBackgroundColour];
+    [backPicker selectRow:value inComponent:0 animated:YES]; [backPicker reloadComponent: 0];
+
+    value = [self colourUIToString:singleton.currentShowColour];
+    [showPicker selectRow:value inComponent:0 animated:YES]; [showPicker reloadComponent: 0];
     
-    self.colourArrayShow  = [[NSArray alloc] initWithObjects:
-    @"black",
-    @"blue",
-    @"green",
-    @"red",
-    @"cyan",
-    @"white",
-    @"yellow",
-    @"magenta",
-    @"gray",
-    @"orangeColor",
-    @"brownColor",
-    @"purpleColor",
-    @"darkGrayColor",
-    @"lightGray",
-    nil
-    ];
-    
-    self.colourArrayBlock  = [[NSArray alloc] initWithObjects:
-    @"black",
-    @"blue",
-    @"green",
-    @"red",
-    @"cyan",
-    @"white",
-    @"yellow",
-    @"magenta",
-    @"gray",
-    @"orangeColor",
-    @"brownColor",
-    @"purpleColor",
-    @"darkGrayColor",
-    @"lightGray",
-    nil
-    ];
+    value = [self colourUIToString:singleton.currentBlockColour];
+    [blockPicker selectRow:value inComponent:0 animated:YES]; [blockPicker reloadComponent: 0];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
+    [self bSpin];
 
-    backCol.backgroundColor    = [UIColor blackColor];
-    showCol.backgroundColor    = [UIColor yellowColor];
-    blockCol1.backgroundColor  = [UIColor darkGrayColor];
-    blockCol2.backgroundColor  = [UIColor darkGrayColor];
-    blockCol3.backgroundColor  = [UIColor darkGrayColor];
-    blockCol4.backgroundColor  = [UIColor darkGrayColor];
-    blockCol5.backgroundColor  = [UIColor darkGrayColor];
-    
+    mySingleton *singleton = [mySingleton sharedSingleton];
+
+    UIColor * bac;
+    bac = (singleton.currentBackgroundColour);
+    UIColor * blc;
+    blc = (singleton.currentBlockColour);
+    UIColor * sho;
+    sho = (singleton.currentShowColour);
+
+    backCol.backgroundColor    = bac;
+    showCol.backgroundColor    = sho;
+    blockCol1.backgroundColor  = blc;
+    blockCol2.backgroundColor  = blc;
+    blockCol3.backgroundColor  = blc;
+    blockCol4.backgroundColor  = blc;
+    blockCol5.backgroundColor  = blc;
+
+
 }
 
 -(void)didReceiveMemoryWarning {
@@ -113,7 +124,7 @@ colourArrayBack, colourArrayShow, colourArrayBlock, backBTN, messageTextView;
     // Dispose of any resources that can be recreated.
 }
 
-- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, pickerView.frame.size.width, 80)];
     label.backgroundColor = [UIColor clearColor];
@@ -121,8 +132,8 @@ colourArrayBack, colourArrayShow, colourArrayBlock, backBTN, messageTextView;
     label.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14];
     label.textAlignment=NSTextAlignmentCenter;
     label.text = [NSString stringWithFormat:@" %@", colourArrayBack[row]];
-    
-    return label;    
+
+    return label;
 }
 
 // returns the number of 'columns' to display.
@@ -138,6 +149,7 @@ colourArrayBack, colourArrayShow, colourArrayBlock, backBTN, messageTextView;
 }
 
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+
     id objectReturn;
     if (pickerView.tag == 0) {
         objectReturn = [colourArrayBack objectAtIndex:row];
@@ -154,7 +166,7 @@ colourArrayBack, colourArrayShow, colourArrayBlock, backBTN, messageTextView;
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
     {
     backBTN.hidden=NO;
-    
+
     if (pickerView.tag==0) { //block
     switch(row)
         {
@@ -406,7 +418,149 @@ colourArrayBack, colourArrayShow, colourArrayBlock, backBTN, messageTextView;
     [self colourChecks];
 }
 
+-(UIColor *)numToUIColor:(int)colourNumber{
+    UIColor * myColour;
+    switch (colourNumber) {
+        case 0:
+            myColour = [UIColor blackColor];
+            break;
+        case 1:
+            myColour = [UIColor blueColor];
+            break;
+        case 2:
+            myColour = [UIColor greenColor];
+            break;
+        case 3:
+            myColour = [UIColor redColor];
+            break;
+        case 4:
+            myColour = [UIColor cyanColor];
+            break;
+        case 5:
+            myColour = [UIColor whiteColor];
+            break;
+        case 6:
+            myColour = [UIColor yellowColor];
+            break;
+        case 7:
+            myColour = [UIColor magentaColor];
+            break;
+        case 8:
+            myColour = [UIColor grayColor];
+            break;
+        case 9:
+            myColour = [UIColor orangeColor];
+            break;
+        case 10:
+            myColour = [UIColor brownColor];
+            break;
+        case 11:
+            myColour = [UIColor purpleColor];
+            break;
+        case 12:
+            myColour = [UIColor darkGrayColor];
+            break;
+        case 13:
+            myColour = [UIColor lightGrayColor];
+            break;
+        default:
+            break;
+    }
+    return myColour;
+}
+
+-(int)colourUIToString:(UIColor*)myUIColour{
+    int myColour;
+
+    //make an array of colour names
+    NSArray *items =
+    @[
+      [UIColor blackColor],
+      [UIColor blueColor],
+      [UIColor greenColor],
+      [UIColor redColor],
+      [UIColor cyanColor],
+      [UIColor whiteColor],
+      [UIColor yellowColor],
+      [UIColor magentaColor],
+      [UIColor grayColor],
+      [UIColor orangeColor],
+      [UIColor brownColor],
+      [UIColor purpleColor],
+      [UIColor darkGrayColor],
+      [UIColor lightGrayColor]
+      ];
+    //find the index value of each
+    long item = [items indexOfObject: myUIColour];
+
+    //select the item number
+    switch (item) {
+        case 0:
+            myColour = 0;
+            break;
+        case 1:
+
+            myColour = 1;
+            break;
+        case 2:
+
+            myColour = 2;
+            break;
+        case 3:
+
+            myColour = 3;
+            break;
+        case 4:
+
+            myColour = 4;
+            break;
+        case 5:
+            // Item 6
+            myColour = 5;
+            break;
+        case 6:
+            // Item 7
+            myColour = 6;
+            break;
+        case 7:
+            // Item 8
+            myColour = 7;
+            break;
+        case 8:
+            // Item 9
+            myColour = 8;
+            break;
+        case 9:
+            // Item 10
+            myColour = 9;
+            break;
+        case 10:
+            // Item 11
+            myColour = 10;
+            break;
+        case 11:
+            // Item 12
+            myColour = 11;
+            break;
+        case 12:
+            // Item 13
+            myColour = 12;
+            break;
+        case 13:
+            // Item 14
+            myColour = 13;
+            break;
+        default:
+            myColour = 0;
+            break;
+    }
+    return myColour;
+}
+
+
 -(void)colourChecks{
+    mySingleton *singleton = [mySingleton sharedSingleton];
+    BOOL isValidColour = YES;
     if (backgr!=showc && blockc!=showc) {
 
     backBTN.hidden=NO;
@@ -417,20 +571,27 @@ colourArrayBack, colourArrayShow, colourArrayBlock, backBTN, messageTextView;
         messageTextView.backgroundColor=[UIColor redColor];
         mess=@"Cannot have Show and Background Colours the same";
         backBTN.hidden=YES;
-        
+        isValidColour = NO;
     }
     if (blockc == showc) {
         messageTextView.backgroundColor=[UIColor redColor];
         mess=@"Cannot have Show and Block Colours the same";
         backBTN.hidden=YES;
-        
+        isValidColour = NO;
     }
     if (blockc == backgr && blockc!=showc && backgr!=showc) {
         messageTextView.backgroundColor=[UIColor yellowColor];
         mess=@"Although you can select the same block and background colours, it is not used often due to the unusual effect in a test.";
         backBTN.hidden=NO;
+        isValidColour = YES;
     }
     }
-    self.messageTextView.text = mess;
+    self.messageTextView.text = mess;// display message
+    if (isValidColour) {
+        //if valid, update singleton colours
+        singleton.currentBlockColour=[self numToUIColor:blockc];
+        singleton.currentShowColour=[self numToUIColor:showc];
+        singleton.currentBackgroundColour=[self numToUIColor:backgr];
+    }
 }
 @end

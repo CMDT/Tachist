@@ -143,16 +143,6 @@
                                     <segue destination="4IA-xA-abo" kind="presentation" id="Tqf-QX-G6q"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="KCe-l5-Rcu">
-                                <rect key="frame" x="16" y="196" width="163" height="24"/>
-                                <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Timings">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <segue destination="aRU-3a-nW6" kind="presentation" id="30e-di-TDF"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Zcz-gT-wAi">
                                 <rect key="frame" x="187" y="196" width="117" height="24"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -274,7 +264,7 @@
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="2Wh-Zj-8FI" kind="presentation" id="37L-Gq-tw8"/>
+                                    <segue destination="591-4U-OD4" kind="presentation" id="Zhj-Tq-8qS"/>
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Canvas" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bVa-jD-j7C">
@@ -356,6 +346,16 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="KCe-l5-Rcu">
+                                <rect key="frame" x="16" y="196" width="163" height="24"/>
+                                <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Timings">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="aRU-3a-nW6" kind="presentation" id="30e-di-TDF"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.84290279212849473" green="0.9223086456184334" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -1036,20 +1036,6 @@
                                     <action selector="BlockColourYelBTN:" destination="2Wh-Zj-8FI" eventType="touchUpInside" id="tG7-6u-LAj"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B3i-9Q-ecI">
-                                <rect key="frame" x="237" y="402" width="67" height="30"/>
-                                <color key="backgroundColor" red="0.40000000600000002" green="1" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="67" id="JMz-vx-955"/>
-                                    <constraint firstAttribute="height" constant="30" id="bm7-UP-VLB"/>
-                                </constraints>
-                                <state key="normal" title="Col">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="591-4U-OD4" kind="presentation" id="ebl-7X-1ce"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bl3-LO-7bm">
                                 <rect key="frame" x="110" y="450" width="100" height="34"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1195,7 +1181,6 @@
                             <constraint firstAttribute="centerX" secondItem="bl3-LO-7bm" secondAttribute="centerX" id="iLu-oB-p4V"/>
                             <constraint firstItem="Lb5-D0-CGQ" firstAttribute="bottom" secondItem="F5r-cT-Qvu" secondAttribute="bottom" id="iqK-2H-Ubf"/>
                             <constraint firstItem="gjC-1n-ZIx" firstAttribute="leading" secondItem="2uu-g0-TEf" secondAttribute="leading" id="j16-pw-FE8"/>
-                            <constraint firstItem="B3i-9Q-ecI" firstAttribute="top" secondItem="ik7-OM-2kY" secondAttribute="bottom" constant="19" id="kNe-dI-fvc"/>
                             <constraint firstItem="ePR-Qg-fSN" firstAttribute="leading" secondItem="zcD-Le-Zoi" secondAttribute="trailing" constant="8" symbolic="YES" id="kbU-7n-U3d"/>
                             <constraint firstItem="Q8K-O4-52d" firstAttribute="top" secondItem="pqN-h0-7s2" secondAttribute="bottom" constant="8" symbolic="YES" id="lBu-wl-HpB"/>
                             <constraint firstItem="zcD-Le-Zoi" firstAttribute="leading" secondItem="CPr-ZK-HY6" secondAttribute="trailing" constant="8" symbolic="YES" id="lNu-cI-2dH"/>
@@ -1206,7 +1191,6 @@
                             <constraint firstItem="Q17-Ii-sOu" firstAttribute="leading" secondItem="R0h-lH-DD7" secondAttribute="leading" id="lse-Ky-3bv"/>
                             <constraint firstItem="ik7-OM-2kY" firstAttribute="top" secondItem="7Cv-4y-b8R" secondAttribute="top" id="mTA-bo-baz"/>
                             <constraint firstItem="HZl-1d-9q5" firstAttribute="top" secondItem="hWb-lh-54y" secondAttribute="bottom" constant="8" symbolic="YES" id="n5h-5d-Kbs"/>
-                            <constraint firstAttribute="centerX" secondItem="B3i-9Q-ecI" secondAttribute="centerX" constant="-110.5" id="n7f-ZY-1wd"/>
                             <constraint firstItem="Lb5-D0-CGQ" firstAttribute="bottom" secondItem="8fg-GR-tSO" secondAttribute="bottom" id="nJb-3J-7Bp"/>
                             <constraint firstItem="t7a-91-dne" firstAttribute="leading" secondItem="2uu-g0-TEf" secondAttribute="trailing" constant="8" symbolic="YES" id="nKO-Rf-oFe"/>
                             <constraint firstItem="S5d-ZU-ewd" firstAttribute="leading" secondItem="KYA-vi-LIg" secondAttribute="leading" id="nf2-WE-6cK"/>
@@ -1264,7 +1248,6 @@
                         <outlet property="b7" destination="hWb-lh-54y" id="dlI-Q0-4Jy"/>
                         <outlet property="b8" destination="jk8-Gj-Hax" id="cQ3-Xn-mCz"/>
                         <outlet property="b9" destination="Aba-Q5-L0h" id="gNH-PQ-wLr"/>
-                        <outlet property="backButton" destination="bl3-LO-7bm" id="Geg-P7-yAq"/>
                         <outlet property="c0" destination="t7a-91-dne" id="yXa-HI-Hsn"/>
                         <outlet property="c1" destination="oQG-GM-Xbr" id="1ib-Ws-avb"/>
                         <outlet property="c10" destination="S5d-ZU-ewd" id="EOU-co-gjb"/>
@@ -1299,12 +1282,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wFS-p1-DTW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-173" y="-74"/>
+            <point key="canvasLocation" x="-247" y="-29"/>
         </scene>
         <!--Colour Settings VC-->
         <scene sceneID="Rbk-A2-tSM">
             <objects>
-                <viewController storyboardIdentifier="Colour Settings VC" title="Colour Settings VC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="591-4U-OD4" customClass="colourSelVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Colour Settings VC" title="Colour Settings VC" modalTransitionStyle="flipHorizontal" useStoryboardIdentifierAsRestorationIdentifier="YES" id="591-4U-OD4" customClass="colourSelVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BLb-Wx-W5V"/>
                         <viewControllerLayoutGuide type="bottom" id="q2R-ch-UI6"/>
@@ -1329,7 +1312,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="2Wh-Zj-8FI" kind="presentation" id="BeG-Q8-7tA"/>
+                                    <segue destination="IKI-2A-uin" kind="presentation" id="tfz-DP-n0g"/>
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Corsi Settings - Colours" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xm1-v4-zLN">
@@ -1414,20 +1397,23 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="backBTN" destination="Bjv-59-dLY" id="TNw-DY-Hip"/>
-                        <outlet property="backCol" destination="ch3-Fp-Hn8" id="PBm-yr-z6O"/>
+                        <outlet property="backBTN" destination="Bjv-59-dLY" id="0b2-Z6-XVL"/>
+                        <outlet property="backCol" destination="ch3-Fp-Hn8" id="13M-SA-vlk"/>
+                        <outlet property="backPicker" destination="4co-gF-7Os" id="lIR-jG-lMQ"/>
                         <outlet property="blockCol1" destination="W2D-6k-4O3" id="Kmh-cD-hcm"/>
                         <outlet property="blockCol2" destination="qa4-zg-THr" id="pGE-nm-4kT"/>
                         <outlet property="blockCol3" destination="P2d-LF-1kk" id="fcF-SU-n4H"/>
                         <outlet property="blockCol4" destination="E4A-bf-BSz" id="0jw-yq-mG5"/>
                         <outlet property="blockCol5" destination="zRg-mL-EBC" id="NFk-qV-USW"/>
+                        <outlet property="blockPicker" destination="57c-SE-tq3" id="hkM-nc-FcA"/>
                         <outlet property="messageTextView" destination="glU-ty-qXy" id="GBF-4J-WL6"/>
                         <outlet property="showCol" destination="aOH-7t-MmP" id="cpL-gk-zld"/>
+                        <outlet property="showPicker" destination="SBl-qN-LBg" id="gXn-NL-FUi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bwN-Oa-J8q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="224" y="-74"/>
+            <point key="canvasLocation" x="108" y="-29"/>
         </scene>
         <!--Block Settings-->
         <scene sceneID="fXO-cP-nio">
@@ -2299,7 +2285,6 @@ at the start of each test session.</string>
         <image name="yellow72.png" width="72" height="72"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="RjO-h2-VtH"/>
-        <segue reference="BeG-Q8-7tA"/>
+        <segue reference="tfz-DP-n0g"/>
     </inferredMetricsTieBreakers>
 </document>

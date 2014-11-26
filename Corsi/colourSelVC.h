@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface colourSelVC : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>
+@interface colourSelVC : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>{
+    IBOutlet UIPickerView *backPicker;
+    IBOutlet UIPickerView *showPicker;
+    IBOutlet UIPickerView *blockPicker;
+}
 
 @property (strong, nonatomic) IBOutlet UIPickerView * backPicker;
 @property (strong, nonatomic) IBOutlet UIPickerView * showPicker;
