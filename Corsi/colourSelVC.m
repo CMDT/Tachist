@@ -27,12 +27,15 @@ showPicker, blockPicker, backPicker,
 showCol,
 backCol,
 blockCol1,blockCol2, blockCol3, blockCol4, blockCol5,
-colourArrayBack, colourArrayShow, colourArrayBlock, backBTN, messageTextView, images;
+colourArrayBack, colourArrayShow, colourArrayBlock, backBTN, messageTextView,
+images, imageNames;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
     mySingleton *singleton = [mySingleton sharedSingleton];
+    
     UIColor * bac;
     bac = (singleton.currentBackgroundColour);
     UIColor * blc;
@@ -69,22 +72,22 @@ colourArrayBack, colourArrayShow, colourArrayBlock, backBTN, messageTextView, im
     //now copy the array to the other two for the picker controls
     self.colourArrayShow  = [[NSArray alloc] initWithArray:colourArrayBack copyItems:YES];
     self.colourArrayBlock  = [[NSArray alloc] initWithArray:colourArrayBack copyItems:YES];
+    
+    // Load images
 
-    [self colourChecks]; //initialise messages after check on combinations
-
-    images =[[NSArray alloc]initWithObjects:
+    images =[[NSMutableArray alloc]initWithObjects:
              [[UIImageView alloc] initWithImage:[UIImage
                                                  imageNamed:@"black25.png"]],
              [[UIImageView alloc] initWithImage:[UIImage
-                                                 imageNamed:@"blue25.png"]],
+                                                 imageNamed:@"blue25.png.png"]],
              [[UIImageView alloc] initWithImage:[UIImage
-                                                 imageNamed:@"green25.png"]],
+                                                 imageNamed:@"green25.png.png"]],
              [[UIImageView alloc] initWithImage:[UIImage
-                                                 imageNamed:@"red25.png"]],
+                                                 imageNamed:@"red25.png.png"]],
              [[UIImageView alloc] initWithImage:[UIImage
-                                                 imageNamed:@"cyan25.png"]],
+                                                 imageNamed:@"cyan25.png.png"]],
              [[UIImageView alloc] initWithImage:[UIImage
-                                                 imageNamed:@"white25.png"]],
+                                                 imageNamed:@"white25.png.png"]],
              [[UIImageView alloc] initWithImage:[UIImage
                                                  imageNamed:@"yellow25.png"]],
              [[UIImageView alloc] initWithImage:[UIImage
@@ -96,10 +99,14 @@ colourArrayBack, colourArrayShow, colourArrayBlock, backBTN, messageTextView, im
              [[UIImageView alloc] initWithImage:[UIImage
                                                  imageNamed:@"brown25.png"]],
              [[UIImageView alloc] initWithImage:[UIImage
-                                                 imageNamed:@"darkGray25.png"]],
+                                                 imageNamed:@"purple25.png"]],
              [[UIImageView alloc] initWithImage:[UIImage
-                                                 imageNamed:@"lightGray25.png"]],
-                       nil];
+                                                 imageNamed:@"darkgray25.png"]],
+             [[UIImageView alloc] initWithImage:[UIImage
+                                                 imageNamed:@"lightgray25.png"]],
+             nil];
+    
+    [self colourChecks]; //initialise messages after check on combinations
 }
 
 -(IBAction)bSpin
@@ -136,8 +143,8 @@ colourArrayBack, colourArrayShow, colourArrayBlock, backBTN, messageTextView, im
     blockCol3.backgroundColor  = blc;
     blockCol4.backgroundColor  = blc;
     blockCol5.backgroundColor  = blc;
-
-
+    
+    [self colourChecks]; //initialise messages after check on combinations
 }
 
 -(void)didReceiveMemoryWarning {
@@ -147,14 +154,20 @@ colourArrayBack, colourArrayShow, colourArrayBlock, backBTN, messageTextView, im
 
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
     
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, pickerView.frame.size.width, 80)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 80, 30)];
+
     label.backgroundColor = [UIColor clearColor];
     label.textColor = [UIColor blackColor];
-    label.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14];
+    label.font = [UIFont fontWithName:@"HelveticaNeue" size:14];//@"HelveticaNeue-Bold" size:14];
     label.textAlignment=NSTextAlignmentCenter;
-    label.text = [NSString stringWithFormat:@"%@ %@",  colourArrayBack[row]];
+    label.text = [NSString stringWithFormat:@"%@", colourArrayBack[row]];
 
-    return label;
+    //return label;
+
+        return [images objectAtIndex:row],label;
+
+    //
+    //
 }
 
 // returns the number of 'columns' to display.
@@ -172,6 +185,7 @@ colourArrayBack, colourArrayShow, colourArrayBlock, backBTN, messageTextView, im
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
 
     id objectReturn;
+    
     if (pickerView.tag == 0) {
         objectReturn = [colourArrayBack objectAtIndex:row];
     }
@@ -601,12 +615,14 @@ colourArrayBack, colourArrayShow, colourArrayBlock, backBTN, messageTextView, im
     }
     if ((blockc == backgr) && (blockc!=showc)) {
         messageTextView.backgroundColor=[UIColor yellowColor];
-        mess=@"Although you can select the same block and background colours, it is not used often due to the unusual effect in a test.";
+        mess=@"Although you can select the same block and\nbackground colours, it is not used \noften due to the unusual effect in a test.";
         backBTN.hidden=NO;
         isValidColour = YES;
-
     }
+    
     self.messageTextView.text = mess;// display message
+    self.messageTextView.textAlignment=NSTextAlignmentCenter;
+    self.messageTextView.font = [UIFont fontWithName:@"HelveticaNeue" size:9];//[UIFont fontWithName:@"HelveticaNeue" size:10];
     if (isValidColour) {
         //if valid, update singleton colours
         singleton.currentBlockColour=[self numToUIColor:blockc];
