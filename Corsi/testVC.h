@@ -20,7 +20,7 @@
 
 @property (nonatomic, retain) AVAudioPlayer        * backgroundMusicPlayer;
 @property (retain, nonatomic) IBOutlet UILabel     * headingLBL;
-@property (retain, nonatomic) IBOutlet UILabel     * statusMessageLBL;
+@property (retain, nonatomic) IBOutlet UITextView  * statusMessageTXT;
 @property (retain, nonatomic) IBOutlet UIImageView * MessageView;
 @property (retain, nonatomic) IBOutlet UITextView  * MessageTextView;
 

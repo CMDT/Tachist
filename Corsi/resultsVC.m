@@ -305,7 +305,7 @@ forRowAtIndexPath: (NSIndexPath*)indexPath
     
     BOOL ok;
     ok = [textToWrite writeToFile:filepath atomically:YES encoding:NSASCIIStringEncoding error:&err];
-    if (!ok) {
+    if (ok == NO) {
         //(statusMessageLab.text=filepath, [err localizedFailureReason]);
         //NSLog(@"Error writing file at %@\n%@", filepath, [err localizedFailureReason]);
     }

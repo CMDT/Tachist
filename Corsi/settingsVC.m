@@ -170,7 +170,7 @@
     [settingsViewerVIEW setBackgroundColor:singleton.currentBackgroundColour];
     
     //forward or revers test flag
-    if(singleton.forwardTestDirection==YES){
+    if(singleton.forwardTestDirection == YES){
         forwardLBL.text=@"Forward";
     } else {
         forwardLBL.text=@"Reverse";
@@ -248,7 +248,7 @@
 //*************************************************************
 //version, set anyway *****************************************
 //*************************************************************
-        version0 =  @"v1.0.0.24.11.14";        // version   *** keep short
+        version0 =  @"v1.0.0.28.11.14";        // version   *** keep short
         version1 =  @"MMU (c) 2014";           // copyright *** limited line space
         version2 =  @"j.a.howell@mmu.ac.uk";   // author    *** to display on device
         version3 =  @"http://www.mmu.ac.uk";   // web site  *** settings screen
@@ -373,6 +373,8 @@
         forward =  YES;
         [defaults setBool:YES forKey:kForward];
     }
+
+    
 }
 
 -(UIColor*)colourPicker:(NSString*)colourName{

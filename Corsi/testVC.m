@@ -60,7 +60,7 @@
     BOOL stageEnded;
     BOOL resultsSaved;
     BOOL infoShow;
-    BOOL reverseTest;
+    BOOL forwardTest;
     BOOL rotateBlocks;
     BOOL animals;
 
@@ -119,7 +119,7 @@
     setOfLBL,
     setTotalLBL,
     startBTN,
-    statusMessageLBL,
+    statusMessageTXT,
     headingLBL,
     MessageTextView,
     MessageView,
@@ -165,7 +165,7 @@
     NSURL *mySoundEffectURL=[NSURL fileURLWithPath:mySoundEffectPath];
     AudioServicesCreateSystemSoundID(CFBridgingRetain(mySoundEffectURL),&mySoundEffect);
     
-    infoShow=singleton.onScreenInfo;
+    infoShow = singleton.onScreenInfo;
 
     flash2 = 0.25;// flash button when pressed
     
@@ -254,17 +254,19 @@
 }
 
 -(void)initialiseBlocks{
-    statusMessageLBL.text = @"CORSI Block Test";
+    statusMessageTXT.text = @"CORSI Block Test";
     mySingleton *singleton = [mySingleton sharedSingleton];
     
     //check for direction of test and title the test appropiately
-    if (singleton.forwardTestDirection) {
+    if (singleton.forwardTestDirection == YES) {
         headingLBL.text=@"CORSI FORWARD BLOCK TEST";
+        forwardTest=YES;
     }else{
         headingLBL.text=@"CORSI REVERSE BLOCK TEST";
+        forwardTest = NO;
     }
 
-    animals=singleton.animals;
+    animals = singleton.animals;
     
     [self putAnimals]; //place the correct random animal in the view
     
@@ -274,8 +276,9 @@
     
     [self putBlocksInPlace];
     
-    int sizeb=0;
-    if (!singleton.blockRotation) {
+    int sizeb = 0;
+
+    if (singleton.blockRotation == NO) {
 
         box1image.transform = CGAffineTransformTranslate(box1image.transform,[self randomPt]-sizeb, [self randomPt]);
         box2image.transform = CGAffineTransformTranslate(box2image.transform,[self randomPt]-sizeb, [self randomPt]);
@@ -288,13 +291,14 @@
         box9image.transform = CGAffineTransformTranslate(box9image.transform,[self randomPt]-sizeb, [self randomPt]);
     }
     
-    infoShow=singleton.onScreenInfo;
-    reverseTest=singleton.forwardTestDirection;
+    infoShow    = singleton.onScreenInfo;
+
+    forwardTest = singleton.forwardTestDirection;
     
     //make 9 sets of number strings
-    for (int x=1; x<10; x++) {
-        order[x]=[self make9order];
-        reverse[x]=[self rev9Order:order[x]];
+    for (int x = 1; x < 10; x++) {
+        order[x]   = [self make9order];
+        reverse[x] = [self rev9Order:order[x]];
         //NSLog(@"Order returned for Set: %d is:%@, reverse:%@",x, order[x], reverse[x]);
     }
     // don't bother, too difficult to do yet //[self rotAllBlocks];
@@ -305,20 +309,19 @@
         //draw an animal picture in the view
         int ani[22];
         //NSLog(@"start");
-        for (int b=0; b<22; b++) {
-            ani[b]=b;
+        for (int b = 0; b < 22; b++) {
+            ani[b] = b;
             //NSLog(@"animal:%d", ani[b]);
         }
-        int temp=0;
-        int tt=0;
-        for (int b=0; b<2541; b++) {
-            tt=[self random22];
-            temp=ani[tt-1];
-            ani[tt-1]=ani[tt];
-            ani[tt]=temp;
+        int temp = 0;
+        int tt = 0;
+        for (int b = 0; b < 2541; b++) {
+            tt        = [self random22];
+            temp      = ani[tt];
+            ani[tt]   = temp;
         }
         //NSLog(@"mix");
-        for (int b=0; b<22; b++) {
+        for (int b = 0; b < 22; b++) {
             //NSLog(@"animal:%d", ani[b]);
         }
         //NSLog(@"end");
@@ -410,9 +413,9 @@
 
 -(NSString*) rev9Order:(NSString*)forOrder{
     NSString *revOrder;
-    revOrder=@"";//blank
-    for (int t=8; t>-1; t--) {
-        revOrder= [revOrder stringByAppendingString:[forOrder substringWithRange:NSMakeRange(t, 1)]];
+    revOrder = @"";//blank
+    for (int t = 8; t>-1; t--) {
+        revOrder = [revOrder stringByAppendingString:[forOrder substringWithRange:NSMakeRange(t, 1)]];
     }
     return revOrder;
 }
@@ -538,7 +541,7 @@
     self.tabBarController.tabBar.hidden = YES;
     MessageTextView.hidden=YES;
     startBTN.hidden=YES;
-    statusMessageLBL.hidden=YES;
+    statusMessageTXT.hidden=YES;
     
     [self hide_blocks];
 
@@ -560,8 +563,8 @@
         self.tabBarController.tabBar.hidden = YES;
         stopTestNowBTN.hidden=NO;
         //NSLog(@"Test has started");
-        //statusMessageLBL.text = @"The Test Has Started";
-        statusMessageLBL.text = @"";
+        //statusMessageTXT.text = @"The Test Has Started";
+        statusMessageTXT.text = @"";
 
         startBTN.hidden   = YES;
         headingLBL.hidden = YES;
@@ -826,7 +829,7 @@
     setTotalLBL.hidden = false;
     setOfLBL.hidden    = false;
     setNoLBL.hidden    = false;
-    statusMessageLBL.hidden
+    statusMessageTXT.hidden
                        = false;
 }
 -(void)hideInfo{
@@ -839,7 +842,7 @@
     setTotalLBL.hidden = true;
     setOfLBL.hidden    = true;
     setNoLBL.hidden    = true;
-    statusMessageLBL.hidden
+    statusMessageTXT.hidden
                        = true;
 }
 
@@ -850,11 +853,12 @@
     stopTestNowBTN.hidden=NO;
     
     //NSLog(@"box init");
-    if (!isAborted) {
-        if (infoShow) {
-            statusMessageLBL.text = @"The Test is Starting now...";
+    if (isAborted == NO) {
+        mySingleton *singleton = [mySingleton sharedSingleton];
+        if (singleton.onScreenInfo == YES) {
+            statusMessageTXT.text = @"The Test is Starting now...";
         }else{
-            statusMessageLBL.text = @"";
+            statusMessageTXT.text = @"";
         }
     //[MessageView setImage: card[0].image];
     //[self display_blocks];
@@ -890,7 +894,7 @@
 }
 
 -(void)stageChecks {
-    if (!isAborted) {
+    if (isAborted == NO) {
         if (isFinished) { //definitely ended, to catch second round of checks
             [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(endTestMSG) userInfo:nil repeats:NO];
         }
@@ -960,7 +964,10 @@
 }
 
 -(void)box1 {
-    if (!isAborted) {
+    if (isAborted == NO) {
+
+        mySingleton *singleton = [mySingleton sharedSingleton];
+
         //block button inputs for now, re-enable after stage end.
         [self buttonsDisable];
     
@@ -978,10 +985,10 @@
         //display blocks
         [self display_blocks];
 
-        if (infoShow) {
-            statusMessageLBL.text = @"Observe";
+        if (singleton.onScreenInfo == YES) {
+            statusMessageTXT.text = @"Observe";
         }else{
-            statusMessageLBL.text = @"Observe";
+            statusMessageTXT.text = @"Observe";
         }
 
         int t=[self whichBlock:ncounter :xcounter];
@@ -1024,7 +1031,7 @@
 }
 
 -(void)but1 {
-    if (!isAborted) {
+    if (isAborted == NO) {
         [self buttonsDisable];
         //clears the block, waits and then sends to check to see if any end, stage or flag is passed
         [self allButtonsBackgroundReset];// background colour reset to std
@@ -1046,43 +1053,46 @@
 
 -(void)statusUpdate:(int)press{
     //type in the guesses if the info flag is on
-    if (!isAborted) {
-        if (infoShow) {
+    if (isAborted == NO) {
+
+        mySingleton *singleton = [mySingleton sharedSingleton];
+
+            if (singleton.onScreenInfo == YES) {
         switch (press) {
             case 1:
-                statusMessageLBL.text = [NSString stringWithFormat:@"%@",guess[1]];
+                statusMessageTXT.text = [NSString stringWithFormat:@"%@",guess[1]];
             break;
             case 2:
-                statusMessageLBL.text = [NSString stringWithFormat:@"%@%@",guess[1],guess[2]];
+                statusMessageTXT.text = [NSString stringWithFormat:@"%@%@",guess[1],guess[2]];
             break;
             case 3:
-                statusMessageLBL.text = [NSString stringWithFormat:@"%@%@%@",guess[1],guess[2],guess[3]];
+                statusMessageTXT.text = [NSString stringWithFormat:@"%@%@%@",guess[1],guess[2],guess[3]];
             break;
             case 4:
-                statusMessageLBL.text = [NSString stringWithFormat:@"%@%@%@%@",guess[1],guess[2],guess[3],guess[4]];
+                statusMessageTXT.text = [NSString stringWithFormat:@"%@%@%@%@",guess[1],guess[2],guess[3],guess[4]];
             break;
             case 5:
-                statusMessageLBL.text = [NSString stringWithFormat:@"%@%@%@%@%@",guess[1],guess[2],guess[3],guess[4],guess[5]];
+                statusMessageTXT.text = [NSString stringWithFormat:@"%@%@%@%@%@",guess[1],guess[2],guess[3],guess[4],guess[5]];
             break;
             case 6:
-                statusMessageLBL.text = [NSString stringWithFormat:@"%@%@%@%@%@%@",guess[1],guess[2],guess[3],guess[4],guess[5],guess[6]];
+                statusMessageTXT.text = [NSString stringWithFormat:@"%@%@%@%@%@%@",guess[1],guess[2],guess[3],guess[4],guess[5],guess[6]];
             break;
             case 7:
-                statusMessageLBL.text = [NSString stringWithFormat:@"%@%@%@%@%@%@%@",guess[1],guess[2],guess[3],guess[4],guess[5],guess[6],guess[7]];
+                statusMessageTXT.text = [NSString stringWithFormat:@"%@%@%@%@%@%@%@",guess[1],guess[2],guess[3],guess[4],guess[5],guess[6],guess[7]];
             break;
             case 8:
-                statusMessageLBL.text = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@",guess[1],guess[2],guess[3],guess[4],guess[5],guess[6],guess[7],guess[8]];
+                statusMessageTXT.text = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@",guess[1],guess[2],guess[3],guess[4],guess[5],guess[6],guess[7],guess[8]];
             break;
             case 9:
-                statusMessageLBL.text = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@",guess[1],guess[2],guess[3],guess[4],guess[5],guess[6],guess[7],guess[8],guess[9]];
+                statusMessageTXT.text = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@",guess[1],guess[2],guess[3],guess[4],guess[5],guess[6],guess[7],guess[8],guess[9]];
             break;
 
             default:
-                statusMessageLBL.text = @"Recall";
+                statusMessageTXT.text = @"Recall";
             break;
         }
         }else{
-            statusMessageLBL.text = @"Recall";
+            statusMessageTXT.text = @"Recall";
         }
     }
 }
@@ -1136,12 +1146,12 @@
     box1image.backgroundColor=currentShowColour;
     //AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     [self playMyEffect];
-    guess[pressNo+1]=@"1";
+    guess[pressNo+1] = @"1";
     blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo+1];
     [self statusUpdate:pressNo+1];
     pressNo=pressNo+1;
     if(pressNo >= xcounter-1){
-        pressNo=0;
+        pressNo = 0;
         [self buttonsDisable];
         [NSTimer scheduledTimerWithTimeInterval: (messageTime/2) target:self selector:@selector(blankMSG3) userInfo:nil repeats:NO];
     }
@@ -1156,12 +1166,12 @@
     box2image.backgroundColor=currentShowColour;
     //AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     [self playMyEffect];
-    guess[pressNo+1]=@"2";
+    guess[pressNo+1] = @"2";
     blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo+1];
     [self statusUpdate:pressNo+1];
     pressNo=pressNo+1;
     if(pressNo >= xcounter-1){
-        pressNo=0;
+        pressNo = 0;
         [self buttonsDisable];
         [NSTimer scheduledTimerWithTimeInterval: (messageTime/2) target:self selector:@selector(blankMSG3) userInfo:nil repeats:NO];
     }
@@ -1176,12 +1186,12 @@
     box3image.backgroundColor=currentShowColour;
     //AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     [self playMyEffect];
-    guess[pressNo+1]=@"3";
+    guess[pressNo+1] = @"3";
     blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo+1];
     [self statusUpdate:pressNo+1];
     pressNo=pressNo+1;
     if(pressNo >= xcounter-1){
-        pressNo=0;
+        pressNo = 0;
         [self buttonsDisable];
         [NSTimer scheduledTimerWithTimeInterval: (messageTime/2) target:self selector:@selector(blankMSG3) userInfo:nil repeats:NO];
     }
@@ -1196,12 +1206,12 @@
     box4image.backgroundColor=currentShowColour;
     //AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     [self playMyEffect];
-    guess[pressNo+1]=@"4";
+    guess[pressNo+1] = @"4";
     blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo+1];
     [self statusUpdate:pressNo+1];
     pressNo=pressNo+1;
     if(pressNo >= xcounter-1){
-        pressNo=0;
+        pressNo = 0;
         [self buttonsDisable];
         [NSTimer scheduledTimerWithTimeInterval: (messageTime/2) target:self selector:@selector(blankMSG3) userInfo:nil repeats:NO];
     }
@@ -1216,12 +1226,12 @@
     box5image.backgroundColor=currentShowColour;
     //AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     [self playMyEffect];
-    guess[pressNo+1]=@"5";
+    guess[pressNo+1] = @"5";
     blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo+1];
     [self statusUpdate:pressNo+1];
     pressNo=pressNo+1;
     if(pressNo >= xcounter-1){
-        pressNo=0;
+        pressNo = 0;
         [self buttonsDisable];
         [NSTimer scheduledTimerWithTimeInterval: (messageTime/2) target:self selector:@selector(blankMSG3) userInfo:nil repeats:NO];
     }
@@ -1236,12 +1246,12 @@
     box6image.backgroundColor=currentShowColour;
     //AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     [self playMyEffect];
-    guess[pressNo+1]=@"6";
+    guess[pressNo+1] = @"6";
     blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo+1];
     [self statusUpdate:pressNo+1];
     pressNo=pressNo+1;
     if(pressNo >= xcounter-1){
-        pressNo=0;
+        pressNo = 0;
         [self buttonsDisable];
         [NSTimer scheduledTimerWithTimeInterval: (messageTime/2) target:self selector:@selector(blankMSG3) userInfo:nil repeats:NO];
     }
@@ -1256,12 +1266,12 @@
     box7image.backgroundColor=currentShowColour;
     //AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     [self playMyEffect];
-    guess[pressNo+1]=@"7";
+    guess[pressNo+1] = @"7";
     blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo+1];
     [self statusUpdate:pressNo+1];
     pressNo=pressNo+1;
     if(pressNo >= xcounter-1){
-        pressNo=0;
+        pressNo = 0;
         [self buttonsDisable];
         [NSTimer scheduledTimerWithTimeInterval: (messageTime/2) target:self selector:@selector(blankMSG3) userInfo:nil repeats:NO];
     }
@@ -1276,12 +1286,12 @@
     box8image.backgroundColor=currentShowColour;
     //AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     [self playMyEffect];
-    guess[pressNo+1]=@"8";
+    guess[pressNo+1] = @"8";
     blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo+1];
     [self statusUpdate:pressNo+1];
     pressNo=pressNo+1;
     if(pressNo >= xcounter-1){
-        pressNo=0;
+        pressNo = 0;
         [self buttonsDisable];
         [NSTimer scheduledTimerWithTimeInterval: (messageTime/2) target:self selector:@selector(blankMSG3) userInfo:nil repeats:NO];
     }
@@ -1297,12 +1307,12 @@
     box9image.backgroundColor=currentShowColour;
     //AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     [self playMyEffect];
-    guess[pressNo+1]=@"9";
-    blkNoLBL.text = [NSString stringWithFormat:@"%i",pressNo+1];
+    guess[pressNo+1] = @"9";
+    blkNoLBL.text = [NSString stringWithFormat:@"%i", pressNo+1];
     [self statusUpdate:pressNo+1];
     pressNo=pressNo+1;
     if(pressNo >= xcounter-1){
-        pressNo=0;
+        pressNo = 0;
         [self buttonsDisable];
         [NSTimer scheduledTimerWithTimeInterval: (messageTime/2) target:self selector:@selector(blankMSG3) userInfo:nil repeats:NO];
     }
@@ -1310,31 +1320,19 @@
 }
 
 -(void)getGuesses {
-    if (!isAborted) {
+    if (isAborted == NO) {
         [self buttonsEnable];
         blkNoLBL.text = [NSString stringWithFormat:@"%i",0];
         //turns on the buttons, collects the xcounter guesses, forms a string, saves it and carries on with next stage
     
-        if (!reverseTest) {
-            if (infoShow) {
-                statusMessageLBL.text = @"Recall the sequence in the reverse order.";
-            }else{
-                statusMessageLBL.text = @"Reverse Test";
-            }
-        }else{
-            if (infoShow) {
-                statusMessageLBL.text = @"Recall the sequence in the same order.";
-            }else{
-                statusMessageLBL.text = @"Forward Test";
-            }
-        }
+        [self recallMessage];
         //NSLog(@"Press The Blocks in Order");
         
         //read the timer
         self.startDate=[NSDate date];
         
         if(pressNo >= xcounter+1){
-            pressNo=0;
+            pressNo = 0;
             [self buttonsDisable];
             [NSTimer scheduledTimerWithTimeInterval: (messageTime/2) target:self selector:@selector(blankMSG3) userInfo:nil repeats:NO];
         }else{
@@ -1343,24 +1341,30 @@
     }
 }
 
+-(void)recallMessage{
+    mySingleton *singleton = [mySingleton sharedSingleton];
+
+    if (singleton.forwardTestDirection == NO) {
+        if (singleton.onScreenInfo == YES) {
+            statusMessageTXT.text = @"Recall the sequence in the \nreverse order.";
+        }else{
+            statusMessageTXT.text = @"Recall Reverse Test";
+        }
+    }else{
+        if (singleton.onScreenInfo == YES) {
+            statusMessageTXT.text = @"Recall the sequence in the \nsame order.";
+        }else{
+            statusMessageTXT.text = @"Recall Forward Test";
+        }
+    }
+}
+
 -(void)getFinalGuesses {
-    if (!isAborted) {
+    if (isAborted == NO) {
         [self buttonsEnable];
         blkNoLBL.text = [NSString stringWithFormat:@"%i", 0];
         //turns on the buttons, collects the xcounter guesses, forms a string, saves it and carries on with next stage
-        if (!reverseTest) {
-            if (infoShow) {
-                statusMessageLBL.text = @"Recall the sequence in the reverse order.";
-            }else{
-                statusMessageLBL.text = @"Recall Reverse Test";
-            }
-        }else{
-            if (infoShow) {
-                statusMessageLBL.text = @"Recall the sequence in the same order.";
-            }else{
-                statusMessageLBL.text = @"Recall Forward Test";
-            }
-        }
+        [self recallMessage];
 
         //NSLog(@"Press The Blocks in Order");
         
@@ -1378,30 +1382,33 @@
 }
 
 -(void)guessMSG {
-    if (!isAborted) {
+    if (isAborted == NO) {
         blkNoLBL.text = [NSString stringWithFormat:@"%i", 0];
         //NSLog(@"Guess Now");
-        statusMessageLBL.text = @"";
+        statusMessageTXT.text = @"";
         [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(getGuesses) userInfo:nil repeats:NO];
     }
 }
 
 -(void)finalGuessMSG {
-    if (!isAborted) {
+    if (isAborted == NO) {
         blkNoLBL.text = [NSString stringWithFormat:@"%i", 0];
-        statusMessageLBL.text = @"";
+        statusMessageTXT.text = @"";
         [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(getFinalGuesses) userInfo:nil repeats:NO];
     }
 }
 
 -(void)stageEndMSG {
-    if (!isAborted) {
+    if (isAborted == NO) {
         [self buttonsDisable];
         //NSLog(@"Stage Ending");
-        if (infoShow) {
-            statusMessageLBL.text = @"Prepare to Recall";
+
+        mySingleton *singleton = [mySingleton sharedSingleton];
+        
+        if (singleton.onScreenInfo == YES) {
+            statusMessageTXT.text = @"Prepare to Recall";
         }else{
-            statusMessageLBL.text = @"";
+            statusMessageTXT.text = @"";
         }
         //[NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(guessMSG) userInfo:nil repeats:NO];
         [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(halt) userInfo:nil repeats:NO];
@@ -1426,14 +1433,17 @@
 }
 
 -(void)finalStageEndMSG {
-    if (!isAborted) {
+    if (isAborted == NO) {
         [self buttonsDisable];
         //NSLog(@"Final Stage Ending");
         isFinished=YES;
-        if (infoShow) {
-            statusMessageLBL.text = @"";
+
+        mySingleton *singleton = [mySingleton sharedSingleton];
+
+        if (singleton.onScreenInfo == YES) {
+            statusMessageTXT.text = @"";
         }else{
-            statusMessageLBL.text = @"";
+            statusMessageTXT.text = @"";
         }
         //[NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(finalGuessMSG) userInfo:nil repeats:NO];
         [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(finalHalt) userInfo:nil repeats:NO];
@@ -1446,7 +1456,6 @@
     [MessageView setImage: card[3].image];
 
     [NSTimer scheduledTimerWithTimeInterval: 1.2 target:self selector:@selector(finalHaltPart2) userInfo:nil repeats:NO];
-    
 }
 
 -(void)finalHaltPart2{
@@ -1460,13 +1469,16 @@
 }
 
 -(void)nextStageMSG {
-    if (!isAborted) {
+    if (isAborted == NO) {
         [self buttonsDisable];
         //NSLog(@"Stage Starting");
-        if (infoShow) {
-            statusMessageLBL.text = @"Observe";
+
+        mySingleton *singleton = [mySingleton sharedSingleton];
+
+        if (singleton.onScreenInfo == YES) {
+            statusMessageTXT.text = @"Observe";
         }else{
-            statusMessageLBL.text = @"Observe";
+            statusMessageTXT.text = @"Observe";
         }
         pressNo = 0;
         [NSTimer scheduledTimerWithTimeInterval: messageTime target:self selector:@selector(blankMSG) userInfo:nil repeats:NO];
@@ -1474,7 +1486,7 @@
 }
 
 -(void)startTestMSG {
-    if (!isAborted) {
+    if (isAborted == NO) {
         //Start of Test Message
         [self buttonsDisable];
         //NSLog(@"Start Test");
@@ -1570,16 +1582,19 @@
 }
 
 -(void)endTestMSG {
-    if (!isAborted) {
+    if (isAborted == NO) {
         //End of Test Message
         [self buttonsDisable];
         //NSLog(@"End Test");
         stopTestNowBTN.hidden=YES;
         isFinished=YES;
-        if (infoShow) {
-            statusMessageLBL.text = @"The Test has Finished.";
+
+        mySingleton *singleton = [mySingleton sharedSingleton];
+
+        if (singleton.onScreenInfo == YES) {
+            statusMessageTXT.text = @"The Test has Finished.";
         }else{
-            statusMessageLBL.text = @"The Test has Finished";
+            statusMessageTXT.text = @"";
         }
         [self hideInfo];
         [self hide_blocks];
@@ -1591,15 +1606,18 @@
 }
 
 -(void)calculatingMSG {
-    if (!isAborted) {
+    if (isAborted == NO) {
         //Calculate stats and outputs
         [self buttonsDisable];
         isFinished=YES;
         //NSLog(@"Calculating Test Results");
-        if (infoShow) {
-            statusMessageLBL.text = @"The test results are being calculated.";
+
+        mySingleton *singleton = [mySingleton sharedSingleton];
+
+        if (singleton.onScreenInfo == YES) {
+            statusMessageTXT.text = @"The test results are being calculated.";
         }else{
-            statusMessageLBL.text = @"Calculating...";
+            statusMessageTXT.text = @"Calculating...";
         }
         [self hide_blocks];
         [self hideInfo];
@@ -1612,7 +1630,7 @@
 }
 
 -(void)blankMSG {
-    if (!isAborted) {
+    if (isAborted == NO) {
         [self buttonsDisable];
         //NSLog(@"(blankmsg)");
         MessageView.hidden=YES;
@@ -1621,31 +1639,21 @@
 }
 
 -(void)blankMSG2 {
-    if (!isAborted) {
+    if (isAborted == NO) {
         [self buttonsDisable];
         //NSLog(@"(blankmsg2)");
         [self display_blocks];
         [self showInfo];
-        if (!reverseTest) {
-            if (infoShow) {
-                statusMessageLBL.text = @"Observe";
-            }else{
-                statusMessageLBL.text = @"Observe";
-            }
-        }else{
-            if (infoShow) {
-                statusMessageLBL.text = @"Observe";
-            }else{
-                statusMessageLBL.text = @"Observe";
-            }
-        }
+
+                statusMessageTXT.text = @"Observe";
+
         MessageView.hidden=YES;//maybe messagetime--v
         [NSTimer scheduledTimerWithTimeInterval:startTime target:self selector:@selector(box1) userInfo:nil repeats:NO];
     }
 }
 
 -(void)jumpToResultsView {
-    if (!isAborted) {
+    if (isAborted == NO) {
         [self buttonsDisable];
         //NSLog(@"(jumpToResultsView)");
         [self hide_blocks];
@@ -1711,19 +1719,19 @@
 }
 
 -(void)blankMSG3 {
-    if (!isAborted) {
+    if (isAborted == NO) {
     [self buttonsDisable];
     guessStr[xcounter-1]= [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@",guess[1],guess[2],guess[3],guess[4],guess[5],guess[6],guess[7],guess[8],guess[9]];
     [self statusUpdate:xcounter-1];
-    NSLog(@"(blank3 after buttons input %@)",guessStr[xcounter-1]);
+        //NSLog(@"(blank3 after buttons input %@)",guessStr[xcounter-1]);
     [self display_blocks];
     MessageView.hidden=YES;
     if (isFinished) {
-        NSLog(@"(blank3 endtestmsg)");
+        //NSLog(@"(blank3 endtestmsg)");
         [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(endTestMSG) userInfo:nil repeats:NO];
     }else{
-        NSLog(@"(blank3 stagechecks)");
-        statusMessageLBL.text = @"";
+        //NSLog(@"(blank3 stagechecks)");
+        statusMessageTXT.text = @"";
         [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(stageChecks) userInfo:nil repeats:NO];
     }
     }
@@ -1764,6 +1772,9 @@
     int range1;
     
     switch ((int)singleton.blockSize) {
+        case 5:
+            range1=70;
+            break;
         case 10:
             range1=70;
             break;
@@ -1795,7 +1806,7 @@
             range1=8;
             break;
         default:
-            range1=6;
+            range1=8;
             break;
     }
     float split1=0;
@@ -1808,16 +1819,16 @@
         split1=1;
         }
     
-    int posrand=0;
+    int posrand = 0;
     
-    posrand=(float)arc4random_uniform(range1)*split1;
+    posrand = (float)arc4random_uniform(range1) * split1;
     
     //NSLog(@"Random Pt:%i",posrand);
     return posrand;
 }
 
 -(void)updateBlockColours{
-    if (!isAborted) {
+    if (isAborted == NO) {
     mySingleton *singleton = [mySingleton sharedSingleton];
 
     currentBlockColour     = singleton.currentBlockColour;
@@ -1841,7 +1852,7 @@
 
 -(void)calculations{
     //MessageView.hidden = YES;
-    if (!isAborted) {
+    if (isAborted == NO) {
 
     mySingleton *singleton = [mySingleton sharedSingleton];
     //NSLog(@"Calculations have started.");
@@ -2112,8 +2123,8 @@
         //loop for test in line
         for (int q=0; q<xx; q++) {
             //swap order for the reverse order if that was selected
-            if (!singleton.forwardTestDirection) {
-                order[q]=reverse[q];
+            if (singleton.forwardTestDirection == NO) {
+                order[q] = reverse[q];
             }
             //get the character at a position in the strings
             ee = [order[xx] substringWithRange:NSMakeRange(q, 1)];
@@ -2121,36 +2132,36 @@
             
             //check for same digits in order and guess and count
             if ([ee isEqualToString: ff]) {
-                cor=cor+1;
-                totcor=totcor+1;
-                ans=@"1";
-                ans2=@"1";
+                cor  = cor + 1;
+                totcor=totcor + 1;
+                ans  = @"1";
+                ans2 = @"1";
             }else{
-                wro=wro+1;
-                totwro=totwro+1;
-                ans=@"0";
-                ans2=@"0";
+                wro  = wro+1;
+                totwro=totwro + 1;
+                ans  = @"0";
+                ans2 = @"0";
             }
             //put the individual components csv in string
-            tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@",%@", ans]];
+            tempString  = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@",%@", ans]];
             tempString2 = [NSString stringWithFormat:@"%@%@", tempString2, [NSString stringWithFormat:@"%@", ans2]];
         }
 
         //add some commas
-        for (int y=1; y<11-xx; y++) {
-            tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@","]];
+        for (int y = 1; y < (11-xx); y++) {
+            tempString  = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@","]];
             tempString2 = [NSString stringWithFormat:@"%@%@", tempString2, [NSString stringWithFormat:@"."]];
         }
         
         //finish off string from loop
-        tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@"%d, %d", cor, wro]];
+        tempString  = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@"%d, %d", cor, wro]];
         tempString2 = [NSString stringWithFormat:@"  :%@%@", tempString2, [NSString stringWithFormat:@"c%dw%d", cor, wro]];
         //line
 
         //tempString4=[NSString stringWithFormat:@"Test:123456789_CW"];
         //[singleton.displayStringTitles addObject:tempString4];//title
         //[singleton.displayStringRows addObject: @""];//data
-        tempString3=@"DATA:";
+        tempString3 = @"DATA:";
         [singleton.displayStringTitles addObject:tempString3 ];//title
         [singleton.displayStringRows addObject: tempString2];//data
         [singleton.resultStringRows addObject:tempString];//csv
@@ -2158,7 +2169,7 @@
 
     }
         //blankline
-        tempString=@"";
+        tempString = @"";
         [singleton.resultStringRows addObject:tempString];//csv
         
         //nb arrays and vars zeroed in boxinit before timings start.
@@ -2387,8 +2398,8 @@
     currentShowColour       = singleton.currentShowColour;
 
     currentStatusColour     = singleton.currentStatusColour;
-    statusMessageLBL.textColor=currentStatusColour;
-    statusMessageLBL.alpha=0.70;
+    statusMessageTXT.textColor=currentStatusColour;
+    statusMessageTXT.alpha=0.70;
 
     if (singleton.onScreenInfo) {
         blkNoLBL.textColor      = singleton.currentStatusColour;

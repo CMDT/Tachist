@@ -105,7 +105,7 @@ images, imageNames;
              [[UIImageView alloc] initWithImage:[UIImage
                                                  imageNamed:@"lightgray25.png"]],
              nil];
-    
+
     [self colourChecks]; //initialise messages after check on combinations
 }
 
@@ -114,6 +114,7 @@ images, imageNames;
     mySingleton *singleton = [mySingleton sharedSingleton];
     //need to pick a random value - this returns an int32 //modulus by a number to get the remainder
     //this will be between 0 and number-1
+
     int value = [self colourUIToString:singleton.currentBackgroundColour];
     [backPicker selectRow:value inComponent:0 animated:YES]; [backPicker reloadComponent: 0];
 
@@ -143,7 +144,11 @@ images, imageNames;
     blockCol3.backgroundColor  = blc;
     blockCol4.backgroundColor  = blc;
     blockCol5.backgroundColor  = blc;
-    
+
+    showc=[self colourUIToString:sho];
+    backgr=[self colourUIToString:bac];
+    blockc=[self colourUIToString:blc];
+    [self bSpin];
     [self colourChecks]; //initialise messages after check on combinations
 }
 
@@ -201,6 +206,10 @@ images, imageNames;
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
     {
     backBTN.hidden=NO;
+
+    showPicker.backgroundColor=[UIColor whiteColor];
+    backPicker.backgroundColor=[UIColor whiteColor];
+    blockPicker.backgroundColor=[UIColor whiteColor];
 
     if (pickerView.tag==0) { //block
     switch(row)
@@ -382,7 +391,7 @@ images, imageNames;
                 backgr=13;
                 break;
             default:
-                blockc=15;
+                backgr=15;
         }
     }
     
@@ -447,7 +456,7 @@ images, imageNames;
                 showc=13;
                 break;
             default:
-                blockc=14;
+                showc=14;
         }
     }
     [self colourChecks];
@@ -598,31 +607,32 @@ images, imageNames;
     BOOL isValidColour = YES;
 
     backBTN.hidden=NO;
-    mess=@"Colour selection valid.";
-    messageTextView.backgroundColor=[UIColor greenColor];
+    mess = @"Colour selection valid.";
+    messageTextView.backgroundColor = [UIColor colorWithRed:0.8 green:1.0 blue:0.8 alpha:1.0];
 
     if (backgr == showc) {
-        messageTextView.backgroundColor=[UIColor redColor];
-        mess=@"Cannot have Show and Background Colours the same";
-        backBTN.hidden=YES;
-        isValidColour = NO;
+        messageTextView.backgroundColor = [UIColor colorWithRed:1.0 green:0.8 blue:0.8 alpha:1.0];
+        mess=@"Cannot have Show and Background \nColours the same";
+        backBTN.hidden = YES;
+        isValidColour  = NO;
     }
     if (blockc == showc) {
-        messageTextView.backgroundColor=[UIColor redColor];
-        mess=@"Cannot have Show and Block Colours the same";
-        backBTN.hidden=YES;
-        isValidColour = NO;
+        messageTextView.backgroundColor = [UIColor colorWithRed:1.0 green:0.8 blue:0.8 alpha:1.0];
+        mess=@"Cannot have Show and Block \nColours the same";
+        backBTN.hidden = YES;
+        isValidColour  = NO;
     }
-    if ((blockc == backgr) && (blockc!=showc)) {
-        messageTextView.backgroundColor=[UIColor yellowColor];
-        mess=@"Although you can select the same block and\nbackground colours, it is not used \noften due to the unusual effect in a test.";
-        backBTN.hidden=NO;
-        isValidColour = YES;
+    if ((blockc == backgr) && (blockc != showc)) {
+        messageTextView.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:0.8 alpha:1.0];
+        mess=@"Although you can select these colours, \nit produces invisible blocks in a test.";
+        backBTN.hidden = NO;
+        isValidColour  = YES;
     }
     
     self.messageTextView.text = mess;// display message
-    self.messageTextView.textAlignment=NSTextAlignmentCenter;
-    self.messageTextView.font = [UIFont fontWithName:@"HelveticaNeue" size:9];//[UIFont fontWithName:@"HelveticaNeue" size:10];
+    self.messageTextView.textAlignment = NSTextAlignmentCenter;
+
+    self.messageTextView.font = [UIFont fontWithName:@"HelveticaNeue" size:12];//[UIFont fontWithName:@"HelveticaNeue" size:10];
     if (isValidColour) {
         //if valid, update singleton colours
         singleton.currentBlockColour=[self numToUIColor:blockc];
