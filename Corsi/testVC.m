@@ -1773,44 +1773,44 @@
     
     switch ((int)singleton.blockSize) {
         case 5:
-            range1=70;
+            range1=90;
             break;
         case 10:
-            range1=70;
+            range1=100;
             break;
         case 15:
-            range1=50;
+            range1=85;
             break;
         case 20:
-            range1=45;
+            range1=65;
             break;
         case 25:
-            range1=40;
+            range1=55;
             break;
         case 30:
-            range1=30;
+            range1=40;
             break;
         case 35:
-            range1=22;
+            range1=30;
             break;
         case 40:
-            range1=17;
+            range1=20;
             break;
         case 45:
-            range1=13;
+            range1=17;
             break;
         case 50:
-            range1=10;
+            range1=12;
             break;
         case 55:
-            range1=8;
+            range1=10;
             break;
         default:
-            range1=8;
+            range1=10;
             break;
     }
     float split1=0;
-    if (arc4random_uniform(11)>5.5)
+    if (arc4random_uniform(11)>5.1)
         {
         split1=-1;
         }

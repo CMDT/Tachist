@@ -1657,16 +1657,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="288" placeholderIntrinsicHeight="314" keyboardDismissMode="interactive" editable="NO" text="results" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jSY-QQ-FBu" userLabel="results Text View">
-                                <rect key="frame" x="16" y="49" width="288" height="418"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <accessibility key="accessibilityConfiguration">
-                                    <accessibilityTraits key="traits" none="YES" staticText="YES"/>
-                                </accessibility>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" maximumZoomScale="4" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="mM9-5t-pzc">
                                 <rect key="frame" x="16" y="49" width="288" height="418"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1714,6 +1704,16 @@
                                     <outlet property="delegate" destination="APr-Tr-350" id="Naf-RO-wfL"/>
                                 </connections>
                             </tableView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="288" placeholderIntrinsicHeight="314" keyboardDismissMode="interactive" editable="NO" text="results" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jSY-QQ-FBu" userLabel="results Text View">
+                                <rect key="frame" x="16" y="49" width="288" height="418"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" none="YES" staticText="YES"/>
+                                </accessibility>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iFj-sz-Pty">
                                 <rect key="frame" x="16" y="475" width="288" height="36"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1734,6 +1734,9 @@
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" placeholderIntrinsicWidth="284" placeholderIntrinsicHeight="21" text="Corsi Test Results" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IQW-SQ-4DV">
                                 <rect key="frame" x="16" y="20" width="288" height="21"/>
                                 <color key="backgroundColor" red="1" green="1" blue="0.40000000596046448" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="gUf-mI-Edi"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -1747,6 +1750,7 @@
                             <constraint firstItem="IQW-SQ-4DV" firstAttribute="leading" secondItem="jSY-QQ-FBu" secondAttribute="leading" id="L8w-fM-UAi"/>
                             <constraint firstItem="mM9-5t-pzc" firstAttribute="leading" secondItem="jSY-QQ-FBu" secondAttribute="leading" id="MTf-8I-Kea"/>
                             <constraint firstItem="iFj-sz-Pty" firstAttribute="leading" secondItem="lQv-c0-wS2" secondAttribute="leadingMargin" id="Nj6-Vd-ZBN"/>
+                            <constraint firstItem="IQW-SQ-4DV" firstAttribute="leading" secondItem="lQv-c0-wS2" secondAttribute="leadingMargin" id="T4M-Og-ZFE"/>
                             <constraint firstItem="iFj-sz-Pty" firstAttribute="top" secondItem="mM9-5t-pzc" secondAttribute="bottom" constant="8" symbolic="YES" id="XNN-uq-FoD"/>
                             <constraint firstItem="iFj-sz-Pty" firstAttribute="trailing" secondItem="mM9-5t-pzc" secondAttribute="trailing" id="YrX-RJ-7Uc"/>
                             <constraint firstItem="mM9-5t-pzc" firstAttribute="top" secondItem="jSY-QQ-FBu" secondAttribute="top" id="eSh-kS-vDI"/>
@@ -1757,6 +1761,7 @@
                             <constraint firstItem="jSY-QQ-FBu" firstAttribute="trailing" secondItem="mM9-5t-pzc" secondAttribute="trailing" id="mTl-kp-1Io"/>
                             <constraint firstItem="IQW-SQ-4DV" firstAttribute="trailing" secondItem="lQv-c0-wS2" secondAttribute="trailingMargin" id="rDY-qN-FrK"/>
                             <constraint firstItem="Wkf-0E-rVZ" firstAttribute="top" secondItem="iFj-sz-Pty" secondAttribute="bottom" constant="8" symbolic="YES" id="sCi-1u-1yr"/>
+                            <constraint firstItem="IQW-SQ-4DV" firstAttribute="trailing" secondItem="lQv-c0-wS2" secondAttribute="trailingMargin" id="sW1-xM-agV"/>
                             <constraint firstItem="IQW-SQ-4DV" firstAttribute="top" secondItem="wNV-sQ-S5m" secondAttribute="bottom" id="uiA-cP-a3E"/>
                         </constraints>
                     </view>
