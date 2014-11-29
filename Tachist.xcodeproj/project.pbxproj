@@ -17,6 +17,7 @@
 		9110816F1A2004600030B89E /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 9110816B1A2004600030B89E /* settings.png */; };
 		911081701A2004600030B89E /* test.png in Resources */ = {isa = PBXBuildFile; fileRef = 9110816C1A2004600030B89E /* test.png */; };
 		914892B71A09627100687220 /* Serifa 55 Roman.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 914892B61A09627100687220 /* Serifa 55 Roman.ttf */; };
+		91737BE31A2957D200E3A008 /* information.png in Resources */ = {isa = PBXBuildFile; fileRef = 91737BE21A2957D200E3A008 /* information.png */; };
 		91C091641A16A9D100036CCF /* detailsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C091631A16A9D100036CCF /* detailsVC.m */; };
 		91E2633819D88D47005B2643 /* timingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 91E2633719D88D47005B2643 /* timingVC.m */; };
 		E10D016919B6024F00D9E5F8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E10D016819B6024F00D9E5F8 /* Foundation.framework */; };
@@ -73,6 +74,7 @@
 		9110816B1A2004600030B89E /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
 		9110816C1A2004600030B89E /* test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test.png; sourceTree = "<group>"; };
 		914892B61A09627100687220 /* Serifa 55 Roman.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Serifa 55 Roman.ttf"; sourceTree = "<group>"; };
+		91737BE21A2957D200E3A008 /* information.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = information.png; sourceTree = "<group>"; };
 		91C091621A16A9D100036CCF /* detailsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = detailsVC.h; sourceTree = "<group>"; };
 		91C091631A16A9D100036CCF /* detailsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = detailsVC.m; sourceTree = "<group>"; };
 		91E2633619D88D47005B2643 /* timingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = timingVC.h; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 		E10D016F19B6024F00D9E5F8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				91737BE21A2957D200E3A008 /* information.png */,
 				9110816A1A2004600030B89E /* results.png */,
 				9110816B1A2004600030B89E /* settings.png */,
 				9110816C1A2004600030B89E /* test.png */,
@@ -355,6 +358,7 @@
 				E12DE08B1A03B09100172B36 /* BEEP_FM.caf in Resources */,
 				E12DE08E1A03B09100172B36 /* BEEPPURE.caf in Resources */,
 				E1B29ECB19B7532E005B9C84 /* red72.png in Resources */,
+				91737BE31A2957D200E3A008 /* information.png in Resources */,
 				911081531A1FD5580030B89E /* calculating.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

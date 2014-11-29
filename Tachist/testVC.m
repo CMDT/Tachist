@@ -120,7 +120,7 @@
     stopTestNowBTN.hidden=YES;
     MessageView.hidden=YES;
     [self hideInfo];
-    [self hide_blocks];
+
     mySingleton *singleton = [mySingleton sharedSingleton];
     
     isAborted=NO;
@@ -144,13 +144,6 @@
     infoShow = singleton.onScreenInfo;
 
     flash2 = 0.25;// flash button when pressed
-    
-    //make 9 sets of number strings
-    for (int x=1; x<10; x++) {
-        order[x]=[self make9order];
-        reverse[x]=[self rev9Order:order[x]];
-        //NSLog(@"Order returned for Set: %d is:%@, reverse:%@",x, order[x], reverse[x]);
-    }
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -168,12 +161,6 @@
     self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Test" image:testImage selectedImage: testImageSel];
 
     isAborted=NO;
-
-    mySingleton *singleton = [mySingleton sharedSingleton];
-
-    [self allButtonsBackgroundReset];
-
-    [self setColours];
 
     tempStartMessage=@"You will be shown a sequence of cards. \n\nObserve the O's, then recall \nif a X is present. \n\nThe test will proceed until all the sections are completed.\n\nYou will exit the test if you touch the 'Cancel Test' button during the test.\n\nOnly completed tests are valid and available for analysis and email.";
 
@@ -345,55 +332,8 @@
     startBTN.hidden=YES;
     statusMessageTXT.hidden=YES;
     
-    [self hide_blocks];
-
     [self participantEntry];
     
-    [self startTestPart2];
-}
-
--(void)startTestPart2{
-    //this will be looped until the text alert popup is finished
-    mySingleton *singleton = [mySingleton sharedSingleton];
-        MessageTextView.hidden=YES;
-    if (isAlertFinished) {
-        MessageTextView.hidden=YES;
-        [self hideInfo];
-        [self playMyEffect];//beep effect if on
-
-        //blank out the tab bar during the test, no end until done now
-        self.tabBarController.tabBar.hidden = YES;
-        stopTestNowBTN.hidden=NO;
-        //NSLog(@"Test has started");
-        //statusMessageTXT.text = @"The Test Has Started";
-        statusMessageTXT.text = @"";
-
-        startBTN.hidden   = YES;
-        headingLBL.hidden = YES;
-
-        start       = singleton.start;
-        finish      = singleton.finish;
-    
-        startTime   =[self delayDelay];
-        showTime    =[self delayShow];
-        waitTime    =[self delayWait];
-        messageTime =[self delayMessage];
-    
-        //start test, the alert was dismissed
-        [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(boxInit) userInfo:nil repeats:NO];
-    } else {
-        //participant alert not yet finished, loop back
-        [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(startTestPart2) userInfo:nil repeats:NO];
-    }
-}
-
--(float)randomDegrees359
-{
-    float degrees = 0;
-    degrees = arc4random_uniform(359); //was 359 //returns a value from 0 to 359, not 360;
-
-    //NSLog(@"Degs=%f",degrees);
-    return degrees;
 }
 
 - (void)didReceiveMemoryWarning
@@ -406,12 +346,9 @@
     stopTestNowBTN.hidden=YES;
     MessageView.hidden = NO;
     [self hideInfo];
-    [self hide_blocks];
 
-    
     //Cancel, return to settings after message
-    [self buttonsDisable];
-    
+
     isFinished         = YES;
     isCalculating      = YES;
     isAborted          = YES;
@@ -483,146 +420,7 @@
                        = true;
 }
 
--(void)boxInit {
-    [self buttonsDisable];
-    MessageTextView.hidden=YES;
-    startBTN.hidden=YES;
-    stopTestNowBTN.hidden=NO;
-    
-    //NSLog(@"box init");
-    if (isAborted == NO) {
-        mySingleton *singleton = [mySingleton sharedSingleton];
-        if (singleton.onScreenInfo == YES) {
-            statusMessageTXT.text = @"The Test is Starting now...";
-        }else{
-            statusMessageTXT.text = @"";
-        }
-    //[MessageView setImage: card[0].image];
-    //[self display_blocks];
-    
-    [self hideInfo];
-    [self allButtonsBackgroundReset];// background colour reset to std
 
-    isFinished=NO;
-    isCalculating=NO;
-
-    //zero counters
-    xcounter = start; //default is 3 but could be 3-9 range depending on settings
-    ncounter = 1;
-    pressNo  = 0; //set initial no of presses
-        
-    blkTotalLBL.text = [NSString stringWithFormat:@"%d", xcounter];
-    blkNoLBL.text    = [NSString stringWithFormat:@"%d", 0];
-
-        //reset the timer vars
-        totalReactionTime=0.00f;
-        for (int cnt=0; cnt<10; cnt++) {
-            shortestReactionTime[cnt]   = 10000.00f;
-            longestReactionTime[cnt]    = -10000.00f;
-            averageReactionTime[cnt]    = 0.00f;
-            for (int dnt=0; dnt<13; dnt++) {
-                reactionTime[cnt][dnt]  = 0.00f;
-            }
-        }
-    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(startTestMSG) userInfo:nil repeats:NO];
-    }
-}
-
--(void)stageChecks {
-    if (isAborted == NO) {
-        if (isFinished) { //definitely ended, to catch second round of checks
-            [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(endTestMSG) userInfo:nil repeats:NO];
-        }
-    //check for stage and test end
-        if ((xcounter == finish) && (ncounter >= xcounter)) {
-        //test is ended
-        //update all counters
-            ncounter = ncounter+1;   //block number 3-9 range
-    
-            if(ncounter>=xcounter+1){ //starts at 3 for 3 blocks, end stage, then new set, 3 for 4 blocks etc.
-                xcounter=xcounter+1; //stage counter 3-9 range
-                ncounter=0;
-            }
-            isFinished=YES;
-            [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(finalStageEndMSG) userInfo:nil repeats:NO];
-        }else{
-            if(ncounter>=xcounter){
-                //not finished, but ended a stage
-                //update all counters
-                ncounter = ncounter+1;   //block number 3-9 range
-
-                if(ncounter>=xcounter+1){ //starts at 3 for 3 blocks, end stage, then new set, 3 for 4 blocks etc.
-                    xcounter=xcounter+1; //stage counter 3-9 range
-                    ncounter=0;
-                }
-                [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(stageEndMSG) userInfo:nil repeats:NO];
-            }else{
-                //not ended, carry on
-                //update all counters
-                ncounter = ncounter+1;   //block number 3-9 range
-
-                if(ncounter>=xcounter+1){ //starts at 3 for 3 blocks, end stage, then new set, 3 for 4 blocks etc.
-                    xcounter=xcounter+1; //stage counter 3-9 range
-                    ncounter=0;
-                }
-                [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(box1) userInfo:nil repeats:NO];
-            }
-        }
-    }else{
-        //aborted end
-        [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(box1) userInfo:nil repeats:NO];
-    }
-}
-
--(void)box1 {
-    if (isAborted == NO) {
-
-        mySingleton *singleton = [mySingleton sharedSingleton];
-
-        //block button inputs for now, re-enable after stage end.
-        [self buttonsDisable];
-    
-        //display status
-        blkTotalLBL.text = [NSString stringWithFormat:@"%d", xcounter];
-        blkNoLBL.text    = [NSString stringWithFormat:@"%d", ncounter];
-        [self showInfo];
-        //hide all messages except blocks
-        MessageTextView.hidden=YES;
-        MessageView.hidden=YES;
-        startBTN.hidden=YES;
-    
-        //display blocks
-        [self display_blocks];
-
-        if (singleton.onScreenInfo == YES) {
-            statusMessageTXT.text = @"Observe";
-        }else{
-            statusMessageTXT.text = @"Observe";
-        }
-
-        int t=[self whichBlock:ncounter :xcounter];
-        NSLog(@"block showing : %i seq : %i set : %i", t, ncounter, xcounter);
-        //show the t block
-
-        [NSTimer scheduledTimerWithTimeInterval:showTime target:self selector:@selector(but1) userInfo:nil repeats:NO];
-    }
-}
-
--(void)startTestMSG {
-    if (isAborted == NO) {
-        //Start of Test Message
-        [self buttonsDisable];
-        //NSLog(@"Start Test");
-        MessageView.hidden=YES;
-        [MessageView setImage: card[0].image];
-        
-        [self animateMessageView];
-   
-        [NSTimer scheduledTimerWithTimeInterval: 5.5 target:self selector:@selector(blankMSG2) userInfo:nil repeats:NO];
-        
-        [self setColours];
-    }
-}
 
 -(void)animateMessageView{
     [NSTimer scheduledTimerWithTimeInterval:0.0 target:self selector:@selector(animateMessageViewIN) userInfo:nil repeats:NO];
@@ -704,99 +502,7 @@
     //nothing else to do, the image was shown
 }
 
--(void)endTestMSG {
-    if (isAborted == NO) {
-        //End of Test Message
-        [self buttonsDisable];
-        //NSLog(@"End Test");
-        stopTestNowBTN.hidden=YES;
-        isFinished=YES;
 
-        mySingleton *singleton = [mySingleton sharedSingleton];
-
-        if (singleton.onScreenInfo == YES) {
-            statusMessageTXT.text = @"The Test has Finished.";
-        }else{
-            statusMessageTXT.text = @"";
-        }
-        [self hideInfo];
-        [self hide_blocks];
-        [MessageView setImage: card[1].image];
-        MessageView.hidden=NO;
-        [self animateMessageViewIN];
-        [NSTimer scheduledTimerWithTimeInterval:4 target:self selector:@selector(calculatingMSG) userInfo:nil repeats:NO];
-    }
-}
-
--(void)calculatingMSG {
-    if (isAborted == NO) {
-        //Calculate stats and outputs
-        [self buttonsDisable];
-        isFinished=YES;
-        //NSLog(@"Calculating Test Results");
-
-        mySingleton *singleton = [mySingleton sharedSingleton];
-
-        if (singleton.onScreenInfo == YES) {
-            statusMessageTXT.text = @"The test results are being calculated.";
-        }else{
-            statusMessageTXT.text = @"Calculating...";
-        }
-        [self hide_blocks];
-        [self hideInfo];
-        [MessageView setImage: card[4].image];
-        MessageView.hidden=NO;
-        [self animateMessageViewIN];
-
-        [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(calculations) userInfo:nil repeats:NO];
-    }
-}
-
--(void)blankMSG {
-    if (isAborted == NO) {
-        [self buttonsDisable];
-        //NSLog(@"(blankmsg)");
-        MessageView.hidden=YES;
-        [NSTimer scheduledTimerWithTimeInterval:waitTime target:self selector:@selector(stageChecks) userInfo:nil repeats:NO];
-    }
-}
-
--(void)blankMSG2 {
-    if (isAborted == NO) {
-        [self buttonsDisable];
-        //NSLog(@"(blankmsg2)");
-        [self display_blocks];
-        [self showInfo];
-
-                statusMessageTXT.text = @"Observe";
-
-        MessageView.hidden=YES;//maybe messagetime--v
-        [NSTimer scheduledTimerWithTimeInterval:startTime target:self selector:@selector(box1) userInfo:nil repeats:NO];
-    }
-}
-
--(void)jumpToResultsView {
-    if (isAborted == NO) {
-        [self buttonsDisable];
-        //NSLog(@"(jumpToResultsView)");
-        [self hide_blocks];
-        [MessageView setImage: card[6].image];
-        MessageView.hidden=NO;
-        isCalculating=YES;
-    
-        self.tabBarController.tabBar.hidden = NO;
-    
-        [self animateMessageViewIN];
-        [MessageView setImage: card[6].image];
-    //jump to selector ResultsVC
-
-        [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(selectTabBarResults) userInfo:nil repeats:NO];
-    }else{
-        //jump to selector SettingsVC
-
-        [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(selectTabBarSettings) userInfo:nil repeats:NO];
-    }
-}
 
 -(void)selectTabBarResults{
     //jump to the results view
@@ -841,23 +547,7 @@
     //settings VC jump
 }
 
--(void)blankMSG3 {
-    if (isAborted == NO) {
-    [self buttonsDisable];
-    guessStr[xcounter-1]= [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@",guess[1],guess[2],guess[3],guess[4],guess[5],guess[6],guess[7],guess[8],guess[9]];
-        //NSLog(@"(blank3 after buttons input %@)",guessStr[xcounter-1]);
-    [self display_blocks];
-    MessageView.hidden=YES;
-    if (isFinished) {
-        //NSLog(@"(blank3 endtestmsg)");
-        [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(endTestMSG) userInfo:nil repeats:NO];
-    }else{
-        //NSLog(@"(blank3 stagechecks)");
-        statusMessageTXT.text = @"";
-        [NSTimer scheduledTimerWithTimeInterval:messageTime target:self selector:@selector(stageChecks) userInfo:nil repeats:NO];
-    }
-    }
-}
+
 
 -(void)calculations{
     //MessageView.hidden = YES;
