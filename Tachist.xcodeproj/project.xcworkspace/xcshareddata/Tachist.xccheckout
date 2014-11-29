@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>E9E4C4DC-262F-4ABB-A556-1630B67412BE</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Tachist</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>AD789BC71C87F31C4C707F1A89EC87BC8981B8DB</key>
+		<string>https://github.com/CMDT/Corsi</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Tachist.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>AD789BC71C87F31C4C707F1A89EC87BC8981B8DB</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/CMDT/Corsi</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>AD789BC71C87F31C4C707F1A89EC87BC8981B8DB</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>AD789BC71C87F31C4C707F1A89EC87BC8981B8DB</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Tachist</string>
+		</dict>
+	</array>
+</dict>
+</plist>

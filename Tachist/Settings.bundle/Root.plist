@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Title</key>
+	<string>Tachist Block Test Settings</string>
+	<key>PreferenceSpecifiers</key>
+	<array>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Names - Subject/Tester</string>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<string></string>
+			<key>KeyboardType</key>
+			<string>Alphabet</string>
+			<key>AutocorrectionType</key>
+			<string>No</string>
+			<key>Key</key>
+			<string>testerName</string>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Tester Name</string>
+			<key>IsSecure</key>
+			<false/>
+			<key>AutocapitalizationType</key>
+			<string>Words</string>
+		</dict>
+
+		<dict>
+			<key>DefaultValue</key>
+			<string></string>
+			<key>KeyboardType</key>
+			<string>EmailAddress</string>
+			<key>AutocorrectionType</key>
+			<string>No</string>
+			<key>Key</key>
+			<string>emailAddress</string>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Email for Results</string>
+			<key>IsSecure</key>
+			<false/>
+			<key>AutocapitalizationType</key>
+			<string>None</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Block Numbers</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSMultiValueSpecifier</string>
+			<key>Title</key>
+			<string>Start No. of Blocks</string>
+			<key>Key</key>
+			<string>startBlocks</string>
+			<key>DefaultValue</key>
+			<integer>3</integer>
+			<key>Values</key>
+			<array>
+				<integer>3</integer>
+				<integer>4</integer>
+				<integer>5</integer>
+				<integer>6</integer>
+				<integer>7</integer>
+				<integer>8</integer>
+				<integer>9</integer>
+			</array>
+			<key>Titles</key>
+			<array>
+				<string>3</string>
+				<string>4</string>
+				<string>5</string>
+				<string>6</string>
+				<string>7</string>
+				<string>8</string>
+				<string>9</string>
+			</array>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Test Type</string>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<true/>
+			<key>Key</key>
+			<string>infoEnabled</string>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Informaton on Screen Enabled</string>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<true/>
+			<key>Key</key>
+			<string>soundsEnabled</string>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Feedback Sounds Enabled</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Block Colours</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSMultiValueSpecifier</string>
+			<key>Title</key>
+			<string>Main Block Colour</string>
+			<key>Key</key>
+			<string>blockColour</string>
+			<key>DefaultValue</key>
+			<string>Dark Gray</string>
+			<key>Values</key>
+        </dict>
+		<dict>
+			<key>DefaultValue</key>
+			<string>BEEPJAZZ</string>
+			<key>Titles</key>
+			<array>
+				<string>KLICK</string>
+				<string>BEEPPURE</string>
+				<string>BEEP_FM</string>
+				<string>BEEPDOUB</string>
+				<string>AMFMBEEP</string>
+				<string>BEEPJAZZ</string>
+			</array>
+			<key>Key</key>
+			<string>beepEffect</string>
+			<key>Type</key>
+			<string>PSMultiValueSpecifier</string>
+			<key>Title</key>
+			<string>Beep Effect Name</string>
+			<key>Values</key>
+			<array>
+				<string>KLICK</string>
+				<string>BEEPPURE</string>
+				<string>BEEP_FM</string>
+				<string>BEEPDOUB</string>
+				<string>AMFMBEEP</string>
+				<string>BEEPJAZZ</string>
+			</array>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Block Timings mS</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Block Start Delay mS</string>
+			<key>Key</key>
+			<string>blockDelay</string>
+			<key>DefaultValue</key>
+			<integer>1500</integer>
+			<key>KeyboardType</key>
+			<string>NumberPad</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Block Timing mS</string>
+			<key>Key</key>
+			<string>blockTime</string>
+			<key>DefaultValue</key>
+			<integer>1500</integer>
+			<key>KeyboardType</key>
+			<string>NumberPad</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Block Show Time mS</string>
+			<key>Key</key>
+			<string>blockShow</string>
+			<key>DefaultValue</key>
+			<integer>1500</integer>
+			<key>KeyboardType</key>
+			<string>NumberPad</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>CORSI Version Information</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTitleValueSpecifier</string>
+			<key>Title</key>
+			<string>Version Number:</string>
+			<key>Key</key>
+			<string>version0</string>
+			<key>DefaultValue</key>
+			<string>2.0.0.24.11.14</string>
+		</dict>
+        <dict>
+            <key>Type</key>
+            <string>PSTitleValueSpecifier</string>
+            <key>Title</key>
+            <string>Copyright:</string>
+            <key>Key</key>
+            <string>version1</string>
+            <key>DefaultValue</key>
+            <string>MMU (c) 2014</string>
+        </dict>
+        <dict>
+            <key>Type</key>
+            <string>PSTitleValueSpecifier</string>
+            <key>Title</key>
+            <string>Author:</string>
+            <key>Key</key>
+            <string>version2</string>
+            <key>DefaultValue</key>
+            <string>j.a.howell@mmu.ac.uk</string>
+        </dict>
+        <dict>
+            <key>Type</key>
+            <string>PSTitleValueSpecifier</string>
+            <key>Title</key>
+            <string>Web:</string>
+            <key>Key</key>
+            <string>version Information</string>
+            <key>DefaultValue</key>
+            <string>http://www.mmu.ac.uk</string>
+        </dict>
+	</array>
+	<key>StringsTable</key>
+	<string>Root</string>
+</dict>
+</plist>
