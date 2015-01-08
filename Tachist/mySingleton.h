@@ -15,6 +15,7 @@
 
     int   start;
     int   finish;
+    int   counter;
     
     long  segIndex;//for sound feedback
     
@@ -36,6 +37,8 @@
     NSString * resultStrings;
     NSString * displayStrings;
     NSString * displayStringsTitle;
+    UIImage  * imageForDisplay;
+    NSMutableArray * cardReactionTimeResult;
 
     NSMutableArray * resultStringRows;//for Excel and data csv format
     NSMutableArray * displayStringRows;//for screen display formatted to look nice
@@ -43,9 +46,10 @@
     }
 
 @property (nonatomic, retain) UIColor * currentStatusColour;
-
-@property (nonatomic) int       start;
+@property (nonatomic, retain) NSMutableArray *cardReactionTimeResult;@property (nonatomic) int       start;
+@property (nonatomic) UIImage *imageForDisplay;
 @property (nonatomic) int       finish;
+@property (nonatomic) int       counter;
 
 @property (nonatomic) long      segIndex; //sound
 

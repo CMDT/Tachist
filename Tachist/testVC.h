@@ -12,7 +12,7 @@
 
 @interface testVC : UIViewController{
     SystemSoundID mySoundEffect;
-    AVAudioPlayer *backgroundMusicPlayer;
+    AVAudioPlayer * backgroundMusicPlayer;
     BOOL backIsStarted;
 }
 
@@ -21,20 +21,9 @@
 @property (nonatomic, retain) AVAudioPlayer        * backgroundMusicPlayer;
 @property (retain, nonatomic) IBOutlet UILabel     * headingLBL;
 @property (retain, nonatomic) IBOutlet UITextView  * statusMessageTXT;
+@property (retain, nonatomic) IBOutlet UILabel     * statusMessageLab;
 @property (retain, nonatomic) IBOutlet UIImageView * MessageView;
 @property (retain, nonatomic) IBOutlet UITextView  * MessageTextView;
-
-//labels for the stages, hide if not needed
-@property (retain, nonatomic) IBOutlet UILabel  * blkLBL;
-@property (retain, nonatomic) IBOutlet UILabel  * blkNoLBL;
-@property (retain, nonatomic) IBOutlet UILabel  * blkOfLBL;
-@property (retain, nonatomic) IBOutlet UILabel  * blkTotalLBL;
-
-//labels for the stages if needed, hide if not
-
-
-//buttons over images
-
 
 //buttons for control
 @property (strong, nonatomic) IBOutlet UIButton * startBTN;
@@ -49,6 +38,9 @@
 
 -(IBAction)startTest:(id)sender;
 -(IBAction)stopTestNow:(id)sender;
+
+- (IBAction)yesPressed;
+- (IBAction)noPressed;
 
 -(float) delayDelay;
 -(float) delayWait;

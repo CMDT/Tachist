@@ -21,6 +21,7 @@ static mySingleton * sharedSingleton = nil;
     start,
     startTime,
     finish,
+    counter,
     waitTime,
     messageTime,
     oldSubjectName,
@@ -28,6 +29,8 @@ static mySingleton * sharedSingleton = nil;
     testerName,
     testDate,
     testTime,
+    imageForDisplay,
+    cardReactionTimeResult,
     resultStrings,      //string
     resultStringRows,   //array
 
@@ -69,6 +72,7 @@ static mySingleton * sharedSingleton = nil;
         currentStatusColour  = [UIColor yellowColor];
         start                = 3;
         finish               = 9;
+        counter              = 0;
         waitTime             = 1500;
         startTime            = 1500;
         showTime             = 1500;
@@ -82,6 +86,7 @@ static mySingleton * sharedSingleton = nil;
         resultStringRows     = [[NSMutableArray alloc]initWithObjects: nil];//clear the arrays of any data
         displayStringRows    = [[NSMutableArray alloc]initWithObjects: nil];
         displayStringTitles  = [[NSMutableArray alloc]initWithObjects: nil];
+        cardReactionTimeResult = [[NSMutableArray alloc]initWithObjects: nil];
         email                = @"me@text.com";
         }
     return self;
