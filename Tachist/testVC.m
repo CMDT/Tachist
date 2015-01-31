@@ -47,7 +47,7 @@
     IBOutlet UIButton    * newTestBut;
 
     //array of card images needed
-    UIImageView * card[50];
+    UIImageView * card[70];
     IBOutlet UIImageView * cardHolder;
     //for timing
 
@@ -340,16 +340,16 @@ bool wasButtonPressed = NO;
     startBTN.hidden        = NO;
 
     //initialise images for messages on messageview
-    card[0] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"started.png"]];    //start
-    card[1] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"finished.png"]];   //finish
-    card[2] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"loading.png"]];    //loading
-    card[3] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"recall.png"]];     //recall
-    card[4] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"calculating.png"]];     //calculations
-    //card[5] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-touch-blocks2.png"]];
-    card[6] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"redblocks800.png"]];  //results
-    card[7] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"cancelled.png"]]; //cancel message
-    //card[8] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_blank.png"]];     //just a blank card
-    //card[9] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"redblocks800.png"]];     //picture of some coloured blocks
+    card[50] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"started.png"]];    //start
+    card[51] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"finished.png"]];   //finish
+    card[52] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"loading.png"]];    //loading
+    card[53] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"recall.png"]];     //recall
+    card[54] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"calculating.png"]];     //calculations
+    //card[55] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi-touch-blocks2.png"]];
+    card[56] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"redblocks800.png"]];  //results
+    card[57] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"cancelled.png"]]; //cancel message
+    //card[58] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"corsi_blank.png"]];     //just a blank card
+    //card[59] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"redblocks800.png"]];     //picture of some coloured blocks
 }
 
 -(void)startStop{
@@ -476,9 +476,9 @@ bool wasButtonPressed = NO;
     UITextField * alertTextField2 = [alert textFieldAtIndex:0];//used to be 1 for dual entry, 0 for single
     alertTextField2.secureTextEntry = NO;
     alertTextField2.textAlignment = NSTextAlignmentCenter;
-    alertTextField2.keyboardType = UIKeyboardTypeDefault;
+    alertTextField2.keyboardType = UIKeyboardTypeAlphabet;
     alertTextField2.textAlignment =NSTextAlignmentNatural;
-    [alertTextField2 setFont:[UIFont fontWithName:@"Helvetica-Bold" size:(28.0)]];
+    [alertTextField2 setFont:[UIFont fontWithName:@"Helvetica-Bold" size:(12.0)]];
     //if blank, add temp name, else add the current one
     if ([singleton.subjectName isEqualToString:@""]) {
         alertTextField2.placeholder = @"Participant Code";
@@ -490,7 +490,7 @@ bool wasButtonPressed = NO;
 
 -(IBAction)startTest:sender{
     MessageView.hidden=NO;
-    [MessageView setImage: card[2].image]; //loading message
+    [MessageView setImage: card[52].image]; //loading message
     [self animateMessageViewOUT2:0.5];
 
     isAlertFinished=NO;
@@ -512,6 +512,7 @@ bool wasButtonPressed = NO;
     yesBut.hidden             = NO;
     startBut.hidden           = YES;
     newTestBut.hidden         = YES;
+    cardHolder.hidden=NO;
     //hideResultsBut.hidden     = YES;
     //saveDataToEmailBut.hidden = YES;
     //infoBut.hidden            = YES;
@@ -561,7 +562,7 @@ bool wasButtonPressed = NO;
     [NSTimer scheduledTimerWithTimeInterval:(3.0) target:self selector:@selector(startCardDisplay) userInfo:nil repeats:NO];
     //get number of cards in test and check ranges in delegate methods for textfield inputs
     //noOfCards = [noCards.text intValue];
-    noOfCards = 5;
+    noOfCards = 20; //**************************************************************************************************
     // NSLog(@"No of Cards = %i", noOfCards);
     wasButtonPressed=YES;
     //...end from tachist
@@ -945,7 +946,7 @@ bool wasButtonPressed = NO;
     [singleton.cardReactionTimeResult addObject:@"MMU Cheshire, Exercise and Sport Science, Tachistoscope iPad Application Results"];
 
     //mmu copyright message 2013 JAH
-    [singleton.cardReactionTimeResult addObject:@"(c) 2013 MMU written by Jonathan A. Howell for ESS Tachistoscope V3.1"];
+    [singleton.cardReactionTimeResult addObject:@"(c) 2015 MMU written by Jonathan A. Howell for ESS Tachistoscope V3.1"];
 
     //blank line
     [singleton.cardReactionTimeResult addObject:@" "];
@@ -1051,7 +1052,7 @@ bool wasButtonPressed = NO;
     //blank line
     [singleton.cardReactionTimeResult addObject:@" " ];
     //mmu copyright message 2013 JAH
-    [singleton.cardReactionTimeResult addObject:@"MMU (c) 2103 Jonathan A. Howell SAS Technical Services. " ];
+    [singleton.cardReactionTimeResult addObject:@"MMU (c) 2015 Jonathan A. Howell SAS Technical Services. " ];
     // 27 + no of cards array index total
     //blank line
     [singleton.cardReactionTimeResult addObject:@" "];

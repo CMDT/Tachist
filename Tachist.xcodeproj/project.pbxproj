@@ -363,7 +363,7 @@
 				ORGANIZATIONNAME = "Manchester Metropolitan University - ESS - essmobile";
 				TargetAttributes = {
 					E10D016419B6024F00D9E5F8 = {
-						DevelopmentTeam = G8Q878PY9S;
+						DevelopmentTeam = 4SPW49WK35;
 					};
 					E10D018819B6024F00D9E5F8 = {
 						TestTargetID = E10D016419B6024F00D9E5F8;
