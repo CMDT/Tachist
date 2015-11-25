@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+    </dependencies>
+    <scenes>
+        <!--Tachistoscope-->
+        <scene sceneID="4">
+            <objects>
+                <viewController title="Tachistoscope" extendedLayoutIncludesOpaqueBars="YES" modalTransitionStyle="crossDissolve" id="2" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dmd-Mq-csJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="esm-qJ-kGZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" maximumZoomScale="4" keyboardDismissMode="onDrag" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BVh-To-1wt" userLabel="Text View - info page">
+                                <rect key="frame" x="144" y="159" width="714" height="493"/>
+                                <animations/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">In this test, you will be shown some white cards that contain rows of O's and maybe one X.  
+
+Some cards contain only O's.
+
+Your task is to correctly identify the cards that contain X’s.
+
+If you see an X, press the YES button.  If there is no X, press the NO button.  
+
+You are timed in milliseconds from the start of the card display to the start of the next card. You can only record one time per card, no matter how many times you press the buttons.   
+
+Each card is displayed for a ‘stimulus time’ in mS that you can set.  The ‘post stimulus delay’ is the time after the card is removed from the display.  The total reaction time available is the sum of the stimulus time and the post stimulus delay.  If you do not press any button in the time available, a blank reaction is recorded.  This blank is not used in the results calculations.
+
+At the end of the test, you will be able to see the results on-screen which contain some basic statistics and the values for each reaction time.
+
+If you press the ‘Start’ button without sending an e-mail, your data will be lost as the new data will overwrite the previous entries.
+
+Pressing the ‘Home’ button will exit the App and you will loose your un-sent data.
+
+Your data is automatically sent to the Documents Directory on the iPad for the Tachistoscope App.  To use the files, open iTunes on your PC or Mac, then open the Apps tab.  The documents associated with the App are stored there and can be saved to the PC or Mac.
+
+You can generate a new file name for the files by typing in your own Subject Code or press the button to generate one.  If the same code is used as a previous one, the data file will not be saved to the iPad.  e.g. Use a NAME Code and a number for each test to ensure data is saved. Use e-mail for server storage of data and flexibility in retrieving it.
+
+The data once displayed on screen is able to be sent to an e-mail address you specify by pressing the Data button. Remember to input a valid e-mail address.
+
+To process the data further, you will need to do some manual cut and paste on the receiving PC or Mac computer.  Cut out the data by ‘Select All’ in the e-mail body area, and paste into a new blank text document using notepad or similar.  Save with the ‘CSV’ extension. In Excel, select the CSV file you just saved, and follow the onscreen instructions to import.  Ensure that the option to use comma-delimited text is enabled in the tick box.
+
+Note:- 
+
+Due to the way an iPad works, multiple Apps can run in parallel, some of which can run in the background, it is possible that the timings could be inaccurate due to processor load from competing tasks.  You may wish to take several runs with the Tachistoscope App to determine more precise results.
+
+(c) 14th October 2013 MMU.</string>
+                                        <attributes>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="20" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Status" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="138" translatesAutoresizingMaskIntoConstraints="NO" id="GZq-bS-vxf">
+                                <rect key="frame" x="78" y="21" width="138" height="134"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="mS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pGP-zO-U9X">
+                                <rect key="frame" x="612" y="470" width="33" height="28"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="mS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yaj-iH-nVi">
+                                <rect key="frame" x="612" y="550" width="33" height="28"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oMe-ds-zg9" userLabel="Button - no button">
+                                <rect key="frame" x="150" y="551" width="150" height="150"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="64"/>
+                                <state key="normal" backgroundImage="no-but.png">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="noPressed" destination="2" eventType="touchUpInside" id="GXY-eN-bGc"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eqB-RP-kt7" userLabel="Button - yes button">
+                                <rect key="frame" x="729" y="551" width="150" height="150"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="64"/>
+                                <state key="normal" backgroundImage="yes-but.png">
+                                    <color key="titleColor" red="0.25098040699958801" green="0.50196081399917603" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="yesPressed" destination="2" eventType="touchUpInside" id="7Fd-P0-HhL"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="vMh-X9-8a8" userLabel="Button - start test">
+                                <rect key="frame" x="388" y="666" width="250" height="88"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="45"/>
+                                <state key="normal" backgroundImage="startTest.png">
+                                    <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="startTest:" destination="2" eventType="touchUpInside" id="lGP-A9-XuM"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="amU-qo-Sqz" userLabel="Button - new test">
+                                <rect key="frame" x="388" y="664" width="250" height="90"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <state key="normal" backgroundImage="newTest.png">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="NewTestExit:" destination="2" eventType="touchUpInside" id="Icj-hG-4dZ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IKB-02-OY6" userLabel="Button - info">
+                                <rect key="frame" x="78" y="653" width="95" height="95"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" backgroundImage="info.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="infoButtonPressed:" destination="2" eventType="touchUpInside" id="NxT-HM-1cg"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zNU-U6-QcZ" userLabel="Button - email data">
+                                <rect key="frame" x="801" y="653" width="145" height="100"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <state key="normal" backgroundImage="dataEmail.png">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="sendMail:" destination="2" eventType="touchUpInside" id="885-21-Ckn"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P8r-eL-ciM" userLabel="Button - results">
+                                <rect key="frame" x="207" y="653" width="145" height="100"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="47"/>
+                                <state key="normal" backgroundImage="results.png">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showResults:" destination="2" eventType="touchUpInside" id="iNZ-ik-vyr"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lop-aP-Cix" userLabel="Button - swap displays">
+                                <rect key="frame" x="388" y="653" width="250" height="100"/>
+                                <animations/>
+                                <state key="normal" backgroundImage="swapScreen.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="hideResults:" destination="2" eventType="touchUpInside" id="1vD-rP-y80"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="HGH-PO-BIM">
+                                <rect key="frame" x="439" y="289" width="395" height="65"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="20" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5JQ-3N-QYR">
+                                <rect key="frame" x="439" y="372" width="148" height="65"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="50"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="300" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nsQ-Ig-l25">
+                                <rect key="frame" x="439" y="451" width="146" height="65"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="50"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="3000" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HFw-fW-CWM">
+                                <rect key="frame" x="439" y="531" width="146" height="65"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="50"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad"/>
+                            </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="MMU_logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="Zu1-nh-V4E">
+                                <rect key="frame" x="839" y="20" width="107" height="129"/>
+                                <animations/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" alpha="0.5499999999999996" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m6x-vr-ipw" userLabel="Image View - settings background">
+                                <rect key="frame" x="155" y="163" width="715" height="488"/>
+                                <animations/>
+                                <color key="backgroundColor" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="center" fixedFrame="YES" restorationIdentifier="cardImage" image="tach-white.png" translatesAutoresizingMaskIntoConstraints="NO" id="nGM-2W-9ER">
+                                <rect key="frame" x="126" y="151" width="772" height="382"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <accessibility key="accessibilityConfiguration" label="cardImage"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="settings.png" translatesAutoresizingMaskIntoConstraints="NO" id="uHx-Tp-JkU">
+                                <rect key="frame" x="387" y="163" width="250" height="100"/>
+                                <animations/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="stimulus.png" translatesAutoresizingMaskIntoConstraints="NO" id="I9n-bM-pGl">
+                                <rect key="frame" x="191" y="451" width="200" height="65"/>
+                                <animations/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="subject.png" translatesAutoresizingMaskIntoConstraints="NO" id="A1v-qw-bh6">
+                                <rect key="frame" x="191" y="289" width="200" height="65"/>
+                                <animations/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="noCards.png" translatesAutoresizingMaskIntoConstraints="NO" id="pwg-Ij-HB2">
+                                <rect key="frame" x="191" y="372" width="200" height="65"/>
+                                <animations/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="postdelay.png" translatesAutoresizingMaskIntoConstraints="NO" id="b0m-fq-v3c">
+                                <rect key="frame" x="191" y="531" width="200" height="65"/>
+                                <animations/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="jumpingmanblue200.png" translatesAutoresizingMaskIntoConstraints="NO" id="iAl-Xd-PLy">
+                                <rect key="frame" x="78" y="20" width="129" height="128"/>
+                                <animations/>
+                            </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="euS-2z-Web" userLabel="Text View - results border page">
+                                <rect key="frame" x="78" y="160" width="868" height="489"/>
+                                <animations/>
+                                <color key="backgroundColor" red="1" green="1" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="tachistTitle1.png" translatesAutoresizingMaskIntoConstraints="NO" id="aXI-sV-dqh">
+                                <rect key="frame" x="224" y="20" width="517" height="63"/>
+                                <animations/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.79999999999999982" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="O and X" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qp2-02-8ND">
+                                <rect key="frame" x="729" y="693" width="150" height="41"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.79999999999999982" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Only O" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="udo-fy-Mw2">
+                                <rect key="frame" x="148" y="693" width="152" height="41"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" text="Please wait... results loading..." translatesAutoresizingMaskIntoConstraints="NO" id="slM-Gn-ZRZ" userLabel="Text View - results page">
+                                <rect key="frame" x="142" y="158" width="741" height="494"/>
+                                <animations/>
+                                <color key="backgroundColor" red="1" green="1" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="V." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8EE-b8-ZSc">
+                                <rect key="frame" x="719" y="55" width="123" height="28"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="(Touch item to edit)" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r8U-k7-cLK">
+                                <rect key="frame" x="653" y="604" width="189" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <size key="shadowOffset" width="0.0" height="1"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hha-36-g6W">
+                                <rect key="frame" x="679" y="362" width="155" height="30"/>
+                                <animations/>
+                                <state key="normal" title="New Subject Code">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="newSubjectCodeGen:" destination="2" eventType="touchUpInside" id="kJB-rR-KFU"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="tachistTitle2.png" translatesAutoresizingMaskIntoConstraints="NO" id="bYi-qM-qY9">
+                                <rect key="frame" x="353" y="80" width="450" height="63"/>
+                                <animations/>
+                            </imageView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="JumpingManLogo" destination="iAl-Xd-PLy" id="sFT-us-0s0"/>
+                        <outlet property="ObutLab" destination="udo-fy-Mw2" id="PJL-JH-TDY"/>
+                        <outlet property="XbutLab" destination="Qp2-02-8ND" id="8LW-ih-XWQ"/>
+                        <outlet property="cardHolder" destination="nGM-2W-9ER" id="l3a-hl-RxA"/>
+                        <outlet property="cardsLab" destination="pwg-Ij-HB2" id="m4G-7r-pCz"/>
+                        <outlet property="clickMessageLab" destination="r8U-k7-cLK" id="ggT-uI-Y4H"/>
+                        <outlet property="hideResultsBut" destination="Lop-aP-Cix" id="9H9-wJ-WtV"/>
+                        <outlet property="infoBut" destination="IKB-02-OY6" id="hP7-f7-tRt"/>
+                        <outlet property="infoView" destination="BVh-To-1wt" id="xeK-O5-W2p"/>
+                        <outlet property="logoImage" destination="Zu1-nh-V4E" id="iaQ-P4-kCE"/>
+                        <outlet property="ms1Lab" destination="pGP-zO-U9X" id="spO-VS-3tR"/>
+                        <outlet property="ms2Lab" destination="Yaj-iH-nVi" id="HmA-7o-zi6"/>
+                        <outlet property="newSubjectBut" destination="hha-36-g6W" id="iD1-Qm-1lS"/>
+                        <outlet property="newTestBut" destination="amU-qo-Sqz" id="baT-KA-ZVw"/>
+                        <outlet property="noBut" destination="oMe-ds-zg9" id="0oi-Wt-K0c"/>
+                        <outlet property="noCards" destination="5JQ-3N-QYR" id="AST-II-JQh"/>
+                        <outlet property="postResponseDelay" destination="HFw-fW-CWM" id="sIH-zg-R2w"/>
+                        <outlet property="respLab" destination="b0m-fq-v3c" id="4mB-1b-d3t"/>
+                        <outlet property="results" destination="P8r-eL-ciM" id="eu1-rP-wAh"/>
+                        <outlet property="resultsView" destination="slM-Gn-ZRZ" id="EbP-rB-atF"/>
+                        <outlet property="resultsViewBorder" destination="euS-2z-Web" id="onm-bb-epY"/>
+                        <outlet property="saveDataToEmailBut" destination="zNU-U6-QcZ" id="f25-cT-Phx"/>
+                        <outlet property="settingsBG" destination="m6x-vr-ipw" id="G3e-yU-b0N"/>
+                        <outlet property="settingsLab" destination="uHx-Tp-JkU" id="nD9-gn-65G"/>
+                        <outlet property="startBut" destination="vMh-X9-8a8" id="DoI-gg-sSS"/>
+                        <outlet property="statusMessageLab" destination="GZq-bS-vxf" id="t9k-HV-iyL"/>
+                        <outlet property="stimLab" destination="I9n-bM-pGl" id="hAd-2G-hI6"/>
+                        <outlet property="stimOnTime" destination="nsQ-Ig-l25" id="XWj-du-KFh"/>
+                        <outlet property="subjectCodeLab" destination="A1v-qw-bh6" id="qKq-Lp-eIL"/>
+                        <outlet property="subjectCodeTxt" destination="HGH-PO-BIM" id="7Mn-6i-2Rs"/>
+                        <outlet property="title1Lab" destination="aXI-sV-dqh" id="fgk-Wr-alk"/>
+                        <outlet property="title2Lab" destination="bYi-qM-qY9" id="VNq-mq-APQ"/>
+                        <outlet property="versionNumberLab" destination="8EE-b8-ZSc" id="t3r-Ac-tjI"/>
+                        <outlet property="yesBut" destination="eqB-RP-kt7" id="Nbq-5s-Ysf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="27" y="-222"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="MMU_logo.png" width="100" height="122"/>
+        <image name="dataEmail.png" width="250" height="100"/>
+        <image name="info.png" width="100" height="100"/>
+        <image name="jumpingmanblue200.png" width="200" height="185"/>
+        <image name="newTest.png" width="250" height="100"/>
+        <image name="no-but.png" width="150" height="150"/>
+        <image name="noCards.png" width="340" height="150"/>
+        <image name="postdelay.png" width="340" height="150"/>
+        <image name="results.png" width="250" height="100"/>
+        <image name="settings.png" width="250" height="100"/>
+        <image name="startTest.png" width="250" height="100"/>
+        <image name="stimulus.png" width="340" height="150"/>
+        <image name="subject.png" width="340" height="150"/>
+        <image name="swapScreen.png" width="250" height="100"/>
+        <image name="tach-white.png" width="630" height="230"/>
+        <image name="tachistTitle1.png" width="450" height="63"/>
+        <image name="tachistTitle2.png" width="450" height="63"/>
+        <image name="yes-but.png" width="150" height="150"/>
+    </resources>
+</document>

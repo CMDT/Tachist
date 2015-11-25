@@ -1,0 +1,503 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		911AD2CD18075499007083F3 /* dataEmail.png in Resources */ = {isa = PBXBuildFile; fileRef = 911AD2C818075499007083F3 /* dataEmail.png */; };
+		911AD2CE18075499007083F3 /* info.png in Resources */ = {isa = PBXBuildFile; fileRef = 911AD2C918075499007083F3 /* info.png */; };
+		911AD2CF18075499007083F3 /* newTest.png in Resources */ = {isa = PBXBuildFile; fileRef = 911AD2CA18075499007083F3 /* newTest.png */; };
+		911AD2D018075499007083F3 /* results.png in Resources */ = {isa = PBXBuildFile; fileRef = 911AD2CB18075499007083F3 /* results.png */; };
+		911AD2D118075499007083F3 /* startTest.png in Resources */ = {isa = PBXBuildFile; fileRef = 911AD2CC18075499007083F3 /* startTest.png */; };
+		911AD2D618075BBC007083F3 /* noCards.png in Resources */ = {isa = PBXBuildFile; fileRef = 911AD2D218075BBC007083F3 /* noCards.png */; };
+		911AD2D718075BBC007083F3 /* postdelay.png in Resources */ = {isa = PBXBuildFile; fileRef = 911AD2D318075BBC007083F3 /* postdelay.png */; };
+		911AD2D818075BBC007083F3 /* stimulus.png in Resources */ = {isa = PBXBuildFile; fileRef = 911AD2D418075BBC007083F3 /* stimulus.png */; };
+		911AD2D918075BBC007083F3 /* subject.png in Resources */ = {isa = PBXBuildFile; fileRef = 911AD2D518075BBC007083F3 /* subject.png */; };
+		911AD2DB18075BEB007083F3 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 911AD2DA18075BEB007083F3 /* settings.png */; };
+		911AD2DD180770C9007083F3 /* swapScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 911AD2DC180770C9007083F3 /* swapScreen.png */; };
+		913FE86D17F0FEE500A27E46 /* MMU_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 913FE86B17F0FEE500A27E46 /* MMU_logo.png */; };
+		913FE86E17F0FEE500A27E46 /* MMU_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 913FE86C17F0FEE500A27E46 /* MMU_logo@2x.png */; };
+		9143CA3C17EA71B9006DB34B /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 9143CA3B17EA71B9006DB34B /* Icon-72.png */; };
+		9143CA3E17EA71C6006DB34B /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9143CA3D17EA71C6006DB34B /* Icon-72@2x.png */; };
+		9143CA4017EA71DE006DB34B /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9143CA3F17EA71DE006DB34B /* Icon.png */; };
+		9143CA4217EA71E7006DB34B /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9143CA4117EA71E7006DB34B /* Icon@2x.png */; };
+		919BF0401800B9D500C486E1 /* no-but.png in Resources */ = {isa = PBXBuildFile; fileRef = 919BF03E1800B9D500C486E1 /* no-but.png */; };
+		919BF0411800B9D500C486E1 /* yes-but.png in Resources */ = {isa = PBXBuildFile; fileRef = 919BF03F1800B9D500C486E1 /* yes-but.png */; };
+		91E7EBE51C052CF500271FC3 /* MainSB_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91E7EBE41C052CF500271FC3 /* MainSB_iPhone.storyboard */; };
+		91FFED8A17FF4056008EC6DE /* mySingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 91FFED8917FF4056008EC6DE /* mySingleton.m */; };
+		91FFED8F17FF55B5008EC6DE /* tach-finish1.png in Resources */ = {isa = PBXBuildFile; fileRef = 91FFED8E17FF55B5008EC6DE /* tach-finish1.png */; };
+		E11CE24A17EC7F3D00696CC6 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E11CE24917EC7F3D00696CC6 /* MessageUI.framework */; };
+		E16826631807E7B800AC0E34 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E16826621807E7B800AC0E34 /* Images.xcassets */; };
+		E16826661807F2C500AC0E34 /* jumpingmangreen200png.png in Resources */ = {isa = PBXBuildFile; fileRef = E16826641807F2C500AC0E34 /* jumpingmangreen200png.png */; };
+		E16826671807F2C500AC0E34 /* jumpingmanblue200.png in Resources */ = {isa = PBXBuildFile; fileRef = E16826651807F2C500AC0E34 /* jumpingmanblue200.png */; };
+		E168266A18081D7C00AC0E34 /* tachistTitle2.png in Resources */ = {isa = PBXBuildFile; fileRef = E168266818081D7C00AC0E34 /* tachistTitle2.png */; };
+		E168266B18081D7C00AC0E34 /* tachistTitle1.png in Resources */ = {isa = PBXBuildFile; fileRef = E168266918081D7C00AC0E34 /* tachistTitle1.png */; };
+		E1CC922D17E1BB460049FE8A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1CC922C17E1BB460049FE8A /* UIKit.framework */; };
+		E1CC922F17E1BB460049FE8A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1CC922E17E1BB460049FE8A /* Foundation.framework */; };
+		E1CC923117E1BB460049FE8A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1CC923017E1BB460049FE8A /* CoreGraphics.framework */; };
+		E1CC923717E1BB460049FE8A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1CC923517E1BB460049FE8A /* InfoPlist.strings */; };
+		E1CC923917E1BB460049FE8A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CC923817E1BB460049FE8A /* main.m */; };
+		E1CC923D17E1BB460049FE8A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CC923C17E1BB460049FE8A /* AppDelegate.m */; };
+		E1CC923F17E1BB460049FE8A /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = E1CC923E17E1BB460049FE8A /* Default.png */; };
+		E1CC924117E1BB460049FE8A /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1CC924017E1BB460049FE8A /* Default@2x.png */; };
+		E1CC924317E1BB460049FE8A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1CC924217E1BB460049FE8A /* Default-568h@2x.png */; };
+		E1CC924917E1BB460049FE8A /* MainSB_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1CC924717E1BB460049FE8A /* MainSB_iPad.storyboard */; };
+		E1CC924C17E1BB460049FE8A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CC924B17E1BB460049FE8A /* ViewController.m */; };
+		E1CC925C17E1BB7E0049FE8A /* tach-1.png in Resources */ = {isa = PBXBuildFile; fileRef = E1CC925217E1BB7E0049FE8A /* tach-1.png */; };
+		E1CC925D17E1BB7E0049FE8A /* tach-2.png in Resources */ = {isa = PBXBuildFile; fileRef = E1CC925317E1BB7E0049FE8A /* tach-2.png */; };
+		E1CC925E17E1BB7E0049FE8A /* tach-3.png in Resources */ = {isa = PBXBuildFile; fileRef = E1CC925417E1BB7E0049FE8A /* tach-3.png */; };
+		E1CC925F17E1BB7E0049FE8A /* tach-4.png in Resources */ = {isa = PBXBuildFile; fileRef = E1CC925517E1BB7E0049FE8A /* tach-4.png */; };
+		E1CC926017E1BB7E0049FE8A /* tach-5.png in Resources */ = {isa = PBXBuildFile; fileRef = E1CC925617E1BB7E0049FE8A /* tach-5.png */; };
+		E1CC926117E1BB7E0049FE8A /* tach-6.png in Resources */ = {isa = PBXBuildFile; fileRef = E1CC925717E1BB7E0049FE8A /* tach-6.png */; };
+		E1CC926217E1BB7E0049FE8A /* tach-7.png in Resources */ = {isa = PBXBuildFile; fileRef = E1CC925817E1BB7E0049FE8A /* tach-7.png */; };
+		E1CC926317E1BB7E0049FE8A /* tach-blank.png in Resources */ = {isa = PBXBuildFile; fileRef = E1CC925917E1BB7E0049FE8A /* tach-blank.png */; };
+		E1CC926417E1BB7E0049FE8A /* tach-finish.png in Resources */ = {isa = PBXBuildFile; fileRef = E1CC925A17E1BB7E0049FE8A /* tach-finish.png */; };
+		E1CC926517E1BB7E0049FE8A /* tach-start.png in Resources */ = {isa = PBXBuildFile; fileRef = E1CC925B17E1BB7E0049FE8A /* tach-start.png */; };
+		E1F8D1B617E74D3D00AD8C0F /* tach-pyellow.png in Resources */ = {isa = PBXBuildFile; fileRef = E1F8D1B417E74D3D00AD8C0F /* tach-pyellow.png */; };
+		E1F8D1B717E74D3D00AD8C0F /* tach-white.png in Resources */ = {isa = PBXBuildFile; fileRef = E1F8D1B517E74D3D00AD8C0F /* tach-white.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		911AD2C818075499007083F3 /* dataEmail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dataEmail.png; sourceTree = "<group>"; };
+		911AD2C918075499007083F3 /* info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info.png; sourceTree = "<group>"; };
+		911AD2CA18075499007083F3 /* newTest.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newTest.png; sourceTree = "<group>"; };
+		911AD2CB18075499007083F3 /* results.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = results.png; sourceTree = "<group>"; };
+		911AD2CC18075499007083F3 /* startTest.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = startTest.png; sourceTree = "<group>"; };
+		911AD2D218075BBC007083F3 /* noCards.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noCards.png; sourceTree = "<group>"; };
+		911AD2D318075BBC007083F3 /* postdelay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = postdelay.png; sourceTree = "<group>"; };
+		911AD2D418075BBC007083F3 /* stimulus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stimulus.png; sourceTree = "<group>"; };
+		911AD2D518075BBC007083F3 /* subject.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = subject.png; sourceTree = "<group>"; };
+		911AD2DA18075BEB007083F3 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
+		911AD2DC180770C9007083F3 /* swapScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = swapScreen.png; sourceTree = "<group>"; };
+		913FE86B17F0FEE500A27E46 /* MMU_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MMU_logo.png; path = ../MMU_logo.png; sourceTree = "<group>"; };
+		913FE86C17F0FEE500A27E46 /* MMU_logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "MMU_logo@2x.png"; path = "../MMU_logo@2x.png"; sourceTree = "<group>"; };
+		9143CA3B17EA71B9006DB34B /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "../Icon-72.png"; sourceTree = "<group>"; };
+		9143CA3D17EA71C6006DB34B /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72@2x.png"; path = "../Icon-72@2x.png"; sourceTree = "<group>"; };
+		9143CA3F17EA71DE006DB34B /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
+		9143CA4117EA71E7006DB34B /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../Icon@2x.png"; sourceTree = "<group>"; };
+		919BF03E1800B9D500C486E1 /* no-but.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no-but.png"; sourceTree = "<group>"; };
+		919BF03F1800B9D500C486E1 /* yes-but.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yes-but.png"; sourceTree = "<group>"; };
+		91E7EBE41C052CF500271FC3 /* MainSB_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainSB_iPhone.storyboard; sourceTree = "<group>"; };
+		91FFED8817FF4056008EC6DE /* mySingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mySingleton.h; sourceTree = "<group>"; };
+		91FFED8917FF4056008EC6DE /* mySingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mySingleton.m; sourceTree = "<group>"; };
+		91FFED8E17FF55B5008EC6DE /* tach-finish1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tach-finish1.png"; sourceTree = "<group>"; };
+		E11CE24917EC7F3D00696CC6 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		E16826621807E7B800AC0E34 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		E16826641807F2C500AC0E34 /* jumpingmangreen200png.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jumpingmangreen200png.png; sourceTree = "<group>"; };
+		E16826651807F2C500AC0E34 /* jumpingmanblue200.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jumpingmanblue200.png; sourceTree = "<group>"; };
+		E168266818081D7C00AC0E34 /* tachistTitle2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tachistTitle2.png; sourceTree = "<group>"; };
+		E168266918081D7C00AC0E34 /* tachistTitle1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tachistTitle1.png; sourceTree = "<group>"; };
+		E1CC922917E1BB460049FE8A /* Tachist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tachist.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1CC922C17E1BB460049FE8A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		E1CC922E17E1BB460049FE8A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		E1CC923017E1BB460049FE8A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		E1CC923417E1BB460049FE8A /* Tachist-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tachist-Info.plist"; sourceTree = "<group>"; };
+		E1CC923617E1BB460049FE8A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E1CC923817E1BB460049FE8A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		E1CC923A17E1BB460049FE8A /* Tachist-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tachist-Prefix.pch"; sourceTree = "<group>"; };
+		E1CC923B17E1BB460049FE8A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		E1CC923C17E1BB460049FE8A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		E1CC923E17E1BB460049FE8A /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		E1CC924017E1BB460049FE8A /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		E1CC924217E1BB460049FE8A /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		E1CC924817E1BB460049FE8A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainSB_iPad.storyboard; sourceTree = "<group>"; };
+		E1CC924A17E1BB460049FE8A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		E1CC924B17E1BB460049FE8A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		E1CC925217E1BB7E0049FE8A /* tach-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tach-1.png"; path = "../tach-1.png"; sourceTree = "<group>"; };
+		E1CC925317E1BB7E0049FE8A /* tach-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tach-2.png"; path = "../tach-2.png"; sourceTree = "<group>"; };
+		E1CC925417E1BB7E0049FE8A /* tach-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tach-3.png"; path = "../tach-3.png"; sourceTree = "<group>"; };
+		E1CC925517E1BB7E0049FE8A /* tach-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tach-4.png"; path = "../tach-4.png"; sourceTree = "<group>"; };
+		E1CC925617E1BB7E0049FE8A /* tach-5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tach-5.png"; path = "../tach-5.png"; sourceTree = "<group>"; };
+		E1CC925717E1BB7E0049FE8A /* tach-6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tach-6.png"; path = "../tach-6.png"; sourceTree = "<group>"; };
+		E1CC925817E1BB7E0049FE8A /* tach-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tach-7.png"; path = "../tach-7.png"; sourceTree = "<group>"; };
+		E1CC925917E1BB7E0049FE8A /* tach-blank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tach-blank.png"; path = "../tach-blank.png"; sourceTree = "<group>"; };
+		E1CC925A17E1BB7E0049FE8A /* tach-finish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tach-finish.png"; path = "../tach-finish.png"; sourceTree = "<group>"; };
+		E1CC925B17E1BB7E0049FE8A /* tach-start.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tach-start.png"; path = "../tach-start.png"; sourceTree = "<group>"; };
+		E1F8D1B417E74D3D00AD8C0F /* tach-pyellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tach-pyellow.png"; sourceTree = SOURCE_ROOT; };
+		E1F8D1B517E74D3D00AD8C0F /* tach-white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tach-white.png"; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E1CC922617E1BB460049FE8A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E11CE24A17EC7F3D00696CC6 /* MessageUI.framework in Frameworks */,
+				E1CC922D17E1BB460049FE8A /* UIKit.framework in Frameworks */,
+				E1CC922F17E1BB460049FE8A /* Foundation.framework in Frameworks */,
+				E1CC923117E1BB460049FE8A /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E1CC922017E1BB460049FE8A = {
+			isa = PBXGroup;
+			children = (
+				E1CC923217E1BB460049FE8A /* Tachist33 */,
+				E1CC922B17E1BB460049FE8A /* Frameworks */,
+				E1CC922A17E1BB460049FE8A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E1CC922A17E1BB460049FE8A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E1CC922917E1BB460049FE8A /* Tachist.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E1CC922B17E1BB460049FE8A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E11CE24917EC7F3D00696CC6 /* MessageUI.framework */,
+				E1CC922C17E1BB460049FE8A /* UIKit.framework */,
+				E1CC922E17E1BB460049FE8A /* Foundation.framework */,
+				E1CC923017E1BB460049FE8A /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E1CC923217E1BB460049FE8A /* Tachist33 */ = {
+			isa = PBXGroup;
+			children = (
+				91FFED8817FF4056008EC6DE /* mySingleton.h */,
+				91FFED8917FF4056008EC6DE /* mySingleton.m */,
+				E1CC923B17E1BB460049FE8A /* AppDelegate.h */,
+				E1CC923C17E1BB460049FE8A /* AppDelegate.m */,
+				E1CC924717E1BB460049FE8A /* MainSB_iPad.storyboard */,
+				91E7EBE41C052CF500271FC3 /* MainSB_iPhone.storyboard */,
+				E1CC924A17E1BB460049FE8A /* ViewController.h */,
+				E1CC924B17E1BB460049FE8A /* ViewController.m */,
+				E1CC923317E1BB460049FE8A /* Supporting Files */,
+				E16826621807E7B800AC0E34 /* Images.xcassets */,
+			);
+			path = Tachist33;
+			sourceTree = "<group>";
+		};
+		E1CC923317E1BB460049FE8A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E168266818081D7C00AC0E34 /* tachistTitle2.png */,
+				E168266918081D7C00AC0E34 /* tachistTitle1.png */,
+				E16826641807F2C500AC0E34 /* jumpingmangreen200png.png */,
+				E16826651807F2C500AC0E34 /* jumpingmanblue200.png */,
+				913FE86B17F0FEE500A27E46 /* MMU_logo.png */,
+				913FE86C17F0FEE500A27E46 /* MMU_logo@2x.png */,
+				9143CA4117EA71E7006DB34B /* Icon@2x.png */,
+				9143CA3F17EA71DE006DB34B /* Icon.png */,
+				9143CA3D17EA71C6006DB34B /* Icon-72@2x.png */,
+				9143CA3B17EA71B9006DB34B /* Icon-72.png */,
+				911AD2DC180770C9007083F3 /* swapScreen.png */,
+				911AD2DA18075BEB007083F3 /* settings.png */,
+				911AD2D218075BBC007083F3 /* noCards.png */,
+				911AD2D318075BBC007083F3 /* postdelay.png */,
+				911AD2D418075BBC007083F3 /* stimulus.png */,
+				911AD2D518075BBC007083F3 /* subject.png */,
+				911AD2C818075499007083F3 /* dataEmail.png */,
+				911AD2C918075499007083F3 /* info.png */,
+				911AD2CA18075499007083F3 /* newTest.png */,
+				911AD2CB18075499007083F3 /* results.png */,
+				911AD2CC18075499007083F3 /* startTest.png */,
+				919BF03E1800B9D500C486E1 /* no-but.png */,
+				919BF03F1800B9D500C486E1 /* yes-but.png */,
+				E1F8D1B417E74D3D00AD8C0F /* tach-pyellow.png */,
+				E1F8D1B517E74D3D00AD8C0F /* tach-white.png */,
+				E1CC925217E1BB7E0049FE8A /* tach-1.png */,
+				E1CC925317E1BB7E0049FE8A /* tach-2.png */,
+				E1CC925417E1BB7E0049FE8A /* tach-3.png */,
+				E1CC925517E1BB7E0049FE8A /* tach-4.png */,
+				E1CC925617E1BB7E0049FE8A /* tach-5.png */,
+				E1CC925717E1BB7E0049FE8A /* tach-6.png */,
+				E1CC925817E1BB7E0049FE8A /* tach-7.png */,
+				E1CC925917E1BB7E0049FE8A /* tach-blank.png */,
+				E1CC925A17E1BB7E0049FE8A /* tach-finish.png */,
+				91FFED8E17FF55B5008EC6DE /* tach-finish1.png */,
+				E1CC925B17E1BB7E0049FE8A /* tach-start.png */,
+				E1CC923E17E1BB460049FE8A /* Default.png */,
+				E1CC924017E1BB460049FE8A /* Default@2x.png */,
+				E1CC924217E1BB460049FE8A /* Default-568h@2x.png */,
+				E1CC923417E1BB460049FE8A /* Tachist-Info.plist */,
+				E1CC923517E1BB460049FE8A /* InfoPlist.strings */,
+				E1CC923817E1BB460049FE8A /* main.m */,
+				E1CC923A17E1BB460049FE8A /* Tachist-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E1CC922817E1BB460049FE8A /* Tachist */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E1CC924F17E1BB460049FE8A /* Build configuration list for PBXNativeTarget "Tachist" */;
+			buildPhases = (
+				E1CC922517E1BB460049FE8A /* Sources */,
+				E1CC922617E1BB460049FE8A /* Frameworks */,
+				E1CC922717E1BB460049FE8A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Tachist;
+			productName = Tachist33;
+			productReference = E1CC922917E1BB460049FE8A /* Tachist.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E1CC922117E1BB460049FE8A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = "Manchester Metropolitan University - ESS - psyc";
+				TargetAttributes = {
+					E1CC922817E1BB460049FE8A = {
+						DevelopmentTeam = 4SPW49WK35;
+					};
+				};
+			};
+			buildConfigurationList = E1CC922417E1BB460049FE8A /* Build configuration list for PBXProject "Tachist" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = E1CC922017E1BB460049FE8A;
+			productRefGroup = E1CC922A17E1BB460049FE8A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E1CC922817E1BB460049FE8A /* Tachist */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E1CC922717E1BB460049FE8A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E1CC923717E1BB460049FE8A /* InfoPlist.strings in Resources */,
+				E1CC923F17E1BB460049FE8A /* Default.png in Resources */,
+				91E7EBE51C052CF500271FC3 /* MainSB_iPhone.storyboard in Resources */,
+				911AD2D818075BBC007083F3 /* stimulus.png in Resources */,
+				E16826631807E7B800AC0E34 /* Images.xcassets in Resources */,
+				E1CC924117E1BB460049FE8A /* Default@2x.png in Resources */,
+				E1CC924317E1BB460049FE8A /* Default-568h@2x.png in Resources */,
+				E1CC924917E1BB460049FE8A /* MainSB_iPad.storyboard in Resources */,
+				911AD2CD18075499007083F3 /* dataEmail.png in Resources */,
+				911AD2D718075BBC007083F3 /* postdelay.png in Resources */,
+				E1CC925C17E1BB7E0049FE8A /* tach-1.png in Resources */,
+				E1CC925D17E1BB7E0049FE8A /* tach-2.png in Resources */,
+				911AD2DB18075BEB007083F3 /* settings.png in Resources */,
+				E1CC925E17E1BB7E0049FE8A /* tach-3.png in Resources */,
+				E1CC925F17E1BB7E0049FE8A /* tach-4.png in Resources */,
+				E1CC926017E1BB7E0049FE8A /* tach-5.png in Resources */,
+				913FE86E17F0FEE500A27E46 /* MMU_logo@2x.png in Resources */,
+				E1CC926117E1BB7E0049FE8A /* tach-6.png in Resources */,
+				911AD2D118075499007083F3 /* startTest.png in Resources */,
+				E1CC926217E1BB7E0049FE8A /* tach-7.png in Resources */,
+				E1CC926317E1BB7E0049FE8A /* tach-blank.png in Resources */,
+				E1CC926417E1BB7E0049FE8A /* tach-finish.png in Resources */,
+				E1CC926517E1BB7E0049FE8A /* tach-start.png in Resources */,
+				E1F8D1B617E74D3D00AD8C0F /* tach-pyellow.png in Resources */,
+				E1F8D1B717E74D3D00AD8C0F /* tach-white.png in Resources */,
+				911AD2CF18075499007083F3 /* newTest.png in Resources */,
+				E16826661807F2C500AC0E34 /* jumpingmangreen200png.png in Resources */,
+				911AD2D018075499007083F3 /* results.png in Resources */,
+				E168266A18081D7C00AC0E34 /* tachistTitle2.png in Resources */,
+				9143CA3C17EA71B9006DB34B /* Icon-72.png in Resources */,
+				919BF0401800B9D500C486E1 /* no-but.png in Resources */,
+				9143CA3E17EA71C6006DB34B /* Icon-72@2x.png in Resources */,
+				913FE86D17F0FEE500A27E46 /* MMU_logo.png in Resources */,
+				91FFED8F17FF55B5008EC6DE /* tach-finish1.png in Resources */,
+				911AD2D918075BBC007083F3 /* subject.png in Resources */,
+				911AD2DD180770C9007083F3 /* swapScreen.png in Resources */,
+				E168266B18081D7C00AC0E34 /* tachistTitle1.png in Resources */,
+				911AD2D618075BBC007083F3 /* noCards.png in Resources */,
+				9143CA4017EA71DE006DB34B /* Icon.png in Resources */,
+				9143CA4217EA71E7006DB34B /* Icon@2x.png in Resources */,
+				911AD2CE18075499007083F3 /* info.png in Resources */,
+				E16826671807F2C500AC0E34 /* jumpingmanblue200.png in Resources */,
+				919BF0411800B9D500C486E1 /* yes-but.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E1CC922517E1BB460049FE8A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E1CC923917E1BB460049FE8A /* main.m in Sources */,
+				91FFED8A17FF4056008EC6DE /* mySingleton.m in Sources */,
+				E1CC923D17E1BB460049FE8A /* AppDelegate.m in Sources */,
+				E1CC924C17E1BB460049FE8A /* ViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		E1CC923517E1BB460049FE8A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E1CC923617E1BB460049FE8A /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		E1CC924717E1BB460049FE8A /* MainSB_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E1CC924817E1BB460049FE8A /* en */,
+			);
+			name = MainSB_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E1CC924D17E1BB460049FE8A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "f6a1e710-46a0-4491-a9ff-2b16e5e3d51f";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Debug;
+		};
+		E1CC924E17E1BB460049FE8A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: manchester metropolitan University";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: manchester metropolitan University";
+				COPY_PHASE_STRIP = YES;
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "f6a1e710-46a0-4491-a9ff-2b16e5e3d51f";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E1CC925017E1BB460049FE8A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_STATIC_ANALYZER_MODE = deep;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: manchester metropolitan University";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Tachist33/Tachist-Prefix.pch";
+				INFOPLIST_FILE = "Tachist33/Tachist-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				LIBRARY_SEARCH_PATHS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = uk.ac.mmu.ess.www.jah.Tachist;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "ff646638-268f-45fa-b3a3-576d0d97b8c9";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		E1CC925117E1BB460049FE8A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_STATIC_ANALYZER_MODE = deep;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: manchester metropolitan University";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Tachist33/Tachist-Prefix.pch";
+				INFOPLIST_FILE = "Tachist33/Tachist-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				LIBRARY_SEARCH_PATHS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = uk.ac.mmu.ess.www.jah.Tachist;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "f6a1e710-46a0-4491-a9ff-2b16e5e3d51f";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E1CC922417E1BB460049FE8A /* Build configuration list for PBXProject "Tachist" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E1CC924D17E1BB460049FE8A /* Debug */,
+				E1CC924E17E1BB460049FE8A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E1CC924F17E1BB460049FE8A /* Build configuration list for PBXNativeTarget "Tachist" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E1CC925017E1BB460049FE8A /* Debug */,
+				E1CC925117E1BB460049FE8A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E1CC922117E1BB460049FE8A /* Project object */;
+}
