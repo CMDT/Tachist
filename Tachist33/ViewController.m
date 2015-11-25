@@ -122,7 +122,7 @@
 //************************************************
 // date part of version no set in did load section vDate
 int v1=4; //version: v1.v2.v3
-int v2=1;
+int v2=2;
 int v3=0;
 
 //************************************************
