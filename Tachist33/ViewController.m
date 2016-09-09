@@ -1,11 +1,12 @@
 //
 //  ViewController.m
-//  Tachist3.3.4 - change v1,v2,v3 etc
+//  Tachist4.3.0 - change v1,v2,v3 etc
 //
 //  Created by Jon Howell on 12/09/2013.
 //  Copyright (c) 2013 Manchester Metropolitan University - ESS - psyc. All rights reserved.
 //
-// Updated for ios9 17/11/15
+//  Updated for ios9 17/11/15
+//  this version 07/09/16
 
 #import "ViewController.h"
 #import "mySingleton.h" //for global variables
@@ -121,11 +122,14 @@
 //************************************************
 //************************************************
 // date part of version no set in did load section vDate
-int v1=4; //version: v1.v2.v3
-int v2=2;
+//******************************************************************************************************
+int v1=4;
+int v2=3;                                                          //  version: v1.v2.v3
 int v3=0;
-
+//******************************************************************************************************
 //************************************************
+// note: date needs editing in
+// AwakeFromNib and ViewDidLoad eg vDate=@"7.9.16";
 //************************************************
 
 // add average reaction for all tests, shortest and longest
@@ -152,7 +156,6 @@ int correctX = 0;
 int wrongX   = 0;
 int noButton = 0;
 int someResultsExist = 0;
-
 
 //store the result reaction times if good - set in the singleton for results page
 float cardReactionTime[150]; // added extra elements for all results plus stats
@@ -273,7 +276,6 @@ bool wasButtonPressed = NO;
         stimOnTime.text=@"3000";
         stimOnTime.backgroundColor = [UIColor yellowColor];
         //        set limits here change colour in check method
-        
     }
     //******** end of block *********
     //******** start of block *********
@@ -671,7 +673,6 @@ bool wasButtonPressed = NO;
     //end of hide section
 }
 
-
 #pragma mark ViewDidLoad
 
 - (void)viewDidLoad
@@ -682,11 +683,10 @@ bool wasButtonPressed = NO;
     //for text fields delegate methods to work in colour change when edited.
     //do the version number in the title bar
 
-    vDate=@"16.11.15";
+    vDate=@"7.9.16";
     NSString *versionNo = [NSString stringWithFormat:@"V.%i.%i.%i.%@",v1,v2,v3,vDate];
 
     versionNumberLab.text=versionNo;
-
 
     //make a status message
     statusMessageLab.text=@"Ready\nTo\nStart Test";
@@ -820,7 +820,7 @@ bool wasButtonPressed = NO;
 
 -(void)awakeFromNib {
     statusMessageLab.text=@"The App is Awake...";
-    vDate=@"16.11.15";
+    vDate=@"7.9.16";
     //hide unhide labels, screens and buttons
     //***
     //Action buttons
@@ -881,16 +881,16 @@ bool wasButtonPressed = NO;
     NSMutableArray *cardNo = [[NSMutableArray alloc] init];
     
     //initialise
-    card[0] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"tach-white.png"]];//@"tach-pyellow.png"]];
-    card[1] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"tach-1.png"]];
-    card[2] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"tach-2.png"]];
-    card[3] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"tach-3.png"]];
-    card[4] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"tach-4.png"]];
-    card[5] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"tach-5.png"]];
-    card[6] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"tach-6.png"]];
-    card[7] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"tach-7.png"]];
-    card[8] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"tach-blank.png"]];
-    card[9] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"tach-blank.png"]];
+    card[0]  = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"tach-white.png"]];//@"tach-yellow.png"]];
+    card[1]  = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"tach-1.png"]];
+    card[2]  = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"tach-2.png"]];
+    card[3]  = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"tach-3.png"]];
+    card[4]  = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"tach-4.png"]];
+    card[5]  = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"tach-5.png"]];
+    card[6]  = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"tach-6.png"]];
+    card[7]  = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"tach-7.png"]];
+    card[8]  = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"tach-blank.png"]];
+    card[9]  = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"tach-blank.png"]];
     card[10] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"tach-blank.png"]];
     card[11] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"tach-blank.png"]];
     card[12] = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"tach-blank.png"]];
@@ -942,7 +942,7 @@ bool wasButtonPressed = NO;
         
         NSString *cardWasCorrect = @"Empty";
         
-        if ((cardPicked<8) && (cardPicked>0)){
+        if ((cardPicked<=7) && (cardPicked>=1)){ //cards 1-7 are 'x's, not 0 and not over 7
             cardWasCorrect=@"Correct X";//don't pick the first card it is blank
             correctX++;
             r1[cardCounter]=1;//the card
@@ -977,7 +977,7 @@ bool wasButtonPressed = NO;
         //reactionTime = @"Slow down! You have to wait for the card";
         
         NSString *cardWasCorrect = @"Empty";
-        if ((cardPicked>=7) && (cardPicked<29)) //don't pick the end two cards as they are messages
+        if ((cardPicked>=8) && (cardPicked<=28)) //don't pick the end two cards as they are messages, start at the 8th card, an 'O'
         {
             cardWasCorrect=@"Correct O";
             correctO++;
@@ -1025,12 +1025,12 @@ bool wasButtonPressed = NO;
     // NSLog(@"No button : = %i", noOfCards-correctO-correctX-wrongO-wrongX);// zero if always an answer, =no of cards if no button pressed
     // NSLog(@".");
     
-    totalDelay=0;
-    averageReaction=0;
-    totalCorrectDelay=0;
-    totalWrongDelay=0;
+    totalDelay            =0;
+    averageReaction       =0;
+    totalCorrectDelay     =0;
+    totalWrongDelay       =0;
     averageCorrectReaction=0;
-    averageWrongReaction=0;
+    averageWrongReaction  =0;
 
     //do the adding up of times
     //for the general results
@@ -1068,10 +1068,10 @@ bool wasButtonPressed = NO;
             totalCorrectDelay +=  cardReactionTime[x];
         }
     }
+    
     //make sure that missed crads are not averaged, and the result is positive
     //don't do if negative, check
     float CardsTaken =(noOfCards-correctO-correctX-wrongO-wrongX);
-
 
 //must have picked at least one reaction time
 //put code her to select if all blanks
@@ -1085,8 +1085,8 @@ bool wasButtonPressed = NO;
     if(correctX+correctO>0)
         {
         averageCorrectReaction = ABS( totalCorrectDelay / (correctX+correctO));
-
     }
+    
     //don't let any silly default results through
     if (CardsTaken==999) { //check if no button was pressed at all and zero out results if tha happened
         shortestReaction=0;
@@ -1232,7 +1232,7 @@ bool wasButtonPressed = NO;
     //blank line
         [singleton.cardReactionTimeResult addObject:@" " ];
     //mmu copyright message 2013 JAH
-            [singleton.cardReactionTimeResult addObject:@"MMU (c) 2015 Jonathan A. Howell SAS Technical Services. " ];
+            [singleton.cardReactionTimeResult addObject:@"MMU (c) 2016 Jonathan A. Howell, SAS Technical Services. " ];
     // 27 + no of cards array index total
     //blank line
     [singleton.cardReactionTimeResult addObject:@" "];

@@ -4,7 +4,8 @@
 //
 //  Created by Jonathan Howell on 18/05/2013.
 //
-// Updated 16/11/15 jah for ios9
+//  Updated 16/11/15 jah for ios9
+//  this version 7/9/16
 
 #import "mySingleton.h"
 
@@ -57,9 +58,6 @@ static mySingleton * sharedSingleton = nil;
 
 - (id) init {
     if(self = [super init]) {
-        //Arrays
-
-        //Counters
         counter=0;
         offset=30;
         lineWidth=1;

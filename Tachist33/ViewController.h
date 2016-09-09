@@ -4,6 +4,7 @@
 //
 //  Created by Jon Howell on 12/09/2013.
 //  Copyright (c) 2013 Manchester Metropolitan University - ESS - psyc. All rights reserved.
+//  this version 7/9/16
 //
 
 #import <UIKit/UIKit.h>
