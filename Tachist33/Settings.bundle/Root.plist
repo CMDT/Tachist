@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>StringsTable</key>
+	<string>Root</string>
+	<key>Title</key>
+	<string>Tachist App Settings</string>
+	<key>PreferenceSpecifiers</key>
+	<array>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Tester Name &amp; Email Address</string>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<string>Me</string>
+			<key>KeyboardType</key>
+			<string>Alphabet</string>
+			<key>AutocorrectionType</key>
+			<string>No</string>
+			<key>Key</key>
+			<string>testerName</string>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Tester Name</string>
+			<key>IsSecure</key>
+			<false/>
+			<key>AutocapitalizationType</key>
+			<string>Words</string>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<string>@mmu.ac.uk</string>
+			<key>KeyboardType</key>
+			<string>EmailAddress</string>
+			<key>AutocorrectionType</key>
+			<string>No</string>
+			<key>Key</key>
+			<string>emailAddress</string>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Email for Results</string>
+			<key>IsSecure</key>
+			<false/>
+			<key>AutocapitalizationType</key>
+			<string>None</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Tachist Version Information</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTitleValueSpecifier</string>
+			<key>Title</key>
+			<string>Version Number:</string>
+			<key>Key</key>
+			<string>version0</string>
+			<key>DefaultValue</key>
+			<string>4.3.2 - 16.1.17</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Copyright:</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTitleValueSpecifier</string>
+			<key>Title</key>
+			<string>Copyright</string>
+			<key>Key</key>
+			<string>version1</string>
+			<key>DefaultValue</key>
+			<string>MMU (c) 2017</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTitleValueSpecifier</string>
+			<key>Title</key>
+			<string>Author:</string>
+			<key>Key</key>
+			<string>version2</string>
+			<key>DefaultValue</key>
+			<string>j.a.howell@mmu.ac.uk</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTitleValueSpecifier</string>
+			<key>Title</key>
+			<string>Web:</string>
+			<key>Key</key>
+			<string>version3</string>
+			<key>DefaultValue</key>
+			<string>http://www.ess.mmu.ac.uk</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>License Information</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+			<key>Title</key>
+			<string>Acknowledgements and Licence</string>
+			<key>File</key>
+			<string>Acknowledgements</string>
+		</dict>
+	</array>
+</dict>
+</plist>

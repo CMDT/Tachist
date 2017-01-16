@@ -14,6 +14,16 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    NSString       * pathStr               = [[NSBundle mainBundle] bundlePath];
+    NSString       * settingsBundlePath    = [pathStr stringByAppendingPathComponent:           @"Settings.bundle"];
+    NSString       * defaultPrefsFile      = [settingsBundlePath stringByAppendingPathComponent:@"Root.plist"];
+    NSDictionary   * defaultPrefs          = [NSDictionary dictionaryWithContentsOfFile:defaultPrefsFile];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultPrefs];
+    NSUserDefaults * defaults              = [NSUserDefaults standardUserDefaults];
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [defaults synchronize];//make sure all are updated
 
     return YES;
 }

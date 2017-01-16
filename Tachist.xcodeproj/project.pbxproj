@@ -30,6 +30,8 @@
 		91FFED8A17FF4056008EC6DE /* mySingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 91FFED8917FF4056008EC6DE /* mySingleton.m */; };
 		91FFED8F17FF55B5008EC6DE /* tach-finish1.png in Resources */ = {isa = PBXBuildFile; fileRef = 91FFED8E17FF55B5008EC6DE /* tach-finish1.png */; };
 		E11CE24A17EC7F3D00696CC6 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E11CE24917EC7F3D00696CC6 /* MessageUI.framework */; };
+		E1587E501E2D36BF004DC06B /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E1587E4F1E2D36BF004DC06B /* Settings.bundle */; };
+		E1587E521E2D3810004DC06B /* Acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = E1587E511E2D3810004DC06B /* Acknowledgements.plist */; };
 		E16826631807E7B800AC0E34 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E16826621807E7B800AC0E34 /* Images.xcassets */; };
 		E16826661807F2C500AC0E34 /* jumpingmangreen200png.png in Resources */ = {isa = PBXBuildFile; fileRef = E16826641807F2C500AC0E34 /* jumpingmangreen200png.png */; };
 		E16826671807F2C500AC0E34 /* jumpingmanblue200.png in Resources */ = {isa = PBXBuildFile; fileRef = E16826651807F2C500AC0E34 /* jumpingmanblue200.png */; };
@@ -85,6 +87,8 @@
 		91FFED8917FF4056008EC6DE /* mySingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mySingleton.m; sourceTree = "<group>"; };
 		91FFED8E17FF55B5008EC6DE /* tach-finish1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tach-finish1.png"; sourceTree = "<group>"; };
 		E11CE24917EC7F3D00696CC6 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		E1587E4F1E2D36BF004DC06B /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		E1587E511E2D3810004DC06B /* Acknowledgements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Acknowledgements.plist; sourceTree = "<group>"; };
 		E16826621807E7B800AC0E34 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		E16826641807F2C500AC0E34 /* jumpingmangreen200png.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jumpingmangreen200png.png; sourceTree = "<group>"; };
 		E16826651807F2C500AC0E34 /* jumpingmanblue200.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jumpingmanblue200.png; sourceTree = "<group>"; };
@@ -176,6 +180,7 @@
 				E1CC924B17E1BB460049FE8A /* ViewController.m */,
 				E1CC923317E1BB460049FE8A /* Supporting Files */,
 				E16826621807E7B800AC0E34 /* Images.xcassets */,
+				E1587E4F1E2D36BF004DC06B /* Settings.bundle */,
 			);
 			path = Tachist33;
 			sourceTree = "<group>";
@@ -226,6 +231,7 @@
 				E1CC923517E1BB460049FE8A /* InfoPlist.strings */,
 				E1CC923817E1BB460049FE8A /* main.m */,
 				E1CC923A17E1BB460049FE8A /* Tachist-Prefix.pch */,
+				E1587E511E2D3810004DC06B /* Acknowledgements.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -237,6 +243,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E1CC924F17E1BB460049FE8A /* Build configuration list for PBXNativeTarget "Tachist" */;
 			buildPhases = (
+				E1587E531E2D3A75004DC06B /* ShellScript */,
 				E1CC922517E1BB460049FE8A /* Sources */,
 				E1CC922617E1BB460049FE8A /* Frameworks */,
 				E1CC922717E1BB460049FE8A /* Resources */,
@@ -302,11 +309,13 @@
 				911AD2DB18075BEB007083F3 /* settings.png in Resources */,
 				E1CC925E17E1BB7E0049FE8A /* tach-3.png in Resources */,
 				E1CC925F17E1BB7E0049FE8A /* tach-4.png in Resources */,
+				E1587E521E2D3810004DC06B /* Acknowledgements.plist in Resources */,
 				E1CC926017E1BB7E0049FE8A /* tach-5.png in Resources */,
 				913FE86E17F0FEE500A27E46 /* MMU_logo@2x.png in Resources */,
 				E1CC926117E1BB7E0049FE8A /* tach-6.png in Resources */,
 				911AD2D118075499007083F3 /* startTest.png in Resources */,
 				E1CC926217E1BB7E0049FE8A /* tach-7.png in Resources */,
+				E1587E501E2D36BF004DC06B /* Settings.bundle in Resources */,
 				E1CC926317E1BB7E0049FE8A /* tach-blank.png in Resources */,
 				E1CC926417E1BB7E0049FE8A /* tach-finish.png in Resources */,
 				E1CC926517E1BB7E0049FE8A /* tach-start.png in Resources */,
@@ -334,6 +343,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E1587E531E2D3A75004DC06B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "// python /Users/jonathanhowell/Documents/VO2/VO2/Settings.bundle/Licence.py //home mac edit if needed to location of py file\npython /Users/jonhowell/Documents/Tachist33newiphone2015/Tachist33newiphone2015a/Tachist33/Settings.bundle/Licence.py //mmu desk mac";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E1CC922517E1BB460049FE8A /* Sources */ = {

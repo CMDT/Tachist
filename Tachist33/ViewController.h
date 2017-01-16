@@ -48,5 +48,6 @@ NSString      * vDate; //version date
 //-(void)blankCardDisplay;
 - (void)startCardDisplay;
 - (void)finishCardDisplay;
+- (void)registerDefaultsFromSettingsBundle;
 
 @end

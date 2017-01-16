@@ -1,6 +1,6 @@
 //
 //  ViewController.m
-//  Tachist4.3.0 - change v1,v2,v3 etc
+//  Tachist4.3.2 - change v1,v2,v3 etc
 //
 //  Created by Jon Howell on 12/09/2013.
 //  Copyright (c) 2013 Manchester Metropolitan University - ESS - psyc. All rights reserved.
@@ -10,6 +10,13 @@
 
 #import "ViewController.h"
 #import "mySingleton.h" //for global variables
+
+#define kEmail      @"emailAddress"
+#define kTester     @"testerName"
+#define kVersion0   @"version0"
+#define kVersion1   @"version1"
+#define kVersion2   @"version2"
+#define kVersion3   @"version3"
 
 // use the following line in any method that needs the singleton
 // mySingleton *singleton = [mySingleton sharedSingleton];
@@ -71,10 +78,13 @@
     IBOutlet UIButton    *saveDataToEmailBut;
     IBOutlet UIButton    *infoBut;
     IBOutlet UIButton    *newSubjectBut;
+    NSString * emailAdd;
 }
 @end
 
-@implementation ViewController
+@implementation ViewController{
+    
+}
 
 #pragma mark Inits
 //************
@@ -446,13 +456,19 @@ bool wasButtonPressed   = NO;
     JumpingManLogo.hidden     = YES;
     clickMessageLab.hidden    = YES;
     
-    if (someResultsExist==1){
-        results.hidden=NO;
+    if (someResultsExist == 1){
+        results.hidden    = NO;
         saveDataToEmailBut.hidden = NO;
     } else {
-        results.hidden=YES;
+        results.hidden    = YES;
         saveDataToEmailBut.hidden = YES;
     }
+    //hide the top titles and logos
+    title1Lab.hidden        = YES;
+    title2Lab.hidden        = YES;
+    JumpingManLogo.hidden   = YES;
+    logoImage.hidden        = YES;
+    versionNumberLab.hidden = YES;
     
     //show cards
     //show start message first for 3 seconds
@@ -461,7 +477,7 @@ bool wasButtonPressed   = NO;
     noOfCards = [noCards.text intValue];
     
     // NSLog(@"No of Cards = %i", noOfCards);
-    wasButtonPressed=YES;
+    wasButtonPressed = YES;
 }
 
 - (IBAction)NewTestExit:(id)sender {
@@ -641,6 +657,13 @@ bool wasButtonPressed   = NO;
     statusMessageLab.text=@"Results\nScreen\nDisplayed";
     //hide unhide labels, screens and buttons
     //***
+    //hide the top titles and logos
+    title1Lab.hidden        = NO;
+    title2Lab.hidden        = NO;
+    JumpingManLogo.hidden   = NO;
+    logoImage.hidden        = NO;
+    versionNumberLab.hidden = NO;
+    
     //Action buttons
     noBut.hidden              = YES;
     yesBut.hidden             = YES;
@@ -760,9 +783,81 @@ bool wasButtonPressed   = NO;
     //********************************
     //for text fields delegate methods to work in colour change when edited.
     //do the version number in the title bar
+    //************************* added plist stuff start
+    //********************************
+    //for plist version group
+    NSString * version0; //version number
+    NSString * version1; //copyright info
+    NSString * version2; //author info
+    NSString * version3; //web site info
+    NSString * tester; //web site info
+    //NSString * emailAdd; //web site info
+    
+    // for web page link
+    //NSURL *url = [NSURL URLWithString:@"http://www.ess.mmu.ac.uk/"];
+    //NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    //[webview loadRequest:request];
+    //read the user defaults from the iPhone/iPad bundle
+    // if any are set to nil (no value on first run), put a temporary one in
+    
+    NSString        * pathStr               = [[NSBundle mainBundle] bundlePath];
+    NSString        * settingsBundlePath    = [pathStr stringByAppendingPathComponent:@"Settings.bundle"];
+    NSString        * defaultPrefsFile      = [settingsBundlePath stringByAppendingPathComponent:@"Root.plist"];
+    NSDictionary    * defaultPrefs          = [NSDictionary dictionaryWithContentsOfFile:defaultPrefsFile];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultPrefs];
+    NSUserDefaults  * defaults              = [NSUserDefaults standardUserDefaults];
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    //*************************************************************
+    //version, set anyway *****************************************
+    //*************************************************************
+    
+    version0 =  @"Version 4.3.2 - 16.1.17";     // version   *** keep short
+    version1 =  @"MMU (C) 2017";                // copyright *** limited line space
+    version2 =  @"j.a.howell@mmu.ac.uk";        // author    *** to display on device
+    version3 =  @"http://www.ess.mmu.ac.uk";    // web site  *** settings screen
+    //*************************************************************
+    [defaults setObject:version0 forKey:kVersion0];   //***
+    [defaults setObject:version1 forKey:kVersion1];   //***
+    [defaults setObject:version2 forKey:kVersion2];   //***
+    [defaults setObject:version3 forKey:kVersion3];   //***
+    //*************************************************************
+    //version set end *********************************************
+    //*************************************************************
+    
+    [defaults synchronize];
+    //if any settings not already set, as in new installation, put the defaults in.
+    
+    [self registerDefaultsFromSettingsBundle];
+    
+    //tester name
+    tester     = [defaults objectForKey:kTester];
+    if([tester isEqualToString: @ "" ]){
+        tester =  @"Me";
+        [defaults setObject:[NSString stringWithFormat:@"%@", tester] forKey:kTester];
+    }
+    //email name
+    emailAdd     = [defaults objectForKey:kEmail];
+    if([emailAdd isEqualToString: @ "" ]){
+        emailAdd =  @"@mmu.ac.uk";
+        [defaults setObject:[NSString stringWithFormat:@"%@", emailAdd] forKey:kEmail];
+    }
+    //singleton.testerName = tester;
+    //singleton.email      = email;
+    
+    [defaults synchronize];//make sure all are updated
+    
+    versionNumberLab.text   = version0;
+    //singleton.versionNumber = version0;
+  
+
+    //************************* added plist stuff end
+    //********************************
 
     vDate=@"16.1.17";
-    NSString *versionNo = [NSString stringWithFormat:@"V.%i.%i.%i - %@",v1, v2, v3, vDate];
+    //NSString *versionNo = [NSString stringWithFormat:@"V.%i.%i.%i - %@",v1, v2, v3, vDate];
+    NSString *versionNo = versionNumberLab.text;
 
     versionNumberLab.text=versionNo;
 
@@ -1365,7 +1460,7 @@ bool wasButtonPressed   = NO;
     MFMailComposeViewController *mailComposer = [[MFMailComposeViewController alloc] init];
     [mailComposer setMailComposeDelegate:self];
     if ([MFMailComposeViewController canSendMail]){
-        [mailComposer setToRecipients:[NSArray arrayWithObjects:@"" ,Nil]];
+        [mailComposer setToRecipients:[NSArray arrayWithObjects:emailAdd ,Nil]];
         filename = @"TachistAppData.csv";
         //[mailComposer setSubject:@"iPad Restults from Tachistoscope V3.3 App"];
         [mailComposer setSubject:
@@ -4411,4 +4506,23 @@ wasButtonPressed = NO;
     // Dispose of any resources that can be recreated.
 }
 
+- (void)registerDefaultsFromSettingsBundle {
+    NSString *settingsBundle = [[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"bundle"];
+    if(!settingsBundle) {
+        NSLog(@"Could not find Settings.bundle");
+        return;
+    }
+    
+    NSDictionary *settings = [NSDictionary dictionaryWithContentsOfFile:[settingsBundle stringByAppendingPathComponent:@"Root.plist"]];
+    NSArray *preferences = [settings objectForKey:@"PreferenceSpecifiers"];
+    
+    NSMutableDictionary *defaultsToRegister = [[NSMutableDictionary alloc] initWithCapacity:[preferences count]];
+    for(NSDictionary *prefSpecification in preferences) {
+        NSString *key = [prefSpecification objectForKey:@"Key"];
+        if(key) {
+            [defaultsToRegister setObject:[prefSpecification objectForKey:@"DefaultValue"] forKey:key];
+        }
+    }
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultsToRegister];
+}
 @end
