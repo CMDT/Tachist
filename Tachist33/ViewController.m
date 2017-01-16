@@ -132,7 +132,7 @@ int v3=1;
 //******************************************************************************************************
 //************************************************
 // note: date needs editing in
-// AwakeFromNib and ViewDidLoad eg vDate=@"7.9.16";
+// AwakeFromNib and ViewDidLoad eg vDate=@"16.1.17";
 //************************************************
 
 // add average reaction for all tests, shortest and longest
@@ -220,10 +220,10 @@ bool wasButtonPressed   = NO;
     
     if ( IDIOM == IPAD ) {
         /* do something specifically for iPad. */
-        yy=100;
+        yy = 140;
     } else {
         /* do something specifically for iPhone or iPod touch. */
-        yy=100;
+        yy = 70;
     }
     
     //move the field to be above keyboard
@@ -753,8 +753,8 @@ bool wasButtonPressed   = NO;
     //for text fields delegate methods to work in colour change when edited.
     //do the version number in the title bar
 
-    vDate=@"7.9.16";
-    NSString *versionNo = [NSString stringWithFormat:@"V.%i.%i.%i.%@",v1,v2,v3,vDate];
+    vDate=@"16.1.17";
+    NSString *versionNo = [NSString stringWithFormat:@"V.%i.%i.%i - %@",v1, v2, v3, vDate];
 
     versionNumberLab.text=versionNo;
 
@@ -818,11 +818,11 @@ bool wasButtonPressed   = NO;
     JumpingManLogo.hidden     = NO;
     clickMessageLab.hidden    = NO;
     
-    if (someResultsExist==1){
-        results.hidden=NO;
+    if (someResultsExist          == 1){
+        results.hidden            = NO;
         saveDataToEmailBut.hidden = NO;
     } else {
-        results.hidden=YES;
+        results.hidden            = YES;
         saveDataToEmailBut.hidden = YES;
     }
 
@@ -894,7 +894,7 @@ bool wasButtonPressed   = NO;
 -(void)awakeFromNib {
     [super awakeFromNib];
     statusMessageLab.text=@"The App is Awake...";
-    vDate=@"7.9.16";
+    vDate=@"16.1.17";
     //hide unhide labels, screens and buttons
     //***
     //Action buttons
@@ -948,7 +948,8 @@ bool wasButtonPressed   = NO;
         saveDataToEmailBut.hidden = YES;
     }
     //end of hide section
-    NSString *temp2 = [NSString stringWithFormat:@"Tachistoscope Test\nV.%i.%i.%i.%@",v1,v2,v3,vDate];
+    
+    NSString *temp2 = [NSString stringWithFormat:@"Tachistoscope Test for IOS\nV.%i.%i.%i - %@",v1, v2, v3, vDate];
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:temp2 message:@"Type the SUBJECT Code,\nSTIMULUS On Time, \nPOST Stimulus Delay and the \nNUMBER of cards before \nstarting the test."
                                                    delegate:self cancelButtonTitle:@"Continue to the App Settings" otherButtonTitles: nil];
     [alert show];
@@ -1016,16 +1017,16 @@ bool wasButtonPressed   = NO;
         
         NSString *cardWasCorrect = @"Empty";
         
-        if ((cardPicked<=7) && (cardPicked>=1)){ //cards 1-7 are 'x's, not 0 and not over 7
-            cardWasCorrect=@"Correct X";//don't pick the first card it is blank
+        if ((cardPicked <= 7) && (cardPicked>=1)){ //cards 1-7 are 'x's, not 0 and not over 7
+            cardWasCorrect  = @"Correct X";//don't pick the first card it is blank
             correctX++;
-            r1[cardCounter]=1;//the card
-            r2[cardCounter]=1;//the result
+            r1[cardCounter] = 1;//the card
+            r2[cardCounter] = 1;//the result
         } else {
-            cardWasCorrect=@"Wrong O";
+            cardWasCorrect  = @"Wrong O";
             wrongO++;
-            r1[cardCounter]=0;//
-            r2[cardCounter]=0;//
+            r1[cardCounter] = 0;//
+            r2[cardCounter] = 0;//
         }
         // NSLog(@"Yes %i Reaction: = %f mS, %@",cardCounter, noSeconds, cardWasCorrect);
         //UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Reaction Time" message:reactionTime
@@ -1051,19 +1052,19 @@ bool wasButtonPressed   = NO;
         //reactionTime = @"Slow down! You have to wait for the card";
         
         NSString *cardWasCorrect = @"Empty";
-        if ((cardPicked>=8) && (cardPicked<=28)) //don't pick the end two cards as they are messages, start at the 8th card, an 'O'
+        if ((cardPicked >= 8) && (cardPicked<=28)) //don't pick the end two cards as they are messages, start at the 8th card, an 'O'
         {
-            cardWasCorrect=@"Correct O";
+            cardWasCorrect = @"Correct O";
             correctO++;
-        r1[cardCounter]=0;//
-        r2[cardCounter]=1;//
+        r1[cardCounter]    = 0;//
+        r2[cardCounter]    = 1;//
         }
         else
         {
             cardWasCorrect=@"Wrong X";
             wrongX++;
-        r1[cardCounter]=1;//
-        r2[cardCounter]=0;//
+        r1[cardCounter] = 1;//
+        r2[cardCounter] = 0;//
         }
         // NSLog(@"No %i Reaction: = %f mS, %@",cardCounter, noSeconds, cardWasCorrect);
         //UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Reaction Time" message:reactionTime
@@ -1076,7 +1077,7 @@ bool wasButtonPressed   = NO;
 }
 
 -(void)calculateStats{
-    statusMessageLab.text=@"Calculating\nStats\nPlease\nWait...";
+    statusMessageLab.text  = @"Calculating\nStats\nPlease\nWait...";
     mySingleton *singleton = [mySingleton sharedSingleton];
     // NSLog(@"Starting Stats");
 
@@ -1099,12 +1100,12 @@ bool wasButtonPressed   = NO;
     // NSLog(@"No button : = %i", noOfCards-correctO-correctX-wrongO-wrongX);// zero if always an answer, =no of cards if no button pressed
     // NSLog(@".");
     
-    totalDelay            =0;
-    averageReaction       =0;
-    totalCorrectDelay     =0;
-    totalWrongDelay       =0;
-    averageCorrectReaction=0;
-    averageWrongReaction  =0;
+    totalDelay             = 0;
+    averageReaction        = 0;
+    totalCorrectDelay      = 0;
+    totalWrongDelay        = 0;
+    averageCorrectReaction = 0;
+    averageWrongReaction   = 0;
 
     //do the adding up of times
     //for the general results
@@ -1113,19 +1114,19 @@ bool wasButtonPressed   = NO;
         if (cardReactionTime[x] > longestReaction) {
             longestReaction = cardReactionTime[x];
         }
-        if (((cardReactionTime[x] < shortestReaction))&& (cardReactionTime[x]>0.00)){
+        if (((cardReactionTime[x] < shortestReaction)) && (cardReactionTime[x]>0.00)){
             shortestReaction = cardReactionTime[x];
         }
         totalDelay +=  cardReactionTime[x];
 
         //for the wrongs and right answers (wrongs)
-        if ( r2[x]==0 ){  //wrong cards)
+        if ( r2[x] == 0 ){  //wrong cards)
 
             if (cardReactionTime[x] > longestWrongReaction) {
                 longestWrongReaction = cardReactionTime[x];
 
             }
-            if (((cardReactionTime[x] < shortestWrongReaction))&& (cardReactionTime[x]>0.00)){
+            if (((cardReactionTime[x] < shortestWrongReaction)) && (cardReactionTime[x]>0.00)){
                 shortestWrongReaction = cardReactionTime[x];
 
             }
@@ -1136,7 +1137,7 @@ bool wasButtonPressed   = NO;
             if (cardReactionTime[x] > longestCorrectReaction) {
                 longestCorrectReaction = cardReactionTime[x];
             }
-            if (((cardReactionTime[x] < shortestCorrectReaction))&& (cardReactionTime[x]>0.00)){
+            if (((cardReactionTime[x] < shortestCorrectReaction)) && (cardReactionTime[x]>0.00)){
                 shortestCorrectReaction = cardReactionTime[x];
             }
             totalCorrectDelay +=  cardReactionTime[x];
@@ -1145,38 +1146,38 @@ bool wasButtonPressed   = NO;
     
     //make sure that missed crads are not averaged, and the result is positive
     //don't do if negative, check
-    float CardsTaken =(noOfCards-correctO-correctX-wrongO-wrongX);
+    float CardsTaken = (noOfCards-correctO-correctX-wrongO-wrongX);
 
 //must have picked at least one reaction time
 //put code her to select if all blanks
 
     averageReaction = ABS( totalDelay / noOfCards);
 
-    if(wrongX+wrongO>0)
+    if(wrongX+wrongO > 0)
         {
         averageWrongReaction = ABS( totalWrongDelay / (wrongX+wrongO));
     }
-    if(correctX+correctO>0)
+    if(correctX+correctO > 0)
         {
         averageCorrectReaction = ABS( totalCorrectDelay / (correctX+correctO));
     }
     
     //don't let any silly default results through
-    if (CardsTaken==999) { //check if no button was pressed at all and zero out results if tha happened
-        shortestReaction=0;
-        averageReaction=0;
-        totalDelay=0;
-        longestReaction=0;
+    if (CardsTaken == 999) { //check if no button was pressed at all and zero out results if tha happened
+        shortestReaction        = 0;
+        averageReaction         = 0;
+        totalDelay              = 0;
+        longestReaction         = 0;
 
-        shortestWrongReaction=0;
-        averageWrongReaction=0;
-        totalWrongDelay=0;
-        longestWrongReaction=0;
+        shortestWrongReaction   = 0;
+        averageWrongReaction    = 0;
+        totalWrongDelay         = 0;
+        longestWrongReaction    = 0;
 
-        shortestCorrectReaction=0;
-        averageCorrectReaction=0;
-        totalCorrectDelay=0;
-        longestCorrectReaction=0;
+        shortestCorrectReaction = 0;
+        averageCorrectReaction  = 0;
+        totalCorrectDelay       = 0;
+        longestCorrectReaction  = 0;
     }
 
     // NSLog(@"        Shortest Reaction : = %f", shortestReaction);
@@ -1326,8 +1327,8 @@ bool wasButtonPressed   = NO;
     }
 
     //make a text file from the array of results
-    NSMutableString *element = [[NSMutableString alloc] init];
-    NSMutableString *printString = [NSMutableString stringWithString:@""];
+    NSMutableString *element        = [[NSMutableString alloc] init];
+    NSMutableString *printString    = [NSMutableString stringWithString:@""];
     for(int i=0; i< (singleton.counter+37); i++)
         {
             element = [singleton.cardReactionTimeResult objectAtIndex: i];
@@ -1352,7 +1353,7 @@ bool wasButtonPressed   = NO;
 
 //mail from button press
 -(IBAction)sendMail:(id)sender {
-    statusMessageLab.text=@"E-Mail\nResults\nLoading...";
+    statusMessageLab.text  = @"E-Mail\nResults\nLoading...";
     mySingleton *singleton = [mySingleton sharedSingleton];
     MFMailComposeViewController *mailComposer = [[MFMailComposeViewController alloc] init];
     [mailComposer setMailComposeDelegate:self];
@@ -1395,12 +1396,12 @@ statusMessageLab.text=@"Select\nNext\nTask";
 {
 //save text results to file for attachment
     statusMessageLab.text=@"Saving\nData\nFile.";
-    mySingleton *singleton = [mySingleton sharedSingleton];
-    NSFileManager *filemgr;
-    NSData *databuffer;
-    NSString *dataFile;
-    NSString *docsDir;
-    NSArray *dirPaths;
+    mySingleton * singleton = [mySingleton sharedSingleton];
+    NSFileManager   * filemgr;
+    NSData          * databuffer;
+    NSString        * dataFile;
+    NSString        * docsDir;
+    NSArray         * dirPaths;
 
     filemgr = [NSFileManager defaultManager];
 
@@ -1408,7 +1409,7 @@ statusMessageLab.text=@"Select\nNext\nTask";
 
     docsDir = dirPaths[0];
 
-    NSString *fileNameS = [NSString stringWithFormat:@"%@.csv", subjectCodeTxt.text];
+    NSString * fileNameS = [NSString stringWithFormat:@"%@.csv", subjectCodeTxt.text];
     dataFile = [docsDir stringByAppendingPathComponent:fileNameS];
 
     databuffer = [singleton.resultStrings dataUsingEncoding: NSASCIIStringEncoding];
@@ -1419,15 +1420,16 @@ statusMessageLab.text=@"Select\nNext\nTask";
 -(void)onCardDisplay1 {
     statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
     //hide the buttons
-    noBut.hidden = NO;
-    yesBut.hidden = NO;
+    noBut.hidden    = NO;
+    yesBut.hidden   = NO;
     startBut.hidden = YES;
     cardCounter++;
-    int t=[self pickACard];
-            if (wasButtonPressed==NO) {
+    int t = [self pickACard];
+            if (wasButtonPressed == NO) {
             // NSLog(@"(Button Not Pressed)");
         }
-wasButtonPressed=NO;
+    
+wasButtonPressed = NO;
     [cardHolder setImage: card[t].image];
 
     //start the timer
