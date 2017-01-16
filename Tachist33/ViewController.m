@@ -24,6 +24,9 @@
 {
     //array of card images needed
     UIImageView *card[50];
+    //for keyboard and field moving animations
+    float keyboardAnimSpeed;
+    float keyboardAnimDelay;
     
 //text fields for inputs
     IBOutlet UITextField *noCards;
@@ -90,29 +93,29 @@
 @synthesize vDate;
 
 -(NSString *) setFilename{
-    mySingleton *singleton = [mySingleton sharedSingleton];
-    NSString *extn = @"csv";
-    filename = [NSString stringWithFormat:@"%@.%@", singleton.subjectName, extn];
+    mySingleton *singleton  = [mySingleton sharedSingleton];
+    NSString *extn          = @"csv";
+    filename                = [NSString stringWithFormat:@"%@.%@", singleton.subjectName, extn];
 
     return filename;
 }
 
 //find the home directory for Document
 -(NSString *)GetDocumentDirectory{
-    fileMgr = [NSFileManager defaultManager];
+    fileMgr     = [NSFileManager defaultManager];
     NSString *docsDir;
     NSArray *dirPaths;
-    dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    docsDir = dirPaths[0];
+    dirPaths    = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    docsDir     = dirPaths[0];
     return docsDir;
 }
 
 /*Create a new file*/
 -(void)WriteToStringFile:(NSMutableString *)textToWrite{
-    filepath = [[NSString alloc] init];
+    filepath    = [[NSString alloc] init];
     NSError *err;
-    filepath = [self.GetDocumentDirectory stringByAppendingPathComponent:self.setFilename];
-    BOOL ok = [textToWrite writeToFile:filepath atomically:YES encoding:NSASCIIStringEncoding error:&err];
+    filepath    = [self.GetDocumentDirectory stringByAppendingPathComponent:self.setFilename];
+    BOOL ok     = [textToWrite writeToFile:filepath atomically:YES encoding:NSASCIIStringEncoding error:&err];
     if (!ok) {
         NSLog(@"Error writing file at %@\n%@",
               filepath, [err localizedFailureReason]);
@@ -124,8 +127,8 @@
 // date part of version no set in did load section vDate
 //******************************************************************************************************
 int v1=4;
-int v2=3;                                                          //  version: v1.v2.v3
-int v3=0;
+int v2=3;  //  version: v1.v2.v3
+int v3=1;
 //******************************************************************************************************
 //************************************************
 // note: date needs editing in
@@ -170,17 +173,17 @@ int r2[150]; //and its result
 //      TachistM use between 1 and 7 X's, count them on 7 buttons
 
 //initialise
-int detectorOn     = 0;
-Float32 delay      = 0.5;
-Float32 delay1     = 0;
-Float32 delay3     = 0;
-Float32 totalDelay = 0;
+int detectorOn          = 0;
+Float32 delay           = 0.5;
+Float32 delay1          = 0;
+Float32 delay3          = 0;
+Float32 totalDelay      = 0;
 
-bool   lastCard    = NO;
-int   noOfCards    = 1;
-int  cardPicked    = 0;
-int cardCounter    = 0;
-bool wasButtonPressed = NO;
+bool   lastCard         = NO;
+int   noOfCards         = 1;
+int  cardPicked         = 0;
+int cardCounter         = 0;
+bool wasButtonPressed   = NO;
 
 //autorotate stuff so we can have landscape and portrait and both work with the buttons and display output
 //iOS 6+
@@ -209,22 +212,44 @@ bool wasButtonPressed = NO;
 //******** Start of block *********
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
-    if(textField==self->noCards){
+    // no effect as this App is being ported to iPhone only, even though displaying on an iPad, compromise value
+#define IDIOM    UI_USER_INTERFACE_IDIOM()
+#define IPAD     UIUserInterfaceIdiomPad
+    
+    int yy;
+    
+    if ( IDIOM == IPAD ) {
+        /* do something specifically for iPad. */
+        yy=100;
+    } else {
+        /* do something specifically for iPhone or iPod touch. */
+        yy=100;
+    }
+    
+    //move the field to be above keyboard
+    if((textField == self->noCards) || (textField == self -> subjectCodeTxt || textField == self->postResponseDelay) || (textField == self -> stimOnTime)){
+        
+        textField.frame = CGRectMake(textField.frame.origin.x, (textField.frame.origin.y), textField.frame.size.width, textField.frame.size.height);
+        int oft=textField.frame.origin.y-yy;
+        [self keyBoardAppeared:oft];
+    }
+    
+    if(textField == self->noCards){
         noCards.backgroundColor = [UIColor greenColor];
         // NSLog(@"Var cards");
         statusMessageLab.text=@"Editing \nNo Of\nCards";
     }
-    if(textField==self->subjectCodeTxt){
+    if(textField == self->subjectCodeTxt){
         subjectCodeTxt.backgroundColor = [UIColor greenColor];
         // NSLog(@"Var sub");
         statusMessageLab.text=@"Editing\nSubject\nName";
     }
-    if(textField==self->postResponseDelay){
+    if(textField == self->postResponseDelay){
         postResponseDelay.backgroundColor = [UIColor greenColor];
         // NSLog(@"Var post");
         statusMessageLab.text=@"Editing\nPost\nDelay";
     }
-    if(textField==self->stimOnTime){
+    if(textField == self->stimOnTime){
         stimOnTime.backgroundColor = [UIColor greenColor];
         // NSLog(@"Var stim");
         statusMessageLab.text=@"Editing\nStimulus\nTime";
@@ -254,10 +279,10 @@ bool wasButtonPressed = NO;
         noCards.backgroundColor = [UIColor yellowColor];
         //        set limits here change colour in check method
     }
-    if (noOfCards>100) {
+    if (noOfCards > 100) {
                noCards.textColor=[UIColor redColor];
-        noOfCards=100;
-        noCards.text=@"100";
+        noOfCards    = 100;
+        noCards.text = @"100";
         noCards.backgroundColor = [UIColor yellowColor];
         //        set limits here change colour in check method
         
@@ -265,28 +290,28 @@ bool wasButtonPressed = NO;
 //******** end of block noCards*********
     //******** start of block stimDelay *********
     stimOnTime.textColor=[UIColor blackColor];
-    if (stimOnTimeN<50) {
+    if (stimOnTimeN < 50) {
         stimOnTime.textColor=[UIColor redColor];
-        stimOnTime.text=@"50";
+        stimOnTime.text = @"50";
         stimOnTime.backgroundColor = [UIColor yellowColor];
         //        set limits here change colour in check method
     }
-    if (stimOnTimeN>3000) {
+    if (stimOnTimeN > 3000) {
         stimOnTime.textColor=[UIColor redColor];
-        stimOnTime.text=@"3000";
+        stimOnTime.text = @"3000";
         stimOnTime.backgroundColor = [UIColor yellowColor];
         //        set limits here change colour in check method
     }
     //******** end of block *********
     //******** start of block *********
     postResponseDelay.textColor=[UIColor blackColor];
-    if (postResponseDelayN<1) {
+    if (postResponseDelayN < 1) {
         postResponseDelay.textColor=[UIColor redColor];
         postResponseDelay.text=@"1";
         postResponseDelay.backgroundColor = [UIColor yellowColor];
         //        set limits here change colour in check method
     }
-    if (postResponseDelayN>5000) {
+    if (postResponseDelayN > 5000) {
         postResponseDelay.textColor=[UIColor redColor];
         postResponseDelay.text=@"5000";
         postResponseDelay.backgroundColor = [UIColor yellowColor];
@@ -294,16 +319,16 @@ bool wasButtonPressed = NO;
     }
     //******** end of block *********
     //******** start of block *********
-    subjectCodeTxt.textColor=[UIColor blackColor];
+    subjectCodeTxt.textColor = [UIColor blackColor];
     if ([subjectCodeTxt.text isEqual:@""]) {
         subjectCodeTxt.textColor=[UIColor redColor];
-        subjectCodeTxt.text=@"Temp Subject";
+        subjectCodeTxt.text = @"Temp Subject";
         subjectCodeTxt.backgroundColor = [UIColor yellowColor];
         //        set limits here change colour in check method
     }
     if ([subjectCodeTxt.text isEqual:@" "]) {
         subjectCodeTxt.textColor=[UIColor redColor];
-        subjectCodeTxt.text=@"Temp Subject";
+        subjectCodeTxt.text = @"Temp Subject";
         subjectCodeTxt.backgroundColor = [UIColor yellowColor];
         //        set limits here change colour in check method
     }
@@ -313,12 +338,57 @@ bool wasButtonPressed = NO;
     // NSLog(@"Subject Code=:%@",subjectCodeTxt.text);
     //******** end of block *********
         statusMessageLab.text=@"Finished\nEditing\nSettings";
+    
+    //reset the screen positions of the fields
+    [self keyBoardDisappeared:0];
 }
+
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     // NSLog(@"Touches began with this event");
     [self.view endEditing:YES];
             statusMessageLab.text=@"You\nTouched\nThe \nScreen";
     [super touchesBegan:touches withEvent:event];
+}
+
+#pragma mark - Show Keyboard and move frame
+
+- (void) keyBoardAppeared :(int)oft
+{
+    //move screen up or down as needed to avoid text field entry
+    CGRect frame = self.view.frame;
+    
+    //move frame without anim if toggle in settings indicates yes
+    
+    //oft= the y of the text field?  make some code to find it
+    [UIView animateWithDuration:keyboardAnimSpeed
+                          delay:keyboardAnimDelay
+                        options: UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+                         self.view.frame = CGRectMake(frame.origin.x, -oft, frame.size.width, frame.size.height);
+                     }
+                     completion:^(BOOL finished){
+                     }];
+}
+
+#pragma mark - Hide Keyboard when done
+
+- (void) keyBoardDisappeared :(int)oft
+{
+    //move the screen back to original position
+    CGRect frame = self.view.frame;
+    
+    //oft= the y of the text field?  make some code to find it
+    [UIView animateWithDuration:keyboardAnimSpeed
+                          delay:keyboardAnimDelay
+                        options: UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+                         self.view.frame = CGRectMake(frame.origin.x, oft, frame.size.width, frame.size.height);
+                     }
+                     completion:^(BOOL finished){
+                     }];
+    
+    //driverName.backgroundColor = [UIColor whiteColor];
+    //email.backgroundColor      = [UIColor whiteColor];
 }
 
 - (IBAction)startTest:(id)sender {
@@ -690,14 +760,17 @@ bool wasButtonPressed = NO;
 
     //make a status message
     statusMessageLab.text=@"Ready\nTo\nStart Test";
+    
+    keyboardAnimSpeed = 0.5;
+    keyboardAnimDelay = 0.3;
 
     // clear the old data, the app has started again.
 
     //set the delegates or text did start/end will not work
-    noCards.delegate = self;
-    stimOnTime.delegate = self;
-    postResponseDelay.delegate = self;
-    subjectCodeTxt.delegate = self;
+    noCards.delegate            = self;
+    stimOnTime.delegate         = self;
+    postResponseDelay.delegate  = self;
+    subjectCodeTxt.delegate     = self;
     
     //********************************
     //hide unhide labels, screens and buttons
@@ -819,6 +892,7 @@ bool wasButtonPressed = NO;
 }
 
 -(void)awakeFromNib {
+    [super awakeFromNib];
     statusMessageLab.text=@"The App is Awake...";
     vDate=@"7.9.16";
     //hide unhide labels, screens and buttons
@@ -2733,10 +2807,10 @@ wasButtonPressed=NO;
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
     cardCounter++;
     int t=[self pickACard];
-        if (wasButtonPressed==NO) {
+        if (wasButtonPressed == NO) {
             // NSLog(@"(Button Not Pressed)");
     }
-wasButtonPressed=NO;
+wasButtonPressed = NO;
     [cardHolder setImage: card[t].image];
 
     //start the timer
@@ -2747,10 +2821,10 @@ wasButtonPressed=NO;
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
     cardCounter++;
     int t=[self pickACard];
-        if (wasButtonPressed==NO) {
+        if (wasButtonPressed == NO) {
             // NSLog(@"(Button Not Pressed)");
     }
-wasButtonPressed=NO;
+wasButtonPressed = NO;
     [cardHolder setImage: card[t].image];
 
     //start the timer
@@ -2847,7 +2921,7 @@ wasButtonPressed=NO;
                 [cardHolder setImage: card[0].image];
 
         [NSTimer scheduledTimerWithTimeInterval:(([self delayx1])) target:self selector:@selector(onCardDisplay6) userInfo:nil repeats:NO];
-}
+    }
 }
 
 -(void)blankCardDisplay6 {
@@ -2863,7 +2937,7 @@ wasButtonPressed=NO;
                 [cardHolder setImage: card[0].image];
 
         [NSTimer scheduledTimerWithTimeInterval:(([self delayx1])) target:self selector:@selector(onCardDisplay7) userInfo:nil repeats:NO];
-}
+    }
 }
 
 -(void)blankCardDisplay7 {
@@ -2879,7 +2953,7 @@ wasButtonPressed=NO;
                 [cardHolder setImage: card[0].image];
 
         [NSTimer scheduledTimerWithTimeInterval:(([self delayx1])) target:self selector:@selector(onCardDisplay8) userInfo:nil repeats:NO];
-        }
+    }
 }
 -(void)blankCardDisplay8 {
     //blank screen
@@ -2894,7 +2968,7 @@ wasButtonPressed=NO;
                 [cardHolder setImage: card[0].image];
 
         [NSTimer scheduledTimerWithTimeInterval:(([self delayx1])) target:self selector:@selector(onCardDisplay9) userInfo:nil repeats:NO];
-        }
+    }
 }
 -(void)blankCardDisplay9 {
     //blank screen

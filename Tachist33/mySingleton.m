@@ -42,7 +42,7 @@ static mySingleton * sharedSingleton = nil;
 #pragma mark Singleton Methods
 
 + (mySingleton *) sharedSingleton {
-    if(sharedSingleton==nil) {
+    if(sharedSingleton  ==nil) {
         sharedSingleton = [[super allocWithZone:NULL]init];
     }
     return sharedSingleton;
@@ -58,20 +58,20 @@ static mySingleton * sharedSingleton = nil;
 
 - (id) init {
     if(self = [super init]) {
-        counter=0;
-        offset=30;
-        lineWidth=1;
-        lineColour=[UIColor blueColor];
-        scalingFactor=1;
-        boxShow=YES;
-        hypot=NO;
-        floatAngle=NO;
-        crossType=1;
+        counter         = 0;
+        offset          = 30;
+        lineWidth       = 1;
+        lineColour      = [UIColor blueColor];
+        scalingFactor   = 1;
+        boxShow         = YES;
+        hypot           = NO;
+        floatAngle      = NO;
+        crossType       = 1;
 
-        resultStrings = @"";
-        subjectName=@"TempSubject";
+        resultStrings   = @"";
+        subjectName     = @"TempSubject";
         
-        picturePos=CGRectMake(10,50,1000,800);//approx, will be updated in a moment anyway
+        picturePos=CGRectMake(10,50,1000,800);    //approx, will be updated in a moment anyway
         cardReactionTimeResult = [[NSMutableArray alloc]initWithObjects:@"", nil]; //15/11/15 for ios 9 added @"",
     }
     return self;
