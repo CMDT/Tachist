@@ -225,6 +225,9 @@ bool wasButtonPressed   = NO;
         /* do something specifically for iPhone or iPod touch. */
         yy = 70;
     }
+    //hide the start button for a while
+    startBut.hidden = YES;
+    infoBut.hidden  = YES;
     
     //move the field to be above keyboard
     if((textField == self->noCards) || (textField == self -> subjectCodeTxt || textField == self->postResponseDelay) || (textField == self -> stimOnTime)){
@@ -385,10 +388,15 @@ bool wasButtonPressed   = NO;
                          self.view.frame = CGRectMake(frame.origin.x, oft, frame.size.width, frame.size.height);
                      }
                      completion:^(BOOL finished){
+                         [self showButtons];
                      }];
-    
-    //driverName.backgroundColor = [UIColor whiteColor];
-    //email.backgroundColor      = [UIColor whiteColor];
+//any colour re-config now
+}
+
+//replace the info and start buttons
+-(void)showButtons{
+    startBut.hidden = NO;
+    infoBut.hidden  = NO;
 }
 
 - (IBAction)startTest:(id)sender {
