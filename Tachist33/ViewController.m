@@ -1197,17 +1197,17 @@ bool wasButtonPressed   = NO;
     // NSLog(@" ");
 
     //put titles and basic params up first
-    [singleton.cardReactionTimeResult addObject:@"MMU Cheshire, Exercise and Sport Science, Tachistoscope iPad Application Results"];
+    [singleton.cardReactionTimeResult addObject:@"MMU Cheshire, Exercise and Sport Science, Tachistoscope IOS Application Results"];
 
     //mmu copyright message 2013 JAH
     //[singleton.cardReactionTimeResult addObject:@"(c) 2015 MMU written by Jonathan A. Howell for ESS Tachistoscope V%@.%@.%@.%@", v1,v2,v3,vDate];
-    [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"(c) 2015 MMU written by Jonathan A. Howell for ESS Tachistoscope V%@.%@.%@.%@.", [NSString stringWithFormat:@"%i", v1],[NSString stringWithFormat:@"%i", v2],[NSString stringWithFormat:@"%i", v3], [NSString stringWithFormat:@"%@", vDate]]];
+    [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"(c) 2017 MMU written by Jonathan A. Howell for MMU, Tachistoscope V%@.%@.%@ - %@", [NSString stringWithFormat:@"%i", v1],[NSString stringWithFormat:@"%i", v2],[NSString stringWithFormat:@"%i", v3], [NSString stringWithFormat:@"%@", vDate]]];
 
     //blank line
     [singleton.cardReactionTimeResult addObject:@" "];
 
     //subject code
-    [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Subject Code: %@",subjectCodeTxt.text]];
+    [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Subject Code, %@",subjectCodeTxt.text]];
     singleton.subjectName = subjectCodeTxt.text;
 
     //date of test and time
@@ -1215,80 +1215,80 @@ bool wasButtonPressed   = NO;
     [dateFormatter setDateFormat:@"E dd-MM-yyyy, hh:mm:ss"];
     NSString *strDate = [dateFormatter stringFromDate:[NSDate date]];
     // NSLog(@"Date of test: %@", strDate);
-    [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Date of Test: %@ ", strDate]];
+    [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Date of Test, %@ ", strDate]];
 
     //blank line
         [singleton.cardReactionTimeResult addObject:@" "];
 
     //no cards
-        [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Number of Cards in Test  : %@ ", [NSString stringWithFormat:@"%d", noOfCards]]];
+        [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Number of Cards in Test, %@ ", [NSString stringWithFormat:@"%d", noOfCards]]];
 
     //stim delay
-        [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Stimulation Delay (mS)    : %@ ", stimOnTime.text]];
+        [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Stimulation Delay (mS), %@ ", stimOnTime.text]];
 
     //post delay
-        [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Post Stimulus Delay (mS)  : %@ ", postResponseDelay.text]];
+        [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Post Stimulus Delay (mS), %@ ", postResponseDelay.text]];
 
     //blank line
         [singleton.cardReactionTimeResult addObject:@" "];
 
     //got correct o
-        [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Correct O Count  : %@ ", [NSString stringWithFormat:@"%d", correctO]]];
+        [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Correct O Count, %@ ", [NSString stringWithFormat:@"%d", correctO]]];
 
     //got correct x
-        [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Correct X Count  : %@ ", [NSString stringWithFormat:@"%d", correctX]]];
+        [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Correct X Count, %@ ", [NSString stringWithFormat:@"%d", correctX]]];
 
     //got wrong o
-        [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Wrong O Count    : %@ ", [NSString stringWithFormat:@"%d", wrongO]]];
+        [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Wrong O Count, %@ ", [NSString stringWithFormat:@"%d", wrongO]]];
 
     //got wrong x
-        [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Wrong X Count     : %@ ", [NSString stringWithFormat:@"%d", wrongX]]];
+        [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Wrong X Count, %@ ", [NSString stringWithFormat:@"%d", wrongX]]];
 
     //no button count
-        [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Missed Results     : %@ ", [NSString stringWithFormat:@"%d", noOfCards-correctO-correctX-wrongO-wrongX]]];
+        [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Missed Results, %@ ", [NSString stringWithFormat:@"%d", noOfCards-correctO-correctX-wrongO-wrongX]]];
     //blank line
         [singleton.cardReactionTimeResult addObject:@""];
 
     //shortest reaction
-        [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Shortest Reaction Time (mS) : %@ ", [NSString stringWithFormat:@"%d", ((int)(shortestReaction+roundUpFactor))]]];
+        [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Shortest Reaction Time (mS), %@ ", [NSString stringWithFormat:@"%d", ((int)(shortestReaction+roundUpFactor))]]];
 
     //longest reaction
-        [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Longest Reaction Time (mS)  : %@ ", [NSString stringWithFormat:@"%d", ((int)(longestReaction+roundUpFactor))]]];
+        [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Longest Reaction Time (mS), %@ ", [NSString stringWithFormat:@"%d", ((int)(longestReaction+roundUpFactor))]]];
 
     //average reaction
-        [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Average Reaction Time (mS)  : %@ ", [NSString stringWithFormat:@"%d", ((int)(averageReaction+roundUpFactor))]]];
+        [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Average Reaction Time (mS), %@ ", [NSString stringWithFormat:@"%d", ((int)(averageReaction+roundUpFactor))]]];
 
     //total time in test reaction
-        [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Total Reaction Time (mS)       : %@ ", [NSString stringWithFormat:@"%d", ((int)(totalDelay+roundUpFactor))]]];
+        [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Total Reaction Time (mS), %@ ", [NSString stringWithFormat:@"%d", ((int)(totalDelay+roundUpFactor))]]];
     //blank line
     [singleton.cardReactionTimeResult addObject:@""];
     //********wrongs
     //shortest Wrong reaction
-    [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Shortest Wrong Reaction Time (mS) : %@ ", [NSString stringWithFormat:@"%d", ((int)(shortestWrongReaction+roundUpFactor))]]];
+    [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Shortest Wrong Reaction Time (mS), %@ ", [NSString stringWithFormat:@"%d", ((int)(shortestWrongReaction+roundUpFactor))]]];
 
     //longest Wrong reaction
-    [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Longest Wrong Reaction Time (mS)  : %@ ", [NSString stringWithFormat:@"%d", ((int)(longestWrongReaction+roundUpFactor))]]];
+    [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Longest Wrong Reaction Time (mS), %@ ", [NSString stringWithFormat:@"%d", ((int)(longestWrongReaction+roundUpFactor))]]];
 
     //average Wrong reaction
-    [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Average Wrong Reaction Time (mS)  : %@ ", [NSString stringWithFormat:@"%d", ((int)(averageWrongReaction+roundUpFactor))]]];
+    [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Average Wrong Reaction Time (mS), %@ ", [NSString stringWithFormat:@"%d", ((int)(averageWrongReaction+roundUpFactor))]]];
 
     //total Wrong time in test reaction
-    [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Total Wrong Reaction Time (mS)       : %@ ", [NSString stringWithFormat:@"%d", ((int)(totalWrongDelay+roundUpFactor))]]];
+    [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Total Wrong Reaction Time (mS), %@ ", [NSString stringWithFormat:@"%d", ((int)(totalWrongDelay+roundUpFactor))]]];
     //blank line
     [singleton.cardReactionTimeResult addObject:@""];
     //********end wrongs
     //********Corrects
     //shortest Correct reaction
-    [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Shortest Correct Reaction Time (mS) : %@ ", [NSString stringWithFormat:@"%d", ((int)(shortestCorrectReaction+roundUpFactor))]]];
+    [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Shortest Correct Reaction Time (mS), %@ ", [NSString stringWithFormat:@"%d", ((int)(shortestCorrectReaction+roundUpFactor))]]];
 
     //longest Correct reaction
-    [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Longest Correct Reaction Time (mS)  : %@ ", [NSString stringWithFormat:@"%d", ((int)(longestCorrectReaction+roundUpFactor))]]];
+    [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Longest Correct Reaction Time (mS), %@ ", [NSString stringWithFormat:@"%d", ((int)(longestCorrectReaction+roundUpFactor))]]];
 
     //average Correct reaction
-    [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Average Correct Reaction Time (mS)  : %@ ", [NSString stringWithFormat:@"%d", ((int)(averageCorrectReaction+roundUpFactor))]]];
+    [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Average Correct Reaction Time (mS), %@ ", [NSString stringWithFormat:@"%d", ((int)(averageCorrectReaction+roundUpFactor))]]];
 
     //total Correct time in test reaction
-    [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Total Correct Reaction Time (mS)       : %@ ", [NSString stringWithFormat:@"%d", ((int)(totalCorrectDelay+roundUpFactor))]]];
+    [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Total Correct Reaction Time (mS), %@ ", [NSString stringWithFormat:@"%d", ((int)(totalCorrectDelay+roundUpFactor))]]];
     //blank line
     //********end corrects
         [singleton.cardReactionTimeResult addObject:@" " ];
@@ -1303,14 +1303,13 @@ bool wasButtonPressed   = NO;
     //blank line
         [singleton.cardReactionTimeResult addObject:@" " ];
     //end of data message
-        [singleton.cardReactionTimeResult addObject:@"End of test data. " ];
-    //blank line
-        [singleton.cardReactionTimeResult addObject:@" " ];
-    //mmu copyright message 2013 JAH
-            [singleton.cardReactionTimeResult addObject:@"MMU (c) 2016 Jonathan A. Howell, SAS Technical Services. " ];
-    // 27 + no of cards array index total
+        [singleton.cardReactionTimeResult addObject:@"End of Tachist Test Data." ];
+
+    // 26 + no of cards array index total
     //blank line
     [singleton.cardReactionTimeResult addObject:@" "];
+    [singleton.cardReactionTimeResult addObject:@" " ];
+    [singleton.cardReactionTimeResult addObject:@" " ];
 
     //example for future
 
@@ -1359,15 +1358,27 @@ bool wasButtonPressed   = NO;
     [mailComposer setMailComposeDelegate:self];
     if ([MFMailComposeViewController canSendMail]){
         [mailComposer setToRecipients:[NSArray arrayWithObjects:@"" ,Nil]];
-        
+        filename = @"TachistAppData.csv";
         //[mailComposer setSubject:@"iPad Restults from Tachistoscope V3.3 App"];
         [mailComposer setSubject:
-        [NSString stringWithFormat:@"%@ - iPad Data Tachistoscope V%@.%@.%@.%@.", [NSString stringWithFormat:@"%@", subjectCodeTxt.text],[NSString stringWithFormat:@"%i", v1],[NSString stringWithFormat:@"%i", v2],[NSString stringWithFormat:@"%i", v3], [NSString stringWithFormat:@"%@", vDate]]];
+        [NSString stringWithFormat:@"%@ - IOS Test Data Tachistoscope V%@.%@.%@ - %@", [NSString stringWithFormat:@"%@", subjectCodeTxt.text],[NSString stringWithFormat:@"%i", v1],[NSString stringWithFormat:@"%i", v2],[NSString stringWithFormat:@"%i", v3], [NSString stringWithFormat:@"%@", vDate]]];
         
         //[mailComposer setMessageBody:@"Dear Tachistoscope User: " isHTML:YES];
 
+        filepath = [[NSString alloc] init];
+        
+        filepath = [self.GetDocumentDirectory stringByAppendingPathComponent:self.setFilename];
+        
+        // Get the resource path and read the file using NSData
+        
+        NSData *fileData = [NSData dataWithContentsOfFile:filepath];
+        
+        
         [mailComposer setMessageBody: singleton.resultStrings isHTML:NO];
         [mailComposer setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+        //add the data as an attachment in csv Excel format
+        [mailComposer addAttachmentData:fileData mimeType:@"text/csv" fileName:filename];
+        
         [self presentViewController:mailComposer animated:YES completion:^{/*email*/}];
     }else{
         
@@ -1409,7 +1420,8 @@ statusMessageLab.text=@"Select\nNext\nTask";
 
     docsDir = dirPaths[0];
 
-    NSString * fileNameS = [NSString stringWithFormat:@"%@.csv", subjectCodeTxt.text];
+    //NSString * fileNameS = [NSString stringWithFormat:@"%@.csv", subjectCodeTxt.text];
+    NSString * fileNameS = @"TachistAppData.csv";
     dataFile = [docsDir stringByAppendingPathComponent:fileNameS];
 
     databuffer = [singleton.resultStrings dataUsingEncoding: NSASCIIStringEncoding];
