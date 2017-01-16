@@ -1307,7 +1307,7 @@ bool wasButtonPressed   = NO;
 
     // 26 + no of cards array index total
     //blank line
-    [singleton.cardReactionTimeResult addObject:@" "];
+    [singleton.cardReactionTimeResult addObject:@" " ];
     [singleton.cardReactionTimeResult addObject:@" " ];
     [singleton.cardReactionTimeResult addObject:@" " ];
 
@@ -2845,6 +2845,7 @@ wasButtonPressed = NO;
 	self.startDate = [NSDate date];
     [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay100) userInfo:nil repeats:NO];
 }
+
 #pragma mark Blanks
 //========*******************************************************=========
 //========*******************************************************=========
@@ -4361,7 +4362,7 @@ wasButtonPressed = NO;
         //// NSLog(@"card display blank");
                 [cardHolder setImage: card[0].image];
     
-        [NSTimer scheduledTimerWithTimeInterval:(([self delayx1])) target:self selector:@selector(onCardDisplay101) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx1])) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
 }
 
