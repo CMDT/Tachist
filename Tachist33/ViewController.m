@@ -568,11 +568,11 @@ bool wasButtonPressed   = NO;
 }
 
 - (IBAction)newSubjectCodeGen:(id)sender {
-    statusMessageLab.text=@"New Subject Code Added";
+    statusMessageLab.text          = @"New Subject Code Added";
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"ddMMyyyyhhmmss"];
-    NSString *strDate = [dateFormatter stringFromDate:[NSDate date]];
-    NSString *newText = [NSString stringWithFormat:@"T%@", strDate];
+    NSString *strDate   = [dateFormatter stringFromDate:[NSDate date]];
+    NSString *newText   = [NSString stringWithFormat:@"T%@", strDate];
     subjectCodeTxt.text = newText;
 }
 
@@ -923,7 +923,7 @@ bool wasButtonPressed   = NO;
     
     //set version no
     singleton.vDate   = @"17.1.17";
-    singleton.version = @"3.4.3";
+    singleton.version = @"4.3.3";
     
     //hide unhide labels, screens and buttons
     //***
