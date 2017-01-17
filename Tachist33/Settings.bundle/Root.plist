@@ -60,11 +60,11 @@
 			<key>Type</key>
 			<string>PSTitleValueSpecifier</string>
 			<key>Title</key>
-			<string>Version Number:</string>
+			<string>Version</string>
 			<key>Key</key>
 			<string>version0</string>
 			<key>DefaultValue</key>
-			<string>4.3.2 - 16.1.17</string>
+			<string>4.3.3 - 17.1.17</string>
 		</dict>
 		<dict>
 			<key>Type</key>

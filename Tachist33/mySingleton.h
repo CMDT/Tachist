@@ -35,6 +35,8 @@
 
     NSString            * resultsStrings;
     NSString            * subjectName;
+    NSString            * vDate;
+    NSString            * version;
 }
 
 @property (nonatomic) int  offset;
@@ -58,6 +60,8 @@
 
 @property (nonatomic, retain) NSString          * resultStrings;
 @property (nonatomic, retain) NSString          * subjectName;
+@property (nonatomic, retain) NSString          * vDate;
+@property (nonatomic, retain) NSString          * version;
 
 //Flags BOOL
 

@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 
 @implementation AppDelegate
+@synthesize     keyboardIsShowing;//for determining if keyboard on screen
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -24,8 +25,26 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     [defaults synchronize];//make sure all are updated
-
+    
+    //for determining if keyboard on screen
+    // Monitor keyboard status application wide
+    self.keyboardIsShowing = NO;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
     return YES;
+}
+
+- (void)keyboardWillShow:(NSNotification*)aNotification
+{
+    self.keyboardIsShowing = YES;
+}
+
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+    self.keyboardIsShowing = NO;
+
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application

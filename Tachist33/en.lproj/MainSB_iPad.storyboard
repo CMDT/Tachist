@@ -27,7 +27,7 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <attributedString key="attributedText">
                                     <fragment>
-                                        <mutableString key="content">In this perception test, you will be shown some white cards that contain rows of O's and maybe one 'X'.  
+                                        <string key="content">In this perception test, you will be shown some white cards that contain rows of O's and maybe one 'X'.  
 
 Some cards contain only O's.
 
@@ -60,7 +60,7 @@ To process the data further, you will need to do some manual cut and paste on th
 Note:- 
 
 Due to the way an iPad functions, multiple Apps can run in parallel, some of which can run in the background, it is possible that the timings could be inaccurate due to processor load from competing tasks.  You may wish to take several runs with the Tachistoscope App to determine more precise results.
-</mutableString>
+</string>
                                         <attributes>
                                             <color key="NSColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <font key="NSFont" size="20" name="HelveticaNeue"/>
@@ -280,7 +280,7 @@ Due to the way an iPad functions, multiple Apps can run in parallel, some of whi
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="V." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8EE-b8-ZSc">
-                                <rect key="frame" x="719" y="55" width="123" height="28"/>
+                                <rect key="frame" x="719" y="55" width="139" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -309,6 +309,14 @@ Due to the way an iPad functions, multiple Apps can run in parallel, some of whi
                                 <rect key="frame" x="353" y="80" width="450" height="63"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cgm-jf-ioP">
+                                <rect key="frame" x="839" y="53" width="107" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="CANCEL"/>
+                                <connections>
+                                    <action selector="cancelButtonPressesInTest" destination="2" eventType="touchUpInside" id="7e9-a5-rGZ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -319,6 +327,7 @@ Due to the way an iPad functions, multiple Apps can run in parallel, some of whi
                         <outlet property="JumpingManLogo" destination="iAl-Xd-PLy" id="sFT-us-0s0"/>
                         <outlet property="ObutLab" destination="udo-fy-Mw2" id="PJL-JH-TDY"/>
                         <outlet property="XbutLab" destination="Qp2-02-8ND" id="8LW-ih-XWQ"/>
+                        <outlet property="cancelBut" destination="Cgm-jf-ioP" id="arc-ft-k4c"/>
                         <outlet property="cardHolder" destination="nGM-2W-9ER" id="l3a-hl-RxA"/>
                         <outlet property="cardsLab" destination="pwg-Ij-HB2" id="m4G-7r-pCz"/>
                         <outlet property="clickMessageLab" destination="r8U-k7-cLK" id="ggT-uI-Y4H"/>

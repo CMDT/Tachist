@@ -13,5 +13,6 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (assign, nonatomic) BOOL keyboardIsShowing;//for determining if keyboard on screen
 
 @end

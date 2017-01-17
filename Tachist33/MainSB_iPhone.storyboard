@@ -258,7 +258,7 @@ Due to the way an iPad works, multiple Apps can run in parallel, some of which c
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Version Number" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8EE-b8-ZSc">
-                                <rect key="frame" x="298" y="33" width="132" height="14"/>
+                                <rect key="frame" x="287" y="33" width="143" height="14"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -307,6 +307,14 @@ Due to the way an iPad works, multiple Apps can run in parallel, some of which c
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gFs-RO-35K">
+                                <rect key="frame" x="388" y="20" width="75" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="CANCEL"/>
+                                <connections>
+                                    <action selector="cancelButtonPressesInTest" destination="2" eventType="touchUpInside" id="7FA-nh-bsL"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -317,6 +325,7 @@ Due to the way an iPad works, multiple Apps can run in parallel, some of which c
                         <outlet property="JumpingManLogo" destination="iAl-Xd-PLy" id="sFT-us-0s0"/>
                         <outlet property="ObutLab" destination="udo-fy-Mw2" id="PJL-JH-TDY"/>
                         <outlet property="XbutLab" destination="Qp2-02-8ND" id="8LW-ih-XWQ"/>
+                        <outlet property="cancelBut" destination="gFs-RO-35K" id="QQq-xy-grr"/>
                         <outlet property="cardHolder" destination="nGM-2W-9ER" id="l3a-hl-RxA"/>
                         <outlet property="cardsLab" destination="pwg-Ij-HB2" id="m4G-7r-pCz"/>
                         <outlet property="clickMessageLab" destination="r8U-k7-cLK" id="ggT-uI-Y4H"/>

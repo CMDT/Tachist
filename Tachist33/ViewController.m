@@ -10,6 +10,7 @@
 
 #import "ViewController.h"
 #import "mySingleton.h" //for global variables
+#import "AppDelegate.h"
 
 #define kEmail      @"emailAddress"
 #define kTester     @"testerName"
@@ -34,6 +35,8 @@
     //for keyboard and field moving animations
     float keyboardAnimSpeed;
     float keyboardAnimDelay;
+    
+    BOOL  cancelButtonPressed;
     
 //text fields for inputs
     IBOutlet UITextField *noCards;
@@ -78,6 +81,7 @@
     IBOutlet UIButton    *saveDataToEmailBut;
     IBOutlet UIButton    *infoBut;
     IBOutlet UIButton    *newSubjectBut;
+    IBOutlet UIButton    *cancelBut;
     NSString * emailAdd;
 }
 @end
@@ -132,19 +136,6 @@
     }
 }
 
-//************************************************
-//************************************************
-// date part of version no set in did load section vDate
-//******************************************************************************************************
-int v1=4;
-int v2=3;  //  version: v1.v2.v3
-int v3=1;
-//******************************************************************************************************
-//************************************************
-// note: date needs editing in
-// AwakeFromNib and ViewDidLoad eg vDate=@"16.1.17";
-//************************************************
-
 // add average reaction for all tests, shortest and longest
 float   longestWrongReaction  = -10000;
 float   shortestWrongReaction = 10000;
@@ -160,7 +151,11 @@ float        averageReaction  = 0;
 float         totalWrongDelay = 0;
 float       totalCorrectDelay = 0;
 
+//***** masybe delete this
+//
 float roundUpFactor = 0;// or 0.5  adds 5 * 10,000 of a second to the reaction time to offset the int rounding
+//
+//*****
 
 // add score correct x and correct o, also wrong x and wrong o
 int correctO = 0;
@@ -222,7 +217,8 @@ bool wasButtonPressed   = NO;
 //******** Start of block *********
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
-    // no effect as this App is being ported to iPhone only, even though displaying on an iPad, compromise value
+    
+    // effects position of frames etc on different devices
 #define IDIOM    UI_USER_INTERFACE_IDIOM()
 #define IPAD     UIUserInterfaceIdiomPad
     
@@ -235,12 +231,13 @@ bool wasButtonPressed   = NO;
         /* do something specifically for iPhone or iPod touch. */
         yy = 70;
     }
+    
     //hide the start button for a while
     startBut.hidden = YES;
     infoBut.hidden  = YES;
     
     //move the field to be above keyboard
-    if((textField == self->noCards) || (textField == self -> subjectCodeTxt || textField == self->postResponseDelay) || (textField == self -> stimOnTime)){
+    if((textField == self -> noCards) || (textField == self -> subjectCodeTxt || textField == self -> postResponseDelay) || (textField == self -> stimOnTime)){
         
         textField.frame = CGRectMake(textField.frame.origin.x, (textField.frame.origin.y), textField.frame.size.width, textField.frame.size.height);
         int oft=textField.frame.origin.y-yy;
@@ -250,26 +247,27 @@ bool wasButtonPressed   = NO;
     if(textField == self->noCards){
         noCards.backgroundColor = [UIColor greenColor];
         // NSLog(@"Var cards");
-        statusMessageLab.text=@"Editing \nNo Of\nCards";
+        statusMessageLab.text = @"Editing \nNo Of\nCards";
     }
     if(textField == self->subjectCodeTxt){
         subjectCodeTxt.backgroundColor = [UIColor greenColor];
         // NSLog(@"Var sub");
-        statusMessageLab.text=@"Editing\nSubject\nName";
+        statusMessageLab.text = @"Editing\nSubject\nName";
     }
     if(textField == self->postResponseDelay){
         postResponseDelay.backgroundColor = [UIColor greenColor];
         // NSLog(@"Var post");
-        statusMessageLab.text=@"Editing\nPost\nDelay";
+        statusMessageLab.text = @"Editing\nPost\nDelay";
     }
     if(textField == self->stimOnTime){
         stimOnTime.backgroundColor = [UIColor greenColor];
         // NSLog(@"Var stim");
-        statusMessageLab.text=@"Editing\nStimulus\nTime";
+        statusMessageLab.text = @"Editing\nStimulus\nTime";
     }
 }
 
 -(void)textFieldDidEndEditing:(UITextField *) textField {
+    
     mySingleton *singleton = [mySingleton sharedSingleton];
 //set int values to the text field inputs
     noOfCards = [noCards.text intValue];
@@ -288,7 +286,7 @@ bool wasButtonPressed   = NO;
     if (noOfCards<1) {
                 noCards.textColor=[UIColor redColor];
         noOfCards=1;
-                noCards.text=@"1";
+                noCards.text = @"1";
         noCards.backgroundColor = [UIColor yellowColor];
         //        set limits here change colour in check method
     }
@@ -320,13 +318,13 @@ bool wasButtonPressed   = NO;
     postResponseDelay.textColor=[UIColor blackColor];
     if (postResponseDelayN < 1) {
         postResponseDelay.textColor=[UIColor redColor];
-        postResponseDelay.text=@"1";
+        postResponseDelay.text = @"1";
         postResponseDelay.backgroundColor = [UIColor yellowColor];
         //        set limits here change colour in check method
     }
     if (postResponseDelayN > 5000) {
         postResponseDelay.textColor=[UIColor redColor];
-        postResponseDelay.text=@"5000";
+        postResponseDelay.text = @"5000";
         postResponseDelay.backgroundColor = [UIColor yellowColor];
         //        set limits here change colour in check method
     }
@@ -398,6 +396,7 @@ bool wasButtonPressed   = NO;
                          self.view.frame = CGRectMake(frame.origin.x, oft, frame.size.width, frame.size.height);
                      }
                      completion:^(BOOL finished){
+                         //replace the hidden buttons now the frame is back home
                          [self showButtons];
                      }];
 //any colour re-config now
@@ -405,8 +404,15 @@ bool wasButtonPressed   = NO;
 
 //replace the info and start buttons
 -(void)showButtons{
-    startBut.hidden = NO;
-    infoBut.hidden  = NO;
+    //use delegate to check if keyboard is on screen (also works with bluetooth kb?)
+    BOOL keyboardIsShowing = ((AppDelegate*)[UIApplication sharedApplication].delegate).keyboardIsShowing;
+    if (keyboardIsShowing) {
+        startBut.hidden = YES;
+        infoBut.hidden  = YES;
+    }else{
+        startBut.hidden = NO;
+        infoBut.hidden  = NO;
+    }
 }
 
 - (IBAction)startTest:(id)sender {
@@ -417,6 +423,7 @@ bool wasButtonPressed   = NO;
 //Action buttons
     noBut.hidden              = NO;
     yesBut.hidden             = NO;
+    cancelBut.hidden          = YES;
     startBut.hidden           = YES;
     newTestBut.hidden         = YES;
     hideResultsBut.hidden     = YES;
@@ -473,7 +480,8 @@ bool wasButtonPressed   = NO;
     //show cards
     //show start message first for 3 seconds
     [NSTimer scheduledTimerWithTimeInterval:(3.0) target:self selector:@selector(startCardDisplay) userInfo:nil repeats:NO];
-//get number of cards in test and check ranges in delegate methods for textfield inputs
+    
+    //get number of cards in test and check ranges in delegate methods for textfield inputs
     noOfCards = [noCards.text intValue];
     
     // NSLog(@"No of Cards = %i", noOfCards);
@@ -513,8 +521,8 @@ bool wasButtonPressed   = NO;
 }
 
 -(void)initVars{
-    mySingleton *singleton = [mySingleton sharedSingleton];
-    statusMessageLab.text=@"Setting\nVariables\nand Flags";
+    mySingleton *singleton   = [mySingleton sharedSingleton];
+    statusMessageLab.text    = @"Setting\nVariables\nand Flags";
     // add average reaction for all tests, shortest and longest
        longestWrongReaction  = -10000;
        shortestWrongReaction = 10000;
@@ -528,21 +536,23 @@ bool wasButtonPressed   = NO;
             shortestReaction = 10000;
             averageReaction  = 0;
 
-    totalCorrectDelay=0;
-    totalWrongDelay=0;
+    totalCorrectDelay        = 0;
+    totalWrongDelay          = 0;
+    
+    cancelButtonPressed      = NO;
     
     // add score correct x and correct o, also wrong x and wrong o
-    correctO = 0;
-    wrongO   = 0;
-    correctX = 0;
-    wrongX   = 0;
-    noButton = -1;
+    correctO   = 0;
+    wrongO     = 0;
+    correctX   = 0;
+    wrongX     = 0;
+    noButton   = -1;
 
-    detectorOn= 0;
-    delay     = 0.5;
-    delay1    = 0;
-    delay3    = 0;
-    totalDelay= 0;
+    detectorOn = 0;
+    delay      = 0.5;
+    delay1     = 0;
+    delay3     = 0;
+    totalDelay = 0;
 
     lastCard         = NO;
     noOfCards        = 1;
@@ -555,7 +565,6 @@ bool wasButtonPressed   = NO;
     for (int s=0; s<130; s++) {
         cardReactionTime[s] = 0.0f;
     }
-    //subjectCodeTxt.text=@"";
 }
 
 - (IBAction)newSubjectCodeGen:(id)sender {
@@ -587,6 +596,7 @@ bool wasButtonPressed   = NO;
     wasButtonPressed=YES;
     [NSTimer scheduledTimerWithTimeInterval:(0.1) target:self selector:@selector(blankCardDisplay101) userInfo:nil repeats:NO];//used to be 0.5
 }
+
 //FINISH part 2/2
 -(void)finishCardDisplay1 {
     statusMessageLab.text=@"FINISH";
@@ -606,6 +616,7 @@ bool wasButtonPressed   = NO;
     saveDataToEmailBut.hidden = NO;
     infoBut.hidden            = NO;
     newSubjectBut.hidden      = YES;
+    cancelBut.hidden          = YES;
 
     //text views
     cardHolder.hidden         = YES;
@@ -654,7 +665,7 @@ bool wasButtonPressed   = NO;
 }
 
 - (IBAction)showResults:(id)sender {
-    statusMessageLab.text=@"Results\nScreen\nDisplayed";
+    statusMessageLab.text = @"Results\nScreen\nDisplayed";
     //hide unhide labels, screens and buttons
     //***
     //hide the top titles and logos
@@ -663,6 +674,7 @@ bool wasButtonPressed   = NO;
     JumpingManLogo.hidden   = NO;
     logoImage.hidden        = NO;
     versionNumberLab.hidden = NO;
+    cancelBut.hidden        = YES;
     
     //Action buttons
     noBut.hidden              = YES;
@@ -718,7 +730,7 @@ bool wasButtonPressed   = NO;
 }
 
 - (IBAction)hideResults:(id)sender {
-    statusMessageLab.text=@"Ready\nFor\nInstruction";
+    statusMessageLab.text = @"Ready\nFor\nInstruction";
     //hide unhide labels, screens and buttons
     //***
     //Action buttons
@@ -730,6 +742,7 @@ bool wasButtonPressed   = NO;
     saveDataToEmailBut.hidden = YES;
     infoBut.hidden            = NO;
     newSubjectBut.hidden      = NO;
+    cancelBut.hidden          = YES;
 
     //text views
     cardHolder.hidden         = YES;
@@ -780,6 +793,7 @@ bool wasButtonPressed   = NO;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    mySingleton *singleton = [mySingleton sharedSingleton];
     //********************************
     //for text fields delegate methods to work in colour change when edited.
     //do the version number in the title bar
@@ -812,12 +826,13 @@ bool wasButtonPressed   = NO;
     //*************************************************************
     //version, set anyway *****************************************
     //*************************************************************
-    
-    version0 =  @"Version 4.3.2 - 16.1.17";     // version   *** keep short
-    version1 =  @"MMU (C) 2017";                // copyright *** limited line space
-    version2 =  @"j.a.howell@mmu.ac.uk";        // author    *** to display on device
-    version3 =  @"http://www.ess.mmu.ac.uk";    // web site  *** settings screen
+    vDate    = singleton.vDate;
+    version0 = singleton.version;               // version   in awake from nib ************************ <<<<<<<<<<<<<<<
+    version1 = @"MMU (C) 2017";                // copyright *** limited line space
+    version2 = @"j.a.howell@mmu.ac.uk";        // author    *** to display on device
+    version3 = @"http://www.ess.mmu.ac.uk";    // web site  *** settings screen
     //*************************************************************
+    
     [defaults setObject:version0 forKey:kVersion0];   //***
     [defaults setObject:version1 forKey:kVersion1];   //***
     [defaults setObject:version2 forKey:kVersion2];   //***
@@ -843,20 +858,13 @@ bool wasButtonPressed   = NO;
         emailAdd =  @"@mmu.ac.uk";
         [defaults setObject:[NSString stringWithFormat:@"%@", emailAdd] forKey:kEmail];
     }
-    //singleton.testerName = tester;
-    //singleton.email      = email;
-    
+
     [defaults synchronize];//make sure all are updated
     
     versionNumberLab.text   = version0;
-    //singleton.versionNumber = version0;
   
-
     //************************* added plist stuff end
-    //********************************
 
-    vDate=@"16.1.17";
-    //NSString *versionNo = [NSString stringWithFormat:@"V.%i.%i.%i - %@",v1, v2, v3, vDate];
     NSString *versionNo = versionNumberLab.text;
 
     versionNumberLab.text=versionNo;
@@ -887,6 +895,7 @@ bool wasButtonPressed   = NO;
     saveDataToEmailBut.hidden = YES;
     infoBut.hidden            = NO;
     newSubjectBut.hidden      = NO;
+    cancelBut.hidden          = YES;
 
     //text views
     cardHolder.hidden         = YES;
@@ -938,7 +947,7 @@ bool wasButtonPressed   = NO;
 }
 
 - (IBAction)infoButtonPressed:(id)sender {
-    statusMessageLab.text=@"Information\nScreen\nDisplayed";
+    statusMessageLab.text = @"Information\nScreen\nDisplayed";
     //hide unhide labels, screens and buttons
     //***
     //Action buttons
@@ -950,6 +959,7 @@ bool wasButtonPressed   = NO;
     saveDataToEmailBut.hidden = YES;
     infoBut.hidden            = YES;
     newSubjectBut.hidden      = YES;
+    cancelBut.hidden          = YES;
 
     //text views
     cardHolder.hidden         = YES;
@@ -984,11 +994,11 @@ bool wasButtonPressed   = NO;
     JumpingManLogo.hidden     = YES;
     clickMessageLab.hidden    = YES;
     
-    if (someResultsExist==1){
-        results.hidden=NO;
+    if (someResultsExist == 1){
+        results.hidden            = NO;
         saveDataToEmailBut.hidden = NO;
     } else {
-        results.hidden=YES;
+        results.hidden            = YES;
         saveDataToEmailBut.hidden = YES;
     }
     //end of hide section
@@ -996,8 +1006,13 @@ bool wasButtonPressed   = NO;
 
 -(void)awakeFromNib {
     [super awakeFromNib];
+    mySingleton *singleton = [mySingleton sharedSingleton];
     statusMessageLab.text=@"The App is Awake...";
-    vDate=@"16.1.17";
+    
+    //set version no
+    singleton.vDate   = @"17.1.17";
+    singleton.version = @"3.4.3";
+    
     //hide unhide labels, screens and buttons
     //***
     //Action buttons
@@ -1009,6 +1024,7 @@ bool wasButtonPressed   = NO;
     saveDataToEmailBut.hidden = YES;
     infoBut.hidden            = NO;
     newSubjectBut.hidden      = NO;
+    cancelBut.hidden          = YES;
 
     //text views
     cardHolder.hidden         = YES;
@@ -1043,16 +1059,16 @@ bool wasButtonPressed   = NO;
     JumpingManLogo.hidden     = NO;
     clickMessageLab.hidden    = NO;
     
-    if (someResultsExist==1){
-        results.hidden=NO;
+    if (someResultsExist == 1){
+        results.hidden            = NO;
         saveDataToEmailBut.hidden = NO;
     } else {
-        results.hidden=YES;
+        results.hidden            = YES;
         saveDataToEmailBut.hidden = YES;
     }
     //end of hide section
     
-    NSString *temp2 = [NSString stringWithFormat:@"Tachistoscope Test for IOS\nV.%i.%i.%i - %@",v1, v2, v3, vDate];
+    NSString *temp2 = [NSString stringWithFormat:@"Tachistoscope Test for IOS\nV.%@ - %@",singleton.version, singleton.vDate];
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:temp2 message:@"Type the SUBJECT Code,\nSTIMULUS On Time, \nPOST Stimulus Delay and the \nNUMBER of cards before \nstarting the test."
                                                    delegate:self cancelButtonTitle:@"Continue to the App Settings" otherButtonTitles: nil];
     [alert show];
@@ -1110,7 +1126,7 @@ bool wasButtonPressed   = NO;
 {
     double noSeconds = (double) [self.startDate timeIntervalSinceNow] * -1000;
     //statusMessageLab.text=@"You\nPressed\nYES";
-    if (wasButtonPressed==NO) {
+    if (wasButtonPressed == NO) {
         //NSString *reactionTime= [[NSString alloc] initWithFormat:@"Reaction time is %1.0f milliseconds. ", noSeconds];
         
         if(detectorOn == 0){
@@ -1140,11 +1156,25 @@ bool wasButtonPressed   = NO;
     cardReactionTime[cardCounter] = noSeconds;
 }
 
+-(IBAction)cancelButtonPressesInTest{
+    lastCard            = YES;
+    cancelButtonPressed = YES;
+    noBut.hidden              = YES;
+    yesBut.hidden             = YES;
+    
+    //display finish message
+    [cardHolder setImage: card[30].image];
+    
+    noOfCards           = cardCounter;
+    //end the test now
+    [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
+}
+
 - (IBAction)noPressed
 {
     double noSeconds = (double) [self.startDate timeIntervalSinceNow] * -1000;
     //statusMessageLab.text=@"You\nPressed\nNO";
-    if (wasButtonPressed==NO) {
+    if (wasButtonPressed == NO) {
         
         //NSString *reactionTime= [[NSString alloc] initWithFormat:@"Reaction time is %1.0f milliseconds.", noSeconds];
         
@@ -1217,7 +1247,7 @@ bool wasButtonPressed   = NO;
         if (cardReactionTime[x] > longestReaction) {
             longestReaction = cardReactionTime[x];
         }
-        if (((cardReactionTime[x] < shortestReaction)) && (cardReactionTime[x]>0.00)){
+        if (((cardReactionTime[x] < shortestReaction)) && (cardReactionTime[x] > 0.00)){
             shortestReaction = cardReactionTime[x];
         }
         totalDelay +=  cardReactionTime[x];
@@ -1229,7 +1259,7 @@ bool wasButtonPressed   = NO;
                 longestWrongReaction = cardReactionTime[x];
 
             }
-            if (((cardReactionTime[x] < shortestWrongReaction)) && (cardReactionTime[x]>0.00)){
+            if (((cardReactionTime[x] < shortestWrongReaction)) && (cardReactionTime[x] > 0.00)){
                 shortestWrongReaction = cardReactionTime[x];
 
             }
@@ -1240,7 +1270,7 @@ bool wasButtonPressed   = NO;
             if (cardReactionTime[x] > longestCorrectReaction) {
                 longestCorrectReaction = cardReactionTime[x];
             }
-            if (((cardReactionTime[x] < shortestCorrectReaction)) && (cardReactionTime[x]>0.00)){
+            if (((cardReactionTime[x] < shortestCorrectReaction)) && (cardReactionTime[x] > 0.00)){
                 shortestCorrectReaction = cardReactionTime[x];
             }
             totalCorrectDelay +=  cardReactionTime[x];
@@ -1267,17 +1297,17 @@ bool wasButtonPressed   = NO;
     
     //don't let any silly default results through
     if (CardsTaken == 999) { //check if no button was pressed at all and zero out results if tha happened
-        shortestReaction        = 0;
+        shortestReaction        = 10000;
         averageReaction         = 0;
         totalDelay              = 0;
         longestReaction         = 0;
 
-        shortestWrongReaction   = 0;
+        shortestWrongReaction   = 10000;
         averageWrongReaction    = 0;
         totalWrongDelay         = 0;
         longestWrongReaction    = 0;
 
-        shortestCorrectReaction = 0;
+        shortestCorrectReaction = 10000;
         averageCorrectReaction  = 0;
         totalCorrectDelay       = 0;
         longestCorrectReaction  = 0;
@@ -1303,8 +1333,7 @@ bool wasButtonPressed   = NO;
     [singleton.cardReactionTimeResult addObject:@"MMU Cheshire, Exercise and Sport Science, Tachistoscope IOS Application Results"];
 
     //mmu copyright message 2013 JAH
-    //[singleton.cardReactionTimeResult addObject:@"(c) 2015 MMU written by Jonathan A. Howell for ESS Tachistoscope V%@.%@.%@.%@", v1,v2,v3,vDate];
-    [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"(c) 2017 MMU written by Jonathan A. Howell for MMU, Tachistoscope V%@.%@.%@ - %@", [NSString stringWithFormat:@"%i", v1],[NSString stringWithFormat:@"%i", v2],[NSString stringWithFormat:@"%i", v3], [NSString stringWithFormat:@"%@", vDate]]];
+    [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"(c) 2017 MMU written by Jonathan A. Howell for MMU, Tachistoscope V%@ - %@",singleton.version, singleton.vDate]];
 
     //blank line
     [singleton.cardReactionTimeResult addObject:@" "];
@@ -1322,7 +1351,12 @@ bool wasButtonPressed   = NO;
 
     //blank line
         [singleton.cardReactionTimeResult addObject:@" "];
-
+    if (cancelButtonPressed) {
+        [singleton.cardReactionTimeResult addObject:@"*** The CANCEL Button was pressed to finish this test early ***."];
+    
+        //blank line
+        [singleton.cardReactionTimeResult addObject:@" "];
+    }
     //no cards
         [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Number of Cards in Test, %@ ", [NSString stringWithFormat:@"%d", noOfCards]]];
 
@@ -1353,47 +1387,83 @@ bool wasButtonPressed   = NO;
         [singleton.cardReactionTimeResult addObject:@""];
 
     //shortest reaction
+    if ((int)(shortestReaction) == 10000) {
+        [singleton.cardReactionTimeResult addObject:@"Shortest Reaction Time (mS), n/a"];
+    }else{
         [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Shortest Reaction Time (mS), %@ ", [NSString stringWithFormat:@"%d", ((int)(shortestReaction+roundUpFactor))]]];
-
+    }
     //longest reaction
+    if ((int)(shortestReaction) == 10000) {
+        [singleton.cardReactionTimeResult addObject:@"Longest Reaction Time (mS), n/a"];
+    }else{
         [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Longest Reaction Time (mS), %@ ", [NSString stringWithFormat:@"%d", ((int)(longestReaction+roundUpFactor))]]];
-
+    }
     //average reaction
+    if ((int)(shortestReaction) == 10000) {
+        [singleton.cardReactionTimeResult addObject:@"Average Reaction Time (mS), n/a"];
+    }else{
         [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Average Reaction Time (mS), %@ ", [NSString stringWithFormat:@"%d", ((int)(averageReaction+roundUpFactor))]]];
-
+    }
     //total time in test reaction
         [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Total Reaction Time (mS), %@ ", [NSString stringWithFormat:@"%d", ((int)(totalDelay+roundUpFactor))]]];
     //blank line
     [singleton.cardReactionTimeResult addObject:@""];
-    //********wrongs
+    
+    //******** wrongs
+
     //shortest Wrong reaction
+    if ((int)(shortestWrongReaction) == 10000) {
+        [singleton.cardReactionTimeResult addObject:@"Shortest Wrong Reaction Time (mS), n/a"];
+    }else{
     [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Shortest Wrong Reaction Time (mS), %@ ", [NSString stringWithFormat:@"%d", ((int)(shortestWrongReaction+roundUpFactor))]]];
-
+    }
+    
     //longest Wrong reaction
+    if ((int)(shortestWrongReaction) == 10000) {
+        [singleton.cardReactionTimeResult addObject:@"Longest Wrong Reaction Time (mS), n/a"];
+    }else{
     [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Longest Wrong Reaction Time (mS), %@ ", [NSString stringWithFormat:@"%d", ((int)(longestWrongReaction+roundUpFactor))]]];
-
+    }
+    
     //average Wrong reaction
+    if ((int)(shortestWrongReaction) == 10000) {
+        [singleton.cardReactionTimeResult addObject:@"Average Wrong Reaction Time (mS), n/a"];
+    }else{
     [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Average Wrong Reaction Time (mS), %@ ", [NSString stringWithFormat:@"%d", ((int)(averageWrongReaction+roundUpFactor))]]];
-
+    }
+    
     //total Wrong time in test reaction
     [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Total Wrong Reaction Time (mS), %@ ", [NSString stringWithFormat:@"%d", ((int)(totalWrongDelay+roundUpFactor))]]];
     //blank line
     [singleton.cardReactionTimeResult addObject:@""];
-    //********end wrongs
-    //********Corrects
+    //******** end wrongs
+    
+    //******** Corrects
     //shortest Correct reaction
+    if ((int)(shortestCorrectReaction) == 10000) {
+        [singleton.cardReactionTimeResult addObject:@"Shortest Correct Reaction Time (mS), n/a"];
+    }else{
     [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Shortest Correct Reaction Time (mS), %@ ", [NSString stringWithFormat:@"%d", ((int)(shortestCorrectReaction+roundUpFactor))]]];
+    }
 
     //longest Correct reaction
+    if ((int)(shortestCorrectReaction) == 10000) {
+        [singleton.cardReactionTimeResult addObject:@"Longest Correct Reaction Time (mS), n/a"];
+    }else{
     [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Longest Correct Reaction Time (mS), %@ ", [NSString stringWithFormat:@"%d", ((int)(longestCorrectReaction+roundUpFactor))]]];
-
+    }
     //average Correct reaction
+    if ((int)(shortestCorrectReaction) == 10000) {
+        [singleton.cardReactionTimeResult addObject:@"Average Correct Reaction Time (mS), n/a"];
+    }else{
     [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Average Correct Reaction Time (mS), %@ ", [NSString stringWithFormat:@"%d", ((int)(averageCorrectReaction+roundUpFactor))]]];
-
+    }
+    
     //total Correct time in test reaction
     [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"Total Correct Reaction Time (mS), %@ ", [NSString stringWithFormat:@"%d", ((int)(totalCorrectDelay+roundUpFactor))]]];
     //blank line
-    //********end corrects
+    //******** end corrects
+    
         [singleton.cardReactionTimeResult addObject:@" " ];
     //title line - results for cards follow
         [singleton.cardReactionTimeResult addObject:@"Card No., Card, Result, Reaction (mS)"];
@@ -1464,7 +1534,7 @@ bool wasButtonPressed   = NO;
         filename = @"TachistAppData.csv";
         //[mailComposer setSubject:@"iPad Restults from Tachistoscope V3.3 App"];
         [mailComposer setSubject:
-        [NSString stringWithFormat:@"%@ - IOS Test Data Tachistoscope V%@.%@.%@ - %@", [NSString stringWithFormat:@"%@", subjectCodeTxt.text],[NSString stringWithFormat:@"%i", v1],[NSString stringWithFormat:@"%i", v2],[NSString stringWithFormat:@"%i", v3], [NSString stringWithFormat:@"%@", vDate]]];
+        [NSString stringWithFormat:@"%@ - IOS Test Data Tachistoscope V%@ - %@", [NSString stringWithFormat:@"%@", subjectCodeTxt.text], singleton.version, singleton.vDate]];
         
         //[mailComposer setMessageBody:@"Dear Tachistoscope User: " isHTML:YES];
 
@@ -1535,9 +1605,10 @@ statusMessageLab.text=@"Select\nNext\nTask";
 -(void)onCardDisplay1 {
     statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
     //hide the buttons
-    noBut.hidden    = NO;
-    yesBut.hidden   = NO;
-    startBut.hidden = YES;
+    
+    noBut.hidden     = NO;
+    yesBut.hidden    = NO;
+    startBut.hidden  = YES;
     cardCounter++;
     int t = [self pickACard];
             if (wasButtonPressed == NO) {
@@ -1553,1401 +1624,1688 @@ wasButtonPressed = NO;
 }
 
 -(void)onCardDisplay2 {
-    statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-            if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+    if (!cancelButtonPressed) {
+        statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
+        cardCounter++;
+        int t=[self pickACard];
+            if (wasButtonPressed == NO) {
+            }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay2) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay2) userInfo:nil repeats:NO];
 }
 
 -(void)onCardDisplay3 {
-    statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+    if (!cancelButtonPressed) {
+        statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay3) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay3) userInfo:nil repeats:NO];
 }
 
 -(void)onCardDisplay4 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay4) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay4) userInfo:nil repeats:NO];
 }
 
 -(void)onCardDisplay5 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay5) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay5) userInfo:nil repeats:NO];
 }
 
 -(void)onCardDisplay6 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay6) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay6) userInfo:nil repeats:NO];
 }
 
 -(void)onCardDisplay7 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay7) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay7) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay8 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay8) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay8) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay9 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay9) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay9) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay10 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay10) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay10) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay11 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay11) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay11) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay12 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay12) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay12) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay13 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay13) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay13) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay14 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay14) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay14) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay15 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay15) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay15) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay16 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay16) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay16) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay17 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay17) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay17) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay18 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay18) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay18) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay19 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay19) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay19) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay20 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay20) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay20) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay21 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay21) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay21) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay22 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay22) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay22) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay23 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay23) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay23) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay24 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay24) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay24) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay25 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay25) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay25) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay26 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay26) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay26) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay27 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay27) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay27) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay28 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay28) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay28) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay29 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay29) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay29) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay30 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay30) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay30) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay31 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay31) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay31) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay32 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay32) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay32) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay33 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay33) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay33) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay34 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay34) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay34) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay35 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay35) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay35) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay36 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay36) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay36) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay37 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay37) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay37) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay38 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay38) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay38) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay39 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay39) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay39) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay40 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay40) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay40) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay41 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay41) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay41) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay42 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay42) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay42) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay43 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay43) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay43) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay44 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay44) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay44) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay45 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay45) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay45) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay46 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay46) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay46) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay47 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay47) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay47) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay48 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay48) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay48) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay49 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay49) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay49) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay50 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay50) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay50) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay51 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay51) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay51) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay52 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay52) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay52) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay53 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay53) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay53) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay54 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay54) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay54) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay55 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay55) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay55) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay56 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay56) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay56) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay57 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay57) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay57) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay58 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay58) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay58) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay59 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay59) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay59) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay60 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay60) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay60) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay61 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay61) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay61) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay62 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay62) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay62) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay63 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay63) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay63) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay64 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay64) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay64) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay65 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay65) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay65) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay66 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay66) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay66) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay67 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay67) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay67) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay68 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay68) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay68) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay69 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay69) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay69) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay70 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay70) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay70) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay71 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay71) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay71) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay72 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay72) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay72) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay73 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay73) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay73) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay74 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay74) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay74) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay75 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay75) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay75) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay76 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay76) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay76) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay77 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay77) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay77) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay78 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay78) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay78) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay79 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay79) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay79) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay80 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay80) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay80) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay81 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay81) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay81) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay82 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay82) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay82) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay83 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay83) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay83) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay84 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay84) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay84) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay85 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay85) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay85) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay86 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay86) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay86) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay87 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay87) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay87) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay88 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay88) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay88) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay89 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay89) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay89) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay90 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay90) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay90) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay91 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay91) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay91) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay92 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay92) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay92) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay93 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay93) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay93) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay94 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay94) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay94) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay95 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay95) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay95) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay96 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay96) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay96) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay97 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay97) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay97) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay98 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
-        if (wasButtonPressed==NO) {
-            // NSLog(@"(Button Not Pressed)");
+        cardCounter++;
+        int t=[self pickACard];
+        if (wasButtonPressed == NO) {
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay98) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed=NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay98) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay99 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
+        cardCounter++;
+        int t=[self pickACard];
         if (wasButtonPressed == NO) {
-            // NSLog(@"(Button Not Pressed)");
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay99) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed = NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay99) userInfo:nil repeats:NO];
 }
+
 -(void)onCardDisplay100 {
+    if (!cancelButtonPressed) {
         statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
-    cardCounter++;
-    int t=[self pickACard];
+        cardCounter++;
+        int t=[self pickACard];
         if (wasButtonPressed == NO) {
-            // NSLog(@"(Button Not Pressed)");
+        }
+        wasButtonPressed = NO;
+        [cardHolder setImage: card[t].image];
+        //start the timer
+        self.startDate = [NSDate date];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay100) userInfo:nil repeats:NO];
+    } else {
+        [NSTimer scheduledTimerWithTimeInterval:((0)) target:self selector:@selector(finishCardDisplay) userInfo:nil repeats:NO];
     }
-wasButtonPressed = NO;
-    [cardHolder setImage: card[t].image];
-
-    //start the timer
-	self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay100) userInfo:nil repeats:NO];
 }
+
 
 #pragma mark Blanks
 //========*******************************************************=========
@@ -2967,6 +3325,7 @@ wasButtonPressed = NO;
 }
 
 -(void)blankCardDisplay1 {
+    cancelBut.hidden = NO; //at least one shown, you can now cancel if wanted
     //blank screen
     //detectorOn = 0;
     if (noOfCards<2) {
@@ -2984,7 +3343,8 @@ wasButtonPressed = NO;
 -(void)blankCardDisplay2 {
     //blank screen
     //detectorOn = 0;
-    if (noOfCards<3) {
+    //if (noOfCards<3) {
+    if (noOfCards <= cardCounter) {
         lastCard=YES;
         // NSLog(@"card display ending now...");
         [cardHolder setImage: card[0].image];
@@ -2993,9 +3353,13 @@ wasButtonPressed = NO;
         //// NSLog(@"card display blank");
                 [cardHolder setImage: card[0].image];
        
-        [NSTimer scheduledTimerWithTimeInterval:(([self delayx1])) target:self selector:@selector(onCardDisplay3) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:(([self delayx1])) target:self selector:@selector(onCardDisplay2) userInfo:nil repeats:NO];
 }
 }
+
+#pragma mark loop back ????
+
+
 -(void)blankCardDisplay3 {
     //blank screen
     //detectorOn = 0;

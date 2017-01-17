@@ -28,11 +28,7 @@ NSString      * vDate; //version date
 @property(nonatomic,retain) NSString        * filepath;
 @property(nonatomic,retain) NSString        * vDate;
 
--(NSString *) GetDocumentDirectory;
--(void) WriteToStringFile:(NSMutableString *)textToWrite;
--(NSString *) setFilename;
-
-@property (nonatomic, copy) NSDate *startDate;
+@property (nonatomic, copy)            NSDate      * startDate;
 @property (nonatomic, strong) IBOutlet UITextField * noCards;
 @property (nonatomic, strong) IBOutlet UITextField * stimOnTime;
 @property (nonatomic, strong) IBOutlet UITextField * postResponseDelay;
@@ -40,14 +36,15 @@ NSString      * vDate; //version date
 
 // button press to send the mail
 - (IBAction)sendMail:(id)sender;
-
 - (IBAction)yesPressed;
 - (IBAction)noPressed;
 
-//-(void)onCardDisplay;
-//-(void)blankCardDisplay;
 - (void)startCardDisplay;
 - (void)finishCardDisplay;
 - (void)registerDefaultsFromSettingsBundle;
+
+- (NSString *) GetDocumentDirectory;
+- (void) WriteToStringFile:(NSMutableString *)textToWrite;
+- (NSString *) setFilename;
 
 @end

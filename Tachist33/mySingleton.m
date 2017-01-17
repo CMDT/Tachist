@@ -34,6 +34,7 @@ static mySingleton * sharedSingleton = nil;
 @synthesize boxShow;
 @synthesize hypot;
 @synthesize floatAngle;
+@synthesize vDate, version;
 
 //Array
 @synthesize cardReactionTimeResult;
@@ -42,8 +43,8 @@ static mySingleton * sharedSingleton = nil;
 #pragma mark Singleton Methods
 
 + (mySingleton *) sharedSingleton {
-    if(sharedSingleton  ==nil) {
-        sharedSingleton = [[super allocWithZone:NULL]init];
+    if(sharedSingleton  == nil) {
+        sharedSingleton  = [[super allocWithZone:NULL]init];
     }
     return sharedSingleton;
 }
@@ -70,8 +71,10 @@ static mySingleton * sharedSingleton = nil;
 
         resultStrings   = @"";
         subjectName     = @"TempSubject";
+        version         = @"";
+        vDate           = @"";
         
-        picturePos=CGRectMake(10,50,1000,800);    //approx, will be updated in a moment anyway
+        picturePos = CGRectMake(10,50,1000,800);    //approx, will be updated in a moment anyway
         cardReactionTimeResult = [[NSMutableArray alloc]initWithObjects:@"", nil]; //15/11/15 for ios 9 added @"",
     }
     return self;
