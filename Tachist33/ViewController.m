@@ -922,9 +922,19 @@ bool wasButtonPressed   = NO;
     mySingleton *singleton = [mySingleton sharedSingleton];
     statusMessageLab.text=@"The App is Awake...";
     
+    
+    
+    //**************************************************************
     //set version no
-    singleton.vDate   = @"17.1.17";
-    singleton.version = @"4.3.3";
+    //**************************************************************
+    //**************************************************************
+    
+    singleton.vDate   = @"24.3.17";
+    singleton.version = @"4.3.4";
+    
+    //**************************************************************
+    //**************************************************************
+    
     
     //hide unhide labels, screens and buttons
     //***
