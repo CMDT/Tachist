@@ -7,6 +7,7 @@
 //
 //  Updated for ios9 17/11/15
 //  this version 07/09/16
+//  Recompiled by jah for testing 24.3.17
 
 #import "ViewController.h"
 #import "mySingleton.h" //for global variables
