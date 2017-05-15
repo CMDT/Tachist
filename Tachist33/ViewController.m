@@ -8,6 +8,7 @@
 //  Updated for ios9 17/11/15
 //  this version 07/09/16
 //  Recompiled by jah for testing 24.3.17
+//  With Adam test 15.5.17
 
 #import "ViewController.h"
 #import "mySingleton.h" //for global variables
@@ -929,8 +930,8 @@ bool wasButtonPressed   = NO;
     //**************************************************************
     //**************************************************************
     
-    singleton.vDate   = @"24.3.17";
-    singleton.version = @"4.3.4";
+    singleton.vDate   = @"15.5.17";
+    singleton.version = @"4.3.5";
     
     //**************************************************************
     //**************************************************************
@@ -1247,6 +1248,7 @@ bool wasButtonPressed   = NO;
     // NSLog(@"Longest Correct Reaction  : = %f", longestReaction);
     // NSLog(@"Average Correct Reaction  : = %f", averageReaction);
     // NSLog(@"Total Correct Time Taken  : = %f", totalCorrectDelay);
+    
     // NSLog(@" ");
 
     //put titles and basic params up first
