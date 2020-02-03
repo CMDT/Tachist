@@ -8,7 +8,8 @@
 //  Updated for ios9 17/11/15
 //  this version 07/09/16
 //  Recompiled by jah for testing 24.3.17
-//  With Adam test 15.5.17
+//  With Adam Palin test 15.5.17
+// rebuild 3/2/20 for Sean Maudsley-Barton
 
 #import "ViewController.h"
 #import "mySingleton.h" //for global variables
@@ -741,8 +742,8 @@ bool wasButtonPressed   = NO;
     //version, set anyway *****************************************
     //*************************************************************
     vDate    = singleton.vDate;
-    version0 = singleton.version;               // version   in awake from nib ************************ <<<<<<<<<<<<<<<
-    version1 = @"MMU (C) 2017";                // copyright *** limited line space
+    version0 = singleton.version;              // version   in awake from nib ************************ <<<<<<<<<<<<<<<
+    version1 = @"MMU (C) 2020";                // copyright *** limited line space
     version2 = @"j.a.howell@mmu.ac.uk";        // author    *** to display on device
     version3 = @"http://www.ess.mmu.ac.uk";    // web site  *** settings screen
     //*************************************************************
@@ -930,8 +931,8 @@ bool wasButtonPressed   = NO;
     //**************************************************************
     //**************************************************************
     
-    singleton.vDate   = @"15.5.17";
-    singleton.version = @"4.3.5";
+    singleton.vDate   = @"03.02.20";
+    singleton.version = @"4.5.0";
     
     //**************************************************************
     //**************************************************************
@@ -1255,7 +1256,7 @@ bool wasButtonPressed   = NO;
     [singleton.cardReactionTimeResult addObject:@"MMU Cheshire, Exercise and Sport Science, Tachistoscope IOS Application Results"];
 
     //mmu copyright message 2013 JAH
-    [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"(c) 2017 MMU written by Jonathan A. Howell for MMU, Tachistoscope V%@ - %@",singleton.version, singleton.vDate]];
+    [singleton.cardReactionTimeResult addObject:[NSString stringWithFormat:@"(c) 2020 MMU written by Jonathan A. Howell for MMU, Tachistoscope V%@ - %@",singleton.version, singleton.vDate]];
 
     //blank line
     [singleton.cardReactionTimeResult addObject:@" "];
