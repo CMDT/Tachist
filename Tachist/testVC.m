@@ -6,6 +6,16 @@
 //  Copyright (c) 2014 Manchester Metropolitan University - ESS - essmobile. All rights reserved.
 //
 
+//************************************************
+//************************************************
+//Here is the versionb Number as disaplyed on the start screen
+int v1=3; //version: v1.v2.v3
+int v2=5;
+int v3=0;
+
+//************************************************
+//************************************************
+
 #import "testVC.h"
 #import "mySingleton.h"
 
@@ -121,20 +131,10 @@
     return self;
 }
 
-//************************************************
-//************************************************
-
-int v1=3; //version: v1.v2.v3
-int v2=3;
-int v3=4;
-
-//************************************************
-//************************************************
-
 // add average reaction for all tests, shortest and longest
 float   longestWrongReaction  = -10000;
 float   shortestWrongReaction = 10000;
-float    averageWrongReaction = 0;
+float   averageWrongReaction = 0;
 
 float longestCorrectReaction  = -10000;
 float shortestCorrectReaction = 10000;
@@ -190,10 +190,10 @@ bool wasButtonPressed = NO;
     return YES;
 }
 //iOS 6+
-- (NSUInteger)supportedInterfaceOrientations
-{
-    return (UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight);
-}
+//- (NSUInteger)supportedInterfaceOrientations
+//{
+//    return (UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight);
+//}
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     // NSLog(@"Touches began with this event");
@@ -641,6 +641,7 @@ bool wasButtonPressed = NO;
 }
 
 -(void)awakeFromNib {
+    [super awakeFromNib];
     //statusMessageLab.text=@"The App is Awake...";
     //hide unhide labels, screens and buttons
     //***
@@ -1655,7 +1656,7 @@ bool wasButtonPressed = NO;
         for (int aa = 0; aa < start; aa++) {
             for (int bb = 0; bb < aa; bb++) {
                 //make positive
-                react = abs(reactionTime[aa][bb]);
+                react = fabs(reactionTime[aa][bb]);
                 if (react>60000.00) {//about 60 seconds in ms
                     react=60001.00;//one more so I can see if it was set or was a default
                 }
@@ -1680,7 +1681,7 @@ bool wasButtonPressed = NO;
         
         for (int aa = start; aa < finish+1; aa++) {
             
-            firstPress = abs(reactionTime[aa][0]);
+            firstPress = fabs(reactionTime[aa][0]);
             testReactionTime[aa] = 0.00;
             
             tempString=[NSString stringWithFormat:@"%d,,", aa-2];
@@ -1693,21 +1694,21 @@ bool wasButtonPressed = NO;
                 }else{
                     cc = bb - 1;
                 }
-                tempCalcR = abs(reactionTime[aa][cc]);
+                tempCalcR = fabs(reactionTime[aa][cc]);
                 
-                actualReactionTime[aa][bb]   = abs(reactionTime[aa][bb] - tempCalcR);
+                actualReactionTime[aa][bb]   = fabs(reactionTime[aa][bb] - tempCalcR);
                 
-                totalReactionTime    = abs(totalReactionTime    + actualReactionTime[aa][bb]);
-                testReactionTime[aa] = abs(testReactionTime[aa] + actualReactionTime[aa][bb]);
+                totalReactionTime    = fabs(totalReactionTime    + actualReactionTime[aa][bb]);
+                testReactionTime[aa] = fabs(testReactionTime[aa] + actualReactionTime[aa][bb]);
                 
                 //min
-                if ((shortestReactionTime[aa] > abs(actualReactionTime[aa][bb])) && (bb>0)) {
-                    shortestReactionTime[aa] = abs(actualReactionTime[aa][bb]);
+                if ((shortestReactionTime[aa] > fabs(actualReactionTime[aa][bb])) && (bb>0)) {
+                    shortestReactionTime[aa] = fabs(actualReactionTime[aa][bb]);
                 }
      
                 //max
-                if (longestReactionTime[aa] < abs(actualReactionTime[aa][bb])) {
-                    longestReactionTime[aa] = abs(actualReactionTime[aa][bb]);
+                if (longestReactionTime[aa] < fabs(actualReactionTime[aa][bb])) {
+                    longestReactionTime[aa] = fabs(actualReactionTime[aa][bb]);
                 }
 
                 //times
@@ -1729,7 +1730,7 @@ bool wasButtonPressed = NO;
             }
             
             //avg absolute
-            averageReactionTime[aa] = abs(testReactionTime[aa] / (Float32)(aa-1));
+            averageReactionTime[aa] = fabs(testReactionTime[aa] / (Float32)(aa-1));
             
             //stage end totals
             tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@",%.0f", testReactionTime[aa]]];
@@ -1737,26 +1738,26 @@ bool wasButtonPressed = NO;
             tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@",%.0f", longestReactionTime[aa]]];
             tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@",%.0f,", averageReactionTime[aa]]];
             
-            if (longestReactionTime[aa] < abs(reactionTime[aa][0])) {
-                longestReactionTime[aa] = abs(reactionTime[aa][0]);
+            if (longestReactionTime[aa] < fabs(reactionTime[aa][0])) {
+                longestReactionTime[aa] = fabs(reactionTime[aa][0]);
 
             }
-            if (shortestReactionTime[aa] > abs(reactionTime[aa][0])){
-                shortestReactionTime[aa] = abs(reactionTime[aa][0]);
+            if (shortestReactionTime[aa] > fabs(reactionTime[aa][0])){
+                shortestReactionTime[aa] = fabs(reactionTime[aa][0]);
             }
             tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@",%.0f", testReactionTime[aa]+reactionTime[aa][0]]];
             tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@",%.0f", shortestReactionTime[aa]]];
             tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@",%.0f", longestReactionTime[aa]]];
             
             //add 1st reaction
-            testReactionTime[aa] = abs(testReactionTime[aa] + reactionTime[aa][0]);
+            testReactionTime[aa] = fabs(testReactionTime[aa] + reactionTime[aa][0]);
             tempString=@"No. Test Reaction Time";
             [singleton.displayStringTitles addObject:tempString ];//title
             tempString=[NSString stringWithFormat:@"   %d: %.0f", aa-2, testReactionTime[aa]];
             [singleton.displayStringRows addObject: tempString];//data
             
             //avg
-            averageReactionTime[aa] = abs(testReactionTime[aa] / (Float32)aa);
+            averageReactionTime[aa] = fabs(testReactionTime[aa] / (Float32)aa);
             tempString = [NSString stringWithFormat:@"%@%@", tempString, [NSString stringWithFormat:@",%.0f", averageReactionTime[aa]]];
             
             [singleton.resultStringRows addObject:tempString];//csv
@@ -1766,7 +1767,7 @@ bool wasButtonPressed = NO;
             [singleton.displayStringRows addObject: tempString];//data
             
             //add the first guess on to the totals
-            totalReactionTime = abs(totalReactionTime + reactionTime[aa][0]);
+            totalReactionTime = fabs(totalReactionTime + reactionTime[aa][0]);
 
             //1st one is zero, so don't count that.
             //Need to take into account that timing starts after 1st guess is received, although timer starts when user is asked
@@ -1859,7 +1860,9 @@ bool wasButtonPressed = NO;
     [singleton.displayStringRows addObject: tempString]; //data
         
     //jump to the results page
-    [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(jumpToResultsView) userInfo:nil repeats:NO];
+        //taken out and replaced 3/2/20
+    //[NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(jumpToResultsView) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval: 0 target:self selector:@selector(selectTabBarResults) userInfo:nil repeats:NO];
     }
 }
 
@@ -3276,7 +3279,22 @@ bool wasButtonPressed = NO;
 
     //start the timer
     self.startDate = [NSDate date];
-    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay100) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay101) userInfo:nil repeats:NO];
+}
+-(void)onCardDisplay101 {
+    //aded 3/2/20 as missing selector
+    statusMessageLab.text = [NSString stringWithFormat: @"Card #%i \nof [%i]",cardCounter+1, noOfCards];
+    cardCounter++;
+    int t=[self pickACard];
+    if (wasButtonPressed==NO) {
+        // NSLog(@"(Button Not Pressed)");
+    }
+    wasButtonPressed=NO;
+    [cardHolder setImage: card[t].image];
+
+    //start the timer
+    self.startDate = [NSDate date];
+    [NSTimer scheduledTimerWithTimeInterval:(([self delayx])) target:self selector:@selector(blankCardDisplay101) userInfo:nil repeats:NO];
 }
 #pragma mark Blanks
 //========*******************************************************=========

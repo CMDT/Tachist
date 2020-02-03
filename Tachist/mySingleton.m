@@ -69,25 +69,25 @@ static mySingleton * sharedSingleton = nil;
     if(self = [super init]) {
     //only runs if no data or first run to give default values
         
-        currentStatusColour  = [UIColor yellowColor];
-        start                = 3;
-        finish               = 9;
-        counter              = 0;
-        waitTime             = 1500;
-        startTime            = 1500;
-        showTime             = 1500;
-        messageTime          = 2000; //for on screen instructions and messages in time interval delay
-        onScreenInfo         = YES;
-        sounds               = YES;
-        beepEffect           = @"BEEPJAZZ";
-        segIndex             = 5;
-        resultStrings        = @"";
-        displayStrings       = @"";
-        resultStringRows     = [[NSMutableArray alloc]initWithObjects: nil];//clear the arrays of any data
-        displayStringRows    = [[NSMutableArray alloc]initWithObjects: nil];
-        displayStringTitles  = [[NSMutableArray alloc]initWithObjects: nil];
-        cardReactionTimeResult = [[NSMutableArray alloc]initWithObjects: nil];
-        email                = @"me@text.com";
+        currentStatusColour    = [UIColor yellowColor];
+        start                  = 3;
+        finish                 = 9;
+        counter                = 0;
+        waitTime               = 1500;
+        startTime              = 1500;
+        showTime               = 1500;
+        messageTime            = 2000; //for on screen instructions and messages in time interval delay
+        onScreenInfo           = YES;
+        sounds                 = YES;
+        beepEffect             = @"BEEPJAZZ";
+        segIndex               = 5;
+        resultStrings          = @"";
+        displayStrings         = @"";
+        resultStringRows       = [NSMutableArray new];//clear the arrays of any data
+        displayStringRows      = [NSMutableArray new];
+        displayStringTitles    = [NSMutableArray new];
+        cardReactionTimeResult = [NSMutableArray new];
+        email                  = @"me@text.com";
         }
     return self;
 }
