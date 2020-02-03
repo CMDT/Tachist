@@ -372,7 +372,7 @@
 			};
 			buildConfigurationList = E10D016019B6024F00D9E5F8 /* Build configuration list for PBXProject "Tachist" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -599,6 +599,7 @@
 				INFOPLIST_FILE = "Tachist/Tachist-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LIBRARY_SEARCH_PATHS = "";
+				MARKETING_VERSION = 2.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
@@ -616,6 +617,7 @@
 				INFOPLIST_FILE = "Tachist/Tachist-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LIBRARY_SEARCH_PATHS = "";
+				MARKETING_VERSION = 2.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
