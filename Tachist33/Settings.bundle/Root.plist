@@ -64,7 +64,7 @@
 			<key>Key</key>
 			<string>version0</string>
 			<key>DefaultValue</key>
-			<string>4.3.5 -15.5.17</string>
+			<string>4.5.0 - 03.02.2020</string>
 		</dict>
 		<dict>
 			<key>Type</key>
@@ -80,7 +80,7 @@
 			<key>Key</key>
 			<string>version1</string>
 			<key>DefaultValue</key>
-			<string>MMU (c) 2017</string>
+			<string>MMU (c) 2020</string>
 		</dict>
 		<dict>
 			<key>Type</key>
