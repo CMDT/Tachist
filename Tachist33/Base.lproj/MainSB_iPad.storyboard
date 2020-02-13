@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="2">
-    <device id="ipad9_7" orientation="landscape">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="2">
+    <device id="ipad9_7" orientation="landscape" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -276,6 +274,7 @@ Due to the way an iPad functions, multiple Apps can run in parallel, some of whi
                                 <rect key="frame" x="142" y="158" width="741" height="494"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -363,32 +362,27 @@ Due to the way an iPad functions, multiple Apps can run in parallel, some of whi
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="27" y="-222"/>
+            <point key="canvasLocation" x="21.09375" y="-130.078125"/>
         </scene>
     </scenes>
     <resources>
-        <image name="MMU_logo.png" width="100" height="121"/>
-        <image name="dataEmail.png" width="250" height="100"/>
-        <image name="info.png" width="100" height="100"/>
-        <image name="jumpingmanblue200.png" width="200" height="185"/>
-        <image name="newTest.png" width="250" height="100"/>
-        <image name="no-but.png" width="150" height="150"/>
-        <image name="noCards.png" width="340" height="150"/>
-        <image name="postdelay.png" width="340" height="150"/>
-        <image name="results.png" width="250" height="100"/>
-        <image name="settings.png" width="250" height="100"/>
-        <image name="startTest.png" width="250" height="100"/>
-        <image name="stimulus.png" width="340" height="150"/>
-        <image name="subject.png" width="340" height="150"/>
-        <image name="swapScreen.png" width="250" height="100"/>
+        <image name="MMU_logo.png" width="100" height="121.5"/>
+        <image name="dataEmail.png" width="125" height="50"/>
+        <image name="info.png" width="50" height="50"/>
+        <image name="jumpingmanblue200.png" width="102.85713958740234" height="95.142860412597656"/>
+        <image name="newTest.png" width="125" height="50"/>
+        <image name="no-but.png" width="75" height="75"/>
+        <image name="noCards.png" width="170" height="75"/>
+        <image name="postdelay.png" width="170" height="75"/>
+        <image name="results.png" width="125" height="50"/>
+        <image name="settings.png" width="125" height="50"/>
+        <image name="startTest.png" width="125" height="50"/>
+        <image name="stimulus.png" width="170" height="75"/>
+        <image name="subject.png" width="170" height="75"/>
+        <image name="swapScreen.png" width="125" height="50"/>
         <image name="tach-white.png" width="630" height="230"/>
-        <image name="tachistTitle1.png" width="450" height="63"/>
-        <image name="tachistTitle2.png" width="450" height="63"/>
-        <image name="yes-but.png" width="150" height="150"/>
+        <image name="tachistTitle1.png" width="225" height="31.5"/>
+        <image name="tachistTitle2.png" width="225" height="31.5"/>
+        <image name="yes-but.png" width="75" height="75"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation" orientation="landscapeRight"/>
-        <simulatedScreenMetrics key="destination"/>
-    </simulatedMetricsContainer>
 </document>

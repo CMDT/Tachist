@@ -509,6 +509,7 @@
 				INFOPLIST_FILE = "Tachist33/Tachist-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LIBRARY_SEARCH_PATHS = "";
+				MARKETING_VERSION = "4.5.0 - 11.2.2020";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.ac.mmu.ess.www.jah.Tachist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -532,6 +533,7 @@
 				INFOPLIST_FILE = "Tachist33/Tachist-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LIBRARY_SEARCH_PATHS = "";
+				MARKETING_VERSION = "4.5.0 - 11.2.2020";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.ac.mmu.ess.www.jah.Tachist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
